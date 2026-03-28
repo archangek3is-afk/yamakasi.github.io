@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archange · Okapi World Média</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syncopate:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8A882;
+    --gold-light: #E8D5B7;
+    --brown: #3D2B1F;
+    --brown-mid: #6B4A35;
+    --cream: #F5EFE6;
+    --cream-dark: #EDE4D8;
+    --text: #2C1810;
+    --text-mid: #7A5C48;
+    --white: #FDFAF6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--brown);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(200, 168, 130, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+  }
+  .cursor.hover { width: 16px; height: 16px; }
+  .cursor-ring.hover { width: 60px; height: 60px; border-color: rgba(200,168,130,0.8); }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ── HERO ─────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, rgba(200,168,130,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,168,130,0.05) 0%, transparent 60%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 12vw, 110px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(14px, 2.5vw, 19px);
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(232, 213, 183, 0.7);
+    margin-top: 24px;
+    max-width: 440px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.8s forwards;
+  }
+
+  .hero-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    margin: 48px auto 0;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.2s forwards;
+  }
+
+  /* ── MANIFESTE ────────────────────────────── */
+  .manifeste {
+    padding: 100px 24px;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+  .manifeste.visible { opacity: 1; transform: translateY(0); }
+
+  .manifeste-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  .manifeste-quote strong {
+    font-weight: 600;
+    font-style: normal;
+    color: var(--gold-light);
+  }
+
+  .manifeste-body {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(232, 213, 183, 0.65);
+    font-weight: 300;
+  }
+
+  /* ── OFFRES ───────────────────────────────── */
+  .offres-section {
+    padding: 80px 24px 100px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 60px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.7s ease;
+  }
+  .section-label.visible { opacity: 1; transform: translateY(0); }
+
+  .offres-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .offre-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(200,168,130,0.12);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease, background 0.4s ease, border-color 0.4s ease;
+    cursor: none;
+  }
+  .offre-card.visible { opacity: 1; transform: translateY(0); }
+  .offre-card:nth-child(2) { transition-delay: 0.1s; }
+  .offre-card:nth-child(3) { transition-delay: 0.2s; }
+
+  .offre-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .offre-card:hover::before { opacity: 1; }
+  .offre-card:hover {
+    background: rgba(200,168,130,0.04);
+    border-color: rgba(200,168,130,0.25);
+  }
+
+  .offre-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(200,168,130,0.1);
+    line-height: 1;
+    position: absolute;
+    top: 24px;
+    right: 36px;
+    font-style: italic;
+  }
+
+  .offre-niveau {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .offre-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .offre-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(200,168,130,0.7);
+    margin-bottom: 24px;
+  }
+
+  .offre-desc {
+    font-size: 14px;
+    line-height: 1.85;
+    color: rgba(232,213,183,0.6);
+    max-width: 520px;
+    margin-bottom: 28px;
+  }
+
+  .offre-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+    font-weight: 300;
+  }
+
+  .offre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    border: 1px solid rgba(200,168,130,0.2);
+    color: rgba(200,168,130,0.6);
+    border-radius: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── IDENTITÉS ────────────────────────────── */
+  .identites {
+    padding: 80px 24px;
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+  .identites.visible { opacity: 1; transform: translateY(0); }
+
+  .identite-card {
+    border-top: 1px solid rgba(200,168,130,0.2);
+    padding-top: 32px;
+  }
+
+  .identite-label {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .identite-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .identite-desc {
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(232,213,183,0.55);
+  }
+
+  /* ── CONTACT ──────────────────────────────── */
+  .contact-section {
+    padding: 100px 24px 120px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+  .contact-section.visible { opacity: 1; transform: translateY(0); }
+
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .contact-sub {
+    font-size: 14px;
+    color: rgba(232,213,183,0.5);
+    margin-bottom: 56px;
+    line-height: 1.8;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .form-label {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: rgba(200,168,130,0.6);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(200,168,130,0.2);
+    padding: 12px 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--cream);
+    outline: none;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+  }
+
+  .form-input::placeholder, .form-textarea::placeholder {
+    color: rgba(200,168,130,0.25);
+    font-style: italic;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-bottom-color: var(--gold);
+  }
+
+  .form-select {
+    cursor: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8A882' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+  }
+
+  .form-select option { background: var(--brown); color: var(--cream); }
+
+  .form-textarea { resize: none; min-height: 100px; line-height: 1.7; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 48px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    transition: color 0.3s ease;
+    position: relative;
+  }
+
+  .btn-submit::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+
+  .btn-submit:hover { color: var(--gold-light); }
+  .btn-submit:hover::after { width: 100%; }
+
+  .btn-arrow {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    position: relative;
+    transition: width 0.4s ease;
+    flex-shrink: 0;
+  }
+  .btn-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0; top: -3px;
+    width: 7px; height: 7px;
+    border-right: 1px solid var(--gold);
+    border-top: 1px solid var(--gold);
+    transform: rotate(45deg);
+  }
+  .btn-submit:hover .btn-arrow { width: 64px; }
+
+  /* ── EMAIL ALT ────────────────────────────── */
+  .email-alt {
+    margin-top: 32px;
+    font-size: 12px;
+    color: rgba(200,168,130,0.4);
+  }
+  .email-alt a {
+    color: rgba(200,168,130,0.6);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200,168,130,0.2);
+    padding-bottom: 1px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .email-alt a:hover { color: var(--gold-light); border-color: var(--gold); }
+
+  /* ── DIVIDER ──────────────────────────────── */
+  .divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, rgba(200,168,130,0.3), transparent);
+    margin: 0 auto;
+  }
+
+  /* ── FOOTER ───────────────────────────────── */
+  footer {
+    padding: 40px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(200,168,130,0.08);
+  }
+  footer p {
+    font-size: 11px;
+    color: rgba(200,168,130,0.25);
+    letter-spacing: 0.15em;
+    font-family: 'Syncopate', sans-serif;
+  }
+
+  /* ── SUCCESS MESSAGE ──────────────────────── */
+  .success-msg {
+    display: none;
+    padding: 24px;
+    border: 1px solid rgba(200,168,130,0.3);
+    text-align: center;
+    margin-top: 32px;
+  }
+  .success-msg.show { display: block; }
+  .success-msg p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold-light);
+  }
+
+  /* ── ANIMATIONS ───────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ───────────────────────────── */
+  @media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .identites { grid-template-columns: 1fr; gap: 32px; }
+    .offre-card { padding: 36px 24px; }
+    .offre-number { font-size: 52px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── HERO ──────────────────────────────────── -->
+<section class="hero">
+  <p class="hero-eyebrow">Storytelling Visuel · Impact Transformationnel</p>
+  <h1 class="hero-name">
+    Archange
+    <em>Yamakasi</em>
+  </h1>
+  <p class="hero-tagline">Je ne prêche pas. Je révèle.</p>
+  <div class="hero-line"></div>
+</section>
+
+<!-- ── MANIFESTE ──────────────────────────────── -->
+<div class="divider"></div>
+<section class="manifeste" id="manifeste">
+  <p class="manifeste-quote">
+    Des images qui ne montrent pas juste ce qui est visible —<br>
+    des images qui révèlent <strong>ce que le monde n'a pas encore compris.</strong>
+  </p>
+  <p class="manifeste-body">
+    Réalisateur, directeur artistique et créateur visuel basé en France.<br>
+    À travers Okapi World Média, je crée des œuvres visuelles qui transforment
+    la façon dont les marques, les projets et les individus se voient eux-mêmes
+    — et dont le monde les voit.
+  </p>
+</section>
+<div class="divider"></div>
+
+<!-- ── OFFRES ──────────────────────────────────── -->
+<section class="offres-section">
+  <p class="section-label" id="offres-label">Ce que je crée pour vous</p>
+  <div class="offres-grid">
+
+    <div class="offre-card" id="card1">
+      <span class="offre-number">I</span>
+      <p class="offre-niveau">Niveau 01 · L'Étincelle</p>
+      <h3 class="offre-title">Portrait de Marque IA</h3>
+      <p class="offre-subtitle">Quand une image vaut plus qu'un discours</p>
+      <p class="offre-desc">
+        5 à 8 visuels cinématographiques générés et dirigés à l'IA,
+        avec narration textuelle pour chaque image. Un univers visuel
+        immédiatement identifiable, prêt à publier.
+      </p>
+      <p class="offre-price">À partir de 500 €</p>
+      <div class="offre-tags">
+        <span class="tag">Direction artistique IA</span>
+        <span class="tag">Storytelling visuel</span>
+        <span class="tag">PME · ONG · Marques</span>
+      </div>
+    </div>
+
+    <div class="offre-card" id="card2">
+      <span class="offre-number">II</span>
+      <p class="offre-niveau">Niveau 02 · L'Histoire</p>
+      <h3 class="offre-title">Film de Marque</h3>
+      <p class="offre-subtitle">Votre histoire racontée avec l'intensité du cinéma</p>
+      <p class="offre-desc">
+        Un film court de 60 à 90 secondes — scénario narratif, direction
+        artistique, production live action ou IA hybride, montage cinématographique.
+        En option : série de visuels assortis pour accompagner la sortie.
+      </p>
+      <p class="offre-price">À partir de 1 200 €</p>
+      <div class="offre-tags">
+        <span class="tag">Film de marque</span>
+        <span class="tag">IA hybride</span>
+        <span class="tag">Maisons de production</span>
+      </div>
+    </div>
+
+    <div class="offre-card" id="card3">
+      <span class="offre-number">III</span>
+      <p class="offre-niveau">Niveau 03 · La Légende</p>
+      <h3 class="offre-title">Direction Créative</h3>
+      <p class="offre-subtitle">Quand vous ne cherchez plus un prestataire, mais un regard</p>
+      <p class="offre-desc">
+        Accompagnement stratégique et créatif sur 3 mois — direction artistique
+        complète, production de 2 à 4 films courts, univers visuel IA cohérent
+        et déclinable, conseil en stratégie de contenu.
+      </p>
+      <p class="offre-price">Sur devis · à partir de 3 000 €</p>
+      <div class="offre-tags">
+        <span class="tag">Conseil stratégique</span>
+        <span class="tag">Direction créative</span>
+        <span class="tag">Projets culturels</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── IDENTITÉS ───────────────────────────────── -->
+<div class="identites" id="identites">
+  <div class="identite-card">
+    <p class="identite-label">Créateur · Personal Brand</p>
+    <h3 class="identite-name">Archange Yamakasi</h3>
+    <p class="identite-desc">
+      Réalisateur et narrateur visuel. Série MILLE VISAGES.
+      Storytelling à l'intersection du cinéma, de l'IA et de l'impact humain.
+      Pour les projets à dimension personnelle, artistique ou sociale.
+    </p>
+  </div>
+  <div class="identite-card">
+    <p class="identite-label">Agence · Studio créatif</p>
+    <h3 class="identite-name">Okapi World Média</h3>
+    <p class="identite-desc">
+      Studios, agence brand content, animation 2D/3D.
+      Pour les marques, PME et maisons de production qui veulent
+      un partenaire créatif au long cours.
+    </p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── CONTACT ──────────────────────────────────── -->
+<section class="contact-section" id="contact">
+  <h2 class="contact-title">Travaillons ensemble</h2>
+  <p class="contact-sub">
+    Décrivez-moi votre projet en quelques lignes.<br>
+    Je vous réponds sous 48h.
+  </p>
+
+  <form id="contactForm">
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Prénom & Nom</label>
+        <input type="text" class="form-input" placeholder="Votre nom" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Organisation</label>
+        <input type="text" class="form-input" placeholder="Marque, agence, studio...">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-input" placeholder="votre@email.com" required>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Type de projet</label>
+      <select class="form-select form-input">
+        <option value="" disabled selected>Choisissez une offre</option>
+        <option>I · Portrait de Marque IA (à partir de 500€)</option>
+        <option>II · Film de Marque (à partir de 1 200€)</option>
+        <option>III · Direction Créative (sur devis)</option>
+        <option>Autre · Je veux en parler</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Votre projet</label>
+      <textarea class="form-textarea form-input" placeholder="Décrivez votre projet, votre vision, vos enjeux..." rows="4"></textarea>
+    </div>
+
+    <button type="submit" class="btn-submit">
+      Envoyer ma demande
+      <span class="btn-arrow"></span>
+    </button>
+
+    <div class="success-msg" id="successMsg">
+      <p>Message reçu. Je vous réponds sous 48h.</p>
+    </div>
+  </form>
+
+  <p class="email-alt">
+    Préférez l'email direct ?
+    <a href="mailto:contact@okapiworldmedia.com">contact@okapiworldmedia.com</a>
+  </p>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────── -->
+<footer>
+  <p>© 2026 · Archange Yamakasi · Okapi World Média</p>
+</footer>
+
+<script>
+  // ── Cursor ─────────────────────────────────────
+  const cursor     = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top  = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .offre-card, select, input, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('hover');
+      cursorRing.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('hover');
+      cursorRing.classList.remove('hover');
+    });
+  });
+
+  // ── Scroll reveal ──────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(
+    '.manifeste, .section-label, .offre-card, .identites, .contact-section'
+  ).forEach(el => observer.observe(el));
+
+  // ── Form ───────────────────────────────────────
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.btn-submit');
+    btn.style.opacity = '0.4';
+    btn.style.pointerEvents = 'none';
+    setTimeout(() => {
+      document.getElementById('successMsg').classList.add('show');
+      btn.style.display = 'none';
+    }, 600);
+  });
+</script>
+
+</body>
+</html>
