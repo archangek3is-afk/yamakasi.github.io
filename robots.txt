@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://archangek3is-afk.github.io/yamakasi.github.io/sitemap.xml
