@@ -11,10 +11,30 @@
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
-    navigator.serviceWorker.register('sw.js').catch(e=>console.warn('SW:',e));
+    navigator.serviceWorker.register('sw.js').then(reg=>{
+      reg.addEventListener('updatefound',()=>{
+        const nw=reg.installing;
+        if(!nw)return;
+        nw.addEventListener('statechange',()=>{
+          if(nw.state==='installed' && navigator.serviceWorker.controller){
+            sessionStorage.setItem('okapi_updated','1');
+            window.location.reload();
+          }
+        });
+      });
+      setInterval(()=>reg.update().catch(()=>{}),60000);
+    }).catch(e=>console.warn('SW:',e));
   });
 }
 </script>
+<style>
+#updateToast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:#1a1a1a;color:#D4AF37;border:1px solid #C49A22;padding:12px 22px;
+  font-size:12px;letter-spacing:1px;text-transform:uppercase;font-family:Georgia,serif;
+  border-radius:2px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;
+  box-shadow:0 4px 20px rgba(0,0,0,.6)}
+#updateToast.show{opacity:1}
+</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 :root{
@@ -203,6 +223,7 @@ td.editing input,td.editing select{
 </head>
 <body>
 
+<div id="updateToast">✓ Mise à jour installée</div>
 <header>
   <h1>Okapi World Média</h1>
   <div class="sub">Dashboard de Direction · EI · SIRET 918 020 975 00028</div>
@@ -896,6 +917,15 @@ archangek.3is@gmail.com · 06 05 78 28 95`;
   refreshLinks();
   document.getElementById('r_body').oninput=refreshLinks;
   document.getElementById('reminderModal').classList.add('show');
+}
+
+// update toast
+if(sessionStorage.getItem('okapi_updated')){
+  sessionStorage.removeItem('okapi_updated');
+  window.addEventListener('DOMContentLoaded',()=>{
+    const t=document.getElementById('updateToast');
+    if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+  });
 }
 
 // init

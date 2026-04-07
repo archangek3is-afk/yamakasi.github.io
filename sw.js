@@ -1,4 +1,5 @@
-const CACHE = 'okapi-dashboard-v2';
+const BUILD = '1775523062';
+const CACHE = 'okapi-dashboard-' + BUILD;
 const BASE = '/yamakasi.github.io/';
 const ASSETS = [
   BASE,
