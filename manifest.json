@@ -1,6 +1,7 @@
 {
-  "name": "Okapi World Média — Dashboard",
-  "short_name": "Okapi WM",
+  "id": "/yamakasi.github.io/dashboard.html",
+  "name": "OWM Dashboard",
+  "short_name": "OWM Dashboard",
   "description": "Dashboard de direction Okapi World Média",
   "start_url": "/yamakasi.github.io/dashboard.html",
   "scope": "/yamakasi.github.io/",
