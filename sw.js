@@ -1,4 +1,4 @@
-const BUILD = '1775526500';
+const BUILD = '1775529571';
 const CACHE = 'okapi-dashboard-' + BUILD;
 const BASE = '/yamakasi.github.io/';
 const ASSETS = [
@@ -36,14 +36,12 @@ self.addEventListener('message', e => {
 // long-polling, auth tokens). Returning early lets the browser handle
 // them natively — caching them breaks Firestore sync.
 const FIREBASE_BYPASS = [
-  'firestore.googleapis.com',
-  'firebase.googleapis.com',
-  'firebaseinstallations.googleapis.com',
-  'identitytoolkit.googleapis.com',
-  'securetoken.googleapis.com',
-  'www.googleapis.com',
+  'googleapis.com',       // covers firestore/gmail/oauth2/identitytoolkit/...
   'firebaseio.com',
-  'firebaseapp.com'
+  'firebaseapp.com',
+  'accounts.google.com',  // OAuth popup / GIS
+  'apis.google.com',      // gapi loader
+  'oauth2.googleapis.com'
 ];
 
 self.addEventListener('fetch', e => {

@@ -10,6 +10,8 @@
 <link rel="apple-touch-icon" href="icon.svg">
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="https://apis.google.com/js/api.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 if('serviceWorker' in navigator){
   let reloading=false;
@@ -57,6 +59,23 @@ if('serviceWorker' in navigator){
   box-shadow:0 0 6px currentColor;transition:background .3s}
 #syncDot.online .dot{background:#27ae60;color:#27ae60}
 #syncDot.offline .dot{background:#e67e22;color:#e67e22}
+.gmail-project{background:var(--bg2);border:1px solid var(--border);
+  border-left:3px solid var(--gold);margin-bottom:18px;padding:18px 20px}
+.gmail-project h3{color:var(--gold2);font-size:15px;margin-bottom:14px;font-family:Georgia,serif}
+.gmail-msg{padding:12px 0;border-bottom:1px solid var(--border)}
+.gmail-msg:last-child{border:none}
+.gmail-msg .meta{font-size:11px;color:var(--muted);margin-bottom:4px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.gmail-msg .subj{color:var(--ivory);font-size:13px;font-weight:600;margin:2px 0}
+.gmail-msg .snip{color:#bdb8a8;font-size:12px;line-height:1.5;margin-top:4px}
+.sig{display:inline-block;padding:2px 8px;font-size:9px;border-radius:2px;
+  text-transform:uppercase;letter-spacing:.8px;font-weight:600;margin-left:4px}
+.sig.b-valid{background:rgba(39,174,96,.18);color:#5fcf8a;border:1px solid #27ae60}
+.sig.b-signed{background:rgba(52,152,219,.18);color:#5fb6dc;border:1px solid #3498db}
+.sig.b-paid{background:rgba(196,154,34,.18);color:var(--gold2);border:1px solid var(--gold)}
+.sig.b-urgent{background:rgba(192,57,43,.2);color:#ff6b5b;border:1px solid #c0392b}
+.silence-badge{display:inline-block;background:rgba(230,126,34,.18);color:#f0a050;
+  border:1px solid #e67e22;padding:2px 7px;font-size:9px;border-radius:2px;
+  text-transform:uppercase;letter-spacing:.7px;margin-left:6px;font-weight:600}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
@@ -261,6 +280,7 @@ td.editing input,td.editing select{
   <button class="tab-btn" data-tab="echeances">Échéanciers<span id="navBadge" class="nav-badge" style="display:none">0</span></button>
   <button class="tab-btn" data-tab="charges">Charges</button>
   <button class="tab-btn" data-tab="investir">Investir</button>
+  <button class="tab-btn" data-tab="emails">Emails</button>
 </nav>
 
 <main>
@@ -367,6 +387,16 @@ td.editing input,td.editing select{
 </section>
 
 <!-- ============ INVESTIR ============ -->
+<section id="emails" class="tab">
+  <h2 class="section">Emails Clients</h2>
+  <div id="gmailControls" style="margin-bottom:18px;display:flex;gap:12px;align-items:center">
+    <button id="gmailConnectBtn" class="add" onclick="connectGmail()">Connecter Gmail</button>
+    <button class="ghost" onclick="fetchAllEmails(true)">Rafraîchir</button>
+    <span id="gmailStatus" style="color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px"></span>
+  </div>
+  <div id="gmailContent"></div>
+</section>
+
 <section id="investir" class="tab">
   <h2 class="section">Leviers de Croissance</h2>
   <div id="leviers"></div>
@@ -618,7 +648,7 @@ function renderProjets(){
     if(fb && p.branche!==fb)return;
     const base=`projets.${i}`;
     tb.innerHTML+=`<tr>
-      <td class="edit" ${ec(base,'nom',p.nom,'text')}>${p.nom}</td>
+      <td class="edit" ${ec(base,'nom',p.nom,'text')}>${p.nom}${silenceBadgeFor(p.nom)}</td>
       <td class="edit" ${ec(base,'client',p.client,'text')}>${p.client}</td>
       <td class="edit" ${ec(base,'branche',p.branche,'select','branche')}>${p.branche}</td>
       <td class="edit" ${ec(base,'statut',p.statut,'select','statut')}>${badgeStatut(p.statut)}</td>
@@ -1015,6 +1045,158 @@ if(sessionStorage.getItem('okapi_updated')){
   });
 }
 
+// ============ GMAIL INTEGRATION ============
+const GMAIL_CLIENT_ID='756710646676-2tj1j02ntp77oi0r9ru6k8afhkhn8482.apps.googleusercontent.com';
+const GMAIL_SCOPE='https://www.googleapis.com/auth/gmail.readonly';
+const GMAIL_TOKEN_KEY='okapi_gmail_token';
+const PROJECT_EMAILS={
+  "MAÏLU":["hortensebl@hotmail.com"],
+  "UNIKIDSLAND":["bmm.moudzouma@gmail.com"],
+  "Le Miroir de l'âme":["Aniela16@live.fr"],
+  "Casino de Paris":[] // Gabin email à compléter
+};
+let gmailToken=null,tokenClient=null,gapiReady=false,gmailData={},silenceMap={};
+
+function silenceBadgeFor(projectName){
+  let maxDays=-1;
+  for(const [key,emails] of Object.entries(PROJECT_EMAILS)){
+    if(!projectName.toLowerCase().includes(key.toLowerCase()))continue;
+    emails.forEach(em=>{
+      const d=silenceMap[em.toLowerCase()];
+      if(d!=null && d>maxDays)maxDays=d;
+    });
+  }
+  return maxDays>=5?` <span class="silence-badge">Sans réponse ${maxDays}j</span>`:'';
+}
+
+function detectSignal(text){
+  const t=text.toLowerCase();
+  if(/urgent|rappel|relance/i.test(text))return{label:'Urgent',cls:'b-urgent',ic:'🔴'};
+  if(/signé|lu et approuvé|signature/.test(t))return{label:'Signé',cls:'b-signed',ic:'🔵'};
+  if(/je vais régler|virement|payé|règlement|j'ai payé/.test(t))return{label:'Paiement annoncé',cls:'b-paid',ic:'💰'};
+  if(/je valide|c'est bon|ok pour moi|validé|approuvé|accord/.test(t))return{label:'Validé',cls:'b-valid',ic:'🟢'};
+  return null;
+}
+
+function gmailStatus(s){const el=document.getElementById('gmailStatus');if(el)el.textContent=s;}
+
+function initGmail(){
+  if(typeof gapi==='undefined'){return setTimeout(initGmail,400);}
+  gapi.load('client',()=>{
+    gapi.client.init({discoveryDocs:['https://gmail.googleapis.com/$discovery/rest?version=v1']}).then(()=>{
+      gapiReady=true;
+      const stored=JSON.parse(localStorage.getItem(GMAIL_TOKEN_KEY)||'null');
+      if(stored && stored.expires_at>Date.now()){
+        gmailToken=stored;
+        gapi.client.setToken({access_token:stored.access_token});
+        document.getElementById('gmailConnectBtn').textContent='Reconnecter Gmail';
+        fetchAllEmails();
+      }
+    }).catch(e=>console.warn('gapi init:',e));
+  });
+  initTokenClient();
+}
+
+function initTokenClient(){
+  if(typeof google==='undefined'||!google.accounts||!google.accounts.oauth2){
+    return setTimeout(initTokenClient,400);
+  }
+  tokenClient=google.accounts.oauth2.initTokenClient({
+    client_id:GMAIL_CLIENT_ID,
+    scope:GMAIL_SCOPE,
+    callback:resp=>{
+      if(resp.access_token){
+        gmailToken={access_token:resp.access_token,expires_at:Date.now()+(resp.expires_in*1000)};
+        localStorage.setItem(GMAIL_TOKEN_KEY,JSON.stringify(gmailToken));
+        if(gapiReady)gapi.client.setToken({access_token:resp.access_token});
+        document.getElementById('gmailConnectBtn').textContent='Reconnecter Gmail';
+        fetchAllEmails();
+      }
+    }
+  });
+}
+
+function connectGmail(){
+  if(!tokenClient){gmailStatus('Google API en cours de chargement…');return;}
+  tokenClient.requestAccessToken({prompt:gmailToken?'':'consent'});
+}
+
+async function fetchAllEmails(force){
+  if(!gmailToken||!gapiReady){gmailStatus('Non connecté');return;}
+  gmailStatus('Synchronisation…');
+  const today=Date.now();
+  silenceMap={};gmailData={};
+  for(const [project,emails] of Object.entries(PROJECT_EMAILS)){
+    const all=[];
+    for(const em of emails){
+      try{
+        const list=await gapi.client.gmail.users.messages.list({
+          userId:'me',q:`from:${em} OR to:${em}`,maxResults:10
+        });
+        const msgs=list.result.messages||[];
+        for(const m of msgs){
+          const detail=await gapi.client.gmail.users.messages.get({
+            userId:'me',id:m.id,format:'metadata',
+            metadataHeaders:['From','Subject','Date']
+          });
+          const h=detail.result.payload.headers||[];
+          const get=n=>(h.find(x=>x.name===n)||{}).value||'';
+          const snippet=detail.result.snippet||'';
+          const subj=get('Subject');
+          all.push({
+            from:get('From'),subj,date:get('Date'),
+            ts:parseInt(detail.result.internalDate),
+            snippet,signal:detectSignal(snippet+' '+subj)
+          });
+        }
+        const fromClient=all.filter(e=>e.from.toLowerCase().includes(em.toLowerCase()));
+        if(fromClient.length){
+          const latest=Math.max(...fromClient.map(e=>e.ts));
+          silenceMap[em.toLowerCase()]=Math.round((today-latest)/86400000);
+        }
+      }catch(e){
+        console.warn('Gmail fetch '+em+':',e);
+        if(e.status===401){
+          localStorage.removeItem(GMAIL_TOKEN_KEY);gmailToken=null;
+          gmailStatus('Session expirée — reconnectez');return;
+        }
+      }
+    }
+    all.sort((a,b)=>b.ts-a.ts);
+    gmailData[project]=all;
+  }
+  gmailStatus('Mis à jour à '+new Date().toLocaleTimeString('fr-FR'));
+  renderEmails();
+  renderProjets();
+}
+
+function renderEmails(){
+  const c=document.getElementById('gmailContent');
+  if(!gmailToken){c.innerHTML='<p style="color:var(--muted);font-size:13px">Connecte Gmail pour afficher les fils de conversation par projet.</p>';return;}
+  let html='';
+  for(const [project,msgs] of Object.entries(gmailData)){
+    html+=`<div class="gmail-project"><h3>${project}</h3>`;
+    if(!msgs||!msgs.length){
+      html+='<p style="color:var(--muted);font-size:12px">Aucun email trouvé.</p>';
+    }else{
+      msgs.forEach(m=>{
+        const sig=m.signal?`<span class="sig ${m.signal.cls}">${m.signal.ic} ${m.signal.label}</span>`:'';
+        const fromShort=(m.from||'').replace(/<[^>]+>/,'').trim()||m.from;
+        const d=new Date(m.ts).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});
+        html+=`<div class="gmail-msg">
+          <div class="meta"><span>${fromShort}</span><span>·</span><span>${d}</span>${sig}</div>
+          <div class="subj">${m.subj||'(sans objet)'}</div>
+          <div class="snip">${m.snippet}</div>
+        </div>`;
+      });
+    }
+    html+='</div>';
+  }
+  c.innerHTML=html;
+}
+
+setInterval(()=>{if(gmailToken)fetchAllEmails();},30*60*1000);
+
 // ============ FIRESTORE SYNC ============
 const FB_CONFIG={
   apiKey:"AIzaSyDmRI3geAdrme2jRYi9G3X3pRg_tBro29Y",
@@ -1100,6 +1282,7 @@ window.addEventListener('offline',()=>setSyncStatus('offline','Offline'));
 // init
 save();
 initFirestore();
+initGmail();
 window.addEventListener('load',()=>{setTimeout(renderAll,100)});
 renderAll();
 </script>
