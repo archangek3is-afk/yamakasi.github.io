@@ -1,4 +1,4 @@
-const BUILD = '1775523500';
+const BUILD = '1775525041';
 const CACHE = 'okapi-dashboard-' + BUILD;
 const BASE = '/yamakasi.github.io/';
 const ASSETS = [
@@ -6,7 +6,9 @@ const ASSETS = [
   BASE + 'dashboard.html',
   BASE + 'manifest.json',
   BASE + 'icon.svg',
-  'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js'
+  'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js',
+  'https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js',
+  'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js'
 ];
 
 self.addEventListener('install', e => {

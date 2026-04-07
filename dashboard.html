@@ -8,6 +8,8 @@
 <meta name="theme-color" content="#C49A22">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="apple-touch-icon" href="icon.svg">
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 <script>
 if('serviceWorker' in navigator){
   let reloading=false;
@@ -47,6 +49,14 @@ if('serviceWorker' in navigator){
   border-radius:2px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;
   box-shadow:0 4px 20px rgba(0,0,0,.6)}
 #updateToast.show{opacity:1}
+#syncDot{position:fixed;top:14px;right:18px;display:flex;align-items:center;gap:6px;
+  font-size:10px;color:#8a8579;text-transform:uppercase;letter-spacing:1px;
+  font-family:system-ui,sans-serif;z-index:60;background:rgba(0,0,0,.5);padding:6px 10px;
+  border-radius:12px;border:1px solid #2a2a2a}
+#syncDot .dot{width:8px;height:8px;border-radius:50%;background:#888;
+  box-shadow:0 0 6px currentColor;transition:background .3s}
+#syncDot.online .dot{background:#27ae60;color:#27ae60}
+#syncDot.offline .dot{background:#e67e22;color:#e67e22}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
@@ -239,6 +249,7 @@ td.editing input,td.editing select{
 <body>
 
 <div id="updateToast">✓ Mise à jour installée</div>
+<div id="syncDot" class="offline"><span class="dot"></span><span id="syncLabel">Offline</span></div>
 <header>
   <h1>Okapi World Média</h1>
   <div class="sub">Dashboard de Direction · EI · SIRET 918 020 975 00028</div>
@@ -532,7 +543,11 @@ function load(){
   seed._migrations=['mailu_status_v1','eve_v1_done','encaisse_dedup_bdc'];
   return seed;
 }
-function save(){reconcileEncaisse();localStorage.setItem(KEY,JSON.stringify(DB))}
+function save(){
+  reconcileEncaisse();
+  localStorage.setItem(KEY,JSON.stringify(DB));
+  cloudPush();
+}
 
 function reconcileEncaisse(){
   DB.encaisse=DB.encaisse||[];
@@ -1000,8 +1015,92 @@ if(sessionStorage.getItem('okapi_updated')){
   });
 }
 
+// ============ FIRESTORE SYNC ============
+const FB_CONFIG={
+  apiKey:"AIzaSyDmRI3geAdrme2jRYi9G3X3pRg_tBro29Y",
+  authDomain:"okapi-world-media.firebaseapp.com",
+  projectId:"okapi-world-media",
+  storageBucket:"okapi-world-media.firebasestorage.app",
+  messagingSenderId:"756710646676",
+  appId:"1:756710646676:web:2569399f831f227db4a581"
+};
+const CLIENT_ID=Math.random().toString(36).slice(2)+Date.now();
+let db_fs=null,docRef=null,cloudReady=false,applyingRemote=false,pendingPush=false;
+
+function setSyncStatus(state,label){
+  const el=document.getElementById('syncDot');
+  if(!el)return;
+  el.classList.remove('online','offline');
+  el.classList.add(state);
+  document.getElementById('syncLabel').textContent=label;
+}
+
+function cloudPush(){
+  if(!cloudReady||applyingRemote){pendingPush=!cloudReady?true:pendingPush;return;}
+  const payload={...DB,_clientId:CLIENT_ID,_ts:Date.now()};
+  docRef.set(payload).catch(e=>console.warn('Firestore push:',e));
+}
+
+function applyRemote(data){
+  if(!data)return;
+  if(data._clientId===CLIENT_ID)return; // our own write echoed back
+  applyingRemote=true;
+  // copy fields, preserve DB reference
+  Object.keys(data).forEach(k=>{
+    if(k.startsWith('_'))return;
+    DB[k]=data[k];
+  });
+  localStorage.setItem(KEY,JSON.stringify(DB));
+  applyingRemote=false;
+  renderAll();
+}
+
+function initFirestore(){
+  if(typeof firebase==='undefined'){
+    setSyncStatus('offline','Offline');
+    return;
+  }
+  try{
+    firebase.initializeApp(FB_CONFIG);
+    db_fs=firebase.firestore();
+    db_fs.enablePersistence({synchronizeTabs:true}).catch(()=>{});
+    docRef=db_fs.collection('dashboard').doc('state');
+    docRef.get().then(snap=>{
+      if(!snap.exists){
+        // first launch: seed Firestore with current local DB
+        cloudReady=true;
+        cloudPush();
+      }else{
+        cloudReady=true;
+        applyRemote(snap.data());
+        if(pendingPush){pendingPush=false;cloudPush();}
+      }
+      docRef.onSnapshot({includeMetadataChanges:true},snap=>{
+        if(!snap.exists)return;
+        const fromCache=snap.metadata.fromCache;
+        setSyncStatus(fromCache?'offline':'online',fromCache?'Offline':'Sync');
+        applyRemote(snap.data());
+      },err=>{
+        console.warn('Firestore snapshot:',err);
+        setSyncStatus('offline','Offline');
+      });
+      setSyncStatus('online','Sync');
+    }).catch(e=>{
+      console.warn('Firestore init:',e);
+      setSyncStatus('offline','Offline');
+    });
+  }catch(e){
+    console.warn('Firebase init:',e);
+    setSyncStatus('offline','Offline');
+  }
+}
+
+window.addEventListener('online',()=>{if(cloudReady)cloudPush();});
+window.addEventListener('offline',()=>setSyncStatus('offline','Offline'));
+
 // init
 save();
+initFirestore();
 window.addEventListener('load',()=>{setTimeout(renderAll,100)});
 renderAll();
 </script>
