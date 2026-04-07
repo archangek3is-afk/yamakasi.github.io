@@ -499,7 +499,7 @@ const KEY = 'okapi_dashboard_v1';
 // Bump SCHEMA_VERSION to force re-run of all migrations on every device,
 // even if they were previously marked as applied. Use it whenever you
 // fix data shape after the user already has cached/Firestore state.
-const SCHEMA_VERSION = 3;
+const SCHEMA_VERSION = 4;
 const SEED = {
   projets:[
     {nom:"En Route pour le Casino de Paris",client:"Gabin Tchoupo / BDC",branche:"Okapi Studios",statut:"En cours",av:20,ech:"2027-05-31",bud:5050},
@@ -519,6 +519,7 @@ const SEED = {
     {lib:"Miroir de l'âme — Acompte signature V1",mt:510,dt:"2026-04-10"},
     {lib:"Miroir de l'âme — Démarrage montage V2",mt:510,dt:"2026-06-01"},
     {lib:"Miroir de l'âme — Livraison finale V3",mt:680,dt:"2026-07-31"},
+    {lib:"BDC V1/5 — Signature contrat",mt:505,dt:"2026-03-15"},
     {lib:"BDC V2/5 — Lendemain tournage T1 Fang-Béti",mt:1010,dt:"2026-04-26"},
     {lib:"BDC V3/5 — Avant tournage T3 Grassfields",mt:1010,dt:"2026-09-25"},
     {lib:"BDC V4/5 — Avant tournage T4 Sawa",mt:1010,dt:"2026-12-18"},
@@ -547,7 +548,7 @@ const SEED = {
     ["V3/3","Juil. 2026","Livraison cut final validé",680,"pending"],
   ],
   bdc:[
-    ["V1/5","Mars 2026","Signature contrat (10%)",505,"done"],
+    ["V1/5","Mars 2026","Signature contrat (10%)",505,"next"],
     ["V2/5","26 avril 2026","Lendemain tournage T1 — Fang-Béti (20%)",1010,"next"],
     ["V3/5","25 sept. 2026","Avant tournage T3 Grassfields (20%)",1010,"pending"],
     ["V4/5","18 déc. 2026","Avant tournage T4 Sawa (20%)",1010,"pending"],
@@ -612,7 +613,7 @@ function runMigrations(d){
   }
   if(!ran('bdc_5_versements')){
     d.bdc=[
-      ["V1/5","Mars 2026","Signature contrat (10%)",505,"done"],
+      ["V1/5","Mars 2026","Signature contrat (10%)",505,"next"],
       ["V2/5","26 avril 2026","Lendemain tournage T1 — Fang-Béti (20%)",1010,"next"],
       ["V3/5","25 sept. 2026","Avant tournage T3 Grassfields (20%)",1010,"pending"],
       ["V4/5","18 déc. 2026","Avant tournage T4 Sawa (20%)",1010,"pending"],
@@ -620,6 +621,7 @@ function runMigrations(d){
     ];
     d.creances=(d.creances||[]).filter(c=>!/BDC|Casino de Paris/i.test(c.lib));
     d.creances.push(
+      {lib:"BDC V1/5 — Signature contrat",mt:505,dt:"2026-03-15"},
       {lib:"BDC V2/5 — Lendemain tournage T1 Fang-Béti",mt:1010,dt:"2026-04-26"},
       {lib:"BDC V3/5 — Avant tournage T3 Grassfields",mt:1010,dt:"2026-09-25"},
       {lib:"BDC V4/5 — Avant tournage T4 Sawa",mt:1010,dt:"2026-12-18"},
@@ -812,9 +814,14 @@ function renderEcheances(){
   renderReminderBanner();
 
   const all=[...DB.ukl,...DB.eve,...DB.bdc];
-  const ca=all.reduce((s,r)=>s+r[3],0);
-  const enc=all.filter(r=>r[4]==='done').reduce((s,r)=>s+r[3],0);
-  const next=all.filter(r=>r[4]==='next').reduce((s,r)=>s+r[3],0);
+  const mailuRows=DB.mailu||[];
+  const caUkl=all.reduce((s,r)=>s+r[3],0);
+  const caMailu=mailuRows.reduce((s,r)=>s+r[1],0);
+  const ca=caUkl+caMailu;
+  const enc=all.filter(r=>r[4]==='done').reduce((s,r)=>s+r[3],0)
+           +mailuRows.filter(r=>r[2]==='done').reduce((s,r)=>s+r[1],0);
+  const next=all.filter(r=>r[4]==='next').reduce((s,r)=>s+r[3],0)
+           +mailuRows.filter(r=>r[2]==='next').reduce((s,r)=>s+r[1],0);
   document.getElementById('eCA').textContent=fmt(ca);
   document.getElementById('eEnc').textContent=fmt(enc);
   document.getElementById('eNext').textContent=fmt(next);
