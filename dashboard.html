@@ -294,7 +294,8 @@ td.editing input,td.editing select{
 
   <h3 class="section">MAÏLU — Relance Urgente</h3>
   <div class="alert"><strong>⚠ Aucun contrat formalisé.</strong> Prestations livrées et validées, à régler. Total : <strong>1 050 €</strong></div>
-  <table><thead><tr><th>Prestation</th><th>Montant</th><th>État</th></tr></thead>
+  <div style="margin-bottom:12px"><button class="btn-rappel" onclick="openMailuReminder('all')">Rappeler tout (1 050 €)</button></div>
+  <table><thead><tr><th>Prestation</th><th>Montant</th><th>État</th><th></th></tr></thead>
     <tbody id="mailu"></tbody></table>
 </section>
 
@@ -610,10 +611,16 @@ function renderEcheances(){
   document.getElementById('eReste').textContent=fmt(ca-enc);
 
   const m=document.getElementById('mailu');m.innerHTML='';
-  DB.mailu.forEach((r,i)=>{const b=`mailu.${i}`;m.innerHTML+=`<tr>
+  DB.mailu.forEach((r,i)=>{
+    const b=`mailu.${i}`;
+    const sentDate=DB.reminders[`mailu.${i}`];
+    const sentBadge=sentDate?`<span class="b-sent" title="Rappel envoyé le ${sentDate}">✓ Rappel</span>`:'';
+    m.innerHTML+=`<tr>
     <td class="edit" ${ec(b,'0',r[0],'text')}>${r[0]}</td>
     <td class="edit" ${ec(b,'1',r[1],'num')}>${fmt(r[1])}</td>
-    <td class="edit" ${ec(b,'2',r[2],'text')}><span class="badge b-urgent">${r[2]}</span></td></tr>`;});
+    <td class="edit" ${ec(b,'2',r[2],'text')}><span class="badge b-urgent">${r[2]}</span>${sentBadge}</td>
+    <td><button class="btn-rappel" onclick="openMailuReminder(${i})">Rappeler</button></td></tr>`;
+  });
 }
 
 function renderCharges(){
@@ -825,9 +832,70 @@ archangek.3is@gmail.com · 06 05 78 28 95`;
 function markSent(){
   if(!currentReminder)return;
   DB.reminders=DB.reminders||{};
-  DB.reminders[`${currentReminder.key}.${currentReminder.i}`]=new Date().toISOString().slice(0,10);
+  const today=new Date().toISOString().slice(0,10);
+  if(currentReminder.key==='mailu' && currentReminder.i==='all'){
+    DB.mailu.forEach((_,i)=>{DB.reminders[`mailu.${i}`]=today;});
+  }else{
+    DB.reminders[`${currentReminder.key}.${currentReminder.i}`]=today;
+  }
   save();
   setTimeout(()=>{closeModal('reminderModal');renderAll();},300);
+}
+
+const MAILU_INFO={client:"Hortense",email:"hortensebl@hotmail.com",project:"MAÏLU — Stratégie & Contenu"};
+
+function openMailuReminder(idx){
+  const subject=`Rappel de paiement — ${MAILU_INFO.project} · Okapi World Média`;
+  let body;
+  if(idx==='all'){
+    const lines=DB.mailu.map(r=>`• ${r[0]} — ${r[1]} €`).join('\n');
+    const total=DB.mailu.reduce((s,r)=>s+r[1],0);
+    body=`Bonjour ${MAILU_INFO.client},
+
+Je me permets de te contacter concernant le règlement des prestations livrées et validées dans le cadre de notre collaboration sur ${MAILU_INFO.project} :
+
+${lines}
+
+Total dû : ${total} €
+
+Ces prestations ont été livrées et validées, et restent en attente de règlement.
+
+Tu peux effectuer le règlement par virement bancaire ou PayPal — coordonnées disponibles sur demande.
+
+Merci pour ta réactivité,
+
+Archange Kiyindou — Okapi World Média
+archangek.3is@gmail.com · 06 05 78 28 95`;
+  }else{
+    const r=DB.mailu[idx];
+    body=`Bonjour ${MAILU_INFO.client},
+
+Je me permets de te contacter concernant le règlement de ${r[1]} € correspondant à ${r[0]} dans le cadre de notre collaboration sur ${MAILU_INFO.project}.
+
+Cette prestation a été livrée et validée, et reste en attente de règlement.
+
+Tu peux effectuer le règlement par virement bancaire ou PayPal — coordonnées disponibles sur demande.
+
+Merci pour ta réactivité,
+
+Archange Kiyindou — Okapi World Média
+archangek.3is@gmail.com · 06 05 78 28 95`;
+  }
+
+  document.getElementById('r_subject').value=subject;
+  document.getElementById('r_body').value=body;
+  currentReminder={key:'mailu',i:idx};
+
+  const refreshLinks=()=>{
+    const b=document.getElementById('r_body').value;
+    const s=document.getElementById('r_subject').value;
+    document.getElementById('r_gmail').href=`mailto:${MAILU_INFO.email}?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
+    document.getElementById('r_wa').href=`https://wa.me/?text=${encodeURIComponent(s+'\n\n'+b)}`;
+    document.getElementById('r_sms').href=`sms:?body=${encodeURIComponent(s+'\n\n'+b)}`;
+  };
+  refreshLinks();
+  document.getElementById('r_body').oninput=refreshLinks;
+  document.getElementById('reminderModal').classList.add('show');
 }
 
 // init
