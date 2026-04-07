@@ -163,6 +163,29 @@ button.danger:hover{background:#2a1010;color:#d66}
   background:transparent;border:none;color:#666;cursor:pointer;font-size:14px;
 }
 .del-row:hover{color:#c55}
+.nav-badge{display:inline-block;background:var(--red);color:#fff;font-size:9px;
+  padding:2px 6px;border-radius:8px;margin-left:6px;font-weight:700;vertical-align:middle}
+.reminder-banner{background:rgba(192,57,43,.12);border-left:3px solid var(--red);
+  padding:16px 20px;margin-bottom:20px;border-radius:2px}
+.reminder-banner h4{color:#ff6b5b;font-size:13px;text-transform:uppercase;
+  letter-spacing:1px;margin-bottom:10px;font-family:Georgia,serif}
+.reminder-banner ul{list-style:none;font-size:13px;color:var(--ivory)}
+.reminder-banner li{padding:4px 0;border-bottom:1px solid rgba(192,57,43,.15)}
+.reminder-banner li:last-child{border:none}
+.reminder-banner .due{color:#ff6b5b;font-weight:600}
+.btn-rappel{background:transparent;border:1px solid var(--gold);color:var(--gold2);
+  padding:4px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.8px;
+  cursor:pointer;border-radius:2px;font-family:inherit}
+.btn-rappel:hover{background:var(--gold);color:#000}
+.b-sent{background:rgba(196,154,34,.15);color:var(--gold2);border:1px solid var(--gold);
+  display:inline-block;padding:3px 8px;font-size:9px;border-radius:2px;
+  text-transform:uppercase;letter-spacing:.8px;margin-left:6px}
+.send-btns{display:flex;gap:10px;margin-top:18px}
+.send-btns a{flex:1;text-align:center;padding:12px;background:var(--bg3);
+  border:1px solid var(--border);color:var(--ivory);text-decoration:none;
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;border-radius:2px;
+  transition:all .2s}
+.send-btns a:hover{border-color:var(--gold);color:var(--gold2)}
 td.edit{cursor:pointer;transition:background .15s,box-shadow .15s}
 td.edit:hover{background:rgba(196,154,34,.08);box-shadow:inset 0 0 0 1px rgba(196,154,34,.35)}
 td.editing{background:#0a0a0a;padding:4px 8px}
@@ -188,7 +211,7 @@ td.editing input,td.editing select{
 <nav>
   <button class="tab-btn active" data-tab="projets">Projets</button>
   <button class="tab-btn" data-tab="finances">Finances</button>
-  <button class="tab-btn" data-tab="echeances">Échéanciers</button>
+  <button class="tab-btn" data-tab="echeances">Échéanciers<span id="navBadge" class="nav-badge" style="display:none">0</span></button>
   <button class="tab-btn" data-tab="charges">Charges</button>
   <button class="tab-btn" data-tab="investir">Investir</button>
 </nav>
@@ -249,6 +272,7 @@ td.editing input,td.editing select{
 <!-- ============ ÉCHÉANCIERS ============ -->
 <section id="echeances" class="tab">
   <h2 class="section">Échéanciers Contractuels</h2>
+  <div id="reminderBanner"></div>
   <div class="metrics">
     <div class="metric"><div class="label">CA contractuel</div><div class="val" id="eCA">—</div></div>
     <div class="metric"><div class="label">Encaissé</div><div class="val" id="eEnc">—</div></div>
@@ -257,15 +281,15 @@ td.editing input,td.editing select{
   </div>
 
   <h3 class="section">UNIKIDSLAND — OKP-2026-UKL-01</h3>
-  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th></tr></thead>
+  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
     <tbody id="ukl"></tbody></table>
 
   <h3 class="section">Le Miroir de l'âme — OKP-2026-EVE01</h3>
-  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th></tr></thead>
+  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
     <tbody id="eve"></tbody></table>
 
   <h3 class="section">Casino de Paris / BDC — OKP-2026-BDC01-A1</h3>
-  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th></tr></thead>
+  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
     <tbody id="bdc"></tbody></table>
 
   <h3 class="section">MAÏLU — Relance Urgente</h3>
@@ -336,6 +360,20 @@ td.editing input,td.editing select{
   <div class="modal-actions">
     <button class="ghost" onclick="closeModal('opModal')">Annuler</button>
     <button class="gold" onclick="addOp()">Enregistrer</button>
+  </div>
+</div></div>
+
+<div class="modal-bg" id="reminderModal"><div class="modal" style="max-width:600px">
+  <h3>Rappel de paiement</h3>
+  <label>Objet</label><input id="r_subject" readonly>
+  <label>Message</label><textarea id="r_body" rows="14" style="width:100%;background:#0a0a0a;border:1px solid var(--border);color:var(--ivory);padding:10px;font-family:inherit;font-size:12px;border-radius:2px;line-height:1.5"></textarea>
+  <div class="send-btns">
+    <a id="r_gmail" href="#" target="_blank" onclick="markSent()">📧 Gmail</a>
+    <a id="r_wa" href="#" target="_blank" onclick="markSent()">💬 WhatsApp</a>
+    <a id="r_sms" href="#" onclick="markSent()">📱 SMS</a>
+  </div>
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('reminderModal')">Fermer</button>
   </div>
 </div></div>
 
@@ -541,16 +579,26 @@ function renderChart(){
 }
 
 function renderEcheances(){
+  DB.reminders=DB.reminders||{};
   const fill=(id,key)=>{
     const arr=DB[key];const t=document.getElementById(id);t.innerHTML='';
-    arr.forEach((r,i)=>{const b=`${key}.${i}`;t.innerHTML+=`<tr>
+    arr.forEach((r,i)=>{
+      const b=`${key}.${i}`;
+      const sentDate=DB.reminders[`${key}.${i}`];
+      const sentBadge=sentDate?`<span class="b-sent" title="Rappel envoyé le ${sentDate}">✓ Rappel</span>`:'';
+      const canRemind=(r[4]==='next'||r[4]==='pending');
+      const btn=canRemind?`<button class="btn-rappel" onclick="openReminder('${key}',${i})">Rappeler</button>`:'';
+      t.innerHTML+=`<tr>
       <td class="edit" ${ec(b,'0',r[0],'text')}>${r[0]}</td>
       <td class="edit" ${ec(b,'1',r[1],'text')}>${r[1]}</td>
       <td class="edit" ${ec(b,'2',r[2],'text')}>${r[2]}</td>
       <td class="edit" ${ec(b,'3',r[3],'num')}>${fmt(r[3])}</td>
-      <td class="edit" ${ec(b,'4',r[4],'select','ver')}>${badgeVer(r[4])}</td></tr>`;});
+      <td class="edit" ${ec(b,'4',r[4],'select','ver')}>${badgeVer(r[4])}${sentBadge}</td>
+      <td>${btn}</td></tr>`;
+    });
   };
   fill('ukl','ukl');fill('eve','eve');fill('bdc','bdc');
+  renderReminderBanner();
 
   const all=[...DB.ukl,...DB.eve,...DB.bdc];
   const ca=all.reduce((s,r)=>s+r[3],0);
@@ -703,6 +751,83 @@ function startEdit(td){
     if(ev.key==='Enter'){ev.preventDefault();el.blur();}
     else if(ev.key==='Escape'){ev.preventDefault();el.removeEventListener('blur',commit);cancel();}
   });
+}
+
+// ============ REMINDERS ============
+const PROJECT_INFO={
+  ukl:{project:"UNIKIDSLAND / Je Suis Unique",client:"Marie-Michelle"},
+  eve:{project:"Le Miroir de l'âme",client:"Ève"},
+  bdc:{project:"En Route pour le Casino de Paris",client:"Gabin"}
+};
+
+function daysUntil(iso){
+  const d=new Date(iso),now=new Date();
+  now.setHours(0,0,0,0);d.setHours(0,0,0,0);
+  return Math.round((d-now)/86400000);
+}
+
+function getPendingAlerts(){
+  return DB.creances.filter(c=>{
+    const d=daysUntil(c.dt);
+    return d<=7;
+  }).map(c=>({...c,days:daysUntil(c.dt)}));
+}
+
+function renderReminderBanner(){
+  const alerts=getPendingAlerts();
+  const bn=document.getElementById('reminderBanner');
+  const navB=document.getElementById('navBadge');
+  if(alerts.length===0){bn.innerHTML='';navB.style.display='none';return;}
+  navB.textContent=alerts.length;navB.style.display='inline-block';
+  let html='<div class="reminder-banner"><h4>⚠ Rappels de paiement à effectuer</h4><ul>';
+  alerts.forEach(a=>{
+    const lbl=a.days<0?`En retard de ${-a.days}j`:(a.days===0?"Aujourd'hui":`Dans ${a.days}j`);
+    html+=`<li>${a.lib} — <strong>${fmt(a.mt)}</strong> · échéance ${a.dt} <span class="due">(${lbl})</span></li>`;
+  });
+  html+='</ul></div>';
+  bn.innerHTML=html;
+}
+
+let currentReminder=null;
+function openReminder(key,i){
+  const row=DB[key][i];
+  const info=PROJECT_INFO[key];
+  const subject=`Rappel de paiement — ${info.project} · Okapi World Média`;
+  const body=`Bonjour ${info.client},
+
+Je me permets de te contacter concernant le règlement de ${row[3]} € correspondant à ${row[2]} dans le cadre de notre collaboration sur ${info.project}.
+
+Ce versement était prévu pour le ${row[1]}.
+
+Tu peux effectuer le règlement par virement bancaire ou PayPal — coordonnées disponibles sur demande.
+
+Merci pour ta réactivité,
+
+Archange Kiyindou — Okapi World Média
+archangek.3is@gmail.com · 06 05 78 28 95`;
+
+  document.getElementById('r_subject').value=subject;
+  document.getElementById('r_body').value=body;
+  currentReminder={key,i};
+
+  const refreshLinks=()=>{
+    const b=document.getElementById('r_body').value;
+    const s=document.getElementById('r_subject').value;
+    document.getElementById('r_gmail').href=`mailto:?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
+    document.getElementById('r_wa').href=`https://wa.me/?text=${encodeURIComponent(s+'\n\n'+b)}`;
+    document.getElementById('r_sms').href=`sms:?body=${encodeURIComponent(s+'\n\n'+b)}`;
+  };
+  refreshLinks();
+  document.getElementById('r_body').oninput=refreshLinks;
+  document.getElementById('reminderModal').classList.add('show');
+}
+
+function markSent(){
+  if(!currentReminder)return;
+  DB.reminders=DB.reminders||{};
+  DB.reminders[`${currentReminder.key}.${currentReminder.i}`]=new Date().toISOString().slice(0,10);
+  save();
+  setTimeout(()=>{closeModal('reminderModal');renderAll();},300);
 }
 
 // init
