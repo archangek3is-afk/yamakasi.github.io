@@ -1040,7 +1040,7 @@ archangek.3is@gmail.com · 06 05 78 28 95`;
   const refreshLinks=()=>{
     const b=document.getElementById('r_body').value;
     const s=document.getElementById('r_subject').value;
-    document.getElementById('r_gmail').href=`mailto:?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
+    document.getElementById('r_gmail').href=`https://mail.google.com/mail/?view=cm&su=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
     document.getElementById('r_wa').href=`https://wa.me/?text=${encodeURIComponent(s+'\n\n'+b)}`;
     document.getElementById('r_sms').href=`sms:?body=${encodeURIComponent(s+'\n\n'+b)}`;
   };
@@ -1109,7 +1109,7 @@ archangek.3is@gmail.com · 06 05 78 28 95`;
   const refreshLinks=()=>{
     const b=document.getElementById('r_body').value;
     const s=document.getElementById('r_subject').value;
-    document.getElementById('r_gmail').href=`mailto:${MAILU_INFO.email}?subject=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
+    document.getElementById('r_gmail').href=`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(MAILU_INFO.email)}&su=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
     document.getElementById('r_wa').href=`https://wa.me/?text=${encodeURIComponent(s+'\n\n'+b)}`;
     document.getElementById('r_sms').href=`sms:?body=${encodeURIComponent(s+'\n\n'+b)}`;
   };
