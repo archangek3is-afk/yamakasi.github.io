@@ -10,19 +10,32 @@
 <link rel="apple-touch-icon" href="icon.svg">
 <script>
 if('serviceWorker' in navigator){
+  let reloading=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(reloading)return;
+    reloading=true;
+    sessionStorage.setItem('okapi_updated','1');
+    window.location.reload();
+  });
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('sw.js').then(reg=>{
+      const promote=sw=>{if(sw)sw.postMessage('SKIP_WAITING');};
+      if(reg.waiting)promote(reg.waiting);
       reg.addEventListener('updatefound',()=>{
         const nw=reg.installing;
         if(!nw)return;
         nw.addEventListener('statechange',()=>{
           if(nw.state==='installed' && navigator.serviceWorker.controller){
-            sessionStorage.setItem('okapi_updated','1');
-            window.location.reload();
+            promote(nw);
           }
         });
       });
-      setInterval(()=>reg.update().catch(()=>{}),60000);
+      const checkUpdate=()=>reg.update().catch(()=>{});
+      setInterval(checkUpdate,60000);
+      document.addEventListener('visibilitychange',()=>{
+        if(document.visibilityState==='visible')checkUpdate();
+      });
+      window.addEventListener('focus',checkUpdate);
     }).catch(e=>console.warn('SW:',e));
   });
 }

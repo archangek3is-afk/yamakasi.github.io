@@ -1,4 +1,4 @@
-const BUILD = '1775523062';
+const BUILD = '1775523233';
 const CACHE = 'okapi-dashboard-' + BUILD;
 const BASE = '/yamakasi.github.io/';
 const ASSETS = [
@@ -10,10 +10,11 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', e => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE).then(c => Promise.all(
       ASSETS.map(u => c.add(u).catch(() => null))
-    )).then(() => self.skipWaiting())
+    ))
   );
 });
 
@@ -23,6 +24,10 @@ self.addEventListener('activate', e => {
       keys.filter(k => k !== CACHE).map(k => caches.delete(k))
     )).then(() => self.clients.claim())
   );
+});
+
+self.addEventListener('message', e => {
+  if (e.data === 'SKIP_WAITING') self.skipWaiting();
 });
 
 self.addEventListener('fetch', e => {
