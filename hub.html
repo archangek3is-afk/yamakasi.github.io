@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWM Production Hub</title>
+<link rel="manifest" href="manifest_hub.json">
+<meta name="theme-color" content="#C49A22">
+<link rel="icon" type="image/svg+xml" href="icon_hub.svg">
+<link rel="apple-touch-icon" href="icon_hub.svg">
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script>
+if('serviceWorker' in navigator){
+  let reloading=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(reloading)return;reloading=true;
+    sessionStorage.setItem('owmhub_updated','1');window.location.reload();
+  });
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw_hub.js').then(reg=>{
+      const promote=sw=>{if(sw)sw.postMessage('SKIP_WAITING');};
+      if(reg.waiting)promote(reg.waiting);
+      reg.addEventListener('updatefound',()=>{
+        const nw=reg.installing;if(!nw)return;
+        nw.addEventListener('statechange',()=>{
+          if(nw.state==='installed' && navigator.serviceWorker.controller)promote(nw);
+        });
+      });
+      const checkUpdate=()=>reg.update().catch(()=>{});
+      setInterval(checkUpdate,60000);
+      document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkUpdate();});
+      window.addEventListener('focus',checkUpdate);
+    }).catch(e=>console.warn('SW:',e));
+  });
+}
+</script>
+<style>
+:root{
+  --bg:#0D0D0D;--bg2:#161616;--bg3:#1f1f1f;--bg-admin:#1a120a;
+  --gold:#C49A22;--gold2:#D4AF37;
+  --ivory:#F0ECE4;--muted:#8a8579;
+  --red:#c0392b;--green:#27ae60;--orange:#e67e22;
+  --studios:#D4AF37;--agence:#8B2E3F;--animation:#2e8b57;--admin:#5a4a2a;
+  --border:#2a2a2a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ivory);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;font-size:14px}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:.5px}
+header{border-bottom:1px solid var(--border);padding:28px 40px 22px;background:linear-gradient(180deg,#0a0a0a,#0D0D0D)}
+header h1{font-size:26px;color:var(--gold2)}
+header .sub{color:var(--muted);font-size:12px;margin-top:4px;letter-spacing:1px;text-transform:uppercase}
+nav{display:flex;gap:2px;padding:0 40px;background:#0a0a0a;border-bottom:1px solid var(--border);overflow-x:auto}
+nav button{background:transparent;border:none;color:var(--muted);padding:16px 26px;cursor:pointer;font-size:13px;font-family:Georgia,serif;letter-spacing:1.2px;text-transform:uppercase;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+nav button:hover{color:var(--ivory)}
+nav button.active{color:var(--gold2);border-bottom-color:var(--gold)}
+main{padding:32px 40px 80px;max-width:1500px;margin:0 auto}
+.tab{display:none}.tab.active{display:block}
+h2.section{font-size:22px;color:var(--gold2);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+h3.branch{font-size:14px;color:var(--gold2);margin:24px 0 10px;letter-spacing:1.5px;text-transform:uppercase;font-family:Georgia,serif;display:flex;align-items:center;gap:10px}
+h3.branch::before{content:"";display:inline-block;width:18px;height:1px;background:var(--gold)}
+.branch-studios h3.branch{color:var(--studios)}
+.branch-agence h3.branch{color:#d4677a}
+.branch-animation h3.branch{color:#5fcf8a}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:14px}
+.card{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--gold);padding:16px 18px;border-radius:2px;cursor:pointer;transition:all .2s}
+.card:hover{border-left-color:var(--gold2);background:#1a1a1a;transform:translateX(2px)}
+.card h4{color:var(--ivory);font-size:14px;margin-bottom:6px;font-family:system-ui,sans-serif;font-weight:600}
+.card .client{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.card .meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);margin-top:8px}
+.card .bar{background:#222;height:4px;border-radius:1px;overflow:hidden;margin:8px 0 6px}
+.card .bar>div{background:linear-gradient(90deg,var(--gold),var(--gold2));height:100%;transition:width .3s}
+
+.badge{display:inline-block;padding:3px 9px;font-size:9px;border-radius:2px;text-transform:uppercase;letter-spacing:.8px;font-weight:600}
+.b-cours{background:rgba(39,174,96,.15);color:#5fcf8a;border:1px solid #27ae60}
+.b-urgent{background:rgba(192,57,43,.18);color:#ff6b5b;border:1px solid #c0392b}
+.b-pause{background:rgba(85,85,85,.2);color:#aaa;border:1px solid #555}
+.b-livre{background:rgba(196,154,34,.15);color:var(--gold2);border:1px solid var(--gold)}
+
+.branch-admin{background:var(--bg-admin);border:1px solid var(--admin);padding:24px;border-radius:2px;margin-top:32px;position:relative}
+.branch-admin h3.branch{color:#c8a866}
+.lock-overlay{position:absolute;inset:0;background:rgba(13,13,13,.95);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;z-index:5;border-radius:2px}
+.lock-overlay .ic{font-size:36px;color:var(--gold)}
+.lock-overlay input{background:#000;border:1px solid var(--gold);color:var(--gold2);padding:12px 18px;font-size:24px;text-align:center;letter-spacing:8px;width:160px;font-family:Georgia,serif;border-radius:2px}
+.lock-overlay .hint{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.doc-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #2a1f10;font-size:13px}
+.doc-row:last-child{border:none}
+.doc-row .name{color:var(--ivory)}
+.doc-row .info{color:var(--muted);font-size:11px}
+.doc-row .acts{display:flex;gap:8px}
+
+button.gold,button.add{background:var(--gold);color:#000;border:none;padding:9px 16px;cursor:pointer;font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;border-radius:2px;font-family:inherit}
+button.gold:hover,button.add:hover{background:var(--gold2)}
+button.ghost{background:transparent;border:1px solid var(--border);color:var(--muted);padding:7px 12px;cursor:pointer;font-size:10px;text-transform:uppercase;letter-spacing:1px;border-radius:2px;font-family:inherit}
+button.ghost:hover{color:var(--ivory);border-color:var(--gold)}
+button.danger{background:transparent;border:1px solid #4a2020;color:#a55;padding:6px 12px;cursor:pointer;font-size:10px;text-transform:uppercase;letter-spacing:1px;border-radius:2px;font-family:inherit}
+button.danger:hover{background:#2a1010;color:#d66}
+button.del-row{background:transparent;border:none;color:#666;cursor:pointer;font-size:14px}
+button.del-row:hover{color:#c55}
+.add-bar{margin:10px 0 18px}
+
+table{width:100%;border-collapse:collapse;background:var(--bg2);margin-bottom:16px;border:1px solid var(--border)}
+th{text-align:left;padding:12px 14px;background:#111;color:var(--gold2);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;border-bottom:1px solid var(--border)}
+td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#1a1a1a}
+
+/* Roadmap / Gantt */
+.gantt{background:var(--bg2);border:1px solid var(--border);padding:18px;overflow-x:auto}
+.gantt-header{display:flex;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:8px;min-width:1440px}
+.gantt-header .label-col{width:200px;flex-shrink:0;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.gantt-header .month{flex:1;text-align:center;font-size:9px;color:var(--muted);text-transform:uppercase;border-left:1px solid #1a1a1a}
+.gantt-row{display:flex;align-items:center;min-width:1440px;height:34px;border-bottom:1px solid #1a1a1a;position:relative}
+.gantt-row .label-col{width:200px;flex-shrink:0;font-size:11px;color:var(--ivory);padding-right:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gantt-row .track{flex:1;height:100%;position:relative}
+.gantt-bar{position:absolute;top:8px;height:18px;border-radius:2px;font-size:9px;color:#000;padding:2px 6px;white-space:nowrap;overflow:hidden;font-weight:600;cursor:pointer}
+.gantt-bar.studios{background:var(--studios)}
+.gantt-bar.agence{background:var(--agence);color:#fff}
+.gantt-bar.animation{background:var(--animation);color:#fff}
+.gantt-milestone{position:absolute;top:6px;width:12px;height:22px;background:var(--red);border:1px solid #fff;cursor:pointer;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+
+/* Calendar */
+.cal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.cal-header h3{color:var(--gold2);font-size:18px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.cal-day-name{background:#111;color:var(--gold2);text-align:center;padding:8px;font-size:10px;text-transform:uppercase;letter-spacing:1px}
+.cal-day{background:var(--bg2);min-height:80px;padding:6px;font-size:11px;cursor:pointer;transition:background .2s}
+.cal-day:hover{background:#1a1a1a}
+.cal-day.empty{background:#0a0a0a;cursor:default}
+.cal-day.today{background:rgba(196,154,34,.08);border:1px solid var(--gold)}
+.cal-day .num{color:var(--muted);font-weight:600;margin-bottom:4px}
+.cal-day .ev{display:block;font-size:9px;background:var(--studios);color:#000;padding:1px 4px;border-radius:2px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal-day .ev.agence{background:var(--agence);color:#fff}
+.cal-day .ev.animation{background:var(--animation);color:#fff}
+
+/* Modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;align-items:center;justify-content:center}
+.modal-bg.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--gold);padding:30px;width:90%;max-width:560px;max-height:90vh;overflow-y:auto}
+.modal h3{color:var(--gold2);margin-bottom:18px;font-size:18px}
+.modal label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:12px 0 4px}
+.modal input,.modal select,.modal textarea{width:100%;background:#0a0a0a;border:1px solid var(--border);color:var(--ivory);padding:10px;font-family:inherit;font-size:13px;border-radius:2px}
+.modal input:focus,.modal select:focus,.modal textarea:focus{outline:1px solid var(--gold);border-color:var(--gold)}
+.modal textarea{resize:vertical;min-height:80px}
+.modal-actions{display:flex;gap:10px;margin-top:22px;justify-content:flex-end}
+.send-btns{display:flex;gap:10px;margin-top:16px}
+.send-btns a{flex:1;text-align:center;padding:11px;background:var(--bg3);border:1px solid var(--border);color:var(--ivory);text-decoration:none;font-size:11px;text-transform:uppercase;letter-spacing:1px;border-radius:2px}
+.send-btns a:hover{border-color:var(--gold);color:var(--gold2)}
+
+.footer-actions{position:fixed;bottom:14px;right:18px;display:flex;gap:8px;z-index:50}
+#syncDot{position:fixed;top:14px;right:18px;display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:system-ui,sans-serif;z-index:60;background:rgba(0,0,0,.5);padding:6px 10px;border-radius:12px;border:1px solid var(--border)}
+#syncDot .dot{width:8px;height:8px;border-radius:50%;background:#888;box-shadow:0 0 6px currentColor}
+#syncDot.online .dot{background:var(--green);color:var(--green)}
+#syncDot.offline .dot{background:var(--orange);color:var(--orange)}
+
+#updateToast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:var(--gold2);border:1px solid var(--gold);padding:12px 22px;font-size:12px;letter-spacing:1px;text-transform:uppercase;font-family:Georgia,serif;border-radius:2px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.6)}
+#updateToast.show{opacity:1}
+
+@media (max-width:900px){
+  header,nav,main{padding-left:14px;padding-right:14px}
+  .card-grid{grid-template-columns:1fr}
+  .gantt-header,.gantt-row{min-width:1100px}
+}
+</style>
+</head>
+<body>
+
+<div id="updateToast">✓ Mise à jour installée</div>
+<div id="syncDot" class="offline"><span class="dot"></span><span id="syncLabel">Offline</span></div>
+
+<header>
+  <h1>OWM Production Hub</h1>
+  <div class="sub">Suite de production · Okapi World Média</div>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-tab="projets">Projets</button>
+  <button class="tab-btn" data-tab="roadmap">Roadmap</button>
+  <button class="tab-btn" data-tab="documents">Documents</button>
+  <button class="tab-btn" data-tab="annuaire">Annuaire</button>
+  <button class="tab-btn" data-tab="planning">Planning</button>
+</nav>
+
+<main>
+
+<!-- ============ PROJETS ============ -->
+<section id="projets" class="tab active">
+  <h2 class="section">Portefeuille Projets</h2>
+
+  <div class="branch-studios">
+    <h3 class="branch">Okapi Studios</h3>
+    <div class="card-grid" id="grid-studios"></div>
+    <div class="add-bar"><button class="ghost" onclick="openProjectModal('Okapi Studios')">+ Ajouter projet Studios</button></div>
+  </div>
+
+  <div class="branch-agence">
+    <h3 class="branch">L'Agence Okapi</h3>
+    <div class="card-grid" id="grid-agence"></div>
+    <div class="add-bar"><button class="ghost" onclick="openProjectModal(&quot;L'Agence Okapi&quot;)">+ Ajouter projet Agence</button></div>
+  </div>
+
+  <div class="branch-animation">
+    <h3 class="branch">Okapi Animation</h3>
+    <div class="card-grid" id="grid-animation"></div>
+    <div class="add-bar"><button class="ghost" onclick="openProjectModal('Okapi Animation')">+ Ajouter projet Animation</button></div>
+  </div>
+
+  <div class="branch-admin" id="adminBranch">
+    <div class="lock-overlay" id="adminLock">
+      <div class="ic">🔒</div>
+      <div class="hint">Section confidentielle — Code à 4 chiffres</div>
+      <input id="adminPin" type="password" maxlength="4" inputmode="numeric" placeholder="••••">
+      <div class="hint" id="adminPinHint">Premier accès : choisissez votre code</div>
+    </div>
+    <h3 class="branch">🔐 Administratif</h3>
+    <div id="adminDocs"></div>
+    <div class="add-bar"><button class="ghost" onclick="openAdminDocModal()">+ Ajouter document admin</button></div>
+  </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section id="roadmap" class="tab">
+  <h2 class="section">Roadmap 2026 — 2027</h2>
+  <p style="color:var(--muted);font-size:11px;margin-bottom:14px">Code couleur : <span style="color:var(--studios)">■ Studios</span> &nbsp; <span style="color:#d4677a">■ Agence</span> &nbsp; <span style="color:#5fcf8a">■ Animation</span> &nbsp; <span style="color:#ff6b5b">◆ Jalons clés</span></p>
+  <div class="gantt" id="gantt"></div>
+</section>
+
+<!-- ============ DOCUMENTS ============ -->
+<section id="documents" class="tab">
+  <h2 class="section">Documents</h2>
+  <div class="add-bar"><button class="add" onclick="openDocModal()">+ Ajouter document</button></div>
+  <table>
+    <thead><tr><th>Nom</th><th>Projet</th><th>Type</th><th>Date</th><th>Taille</th><th>Actions</th></tr></thead>
+    <tbody id="docsTable"></tbody>
+  </table>
+</section>
+
+<!-- ============ ANNUAIRE ============ -->
+<section id="annuaire" class="tab">
+  <h2 class="section">Annuaire</h2>
+  <div class="add-bar"><button class="add" onclick="openContactModal()">+ Ajouter contact</button></div>
+  <div id="annuaireGroups"></div>
+</section>
+
+<!-- ============ PLANNING ============ -->
+<section id="planning" class="tab">
+  <h2 class="section">Planning</h2>
+  <div class="cal-header">
+    <button class="ghost" onclick="navMonth(-1)">‹ Mois précédent</button>
+    <h3 id="calMonthTitle"></h3>
+    <button class="ghost" onclick="navMonth(1)">Mois suivant ›</button>
+  </div>
+  <div class="add-bar"><button class="add" onclick="openEventModal()">+ Ajouter événement</button></div>
+  <div class="cal-grid" id="calGrid"></div>
+</section>
+
+</main>
+
+<div class="footer-actions">
+  <button class="ghost" onclick="exportJSON()">Exporter JSON</button>
+  <button class="danger" onclick="resetData()">Réinitialiser</button>
+</div>
+
+<!-- ===== MODALS ===== -->
+<div class="modal-bg" id="projectModal"><div class="modal">
+  <h3 id="pmTitle">Ajouter un projet</h3>
+  <input id="pm_id" type="hidden">
+  <label>Nom</label><input id="pm_nom">
+  <label>Client</label><input id="pm_client">
+  <label>Branche</label><select id="pm_branche">
+    <option>Okapi Studios</option><option>L'Agence Okapi</option><option>Okapi Animation</option>
+  </select>
+  <label>Statut</label><select id="pm_statut">
+    <option>En cours</option><option>Urgent</option><option>En pause</option><option>Livré</option>
+  </select>
+  <label>Avancement %</label><input id="pm_av" type="number" min="0" max="100">
+  <label>Échéance</label><input id="pm_ech" type="date">
+  <label>Description</label><textarea id="pm_desc"></textarea>
+  <label>Équipe assignée</label><input id="pm_equipe" placeholder="Cadreur, monteur, ...">
+  <label>Documents liés</label><input id="pm_docs" placeholder="Brief, contrat...">
+  <label>Jalons / Roadmap</label><textarea id="pm_jalons" placeholder="Une étape par ligne"></textarea>
+  <label>Notes</label><textarea id="pm_notes"></textarea>
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('projectModal')">Annuler</button>
+    <button class="danger" id="pm_delete" onclick="deleteProject()" style="display:none">Supprimer</button>
+    <button class="gold" onclick="saveProject()">Enregistrer</button>
+  </div>
+</div></div>
+
+<div class="modal-bg" id="docModal"><div class="modal">
+  <h3>Ajouter un document</h3>
+  <input id="dm_id" type="hidden">
+  <label>Nom du document</label><input id="dm_nom">
+  <label>Projet associé</label><select id="dm_projet"></select>
+  <label>Type</label><select id="dm_type">
+    <option>Contrat</option><option>Brief</option><option>Script</option>
+    <option>Visuel</option><option>Devis</option><option>Facture</option>
+    <option>Note</option><option>Admin</option>
+  </select>
+  <label>Date</label><input id="dm_date" type="date">
+  <label>Taille (ko)</label><input id="dm_size" type="number" placeholder="0">
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('docModal')">Annuler</button>
+    <button class="danger" id="dm_delete" onclick="deleteDoc()" style="display:none">Supprimer</button>
+    <button class="gold" onclick="saveDoc()">Enregistrer</button>
+  </div>
+</div></div>
+
+<div class="modal-bg" id="sendModal"><div class="modal">
+  <h3>Envoyer le document</h3>
+  <label>Destinataire</label><select id="sm_contact"></select>
+  <label>Document</label><input id="sm_doc" readonly>
+  <label>Message</label><textarea id="sm_msg" rows="6"></textarea>
+  <div class="send-btns">
+    <a id="sm_email" href="#" target="_blank">📧 Email</a>
+    <a id="sm_wa" href="#" target="_blank">💬 WhatsApp</a>
+    <a id="sm_sms" href="#">📱 SMS</a>
+  </div>
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('sendModal')">Fermer</button>
+  </div>
+</div></div>
+
+<div class="modal-bg" id="contactModal"><div class="modal">
+  <h3>Ajouter un contact</h3>
+  <input id="cm_id" type="hidden">
+  <label>Nom</label><input id="cm_nom">
+  <label>Catégorie</label><select id="cm_cat">
+    <option>Client</option><option>Technicien</option><option>Talent</option><option>Partenaire</option>
+  </select>
+  <label>Rôle / Fonction</label><input id="cm_role" placeholder="Cadreur, comédien, ...">
+  <label>Email</label><input id="cm_email" type="email">
+  <label>Téléphone</label><input id="cm_tel" type="tel">
+  <label>Projets associés</label><input id="cm_projets" placeholder="BDC, MAÏLU...">
+  <label>Notes</label><textarea id="cm_notes"></textarea>
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('contactModal')">Annuler</button>
+    <button class="danger" id="cm_delete" onclick="deleteContact()" style="display:none">Supprimer</button>
+    <button class="gold" onclick="saveContact()">Enregistrer</button>
+  </div>
+</div></div>
+
+<div class="modal-bg" id="eventModal"><div class="modal">
+  <h3>Ajouter un événement</h3>
+  <input id="em_id" type="hidden">
+  <label>Date</label><input id="em_date" type="date">
+  <label>Titre</label><input id="em_titre">
+  <label>Projet associé</label><select id="em_projet"></select>
+  <label>Branche (couleur)</label><select id="em_branche">
+    <option>Okapi Studios</option><option>L'Agence Okapi</option><option>Okapi Animation</option>
+  </select>
+  <label>Description</label><textarea id="em_desc"></textarea>
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('eventModal')">Annuler</button>
+    <button class="danger" id="em_delete" onclick="deleteEvent()" style="display:none">Supprimer</button>
+    <button class="gold" onclick="saveEvent()">Enregistrer</button>
+  </div>
+</div></div>
+
+<div class="modal-bg" id="adminDocModal"><div class="modal">
+  <h3>Ajouter un document admin</h3>
+  <input id="am_id" type="hidden">
+  <label>Nom</label><input id="am_nom">
+  <label>Type</label><select id="am_type">
+    <option>Bible OWM</option><option>Deck</option><option>Stratégie</option>
+    <option>URSSAF</option><option>Impôts</option><option>Contrat signé</option><option>Autre</option>
+  </select>
+  <label>Date</label><input id="am_date" type="date">
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('adminDocModal')">Annuler</button>
+    <button class="gold" onclick="saveAdminDoc()">Enregistrer</button>
+  </div>
+</div></div>
+
+<script>
+// ============ DATA ============
+const KEY='owm_hub_v1';
+const SCHEMA_VERSION=1;
+
+const SEED={
+  projets:[
+    {id:'p_bdc',nom:"En Route pour le Casino de Paris",client:"Gabin Tchoupo / BDC",branche:"Okapi Studios",statut:"En cours",av:20,ech:"2027-05-31",desc:"Documentaire 25 min sur les 4 traversières culturelles + clôture Casino de Paris.",equipe:"Cadreurs, photographe, monteur, étalonneur",docs:"Contrat OKP-2026-BDC01",jalons:"T1 25/04/2026\nT2 19/06/2026\nT3 26/09/2026\nT4 19/12/2026\nClôture mai 2027",notes:""},
+    {id:'p_illusion',nom:"ILLUSION — Court-métrage",client:"Interne",branche:"Okapi Studios",statut:"Urgent",av:85,ech:"2026-04-20",desc:"Court-métrage interne Okapi Studios.",equipe:"",docs:"",jalons:"",notes:""},
+    {id:'p_miroir',nom:"Le Miroir de l'âme",client:"Ève Aniela / Ruah Studio",branche:"Okapi Studios",statut:"En cours",av:25,ech:"2026-07-31",desc:"Montage cut final.",equipe:"",docs:"Contrat OKP-2026-EVE01",jalons:"V1 signature\nV2 démarrage montage\nV3 livraison cut",notes:""},
+    {id:'p_hyacinthe',nom:"Hyacinthe Imayanga — Série courts",client:"Hyacinthe Imayanga",branche:"Okapi Studios",statut:"En cours",av:10,ech:"2026-05-15",desc:"Série de courts métrages.",equipe:"",docs:"",jalons:"",notes:""},
+    {id:'p_mailu',nom:"MAÏLU — Stratégie & Contenu",client:"Hortense",branche:"L'Agence Okapi",statut:"En cours",av:75,ech:"2026-04-30",desc:"Stratégie digitale + Hero Film + Additif + Teaser.",equipe:"",docs:"",jalons:"",notes:""},
+    {id:'p_mille',nom:"MILLE VISAGES",client:"Interne OWM",branche:"L'Agence Okapi",statut:"En cours",av:30,ech:"2026-12-31",desc:"Projet interne d'identité visuelle.",equipe:"",docs:"",jalons:"",notes:""},
+    {id:'p_yamakasi',nom:"yamakasi.github.io",client:"OWM site web",branche:"L'Agence Okapi",statut:"En cours",av:60,ech:"2026-04-30",desc:"Site web institutionnel OWM.",equipe:"",docs:"",jalons:"",notes:""},
+    {id:'p_ukl',nom:"UNIKIDSLAND / Je Suis Unique",client:"Marie-Michelle Badelas",branche:"Okapi Animation",statut:"En cours",av:15,ech:"2026-11-30",desc:"Saison 1 — 10 épisodes animés.",equipe:"",docs:"Contrat OKP-2026-UKL-01",jalons:"V1 signature\nV2 designs\nV3 animatique\nV4-V10 production",notes:""},
+    {id:'p_bau',nom:"BAU — L'Infabuleuse Histoire",client:"Interne",branche:"Okapi Animation",statut:"En pause",av:40,ech:"2027-01-01",desc:"Long-métrage animé. Dossier CNC à monter.",equipe:"",docs:"",jalons:"",notes:""}
+  ],
+  documents:[],
+  contacts:[
+    {id:'c_gabin',nom:"Gabin Tchoupo",cat:"Client",role:"Producteur BDC",email:"balletdeladiasporacamerounaise@gmail.com",tel:"",projets:"BDC / Casino de Paris",notes:""},
+    {id:'c_hortense',nom:"Hortense",cat:"Client",role:"Fondatrice MAÏLU",email:"hortensebl@hotmail.com",tel:"",projets:"MAÏLU",notes:""},
+    {id:'c_eve',nom:"Ève Aniela",cat:"Client",role:"Réalisatrice Ruah Studio",email:"Aniela16@live.fr",tel:"",projets:"Le Miroir de l'âme",notes:""},
+    {id:'c_marie',nom:"Marie-Michelle Badelas",cat:"Client",role:"Productrice UNIKIDSLAND",email:"bmm.moudzouma@gmail.com",tel:"",projets:"UNIKIDSLAND",notes:""},
+    {id:'c_hyacinthe',nom:"Hyacinthe Imayanga",cat:"Client",role:"Collaborateur",email:"",tel:"",projets:"Série courts",notes:""}
+  ],
+  events:[
+    {id:'e_t1',date:"2026-04-25",titre:"Tournage T1 — Fang-Béti",projet:"BDC",branche:"Okapi Studios",desc:""},
+    {id:'e_t2',date:"2026-06-19",titre:"Tournage T2 — Soudano-Sahélien",projet:"BDC",branche:"Okapi Studios",desc:""},
+    {id:'e_t3',date:"2026-09-26",titre:"Tournage T3 — Grassfields",projet:"BDC",branche:"Okapi Studios",desc:""},
+    {id:'e_t4',date:"2026-12-19",titre:"Tournage T4 — Sawa",projet:"BDC",branche:"Okapi Studios",desc:""},
+    {id:'e_casino',date:"2027-05-15",titre:"Clôture Casino de Paris",projet:"BDC",branche:"Okapi Studios",desc:""},
+    {id:'e_illusion',date:"2026-04-20",titre:"Deadline ILLUSION",projet:"ILLUSION",branche:"Okapi Studios",desc:""},
+    {id:'e_mailu',date:"2026-04-30",titre:"Deadline MAÏLU + yamakasi.github.io",projet:"MAÏLU",branche:"L'Agence Okapi",desc:""},
+    {id:'e_hyacinthe',date:"2026-05-15",titre:"Deadline Hyacinthe Imayanga",projet:"Hyacinthe",branche:"Okapi Studios",desc:""},
+    {id:'e_ukl',date:"2026-11-30",titre:"Deadline UNIKIDSLAND",projet:"UNIKIDSLAND",branche:"Okapi Animation",desc:""}
+  ],
+  adminDocs:[
+    {id:'a_bible',nom:"Bible OWM",type:"Bible OWM",date:"2026-01-01"},
+    {id:'a_deck',nom:"Deck OWM",type:"Deck",date:"2026-01-01"},
+    {id:'a_strat',nom:"Stratégie digitale",type:"Stratégie",date:"2026-01-01"}
+  ]
+};
+
+let DB=load();
+function load(){
+  try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);return migrate(d);}}catch(e){}
+  return migrate(JSON.parse(JSON.stringify(SEED)));
+}
+function migrate(d){
+  if(d._schemaVersion!==SCHEMA_VERSION){
+    // ensure all collections exist
+    ['projets','documents','contacts','events','adminDocs'].forEach(k=>{if(!d[k])d[k]=JSON.parse(JSON.stringify(SEED[k]||[]));});
+    d._schemaVersion=SCHEMA_VERSION;
+  }
+  return d;
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(DB));cloudPush();}
+function uid(){return Math.random().toString(36).slice(2,10)}
+
+// ============ FIRESTORE SYNC ============
+const FB_CONFIG={apiKey:"AIzaSyDmRI3geAdrme2jRYi9G3X3pRg_tBro29Y",authDomain:"okapi-world-media.firebaseapp.com",projectId:"okapi-world-media",storageBucket:"okapi-world-media.firebasestorage.app",messagingSenderId:"756710646676",appId:"1:756710646676:web:2569399f831f227db4a581"};
+const CLIENT_ID=Math.random().toString(36).slice(2)+Date.now();
+let db_fs=null,docRef=null,cloudReady=false,applyingRemote=false;
+
+function setSyncStatus(state,label){
+  const el=document.getElementById('syncDot');if(!el)return;
+  el.classList.remove('online','offline');el.classList.add(state);
+  document.getElementById('syncLabel').textContent=label;
+}
+function cloudPush(){
+  if(!cloudReady||applyingRemote)return;
+  DB._schemaVersion=SCHEMA_VERSION;
+  const payload={state:JSON.stringify(DB),_clientId:CLIENT_ID,_ts:Date.now(),_schemaVersion:SCHEMA_VERSION};
+  docRef.set(payload).catch(e=>{console.warn('Firestore push:',e);setSyncStatus('offline','Offline');});
+}
+function applyRemote(data){
+  if(!data||!data.state||data._clientId===CLIENT_ID)return;
+  let parsed;try{parsed=JSON.parse(data.state);}catch(e){return;}
+  parsed=migrate(parsed);
+  applyingRemote=true;
+  Object.keys(parsed).forEach(k=>DB[k]=parsed[k]);
+  localStorage.setItem(KEY,JSON.stringify(DB));
+  applyingRemote=false;
+  renderAll();
+}
+function initFirestore(){
+  if(typeof firebase==='undefined'){setSyncStatus('offline','Offline');return;}
+  try{
+    firebase.initializeApp(FB_CONFIG);
+    db_fs=firebase.firestore();
+    db_fs.enablePersistence({synchronizeTabs:true}).catch(()=>{});
+    docRef=db_fs.collection('hub').doc('state');
+    docRef.get().then(snap=>{
+      if(!snap.exists){cloudReady=true;cloudPush();}
+      else{cloudReady=true;applyRemote(snap.data());}
+      docRef.onSnapshot({includeMetadataChanges:true},snap=>{
+        if(!snap.exists)return;
+        const fromCache=snap.metadata.fromCache;
+        setSyncStatus(fromCache?'offline':'online',fromCache?'Offline':'Sync');
+        applyRemote(snap.data());
+      },err=>{console.warn(err);setSyncStatus('offline','Offline');});
+      setSyncStatus('online','Sync');
+    }).catch(e=>{console.warn(e);setSyncStatus('offline','Offline');});
+  }catch(e){console.warn(e);setSyncStatus('offline','Offline');}
+}
+window.addEventListener('online',()=>{if(cloudReady)cloudPush();});
+window.addEventListener('offline',()=>setSyncStatus('offline','Offline'));
+
+// ============ TABS ============
+document.querySelectorAll('.tab-btn').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById(b.dataset.tab).classList.add('active');
+    if(b.dataset.tab==='roadmap')renderRoadmap();
+    if(b.dataset.tab==='planning')renderCalendar();
+  };
+});
+
+// ============ HELPERS ============
+function badge(s){
+  const m={"En cours":"b-cours","Urgent":"b-urgent","En pause":"b-pause","Livré":"b-livre"};
+  return `<span class="badge ${m[s]||''}">${s}</span>`;
+}
+function fmtDate(iso){if(!iso)return'';return new Date(iso).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'});}
+function esc(s){return(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+// ============ PROJETS ============
+function renderProjets(){
+  const branches={'Okapi Studios':'grid-studios',"L'Agence Okapi":'grid-agence','Okapi Animation':'grid-animation'};
+  Object.entries(branches).forEach(([br,id])=>{
+    const el=document.getElementById(id);el.innerHTML='';
+    DB.projets.filter(p=>p.branche===br).forEach(p=>{
+      el.innerHTML+=`<div class="card" onclick="openProjectModal(null,'${p.id}')">
+        <h4>${esc(p.nom)}</h4>
+        <div class="client">${esc(p.client)}</div>
+        ${badge(p.statut)}
+        <div class="bar"><div style="width:${p.av}%"></div></div>
+        <div class="meta"><span>${p.av}%</span><span>${fmtDate(p.ech)}</span></div>
+      </div>`;
+    });
+  });
+  renderAdminDocs();
+}
+
+function openProjectModal(branche,id){
+  const m=document.getElementById('projectModal');
+  if(id){
+    const p=DB.projets.find(x=>x.id===id);if(!p)return;
+    document.getElementById('pmTitle').textContent='Modifier le projet';
+    document.getElementById('pm_delete').style.display='inline-block';
+    pm_id.value=p.id;pm_nom.value=p.nom;pm_client.value=p.client;pm_branche.value=p.branche;
+    pm_statut.value=p.statut;pm_av.value=p.av;pm_ech.value=p.ech;
+    pm_desc.value=p.desc||'';pm_equipe.value=p.equipe||'';pm_docs.value=p.docs||'';
+    pm_jalons.value=p.jalons||'';pm_notes.value=p.notes||'';
+  }else{
+    document.getElementById('pmTitle').textContent='Ajouter un projet';
+    document.getElementById('pm_delete').style.display='none';
+    pm_id.value='';pm_nom.value='';pm_client.value='';pm_branche.value=branche||'Okapi Studios';
+    pm_statut.value='En cours';pm_av.value=0;pm_ech.value='';
+    pm_desc.value='';pm_equipe.value='';pm_docs.value='';pm_jalons.value='';pm_notes.value='';
+  }
+  m.classList.add('show');
+}
+function saveProject(){
+  const data={nom:pm_nom.value||'Sans titre',client:pm_client.value,branche:pm_branche.value,
+    statut:pm_statut.value,av:+pm_av.value||0,ech:pm_ech.value,
+    desc:pm_desc.value,equipe:pm_equipe.value,docs:pm_docs.value,jalons:pm_jalons.value,notes:pm_notes.value};
+  if(pm_id.value){
+    const p=DB.projets.find(x=>x.id===pm_id.value);Object.assign(p,data);
+  }else{DB.projets.push({id:'p_'+uid(),...data});}
+  save();renderAll();closeModal('projectModal');
+}
+function deleteProject(){
+  if(!confirm('Supprimer ce projet ?'))return;
+  DB.projets=DB.projets.filter(p=>p.id!==pm_id.value);
+  save();renderAll();closeModal('projectModal');
+}
+
+// ============ ADMIN (PIN-protected) ============
+const ADMIN_PIN_KEY='owm_hub_admin_pin';
+let adminUnlocked=false;
+function renderAdminDocs(){
+  const c=document.getElementById('adminDocs');c.innerHTML='';
+  DB.adminDocs.forEach(d=>{
+    c.innerHTML+=`<div class="doc-row">
+      <div><div class="name">${esc(d.nom)}</div><div class="info">${d.type} · ${fmtDate(d.date)}</div></div>
+      <div class="acts">
+        <button class="ghost" onclick="alert('Document : ${esc(d.nom)}')">Voir</button>
+        <button class="ghost" onclick="openSendModal(null,'${esc(d.nom)}')">Envoyer</button>
+        <button class="del-row" onclick="delAdminDoc('${d.id}')">✕</button>
+      </div>
+    </div>`;
+  });
+}
+function delAdminDoc(id){if(!confirm('Supprimer ?'))return;DB.adminDocs=DB.adminDocs.filter(x=>x.id!==id);save();renderAll();}
+function openAdminDocModal(){am_id.value='';am_nom.value='';am_type.value='Bible OWM';am_date.value=new Date().toISOString().slice(0,10);document.getElementById('adminDocModal').classList.add('show');}
+function saveAdminDoc(){
+  DB.adminDocs.push({id:'a_'+uid(),nom:am_nom.value||'Sans titre',type:am_type.value,date:am_date.value});
+  save();renderAll();closeModal('adminDocModal');
+}
+
+document.getElementById('adminPin').addEventListener('input',e=>{
+  if(e.target.value.length===4){
+    const stored=localStorage.getItem(ADMIN_PIN_KEY);
+    if(!stored){
+      localStorage.setItem(ADMIN_PIN_KEY,e.target.value);
+      adminUnlocked=true;document.getElementById('adminLock').style.display='none';
+    }else if(stored===e.target.value){
+      adminUnlocked=true;document.getElementById('adminLock').style.display='none';
+    }else{
+      e.target.value='';
+      document.getElementById('adminPinHint').textContent='Code incorrect';
+      document.getElementById('adminPinHint').style.color='#ff6b5b';
+    }
+  }
+});
+
+// ============ DOCUMENTS ============
+function renderDocs(){
+  const t=document.getElementById('docsTable');t.innerHTML='';
+  DB.documents.forEach(d=>{
+    t.innerHTML+=`<tr>
+      <td>${esc(d.nom)}</td><td>${esc(d.projet||'—')}</td><td>${esc(d.type)}</td>
+      <td>${fmtDate(d.date)}</td><td>${d.size||0} ko</td>
+      <td>
+        <button class="ghost" onclick="openSendModal('${d.id}')">Envoyer</button>
+        <button class="ghost" onclick="openDocModal('${d.id}')">Éditer</button>
+      </td></tr>`;
+  });
+  // populate project select
+  const sel=document.getElementById('dm_projet');sel.innerHTML='<option value="">— Aucun —</option>';
+  DB.projets.forEach(p=>sel.innerHTML+=`<option>${esc(p.nom)}</option>`);
+}
+function openDocModal(id){
+  if(id){
+    const d=DB.documents.find(x=>x.id===id);if(!d)return;
+    dm_id.value=d.id;dm_nom.value=d.nom;dm_projet.value=d.projet||'';
+    dm_type.value=d.type;dm_date.value=d.date;dm_size.value=d.size||0;
+    document.getElementById('dm_delete').style.display='inline-block';
+  }else{
+    dm_id.value='';dm_nom.value='';dm_projet.value='';dm_type.value='Brief';
+    dm_date.value=new Date().toISOString().slice(0,10);dm_size.value='';
+    document.getElementById('dm_delete').style.display='none';
+  }
+  document.getElementById('docModal').classList.add('show');
+}
+function saveDoc(){
+  const data={nom:dm_nom.value,projet:dm_projet.value,type:dm_type.value,date:dm_date.value,size:+dm_size.value||0};
+  if(dm_id.value){const d=DB.documents.find(x=>x.id===dm_id.value);Object.assign(d,data);}
+  else DB.documents.push({id:'d_'+uid(),...data});
+  save();renderAll();closeModal('docModal');
+}
+function deleteDoc(){if(!confirm('Supprimer ?'))return;DB.documents=DB.documents.filter(d=>d.id!==dm_id.value);save();renderAll();closeModal('docModal');}
+
+function openSendModal(docId,docName){
+  const d=docId?DB.documents.find(x=>x.id===docId):null;
+  const name=d?d.nom:(docName||'Document');
+  sm_doc.value=name;
+  const sel=document.getElementById('sm_contact');sel.innerHTML='';
+  DB.contacts.forEach(c=>sel.innerHTML+=`<option value="${c.id}">${esc(c.nom)} ${c.email?'<'+c.email+'>':''}</option>`);
+  sm_msg.value=`Bonjour,\n\nJe te transmets le document : ${name}.\n\nN'hésite pas à me faire un retour.\n\nArchange Kiyindou — Okapi World Média`;
+  const refresh=()=>{
+    const c=DB.contacts.find(x=>x.id===sm_contact.value);
+    const msg=sm_msg.value;
+    const subject=`OWM — ${name}`;
+    sm_email.href=`mailto:${c?c.email:''}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+    sm_wa.href=`https://wa.me/${c&&c.tel?c.tel.replace(/\D/g,''):''}?text=${encodeURIComponent(subject+'\n\n'+msg)}`;
+    sm_sms.href=`sms:${c&&c.tel?c.tel:''}?body=${encodeURIComponent(subject+'\n\n'+msg)}`;
+  };
+  refresh();
+  sm_contact.onchange=refresh;sm_msg.oninput=refresh;
+  document.getElementById('sendModal').classList.add('show');
+}
+
+// ============ ANNUAIRE ============
+function renderAnnuaire(){
+  const cats=['Client','Technicien','Talent','Partenaire'];
+  const c=document.getElementById('annuaireGroups');c.innerHTML='';
+  cats.forEach(cat=>{
+    const items=DB.contacts.filter(x=>x.cat===cat);
+    if(!items.length)return;
+    let html=`<h3 class="branch">${cat}s</h3><table><thead><tr><th>Nom</th><th>Rôle</th><th>Email</th><th>Téléphone</th><th>Projets</th><th>Actions</th></tr></thead><tbody>`;
+    items.forEach(x=>{
+      html+=`<tr>
+        <td>${esc(x.nom)}</td><td>${esc(x.role||'')}</td>
+        <td>${x.email?`<a href="mailto:${x.email}" style="color:var(--gold2)">${esc(x.email)}</a>`:'—'}</td>
+        <td>${esc(x.tel||'—')}</td><td>${esc(x.projets||'')}</td>
+        <td>
+          ${x.email?`<a class="ghost" style="text-decoration:none;display:inline-block" href="mailto:${x.email}">📧</a>`:''}
+          ${x.tel?`<a class="ghost" style="text-decoration:none;display:inline-block" href="https://wa.me/${x.tel.replace(/\D/g,'')}" target="_blank">💬</a>`:''}
+          <button class="ghost" onclick="openSendModal(null,'Document')">Envoyer doc</button>
+          <button class="ghost" onclick="openContactModal('${x.id}')">Éditer</button>
+        </td></tr>`;
+    });
+    html+='</tbody></table>';
+    c.innerHTML+=html;
+  });
+}
+function openContactModal(id){
+  if(id){
+    const c=DB.contacts.find(x=>x.id===id);if(!c)return;
+    cm_id.value=c.id;cm_nom.value=c.nom;cm_cat.value=c.cat;cm_role.value=c.role||'';
+    cm_email.value=c.email||'';cm_tel.value=c.tel||'';cm_projets.value=c.projets||'';cm_notes.value=c.notes||'';
+    document.getElementById('cm_delete').style.display='inline-block';
+  }else{
+    cm_id.value='';cm_nom.value='';cm_cat.value='Client';cm_role.value='';
+    cm_email.value='';cm_tel.value='';cm_projets.value='';cm_notes.value='';
+    document.getElementById('cm_delete').style.display='none';
+  }
+  document.getElementById('contactModal').classList.add('show');
+}
+function saveContact(){
+  const data={nom:cm_nom.value,cat:cm_cat.value,role:cm_role.value,email:cm_email.value,tel:cm_tel.value,projets:cm_projets.value,notes:cm_notes.value};
+  if(cm_id.value){const c=DB.contacts.find(x=>x.id===cm_id.value);Object.assign(c,data);}
+  else DB.contacts.push({id:'c_'+uid(),...data});
+  save();renderAll();closeModal('contactModal');
+}
+function deleteContact(){if(!confirm('Supprimer ?'))return;DB.contacts=DB.contacts.filter(c=>c.id!==cm_id.value);save();renderAll();closeModal('contactModal');}
+
+// ============ ROADMAP / GANTT ============
+function renderRoadmap(){
+  const start=new Date('2026-01-01'),end=new Date('2027-12-31');
+  const totalDays=(end-start)/86400000;
+  const months=[];const cur=new Date(start);
+  while(cur<=end){months.push(new Date(cur));cur.setMonth(cur.getMonth()+1);}
+  const labelW=200;
+  const g=document.getElementById('gantt');
+  let html='<div class="gantt-header"><div class="label-col">Projet</div>';
+  months.forEach(m=>{
+    const lbl=m.toLocaleDateString('fr-FR',{month:'short'})+' '+(m.getMonth()===0||m===months[0]?m.getFullYear().toString().slice(2):'');
+    html+=`<div class="month">${lbl}</div>`;
+  });
+  html+='</div>';
+  const branchClass={'Okapi Studios':'studios',"L'Agence Okapi":'agence','Okapi Animation':'animation'};
+  DB.projets.filter(p=>p.statut!=='Livré').forEach(p=>{
+    if(!p.ech)return;
+    const echDate=new Date(p.ech);
+    if(echDate<start)return;
+    const startProj=new Date(start);
+    const startOffset=0; // tous démarrent au début pour simplifier
+    const endOffset=Math.min(((echDate-start)/86400000)/totalDays*100,100);
+    const left=startOffset,width=Math.max(endOffset-startOffset,3);
+    html+=`<div class="gantt-row">
+      <div class="label-col" title="${esc(p.nom)}">${esc(p.nom)}</div>
+      <div class="track">
+        <div class="gantt-bar ${branchClass[p.branche]||'studios'}" style="left:${left}%;width:${width}%" onclick="openProjectModal(null,'${p.id}')">${esc(p.nom)}</div>
+      </div>
+    </div>`;
+  });
+  // jalons row
+  html+=`<div class="gantt-row"><div class="label-col" style="color:#ff6b5b">◆ Jalons</div><div class="track">`;
+  DB.events.forEach(e=>{
+    const d=new Date(e.date);
+    if(d<start||d>end)return;
+    const left=((d-start)/86400000)/totalDays*100;
+    html+=`<div class="gantt-milestone" style="left:calc(${left}% - 6px)" title="${esc(e.titre)} — ${fmtDate(e.date)}" onclick="alert('${esc(e.titre)} — ${fmtDate(e.date)}')"></div>`;
+  });
+  html+='</div></div>';
+  g.innerHTML=html;
+}
+
+// ============ PLANNING / CALENDAR ============
+let calCurrent=new Date();calCurrent.setDate(1);
+function navMonth(delta){calCurrent.setMonth(calCurrent.getMonth()+delta);renderCalendar();}
+function renderCalendar(){
+  const y=calCurrent.getFullYear(),m=calCurrent.getMonth();
+  document.getElementById('calMonthTitle').textContent=calCurrent.toLocaleDateString('fr-FR',{month:'long',year:'numeric'}).replace(/^./,c=>c.toUpperCase());
+  const first=new Date(y,m,1);
+  const startDay=(first.getDay()+6)%7; // mon=0
+  const daysInMonth=new Date(y,m+1,0).getDate();
+  const today=new Date();
+  const branchClass={'Okapi Studios':'','L\'Agence Okapi':'agence','Okapi Animation':'animation'};
+  const grid=document.getElementById('calGrid');
+  let html='';
+  ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'].forEach(d=>html+=`<div class="cal-day-name">${d}</div>`);
+  for(let i=0;i<startDay;i++)html+='<div class="cal-day empty"></div>';
+  for(let d=1;d<=daysInMonth;d++){
+    const iso=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isToday=today.getFullYear()===y&&today.getMonth()===m&&today.getDate()===d;
+    const dayEvents=DB.events.filter(e=>e.date===iso);
+    let evHtml='';
+    dayEvents.forEach(e=>{
+      evHtml+=`<span class="ev ${branchClass[e.branche]||''}" onclick="event.stopPropagation();openEventModal('${e.id}')" title="${esc(e.titre)}">${esc(e.titre)}</span>`;
+    });
+    html+=`<div class="cal-day ${isToday?'today':''}" onclick="quickAddEvent('${iso}')">
+      <div class="num">${d}</div>${evHtml}</div>`;
+  }
+  grid.innerHTML=html;
+  // populate event modal project select
+  const sel=document.getElementById('em_projet');sel.innerHTML='<option value="">— Aucun —</option>';
+  DB.projets.forEach(p=>sel.innerHTML+=`<option>${esc(p.nom)}</option>`);
+}
+function quickAddEvent(iso){em_id.value='';em_date.value=iso;em_titre.value='';em_projet.value='';em_branche.value='Okapi Studios';em_desc.value='';document.getElementById('em_delete').style.display='none';document.getElementById('eventModal').classList.add('show');}
+function openEventModal(id){
+  if(id){
+    const e=DB.events.find(x=>x.id===id);if(!e)return;
+    em_id.value=e.id;em_date.value=e.date;em_titre.value=e.titre;em_projet.value=e.projet||'';
+    em_branche.value=e.branche||'Okapi Studios';em_desc.value=e.desc||'';
+    document.getElementById('em_delete').style.display='inline-block';
+  }else{quickAddEvent(new Date().toISOString().slice(0,10));}
+  const sel=document.getElementById('em_projet');sel.innerHTML='<option value="">— Aucun —</option>';
+  DB.projets.forEach(p=>sel.innerHTML+=`<option ${p.nom===em_projet.value?'selected':''}>${esc(p.nom)}</option>`);
+  document.getElementById('eventModal').classList.add('show');
+}
+function saveEvent(){
+  const data={date:em_date.value,titre:em_titre.value,projet:em_projet.value,branche:em_branche.value,desc:em_desc.value};
+  if(em_id.value){const e=DB.events.find(x=>x.id===em_id.value);Object.assign(e,data);}
+  else DB.events.push({id:'e_'+uid(),...data});
+  save();renderAll();closeModal('eventModal');
+}
+function deleteEvent(){if(!confirm('Supprimer ?'))return;DB.events=DB.events.filter(e=>e.id!==em_id.value);save();renderAll();closeModal('eventModal');}
+
+// ============ MISC ============
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='owm_hub_'+new Date().toISOString().slice(0,10)+'.json';a.click();
+}
+function resetData(){if(confirm('Réinitialiser toutes les données ? Irréversible.')){DB=migrate(JSON.parse(JSON.stringify(SEED)));save();renderAll();}}
+
+function renderAll(){renderProjets();renderDocs();renderAnnuaire();renderRoadmap();renderCalendar();}
+
+// update toast
+if(sessionStorage.getItem('owmhub_updated')){
+  sessionStorage.removeItem('owmhub_updated');
+  window.addEventListener('DOMContentLoaded',()=>{
+    const t=document.getElementById('updateToast');
+    if(t){t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+  });
+}
+
+// init
+save();
+initFirestore();
+window.addEventListener('load',()=>setTimeout(renderAll,100));
+renderAll();
+</script>
+</body>
+</html>
