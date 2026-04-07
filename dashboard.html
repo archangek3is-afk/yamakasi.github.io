@@ -1037,19 +1037,18 @@ function setSyncStatus(state,label){
 
 function cloudPush(){
   if(!cloudReady||applyingRemote){pendingPush=!cloudReady?true:pendingPush;return;}
-  const payload={...DB,_clientId:CLIENT_ID,_ts:Date.now()};
-  docRef.set(payload).catch(e=>console.warn('Firestore push:',e));
+  // Serialize entire DB to a JSON string field — Firestore forbids nested arrays
+  const payload={state:JSON.stringify(DB),_clientId:CLIENT_ID,_ts:Date.now()};
+  docRef.set(payload).catch(e=>{console.warn('Firestore push:',e);setSyncStatus('offline','Offline');});
 }
 
 function applyRemote(data){
-  if(!data)return;
+  if(!data||!data.state)return;
   if(data._clientId===CLIENT_ID)return; // our own write echoed back
+  let parsed;
+  try{parsed=JSON.parse(data.state);}catch(e){console.warn('Firestore parse:',e);return;}
   applyingRemote=true;
-  // copy fields, preserve DB reference
-  Object.keys(data).forEach(k=>{
-    if(k.startsWith('_'))return;
-    DB[k]=data[k];
-  });
+  Object.keys(parsed).forEach(k=>{DB[k]=parsed[k];});
   localStorage.setItem(KEY,JSON.stringify(DB));
   applyingRemote=false;
   renderAll();
