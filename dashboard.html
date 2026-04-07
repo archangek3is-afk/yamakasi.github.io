@@ -222,6 +222,8 @@ button.danger:hover{background:#2a1010;color:#d66}
 td.edit{cursor:pointer;transition:background .15s,box-shadow .15s}
 td.edit:hover{background:rgba(196,154,34,.08);box-shadow:inset 0 0 0 1px rgba(196,154,34,.35)}
 td.editing{background:#0a0a0a;padding:4px 8px}
+tr.row-done td{opacity:.5;background:rgba(39,174,96,.04)}
+tr.row-done td.edit:hover{opacity:1}
 td.editing input,td.editing select{
   width:100%;background:#000;border:1px solid var(--gold);color:var(--ivory);
   padding:6px 8px;font-family:inherit;font-size:13px;border-radius:2px;outline:none;
@@ -439,7 +441,6 @@ const SEED = {
     {nom:"yamakasi.github.io",client:"OWM site web",branche:"L'Agence Okapi",statut:"En cours",av:60,ech:"2026-04-30",bud:0},
   ],
   encaisse:[
-    {lib:"Acompte BDC (OKP-2026-BDC01)",mt:2525,dt:"2026-03-01"},
     {lib:"Réglé MAÏLU — Hero Film 60s",mt:600,dt:"2026-02-15"},
   ],
   creances:[
@@ -467,7 +468,7 @@ const SEED = {
     ["V10/10","Nov. 2026","Livraison finale + QC Saison 1",1000,"pending"],
   ],
   eve:[
-    ["V1/3","Avr. 2026","À la signature",510,"next"],
+    ["V1/3","Avr. 2026","À la signature",510,"done"],
     ["V2/3","Juin 2026","Démarrage montage image",510,"pending"],
     ["V3/3","Juil. 2026","Livraison cut final validé",680,"pending"],
   ],
@@ -476,9 +477,9 @@ const SEED = {
     ["V2/2","Mai 2027","Livraison Casino de Paris",2525,"pending"],
   ],
   mailu:[
-    ["Additif Hero Film",300,"Livré · validé · à régler"],
-    ["Teaser Homme 15s",150,"Livré · validé · à régler"],
-    ["Stratégie digitale + lancement",600,"Validé · à régler"],
+    ["Additif Hero Film",300,"pending"],
+    ["Teaser Homme 15s",150,"pending"],
+    ["Stratégie digitale + lancement",600,"pending"],
   ],
   chMois:[
     {lib:"Claude Pro",mt:22},
@@ -502,10 +503,64 @@ const SEED = {
 
 let DB = load();
 function load(){
-  try{const r=localStorage.getItem(KEY);if(r)return JSON.parse(r);}catch(e){}
-  return JSON.parse(JSON.stringify(SEED));
+  try{
+    const r=localStorage.getItem(KEY);
+    if(r){
+      const d=JSON.parse(r);
+      d._migrations=d._migrations||[];
+      // migrate mailu rows: convert free-text status to code
+      if(!d._migrations.includes('mailu_status_v1')){
+        (d.mailu||[]).forEach(r=>{
+          if(!['done','next','pending'].includes(r[2]))r[2]='pending';
+        });
+        d._migrations.push('mailu_status_v1');
+      }
+      // migrate eve V1 to done
+      if(!d._migrations.includes('eve_v1_done')){
+        if(d.eve && d.eve[0])d.eve[0][4]='done';
+        d._migrations.push('eve_v1_done');
+      }
+      // remove manual BDC encaisse entry (now auto from bdc.0)
+      if(!d._migrations.includes('encaisse_dedup_bdc')){
+        d.encaisse=(d.encaisse||[]).filter(e=>e.lib!=='Acompte BDC (OKP-2026-BDC01)');
+        d._migrations.push('encaisse_dedup_bdc');
+      }
+      return d;
+    }
+  }catch(e){}
+  const seed=JSON.parse(JSON.stringify(SEED));
+  seed._migrations=['mailu_status_v1','eve_v1_done','encaisse_dedup_bdc'];
+  return seed;
 }
-function save(){localStorage.setItem(KEY,JSON.stringify(DB))}
+function save(){reconcileEncaisse();localStorage.setItem(KEY,JSON.stringify(DB))}
+
+function reconcileEncaisse(){
+  DB.encaisse=DB.encaisse||[];
+  const today=new Date().toISOString().slice(0,10);
+  const sources={
+    ukl:{label:r=>`UNIKIDSLAND ${r[0]} — ${r[2]}`,amt:r=>r[3],status:r=>r[4]},
+    eve:{label:r=>`Miroir de l'âme ${r[0]} — ${r[2]}`,amt:r=>r[3],status:r=>r[4]},
+    bdc:{label:r=>`BDC Casino de Paris ${r[0]} — ${r[2]}`,amt:r=>r[3],status:r=>r[4]},
+    mailu:{label:r=>`MAÏLU — ${r[0]}`,amt:r=>r[1],status:r=>r[2]},
+  };
+  const wantedKeys=new Set();
+  Object.keys(sources).forEach(k=>{
+    const cfg=sources[k];const arr=DB[k]||[];
+    arr.forEach((r,i)=>{
+      if(cfg.status(r)==='done'){
+        const src=`${k}.${i}`;wantedKeys.add(src);
+        const existing=DB.encaisse.find(e=>e._src===src);
+        if(existing){
+          existing.lib=cfg.label(r);existing.mt=cfg.amt(r);
+        }else{
+          DB.encaisse.push({lib:cfg.label(r),mt:cfg.amt(r),dt:today,_src:src});
+        }
+      }
+    });
+  });
+  // remove stale auto entries (status changed away from done)
+  DB.encaisse=DB.encaisse.filter(e=>!e._src||wantedKeys.has(e._src));
+}
 function fmt(n){return new Intl.NumberFormat('fr-FR').format(n)+' €'}
 
 // ============ TABS ============
@@ -623,7 +678,8 @@ function renderEcheances(){
       const sentBadge=sentDate?`<span class="b-sent" title="Rappel envoyé le ${sentDate}">✓ Rappel</span>`:'';
       const canRemind=(r[4]==='next'||r[4]==='pending');
       const btn=canRemind?`<button class="btn-rappel" onclick="openReminder('${key}',${i})">Rappeler</button>`:'';
-      t.innerHTML+=`<tr>
+      const cls=r[4]==='done'?' class="row-done"':'';
+      t.innerHTML+=`<tr${cls}>
       <td class="edit" ${ec(b,'0',r[0],'text')}>${r[0]}</td>
       <td class="edit" ${ec(b,'1',r[1],'text')}>${r[1]}</td>
       <td class="edit" ${ec(b,'2',r[2],'text')}>${r[2]}</td>
@@ -649,11 +705,14 @@ function renderEcheances(){
     const b=`mailu.${i}`;
     const sentDate=DB.reminders[`mailu.${i}`];
     const sentBadge=sentDate?`<span class="b-sent" title="Rappel envoyé le ${sentDate}">✓ Rappel</span>`:'';
-    m.innerHTML+=`<tr>
+    const canRemind=(r[2]==='next'||r[2]==='pending');
+    const btn=canRemind?`<button class="btn-rappel" onclick="openMailuReminder(${i})">Rappeler</button>`:'';
+    const cls=r[2]==='done'?' class="row-done"':'';
+    m.innerHTML+=`<tr${cls}>
     <td class="edit" ${ec(b,'0',r[0],'text')}>${r[0]}</td>
     <td class="edit" ${ec(b,'1',r[1],'num')}>${fmt(r[1])}</td>
-    <td class="edit" ${ec(b,'2',r[2],'text')}><span class="badge b-urgent">${r[2]}</span>${sentBadge}</td>
-    <td><button class="btn-rappel" onclick="openMailuReminder(${i})">Rappeler</button></td></tr>`;
+    <td class="edit" ${ec(b,'2',r[2],'select','ver')}>${badgeVer(r[2])}${sentBadge}</td>
+    <td>${btn}</td></tr>`;
   });
 }
 
@@ -942,6 +1001,7 @@ if(sessionStorage.getItem('okapi_updated')){
 }
 
 // init
+save();
 window.addEventListener('load',()=>{setTimeout(renderAll,100)});
 renderAll();
 </script>
