@@ -355,7 +355,33 @@ td.editing input,td.editing select{
   <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
     <tbody id="eve"></tbody></table>
 
-  <h3 class="section">Casino de Paris / BDC — OKP-2026-BDC01-A1</h3>
+  <h3 class="section">Casino de Paris / BDC — OKP-2026-BDC01</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:14px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px">
+      <h4 style="color:var(--gold2);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-family:Georgia,serif">📅 Calendrier tournages</h4>
+      <div style="font-size:12px;line-height:1.8;color:var(--ivory)">
+        <div>T1 Fang-Béti — <span style="color:var(--muted)">Sam. 25 avr. 2026</span></div>
+        <div>T2 Soudano-Sahélien — <span style="color:var(--muted)">Ven. 19 juin 2026</span></div>
+        <div>T3 Grassfields — <span style="color:var(--muted)">Sam. 26 sept. 2026</span></div>
+        <div>T4 Sawa — <span style="color:var(--muted)">Sam. 19 déc. 2026</span></div>
+        <div style="color:var(--gold2);margin-top:6px;border-top:1px solid var(--border);padding-top:6px">★ Clôture Casino de Paris — Mai 2027</div>
+      </div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--gold);padding:14px 18px">
+      <h4 style="color:var(--gold2);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-family:Georgia,serif">💼 Détail prestations (5 050 € HT)</h4>
+      <div style="font-size:11px;line-height:1.7;color:var(--ivory)">
+        <div style="display:flex;justify-content:space-between"><span>Réalisation 4 représ. Traversière</span><span style="color:var(--gold2)">1 200 €</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Photographe 4 représ. Traversière</span><span style="color:var(--gold2)">200 €</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Réalisation Clôture Casino</span><span style="color:var(--gold2)">600 €</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Cadreur 4 représ. Traversière</span><span style="color:var(--gold2)">720 €</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Cadreur Clôture Casino</span><span style="color:var(--gold2)">230 €</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Montage documentaire 25 min</span><span style="color:var(--gold2)">1 200 €</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Étalonnage colorimétrique</span><span style="color:var(--gold2)">350 €</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Mixage son</span><span style="color:var(--gold2)">300 €</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Teaser promotionnel 2-3 min</span><span style="color:var(--gold2)">250 €</span></div>
+      </div>
+    </div>
+  </div>
   <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
     <tbody id="bdc"></tbody></table>
 
@@ -489,7 +515,10 @@ const SEED = {
     {lib:"Miroir de l'âme — Acompte signature V1",mt:510,dt:"2026-04-10"},
     {lib:"Miroir de l'âme — Démarrage montage V2",mt:510,dt:"2026-06-01"},
     {lib:"Miroir de l'âme — Livraison finale V3",mt:680,dt:"2026-07-31"},
-    {lib:"Solde BDC — livraison Casino de Paris",mt:2525,dt:"2027-05-31"},
+    {lib:"BDC V2/5 — Avant tournage T2 Soudano-Sahélien",mt:1010,dt:"2026-06-18"},
+    {lib:"BDC V3/5 — Avant tournage T3 Grassfields",mt:1010,dt:"2026-09-25"},
+    {lib:"BDC V4/5 — Avant tournage T4 Sawa",mt:1010,dt:"2026-12-18"},
+    {lib:"BDC V5/5 — Livraison cut final + Casino de Paris",mt:1515,dt:"2027-05-31"},
     {lib:"UKL V1 — Signature contrat",mt:1000,dt:"2026-05-01"},
     {lib:"UKL V2 — Designs validés",mt:1000,dt:"2026-05-15"},
     {lib:"UKL V3 — Animatique EP01",mt:1000,dt:"2026-06-15"},
@@ -514,8 +543,11 @@ const SEED = {
     ["V3/3","Juil. 2026","Livraison cut final validé",680,"pending"],
   ],
   bdc:[
-    ["V1/2","Mars 2026","Signature contrat",2525,"done"],
-    ["V2/2","Mai 2027","Livraison Casino de Paris",2525,"pending"],
+    ["V1/5","Mars 2026","Signature contrat (10%)",505,"done"],
+    ["V2/5","18 juin 2026","Avant tournage T2 Soudano-Sahélien (20%)",1010,"pending"],
+    ["V3/5","25 sept. 2026","Avant tournage T3 Grassfields (20%)",1010,"pending"],
+    ["V4/5","18 déc. 2026","Avant tournage T4 Sawa (20%)",1010,"pending"],
+    ["V5/5","Mai 2027","Livraison cut final + Casino de Paris (30%)",1515,"pending"],
   ],
   mailu:[
     ["Additif Hero Film",300,"pending"],
@@ -566,11 +598,31 @@ function load(){
         d.encaisse=(d.encaisse||[]).filter(e=>e.lib!=='Acompte BDC (OKP-2026-BDC01)');
         d._migrations.push('encaisse_dedup_bdc');
       }
+      // BDC contract: 5 versements with correct amounts from PDF
+      if(!d._migrations.includes('bdc_5_versements')){
+        d.bdc=[
+          ["V1/5","Mars 2026","Signature contrat (10%)",505,"done"],
+          ["V2/5","18 juin 2026","Avant tournage T2 Soudano-Sahélien (20%)",1010,"pending"],
+          ["V3/5","25 sept. 2026","Avant tournage T3 Grassfields (20%)",1010,"pending"],
+          ["V4/5","18 déc. 2026","Avant tournage T4 Sawa (20%)",1010,"pending"],
+          ["V5/5","Mai 2027","Livraison cut final + Casino de Paris (30%)",1515,"pending"],
+        ];
+        d.creances=(d.creances||[]).filter(c=>!/BDC|Casino de Paris/i.test(c.lib));
+        d.creances.push(
+          {lib:"BDC V2/5 — Avant tournage T2 Soudano-Sahélien",mt:1010,dt:"2026-06-18"},
+          {lib:"BDC V3/5 — Avant tournage T3 Grassfields",mt:1010,dt:"2026-09-25"},
+          {lib:"BDC V4/5 — Avant tournage T4 Sawa",mt:1010,dt:"2026-12-18"},
+          {lib:"BDC V5/5 — Livraison cut final + Casino de Paris",mt:1515,dt:"2027-05-31"}
+        );
+        // remove old auto-encaisse entry that referenced bdc.0 with old amount
+        d.encaisse=(d.encaisse||[]).filter(e=>e._src!=='bdc.0');
+        d._migrations.push('bdc_5_versements');
+      }
       return d;
     }
   }catch(e){}
   const seed=JSON.parse(JSON.stringify(SEED));
-  seed._migrations=['mailu_status_v1','eve_v1_done','encaisse_dedup_bdc'];
+  seed._migrations=['mailu_status_v1','eve_v1_done','encaisse_dedup_bdc','bdc_5_versements'];
   return seed;
 }
 function save(){
