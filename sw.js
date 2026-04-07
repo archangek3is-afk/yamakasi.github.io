@@ -1,9 +1,10 @@
-const CACHE = 'okapi-dashboard-v1';
+const CACHE = 'okapi-dashboard-v2';
+const BASE = '/yamakasi.github.io/';
 const ASSETS = [
-  '/',
-  '/okapi_dashboard.html',
-  '/manifest.json',
-  '/icon.svg',
+  BASE,
+  BASE + 'dashboard.html',
+  BASE + 'manifest.json',
+  BASE + 'icon.svg',
   'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js'
 ];
 
@@ -33,7 +34,7 @@ self.addEventListener('fetch', e => {
           caches.open(CACHE).then(c => c.put(e.request, clone));
         }
         return resp;
-      }).catch(() => cached);
+      }).catch(() => cached || caches.match(BASE + 'dashboard.html'));
       return cached || fetchPromise;
     })
   );
