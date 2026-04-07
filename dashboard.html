@@ -496,6 +496,10 @@ td.editing input,td.editing select{
 <script>
 // ============ DATA ============
 const KEY = 'okapi_dashboard_v1';
+// Bump SCHEMA_VERSION to force re-run of all migrations on every device,
+// even if they were previously marked as applied. Use it whenever you
+// fix data shape after the user already has cached/Firestore state.
+const SCHEMA_VERSION = 3;
 const SEED = {
   projets:[
     {nom:"En Route pour le Casino de Paris",client:"Gabin Tchoupo / BDC",branche:"Okapi Studios",statut:"En cours",av:20,ech:"2027-05-31",bud:5050},
@@ -584,11 +588,6 @@ function load(){
   const seed=JSON.parse(JSON.stringify(SEED));
   return runMigrations(seed);
 }
-
-// Bump SCHEMA_VERSION to force re-run of all migrations on every device,
-// even if they were previously marked as applied. Use it whenever you
-// fix data shape after the user already has cached/Firestore state.
-const SCHEMA_VERSION = 3;
 
 function runMigrations(d){
   if(d._schemaVersion!==SCHEMA_VERSION){
