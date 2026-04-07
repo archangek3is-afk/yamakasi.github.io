@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okapi World Média — Dashboard de Direction</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#C49A22">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(e=>console.warn('SW:',e));
+  });
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{
+  --bg:#0D0D0D; --bg2:#161616; --bg3:#1f1f1f;
+  --gold:#C49A22; --gold2:#D4AF37;
+  --ivory:#F0ECE4; --muted:#8a8579;
+  --red:#c0392b; --green:#27ae60; --orange:#e67e22; --gray:#555;
+  --border:#2a2a2a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ivory);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  min-height:100vh;font-size:14px;
+}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:.5px}
+header{
+  border-bottom:1px solid var(--border);
+  padding:28px 40px 22px;
+  background:linear-gradient(180deg,#0a0a0a,#0D0D0D);
+}
+header h1{font-size:26px;color:var(--gold2)}
+header .sub{color:var(--muted);font-size:12px;margin-top:4px;letter-spacing:1px;text-transform:uppercase}
+nav{
+  display:flex;gap:2px;padding:0 40px;background:#0a0a0a;
+  border-bottom:1px solid var(--border);
+}
+nav button{
+  background:transparent;border:none;color:var(--muted);
+  padding:16px 26px;cursor:pointer;font-size:13px;
+  font-family:Georgia,serif;letter-spacing:1.2px;text-transform:uppercase;
+  border-bottom:2px solid transparent;transition:all .2s;
+}
+nav button:hover{color:var(--ivory)}
+nav button.active{color:var(--gold2);border-bottom-color:var(--gold)}
+main{padding:32px 40px 80px;max-width:1500px;margin:0 auto}
+.tab{display:none}
+.tab.active{display:block}
+h2.section{font-size:22px;color:var(--gold2);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+h3.section{font-size:16px;color:var(--gold2);margin:24px 0 12px;letter-spacing:.5px}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.metric{
+  background:var(--bg2);border:1px solid var(--border);
+  border-left:3px solid var(--gold);padding:20px;border-radius:2px;
+}
+.metric .label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.metric .val{font-size:24px;color:var(--gold2);margin-top:8px;font-family:Georgia,serif}
+
+table{width:100%;border-collapse:collapse;background:var(--bg2);margin-bottom:16px;border:1px solid var(--border)}
+th{
+  text-align:left;padding:12px 14px;background:#111;color:var(--gold2);
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:600;
+  border-bottom:1px solid var(--border);
+}
+td{padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#1a1a1a}
+
+.badge{
+  display:inline-block;padding:4px 10px;font-size:10px;border-radius:2px;
+  text-transform:uppercase;letter-spacing:.8px;font-weight:600;
+}
+.b-cours{background:rgba(39,174,96,.15);color:#5fcf8a;border:1px solid #27ae60}
+.b-urgent{background:rgba(192,57,43,.18);color:#ff6b5b;border:1px solid #c0392b}
+.b-pause{background:rgba(85,85,85,.2);color:#aaa;border:1px solid #555}
+.b-livre{background:rgba(196,154,34,.15);color:var(--gold2);border:1px solid var(--gold)}
+.b-done{background:rgba(39,174,96,.15);color:#5fcf8a;border:1px solid #27ae60}
+.b-next{background:rgba(230,126,34,.15);color:#f0a050;border:1px solid #e67e22}
+.b-pending{background:rgba(85,85,85,.2);color:#aaa;border:1px solid #555}
+
+.bar{background:#222;height:6px;width:90px;border-radius:1px;overflow:hidden;display:inline-block;vertical-align:middle}
+.bar>div{background:linear-gradient(90deg,var(--gold),var(--gold2));height:100%}
+
+.filters{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.filters select,.filters button.add{
+  background:var(--bg2);border:1px solid var(--border);color:var(--ivory);
+  padding:9px 14px;font-size:12px;border-radius:2px;cursor:pointer;
+  font-family:inherit;
+}
+.filters select:focus{outline:1px solid var(--gold)}
+button.add,button.gold{
+  background:var(--gold);color:#000;border:none;padding:9px 16px;
+  cursor:pointer;font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  font-weight:600;border-radius:2px;font-family:inherit;
+}
+button.add:hover,button.gold:hover{background:var(--gold2)}
+button.ghost{
+  background:transparent;border:1px solid var(--border);color:var(--muted);
+  padding:8px 14px;cursor:pointer;font-size:11px;text-transform:uppercase;
+  letter-spacing:1px;border-radius:2px;font-family:inherit;
+}
+button.ghost:hover{color:var(--ivory);border-color:var(--gold)}
+button.danger{
+  background:transparent;border:1px solid #4a2020;color:#a55;
+  padding:6px 12px;cursor:pointer;font-size:10px;text-transform:uppercase;
+  letter-spacing:1px;border-radius:2px;font-family:inherit;
+}
+button.danger:hover{background:#2a1010;color:#d66}
+
+.alert{
+  background:rgba(192,57,43,.1);border-left:3px solid var(--red);
+  padding:14px 18px;margin:14px 0;color:#f0a;font-size:13px;color:var(--ivory);
+}
+.alert strong{color:#ff6b5b}
+
+#chartWrap{background:var(--bg2);border:1px solid var(--border);padding:20px;margin-top:20px;height:340px;position:relative}
+#chartWrap canvas{max-height:300px}
+#chartFallback{color:var(--muted);text-align:center;padding:80px 20px;display:none}
+
+.lever{
+  background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--gold);
+  padding:18px 20px;margin-bottom:12px;
+}
+.lever h4{color:var(--gold2);font-size:15px;margin-bottom:8px}
+.lever .meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.lever .meta span{
+  font-size:10px;padding:3px 9px;background:#222;border:1px solid var(--border);
+  text-transform:uppercase;letter-spacing:.8px;color:var(--muted);
+}
+.lever p{color:#cfc8b8;font-size:13px;line-height:1.6;margin-top:6px}
+
+.modal-bg{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);
+  z-index:100;align-items:center;justify-content:center;
+}
+.modal-bg.show{display:flex}
+.modal{
+  background:var(--bg2);border:1px solid var(--gold);padding:30px;
+  width:90%;max-width:500px;max-height:90vh;overflow-y:auto;
+}
+.modal h3{color:var(--gold2);margin-bottom:18px;font-size:18px}
+.modal label{display:block;font-size:11px;text-transform:uppercase;
+  letter-spacing:1px;color:var(--muted);margin:12px 0 4px}
+.modal input,.modal select,.modal textarea{
+  width:100%;background:#0a0a0a;border:1px solid var(--border);
+  color:var(--ivory);padding:10px;font-family:inherit;font-size:13px;border-radius:2px;
+}
+.modal input:focus,.modal select:focus{outline:1px solid var(--gold);border-color:var(--gold)}
+.modal-actions{display:flex;gap:10px;margin-top:22px;justify-content:flex-end}
+
+.footer-actions{
+  position:fixed;bottom:14px;right:18px;display:flex;gap:8px;z-index:50;
+}
+.del-row{
+  background:transparent;border:none;color:#666;cursor:pointer;font-size:14px;
+}
+.del-row:hover{color:#c55}
+td.edit{cursor:pointer;transition:background .15s,box-shadow .15s}
+td.edit:hover{background:rgba(196,154,34,.08);box-shadow:inset 0 0 0 1px rgba(196,154,34,.35)}
+td.editing{background:#0a0a0a;padding:4px 8px}
+td.editing input,td.editing select{
+  width:100%;background:#000;border:1px solid var(--gold);color:var(--ivory);
+  padding:6px 8px;font-family:inherit;font-size:13px;border-radius:2px;outline:none;
+}
+@media (max-width:900px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  nav{overflow-x:auto;padding:0 10px}
+  main{padding:20px 14px 80px}
+  header{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Okapi World Média</h1>
+  <div class="sub">Dashboard de Direction · EI · SIRET 918 020 975 00028</div>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-tab="projets">Projets</button>
+  <button class="tab-btn" data-tab="finances">Finances</button>
+  <button class="tab-btn" data-tab="echeances">Échéanciers</button>
+  <button class="tab-btn" data-tab="charges">Charges</button>
+  <button class="tab-btn" data-tab="investir">Investir</button>
+</nav>
+
+<main>
+
+<!-- ============ PROJETS ============ -->
+<section id="projets" class="tab active">
+  <h2 class="section">Portefeuille Projets</h2>
+  <div class="filters">
+    <select id="fStatut">
+      <option value="">Tous statuts</option>
+      <option>En cours</option><option>Urgent</option>
+      <option>En pause</option><option>Livré</option>
+    </select>
+    <select id="fBranche">
+      <option value="">Toutes branches</option>
+      <option>Okapi Studios</option><option>L'Agence Okapi</option><option>Okapi Animation</option>
+    </select>
+    <button class="add" onclick="openProjectModal()">+ Ajouter projet</button>
+  </div>
+  <table>
+    <thead><tr>
+      <th>Nom</th><th>Client</th><th>Branche</th><th>Statut</th>
+      <th>Avancement</th><th>Échéance</th><th>Budget HT</th><th></th>
+    </tr></thead>
+    <tbody id="projTable"></tbody>
+  </table>
+</section>
+
+<!-- ============ FINANCES ============ -->
+<section id="finances" class="tab">
+  <h2 class="section">Vue Financière</h2>
+  <div class="metrics">
+    <div class="metric"><div class="label">Encaissé</div><div class="val" id="mEncaisse">—</div></div>
+    <div class="metric"><div class="label">À encaisser</div><div class="val" id="mAEncaisser">—</div></div>
+    <div class="metric"><div class="label">Charges / mois</div><div class="val" id="mChMois">—</div></div>
+    <div class="metric"><div class="label">Charges / an</div><div class="val" id="mChAn">—</div></div>
+  </div>
+
+  <div style="margin:18px 0"><button class="add" onclick="openOpModal()">+ Ajouter opération</button></div>
+
+  <h3 class="section">Encaissé · Entrées confirmées</h3>
+  <table><thead><tr><th>Libellé</th><th>Montant</th><th>Date</th><th></th></tr></thead>
+    <tbody id="encTable"></tbody></table>
+
+  <h3 class="section">Créances en attente</h3>
+  <table><thead><tr><th>Libellé</th><th>Montant</th><th>Échéance</th><th></th></tr></thead>
+    <tbody id="creTable"></tbody></table>
+
+  <h3 class="section">Flux mensuel prévisionnel 2026</h3>
+  <div id="chartWrap">
+    <canvas id="fluxChart"></canvas>
+    <div id="chartFallback">Graphique indisponible en mode offline complet.</div>
+  </div>
+</section>
+
+<!-- ============ ÉCHÉANCIERS ============ -->
+<section id="echeances" class="tab">
+  <h2 class="section">Échéanciers Contractuels</h2>
+  <div class="metrics">
+    <div class="metric"><div class="label">CA contractuel</div><div class="val" id="eCA">—</div></div>
+    <div class="metric"><div class="label">Encaissé</div><div class="val" id="eEnc">—</div></div>
+    <div class="metric"><div class="label">Prochains dus</div><div class="val" id="eNext">—</div></div>
+    <div class="metric"><div class="label">Reste total</div><div class="val" id="eReste">—</div></div>
+  </div>
+
+  <h3 class="section">UNIKIDSLAND — OKP-2026-UKL-01</h3>
+  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th></tr></thead>
+    <tbody id="ukl"></tbody></table>
+
+  <h3 class="section">Le Miroir de l'âme — OKP-2026-EVE01</h3>
+  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th></tr></thead>
+    <tbody id="eve"></tbody></table>
+
+  <h3 class="section">Casino de Paris / BDC — OKP-2026-BDC01-A1</h3>
+  <table><thead><tr><th>Versement</th><th>Période</th><th>Livrable</th><th>Montant</th><th>Statut</th></tr></thead>
+    <tbody id="bdc"></tbody></table>
+
+  <h3 class="section">MAÏLU — Relance Urgente</h3>
+  <div class="alert"><strong>⚠ Aucun contrat formalisé.</strong> Prestations livrées et validées, à régler. Total : <strong>1 050 €</strong></div>
+  <table><thead><tr><th>Prestation</th><th>Montant</th><th>État</th></tr></thead>
+    <tbody id="mailu"></tbody></table>
+</section>
+
+<!-- ============ CHARGES ============ -->
+<section id="charges" class="tab">
+  <h2 class="section">Charges Récurrentes</h2>
+  <div class="metrics">
+    <div class="metric"><div class="label">Total mensuel</div><div class="val" id="cMois">—</div></div>
+    <div class="metric"><div class="label">Total annualisé</div><div class="val" id="cAn">—</div></div>
+    <div class="metric"><div class="label">% du CA prévisionnel</div><div class="val" id="cPct">—</div></div>
+    <div class="metric"><div class="label">Lignes actives</div><div class="val" id="cNb">—</div></div>
+  </div>
+  <div style="margin:18px 0"><button class="add" onclick="openChargeModal()">+ Ajouter charge</button></div>
+
+  <h3 class="section">Charges mensuelles</h3>
+  <table><thead><tr><th>Libellé</th><th>Montant / mois</th><th>Annualisé</th><th></th></tr></thead>
+    <tbody id="chMois"></tbody></table>
+
+  <h3 class="section">Charges annuelles</h3>
+  <table><thead><tr><th>Libellé</th><th>Montant / an</th><th></th></tr></thead>
+    <tbody id="chAn"></tbody></table>
+</section>
+
+<!-- ============ INVESTIR ============ -->
+<section id="investir" class="tab">
+  <h2 class="section">Leviers de Croissance</h2>
+  <div id="leviers"></div>
+</section>
+
+</main>
+
+<div class="footer-actions">
+  <button class="ghost" onclick="exportJSON()">Exporter JSON</button>
+  <button class="danger" onclick="resetData()">Réinitialiser</button>
+</div>
+
+<!-- Modals -->
+<div class="modal-bg" id="projModal"><div class="modal">
+  <h3>Ajouter un projet</h3>
+  <label>Nom</label><input id="p_nom">
+  <label>Client</label><input id="p_client">
+  <label>Branche</label><select id="p_branche">
+    <option>Okapi Studios</option><option>L'Agence Okapi</option><option>Okapi Animation</option>
+  </select>
+  <label>Statut</label><select id="p_statut">
+    <option>En cours</option><option>Urgent</option><option>En pause</option><option>Livré</option>
+  </select>
+  <label>Avancement %</label><input id="p_av" type="number" value="0" min="0" max="100">
+  <label>Échéance</label><input id="p_ech" type="date">
+  <label>Budget HT (€)</label><input id="p_bud" type="number" value="0">
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('projModal')">Annuler</button>
+    <button class="gold" onclick="addProject()">Enregistrer</button>
+  </div>
+</div></div>
+
+<div class="modal-bg" id="opModal"><div class="modal">
+  <h3>Ajouter une opération</h3>
+  <label>Type</label><select id="o_type"><option value="enc">Encaissé</option><option value="cre">Créance</option></select>
+  <label>Libellé</label><input id="o_lib">
+  <label>Montant (€)</label><input id="o_mt" type="number">
+  <label>Date / Échéance</label><input id="o_dt" type="date">
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('opModal')">Annuler</button>
+    <button class="gold" onclick="addOp()">Enregistrer</button>
+  </div>
+</div></div>
+
+<div class="modal-bg" id="chargeModal"><div class="modal">
+  <h3>Ajouter une charge</h3>
+  <label>Type</label><select id="c_type"><option value="mois">Mensuelle</option><option value="an">Annuelle</option></select>
+  <label>Libellé</label><input id="c_lib">
+  <label>Montant (€)</label><input id="c_mt" type="number">
+  <div class="modal-actions">
+    <button class="ghost" onclick="closeModal('chargeModal')">Annuler</button>
+    <button class="gold" onclick="addCharge()">Enregistrer</button>
+  </div>
+</div></div>
+
+<script>
+// ============ DATA ============
+const KEY = 'okapi_dashboard_v1';
+const SEED = {
+  projets:[
+    {nom:"En Route pour le Casino de Paris",client:"Gabin Tchoupo / BDC",branche:"Okapi Studios",statut:"En cours",av:20,ech:"2027-05-31",bud:5050},
+    {nom:"MAÏLU — Stratégie & Contenu",client:"Hortense",branche:"L'Agence Okapi",statut:"En cours",av:75,ech:"2026-04-30",bud:1650},
+    {nom:"ILLUSION — Court-métrage",client:"Okapi Studios interne",branche:"Okapi Studios",statut:"Urgent",av:85,ech:"2026-04-20",bud:0},
+    {nom:"UNIKIDSLAND / Je Suis Unique",client:"Marie-Michelle Badelas",branche:"Okapi Animation",statut:"En cours",av:15,ech:"2026-11-30",bud:10000},
+    {nom:"MILLE VISAGES",client:"Interne OWM",branche:"L'Agence Okapi",statut:"En cours",av:30,ech:"2026-12-31",bud:0},
+    {nom:"BAU — L'Infabuleuse Histoire",client:"Okapi Animation",branche:"Okapi Animation",statut:"En pause",av:40,ech:"2027-01-01",bud:0},
+    {nom:"Le Miroir de l'âme",client:"Ève Aniela / Ruah Studio",branche:"Okapi Studios",statut:"En cours",av:25,ech:"2026-07-31",bud:1700},
+    {nom:"Hyacinthe Imayanga — Série courts",client:"Hyacinthe Imayanga",branche:"Okapi Studios",statut:"En cours",av:10,ech:"2026-05-15",bud:0},
+    {nom:"yamakasi.github.io",client:"OWM site web",branche:"L'Agence Okapi",statut:"En cours",av:60,ech:"2026-04-30",bud:0},
+  ],
+  encaisse:[
+    {lib:"Acompte BDC (OKP-2026-BDC01)",mt:2525,dt:"2026-03-01"},
+    {lib:"Réglé MAÏLU — Hero Film 60s",mt:600,dt:"2026-02-15"},
+  ],
+  creances:[
+    {lib:"Solde MAÏLU (Additif + Teaser H. + Stratégie)",mt:1050,dt:"2026-04-30"},
+    {lib:"Miroir de l'âme — Acompte signature V1",mt:510,dt:"2026-04-10"},
+    {lib:"Miroir de l'âme — Démarrage montage V2",mt:510,dt:"2026-06-01"},
+    {lib:"Miroir de l'âme — Livraison finale V3",mt:680,dt:"2026-07-31"},
+    {lib:"Solde BDC — livraison Casino de Paris",mt:2525,dt:"2027-05-31"},
+    {lib:"UKL V1 — Signature contrat",mt:1000,dt:"2026-05-01"},
+    {lib:"UKL V2 — Designs validés",mt:1000,dt:"2026-05-15"},
+    {lib:"UKL V3 — Animatique EP01",mt:1000,dt:"2026-06-15"},
+    {lib:"UKL V4 à V10 (7 versements)",mt:7000,dt:"2026-11-30"},
+  ],
+  flux2026:[0,0,3125,1560,2000,1510,1680,1000,1000,2000,1000,0],
+  ukl:[
+    ["V1/10","Mai 2026 S1","Signature contrat",1000,"next"],
+    ["V2/10","Mai 2026 S3","Designs personnages + logo",1000,"pending"],
+    ["V3/10","Juin 2026 S2","Animatique EP01 rough",1000,"pending"],
+    ["V4/10","Juin 2026 S4","EP01 finalisé 16:9+9:16",1000,"pending"],
+    ["V5/10","Juil. 2026","EP02 finalisé",1000,"pending"],
+    ["V6/10","Août 2026","Lancement YouTube + EP03",1000,"pending"],
+    ["V7/10","Sept. 2026","EP04 + EP05",1000,"pending"],
+    ["V8/10","Oct. 2026 S1","EP06 + EP07",1000,"pending"],
+    ["V9/10","Oct. 2026 S3","Formats courts S4-S6 + Cantine",1000,"pending"],
+    ["V10/10","Nov. 2026","Livraison finale + QC Saison 1",1000,"pending"],
+  ],
+  eve:[
+    ["V1/3","Avr. 2026","À la signature",510,"next"],
+    ["V2/3","Juin 2026","Démarrage montage image",510,"pending"],
+    ["V3/3","Juil. 2026","Livraison cut final validé",680,"pending"],
+  ],
+  bdc:[
+    ["V1/2","Mars 2026","Signature contrat",2525,"done"],
+    ["V2/2","Mai 2027","Livraison Casino de Paris",2525,"pending"],
+  ],
+  mailu:[
+    ["Additif Hero Film",300,"Livré · validé · à régler"],
+    ["Teaser Homme 15s",150,"Livré · validé · à régler"],
+    ["Stratégie digitale + lancement",600,"Validé · à régler"],
+  ],
+  chMois:[
+    {lib:"Claude Pro",mt:22},
+    {lib:"Gemini Pro",mt:22},
+    {lib:"ChatGPT Pro",mt:22},
+  ],
+  chAn:[
+    {lib:"Higgsfield AI Ultra Plan",mt:240},
+  ],
+  leviers:[
+    {ic:"⚡",t:"Formation / preset pack vente passive",c:"Invest: 0€",ty:"Revenus passifs",h:"Court terme",d:"Créer 1 pack LUT cinéma ou mini-cours en ligne sur Gumroad. Retour dès J+30."},
+    {ic:"🎯",t:"Coaching créatif 1h = 150€",c:"Invest: 0€",ty:"Prestation directe",h:"Court terme",d:"Sessions direction artistique / script doctoring / stratégie contenu. Acquisition IG + LinkedIn."},
+    {ic:"📦",t:"Pack social media marque blanche",c:"Invest: temps production",ty:"Produit Agence",h:"Court terme",d:"Stratégie + 8 visuels + calendrier vendu 500-800€ aux PME."},
+    {ic:"🎓",t:"Vendre Cinéma 201 à d'autres écoles",c:"Invest: 0€",ty:"Formation",h:"Moyen terme",d:"Module déjà créé. Tarif 800-1500€/session. 3 à 5 écoles à démarcher."},
+    {ic:"💼",t:"Retainer mensuel Agence MRR 2400€",c:"Invest: 0€",ty:"MRR Agence",h:"Moyen terme",d:"3 clients × 800€/mois. Convertir MAÏLU + 2 nouveaux clients."},
+    {ic:"🤖",t:"Runway Gen-4 / Kling AI Pro",c:"Invest: 75-100€/mois",ty:"Outil production",h:"Moyen terme",d:"Scaler production UNIKIDSLAND sans coût humain. ROI direct sur contrat 10000€."},
+    {ic:"🌐",t:"Offre AI Brand Identity packagée",c:"Invest: 0€",ty:"Produit Agence",h:"Moyen terme",d:"Pack 900€ : portrait IA + stratégie IG + film court. Cibler coachs et artisans."},
+    {ic:"🏗️",t:"Dossier CNC/CNAP pour BAU",c:"Invest: temps uniquement",ty:"Subvention",h:"Long terme",d:"Traitement complet + dossier producteur. Potentiel 10000-50000€ subvention."},
+  ],
+};
+
+let DB = load();
+function load(){
+  try{const r=localStorage.getItem(KEY);if(r)return JSON.parse(r);}catch(e){}
+  return JSON.parse(JSON.stringify(SEED));
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(DB))}
+function fmt(n){return new Intl.NumberFormat('fr-FR').format(n)+' €'}
+
+// ============ TABS ============
+document.querySelectorAll('.tab-btn').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById(b.dataset.tab).classList.add('active');
+  };
+});
+
+// ============ RENDER ============
+function badgeStatut(s){
+  const m={"En cours":"b-cours","Urgent":"b-urgent","En pause":"b-pause","Livré":"b-livre"};
+  return `<span class="badge ${m[s]||''}">${s}</span>`;
+}
+function badgeVer(s){
+  const m={done:["b-done","Encaissé"],next:["b-next","Prochain"],pending:["b-pending","En attente"]};
+  return `<span class="badge ${m[s][0]}">${m[s][1]}</span>`;
+}
+
+const BRANCHES=["Okapi Studios","L'Agence Okapi","Okapi Animation"];
+const STATUTS=["En cours","Urgent","En pause","Livré"];
+const VER_STATES=[["done","Encaissé"],["next","Prochain"],["pending","En attente"]];
+
+function ec(path,field,val,type,opts){
+  // editable cell. type: text|num|date|select
+  const o=opts?` data-opts="${opts}"`:'';
+  return `data-edit="1" data-path="${path}" data-field="${field}" data-type="${type}"${o}`;
+}
+
+function renderProjets(){
+  const fs=document.getElementById('fStatut').value;
+  const fb=document.getElementById('fBranche').value;
+  const tb=document.getElementById('projTable');
+  tb.innerHTML='';
+  DB.projets.forEach((p,i)=>{
+    if(fs && p.statut!==fs)return;
+    if(fb && p.branche!==fb)return;
+    const base=`projets.${i}`;
+    tb.innerHTML+=`<tr>
+      <td class="edit" ${ec(base,'nom',p.nom,'text')}>${p.nom}</td>
+      <td class="edit" ${ec(base,'client',p.client,'text')}>${p.client}</td>
+      <td class="edit" ${ec(base,'branche',p.branche,'select','branche')}>${p.branche}</td>
+      <td class="edit" ${ec(base,'statut',p.statut,'select','statut')}>${badgeStatut(p.statut)}</td>
+      <td class="edit" ${ec(base,'av',p.av,'num')}><div class="bar"><div style="width:${p.av}%"></div></div> <span style="color:var(--muted);font-size:11px">${p.av}%</span></td>
+      <td class="edit" ${ec(base,'ech',p.ech,'date')}>${p.ech}</td>
+      <td class="edit" ${ec(base,'bud',p.bud,'num')}>${fmt(p.bud)}</td>
+      <td><button class="del-row" onclick="delProj(${i})">✕</button></td>
+    </tr>`;
+  });
+}
+document.getElementById('fStatut').onchange=renderProjets;
+document.getElementById('fBranche').onchange=renderProjets;
+
+function renderFinances(){
+  const enc=DB.encaisse.reduce((s,x)=>s+x.mt,0);
+  const cre=DB.creances.reduce((s,x)=>s+x.mt,0);
+  const cm=DB.chMois.reduce((s,x)=>s+x.mt,0);
+  const ca=cm*12+DB.chAn.reduce((s,x)=>s+x.mt,0);
+  document.getElementById('mEncaisse').textContent=fmt(enc);
+  document.getElementById('mAEncaisser').textContent=fmt(cre);
+  document.getElementById('mChMois').textContent=fmt(cm);
+  document.getElementById('mChAn').textContent=fmt(ca);
+
+  const et=document.getElementById('encTable');et.innerHTML='';
+  DB.encaisse.forEach((x,i)=>{const b=`encaisse.${i}`;et.innerHTML+=`<tr>
+    <td class="edit" ${ec(b,'lib',x.lib,'text')}>${x.lib}</td>
+    <td class="edit" ${ec(b,'mt',x.mt,'num')}>${fmt(x.mt)}</td>
+    <td class="edit" ${ec(b,'dt',x.dt,'date')}>${x.dt}</td>
+    <td><button class="del-row" onclick="delEnc(${i})">✕</button></td></tr>`;});
+  const ct=document.getElementById('creTable');ct.innerHTML='';
+  DB.creances.forEach((x,i)=>{const b=`creances.${i}`;ct.innerHTML+=`<tr>
+    <td class="edit" ${ec(b,'lib',x.lib,'text')}>${x.lib}</td>
+    <td class="edit" ${ec(b,'mt',x.mt,'num')}>${fmt(x.mt)}</td>
+    <td class="edit" ${ec(b,'dt',x.dt,'date')}>${x.dt}</td>
+    <td><button class="del-row" onclick="delCre(${i})">✕</button></td></tr>`;});
+}
+
+let chart;
+function renderChart(){
+  if(typeof Chart==='undefined'){
+    document.getElementById('fluxChart').style.display='none';
+    document.getElementById('chartFallback').style.display='block';
+    return;
+  }
+  const ctx=document.getElementById('fluxChart');
+  if(chart)chart.destroy();
+  chart=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août','Sept','Oct','Nov','Déc'],
+      datasets:[{label:'Flux prévisionnel 2026 (€)',data:DB.flux2026,
+        backgroundColor:'rgba(196,154,34,.7)',borderColor:'#D4AF37',borderWidth:1}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#F0ECE4'}}},
+      scales:{
+        x:{ticks:{color:'#8a8579'},grid:{color:'#1f1f1f'}},
+        y:{ticks:{color:'#8a8579'},grid:{color:'#1f1f1f'}}
+      }
+    }
+  });
+}
+
+function renderEcheances(){
+  const fill=(id,key)=>{
+    const arr=DB[key];const t=document.getElementById(id);t.innerHTML='';
+    arr.forEach((r,i)=>{const b=`${key}.${i}`;t.innerHTML+=`<tr>
+      <td class="edit" ${ec(b,'0',r[0],'text')}>${r[0]}</td>
+      <td class="edit" ${ec(b,'1',r[1],'text')}>${r[1]}</td>
+      <td class="edit" ${ec(b,'2',r[2],'text')}>${r[2]}</td>
+      <td class="edit" ${ec(b,'3',r[3],'num')}>${fmt(r[3])}</td>
+      <td class="edit" ${ec(b,'4',r[4],'select','ver')}>${badgeVer(r[4])}</td></tr>`;});
+  };
+  fill('ukl','ukl');fill('eve','eve');fill('bdc','bdc');
+
+  const all=[...DB.ukl,...DB.eve,...DB.bdc];
+  const ca=all.reduce((s,r)=>s+r[3],0);
+  const enc=all.filter(r=>r[4]==='done').reduce((s,r)=>s+r[3],0);
+  const next=all.filter(r=>r[4]==='next').reduce((s,r)=>s+r[3],0);
+  document.getElementById('eCA').textContent=fmt(ca);
+  document.getElementById('eEnc').textContent=fmt(enc);
+  document.getElementById('eNext').textContent=fmt(next);
+  document.getElementById('eReste').textContent=fmt(ca-enc);
+
+  const m=document.getElementById('mailu');m.innerHTML='';
+  DB.mailu.forEach((r,i)=>{const b=`mailu.${i}`;m.innerHTML+=`<tr>
+    <td class="edit" ${ec(b,'0',r[0],'text')}>${r[0]}</td>
+    <td class="edit" ${ec(b,'1',r[1],'num')}>${fmt(r[1])}</td>
+    <td class="edit" ${ec(b,'2',r[2],'text')}><span class="badge b-urgent">${r[2]}</span></td></tr>`;});
+}
+
+function renderCharges(){
+  const tm=document.getElementById('chMois');tm.innerHTML='';
+  DB.chMois.forEach((c,i)=>{const b=`chMois.${i}`;tm.innerHTML+=`<tr>
+    <td class="edit" ${ec(b,'lib',c.lib,'text')}>${c.lib}</td>
+    <td class="edit" ${ec(b,'mt',c.mt,'num')}>${fmt(c.mt)}</td>
+    <td>${fmt(c.mt*12)}</td>
+    <td><button class="del-row" onclick="delCh('mois',${i})">✕</button></td></tr>`;});
+  const ta=document.getElementById('chAn');ta.innerHTML='';
+  DB.chAn.forEach((c,i)=>{const b=`chAn.${i}`;ta.innerHTML+=`<tr>
+    <td class="edit" ${ec(b,'lib',c.lib,'text')}>${c.lib}</td>
+    <td class="edit" ${ec(b,'mt',c.mt,'num')}>${fmt(c.mt)}</td>
+    <td><button class="del-row" onclick="delCh('an',${i})">✕</button></td></tr>`;});
+
+  const cm=DB.chMois.reduce((s,x)=>s+x.mt,0);
+  const ann=cm*12+DB.chAn.reduce((s,x)=>s+x.mt,0);
+  const caPrev=DB.flux2026.reduce((s,x)=>s+x,0);
+  document.getElementById('cMois').textContent=fmt(cm);
+  document.getElementById('cAn').textContent=fmt(ann);
+  document.getElementById('cPct').textContent=caPrev?((ann/caPrev)*100).toFixed(1)+' %':'—';
+  document.getElementById('cNb').textContent=(DB.chMois.length+DB.chAn.length);
+}
+
+function renderLeviers(){
+  const c=document.getElementById('leviers');c.innerHTML='';
+  DB.leviers.forEach(l=>{
+    c.innerHTML+=`<div class="lever">
+      <h4>${l.ic} ${l.t}</h4>
+      <div class="meta"><span>${l.c}</span><span>${l.ty}</span><span>${l.h}</span></div>
+      <p>${l.d}</p></div>`;
+  });
+}
+
+function renderAll(){
+  renderProjets();renderFinances();renderEcheances();renderCharges();renderLeviers();renderChart();
+}
+
+// ============ MODALS ============
+function openProjectModal(){document.getElementById('projModal').classList.add('show')}
+function openOpModal(){document.getElementById('opModal').classList.add('show')}
+function openChargeModal(){document.getElementById('chargeModal').classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+
+function addProject(){
+  DB.projets.push({
+    nom:p_nom.value||'Sans titre',client:p_client.value,branche:p_branche.value,
+    statut:p_statut.value,av:+p_av.value||0,ech:p_ech.value,bud:+p_bud.value||0
+  });
+  save();renderAll();closeModal('projModal');
+  ['p_nom','p_client','p_av','p_ech','p_bud'].forEach(i=>document.getElementById(i).value='');
+}
+function addOp(){
+  const o={lib:o_lib.value,mt:+o_mt.value||0,dt:o_dt.value};
+  if(o_type.value==='enc')DB.encaisse.push(o);else DB.creances.push(o);
+  save();renderAll();closeModal('opModal');
+  ['o_lib','o_mt','o_dt'].forEach(i=>document.getElementById(i).value='');
+}
+function addCharge(){
+  const o={lib:c_lib.value,mt:+c_mt.value||0};
+  if(c_type.value==='mois')DB.chMois.push(o);else DB.chAn.push(o);
+  save();renderAll();closeModal('chargeModal');
+  ['c_lib','c_mt'].forEach(i=>document.getElementById(i).value='');
+}
+function delProj(i){DB.projets.splice(i,1);save();renderAll()}
+function delEnc(i){DB.encaisse.splice(i,1);save();renderAll()}
+function delCre(i){DB.creances.splice(i,1);save();renderAll()}
+function delCh(t,i){(t==='mois'?DB.chMois:DB.chAn).splice(i,1);save();renderAll()}
+
+// ============ EXPORT / RESET ============
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='okapi_dashboard_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+}
+function resetData(){
+  if(confirm('Réinitialiser toutes les données aux valeurs initiales ? Cette action est irréversible.')){
+    DB=JSON.parse(JSON.stringify(SEED));save();renderAll();
+  }
+}
+
+// ============ INLINE EDIT ============
+function getRef(path){
+  const parts=path.split('.');let o=DB;
+  for(let i=0;i<parts.length-1;i++)o=o[parts[i]]??o[+parts[i]];
+  const last=parts[parts.length-1];
+  return {parent:o,key:isNaN(+last)?last:+last};
+}
+let editing=null;
+document.addEventListener('click',e=>{
+  const td=e.target.closest('td.edit');
+  if(!td || td.classList.contains('editing'))return;
+  if(editing)return;
+  startEdit(td);
+});
+function startEdit(td){
+  editing=td;
+  const path=td.dataset.path,field=td.dataset.field,type=td.dataset.type,opts=td.dataset.opts;
+  const ref=getRef(path);const cur=ref.parent[ref.key][isNaN(+field)?field:+field];
+  td.classList.add('editing');
+  let el;
+  if(type==='select'){
+    el=document.createElement('select');
+    let list=[];
+    if(opts==='branche')list=BRANCHES;
+    else if(opts==='statut')list=STATUTS;
+    else if(opts==='ver')list=VER_STATES.map(v=>v[0]);
+    list.forEach(v=>{
+      const o=document.createElement('option');o.value=v;
+      o.textContent=opts==='ver'?(VER_STATES.find(x=>x[0]===v)[1]):v;
+      if(v===cur)o.selected=true;el.appendChild(o);
+    });
+  }else{
+    el=document.createElement('input');
+    el.type=type==='num'?'number':(type==='date'?'date':'text');
+    el.value=cur;
+  }
+  td.innerHTML='';td.appendChild(el);el.focus();
+  if(el.select)el.select();
+  let done=false;
+  const commit=()=>{
+    if(done)return;done=true;
+    let v=el.value;
+    if(type==='num')v=+v||0;
+    const target=ref.parent[ref.key];
+    const k=isNaN(+field)?field:+field;
+    target[k]=v;
+    save();editing=null;renderAll();
+  };
+  const cancel=()=>{if(done)return;done=true;editing=null;renderAll();};
+  el.addEventListener('blur',commit);
+  el.addEventListener('keydown',ev=>{
+    if(ev.key==='Enter'){ev.preventDefault();el.blur();}
+    else if(ev.key==='Escape'){ev.preventDefault();el.removeEventListener('blur',commit);cancel();}
+  });
+}
+
+// init
+window.addEventListener('load',()=>{setTimeout(renderAll,100)});
+renderAll();
+</script>
+</body>
+</html>
