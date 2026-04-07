@@ -432,6 +432,7 @@ td.editing input,td.editing select{
 
 <div class="footer-actions">
   <button class="ghost" onclick="exportJSON()">Exporter JSON</button>
+  <button class="danger" onclick="resetFirestore()">Reset cloud</button>
   <button class="danger" onclick="resetData()">Réinitialiser</button>
 </div>
 
@@ -578,72 +579,75 @@ let DB = load();
 function load(){
   try{
     const r=localStorage.getItem(KEY);
-    if(r){
-      const d=JSON.parse(r);
-      d._migrations=d._migrations||[];
-      // migrate mailu rows: convert free-text status to code
-      if(!d._migrations.includes('mailu_status_v1')){
-        (d.mailu||[]).forEach(r=>{
-          if(!['done','next','pending'].includes(r[2]))r[2]='pending';
-        });
-        d._migrations.push('mailu_status_v1');
-      }
-      // migrate eve V1 to done
-      if(!d._migrations.includes('eve_v1_done')){
-        if(d.eve && d.eve[0])d.eve[0][4]='done';
-        d._migrations.push('eve_v1_done');
-      }
-      // remove manual BDC encaisse entry (now auto from bdc.0)
-      if(!d._migrations.includes('encaisse_dedup_bdc')){
-        d.encaisse=(d.encaisse||[]).filter(e=>e.lib!=='Acompte BDC (OKP-2026-BDC01)');
-        d._migrations.push('encaisse_dedup_bdc');
-      }
-      // BDC contract: 5 versements with correct amounts from PDF
-      if(!d._migrations.includes('bdc_5_versements')){
-        d.bdc=[
-          ["V1/5","Mars 2026","Signature contrat (10%)",505,"done"],
-          ["V2/5","26 avril 2026","Lendemain tournage T1 — Fang-Béti (20%)",1010,"next"],
-          ["V3/5","25 sept. 2026","Avant tournage T3 Grassfields (20%)",1010,"pending"],
-          ["V4/5","18 déc. 2026","Avant tournage T4 Sawa (20%)",1010,"pending"],
-          ["V5/5","Mai 2027","Livraison cut final + Casino de Paris (30%)",1515,"pending"],
-        ];
-        d.creances=(d.creances||[]).filter(c=>!/BDC|Casino de Paris/i.test(c.lib));
-        d.creances.push(
-          {lib:"BDC V2/5 — Lendemain tournage T1 Fang-Béti",mt:1010,dt:"2026-04-26"},
-          {lib:"BDC V3/5 — Avant tournage T3 Grassfields",mt:1010,dt:"2026-09-25"},
-          {lib:"BDC V4/5 — Avant tournage T4 Sawa",mt:1010,dt:"2026-12-18"},
-          {lib:"BDC V5/5 — Livraison cut final + Casino de Paris",mt:1515,dt:"2027-05-31"}
-        );
-        // remove old auto-encaisse entry that referenced bdc.0 with old amount
-        d.encaisse=(d.encaisse||[]).filter(e=>e._src!=='bdc.0');
-        d._migrations.push('bdc_5_versements');
-      }
-      // BDC V2 corrected: lendemain T1 Fang-Béti, status next
-      if(!d._migrations.includes('bdc_v2_t1')){
-        if(d.bdc && d.bdc[1]){
-          d.bdc[1]=["V2/5","26 avril 2026","Lendemain tournage T1 — Fang-Béti (20%)",1010,"next"];
-        }
-        d.creances=(d.creances||[]).map(c=>{
-          if(/BDC V2\/5/.test(c.lib))return{lib:"BDC V2/5 — Lendemain tournage T1 Fang-Béti",mt:1010,dt:"2026-04-26"};
-          return c;
-        });
-        d._migrations.push('bdc_v2_t1');
-      }
-      // Hero Film MAÏLU as done line + remove manual encaisse entry
-      if(!d._migrations.includes('mailu_hero_film')){
-        d.mailu=d.mailu||[];
-        if(!d.mailu.some(r=>r[0]==='Hero Film 60s')){
-          d.mailu.unshift(["Hero Film 60s",600,"done"]);
-        }
-        d.encaisse=(d.encaisse||[]).filter(e=>e.lib!=='Réglé MAÏLU — Hero Film 60s');
-        d._migrations.push('mailu_hero_film');
-      }
-      return d;
-    }
+    if(r){return runMigrations(JSON.parse(r));}
   }catch(e){}
   const seed=JSON.parse(JSON.stringify(SEED));
-  seed._migrations=['mailu_status_v1','eve_v1_done','encaisse_dedup_bdc','bdc_5_versements','bdc_v2_t1','mailu_hero_film'];
-  return seed;
+  return runMigrations(seed);
+}
+
+// Bump SCHEMA_VERSION to force re-run of all migrations on every device,
+// even if they were previously marked as applied. Use it whenever you
+// fix data shape after the user already has cached/Firestore state.
+const SCHEMA_VERSION = 3;
+
+function runMigrations(d){
+  if(d._schemaVersion!==SCHEMA_VERSION){
+    d._migrations=[];
+    d._schemaVersion=SCHEMA_VERSION;
+  }
+  d._migrations=d._migrations||[];
+  const ran=name=>d._migrations.includes(name);
+  const mark=name=>d._migrations.push(name);
+
+  if(!ran('mailu_status_v1')){
+    (d.mailu||[]).forEach(r=>{if(!['done','next','pending'].includes(r[2]))r[2]='pending';});
+    mark('mailu_status_v1');
+  }
+  if(!ran('eve_v1_done')){
+    if(d.eve && d.eve[0])d.eve[0][4]='done';
+    mark('eve_v1_done');
+  }
+  if(!ran('encaisse_dedup_bdc')){
+    d.encaisse=(d.encaisse||[]).filter(e=>e.lib!=='Acompte BDC (OKP-2026-BDC01)');
+    mark('encaisse_dedup_bdc');
+  }
+  if(!ran('bdc_5_versements')){
+    d.bdc=[
+      ["V1/5","Mars 2026","Signature contrat (10%)",505,"done"],
+      ["V2/5","26 avril 2026","Lendemain tournage T1 — Fang-Béti (20%)",1010,"next"],
+      ["V3/5","25 sept. 2026","Avant tournage T3 Grassfields (20%)",1010,"pending"],
+      ["V4/5","18 déc. 2026","Avant tournage T4 Sawa (20%)",1010,"pending"],
+      ["V5/5","Mai 2027","Livraison cut final + Casino de Paris (30%)",1515,"pending"],
+    ];
+    d.creances=(d.creances||[]).filter(c=>!/BDC|Casino de Paris/i.test(c.lib));
+    d.creances.push(
+      {lib:"BDC V2/5 — Lendemain tournage T1 Fang-Béti",mt:1010,dt:"2026-04-26"},
+      {lib:"BDC V3/5 — Avant tournage T3 Grassfields",mt:1010,dt:"2026-09-25"},
+      {lib:"BDC V4/5 — Avant tournage T4 Sawa",mt:1010,dt:"2026-12-18"},
+      {lib:"BDC V5/5 — Livraison cut final + Casino de Paris",mt:1515,dt:"2027-05-31"}
+    );
+    d.encaisse=(d.encaisse||[]).filter(e=>e._src!=='bdc.0');
+    mark('bdc_5_versements');
+  }
+  if(!ran('bdc_v2_t1')){
+    if(d.bdc && d.bdc[1]){
+      d.bdc[1]=["V2/5","26 avril 2026","Lendemain tournage T1 — Fang-Béti (20%)",1010,"next"];
+    }
+    d.creances=(d.creances||[]).map(c=>{
+      if(/BDC V2\/5/.test(c.lib))return{lib:"BDC V2/5 — Lendemain tournage T1 Fang-Béti",mt:1010,dt:"2026-04-26"};
+      return c;
+    });
+    mark('bdc_v2_t1');
+  }
+  if(!ran('mailu_hero_film')){
+    d.mailu=d.mailu||[];
+    if(!d.mailu.some(r=>r[0]==='Hero Film 60s')){
+      d.mailu.unshift(["Hero Film 60s",600,"done"]);
+    }
+    d.encaisse=(d.encaisse||[]).filter(e=>e.lib!=='Réglé MAÏLU — Hero Film 60s');
+    mark('mailu_hero_film');
+  }
+  return d;
 }
 function save(){
   reconcileEncaisse();
@@ -1291,8 +1295,9 @@ function setSyncStatus(state,label){
 
 function cloudPush(){
   if(!cloudReady||applyingRemote){pendingPush=!cloudReady?true:pendingPush;return;}
-  // Serialize entire DB to a JSON string field — Firestore forbids nested arrays
-  const payload={state:JSON.stringify(DB),_clientId:CLIENT_ID,_ts:Date.now()};
+  // Ensure schema version is embedded in the serialized state
+  DB._schemaVersion=SCHEMA_VERSION;
+  const payload={state:JSON.stringify(DB),_clientId:CLIENT_ID,_ts:Date.now(),_schemaVersion:SCHEMA_VERSION};
   docRef.set(payload).catch(e=>{console.warn('Firestore push:',e);setSyncStatus('offline','Offline');});
 }
 
@@ -1301,11 +1306,33 @@ function applyRemote(data){
   if(data._clientId===CLIENT_ID)return; // our own write echoed back
   let parsed;
   try{parsed=JSON.parse(data.state);}catch(e){console.warn('Firestore parse:',e);return;}
+  const remoteSchema=parsed._schemaVersion||0;
+  const needsMigration=remoteSchema<SCHEMA_VERSION;
+  if(needsMigration){
+    console.log(`Firestore schema ${remoteSchema} < ${SCHEMA_VERSION}, running migrations`);
+    runMigrations(parsed);
+  }
   applyingRemote=true;
   Object.keys(parsed).forEach(k=>{DB[k]=parsed[k];});
   localStorage.setItem(KEY,JSON.stringify(DB));
   applyingRemote=false;
   renderAll();
+  // push migrated data back so other devices see the corrected state
+  if(needsMigration){cloudPush();}
+}
+
+function resetFirestore(){
+  if(!confirm('Effacer le document Firestore et le ré-initialiser depuis le code local ? Les modifications non sauvegardées sur d\'autres appareils seront perdues.'))return;
+  if(!docRef){alert('Firestore non connecté');return;}
+  docRef.delete().then(()=>{
+    // re-seed from local SEED, run migrations, push back
+    const fresh=runMigrations(JSON.parse(JSON.stringify(SEED)));
+    Object.keys(fresh).forEach(k=>{DB[k]=fresh[k];});
+    localStorage.setItem(KEY,JSON.stringify(DB));
+    cloudPush();
+    renderAll();
+    alert('Firestore réinitialisé.');
+  }).catch(e=>{console.warn('reset:',e);alert('Erreur reset Firestore : '+e.message);});
 }
 
 function initFirestore(){
