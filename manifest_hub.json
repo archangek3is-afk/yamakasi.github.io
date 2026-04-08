@@ -1,16 +1,16 @@
 {
-  "id": "/yamakasi.github.io/hub.html",
+  "id": "/hub.html",
   "name": "OWM Production Hub",
   "short_name": "OWM Hub",
   "description": "Suite de production Okapi World Média",
-  "start_url": "/yamakasi.github.io/hub.html",
-  "scope": "/yamakasi.github.io/",
+  "start_url": "/hub.html",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0D0D0D",
   "theme_color": "#C49A22",
   "lang": "fr",
   "icons": [
-    { "src": "/yamakasi.github.io/icon_hub.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+    { "src": "/icon_hub.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]
 }

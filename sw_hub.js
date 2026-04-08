@@ -1,6 +1,6 @@
-const BUILD = '1775533113';
+const BUILD = '1775533114';
 const CACHE = 'owm-hub-' + BUILD;
-const BASE = '/yamakasi.github.io/';
+const BASE = '/';
 const ASSETS = [
   BASE,
   BASE + 'hub.html',
