@@ -1,16 +1,16 @@
 {
-  "id": "/yamakasi.github.io/dashboard.html",
+  "id": "/dashboard.html",
   "name": "OWM Dashboard",
   "short_name": "OWM Dashboard",
   "description": "Dashboard de direction Okapi World Média",
-  "start_url": "/yamakasi.github.io/dashboard.html",
-  "scope": "/yamakasi.github.io/",
+  "start_url": "/dashboard.html",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0D0D0D",
   "theme_color": "#C49A22",
   "lang": "fr",
   "icons": [
-    { "src": "/yamakasi.github.io/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
   ]
 }
