@@ -4,7 +4,7 @@
   "short_name": "OWM Hub",
   "description": "Suite de production Okapi World Média",
   "start_url": "/hub.html",
-  "scope": "/",
+  "scope": "/hub.html",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0D0D0D",
