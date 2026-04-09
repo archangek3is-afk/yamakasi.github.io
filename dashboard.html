@@ -1133,7 +1133,7 @@ if(sessionStorage.getItem('okapi_updated')){
 
 // ============ GMAIL INTEGRATION ============
 const GMAIL_CLIENT_ID='756710646676-2tj1j02ntp77oi0r9ru6k8afhkhn8482.apps.googleusercontent.com';
-const GMAIL_SCOPE='https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send';
+const GMAIL_SCOPE='https://www.googleapis.com/auth/gmail.readonly';
 const GMAIL_TOKEN_KEY='okapi_gmail_token';
 const PROJECT_EMAILS={
   "MAÏLU":["hortensebl@hotmail.com"],
@@ -1202,38 +1202,23 @@ function initTokenClient(){
   });
 }
 
+const MAIL_PROXY='https://okapi-mail-proxy.archangek3is.workers.dev';
+
 async function sendGmailDirect(to,subject,body){
-  if(!gmailToken||!gmailToken.access_token){
-    alert('Connecte Gmail d\'abord pour envoyer depuis yamakasi@okapiworldmedia.com');
-    return false;
-  }
-  const from='yamakasi@okapiworldmedia.com';
-  const message=[
-    `From: Yamakasi — Okapi World Média <${from}>`,
-    `To: ${to}`,
-    `Subject: ${subject}`,
-    'Content-Type: text/plain; charset=utf-8',
-    '',
-    body
-  ].join('\n');
-  const encoded=btoa(unescape(encodeURIComponent(message)))
-    .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  if(!to){alert('Aucun destinataire défini.');return false;}
   try{
-    const res=await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send',{
+    const res=await fetch(MAIL_PROXY,{
       method:'POST',
-      headers:{
-        'Authorization':`Bearer ${gmailToken.access_token}`,
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify({raw:encoded})
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({to,subject,body})
     });
-    if(res.ok){
+    const data=await res.json();
+    if(data.ok){
       alert('✅ Mail envoyé depuis yamakasi@okapiworldmedia.com');
       markSent();
       return true;
     }else{
-      const err=await res.json();
-      alert('❌ Erreur envoi: '+(err.error?.message||'Inconnu'));
+      alert('❌ Erreur envoi: '+(data.error||'Inconnu'));
       return false;
     }
   }catch(e){
