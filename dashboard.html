@@ -473,7 +473,7 @@ td.editing input,td.editing select{
   <label>Objet</label><input id="r_subject" readonly>
   <label>Message</label><textarea id="r_body" rows="14" style="width:100%;background:#0a0a0a;border:1px solid var(--border);color:var(--ivory);padding:10px;font-family:inherit;font-size:12px;border-radius:2px;line-height:1.5"></textarea>
   <div class="send-btns">
-    <a id="r_gmail" href="#" target="_blank" onclick="markSent()">📧 Gmail</a>
+    <a id="r_gmail" href="#" onclick="event.preventDefault();sendGmailDirect(currentReminderTo,document.getElementById('r_subject').value,document.getElementById('r_body').value)">📧 Envoyer</a>
     <a id="r_wa" href="#" target="_blank" onclick="markSent()">💬 WhatsApp</a>
     <a id="r_sms" href="#" onclick="markSent()">📱 SMS</a>
   </div>
@@ -1017,7 +1017,7 @@ function renderReminderBanner(){
   bn.innerHTML=html;
 }
 
-let currentReminder=null;
+let currentReminder=null,currentReminderTo='';
 function openReminder(key,i){
   const row=DB[key][i];
   const info=PROJECT_INFO[key];
@@ -1038,6 +1038,7 @@ yamakasi@okapiworldmedia.com · 06 05 78 28 95`;
   document.getElementById('r_subject').value=subject;
   document.getElementById('r_body').value=body;
   currentReminder={key,i};
+  currentReminderTo=info.email||'';
 
   const refreshLinks=()=>{
     const b=document.getElementById('r_body').value;
@@ -1107,6 +1108,7 @@ yamakasi@okapiworldmedia.com · 06 05 78 28 95`;
   document.getElementById('r_subject').value=subject;
   document.getElementById('r_body').value=body;
   currentReminder={key:'mailu',i:idx};
+  currentReminderTo=MAILU_INFO.email||'';
 
   const refreshLinks=()=>{
     const b=document.getElementById('r_body').value;
@@ -1131,7 +1133,7 @@ if(sessionStorage.getItem('okapi_updated')){
 
 // ============ GMAIL INTEGRATION ============
 const GMAIL_CLIENT_ID='756710646676-2tj1j02ntp77oi0r9ru6k8afhkhn8482.apps.googleusercontent.com';
-const GMAIL_SCOPE='https://www.googleapis.com/auth/gmail.readonly';
+const GMAIL_SCOPE='https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send';
 const GMAIL_TOKEN_KEY='okapi_gmail_token';
 const PROJECT_EMAILS={
   "MAÏLU":["hortensebl@hotmail.com"],
@@ -1198,6 +1200,46 @@ function initTokenClient(){
       }
     }
   });
+}
+
+async function sendGmailDirect(to,subject,body){
+  if(!gmailToken||!gmailToken.access_token){
+    alert('Connecte Gmail d\'abord pour envoyer depuis yamakasi@okapiworldmedia.com');
+    return false;
+  }
+  const from='yamakasi@okapiworldmedia.com';
+  const message=[
+    `From: Yamakasi — Okapi World Média <${from}>`,
+    `To: ${to}`,
+    `Subject: ${subject}`,
+    'Content-Type: text/plain; charset=utf-8',
+    '',
+    body
+  ].join('\n');
+  const encoded=btoa(unescape(encodeURIComponent(message)))
+    .replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  try{
+    const res=await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send',{
+      method:'POST',
+      headers:{
+        'Authorization':`Bearer ${gmailToken.access_token}`,
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify({raw:encoded})
+    });
+    if(res.ok){
+      alert('✅ Mail envoyé depuis yamakasi@okapiworldmedia.com');
+      markSent();
+      return true;
+    }else{
+      const err=await res.json();
+      alert('❌ Erreur envoi: '+(err.error?.message||'Inconnu'));
+      return false;
+    }
+  }catch(e){
+    alert('❌ Erreur réseau: '+e.message);
+    return false;
+  }
 }
 
 function connectGmail(){
