@@ -1,4 +1,4 @@
-const BUILD = '1775741317';
+const BUILD = '1775741881';
 const CACHE = 'okapi-dashboard-' + BUILD;
 const BASE = '/';
 const ASSETS = [
