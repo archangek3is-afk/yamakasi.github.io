@@ -1042,7 +1042,7 @@ yamakasi@okapiworldmedia.com · 06 05 78 28 95`;
   const refreshLinks=()=>{
     const b=document.getElementById('r_body').value;
     const s=document.getElementById('r_subject').value;
-    document.getElementById('r_gmail').href=`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(info.email||'')}&su=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
+    document.getElementById('r_gmail').href=`https://mail.google.com/mail/?view=cm&from=${encodeURIComponent('yamakasi@okapiworldmedia.com')}&to=${encodeURIComponent(info.email||'')}&su=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
     document.getElementById('r_wa').href=`https://wa.me/?text=${encodeURIComponent(s+'\n\n'+b)}`;
     document.getElementById('r_sms').href=`sms:?body=${encodeURIComponent(s+'\n\n'+b)}`;
   };
@@ -1111,7 +1111,7 @@ yamakasi@okapiworldmedia.com · 06 05 78 28 95`;
   const refreshLinks=()=>{
     const b=document.getElementById('r_body').value;
     const s=document.getElementById('r_subject').value;
-    document.getElementById('r_gmail').href=`https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(MAILU_INFO.email)}&su=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
+    document.getElementById('r_gmail').href=`https://mail.google.com/mail/?view=cm&from=${encodeURIComponent('yamakasi@okapiworldmedia.com')}&to=${encodeURIComponent(MAILU_INFO.email)}&su=${encodeURIComponent(s)}&body=${encodeURIComponent(b)}`;
     document.getElementById('r_wa').href=`https://wa.me/?text=${encodeURIComponent(s+'\n\n'+b)}`;
     document.getElementById('r_sms').href=`sms:?body=${encodeURIComponent(s+'\n\n'+b)}`;
   };
