@@ -119,8 +119,7 @@
     .offre-name { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
     .offre-title { font-size: 28px; font-weight: 300; font-style: italic; margin-bottom: 20px; }
     .offre-desc { font-size: 16px; font-weight: 400; line-height: 1.75; color: rgba(245,240,232,0.85); margin-bottom: 32px; }
-    .offre-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
-    .offre-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; padding: 6px 12px; border: 1px solid rgba(201,168,76,0.25); color: var(--grey); text-transform: uppercase; }
+    .offre-tags { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--grey); text-transform: uppercase; margin-bottom: 36px; }
     .offre-price { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--white); }
     .offre-price span { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--grey); letter-spacing: 2px; display: block; margin-top: 4px; }
 
@@ -181,14 +180,6 @@
     .manifeste-author { 
       font-size: 11px; 
       letter-spacing: 4px; 
-    }
-    
-    /* Offre tag labels */
-    .offre-tag { 
-      font-size: 10px; 
-      letter-spacing: 1.5px; 
-      padding: 7px 14px; 
-      color: rgba(245,240,232,0.7);
     }
     
     /* Offre price */
