@@ -388,6 +388,24 @@
   #s8 .hitch-desc { font-size:clamp(12px,1.1vw,14px); font-style:italic; color:rgba(245,240,232,.78); line-height:1.5; }
   #s8 .hitch-quote { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(13px,1.1vw,15px); color:rgba(201,168,76,.72); border-top:1px solid rgba(201,168,76,.15); padding-top:10px; line-height:1.5; }
 
+
+  #s10 .cta-block { margin-top:36px; text-align:center; animation:fadeUp .8s ease .5s both; }
+  #s10 .cta-question { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(18px,2vw,26px); color:rgba(245,240,232,.7); margin-bottom:16px; }
+  #s10 .cta-handle {
+    display: inline-block;
+    font-family:'Bebas Neue',sans-serif;
+    font-size: clamp(36px,5vw,72px);
+    letter-spacing: .08em;
+    color: var(--or);
+    text-decoration: none;
+    border-bottom: 2px solid rgba(201,168,76,.3);
+    padding-bottom: 4px;
+    transition: border-color .3s, color .3s;
+  }
+  #s10 .cta-handle:hover { border-color: var(--or); color: #e8c96a; }
+  #s10 .cta-sub { font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.2em; color:rgba(245,240,232,.35); text-transform:uppercase; margin-top:14px; }
+  #s10 .contact { margin-top:32px; }
+
   /* ── S9 OBSESSION ── */
   #s9 { background:#060608; }
   #s9 .orbit { position:absolute; border:1px solid rgba(201,168,76,.06); border-radius:50%; animation:rotate 20s linear infinite; }
@@ -786,13 +804,18 @@
       et imaginer <span>ce qui pourrait y être.</span>
     </p>
     <p class="attribution">— L'art de la direction créative</p>
+    <div class="cta-block">
+      <p class="cta-question">Tu veux aller plus loin ?</p>
+      <a class="cta-handle" href="https://instagram.com/yamakasi_ak" target="_blank">
+        &#64;yamakasi_ak
+      </a>
+      <p class="cta-sub">Instagram · TikTok · Contenu créatif chaque semaine</p>
+    </div>
     <div class="contact">
-      <div class="dot"></div>
-      <span>yamakasi_ak</span>
       <div class="dot"></div>
       <span>Okapi World Média</span>
       <div class="dot"></div>
-      <span>yamakasi [at] okapiworldmedia.com</span>
+      <span>okapiworldmedia.com</span>
     </div>
   </div>
 
