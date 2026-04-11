@@ -181,14 +181,19 @@
   }
 
   .cursor {
-    position: fixed; width: 12px; height: 12px;
-    background: var(--or); border-radius: 50%;
+    position: fixed; width: 14px; height: 14px;
+    background: var(--or);
+    border-radius: 50%;
     pointer-events: none; z-index: 9999;
     transform: translate(-50%,-50%);
-    transition: width .2s, height .2s;
-    mix-blend-mode: difference;
+    transition: width .15s ease, height .15s ease, background .15s ease;
+    box-shadow: 0 0 0 2px rgba(201,168,76,0.4);
   }
-  .cursor.big { width: 36px; height: 36px; }
+  .cursor.big {
+    width: 44px; height: 44px;
+    background: rgba(201,168,76,0.15);
+    box-shadow: 0 0 0 1.5px var(--or);
+  }
   @media (hover: none) { .cursor { display: none !important; } html, body { cursor: auto; } }
 
   .slides { width: 100%; height: 100%; position: relative; }
@@ -810,11 +815,30 @@ try {
     if (['ArrowLeft','ArrowUp'].includes(e.key)) { e.preventDefault(); prev(); }
   });
 
-  let startX = 0;
-  document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+  // Touch navigation — robust version
+  let startX = 0, startY = 0, startT = 0;
+  document.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    startT = Date.now();
+  }, { passive: true });
+
   document.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 50) dx < 0 ? next() : prev();
+    const dy = e.changedTouches[0].clientY - startY;
+    const dt = Date.now() - startT;
+    // Must be horizontal, fast enough, and significant
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 500) {
+      dx < 0 ? next() : prev();
+    }
+  }, { passive: true });
+
+  // Also support tap on left/right thirds of screen
+  document.addEventListener('click', e => {
+    const w = window.innerWidth;
+    const x = e.clientX;
+    if (x < w * 0.25) prev();
+    else if (x > w * 0.75) next();
   });
 
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
