@@ -306,8 +306,8 @@
 
   /* ── S3 RÉFÉRENCES ── */
   #s3 { background:var(--noir); align-items:flex-start; text-align:left; padding:60px; }
-  #s3 .layout { display:grid; grid-template-columns:1fr 1fr; gap:48px; width:100%; max-width:1100px; align-items:center; }
-  #s3 .left h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,5.5vw,84px); line-height:.9; color:var(--ivoire); animation:fadeUp .8s ease both; }
+  #s3 .layout { display:grid; grid-template-columns:1fr 1fr; gap:32px; width:100%; max-width:1000px; align-items:center; }
+  #s3 .left h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,4.5vw,72px); line-height:.92; color:var(--ivoire); animation:fadeUp .8s ease both; }
   #s3 .left h2 em { display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.55em; color:var(--or); letter-spacing:.05em; }
   #s3 .left p { font-size:clamp(15px,1.4vw,18px); line-height:1.7; color:rgba(245,240,232,.8); margin-top:20px; animation:fadeUp .8s ease .2s both; }
   #s3 .right { display:flex; flex-direction:column; gap:10px; animation:fadeUp .8s ease .4s both; }
@@ -416,10 +416,26 @@
   .nav { position:fixed; bottom:26px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:10px; z-index:100; }
   .nav .dot { width:6px; height:6px; border-radius:50%; background:rgba(245,240,232,.15); cursor:pointer; transition:background .3s,transform .3s; }
   .nav .dot.active { background:var(--or); transform:scale(1.5); }
-  .nav-arrow { position:fixed; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(245,240,232,.15); font-size:26px; cursor:pointer; z-index:100; transition:color .3s; padding:20px; }
-  .nav-arrow:hover { color:var(--or); }
-  .nav-arrow.left { left:10px; }
-  .nav-arrow.right { right:10px; }
+  .nav-arrow { 
+    position:fixed; top:50%; transform:translateY(-50%); 
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 50%;
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(245,240,232,0.7); font-size:22px; 
+    cursor:pointer; z-index:1000; 
+    transition: background .2s, color .2s, border-color .2s; 
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .nav-arrow:hover, .nav-arrow:active { 
+    background: rgba(201,168,76,0.2); 
+    color: var(--or);
+    border-color: var(--or);
+  }
+  .nav-arrow.left { left:16px; }
+  .nav-arrow.right { right:16px; }
   .counter { position:fixed; top:24px; right:36px; font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.2em; color:rgba(245,240,232,.25); z-index:100; }
   .counter .current { color:var(--or); }
   .brand { position:fixed; top:24px; left:36px; font-family:'Space Mono',monospace; font-size:10px; letter-spacing:.3em; color:rgba(245,240,232,.2); z-index:100; text-transform:uppercase; }
@@ -616,7 +632,7 @@
   <div class="slide" id="s3">
     <div class="layout">
       <div class="left">
-        <h2>Accu<br>muler<br><em>des références</em></h2>
+        <h2>Accumuler<br><em>des références</em></h2>
         <p>Une inspiration te donne envie de copier. Une référence t'apprend à voir. La différence : la question que tu te poses.</p>
       </div>
       <div class="right">
@@ -785,72 +801,71 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 try {
-  const SLIDE_IDS = ['s0','syama','sfilms','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'];
-  const TOTAL = SLIDE_IDS.length;
-  let current = 0;
 
-  const nav = document.getElementById('nav');
-  for (let i = 0; i < TOTAL; i++) {
-    const d = document.createElement('div');
+  var SLIDE_IDS = ['s0','syama','sfilms','s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'];
+  var TOTAL = SLIDE_IDS.length;
+  var current = 0;
+
+  // Build nav dots
+  var nav = document.getElementById('nav');
+  for (var i = 0; i < TOTAL; i++) {
+    var d = document.createElement('div');
     d.className = 'dot' + (i === 0 ? ' active' : '');
-    d.onclick = () => goTo(i);
+    (function(idx){ d.addEventListener('click', function(){ goTo(idx); }); })(i);
     nav.appendChild(d);
   }
 
   function goTo(n) {
+    if (n < 0 || n >= TOTAL) return;
     document.getElementById(SLIDE_IDS[current]).classList.remove('active');
     nav.children[current].classList.remove('active');
-    current = Math.max(0, Math.min(TOTAL - 1, n));
+    current = n;
     document.getElementById(SLIDE_IDS[current]).classList.add('active');
     nav.children[current].classList.add('active');
     document.getElementById('cur').textContent = String(current + 1).padStart(2,'0');
     document.getElementById('progress').style.width = ((current + 1) / TOTAL * 100) + '%';
   }
 
-  function next() { goTo(current + 1); }
-  function prev() { goTo(current - 1); }
+  function next() { if (current < TOTAL - 1) goTo(current + 1); }
+  function prev() { if (current > 0) goTo(current - 1); }
 
-  document.addEventListener('keydown', e => {
-    if (['ArrowRight','ArrowDown',' '].includes(e.key)) { e.preventDefault(); next(); }
-    if (['ArrowLeft','ArrowUp'].includes(e.key)) { e.preventDefault(); prev(); }
+  // Expose globally for onclick= attributes
+  window.next = next;
+  window.prev = prev;
+
+  // Keyboard
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); prev(); }
   });
 
-  // Touch navigation — robust version
-  let startX = 0, startY = 0, startT = 0;
-  document.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    startT = Date.now();
+  // Swipe
+  var tx = 0, ty = 0, tt = 0;
+  document.addEventListener('touchstart', function(e) {
+    tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+    tt = Date.now();
   }, { passive: true });
-
-  document.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - startX;
-    const dy = e.changedTouches[0].clientY - startY;
-    const dt = Date.now() - startT;
-    // Must be horizontal, fast enough, and significant
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5 && dt < 500) {
-      dx < 0 ? next() : prev();
+  document.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - tx;
+    var dy = e.changedTouches[0].clientY - ty;
+    var dt = Date.now() - tt;
+    if (dt < 400 && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 2) {
+      if (dx < 0) next(); else prev();
     }
   }, { passive: true });
 
-  // Also support tap on left/right thirds of screen
-  document.addEventListener('click', e => {
-    const w = window.innerWidth;
-    const x = e.clientX;
-    if (x < w * 0.25) prev();
-    else if (x > w * 0.75) next();
-  });
-
+  // Cursor desktop only
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
+    var cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', function(e) {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
     });
-    document.querySelectorAll('button,.dot,.vocab-item,.genre-tag').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-    });
   }
-  document.querySelectorAll('button,.dot,.vocab-item,.genre-tag').forEach(el => {
-    el.addEventListene
+
+  document.getElementById('progress').style.width = (1 / TOTAL * 100) + '%';
+
+} catch(err) { console.warn('Init:', err.message); }
+});
+</script>
