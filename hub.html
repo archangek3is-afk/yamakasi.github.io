@@ -10,6 +10,7 @@
 <link rel="apple-touch-icon" href="icon_hub.svg">
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 <script>
 if('serviceWorker' in navigator){
   let reloading=false;
@@ -157,6 +158,24 @@ tr:hover td{background:#1a1a1a}
 #updateToast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:var(--gold2);border:1px solid var(--gold);padding:12px 22px;font-size:12px;letter-spacing:1px;text-transform:uppercase;font-family:Georgia,serif;border-radius:2px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;box-shadow:0 4px 20px rgba(0,0,0,.6)}
 #updateToast.show{opacity:1}
 
+/* Upload zone */
+.upload-zone{border:2px dashed var(--border);padding:28px;text-align:center;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1px;border-radius:2px;margin-bottom:16px;transition:all .2s;cursor:pointer}
+.upload-zone.over{border-color:var(--gold);background:rgba(196,154,34,.06);color:var(--gold2)}
+.upload-zone input[type=file]{display:none}
+.upload-progress{background:#222;height:6px;border-radius:2px;overflow:hidden;margin:10px 0;display:none}
+.upload-progress.active{display:block}
+.upload-progress>div{background:linear-gradient(90deg,var(--gold),var(--gold2));height:100%;width:0;transition:width .2s}
+.upload-pct{font-size:11px;color:var(--gold2);text-align:center;margin-bottom:8px;display:none}
+.upload-pct.active{display:block}
+.b-pdf{background:rgba(192,57,43,.18);color:#ff6b5b;border:1px solid #c0392b}
+.b-image{background:rgba(39,174,96,.15);color:#5fcf8a;border:1px solid #27ae60}
+.cloud-doc-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--border);font-size:13px;background:var(--bg2)}
+.cloud-doc-row:last-child{border-bottom:none}
+.cloud-doc-row:hover{background:#1a1a1a}
+.cloud-doc-meta{display:flex;gap:10px;align-items:center}
+.filter-bar{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap}
+.filter-bar select{background:#0a0a0a;border:1px solid var(--border);color:var(--ivory);padding:8px 12px;font-size:12px;font-family:inherit;border-radius:2px}
+
 @media (max-width:900px){
   header,nav,main{padding-left:14px;padding-right:14px}
   .card-grid{grid-template-columns:1fr}
@@ -229,11 +248,34 @@ tr:hover td{background:#1a1a1a}
 <!-- ============ DOCUMENTS ============ -->
 <section id="documents" class="tab">
   <h2 class="section">Documents</h2>
-  <div class="add-bar"><button class="add" onclick="openDocModal()">+ Ajouter document</button></div>
+
+  <!-- Upload zone -->
+  <div class="filter-bar">
+    <select id="uploadProjet"><option value="">— Sélectionner un projet —</option></select>
+    <button class="add" id="uploadBtn" onclick="document.getElementById('fileInput').click()">+ Ajouter un document</button>
+  </div>
+  <input type="file" id="fileInput" accept=".pdf,image/*" multiple style="display:none">
+  <div class="upload-zone" id="dropZone">
+    Glisser-déposer des fichiers ici (PDF, images)<br>
+    <span style="font-size:10px;color:var(--muted)">ou cliquer sur « + Ajouter un document »</span>
+  </div>
+  <div class="upload-pct" id="uploadPct">0 %</div>
+  <div class="upload-progress" id="uploadBar"><div id="uploadBarInner"></div></div>
+
+  <!-- Existing local docs table -->
+  <h3 class="branch" style="margin-top:28px">Documents locaux</h3>
+  <div class="add-bar"><button class="ghost" onclick="openDocModal()">+ Ajouter document local</button></div>
   <table>
     <thead><tr><th>Nom</th><th>Projet</th><th>Type</th><th>Date</th><th>Taille</th><th>Actions</th></tr></thead>
     <tbody id="docsTable"></tbody>
   </table>
+
+  <!-- Cloud docs list -->
+  <h3 class="branch" style="margin-top:28px">Documents Cloud (Firebase)</h3>
+  <div class="filter-bar">
+    <select id="filterCloudProjet" onchange="renderCloudDocs()"><option value="">Tous les projets</option></select>
+  </div>
+  <div id="cloudDocsList" style="border:1px solid var(--border);border-radius:2px"></div>
 </section>
 
 <!-- ============ ANNUAIRE ============ -->
@@ -796,7 +838,161 @@ function exportJSON(){
 }
 function resetData(){if(confirm('Réinitialiser toutes les données ? Irréversible.')){DB=migrate(JSON.parse(JSON.stringify(SEED)));save();renderAll();}}
 
-function renderAll(){renderProjets();renderDocs();renderAnnuaire();renderRoadmap();renderCalendar();}
+function renderAll(){renderProjets();renderDocs();renderAnnuaire();renderRoadmap();renderCalendar();populateUploadSelects();renderCloudDocs();}
+
+// ============ FIREBASE STORAGE UPLOAD ============
+let storage=null;
+let cloudDocs=[];
+
+function initStorage(){
+  if(typeof firebase==='undefined'||!firebase.storage)return;
+  storage=firebase.storage();
+}
+
+function populateUploadSelects(){
+  const sel1=document.getElementById('uploadProjet');
+  const sel2=document.getElementById('filterCloudProjet');
+  const prev1=sel1.value,prev2=sel2.value;
+  sel1.innerHTML='<option value="">— Sélectionner un projet —</option>';
+  sel2.innerHTML='<option value="">Tous les projets</option>';
+  DB.projets.forEach(p=>{
+    sel1.innerHTML+=`<option value="${p.id}">${esc(p.nom)}</option>`;
+    sel2.innerHTML+=`<option value="${p.id}">${esc(p.nom)}</option>`;
+  });
+  if(prev1)sel1.value=prev1;
+  if(prev2)sel2.value=prev2;
+}
+
+function loadCloudDocs(){
+  if(!db_fs)return;
+  db_fs.collection('documents').orderBy('dateUpload','desc').onSnapshot(snap=>{
+    cloudDocs=[];
+    snap.forEach(doc=>cloudDocs.push({id:doc.id,...doc.data()}));
+    renderCloudDocs();
+  },err=>console.warn('Cloud docs listen:',err));
+}
+
+function renderCloudDocs(){
+  const container=document.getElementById('cloudDocsList');
+  if(!container)return;
+  const filter=document.getElementById('filterCloudProjet').value;
+  const filtered=filter?cloudDocs.filter(d=>d.projetId===filter):cloudDocs;
+  if(!filtered.length){
+    container.innerHTML='<div style="padding:18px;color:var(--muted);font-size:12px;text-align:center">Aucun document cloud</div>';
+    return;
+  }
+  container.innerHTML=filtered.map(d=>{
+    const typeBadge=d.type==='pdf'?'<span class="badge b-pdf">PDF</span>':'<span class="badge b-image">Image</span>';
+    const date=d.dateUpload?new Date(d.dateUpload.seconds?d.dateUpload.seconds*1000:d.dateUpload).toLocaleDateString('fr-FR',{day:'2-digit',month:'short',year:'numeric'}):'—';
+    const size=d.taille?Math.round(d.taille)+' Ko':'—';
+    return `<div class="cloud-doc-row">
+      <div>
+        <div style="color:var(--ivory);font-weight:600;margin-bottom:3px">${esc(d.nom)}</div>
+        <div style="font-size:11px;color:var(--muted)">${esc(d.projetNom||'—')} · ${size} · ${date}</div>
+      </div>
+      <div class="cloud-doc-meta">
+        ${typeBadge}
+        <a href="${d.url}" target="_blank" class="ghost" style="text-decoration:none;display:inline-block;padding:6px 10px;font-size:10px">Télécharger</a>
+        <button class="danger" onclick="deleteCloudDoc('${d.id}','${esc(d.storagePath)}')">Supprimer</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function uploadFiles(files){
+  const projetId=document.getElementById('uploadProjet').value;
+  if(!projetId){alert('Veuillez sélectionner un projet.');return;}
+  if(!storage||!db_fs){alert('Firebase Storage non disponible.');return;}
+  const projet=DB.projets.find(p=>p.id===projetId);
+  if(!projet)return;
+  const barOuter=document.getElementById('uploadBar');
+  const barInner=document.getElementById('uploadBarInner');
+  const pctEl=document.getElementById('uploadPct');
+
+  Array.from(files).forEach(file=>{
+    const isPdf=file.type==='application/pdf';
+    const isImage=file.type.startsWith('image/');
+    if(!isPdf&&!isImage){alert('Type non supporté : '+file.name);return;}
+
+    const ts=Date.now();
+    const storagePath='documents/'+projetId+'/'+ts+'_'+file.name;
+    const ref=storage.ref(storagePath);
+    const task=ref.put(file);
+
+    barOuter.classList.add('active');
+    pctEl.classList.add('active');
+
+    task.on('state_changed',
+      snap=>{
+        const pct=Math.round((snap.bytesTransferred/snap.totalBytes)*100);
+        barInner.style.width=pct+'%';
+        pctEl.textContent=pct+' %';
+      },
+      err=>{
+        console.error('Upload error:',err);
+        alert('Erreur upload : '+file.name);
+        barOuter.classList.remove('active');
+        pctEl.classList.remove('active');
+      },
+      ()=>{
+        task.snapshot.ref.getDownloadURL().then(url=>{
+          db_fs.collection('documents').add({
+            projetId:projetId,
+            projetNom:projet.nom,
+            nom:file.name,
+            type:isPdf?'pdf':'image',
+            url:url,
+            storagePath:storagePath,
+            dateUpload:firebase.firestore.FieldValue.serverTimestamp(),
+            taille:Math.round(file.size/1024)
+          }).then(()=>{
+            barInner.style.width='100%';
+            pctEl.textContent='Upload terminé';
+            setTimeout(()=>{
+              barOuter.classList.remove('active');
+              pctEl.classList.remove('active');
+              barInner.style.width='0';
+            },1500);
+          }).catch(err=>console.error('Firestore write:',err));
+        });
+      }
+    );
+  });
+}
+
+function deleteCloudDoc(docId,storagePath){
+  if(!confirm('Supprimer ce document du cloud ?'))return;
+  if(!storage||!db_fs)return;
+  const ref=storage.ref(storagePath);
+  ref.delete().then(()=>{
+    return db_fs.collection('documents').doc(docId).delete();
+  }).then(()=>{
+    // snapshot listener will update the list
+  }).catch(err=>{
+    console.error('Delete error:',err);
+    // still try to remove Firestore doc if storage fails (file may already be gone)
+    db_fs.collection('documents').doc(docId).delete().catch(()=>{});
+  });
+}
+
+// Drag & drop + file input
+window.addEventListener('load',()=>{
+  const zone=document.getElementById('dropZone');
+  const input=document.getElementById('fileInput');
+  if(!zone||!input)return;
+
+  zone.addEventListener('click',()=>input.click());
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over');});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('over'));
+  zone.addEventListener('drop',e=>{
+    e.preventDefault();zone.classList.remove('over');
+    if(e.dataTransfer.files.length)uploadFiles(e.dataTransfer.files);
+  });
+  input.addEventListener('change',e=>{
+    if(e.target.files.length)uploadFiles(e.target.files);
+    e.target.value='';
+  });
+});
 
 // update toast
 if(sessionStorage.getItem('owmhub_updated')){
@@ -810,7 +1006,8 @@ if(sessionStorage.getItem('owmhub_updated')){
 // init
 save();
 initFirestore();
-window.addEventListener('load',()=>setTimeout(renderAll,100));
+initStorage();
+window.addEventListener('load',()=>{setTimeout(renderAll,100);loadCloudDocs();});
 renderAll();
 </script>
 </body>
