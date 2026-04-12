@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okapi World Média — Production Nike Dunk Low</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --noir:#0A0A0A;--or:#C9A84C;--or-pale:#E8D5A0;
+  --ivoire:#F5F0E8;--gris:#141414;--gris2:#1C1C1C;
+  --gris-light:#666;--rouge:#9B2020;--bleu:#1A3A5C;
+  --rouge-nike:#E5392A;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--noir);}
+body{font-family:'Cormorant Garamond',serif;color:var(--ivoire);}
+
+/* DECK */
+.deck{width:100%;height:100vh;position:relative;overflow:hidden;}
+.slide{position:absolute;inset:0;display:flex;opacity:0;transition:opacity 0.65s ease,transform 0.65s ease;transform:translateX(48px);pointer-events:none;}
+.slide.active{opacity:1;transform:translateX(0);pointer-events:all;}
+.slide.prev{opacity:0;transform:translateX(-48px);}
+
+/* NAV */
+.nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:100;}
+.dots{display:flex;gap:6px;}
+.dot{width:5px;height:5px;border-radius:50%;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.35);cursor:pointer;transition:all 0.3s;}
+.dot.active{background:var(--or);width:18px;border-radius:3px;}
+.nbtn{width:34px;height:34px;border-radius:50%;background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);color:var(--or);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all 0.2s;}
+.nbtn:hover{background:rgba(201,168,76,0.16);}
+.counter{position:fixed;bottom:32px;right:44px;z-index:100;font-family:'Space Mono',monospace;font-size:9px;color:var(--gris-light);letter-spacing:0.15em;}
+
+/* HEADER */
+.hbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:52px;background:rgba(10,10,10,0.92);border-bottom:1px solid rgba(201,168,76,0.1);backdrop-filter:blur(8px);}
+.hbar-left{display:flex;align-items:center;gap:14px;}
+.hbar-brand{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.25em;color:var(--or);}
+.hbar-title{font-family:'Space Mono',monospace;font-size:9px;color:var(--gris-light);letter-spacing:0.12em;}
+.hbar-conf{font-family:'Space Mono',monospace;font-size:8px;color:rgba(201,168,76,0.35);letter-spacing:0.1em;}
+
+/* COMMON */
+.sidebar{background:var(--gris);display:flex;flex-direction:column;justify-content:center;padding:56px 48px;border-right:1px solid rgba(201,168,76,0.1);position:relative;overflow:hidden;}
+.sidebar::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--or);}
+.eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.28em;color:var(--or);text-transform:uppercase;margin-bottom:16px;}
+.sidebar h2{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:0.95;letter-spacing:0.04em;color:var(--ivoire);margin-bottom:18px;}
+.sidebar h2 span{color:var(--or);}
+.sidebar p{font-size:15px;line-height:1.75;color:rgba(245,240,232,0.62);font-weight:300;max-width:330px;}
+.bignr{font-family:'Bebas Neue',sans-serif;font-size:110px;line-height:1;color:rgba(201,168,76,0.055);position:absolute;bottom:-12px;right:16px;pointer-events:none;letter-spacing:-0.02em;}
+
+.main{background:var(--noir);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:52px 48px;position:relative;overflow:hidden;}
+.main-dark{background:var(--gris2);display:flex;flex-direction:column;padding:52px 48px;position:relative;overflow:hidden;}
+.l2{display:grid;grid-template-columns:1fr 1fr;width:100%;height:100vh;}
+.l3{display:grid;grid-template-columns:300px 1fr 1fr;width:100%;height:100vh;}
+
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px;}
+.tag{font-family:'Space Mono',monospace;font-size:9px;padding:3px 9px;border-radius:2px;letter-spacing:0.07em;}
+.tor{background:rgba(201,168,76,0.1);color:var(--or);border:0.5px solid rgba(201,168,76,0.28);}
+.tbl{background:rgba(26,58,92,0.28);color:#6A9AD4;border:0.5px solid rgba(106,154,212,0.2);}
+.tgr{background:rgba(40,80,50,0.28);color:#5AB07A;border:0.5px solid rgba(90,176,122,0.18);}
+.trd{background:rgba(120,30,30,0.28);color:#C05050;border:0.5px solid rgba(192,80,80,0.2);}
+.tnk{background:rgba(229,57,42,0.12);color:var(--rouge-nike);border:0.5px solid rgba(229,57,42,0.3);}
+
+.divl{width:100%;height:1px;background:rgba(201,168,76,0.12);margin:18px 0;}
+.ilabel{font-family:'Space Mono',monospace;font-size:9px;color:var(--or);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:5px;}
+.ival{font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(245,240,232,0.7);line-height:1.65;font-weight:300;}
+
+.sb{display:grid;}
+.sbc{background:var(--gris);border:0.5px solid rgba(201,168,76,0.1);border-radius:3px;overflow:hidden;}
+.sbf{aspect-ratio:1/1;background:#120A06;position:relative;display:flex;align-items:center;justify-content:center;}
+.sbi{padding:5px 8px;}
+.sbn{font-family:'Space Mono',monospace;font-size:7.5px;color:var(--or);letter-spacing:0.08em;}
+.sbt{font-family:'Cormorant Garamond',serif;font-size:9.5px;color:rgba(245,240,232,0.7);margin-top:1px;line-height:1.3;}
+.sbtc{font-family:'Space Mono',monospace;font-size:6.5px;color:var(--gris-light);margin-top:1px;}
+
+/* CHATBOX */
+.chat-wrap{display:flex;flex-direction:column;gap:10px;width:100%;max-width:640px;}
+.chat-msg{display:flex;gap:10px;align-items:flex-start;}
+.chat-msg.user{flex-direction:row-reverse;}
+.chat-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;}
+.av-user{background:var(--or);color:#0A0A0A;}
+.av-ai{background:#1A2A3A;color:#6A9AD4;border:1px solid rgba(106,154,212,0.2);}
+.chat-bubble{border-radius:12px;padding:10px 14px;max-width:88%;font-family:'Space Mono',monospace;font-size:9.5px;line-height:1.75;}
+.bubble-user{background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.25);color:var(--or-pale);border-radius:12px 12px 3px 12px;}
+.bubble-ai{background:#111A22;border:0.5px solid rgba(106,154,212,0.18);color:rgba(200,220,240,0.82);border-radius:12px 12px 12px 3px;}
+.bubble-ai .hi{color:var(--or);}
+.bubble-ai .hi2{color:#6A9AD4;}
+
+/* COVER */
+.cover{width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;padding:64px 72px;}
+.cover-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.93) 0%,rgba(10,10,10,0.68) 45%,rgba(10,10,10,0.28) 100%);}
+.cover-content{position:relative;z-index:2;}
+.cov-ey{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.32em;color:var(--or);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.cov-ey::before{content:'';display:block;width:36px;height:1px;background:var(--or);}
+.cover h1{font-family:'Bebas Neue',sans-serif;font-size:84px;line-height:0.9;letter-spacing:0.03em;color:var(--ivoire);margin-bottom:22px;}
+.cover h1 em{color:var(--or);font-style:normal;}
+.cover h1 .accent{color:var(--rouge-nike);}
+.cover-sub{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(245,240,232,0.58);font-weight:300;max-width:480px;line-height:1.65;margin-bottom:30px;}
+.cover-stats{display:flex;gap:36px;}
+.cs-item{border-left:2px solid rgba(201,168,76,0.35);padding-left:14px;}
+.cs-num{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--or);line-height:1;}
+.cs-lab{font-family:'Space Mono',monospace;font-size:7.5px;color:var(--gris-light);letter-spacing:0.1em;margin-top:2px;}
+
+/* GEN GRID */
+.gg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;width:100%;}
+.gc{padding:9px 11px;background:var(--gris);border:0.5px solid rgba(255,255,255,0.05);border-radius:3px;font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:0.06em;line-height:1.5;}
+.gok{border-color:rgba(90,176,122,0.18);color:#5AB07A;}
+.gbl{border-color:rgba(192,80,80,0.22);color:#C05050;}
+
+/* SPEC TABLE */
+.spec-tbl{width:100%;border-collapse:collapse;}
+.spec-tbl td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:14px;}
+.spec-tbl td:first-child{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.14em;color:var(--or);text-transform:uppercase;width:160px;}
+.spec-tbl td:last-child{font-family:'Cormorant Garamond',serif;color:rgba(245,240,232,0.7);font-weight:300;}
+
+/* SB STORYBOARD */
+.sb6{grid-template-columns:repeat(3,1fr);gap:5px;width:100%;}
+
+/* CTA SLIDE */
+.cta-slide{width:100%;height:100%;background:var(--noir);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.cta-content{position:relative;z-index:2;text-align:center;}
+.cta-eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:0.3em;color:var(--or);text-transform:uppercase;margin-bottom:24px;}
+.cta-brand{font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:0.12em;color:var(--ivoire);line-height:1;}
+.cta-tagline{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(245,240,232,0.5);margin:12px 0 48px;}
+.cta-links{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;}
+.cta-link{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none;color:inherit;cursor:pointer;transition:all 0.25s;padding:24px 28px;border:0.5px solid rgba(201,168,76,0.15);border-radius:8px;background:rgba(201,168,76,0.03);min-width:130px;}
+.cta-link:hover{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.08);transform:translateY(-4px);}
+.cta-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:12px;}
+.cta-handle{font-family:'Space Mono',monospace;font-size:9px;color:var(--or);letter-spacing:0.06em;}
+.cta-platform{font-family:'Space Mono',monospace;font-size:7.5px;color:var(--gris-light);letter-spacing:0.1em;margin-top:2px;}
+.cta-divider{width:60px;height:1px;background:rgba(201,168,76,0.2);margin:32px auto;}
+
+/* SLIDE BODY */
+.slide-body{padding-top:52px;height:100vh;width:100%;}
+.scr{overflow-y:auto;max-height:calc(100vh - 70px);padding-right:6px;}
+.scr::-webkit-scrollbar{width:2px;}
+.scr::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.15);border-radius:1px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.slide.active .sidebar h2,.slide.active .sidebar p,.slide.active .cover-content > *,.slide.active .cta-content > *{animation:fadeUp 0.55s ease forwards;}
+.slide.active .sidebar h2{animation-delay:0.12s;opacity:0;}
+.slide.active .sidebar p{animation-delay:0.22s;opacity:0;}
+.slide.active .cta-content > *:nth-child(1){animation-delay:0.1s;opacity:0;}
+.slide.active .cta-content > *:nth-child(2){animation-delay:0.2s;opacity:0;}
+.slide.active .cta-content > *:nth-child(3){animation-delay:0.28s;opacity:0;}
+.slide.active .cta-content > *:nth-child(4){animation-delay:0.36s;opacity:0;}
+.slide.active .cta-content > *:nth-child(5){animation-delay:0.44s;opacity:0;}
+
+</style>
+</head>
+<body>
+
+<div class="hbar">
+  <div class="hbar-left">
+    <svg viewBox="0 0 40 40" fill="none" style="width:28px;height:28px;">
+      <polygon points="12,6 16,2 18,8 20,3 22,8 24,2 28,6 26,14 20,12 14,14" fill="#C9A84C"/>
+      <circle cx="16" cy="16" r="2.5" fill="#C9A84C"/>
+      <circle cx="24" cy="16" r="2.5" fill="#C9A84C"/>
+      <path d="M12,20 Q20,32 28,20" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+      <rect x="14" y="22" width="4" height="10" rx="1" fill="#C9A84C" opacity="0.7"/>
+      <rect x="22" y="22" width="4" height="10" rx="1" fill="#C9A84C" opacity="0.7"/>
+    </svg>
+    <div class="hbar-brand">Okapi World Média</div>
+  </div>
+  <div class="hbar-title">NIKE DUNK LOW "SYRACUSE" · PROCESS DE PRODUCTION · 2026</div>
+  <div class="hbar-conf">CONFIDENTIEL</div>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- ====== S0 COVER ====== -->
+<div class="slide active" id="s0">
+  <div class="slide-body" style="width:100%;position:relative;">
+    <div class="cover" style="background:radial-gradient(ellipse at 30% 70%, rgba(229,57,42,0.18) 0%, transparent 55%),radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),var(--noir);">
+      <div class="cover-ov" style="background:linear-gradient(135deg,rgba(10,10,10,0.88) 0%,rgba(10,10,10,0.55) 50%,rgba(10,10,10,0.3) 100%);"></div>
+      <div class="cover-content">
+        <div class="cov-ey">Okapi Studios · Exercice créatif</div>
+        <h1>NIKE<br>DUNK LOW<br><span class="accent">"SYRACUSE"</span></h1>
+        <p class="cover-sub">Du prompt à l'image — 8 secondes, 9 générations.<br>Process complet de production d'un film pub IA.</p>
+        <div class="cover-stats">
+          <div class="cs-item">
+            <div class="cs-num">8s</div>
+            <div class="cs-lab">Durée finale</div>
+          </div>
+          <div class="cs-item">
+            <div class="cs-num">9</div>
+            <div class="cs-lab">Générations</div>
+          </div>
+          <div class="cs-item">
+            <div class="cs-num">1:1</div>
+            <div class="cs-lab">Format carré</div>
+          </div>
+          <div class="cs-item">
+            <div class="cs-num">0</div>
+            <div class="cs-lab">Post-production</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S1 BRIEF ====== -->
+<div class="slide" id="s1">
+  <div class="slide-body l2" style="width:100%;">
+    <div class="sidebar">
+      <div class="eyebrow">Étape 01 · Brief</div>
+      <h2>L'<span>Objectif</span></h2>
+      <p>Produire un film pub de 8 secondes pour la Nike Dunk Low "Syracuse" — blanc/orange. Format carré 1:1, capsule sociale, 100% généré par IA sans aucun montage externe.</p>
+      <div class="tags">
+        <span class="tag tnk">Nike Dunk Low</span>
+        <span class="tag tor">1:1 · 720p</span>
+        <span class="tag tbl">8 secondes</span>
+      </div>
+      <div class="divl"></div>
+      <div class="ilabel">Ambition</div>
+      <div class="ival">Pub IA intégrale — sans montage externe. Le film sort directement de l'outil de génération.</div>
+      <div class="bignr">01</div>
+    </div>
+    <div class="main" style="align-items:center;justify-content:center;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;max-width:520px;">
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(229,57,42,0.15);padding:28px 32px;">
+          <div class="ilabel">Produit</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ivoire);font-weight:300;line-height:1.3;">Nike Dunk Low<br><strong style="font-weight:600;color:#fff;">"Syracuse"</strong><br><span style="font-size:14px;color:var(--gris-light);">Blanc / Orange</span></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:28px 32px;">
+          <div class="ilabel">Format final</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ivoire);font-weight:300;line-height:1.3;"><strong style="font-weight:600;color:#fff;">8 secondes</strong><br>1:1 · 720p<br><span style="font-size:14px;color:var(--gris-light);">Capsule sociale</span></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:28px 32px;">
+          <div class="ilabel">Univers visuel</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ivoire);font-weight:300;line-height:1.3;">Fond <strong style="font-weight:600;color:var(--rouge-nike);">rouge vif</strong><br>Surface blanche<br><span style="font-size:14px;color:var(--gris-light);">Éditorial streetwear</span></div>
+        </div>
+        <div style="background:rgba(229,57,42,0.06);border:1px solid rgba(229,57,42,0.15);padding:28px 32px;">
+          <div class="ilabel">Outil</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ivoire);font-weight:300;line-height:1.3;"><strong style="font-weight:600;color:#fff;">Seedance 2.0</strong><br>Seedream 4.5<br><span style="font-size:14px;color:var(--gris-light);">Higgsfield Soul 2.0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S2 PROMPT PHOTO ====== -->
+<div class="slide" id="s2">
+  <div class="slide-body l2" style="width:100%;">
+    <div class="sidebar">
+      <div class="eyebrow">Étape 02 · Direction créative</div>
+      <h2>Prompt<br><span>Photo</span></h2>
+      <p>Tout commence par 3 images source. Un prompt Seedream 4.5 via Higgsfield Soul 2.0 — angle ras de sol, fond rouge, high-key lighting, esthétique éditorial streetwear.</p>
+      <div class="tags">
+        <span class="tag tor">Worm's eye · 3/4</span>
+        <span class="tag tnk">Rouge #E5392A</span>
+        <span class="tag tbl">High-key · Surface blanche</span>
+      </div>
+      <div class="divl"></div>
+      <div class="ilabel">Keyframes</div>
+      <div class="ival">3 images source générées — toutes retenues comme input vidéo pour Seedance 2.0.</div>
+      <div class="bignr">02</div>
+    </div>
+    <div class="main-dark" style="justify-content:center;gap:20px;padding-top:68px;">
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--or);letter-spacing:0.18em;margin-bottom:4px;">PROMPT · SEEDREAM 4.5 · HIGGSFIELD SOUL 2.0</div>
+      <div style="background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);border-left:3px solid var(--or);padding:24px 28px;font-family:'Space Mono',monospace;font-size:10px;color:rgba(245,240,232,0.75);line-height:2.2;letter-spacing:0.02em;max-width:560px;">
+        A <span style="color:var(--or);">close-up 3/4 product shot</span> of white and orange Nike sneakers resting on a <span style="color:var(--or);">clean white surface</span>, camera positioned at <span style="color:var(--or);">ground level</span> (worm's eye / floor-level angle), <span style="color:var(--rouge-nike);">bold solid red background</span>, high-key studio lighting with soft diffused light and sharp crisp shadows, <span style="color:var(--or);">fashion lifestyle aesthetic</span>, editorial streetwear mood, ultra-sharp details on the shoe texture and sole, minimal composition, commercial photography style, <span style="color:var(--or);">4K, photorealistic</span>
+      </div>
+      <div class="tags" style="max-width:560px;">
+        <span class="tag tor">Seedream 4.5</span>
+        <span class="tag tgr">3 keyframes · toutes retenues</span>
+        <span class="tag tbl">Higgsfield Soul 2.0</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S3 STORYBOARD ====== -->
+<div class="slide" id="s3">
+  <div class="slide-body" style="width:100%;display:flex;flex-direction:column;padding:60px 44px 76px;gap:0;">
+    <div style="margin-bottom:16px;">
+      <div class="eyebrow">Étape 03 · Storyboard</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--ivoire);letter-spacing:0.04em;line-height:1;">Découpage <span style="color:var(--or);">8 secondes</span></h2>
+    </div>
+    <div class="sb sb6" style="flex:1;">
+      <!-- Shot 1 -->
+      <div class="sbc">
+        <div class="sbf">
+          <svg viewBox="0 0 300 300" fill="none" style="width:100%;height:100%;position:absolute;inset:0;">
+            <rect width="300" height="300" fill="#120A06"/>
+            <rect x="0" y="240" width="300" height="60" fill="#F5F0E8" opacity="0.08"/>
+            <ellipse cx="150" cy="200" rx="90" ry="28" fill="#E5392A" opacity="0.25"/>
+            <path d="M60,200 L80,150 L120,140 L180,140 L220,150 L240,200 Z" fill="none" stroke="#F5F0E8" stroke-width="1.2" opacity="0.6"/>
+            <path d="M80,150 Q100,120 150,118 Q200,120 220,150" fill="none" stroke="#E5392A" stroke-width="1.5" opacity="0.8"/>
+            <path d="M40,200 Q150,80 260,200" fill="none" stroke="#C9A84C" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>
+            <polygon points="256,195 265,205 255,208" fill="#C9A84C" opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="sbi">
+          <div class="sbn">SHOT 01</div>
+          <div class="sbt">Basket gauche · Plan au sol · Orbital 90°</div>
+          <div class="sbtc">00:00 — 02:30</div>
+        </div>
+      </div>
+      <!-- Flash 1 -->
+      <div class="sbc">
+        <div class="sbf" style="background:#0D0A08;">
+          <div style="position:absolute;inset:0;background:rgba(229,57,42,0.12);border:2px solid rgba(229,57,42,0.4);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.2em;color:var(--rouge-nike);">FLASH</div>
+        </div>
+        <div class="sbi">
+          <div class="sbn">TRANSITION</div>
+          <div class="sbt">Flash photo natif — généré dans l'outil</div>
+          <div class="sbtc">02:30 — 02:50</div>
+        </div>
+      </div>
+      <!-- Shot 2 -->
+      <div class="sbc">
+        <div class="sbf">
+          <svg viewBox="0 0 300 300" fill="none" style="width:100%;height:100%;position:absolute;inset:0;">
+            <rect width="300" height="300" fill="#120A06"/>
+            <rect x="0" y="240" width="300" height="60" fill="#F5F0E8" opacity="0.08"/>
+            <ellipse cx="150" cy="150" rx="75" ry="40" fill="none" stroke="#F5F0E8" stroke-width="1.2" opacity="0.6"/>
+            <ellipse cx="150" cy="150" rx="30" ry="15" fill="#E5392A" opacity="0.2"/>
+            <line x1="150" y1="40" x2="150" y2="100" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.7"/>
+            <polygon points="145,40 155,40 150,25" fill="#C9A84C" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="sbi">
+          <div class="sbn">SHOT 02</div>
+          <div class="sbt">Basket droite · Plan zénithal descendant</div>
+          <div class="sbtc">02:50 — 05:00</div>
+        </div>
+      </div>
+      <!-- Flash 2 -->
+      <div class="sbc">
+        <div class="sbf" style="background:#0D0A08;">
+          <div style="position:absolute;inset:0;background:rgba(229,57,42,0.12);border:2px solid rgba(229,57,42,0.4);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:0.2em;color:var(--rouge-nike);">FLASH</div>
+        </div>
+        <div class="sbi">
+          <div class="sbn">TRANSITION</div>
+          <div class="sbt">Flash photo natif — in-generation</div>
+          <div class="sbtc">05:00 — 05:20</div>
+        </div>
+      </div>
+      <!-- Shot 3 -->
+      <div class="sbc">
+        <div class="sbf">
+          <svg viewBox="0 0 300 300" fill="none" style="width:100%;height:100%;position:absolute;inset:0;">
+            <rect width="300" height="300" fill="#120A06"/>
+            <rect x="0" y="240" width="300" height="60" fill="#F5F0E8" opacity="0.08"/>
+            <path d="M40,180 L70,140 L110,130 L140,180 Z" fill="none" stroke="#F5F0E8" stroke-width="1.2" opacity="0.5"/>
+            <path d="M160,180 L190,140 L230,130 L260,180 Z" fill="none" stroke="#F5F0E8" stroke-width="1.2" opacity="0.5"/>
+            <path d="M70,140 Q105,115 140,130" fill="none" stroke="#E5392A" stroke-width="1.5" opacity="0.8"/>
+            <path d="M190,140 Q225,115 260,130" fill="none" stroke="#E5392A" stroke-width="1.5" opacity="0.8"/>
+            <line x1="150" y1="80" x2="200" y2="80" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+            <polygon points="200,76 210,80 200,84" fill="#C9A84C" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="sbi">
+          <div class="sbn">SHOT 03</div>
+          <div class="sbt">La paire complète · Travelling latéral · Still final</div>
+          <div class="sbtc">05:20 — 08:00</div>
+        </div>
+      </div>
+      <!-- Format -->
+      <div class="sbc" style="border-color:rgba(201,168,76,0.22);background:rgba(201,168,76,0.04);">
+        <div class="sbf" style="background:#0A0A0A;">
+          <svg viewBox="0 0 300 300" fill="none" style="width:100%;height:100%;position:absolute;inset:0;">
+            <rect width="300" height="300" fill="#0A0A0A"/>
+            <rect x="75" y="75" width="150" height="150" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+            <line x1="150" y1="75" x2="150" y2="225" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="3 4" opacity="0.3"/>
+            <line x1="75" y1="150" x2="225" y2="150" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="3 4" opacity="0.3"/>
+            <text x="150" y="155" text-anchor="middle" font-family="monospace" font-size="18" fill="#C9A84C" opacity="0.9">1:1</text>
+            <text x="150" y="210" text-anchor="middle" font-family="monospace" font-size="11" fill="#C9A84C" opacity="0.5">720p</text>
+          </svg>
+        </div>
+        <div class="sbi">
+          <div class="sbn">FORMAT</div>
+          <div class="sbt">Carré natif 720p — pas de recadrage</div>
+          <div class="sbtc">Social-first</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S4 PROMPT VIDÉO ====== -->
+<div class="slide" id="s4">
+  <div class="slide-body l2" style="width:100%;">
+    <div class="sidebar">
+      <div class="eyebrow">Étape 04 · Prompt vidéo</div>
+      <h2>Prompt<br><span>Multishot</span></h2>
+      <p>Séquence 3 shots avec transitions flash intégrées. Mouvements caméra : orbital → top shot → travelling. Tout dans un seul prompt Seedance 2.0.</p>
+      <div class="tags">
+        <span class="tag tnk">Multishot · Flash natif</span>
+        <span class="tag tor">Seedance 2.0</span>
+      </div>
+      <div class="divl"></div>
+      <div class="ilabel">Stratégie</div>
+      <div class="ival">La contrainte de 8s et du flash natif a guidé toutes les décisions du prompt. Les 3 keyframes sont injectées comme images de référence.</div>
+      <div class="bignr">04</div>
+    </div>
+    <div class="main-dark" style="justify-content:center;gap:20px;padding-top:68px;">
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--or);letter-spacing:0.18em;margin-bottom:4px;">PROMPT MULTISHOT · SEEDANCE 2.0</div>
+      <div class="chat-wrap">
+        <div class="chat-msg user">
+          <div class="chat-avatar av-user">Y</div>
+          <div class="chat-bubble bubble-user">
+            3 keyframes (basket G, basket D, la paire) + prompt multishot :<br><br>
+            SHOT 1 — Orb around product · 2.5s<br>
+            FLASH transition · 0.2s<br>
+            SHOT 2 — Top shot descente · 2.1s<br>
+            FLASH transition · 0.2s<br>
+            SHOT 3 — Travelling latéral + hold · 2.7s<br><br>
+            Format 1:1 · 720p · 8s total
+          </div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-avatar av-ai">AI</div>
+          <div class="chat-bubble bubble-ai">
+            Generating video from <span class="hi">3 reference images</span>...<br>
+            Camera: <span class="hi2">orbital → zenith → lateral tracking</span><br>
+            Transitions: <span class="hi">flash photo natif</span><br>
+            Duration: <span class="hi">8.0s</span> · Ratio: <span class="hi">1:1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S5 GÉNÉRATIONS ====== -->
+<div class="slide" id="s5">
+  <div class="slide-body" style="width:100%;display:grid;grid-template-columns:290px 1fr;height:100vh;">
+    <div class="sidebar">
+      <div class="eyebrow">Étape 05 · Génération IA</div>
+      <h2>9<br><span>Générations</span></h2>
+      <p>9 vidéos générées. Itérations sur la fluidité des transitions, la lecture du produit, la qualité du flash. 8 rejetées pour incohérence visuelle ou timing défaillant.</p>
+      <div class="tags"><span class="tag tgr">1 retenue</span><span class="tag trd">8 rejetées</span></div>
+      <div class="bignr">05</div>
+    </div>
+    <div class="main-dark" style="justify-content:flex-start;padding-top:68px;gap:16px;">
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--or);letter-spacing:0.18em;margin-bottom:4px;">GRILLE DE GÉNÉRATION · SEEDANCE 2.0</div>
+      <div class="gg">
+        <div class="gc gbl">GEN 01 · Flash timing incorrect — transitions décalées</div>
+        <div class="gc gbl">GEN 02 · Lecture produit faible — angle trop haut</div>
+        <div class="gc gbl">GEN 03 · Orbital saccadé — manque fluidité caméra</div>
+        <div class="gc gbl">GEN 04 · Couleur orange dénaturée sur fond rouge</div>
+        <div class="gc gbl">GEN 05 · Top shot trop rapide — perte de lisibilité</div>
+        <div class="gc gbl">GEN 06 · Artefact sur transition flash 2</div>
+        <div class="gc gok" style="border-width:1.5px;">GEN 07 · RETENUE — Fluidité, timing, lecture produit optimaux</div>
+        <div class="gc gbl">GEN 08 · Travelling final trop court — still absent</div>
+        <div class="gc gbl">GEN 09 · Deformation shoe droite sur top shot</div>
+      </div>
+      <div style="display:flex;gap:36px;margin-top:18px;">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--or);line-height:1;">9</div>
+          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--gris-light);letter-spacing:0.1em;">Générations</div>
+        </div>
+        <div style="width:1px;height:56px;background:rgba(255,255,255,0.08);"></div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--rouge-nike);line-height:1;">8</div>
+          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--gris-light);letter-spacing:0.1em;">Rejetées</div>
+        </div>
+        <div style="width:1px;height:56px;background:rgba(255,255,255,0.08);"></div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:#5AB07A;line-height:1;">1</div>
+          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--gris-light);letter-spacing:0.1em;">Retenue</div>
+        </div>
+        <div style="width:1px;height:56px;background:rgba(255,255,255,0.08);"></div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--gris-light);line-height:1;margin-top:8px;">11%</div>
+          <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--gris-light);letter-spacing:0.1em;">Taux sélection</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S6 SÉLECTION ====== -->
+<div class="slide" id="s6">
+  <div class="slide-body l2" style="width:100%;">
+    <div class="sidebar">
+      <div class="eyebrow">Étape 06 · Sélection</div>
+      <h2>Génération<br><span>n°7</span></h2>
+      <p>Seule la génération 07 réunit tous les critères : lecture produit nette, flash timing précis, fluidité caméra sur les 3 shots, still final stable.</p>
+      <div class="tags"><span class="tag tgr">Gen 07 · Finale</span><span class="tag tor">Critères visuels validés</span></div>
+      <div style="margin-top:16px;padding:12px 16px;border-left:2px solid var(--or);background:rgba(201,168,76,0.04);border-radius:0 3px 3px 0;">
+        <p style="font-size:13px;font-style:italic;color:rgba(245,240,232,0.62);line-height:1.65;">Le film sort directement de l'outil — aucun montage, aucune retouche. La sélection est le seul geste éditorial.</p>
+      </div>
+      <div class="bignr">06</div>
+    </div>
+    <div class="main" style="align-items:center;justify-content:center;gap:20px;flex-direction:column;">
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--or);letter-spacing:0.18em;">FILM FINAL · GEN 07 · 8 SECONDES</div>
+      <div style="width:320px;height:320px;background:var(--gris2);border:1px solid rgba(201,168,76,0.15);border-radius:4px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+        <div style="width:100%;height:100%;background:radial-gradient(ellipse at 30% 70%, rgba(229,57,42,0.25) 0%, transparent 60%),radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.12) 0%, transparent 55%),#0D0A08;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+          <svg width="120" height="70" viewBox="0 0 140 80" fill="none" opacity="0.5">
+            <path d="M10,65 L25,30 L55,22 L85,22 L115,30 L130,65 Z" fill="none" stroke="#F5F0E8" stroke-width="1.5"/>
+            <path d="M25,30 Q70,5 115,30" fill="none" stroke="#E5392A" stroke-width="2"/>
+          </svg>
+          <div style="width:44px;height:44px;border:1.5px solid rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 24 24" width="16" height="16"><polygon points="5 3 19 12 5 21 5 3" fill="#C9A84C"/></svg>
+          </div>
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.2em;color:var(--or);">00:08</div>
+        </div>
+        <div style="position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-size:8px;color:var(--ivoire);background:rgba(0,0,0,0.6);border:0.5px solid rgba(255,255,255,0.1);padding:3px 8px;">1:1 · 720p</div>
+        <div style="position:absolute;bottom:10px;left:10px;font-family:'Space Mono',monospace;font-size:8px;color:var(--or);background:rgba(0,0,0,0.6);border:0.5px solid rgba(201,168,76,0.25);padding:3px 8px;">GEN 07 · RETENUE</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S7 SPECS ====== -->
+<div class="slide" id="s7">
+  <div class="slide-body l2" style="width:100%;">
+    <div class="sidebar">
+      <div class="eyebrow">Étape 07 · Spécifications</div>
+      <h2>Specs<br><span>Techniques</span></h2>
+      <p>Pas de montage CapCut. Pas de post-production. La génération fait tout. Export natif 1:1 720p directement depuis Seedance 2.0.</p>
+      <div class="tags"><span class="tag tor">Zéro post-prod</span><span class="tag tnk">Natif Seedance</span></div>
+      <div class="bignr">07</div>
+    </div>
+    <div class="main" style="flex-direction:column;align-items:flex-start;justify-content:center;gap:16px;">
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--or);letter-spacing:0.18em;margin-bottom:4px;">SPÉCIFICATIONS · FILM FINAL</div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:0;width:100%;max-width:480px;">
+        <table class="spec-tbl">
+          <tr><td>Outil</td><td>Seedance 2.0</td></tr>
+          <tr><td>Résolution</td><td>720p natif</td></tr>
+          <tr><td>Format</td><td>1:1 (carré)</td></tr>
+          <tr><td>Durée</td><td>8 secondes</td></tr>
+          <tr><td>Transitions</td><td>Flash · in-generation</td></tr>
+          <tr><td>Montage externe</td><td style="color:var(--rouge-nike);">Aucun</td></tr>
+          <tr><td>Keyframes source</td><td>3 photos produit (Seedream 4.5)</td></tr>
+          <tr><td>Prompt type</td><td>Multishot séquentiel</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S8 WORKFLOW ====== -->
+<div class="slide" id="s8">
+  <div class="slide-body l2" style="width:100%;">
+    <div class="sidebar">
+      <div class="eyebrow">Étape 08 · Workflow</div>
+      <h2>Production<br><span>Pipeline</span></h2>
+      <p>5 étapes. De la DA au film final — sans montage externe. Le pipeline est linéaire : chaque étape alimente directement la suivante.</p>
+      <div class="bignr">08</div>
+    </div>
+    <div class="main" style="flex-direction:column;align-items:flex-start;justify-content:center;gap:0;padding-top:68px;">
+      <div style="font-family:'Space Mono',monospace;font-size:8px;color:var(--or);letter-spacing:0.18em;margin-bottom:18px;">WORKFLOW DE PRODUCTION · 5 ÉTAPES</div>
+      <div style="display:flex;flex-direction:column;gap:0;width:100%;max-width:520px;">
+        <!-- Step 1 -->
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:18px;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:36px;height:36px;border:1px solid rgba(201,168,76,0.28);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--or);flex-shrink:0;">1</div>
+            <div style="width:1px;flex:1;background:rgba(201,168,76,0.18);margin:4px 0;"></div>
+          </div>
+          <div style="padding-bottom:22px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ivoire);margin-bottom:3px;padding-top:6px;">Direction artistique & Prompt Photo</div>
+            <div style="font-size:13px;color:rgba(245,240,232,0.6);line-height:1.6;">Fond rouge, angle ras de sol, high-key. Prompt Seedream 4.5 via Higgsfield Soul 2.0.</div>
+            <span class="tag tnk" style="margin-top:6px;display:inline-block;">Seedream 4.5 · Soul 2.0</span>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:18px;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:36px;height:36px;border:1px solid rgba(201,168,76,0.28);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--or);flex-shrink:0;">2</div>
+            <div style="width:1px;flex:1;background:rgba(201,168,76,0.18);margin:4px 0;"></div>
+          </div>
+          <div style="padding-bottom:22px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ivoire);margin-bottom:3px;padding-top:6px;">Génération des 3 keyframes</div>
+            <div style="font-size:13px;color:rgba(245,240,232,0.6);line-height:1.6;">Basket G · Basket D · La paire. 3 images source, toutes retenues comme input vidéo.</div>
+            <span class="tag tgr" style="margin-top:6px;display:inline-block;">3 photos · validées</span>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:18px;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:36px;height:36px;border:1px solid rgba(201,168,76,0.28);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--or);flex-shrink:0;">3</div>
+            <div style="width:1px;flex:1;background:rgba(201,168,76,0.18);margin:4px 0;"></div>
+          </div>
+          <div style="padding-bottom:22px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ivoire);margin-bottom:3px;padding-top:6px;">Prompt multishot Seedance 2.0</div>
+            <div style="font-size:13px;color:rgba(245,240,232,0.6);line-height:1.6;">Séquence 3 shots + transitions flash intégrées. Mouvements caméra : orb → top shot → travelling.</div>
+            <span class="tag tnk" style="margin-top:6px;display:inline-block;">Multishot · Flash natif</span>
+          </div>
+        </div>
+        <!-- Step 4 -->
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:18px;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:36px;height:36px;border:1px solid rgba(201,168,76,0.28);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--or);flex-shrink:0;">4</div>
+            <div style="width:1px;flex:1;background:rgba(201,168,76,0.18);margin:4px 0;"></div>
+          </div>
+          <div style="padding-bottom:22px;">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ivoire);margin-bottom:3px;padding-top:6px;">9 cycles de génération</div>
+            <div style="font-size:13px;color:rgba(245,240,232,0.6);line-height:1.6;">Itérations sur fluidité, lecture produit, qualité du flash. 8 rejetées pour incohérence visuelle ou timing.</div>
+            <span class="tag trd" style="margin-top:6px;display:inline-block;">9 gen · 8 rejetées</span>
+          </div>
+        </div>
+        <!-- Step 5 -->
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:18px;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:36px;height:36px;border:1px solid rgba(201,168,76,0.28);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--or);flex-shrink:0;">5</div>
+          </div>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--ivoire);margin-bottom:3px;padding-top:6px;">Sélection & export final</div>
+            <div style="font-size:13px;color:rgba(245,240,232,0.6);line-height:1.6;">Gen n°7 retenue. Export natif 1:1 720p. Aucun montage externe. Le film sort directement de l'outil.</div>
+            <span class="tag tgr" style="margin-top:6px;display:inline-block;">Gen 07 · Finale</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== S9 CTA ====== -->
+<div class="slide" id="s9">
+  <div class="slide-body" style="width:100%;height:100vh;position:relative;">
+    <div class="cta-slide">
+      <div class="cta-content">
+        <div class="cta-eyebrow">Okapi World Média · Okapi Studios</div>
+        <div class="cta-brand">CRÉONS<br>ENSEMBLE</div>
+        <div class="cta-tagline">Films de marque · Direction créative · Production IA</div>
+        <div style="margin-top:12px;margin-bottom:4px;"><span style="font-family:'Space Mono',monospace;font-size:8px;color:rgba(201,168,76,0.35);letter-spacing:0.08em;">Exercice créatif personnel — aucune affiliation avec Nike, Inc.</span></div>
+        <div class="cta-divider"></div>
+        <div class="cta-links">
+          <!-- Instagram -->
+          <a class="cta-link" href="https://instagram.com/yamakasi_ak" target="_blank">
+            <div class="cta-icon" style="background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="1.8"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.3" fill="white"/></svg>
+            </div>
+            <div class="cta-handle">@yamakasi_ak</div>
+            <div class="cta-platform">Instagram</div>
+          </a>
+          <!-- TikTok -->
+          <a class="cta-link" href="https://tiktok.com/@okapistudios" target="_blank">
+            <div class="cta-icon" style="background:#010101;border:1px solid rgba(255,255,255,0.1);">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.13a8.16 8.16 0 004.77 1.52V7.21a4.85 4.85 0 01-1-.52z"/></svg>
+            </div>
+            <div class="cta-handle">@okapistudios</div>
+            <div class="cta-platform">TikTok</div>
+          </a>
+          <!-- Gmail -->
+          <a class="cta-link" href="mailto:yamakasi@okapiworldmedia.com">
+            <div class="cta-icon" style="background:#EA4335;">
+              <svg viewBox="0 0 24 24" width="24" height="24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" fill="white"/></svg>
+            </div>
+            <div class="cta-handle" style="font-size:8px;">yamakasi@okapi<br>worldmedia.com</div>
+            <div class="cta-platform">Gmail</div>
+          </a>
+          <!-- Site web -->
+          <a class="cta-link" href="https://okapiworldmedia.com" target="_blank">
+            <div class="cta-icon" style="background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#C9A84C" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <div class="cta-handle">okapiworldmedia<br>.com</div>
+            <div class="cta-platform">Site web</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nbtn" onclick="go(-1)">&#8592;</button>
+  <div class="dots" id="dots"></div>
+  <button class="nbtn" onclick="go(1)">&#8594;</button>
+</div>
+<div class="counter" id="counter">1 / 10</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('dots');
+const ctr = document.getElementById('counter');
+let cur = 0;
+const labels = ['Intro','01','02','03','04','05','06','07','08','CTA'];
+slides.forEach((_,i) => {
+  const d = document.createElement('div');
+  d.className = 'dot'+(i===0?' active':'');
+  d.title = labels[i]||'';
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+function goTo(n) {
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('prev');
+  setTimeout(() => slides[cur].classList.remove('prev'), 650);
+  dotsEl.children[cur].classList.remove('active');
+  cur = (n + slides.length) % slides.length;
+  slides[cur].classList.add('active');
+  dotsEl.children[cur].classList.add('active');
+  ctr.textContent = (cur+1)+' / '+slides.length;
+}
+function go(d) { goTo(cur+d); }
+document.addEventListener('keydown', e => {
+  if(e.key==='ArrowRight'||e.key===' ') go(1);
+  if(e.key==='ArrowLeft') go(-1);
+});
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);});
+</script>
+</body>
+</html>
