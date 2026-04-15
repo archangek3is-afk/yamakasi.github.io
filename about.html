@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À propos — Okapi World Média</title>
+<meta name="description" content="Okapi World Média. Une maison de récits stratégiques fondée par Archange Kiyindou — Yamakasi. Le cinéma n'a jamais été réservé aux grandes marques.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noir: #0A0A0A;
+    --noir-soft: #141414;
+    --or: #C9A84C;
+    --or-dim: #8A7332;
+    --ivoire: #F5F0E8;
+    --ivoire-dim: rgba(245, 240, 232, 0.55);
+    --ivoire-faint: rgba(245, 240, 232, 0.18);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --display: 'Bebas Neue', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--noir);
+    color: var(--ivoire);
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.94 0 0 0 0 0.91 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+  }
+
+  /* — NAV — */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 28px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+  }
+  .nav-brand {
+    font-family: var(--display);
+    font-size: 18px;
+    letter-spacing: 0.25em;
+    color: var(--ivoire);
+    text-decoration: none;
+  }
+  .nav-brand span { color: var(--or); }
+  .nav-links {
+    display: flex;
+    gap: 42px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .nav-links a {
+    color: var(--ivoire-dim);
+    text-decoration: none;
+    transition: color 0.4s ease;
+  }
+  .nav-links a:hover { color: var(--or); }
+
+  /* — HERO — */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 56px;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 56px;
+    left: 56px;
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--or));
+    animation: drop 2.4s ease-in-out infinite;
+  }
+  @keyframes drop {
+    0%, 100% { transform: scaleY(0.3); transform-origin: top; opacity: 0.3; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--or);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 124px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    max-width: 1200px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--or);
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ivoire-dim);
+    max-width: 580px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.8s forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* — ACT MARKER — */
+  .act {
+    padding: 160px 56px;
+    position: relative;
+    border-top: 1px solid var(--ivoire-faint);
+  }
+  .act-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .act-meta {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+  .act-number {
+    font-family: var(--display);
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: var(--or);
+    margin-bottom: 12px;
+  }
+  .act-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ivoire);
+    line-height: 1.3;
+  }
+  .act-name::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--or);
+    margin-bottom: 18px;
+  }
+  .act-content h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 56px;
+    max-width: 720px;
+  }
+  .act-content h2 em {
+    font-style: italic;
+    color: var(--or);
+  }
+  .act-content p {
+    font-size: 21px;
+    line-height: 1.75;
+    color: var(--ivoire);
+    margin-bottom: 28px;
+    max-width: 660px;
+  }
+  .act-content p.lead::first-letter {
+    font-family: var(--serif);
+    font-size: 78px;
+    float: left;
+    line-height: 0.85;
+    padding: 8px 12px 0 0;
+    color: var(--or);
+    font-weight: 400;
+  }
+
+  .pull {
+    margin: 64px 0;
+    padding: 0 0 0 32px;
+    border-left: 2px solid var(--or);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1.4;
+    color: var(--ivoire);
+    max-width: 620px;
+  }
+
+  /* — MANIFESTE — */
+  .manifeste {
+    padding: 200px 56px;
+    text-align: center;
+    background: var(--noir-soft);
+    border-top: 1px solid var(--ivoire-faint);
+    border-bottom: 1px solid var(--ivoire-faint);
+    position: relative;
+  }
+  .manifeste::before, .manifeste::after {
+    content: '✦';
+    position: absolute;
+    color: var(--or);
+    font-size: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .manifeste::before { top: 60px; }
+  .manifeste::after { bottom: 60px; }
+  .manifeste-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--or);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  .manifeste-quote {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1.25;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .manifeste-quote span { color: var(--or); }
+  .manifeste-attr {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ivoire-dim);
+    text-transform: uppercase;
+    margin-top: 56px;
+  }
+
+  /* — LES 4 AXES — */
+  .axes {
+    padding: 160px 56px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .axes-header {
+    margin-bottom: 96px;
+    max-width: 720px;
+  }
+  .axes-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--or);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .axes-header h3 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.1;
+  }
+  .axes-header h3 em { font-style: italic; color: var(--or); }
+  .axes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+  }
+  .axe {
+    border-top: 1px solid var(--or);
+    padding-top: 28px;
+  }
+  .axe-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--or);
+    margin-bottom: 16px;
+  }
+  .axe-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 32px;
+    color: var(--ivoire);
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+  .axe-desc {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ivoire-dim);
+  }
+
+  /* — CTA — */
+  .cta {
+    padding: 200px 56px;
+    text-align: center;
+    border-top: 1px solid var(--ivoire-faint);
+  }
+  .cta h4 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1.05;
+    max-width: 1000px;
+    margin: 0 auto 56px;
+  }
+  .cta h4 em { font-style: italic; color: var(--or); }
+  .cta-button {
+    display: inline-block;
+    padding: 22px 56px;
+    border: 1px solid var(--or);
+    color: var(--or);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--or);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: -1;
+  }
+  .cta-button:hover { color: var(--noir); }
+  .cta-button:hover::before { transform: translateY(0); }
+  .cta-secondary {
+    display: block;
+    margin-top: 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ivoire-dim);
+    letter-spacing: 0.15em;
+  }
+  .cta-secondary a { color: var(--or); text-decoration: none; }
+
+  /* — FOOTER — */
+  footer {
+    padding: 48px 56px;
+    border-top: 1px solid var(--ivoire-faint);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ivoire-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  footer span { color: var(--or); }
+
+  /* — REVEAL ON SCROLL — */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* — RESPONSIVE — */
+  @media (max-width: 880px) {
+    nav { padding: 20px 24px; }
+    .nav-links { gap: 20px; }
+    .hero, .act, .manifeste, .axes, .cta { padding-left: 24px; padding-right: 24px; }
+    .act { padding-top: 100px; padding-bottom: 100px; }
+    .act-grid { grid-template-columns: 1fr; gap: 32px; }
+    .act-meta { position: relative; top: 0; }
+    .axes-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .pull { font-size: 24px; padding-left: 20px; }
+    .act-content p { font-size: 19px; }
+    footer { flex-direction: column; gap: 16px; }
+  }
+  @media (max-width: 540px) {
+    .axes-grid { grid-template-columns: 1fr; }
+    .nav-links a:not(:first-child):not(:last-child) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">OKAPI<span>·</span>WORLD<span>·</span>MÉDIA</a>
+  <div class="nav-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#manifeste">Manifeste</a>
+    <a href="about.html">À propos</a>
+    <a href="index.html#portfolio">Portfolio</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">À propos · Archange Kiyindou — Yamakasi</div>
+  <h1 class="hero-title">Je ne crée pas du contenu.<br>Je construis des <em>mémoires visuelles</em>.</h1>
+  <p class="hero-sub">Cinéaste, directeur créatif, artiste IA. Fondateur d'Okapi World Média — une maison de récits stratégiques née entre Brazzaville et Paris.</p>
+</section>
+
+<!-- ACTE I — ORIGINE -->
+<section class="act">
+  <div class="act-grid">
+    <div class="act-meta reveal">
+      <div class="act-number">ACTE I</div>
+      <div class="act-name">L'origine</div>
+    </div>
+    <div class="act-content reveal">
+      <h2>J'ai grandi entouré de <em>rêves confisqués</em>.</h2>
+      <p class="lead">Au Congo, j'ai vu trop de gens talentueux — des dessinateurs, des musiciens, des écrivains, des comédiens — ranger leur vocation dans un tiroir parce que l'écosystème n'existait pas. Faute de moyens, faute de relais, ils prenaient des emplois "pour survivre" et leur regard s'éteignait lentement.</p>
+      <p>Cette résignation m'a révolté. Pas en théorie — viscéralement. Je ne voulais pas finir comme ça. Et surtout, je ne voulais pas que les autres finissent comme ça.</p>
+      <div class="pull">Il fallait construire un pont. Pour celles et ceux qui ont des histoires plein la tête et qui n'attendent qu'un coup de pouce pour les enfanter.</div>
+      <p>Ce pont, j'ai mis des années à comprendre qu'il s'appellerait Okapi World Média.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTE II — LE MUR -->
+<section class="act">
+  <div class="act-grid">
+    <div class="act-meta reveal">
+      <div class="act-number">ACTE II</div>
+      <div class="act-name">Le mur</div>
+    </div>
+    <div class="act-content reveal">
+      <h2>Cape Town, 2016. Amsterdam, 2025. Deux <em>portes fermées</em>.</h2>
+      <p class="lead">J'ai fait le tour. Cape Town Animation Film Festival. Cinekid Amsterdam. J'ai serré des mains, présenté mes projets à des producteurs, à des distributeurs. Tous polis. Aucun engagé. J'ai voulu plusieurs fois aller à Annecy. Toujours rien.</p>
+      <p>Pendant longtemps, j'ai cru que c'était à moi de m'adapter, de plier mes histoires au format qu'ils attendaient. Jusqu'au jour où j'ai compris que le problème n'était pas mes histoires. C'était le système d'autorisation.</p>
+      <div class="pull">Je ne veux plus attendre qu'on me tende la main. Je vais raconter les histoires que je veux raconter, avec les outils de mon temps, à une audience qui en a faim.</div>
+      <p>L'IA générative. Le smartphone filmmaking. Les workflows hybrides. Les nouvelles technologies ne sont pas une concession au manque de budget — elles sont une libération. Elles déplacent le pouvoir : du gatekeeper vers le regard.</p>
+      <p>Le mur n'est pas tombé. Je l'ai contourné.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACTE III — LA MISSION -->
+<section class="act">
+  <div class="act-grid">
+    <div class="act-meta reveal">
+      <div class="act-number">ACTE III</div>
+      <div class="act-name">La mission</div>
+    </div>
+    <div class="act-content reveal">
+      <h2>Pourquoi <em>Okapi</em>.</h2>
+      <p class="lead">Un dimanche matin, avant d'aller à l'église, je tombe sur un documentaire animalier. Un okapi traverse l'écran. Cette créature m'arrête net. Hybride entre la girafe et le zèbre, endémique au Congo, longtemps considérée comme un mythe par les explorateurs européens. On ne l'attend pas. Elle ne ressemble à rien d'autre. Et pourtant elle existe.</p>
+      <p>J'ai su immédiatement que c'était l'image exacte de ce que je voulais bâtir.</p>
+      <p>Une maison hybride : direction artistique humaine et intelligence artificielle. Prises de vues réelles et génération. Cinéma et stratégie de marque. Une maison dont les racines plongent au Congo, comme l'okapi, et dont l'ambition est mondiale.</p>
+      <div class="pull">Le cinéma n'a jamais été réservé aux grandes marques. Il a juste été mal distribué.</div>
+      <p>Okapi World Média existe pour rendre le regard cinématographique accessible aux marques ambitieuses, aux porteurs de projets culturels, à toutes celles et ceux qui ont quelque chose à dire et qui méritent qu'on le dise avec exigence. Pas avec un budget hollywoodien. Avec un regard.</p>
+      <p>C'est ce regard que je vends. C'est ce regard qui transforme un témoignage en mémoire visuelle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTE QUOTE -->
+<section class="manifeste">
+  <div class="manifeste-label">Signature</div>
+  <p class="manifeste-quote">Je transforme vos histoires<br>en images <span>qu'on n'oublie pas</span>.</p>
+  <div class="manifeste-attr">Yamakasi · Okapi World Média</div>
+</section>
+
+<!-- LES 4 AXES -->
+<section class="axes">
+  <div class="axes-header reveal">
+    <div class="axes-label">Méthode</div>
+    <h3>Quatre axes. <em>Une seule</em> obsession : que l'image reste.</h3>
+  </div>
+  <div class="axes-grid">
+    <div class="axe reveal">
+      <div class="axe-num">01</div>
+      <div class="axe-name">Cadre</div>
+      <div class="axe-desc">La composition qui crée l'intention. Avant le mot, le plan parle.</div>
+    </div>
+    <div class="axe reveal">
+      <div class="axe-num">02</div>
+      <div class="axe-name">Émotion</div>
+      <div class="axe-desc">Ce que le spectateur ressent avant de comprendre. La logique vient ensuite.</div>
+    </div>
+    <div class="axe reveal">
+      <div class="axe-num">03</div>
+      <div class="axe-name">Symbole</div>
+      <div class="axe-desc">L'image qui reste une semaine après. Celle qu'on revoit en fermant les yeux.</div>
+    </div>
+    <div class="axe reveal">
+      <div class="axe-num">04</div>
+      <div class="axe-name">Message</div>
+      <div class="axe-desc">Ce que la marque veut que le monde retienne. Non négociable.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h4>Tu as une histoire.<br>Construisons-en une <em>mémoire</em>.</h4>
+  <a href="mailto:yamakasi@okapiworldmedia.com" class="cta-button">Démarrer une conversation</a>
+  <div class="cta-secondary">
+    Ou écris directement à <a href="mailto:yamakasi@okapiworldmedia.com">yamakasi@okapiworldmedia.com</a>
+  </div>
+</section>
+
+<footer>
+  <div>OKAPI WORLD MÉDIA · <span>EI</span> · SIRET 918 020 975 00028</div>
+  <div>20 RUE TEDDY RINER · 92600 ASNIÈRES-SUR-SEINE</div>
+  <div>© 2026 · TOUS DROITS <span>RÉSERVÉS</span></div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
