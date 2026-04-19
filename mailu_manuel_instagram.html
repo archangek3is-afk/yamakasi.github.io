@@ -1033,7 +1033,7 @@ body::before{
     position:fixed;
     left:-320px;
     transition:left .3s ease;
-    z-index:50;
+    z-index:51;
     box-shadow:6px 0 30px rgba(0,0,0,.3);
   }
   .sidebar.ouvert{left:0}
@@ -2218,13 +2218,30 @@ function quizRetry(quizId){
 }
 
 navItems.forEach(item => {
-  item.addEventListener('click', () => {
-    if (window.innerWidth <= 1024){
+  item.addEventListener('click', (e) => {
+    const href = item.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      e.preventDefault();
+      // Fermer la sidebar
       document.getElementById('sidebar').classList.remove('ouvert');
       document.getElementById('overlay').classList.remove('visible');
+      // Attendre la fin de l'animation sidebar (300ms) puis scroller
+      const target = document.querySelector(href);
+      if (target) {
+        setTimeout(() => {
+          const offset = target.offsetTop - 70;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }, window.innerWidth <= 1024 ? 320 : 0);
+      }
+      // Highlighting immédiat
+      navItems.forEach(n => n.classList.remove('active'));
+      item.classList.add('active');
     }
   });
 });
+
+// Highlighting au chargement initial
+window.dispatchEvent(new Event('scroll'));
 </script>
 
 </body>
