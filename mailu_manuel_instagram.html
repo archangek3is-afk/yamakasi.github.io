@@ -120,6 +120,9 @@ body::before{
   transition:all .3s ease;
   cursor:pointer;
   position:relative;
+  pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:rgba(212,175,55,.2);
 }
 .nav-item:hover{
   background:rgba(212,175,55,.1);
@@ -1021,9 +1024,10 @@ body::before{
 .sidebar-overlay{
   display:none;
   position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:49;
+  top:0;bottom:0;
+  left:320px;right:0;
+  background:rgba(0,0,0,.55);
+  z-index:199;
 }
 .sidebar-overlay.visible{display:block}
 
@@ -1033,7 +1037,7 @@ body::before{
     position:fixed;
     left:-320px;
     transition:left .3s ease;
-    z-index:51;
+    z-index:200;
     box-shadow:6px 0 30px rgba(0,0,0,.3);
   }
   .sidebar.ouvert{left:0}
@@ -2136,23 +2140,32 @@ body::before{
 function toggleSidebar(){
   const sb = document.getElementById('sidebar');
   const ov = document.getElementById('overlay');
-  sb.classList.toggle('ouvert');
-  ov.classList.toggle('visible');
+  if(sb.classList.contains('ouvert')){
+    sb.classList.remove('ouvert');
+    ov.classList.remove('visible');
+  } else {
+    sb.classList.add('ouvert');
+    ov.classList.add('visible');
+    updateHighlight();
+  }
+}
+
+function updateHighlight(){
+  let current = '';
+  document.querySelectorAll('.section, .hero').forEach(s => {
+    if(window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.remove('active');
+    if(n.getAttribute('href') === '#' + current) n.classList.add('active');
+  });
 }
 
 const sections = document.querySelectorAll('.section, .hero');
 const navItems = document.querySelectorAll('.nav-item');
 
 window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 120;
-    if (window.scrollY >= sectionTop) current = section.id;
-  });
-  navItems.forEach(item => {
-    item.classList.remove('active');
-    if (item.getAttribute('href') === '#' + current) item.classList.add('active');
-  });
+  updateHighlight();
   const scrolled = (window.scrollY / (document.body.offsetHeight - window.innerHeight)) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
   const backTop = document.getElementById('backTop');
@@ -2222,26 +2235,26 @@ navItems.forEach(item => {
     const href = item.getAttribute('href');
     if (href && href.startsWith('#')) {
       e.preventDefault();
-      // Fermer la sidebar
-      document.getElementById('sidebar').classList.remove('ouvert');
-      document.getElementById('overlay').classList.remove('visible');
-      // Attendre la fin de l'animation sidebar (300ms) puis scroller
-      const target = document.querySelector(href);
-      if (target) {
-        setTimeout(() => {
-          const offset = target.offsetTop - 70;
-          window.scrollTo({ top: offset, behavior: 'smooth' });
-        }, window.innerWidth <= 1024 ? 320 : 0);
-      }
+      e.stopPropagation();
       // Highlighting immédiat
       navItems.forEach(n => n.classList.remove('active'));
       item.classList.add('active');
+      // Fermer la sidebar
+      document.getElementById('sidebar').classList.remove('ouvert');
+      document.getElementById('overlay').classList.remove('visible');
+      // Scroller (délai sur mobile pour laisser la sidebar se fermer)
+      const target = document.querySelector(href);
+      if (target) {
+        setTimeout(() => {
+          const top = target.getBoundingClientRect().top + window.scrollY - 75;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }, window.innerWidth <= 1024 ? 350 : 0);
+      }
     }
   });
 });
 
-// Highlighting au chargement initial
-window.dispatchEvent(new Event('scroll'));
+updateHighlight();
 </script>
 
 </body>
