@@ -690,7 +690,7 @@ nav.scrolled {
 }
 
 .hero-content {
-  padding: 180px 80px 80px 80px;
+  padding: 120px 80px 80px 80px;
   max-width: 720px;
   position: relative;
   z-index: 3;
@@ -731,34 +731,21 @@ nav.scrolled {
   pointer-events: none;
 }
 
-.hero-logo {
-  position: absolute;
-  top: 40px;
-  left: 60px;
-  width: 140px;
-  height: auto;
-  z-index: 10;
-}
-
-.hero-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--owm-or);
-  margin-bottom: 30px;
+/* === HERO CREST — remplace le 2e logo redondant === */
+.hero-crest {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  margin-bottom: 40px;
 }
 
-.hero-label::before {
-  content: "";
-  width: 30px;
-  height: 1px;
-  background: var(--owm-or);
-  display: inline-block;
+.hero-crest-symbol {
+  width: 56px;
+  height: 56px;
+  opacity: 0.9;
+  object-fit: contain;
 }
+
 
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
@@ -856,10 +843,9 @@ nav.scrolled {
   .hero-content {
     padding: 60px 30px;
   }
-  .hero-logo {
-    top: 20px;
-    left: 30px;
-    width: 110px;
+  .hero-crest-symbol {
+    width: 44px;
+    height: 44px;
   }
 }
 
