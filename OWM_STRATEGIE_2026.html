@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWM — Document stratégique interne 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noir:#0A0A0A;
+    --noir-doux:#141414;
+    --or:#C9A84C;
+    --or-clair:#D4B65C;
+    --ivoire:#F5F0E8;
+    --ivoire-sombre:#E8E0D0;
+    --gris:#8A8275;
+    --rouge:#8B1E1E;
+    --vert:#2D5F3F;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ivoire);
+    color:var(--noir);
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    line-height:1.6;
+    font-size:17px;
+  }
+  .page{
+    min-height:100vh;
+    padding:80px 0;
+    position:relative;
+    border-bottom:1px solid rgba(10,10,10,0.08);
+  }
+  .page:last-child{border-bottom:none}
+  .container{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 60px;
+  }
+  /* ===== COUVERTURE ===== */
+  .cover{
+    background:var(--noir);
+    color:var(--ivoire);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:80px 60px;
+    position:relative;
+    overflow:hidden;
+  }
+  .cover::before{
+    content:"";
+    position:absolute;
+    top:-20%;
+    right:-10%;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .cover-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--or);
+  }
+  .cover-header .dot{
+    display:inline-block;
+    width:8px;
+    height:8px;
+    background:var(--or);
+    border-radius:50%;
+    margin-right:10px;
+    vertical-align:middle;
+  }
+  .cover-center{
+    max-width:900px;
+  }
+  .cover-label{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--or);
+    margin-bottom:40px;
+  }
+  .cover-title{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(80px, 12vw, 180px);
+    line-height:0.85;
+    letter-spacing:-0.02em;
+    margin-bottom:30px;
+  }
+  .cover-title span{
+    color:var(--or);
+    font-style:italic;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+  }
+  .cover-subtitle{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:28px;
+    max-width:650px;
+    line-height:1.3;
+    color:var(--ivoire-sombre);
+    margin-top:40px;
+  }
+  .cover-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--gris);
+  }
+  .cover-meta{
+    display:flex;
+    gap:60px;
+  }
+  .cover-meta div strong{
+    display:block;
+    color:var(--ivoire);
+    margin-bottom:6px;
+    font-size:10px;
+  }
+  /* ===== SOMMAIRE ===== */
+  .toc{
+    background:var(--ivoire);
+    color:var(--noir);
+  }
+  .page-num{
+    position:absolute;
+    top:40px;
+    right:60px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    color:var(--gris);
+  }
+  .chapter-label{
+    position:absolute;
+    top:40px;
+    left:60px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    color:var(--or);
+    text-transform:uppercase;
+  }
+  .chapter-label::before{
+    content:"● ";
+    color:var(--or);
+  }
+  h1.section-title{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(54px, 8vw, 96px);
+    line-height:0.95;
+    letter-spacing:-0.01em;
+    margin:60px 0 40px;
+    max-width:900px;
+  }
+  h1.section-title em{
+    color:var(--or);
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+  }
+  h2.subtitle{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:26px;
+    color:var(--gris);
+    margin-bottom:50px;
+    max-width:700px;
+    line-height:1.4;
+  }
+  h3{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:32px;
+    letter-spacing:0.02em;
+    margin:50px 0 20px;
+    color:var(--noir);
+  }
+  h3 .num{
+    color:var(--or);
+    margin-right:15px;
+    font-family:'Space Mono', monospace;
+    font-size:20px;
+  }
+  h4{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:22px;
+    margin:30px 0 15px;
+  }
+  p{
+    margin-bottom:18px;
+    max-width:760px;
+  }
+  .lead{
+    font-size:22px;
+    font-weight:300;
+    line-height:1.5;
+    color:var(--noir-doux);
+    max-width:800px;
+    margin-bottom:40px;
+  }
+  .lead em{
+    color:var(--or);
+    font-style:italic;
+  }
+  strong{
+    font-weight:700;
+  }
+  .mono{
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.05em;
+  }
+  /* ===== TOC LIST ===== */
+  .toc-list{
+    list-style:none;
+    margin-top:60px;
+  }
+  .toc-list li{
+    display:flex;
+    align-items:baseline;
+    padding:24px 0;
+    border-bottom:1px solid rgba(10,10,10,0.1);
+    font-family:'Cormorant Garamond', serif;
+    transition:all 0.3s;
+  }
+  .toc-list li:hover{
+    padding-left:20px;
+    background:rgba(201,168,76,0.05);
+  }
+  .toc-num{
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    color:var(--or);
+    width:70px;
+    letter-spacing:0.1em;
+  }
+  .toc-title{
+    font-size:26px;
+    font-weight:500;
+    flex:1;
+  }
+  .toc-page{
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    color:var(--gris);
+  }
+  /* ===== CALLOUTS ===== */
+  .callout{
+    background:var(--noir);
+    color:var(--ivoire);
+    padding:50px 60px;
+    margin:50px 0;
+    border-left:4px solid var(--or);
+    position:relative;
+  }
+  .callout-label{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.3em;
+    color:var(--or);
+    text-transform:uppercase;
+    margin-bottom:20px;
+  }
+  .callout-text{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:28px;
+    line-height:1.4;
+    max-width:800px;
+  }
+  .callout-text strong{
+    color:var(--or);
+    font-weight:500;
+  }
+  .quote-big{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:38px;
+    line-height:1.3;
+    color:var(--or);
+    max-width:800px;
+    margin:40px 0;
+    padding-left:30px;
+    border-left:3px solid var(--or);
+  }
+  /* ===== KPI / STATS ===== */
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:30px;
+    margin:40px 0;
+  }
+  .stat{
+    padding:30px;
+    background:var(--noir);
+    color:var(--ivoire);
+    border-top:3px solid var(--or);
+  }
+  .stat-num{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:62px;
+    line-height:1;
+    color:var(--or);
+    margin-bottom:10px;
+  }
+  .stat-label{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--ivoire-sombre);
+    line-height:1.5;
+  }
+  /* ===== TABLES ===== */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:30px 0;
+    font-family:'Cormorant Garamond', serif;
+    font-size:16px;
+  }
+  th{
+    background:var(--noir);
+    color:var(--or);
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    padding:16px 20px;
+    text-align:left;
+    font-weight:700;
+  }
+  td{
+    padding:16px 20px;
+    border-bottom:1px solid rgba(10,10,10,0.1);
+    vertical-align:top;
+  }
+  tr:hover td{
+    background:rgba(201,168,76,0.05);
+  }
+  td strong{
+    color:var(--noir);
+  }
+  .risk-high{color:var(--rouge); font-weight:700}
+  .risk-med{color:var(--or); font-weight:700}
+  .risk-low{color:var(--vert); font-weight:700}
+  /* ===== PROPOSITION / ENCADRÉ ===== */
+  .boxed{
+    border:1px solid var(--noir);
+    padding:40px;
+    margin:40px 0;
+    position:relative;
+    background:#FDFBF6;
+  }
+  .boxed::before{
+    content:"";
+    position:absolute;
+    top:-1px;
+    left:-1px;
+    width:40px;
+    height:40px;
+    border-top:3px solid var(--or);
+    border-left:3px solid var(--or);
+  }
+  .boxed::after{
+    content:"";
+    position:absolute;
+    bottom:-1px;
+    right:-1px;
+    width:40px;
+    height:40px;
+    border-bottom:3px solid var(--or);
+    border-right:3px solid var(--or);
+  }
+  .boxed h4{
+    margin-top:0;
+    color:var(--or);
+    font-family:'Bebas Neue',sans-serif;
+    font-size:24px;
+  }
+  /* ===== LISTES ===== */
+  ul.refined{
+    list-style:none;
+    margin:20px 0;
+  }
+  ul.refined li{
+    position:relative;
+    padding-left:35px;
+    margin-bottom:14px;
+    max-width:780px;
+  }
+  ul.refined li::before{
+    content:"—";
+    position:absolute;
+    left:0;
+    top:0;
+    color:var(--or);
+    font-weight:700;
+  }
+  ol.refined{
+    counter-reset:step;
+    list-style:none;
+    margin:20px 0;
+  }
+  ol.refined li{
+    counter-increment:step;
+    position:relative;
+    padding-left:55px;
+    margin-bottom:22px;
+    max-width:780px;
+    min-height:40px;
+  }
+  ol.refined li::before{
+    content:counter(step,decimal-leading-zero);
+    position:absolute;
+    left:0;
+    top:-4px;
+    color:var(--or);
+    font-family:'Bebas Neue',sans-serif;
+    font-size:28px;
+    font-weight:400;
+  }
+  /* ===== TIMELINE ===== */
+  .timeline{
+    position:relative;
+    padding-left:40px;
+    margin:40px 0;
+    border-left:2px solid var(--or);
+  }
+  .timeline-item{
+    position:relative;
+    padding-bottom:40px;
+  }
+  .timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-48px;
+    top:8px;
+    width:14px;
+    height:14px;
+    background:var(--or);
+    border-radius:50%;
+    border:3px solid var(--ivoire);
+  }
+  .timeline-phase{
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.2em;
+    color:var(--or);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .timeline-title{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:26px;
+    margin-bottom:12px;
+  }
+  /* ===== SECTION DARK ===== */
+  .page.dark{
+    background:var(--noir);
+    color:var(--ivoire);
+  }
+  .page.dark h1.section-title,
+  .page.dark h3,
+  .page.dark h4{
+    color:var(--ivoire);
+  }
+  .page.dark h1.section-title em,
+  .page.dark h3 .num{color:var(--or)}
+  .page.dark .lead{color:var(--ivoire-sombre)}
+  .page.dark strong{color:var(--or)}
+  .page.dark td{
+    border-bottom:1px solid rgba(245,240,232,0.1);
+    color:var(--ivoire);
+  }
+  .page.dark td strong{color:var(--ivoire)}
+  .page.dark .chapter-label,
+  .page.dark .page-num{color:var(--or)}
+  .page.dark .boxed{
+    background:rgba(245,240,232,0.03);
+    border-color:var(--or);
+  }
+  .page.dark .boxed h4{color:var(--or)}
+  /* ===== GRID 2 COL ===== */
+  .two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    margin:30px 0;
+  }
+  /* ===== FINAL ===== */
+  .final-page{
+    background:var(--noir);
+    color:var(--ivoire);
+    min-height:80vh;
+    display:flex;
+    align-items:center;
+    padding:80px 60px;
+    position:relative;
+    overflow:hidden;
+  }
+  .final-page::before{
+    content:"";
+    position:absolute;
+    bottom:-30%;
+    left:-10%;
+    width:800px;
+    height:800px;
+    background:radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+  }
+  .final-quote{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:300;
+    font-style:italic;
+    font-size:clamp(36px, 5vw, 62px);
+    line-height:1.2;
+    max-width:1000px;
+    position:relative;
+    z-index:2;
+  }
+  .final-quote em{
+    color:var(--or);
+  }
+  .signature{
+    margin-top:60px;
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.3em;
+    color:var(--or);
+    text-transform:uppercase;
+  }
+  /* ===== SEPARATOR ===== */
+  .sep{
+    width:60px;
+    height:2px;
+    background:var(--or);
+    margin:40px 0;
+  }
+  /* ===== NUMBERED HERO ===== */
+  .hero-number{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:200px;
+    line-height:1;
+    color:var(--or);
+    opacity:0.15;
+    position:absolute;
+    top:60px;
+    right:60px;
+    pointer-events:none;
+  }
+  /* ===== TAG ===== */
+  .tag{
+    display:inline-block;
+    font-family:'Space Mono',monospace;
+    font-size:10px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    padding:5px 12px;
+    background:var(--or);
+    color:var(--noir);
+    margin-right:8px;
+    margin-bottom:8px;
+  }
+  .tag.dark{background:var(--noir); color:var(--or); border:1px solid var(--or)}
+  /* PRINT */
+  @media print{
+    .page{page-break-after:always; min-height:auto}
+    .cover{page-break-after:always}
+    body{font-size:14px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ COUVERTURE ============ -->
+<section class="cover">
+  <div class="cover-header">
+    <div><span class="dot"></span>OKAPI WORLD MÉDIA — DOCUMENT INTERNE</div>
+    <div>CONFIDENTIEL · OKP-STRAT-2026-01</div>
+  </div>
+
+  <div class="cover-center">
+    <div class="cover-label">Audit stratégique &amp; feuille de route</div>
+    <h1 class="cover-title">LE<br><span>Regard</span><br>QUI DÉCIDE</h1>
+    <p class="cover-subtitle">
+      Verticalisation de niche, protocole d'acquisition automatisé,<br>
+      exécution opérationnelle sur 180 jours.
+    </p>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-meta">
+      <div><strong>PRÉPARÉ POUR</strong>Archange Kiyindou</div>
+      <div><strong>DATE</strong>Avril 2026</div>
+      <div><strong>VERSION</strong>V1.0 — Interne</div>
+    </div>
+    <div>PAGE 01</div>
+  </div>
+</section>
+
+<!-- ============ SOMMAIRE ============ -->
+<section class="page toc">
+  <span class="chapter-label">Sommaire</span>
+  <span class="page-num">02</span>
+  <div class="container">
+    <h1 class="section-title">CE QUE CE<br>DOCUMENT <em>ouvre</em>.</h1>
+    <p class="lead">
+      Un diagnostic brutal, une niche recadrée, une stratégie à 180 jours,
+      un protocole d'acquisition automatisé, et les changements précis à apporter
+      au site et au pipeline commercial. Pas de fluff. Du livrable.
+    </p>
+
+    <ul class="toc-list">
+      <li><span class="toc-num">01</span><span class="toc-title">Executive summary &amp; diagnostic</span><span class="toc-page">03</span></li>
+      <li><span class="toc-num">02</span><span class="toc-title">La vraie niche d'Okapi World Media</span><span class="toc-page">04</span></li>
+      <li><span class="toc-num">03</span><span class="toc-title">Étude de marché &amp; Porter's Five Forces</span><span class="toc-page">06</span></li>
+      <li><span class="toc-num">04</span><span class="toc-title">Pre-mortem : les 3 scénarios d'échec</span><span class="toc-page">08</span></li>
+      <li><span class="toc-num">05</span><span class="toc-title">Stratégie 180 jours — Step by step</span><span class="toc-page">09</span></li>
+      <li><span class="toc-num">06</span><span class="toc-title">Exécution site &amp; messaging</span><span class="toc-page">12</span></li>
+      <li><span class="toc-num">07</span><span class="toc-title">Protocole Clay + LinkedIn</span><span class="toc-page">14</span></li>
+      <li><span class="toc-num">08</span><span class="toc-title">KPIs &amp; gouvernance</span><span class="toc-page">16</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 01 EXECUTIVE SUMMARY ============ -->
+<section class="page">
+  <span class="chapter-label">01 · Executive summary</span>
+  <span class="page-num">03</span>
+  <div class="container">
+    <div class="hero-number">01</div>
+    <h1 class="section-title">Le <em>diagnostic</em><br>en 90 secondes.</h1>
+
+    <p class="lead">
+      Tu te présentes comme un studio créatif humain + IA.
+      <em>Sur le marché français 2026, c'est devenu une commodité.</em>
+      Ton différenciateur n'est pas l'IA. C'est toi.
+    </p>
+
+    <div class="sep"></div>
+
+    <h3><span class="num">→</span>Le problème</h3>
+    <p>
+      Eoprod se revendique « agence pionnière IA ». Masayume « combine IA et direction artistique ».
+      Omedia Paris, Infuse IA, Agence Sacré, Alt-Studio — tous tiennent le même discours.
+      Si on remplace « Okapi World Média » par n'importe lequel d'entre eux sur ta homepage,
+      personne ne verra la différence. <strong>C'est un océan rouge.</strong>
+    </p>
+
+    <h3><span class="num">→</span>La solution</h3>
+    <p>
+      Ta niche n'est pas « les PME ambitieuses ». En regardant tes livraisons réelles
+      (MAÏLU, Le Miroir de l'âme, BDC, UNIKIDSLAND, Pour la vie!, MILLE VISAGES),
+      un pattern émerge. <strong>Tu sers des Marques d'Auteur</strong> :
+      des structures à forte charge narrative, fondées par un auteur-entrepreneur,
+      à budget 2-15 k€, où l'identité culturelle ou la vision personnelle est le cœur du produit.
+    </p>
+
+    <div class="callout">
+      <div class="callout-label">Repositionnement</div>
+      <div class="callout-text">
+        « Le cinéma pour les <strong>ambitieux</strong>, pas pour les fortunés »
+        devient<br>
+        <strong>« Pour les maisons qui portent une vision. Le cinéma au service de votre histoire. »</strong>
+      </div>
+    </div>
+
+    <h3><span class="num">→</span>Les 3 segments à activer</h3>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num">A</div>
+        <div class="stat-label">Services premium identitaires<br>(diaspora, 40+)<br>SOM : 200-400 prospects</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">B</div>
+        <div class="stat-label">DNVB beauté, parfum, mode de niche<br>500k-5M€ CA<br>SOM : 800-1 500</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">C</div>
+        <div class="stat-label">Auteurs de projets culturels<br>(film, édition, scène)<br>SOM : 300-600</div>
+      </div>
+    </div>
+
+    <h3><span class="num">→</span>L'axe d'acquisition</h3>
+    <p>
+      Un workflow Clay unique, trigger-based, pas dix campagnes dispersées.
+      Déclencheur = événement observable (embauche Head of Brand, levée de fonds, silence IG > 14 jours,
+      lancement de produit, recrutement ouvert). <strong>80 prospects ultra-qualifiés par mois</strong>,
+      taux de réponse cible 8-15 %, objectif : 3 nouveaux clients signés ≥ 2 500 € HT mensuellement d'ici juillet.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 02 LA VRAIE NICHE ============ -->
+<section class="page dark">
+  <span class="chapter-label">02 · La niche réelle</span>
+  <span class="page-num">04</span>
+  <div class="container">
+    <div class="hero-number">02</div>
+    <h1 class="section-title">Ce que tu <em>livres</em>,<br>non ce que tu dis.</h1>
+    <h2 class="subtitle" style="color:var(--gris)">Les faits dessinent ta niche mieux que ton pitch.</h2>
+
+    <h3><span class="num">01</span>Les 4 marqueurs ADN communs à tous tes projets</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Marqueur</th>
+          <th>Description</th>
+          <th>Exemple OWM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Storytelling émotionnel fort</strong></td>
+          <td>Arc narratif, personnages, symboles — pas de promo plate</td>
+          <td>MAÏLU : SARA / ADAM / MALIK</td>
+        </tr>
+        <tr>
+          <td><strong>Ancrage identitaire ou culturel</strong></td>
+          <td>Diaspora, héritage, univers de niche</td>
+          <td>BDC, MAÏLU, MILLE VISAGES</td>
+        </tr>
+        <tr>
+          <td><strong>Porteur-auteur</strong></td>
+          <td>Un fondateur qui <em>est</em> la marque</td>
+          <td>Hortense, Ève, Gabin, Marie-Michelle</td>
+        </tr>
+        <tr>
+          <td><strong>Budget 2-15 k€</strong></td>
+          <td>Pas Hollywood, pas bricolage — artisanat premium accessible</td>
+          <td>Ticket moyen OWM ≈ 3 500 € HT</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quote-big">
+      « Ta niche : les marques à forte charge narrative, fondées par des auteurs-entrepreneurs,
+      où l'identité est le cœur du produit. »
+    </div>
+
+    <h3><span class="num">02</span>Les 3 sous-niches verticalisables</h3>
+
+    <div class="boxed">
+      <h4>A · Services premium identitaires (priorité 1)</h4>
+      <p>
+        Agences matrimoniales afro / maghrébines / asiatiques, cabinets de coaching pour femmes
+        diaspora, écoles de savoir-être, thérapeutes de couple haut de gamme, retraites spirituelles.
+      </p>
+      <p>
+        <span class="tag dark">SOM : 200-400</span>
+        <span class="tag dark">Panier : 3-8 k€ HT</span>
+        <span class="tag dark">Récurrence : trimestrielle</span>
+      </p>
+      <p>
+        <strong>Pourquoi toi :</strong> MAÏLU est ton cas d'école. Tu as quatre mois d'expertise vertical,
+        un livre de codes couleur/typographie/ton, une preuve visuelle publiable.
+        <em>Personne d'autre en France ne peut le revendiquer.</em>
+      </p>
+    </div>
+
+    <div class="boxed">
+      <h4>B · DNVB premium &amp; maisons indépendantes beauté/mode</h4>
+      <p>
+        Parfums de niche (Liquides, Nose, Ormaie), cosmétiques indés (Oden, Respire tier 2),
+        bijouterie d'auteur, prêt-à-porter confidentiel.
+      </p>
+      <p>
+        <span class="tag dark">SOM : 800-1 500</span>
+        <span class="tag dark">Panier : 5-20 k€</span>
+        <span class="tag dark">Campagnes : 2-4/an</span>
+      </p>
+      <p>
+        <strong>Positionnement :</strong> tu ne vends pas « moins cher ». Tu vends
+        « un film de parfum qui fait rêver pour 8 k€ au lieu de 80 k€ ».
+        <em>Direction artistique humaine, production augmentée IA.</em>
+      </p>
+    </div>
+
+    <div class="boxed">
+      <h4>C · Auteurs-créateurs de projets culturels</h4>
+      <p>
+        Premiers réalisateurs, producteurs indépendants, compagnies scène, labels indés,
+        éditeurs d'art, fondations culturelles.
+      </p>
+      <p>
+        <span class="tag dark">SOM : 300-600</span>
+        <span class="tag dark">Panier : 500-3 k€</span>
+        <span class="tag dark">Usage : réputation</span>
+      </p>
+      <p>
+        <strong>Logique :</strong> faible LTV, fort effet de portefeuille. Ton offre Pour la vie!
+        (650 € HT) est déjà calibrée pour ça. <em>Plafond 30 % de l'agenda.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 MARCHÉ & PORTER ============ -->
+<section class="page">
+  <span class="chapter-label">03 · Étude de marché</span>
+  <span class="page-num">06</span>
+  <div class="container">
+    <div class="hero-number">03</div>
+    <h1 class="section-title">Les <em>forces</em><br>qui te traversent.</h1>
+    <h2 class="subtitle">Macro marché, Porter's Five Forces, et lecture VC brute.</h2>
+
+    <h3><span class="num">01</span>Signaux macro à connaître</h3>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <div class="stat-num">946 M$</div>
+        <div class="stat-label">Marché mondial vidéo IA 2026<br>CAGR 20,3 % · cap 3,44 Mds$ en 2033</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">+9 %</div>
+        <div class="stat-label">Croissance digital France 2025<br>portée par la vidéo + retail média</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">70 %</div>
+        <div class="stat-label">PME françaises ayant franchi<br>le cap digital (reste 30 % à adresser)</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">38 %</div>
+        <div class="stat-label">Annonceurs priorisent l'acquisition<br>de nouveaux clients en 2026</div>
+      </div>
+    </div>
+
+    <p style="margin-top:30px">
+      <strong>Lecture brutale :</strong> le marché croît, mais il croît pour les gros.
+      Synthesia, HeyGen, Runway capturent la valeur sur les grands comptes.
+      Toi, tu joues sur un segment différent : <em>le sur-mesure auteur-driven</em>,
+      qui résiste à la commoditisation parce que la valeur est dans la signature, pas dans le rendu.
+    </p>
+
+    <h3><span class="num">02</span>Porter's Five Forces — Verdict</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Force</th>
+          <th>Intensité</th>
+          <th>Implication OWM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Nouveaux entrants</strong></td>
+          <td class="risk-high">TRÈS ÉLEVÉE</td>
+          <td>1 000 micro-studios se créent par an. Ton rempart = ton nom, ta voix, ta signature.</td>
+        </tr>
+        <tr>
+          <td><strong>Pouvoir des fournisseurs</strong><br>(Higgsfield, Runway, Sora, Veo)</td>
+          <td class="risk-med">MOYENNE</td>
+          <td>Dépendance API totale. Multi-sourcer systématiquement, ne jamais se lier.</td>
+        </tr>
+        <tr>
+          <td><strong>Pouvoir des clients</strong></td>
+          <td class="risk-med">MOYENNE</td>
+          <td>Élevé sur le bas du marché. Faible sur Marques d'Auteur. <em>Remonte.</em></td>
+        </tr>
+        <tr>
+          <td><strong>Substituts</strong><br>(prod interne, freelances, Canva, CapCut)</td>
+          <td class="risk-high">TRÈS ÉLEVÉE</td>
+          <td>Ne joue pas ce match. Refuse les briefs « contenu rapide pas cher ».</td>
+        </tr>
+        <tr>
+          <td><strong>Intensité concurrentielle</strong></td>
+          <td class="risk-high">TRÈS ÉLEVÉE mais fragmentée</td>
+          <td>Opportunité = verticaliser avant les autres.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <div class="callout-label">Verdict VC</div>
+      <div class="callout-text">
+        Marché à forces de Porter <strong>défavorables dans l'ensemble</strong>.
+        Seul gagnant possible : ceux qui se verticalisent avant les autres.
+        <em>C'est la raison exacte pour laquelle la Sous-niche A est prioritaire.</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 PRE-MORTEM ============ -->
+<section class="page dark">
+  <span class="chapter-label">04 · Pre-mortem</span>
+  <span class="page-num">08</span>
+  <div class="container">
+    <div class="hero-number">04</div>
+    <h1 class="section-title">Les 3 façons<br>dont cette niche<br>va <em>te tuer</em>.</h1>
+    <h2 class="subtitle" style="color:var(--gris)">Mieux vaut les identifier maintenant que les subir dans six mois.</h2>
+
+    <div class="boxed">
+      <h4>Risque 1 · Le piège de l'artisanat affectif</h4>
+      <p>
+        <strong>Symptôme :</strong> tu t'attaches à chaque projet comme s'il était le tien.
+        À 3 500 € de ticket moyen et 40 h de production réelle, tu factures ≈ 85 €/h.
+        Sous le TJM médian d'un freelance créatif senior.
+      </p>
+      <p>
+        <strong>Conséquence 12 mois :</strong> burn-out, ressentiment envers les clients,
+        incapacité à scaler parce que tout repose sur toi.
+      </p>
+      <p>
+        <strong>Mitigation :</strong> KPI dur = 40 % du CA sans intervention directe d'Archange à M+12.
+        Produits packagés (Portrait de Marque, Film 60 s, Capsule 15 s) avec SOPs formalisées.
+      </p>
+    </div>
+
+    <div class="boxed">
+      <h4>Risque 2 · La niche d'auteur est illisible pour les acheteurs</h4>
+      <p>
+        <strong>Symptôme :</strong> un CMO tape « agence vidéo Paris », pas « studio narratif pour marques d'auteur ».
+        Ton positionnement sophistiqué est ton meilleur atout créatif <em>et ton pire atout discovery</em>.
+      </p>
+      <p>
+        <strong>Mitigation :</strong> deux landing pages verticales spécialisées (pas ta homepage) :
+        <code class="mono">/maisons-premium-diaspora</code> et <code class="mono">/dnvb-parfum-beaute</code>.
+        SEO ultra-ciblé sur des requêtes longue traîne.
+      </p>
+    </div>
+
+    <div class="boxed">
+      <h4>Risque 3 · La concurrence verticale qui va te manger</h4>
+      <p>
+        <strong>Vrais concurrents :</strong> pas Masayume ou Alt-Studio — ils jouent un autre match.
+        Ce sont : les <em>freelances créatifs seniors</em> (TJM 600-900 €),
+        les <em>micro-studios de 2-3 personnes</em> (NOUS AUTRES, Superchouette),
+        les <em>CMOs internalisés</em> avec Sora/Runway/Veo qui suppriment le besoin.
+      </p>
+      <p>
+        <strong>Mitigation :</strong> ton arc personnel (Congo → Mur → IA → Mission) est incopiable.
+        Manifeste vidéo 90 s à livrer avant fin avril. <em>Non négociable.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 STRATÉGIE STEP BY STEP ============ -->
+<section class="page">
+  <span class="chapter-label">05 · Stratégie 180 jours</span>
+  <span class="page-num">09</span>
+  <div class="container">
+    <div class="hero-number">05</div>
+    <h1 class="section-title">Le plan,<br><em>pas</em> à pas.</h1>
+    <h2 class="subtitle">Six mois, quatre phases, un objectif : arriver en octobre 2026 avec un pipeline prédictible.</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 01 · Semaine 1-2 (21 avril — 04 mai)</div>
+        <div class="timeline-title">Cadrage identitaire &amp; preuves</div>
+        <ul class="refined">
+          <li>Valider le nouveau positionnement « Marques d'Auteur » en interne</li>
+          <li>Réécrire la homepage (promesse, sous-niches, CTA)</li>
+          <li>Enregistrer le manifeste vidéo 90 s (arc Congo → Mur → IA → Mission)</li>
+          <li>Créer les trois one-pagers de validation (Carrd, gratuits)</li>
+          <li>Finaliser les deux cas d'étude publiables : MAÏLU + MILLE VISAGES</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 02 · Semaine 3-4 (05 — 18 mai)</div>
+        <div class="timeline-title">Validation 7 jours zéro-coût</div>
+        <ul class="refined">
+          <li>30 recherches LinkedIn manuelles par sous-niche = 90 prospects qualifiés</li>
+          <li>30 messages ultra-personnalisés envoyés (10 par sous-niche)</li>
+          <li>Mesure taux de connexion, taux de visite des Carrd, taux de réponse</li>
+          <li>Décision de priorisation : la sous-niche gagnante devient l'axe outbound n°1</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 03 · Mois 2 (mai-juin)</div>
+        <div class="timeline-title">Setup stack outbound &amp; premières campagnes</div>
+        <ul class="refined">
+          <li>Abonnements : LinkedIn Sales Navigator + Clay Starter + La Growth Machine</li>
+          <li>Construction du workflow Clay (cf. chapitre 07)</li>
+          <li>Warming des adresses email secondaires (14 jours avant tout envoi)</li>
+          <li>Première campagne 80 prospects scorés ≥ 6 sur la sous-niche prioritaire</li>
+          <li>Publication LinkedIn de 3 posts / semaine (cas client + manifeste + insights)</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 04 · Mois 3-4 (juin-juillet)</div>
+        <div class="timeline-title">Scaling mesuré &amp; produits packagés</div>
+        <ul class="refined">
+          <li>Formaliser les 3 offres produits : Portrait de Marque IA, Film 60 s, Capsule 15 s</li>
+          <li>SOPs écrits pour chaque offre (brief, production, livraison)</li>
+          <li>Lancer la sous-niche secondaire en parallèle (B si A prioritaire)</li>
+          <li>Cible mid-term : 5 RDV bookés / mois, 2 signatures / mois</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Phase 05 · Mois 5-6 (août-octobre)</div>
+        <div class="timeline-title">Consolidation &amp; portefeuille récurrent</div>
+        <ul class="refined">
+          <li>Proposer un <em>retainer mensuel</em> (Direction Créative 3 mois) aux 3 meilleurs clients</li>
+          <li>Cas d'étude publiés pour chaque sous-niche (preuve sociale croisée)</li>
+          <li>Prise de parole : une intervention externe (podcast, table-ronde, newsletter invité)</li>
+          <li>Cible : 10 RDV / mois, 3 signatures / mois, CA mensuel ≥ 10 k€ HT</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 EXÉCUTION SITE ============ -->
+<section class="page dark">
+  <span class="chapter-label">06 · Exécution site &amp; messaging</span>
+  <span class="page-num">12</span>
+  <div class="container">
+    <div class="hero-number">06</div>
+    <h1 class="section-title">Ce qui <em>change</em><br>sur le site.</h1>
+    <h2 class="subtitle" style="color:var(--gris)">Inventaire précis, refonte par zone. Aucun chantier cosmétique.</h2>
+
+    <h3><span class="num">01</span>Zone HERO — Refonte complète</h3>
+
+    <div class="boxed">
+      <h4>Avant</h4>
+      <p style="font-style:italic; color:var(--gris)">
+        « Des visuels cinématographiques, sans le budget Hollywood. »<br>
+        Tagline : « Le cinéma pour les ambitieux, pas pour les fortunés. »
+      </p>
+      <h4 style="margin-top:30px">Après</h4>
+      <p>
+        <strong>H1 :</strong> <em>« Pour les maisons qui portent une vision. »</em><br>
+        <strong>H2 :</strong> <em>« Le cinéma au service de votre histoire. Production augmentée IA, direction artistique humaine. »</em><br>
+        <strong>CTA principal :</strong> <em>« Réserver un appel de 20 minutes »</em>
+      </p>
+    </div>
+
+    <h3><span class="num">02</span>Nouvelle section « Les maisons que nous servons »</h3>
+    <p>
+      Trois cartes verticales remplacent l'actuelle grille d'offres. Chacune renvoie vers
+      une landing spécialisée. Photo éditoriale + une phrase signature + CTA.
+    </p>
+    <ul class="refined">
+      <li><strong>Maisons premium &amp; services identitaires</strong> → /maisons-premium</li>
+      <li><strong>DNVB &amp; marques d'auteur beauté/mode</strong> → /marques-auteur</li>
+      <li><strong>Auteurs &amp; projets culturels</strong> → /auteurs-projets</li>
+    </ul>
+
+    <h3><span class="num">03</span>Page Manifeste (nouvelle)</h3>
+    <p>
+      Route <code class="mono">/manifeste</code>. Contient le film 90 s en hero,
+      l'arc narratif Congo → Mur → IA → Mission en 4 blocs visuels, et un CTA contact direct.
+      <strong>C'est la page que tu envoies en signature email.</strong>
+    </p>
+
+    <h3><span class="num">04</span>Section preuves retravaillée</h3>
+    <ul class="refined">
+      <li>Case MAÏLU (full-page dédiée, chiffres, extraits du film, process)</li>
+      <li>Case MILLE VISAGES (IP personnelle, preuve de vision d'auteur)</li>
+      <li>Case BDC (documentaire, preuve sur le segment culturel)</li>
+      <li>Témoignages clients vidéo 30 s (demander à Hortense, Ève, Gabin)</li>
+    </ul>
+
+    <h3><span class="num">05</span>Offres reformulées (verticalisation)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Offre</th>
+          <th>Prix entrée</th>
+          <th>Cible</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Le Premier Regard</strong><br>(Portrait de Marque IA)</td>
+          <td>500 €</td>
+          <td>Tests, marques jeunes, premier contact</td>
+        </tr>
+        <tr>
+          <td><strong>L'Histoire qu'on n'oublie pas</strong><br>(Film de Marque)</td>
+          <td>1 200 €</td>
+          <td>Maisons en lancement, storytelling pilier</td>
+        </tr>
+        <tr>
+          <td><strong>Le Regard sur 3 Mois</strong><br>(Direction Créative)</td>
+          <td>3 000 €</td>
+          <td>Retainer récurrent, clients actifs</td>
+        </tr>
+        <tr>
+          <td><strong>Consultation éditoriale</strong><br>(Script doctoring)</td>
+          <td>650 €</td>
+          <td>Auteurs, premiers films, projets culturels</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3><span class="num">06</span>Chantiers techniques pendants</h3>
+    <ul class="refined">
+      <li>Favicon Okapi finalisé dans le repo GitHub</li>
+      <li>Symbole Okapi rigide comme séparateur entre sections (SVG inline)</li>
+      <li>Logo OWM généré avec intégration du symbole Okapi (Nano Banana Pro)</li>
+      <li>Page About refondue avec l'arc complet (Congo → Mur → Mission)</li>
+      <li>Version email prospection adaptée du manifeste</li>
+      <li>Symbole animé Okapi (intro vidéo) — prod mai</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 07 CLAY + LINKEDIN ============ -->
+<section class="page">
+  <span class="chapter-label">07 · Protocole Clay + LinkedIn</span>
+  <span class="page-num">14</span>
+  <div class="container">
+    <div class="hero-number">07</div>
+    <h1 class="section-title">Le <em>moteur</em><br>d'acquisition.</h1>
+    <h2 class="subtitle">80 prospects ultra-qualifiés / mois. Taux de réponse cible 8-15 %. Stack ≤ 250 €/mois.</h2>
+
+    <h3><span class="num">01</span>Le stack — &lt; 250 € / mois</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Outil</th>
+          <th>Rôle</th>
+          <th>Coût</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>LinkedIn Sales Navigator</strong></td>
+          <td>Sourcing &amp; triggers (50+ filtres, alertes changement poste)</td>
+          <td>~80 $ / mois</td>
+        </tr>
+        <tr>
+          <td><strong>Clay Starter</strong></td>
+          <td>Enrichissement + AI research + orchestration</td>
+          <td>~134 € / mois</td>
+        </tr>
+        <tr>
+          <td><strong>La Growth Machine</strong></td>
+          <td>Séquence multicanal LinkedIn + email (francophone)</td>
+          <td>~60 € / mois</td>
+        </tr>
+        <tr>
+          <td><strong>Apollo (plan Free)</strong></td>
+          <td>Base de contacts complémentaire + email finder</td>
+          <td>0 €</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3><span class="num">02</span>Le workflow Clay — 7 étapes</h3>
+
+    <ol class="refined">
+      <li><strong>Sourcing Sales Navigator</strong> → import Clay (~300-500 leads / recherche)</li>
+      <li><strong>Enrichissement cascade</strong> (email waterfall Apollo → Hunter → Findymail, téléphone, site web, derniers posts LinkedIn/Insta)</li>
+      <li><strong>Scoring ICP</strong> par formule AI Clay (0-10 sur 5 critères)</li>
+      <li><strong>Triggers automatiques</strong> : changement de poste / levée / silence IG / lancement / recrutement</li>
+      <li><strong>Personnalisation hyper-contextuelle</strong> (Hook + Bridge + CTA générés par AI avec données scrapées)</li>
+      <li><strong>Séquence multicanal 14 jours</strong> : 6 touches LinkedIn + email</li>
+      <li><strong>KPI tracking</strong> sync Clay → Firestore dashboard</li>
+    </ol>
+
+    <div class="callout">
+      <div class="callout-label">Règle absolue</div>
+      <div class="callout-text">
+        Chaque email doit contenir <strong>une phrase</strong> qui ne pourrait être écrite
+        qu'à ce prospect précis. <em>Si tu pourrais la copier-coller à un autre, recommence.</em>
+      </div>
+    </div>
+
+    <h3><span class="num">03</span>Séquence multicanal type (14 jours · 6 touches)</h3>
+
+    <table>
+      <thead>
+        <tr><th>Jour</th><th>Canal</th><th>Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>J+0</td><td>LinkedIn</td><td>Visite profil + follow</td></tr>
+        <tr><td>J+2</td><td>LinkedIn</td><td>Connexion avec note personnalisée (sans pitch)</td></tr>
+        <tr><td>J+4</td><td>Email #1</td><td>Hook observation + micro-offre de valeur</td></tr>
+        <tr><td>J+7</td><td>LinkedIn</td><td>Commentaire qualitatif sur un post récent du prospect</td></tr>
+        <tr><td>J+10</td><td>Email #2</td><td>Relance avec un <em>nouveau</em> angle, jamais « did you see my email »</td></tr>
+        <tr><td>J+14</td><td>LinkedIn</td><td>Message direct court (2 lignes max)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 08 KPI & GOUVERNANCE ============ -->
+<section class="page dark">
+  <span class="chapter-label">08 · KPIs &amp; gouvernance</span>
+  <span class="page-num">16</span>
+  <div class="container">
+    <div class="hero-number">08</div>
+    <h1 class="section-title">Ce qui se <em>mesure</em><br>se pilote.</h1>
+    <h2 class="subtitle" style="color:var(--gris)">Si ces chiffres ne sont pas atteints, le problème n'est pas l'outbound : c'est le positionnement.</h2>
+
+    <h3><span class="num">01</span>Tableau de bord mensuel</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>KPI</th>
+          <th>M+3</th>
+          <th>M+6</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Leads qualifiés (score ≥ 6) / mois</td><td>60</td><td>100</td></tr>
+        <tr><td>Taux d'ouverture email</td><td>55 %+</td><td>65 %+</td></tr>
+        <tr><td>Taux de réponse positive</td><td>8 %</td><td>15 %</td></tr>
+        <tr><td>RDV bookés / mois</td><td>5</td><td>12</td></tr>
+        <tr><td>Conversion RDV → devis</td><td>40 %</td><td>50 %</td></tr>
+        <tr><td>Conversion devis → signé</td><td>25 %</td><td>35 %</td></tr>
+        <tr><td><strong>CA outbound mensuel</strong></td><td><strong>3 500 €</strong></td><td><strong>10 000 €</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3><span class="num">02</span>KPIs stratégiques hors outbound</h3>
+    <ul class="refined">
+      <li>% du CA réalisé sans intervention directe d'Archange (cible : 40 % à M+12)</li>
+      <li>Leads inbound organiques / mois (cible : 3 à M+6, 10 à M+12)</li>
+      <li>Signal différenciation publié / mois (cas client, intervention, interview, award)</li>
+      <li>Retainers mensuels signés (cible : 2 à M+6, 4 à M+12)</li>
+    </ul>
+
+    <h3><span class="num">03</span>Rituels de gouvernance</h3>
+
+    <div class="two-col">
+      <div>
+        <h4 style="color:var(--or)">Hebdo · Vendredi 17h00</h4>
+        <p>
+          Revue pipeline Clay, ajustement des prompts AI, validation des séquences semaine suivante.
+          <em>Durée : 45 min.</em>
+        </p>
+      </div>
+      <div>
+        <h4 style="color:var(--or)">Mensuel · 1er lundi</h4>
+        <p>
+          Revue des 7 KPIs critiques, décision go/no-go sur les sous-niches secondaires,
+          itération du positionnement si nécessaire. <em>Durée : 90 min.</em>
+        </p>
+      </div>
+    </div>
+
+    <h3><span class="num">04</span>Perspectives contradictoires à garder en tête</h3>
+
+    <div class="boxed">
+      <h4>Contre la verticalisation forte</h4>
+      <p>
+        <em>Argument adverse :</em> restreindre à ce stade — avec besoin de CA — est prématuré.
+        Il faut d'abord capturer tout ce qui passe.
+      </p>
+      <p>
+        <strong>Contre-argument :</strong> 18 mois de diffusion large ont donné les résultats qu'on connaît.
+        La diffusion tue la mémorabilité.
+      </p>
+    </div>
+
+    <div class="boxed">
+      <h4>Contre Clay &amp; automation</h4>
+      <p>
+        <em>Argument adverse :</em> l'outbound automatisé sur des Marques d'Auteur humaines
+        peut être perçu comme agressif et casser la marque.
+      </p>
+      <p>
+        <strong>Contre-argument :</strong> ce n'est pas l'automatisation qui tue — c'est la générique.
+        Clay bien utilisé rend possible une hyper-personnalisation impossible à la main.
+      </p>
+    </div>
+
+    <div class="boxed">
+      <h4>Contre la focalisation diaspora</h4>
+      <p>
+        <em>Argument adverse :</em> risque d'être perçu comme « l'agence afro »
+        et de fermer des portes dans le luxe mainstream.
+      </p>
+      <p>
+        <strong>Contre-argument :</strong> faux dilemme.
+        MAÏLU prouve qu'on peut faire du premium universel depuis une ancre culturelle.
+        Virgil Abloh a fait exactement ça chez LV.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE FINALE ============ -->
+<section class="final-page">
+  <div class="container">
+    <div class="final-quote">
+      « Tu es le produit.<br>
+      Pas Okapi World Média. Pas l'IA.<br>
+      Pas ton pipeline technique.<br>
+      <em>Toi, ton regard, ton arc, ta voix.</em> »
+    </div>
+    <div class="signature">
+      OWM — Document stratégique · Avril 2026<br>
+      Confidentiel · Usage interne
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
