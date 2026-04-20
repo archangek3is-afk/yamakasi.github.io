@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- CONFIDENTIALITÉ -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+
+<title>Pearlace — Audit Stratégique · Okapi World Média</title>
+<meta name="description" content="Document confidentiel préparé pour Joel Desteney — Audit stratégique et plan de transformation Pearlace.">
+<meta name="author" content="Okapi World Média">
+
+<meta property="og:title" content="Pearlace — Audit stratégique">
+<meta property="og:description" content="Document confidentiel préparé par Okapi World Média.">
+<meta property="og:type" content="article">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%236D2E46'/%3E%3Ctext x='50' y='68' font-family='Georgia' font-style='italic' font-size='60' fill='%23C9A84C' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bordeaux: #6D2E46;
+    --bordeaux-dark: #4A1F30;
+    --cream: #F5EFE6;
+    --cream-light: #FAF5ED;
+    --gold: #C9A84C;
+    --gold-light: #E6C97A;
+    --black: #0A0A0A;
+    --ink: #1A1A1A;
+    --mute: #8A7968;
+    --line: #D4C9B8;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'DM Mono', 'Consolas', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+    font-size: 15px;
+    overflow-x: hidden;
+  }
+
+  /* ============ BANDEAU CONFIDENTIEL ============ */
+  .confidential-banner {
+    background: var(--black);
+    color: var(--gold);
+    padding: 10px 40px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    z-index: 101;
+    border-bottom: 0.5px solid var(--bordeaux-dark);
+  }
+
+  .confidential-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .conf-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .conf-text {
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #C9C0B3;
+  }
+
+  .conf-text strong { color: var(--gold); font-weight: 500; }
+
+  /* ============ TOP BAR ============ */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(245, 239, 230, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 0.5px solid var(--line);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .top-bar-left {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--mute);
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .top-bar-left:hover { color: var(--bordeaux); }
+  .top-bar-left strong { color: var(--gold); font-weight: 500; }
+  .top-bar-left .separator { color: var(--mute); margin: 0 8px; }
+
+  .top-bar-right {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--bordeaux);
+    font-weight: 500;
+  }
+
+  /* ============ HERO / COUVERTURE ============ */
+  .audit-hero {
+    background: var(--black);
+    color: var(--cream);
+    padding: 120px 40px 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .audit-hero::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 120px;
+    bottom: 100px;
+    width: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  .audit-hero-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: 40px;
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 48px;
+  }
+
+  .hero-brand {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(72px, 10vw, 144px);
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 0.9;
+    letter-spacing: -3px;
+    margin-bottom: 16px;
+  }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(24px, 3vw, 36px);
+    color: var(--gold);
+    line-height: 1.2;
+    font-weight: 400;
+    margin-bottom: 80px;
+    max-width: 680px;
+  }
+
+  .hero-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--bordeaux-dark);
+    max-width: 720px;
+  }
+
+  .hero-meta-block {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    line-height: 1.8;
+    color: var(--mute);
+  }
+
+  .hero-meta-block strong {
+    display: block;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .hero-meta-block span {
+    color: #C9C0B3;
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* ============ LAYOUT PRINCIPAL ============ */
+  .main-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    gap: 80px;
+  }
+
+  /* ============ TABLE DES MATIÈRES STICKY ============ */
+  .toc-sidebar {
+    padding: 80px 0;
+  }
+
+  .toc-sticky {
+    position: sticky;
+    top: 100px;
+  }
+
+  .toc-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .toc-list {
+    list-style: none;
+  }
+
+  .toc-list li {
+    margin-bottom: 4px;
+  }
+
+  .toc-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 8px 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--mute);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+    padding-left: 12px;
+    margin-left: -14px;
+  }
+
+  .toc-list a:hover {
+    color: var(--bordeaux);
+    border-left-color: var(--gold);
+  }
+
+  .toc-list a.active {
+    color: var(--bordeaux);
+    border-left-color: var(--bordeaux);
+    font-weight: 500;
+  }
+
+  .toc-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold);
+    min-width: 20px;
+    font-weight: 500;
+  }
+
+  /* ============ CONTENU PRINCIPAL ============ */
+  .audit-content {
+    padding: 80px 0 120px;
+    max-width: 820px;
+  }
+
+  section.audit-section {
+    margin-bottom: 120px;
+    scroll-margin-top: 100px;
+  }
+
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-tag strong { color: var(--bordeaux); font-weight: 500; margin-right: 8px; }
+
+  h2.section-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 400;
+    color: var(--bordeaux);
+    line-height: 1;
+    letter-spacing: -1.5px;
+    margin-bottom: 32px;
+  }
+
+  h2.section-title em { color: var(--gold); font-weight: 500; font-style: italic; }
+
+  h3.subsection {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--black);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 48px 0 16px;
+  }
+
+  .intro {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--bordeaux-dark);
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  p { margin-bottom: 16px; }
+
+  strong { color: var(--black); font-weight: 600; }
+  em { color: var(--bordeaux); font-style: italic; }
+
+  ul, ol {
+    margin: 16px 0 24px;
+    padding-left: 20px;
+  }
+
+  li { margin-bottom: 8px; line-height: 1.6; }
+
+  /* ============ LEAD (préambule) ============ */
+  .lead-block {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--bordeaux-dark);
+    padding: 32px 40px;
+    border-left: 3px solid var(--gold);
+    background: var(--cream-light);
+    margin: 32px 0 48px;
+    border-radius: 0;
+  }
+
+  .signature-block {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+
+  .signature-bar {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .sig-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 4px;
+  }
+
+  .sig-role {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--mute);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .sig-date {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--mute);
+  }
+
+  /* ============ SYNTHÈSE — STATS ============ */
+  .exec-callout {
+    background: var(--cream-light);
+    border-left: 4px solid var(--bordeaux);
+    padding: 32px 40px;
+    margin: 32px 0 48px;
+  }
+
+  .exec-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .exec-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--bordeaux);
+    margin: 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 48px 0;
+  }
+
+  .stat-card {
+    background: var(--black);
+    color: var(--cream);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 56px;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-unit {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--cream);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .stat-caption {
+    font-size: 12px;
+    color: #C9C0B3;
+    line-height: 1.5;
+  }
+
+  .reco-final {
+    background: var(--gold);
+    color: var(--black);
+    padding: 24px 32px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 32px 0;
+  }
+
+  .reco-final strong { color: var(--bordeaux-dark); }
+
+  /* ============ AUDIT BLOCKS ============ */
+  .audit-axis {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .axis-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+
+  .axis-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  .axis-score {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--bordeaux);
+    font-weight: 500;
+  }
+
+  .axis-score span {
+    font-size: 14px;
+    color: var(--mute);
+  }
+
+  .axis-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--cream-light);
+    margin-bottom: 20px;
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  .axis-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--bordeaux) 0%, var(--bordeaux-dark) 100%);
+    transition: width 1s ease;
+  }
+
+  .axis-obs, .axis-reco {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  .axis-reco {
+    padding-left: 16px;
+    border-left: 2px solid var(--gold);
+    color: var(--bordeaux-dark);
+  }
+
+  .global-note {
+    background: var(--black);
+    color: var(--cream);
+    padding: 32px;
+    text-align: center;
+    margin: 48px 0;
+  }
+
+  .global-note-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .global-note-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 72px;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .global-note-num span { font-size: 28px; color: var(--cream); }
+
+  .global-note-caption {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: #C9C0B3;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ============ TABLEAU CONCURRENCE ============ */
+  .table-wrap {
+    margin: 32px 0 48px;
+    overflow-x: auto;
+  }
+
+  .compet-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .compet-table th {
+    background: var(--black);
+    color: var(--cream);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-align: left;
+    padding: 12px 14px;
+    font-weight: 500;
+  }
+
+  .compet-table td {
+    padding: 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .compet-table tr:nth-child(even) td { background: var(--cream-light); }
+
+  .compet-table td:first-child {
+    font-weight: 600;
+    color: var(--bordeaux);
+  }
+
+  /* ============ PULLQUOTE ============ */
+  .pullquote {
+    background: var(--bordeaux);
+    color: var(--cream);
+    padding: 32px 40px;
+    margin: 48px 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .pullquote em { color: var(--gold); font-style: italic; }
+
+  /* ============ ZONES ============ */
+  .zones-grid { margin: 32px 0 48px; }
+
+  .zone-block {
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    background: var(--cream-light);
+    border-left: 3px solid var(--line);
+  }
+
+  .zone-block.highlight {
+    border-left-color: var(--gold);
+    background: #FAF0D8;
+    border: 1px solid var(--gold);
+    border-left-width: 4px;
+  }
+
+  .zone-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .zone-block .zone-label { color: var(--mute); }
+  .zone-block.highlight .zone-label { color: var(--bordeaux); }
+
+  .zone-desc { font-size: 13px; line-height: 1.6; margin: 0; }
+
+  /* ============ SECTION SOMBRE (Burkina) ============ */
+  .dark-section {
+    background: var(--black);
+    color: var(--cream);
+    margin: 0 -40px;
+    padding: 100px 40px;
+  }
+
+  .dark-section h2.section-title { color: var(--cream); }
+  .dark-section h2.section-title em { color: var(--gold); }
+  .dark-section .intro { color: #D4C9B8; }
+  .dark-section p { color: #D4C9B8; }
+  .dark-section strong { color: var(--cream); }
+  .dark-section em { color: var(--gold); }
+  .dark-section .section-tag { border-bottom-color: var(--bordeaux-dark); }
+
+  .pepite-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 40px 0;
+  }
+
+  .pepite-card {
+    background: var(--bordeaux-dark);
+    padding: 32px;
+  }
+
+  .pepite-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 36px;
+    color: var(--gold);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .pepite-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--cream);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .pepite-sep {
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .pepite-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--cream);
+    margin: 0;
+  }
+
+  .manner-block {
+    background: var(--bordeaux-dark);
+    padding: 24px 32px;
+    margin: 40px 0 24px;
+  }
+
+  .manner-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .manner-items { margin-top: 24px; }
+
+  .manner-item {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+
+  .manner-arrow {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--gold);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .manner-item p { margin: 0; font-size: 14px; line-height: 1.6; }
+
+  /* ============ ROADMAP ============ */
+  .roadmap-item {
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    background: var(--cream-light);
+    border-left: 3px solid var(--bordeaux);
+  }
+
+  .roadmap-head {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+
+  .roadmap-phase {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .roadmap-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--bordeaux);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .roadmap-body { font-size: 14px; line-height: 1.6; margin: 0 0 8px; }
+
+  .roadmap-deliverable {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--bordeaux-dark);
+    margin: 0;
+  }
+
+  /* ============ KPI TABLE ============ */
+  .kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0 24px;
+    font-size: 13px;
+  }
+
+  .kpi-table th {
+    background: var(--black);
+    color: var(--cream);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .kpi-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .kpi-table tr:nth-child(even) td { background: var(--cream-light); }
+
+  .kpi-table td:first-child { color: var(--bordeaux); font-weight: 600; }
+  .kpi-table td:last-child { color: var(--gold); font-weight: 600; }
+
+  .callout {
+    background: var(--cream-light);
+    border: 1px solid var(--gold);
+    border-left: 4px solid var(--gold);
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+
+  .callout p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--bordeaux-dark);
+  }
+
+  /* ============ OFFRES ============ */
+  .offers-wrap { margin: 32px 0; }
+
+  .offer-card {
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    background: white;
+    border: 1px solid var(--line);
+  }
+
+  .offer-card.highlight {
+    background: var(--bordeaux);
+    color: var(--cream);
+    border: none;
+  }
+
+  .offer-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .offer-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--black);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .offer-card.highlight .offer-name { color: var(--cream); }
+
+  .offer-price {
+    font-family: var(--serif);
+    font-size: 32px;
+    color: var(--bordeaux);
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+
+  .offer-card.highlight .offer-price { color: var(--gold); }
+
+  .offer-unit {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--mute);
+    margin-bottom: 16px;
+  }
+
+  .offer-card.highlight .offer-unit { color: #E8DFD0; }
+
+  .offer-features {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+
+  .offer-features li {
+    padding: 4px 0 4px 20px;
+    position: relative;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .offer-features li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--bordeaux);
+  }
+
+  .offer-card.highlight .offer-features li::before { color: var(--gold); }
+
+  .offer-note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--mute);
+    margin: 8px 0 0;
+  }
+
+  .offer-card.highlight .offer-note { color: #D4C9B8; }
+
+  /* ============ STEPS ============ */
+  .step-block {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .step-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 40px;
+    color: var(--gold);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .step-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--black);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .step-body-text { font-size: 13px; line-height: 1.6; margin: 0 0 8px; }
+
+  .step-timing {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--bordeaux);
+    font-weight: 600;
+  }
+
+  /* ============ CLÔTURE ============ */
+  .closing {
+    background: var(--black);
+    color: var(--cream);
+    margin: 80px -40px 0;
+    padding: 120px 40px;
+    position: relative;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent 10%, var(--gold) 50%, transparent 90%);
+  }
+
+  .closing-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 48px;
+  }
+
+  .closing-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .closing-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+    color: var(--cream);
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+  }
+
+  .closing-title em {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .closing-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: #D4C9B8;
+    line-height: 1.5;
+    margin-bottom: 48px;
+  }
+
+  .closing-sig {
+    padding-top: 24px;
+    border-top: 1px solid rgba(201, 168, 76, 0.2);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 1.8;
+  }
+
+  .closing-sig strong {
+    display: block;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .closing-sig span { color: var(--mute); display: block; }
+
+  /* ============ FOOTER ============ */
+  .footer-mini {
+    padding: 24px 40px;
+    text-align: center;
+    background: var(--black);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--mute);
+    border-top: 1px solid var(--bordeaux-dark);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 960px) {
+    .confidential-banner { padding: 10px 20px; font-size: 9px; }
+    .conf-text { letter-spacing: 1.5px; font-size: 9px; }
+    .top-bar { padding: 14px 20px; }
+    .top-bar-left { font-size: 9px; }
+    .top-bar-right { display: none; }
+
+    .audit-hero { padding: 80px 24px; }
+    .audit-hero::before { left: 24px; top: 80px; bottom: 80px; }
+    .audit-hero-inner { padding-left: 32px; }
+    .hero-meta-grid { grid-template-columns: 1fr; gap: 24px; }
+
+    .main-layout { grid-template-columns: 1fr; padding: 0 24px; gap: 0; }
+
+    .toc-sidebar { padding: 40px 0 0; }
+    .toc-sticky { position: relative; top: 0; }
+    .toc-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .toc-list li { margin: 0; }
+    .toc-list a { padding: 6px 12px; border-left: none; margin-left: 0; font-size: 12px; border: 1px solid var(--line); }
+    .toc-list a.active { background: var(--bordeaux); color: var(--cream); border-color: var(--bordeaux); }
+    .toc-list a.active .toc-num { color: var(--gold); }
+
+    .audit-content { padding: 40px 0 80px; }
+    section.audit-section { margin-bottom: 80px; }
+
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat-card { padding: 24px; }
+    .stat-num { font-size: 48px; }
+
+    .pepite-grid { grid-template-columns: 1fr; }
+
+    .dark-section { margin: 0 -24px; padding: 72px 24px; }
+
+    .lead-block { padding: 24px; font-size: 18px; }
+    .pullquote { padding: 24px; font-size: 18px; }
+    .closing { margin: 60px -24px 0; padding: 80px 24px; }
+    .closing::before { left: 24px; }
+    .closing-inner { padding-left: 32px; }
+
+    .table-wrap { margin: 24px -24px; padding: 0 24px; }
+
+    .step-block { grid-template-columns: 40px 1fr; gap: 16px; }
+    .step-num { font-size: 32px; }
+  }
+
+  /* ============ PRINT ============ */
+  @media print {
+    .confidential-banner, .top-bar, .toc-sidebar { display: none; }
+    .main-layout { grid-template-columns: 1fr; gap: 0; }
+    .audit-content { padding: 40px 0; max-width: 100%; }
+    section.audit-section { page-break-inside: avoid; margin-bottom: 60px; }
+    body { background: white; }
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-label, .hero-brand, .hero-sub, .hero-meta-grid {
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-brand { animation-delay: 0.1s; }
+  .hero-sub { animation-delay: 0.2s; }
+  .hero-meta-grid { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- ============ BANDEAU CONFIDENTIEL ============ -->
+<div class="confidential-banner">
+  <div class="confidential-inner">
+    <span class="conf-dot"></span>
+    <span class="conf-text">Document préparé pour <strong>Joel Desteney</strong> · Confidentiel · Ne pas diffuser</span>
+  </div>
+</div>
+
+<!-- ============ TOP BAR ============ -->
+<div class="top-bar">
+  <a href="https://okapiworldmedia.com" class="top-bar-left" target="_blank" rel="noopener">
+    <strong>OKAPI WORLD MÉDIA</strong> <span class="separator">×</span> PEARLACE
+  </a>
+  <div class="top-bar-right">AUDIT STRATÉGIQUE · AVRIL 2026</div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="audit-hero">
+  <div class="audit-hero-inner">
+    <div class="hero-label">— AUDIT STRATÉGIQUE · AVRIL 2026</div>
+    <h1 class="hero-brand">Pearlace.</h1>
+    <p class="hero-sub">Diagnostic de marque et plan de transformation sur 12 mois.</p>
+    <div class="hero-meta-grid">
+      <div class="hero-meta-block">
+        <strong>PRÉPARÉ PAR</strong>
+        <span>Okapi World Média</span>
+        Studio · Agence · Animation
+      </div>
+      <div class="hero-meta-block">
+        <strong>DESTINATAIRE</strong>
+        <span>Joel Desteney</span>
+        Fondateur — Pearlace
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LAYOUT PRINCIPAL ============ -->
+<div class="main-layout">
+
+  <!-- ========== TOC STICKY ========== -->
+  <aside class="toc-sidebar">
+    <nav class="toc-sticky">
+      <div class="toc-label">— SOMMAIRE</div>
+      <ul class="toc-list">
+        <li><a href="#preambule"><span class="toc-num">01</span><span>Pour Joel</span></a></li>
+        <li><a href="#synthese"><span class="toc-num">02</span><span>L'essentiel</span></a></li>
+        <li><a href="#diagnostic"><span class="toc-num">03</span><span>Diagnostic 360</span></a></li>
+        <li><a href="#concurrence"><span class="toc-num">04</span><span>Concurrence</span></a></li>
+        <li><a href="#positionnement"><span class="toc-num">05</span><span>Positionnement</span></a></li>
+        <li><a href="#burkina"><span class="toc-num">06</span><span>L'angle caché</span></a></li>
+        <li><a href="#roadmap"><span class="toc-num">07</span><span>Roadmap 12 mois</span></a></li>
+        <li><a href="#kpi"><span class="toc-num">08</span><span>Indicateurs</span></a></li>
+        <li><a href="#offres"><span class="toc-num">09</span><span>Propositions</span></a></li>
+        <li><a href="#next"><span class="toc-num">10</span><span>Prochaines étapes</span></a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- ========== CONTENU PRINCIPAL ========== -->
+  <main class="audit-content">
+
+    <!-- 01 — PRÉAMBULE -->
+    <section class="audit-section" id="preambule">
+      <p class="section-tag"><strong>01 ·</strong> PRÉAMBULE</p>
+      <h2 class="section-title">Pour Joel.</h2>
+      <div class="lead-block">
+        Joel, ce document t'est adressé directement. Il n'est pas une offre commerciale déguisée ni un rapport générique. C'est le regard d'un professionnel que tu connais — qui a observé ce que tu as construit, qui en comprend l'intention, et qui te partage honnêtement ce qu'il voit.
+      </div>
+      <p>Tu m'as approché avec une demande simple : <em>comment faire rayonner Pearlace sur les réseaux sociaux ?</em> Ma conviction professionnelle, que je te dois, est que la question mérite d'être reformulée.</p>
+      <p>Le problème de Pearlace aujourd'hui n'est pas un problème de visibilité. C'est un problème d'identité. Les réseaux sociaux ne sont que l'amplificateur d'une marque. Si la marque en tant que telle n'est pas encore construite, le community management le plus brillant ne fera qu'accélérer le mouvement sans donner de direction.</p>
+      <p>Ce document te propose donc une lecture plus large. Il commence par un diagnostic lucide de ce qui existe, puis se déploie vers ce qui pourrait exister. Il s'adresse à celui qui a eu le courage d'entreprendre, pas à celui qui a besoin d'être convaincu. Et il garde en mémoire, à chaque page, que nous nous parlons en frères avant de nous parler en partenaires.</p>
+      <p>Prends le temps de le lire. Reviens vers moi avec tes questions, tes doutes, tes désaccords. C'est de là que naîtra la bonne décision.</p>
+      <div class="signature-block">
+        <div class="signature-bar"></div>
+        <p class="sig-name">Yamakasi Kiyindou</p>
+        <p class="sig-role">Fondateur — Okapi World Média</p>
+        <p class="sig-date">Paris, avril 2026</p>
+      </div>
+    </section>
+
+    <!-- 02 — SYNTHÈSE -->
+    <section class="audit-section" id="synthese">
+      <p class="section-tag"><strong>02 ·</strong> SYNTHÈSE EXÉCUTIVE</p>
+      <h2 class="section-title">L'essentiel <em>en une page.</em></h2>
+
+      <div class="exec-callout">
+        <div class="exec-label">DIAGNOSTIC EN UNE PHRASE</div>
+        <p class="exec-quote">« Pearlace n'est pas une marque qui manque de visibilité. Pearlace est une marque qui n'a pas encore été écrite — et cette écriture peut commencer maintenant. »</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">37</div>
+          <div class="stat-unit">/100</div>
+          <div class="stat-caption">Note globale actuelle de la marque</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6</div>
+          <div class="stat-unit">CONCURRENTS</div>
+          <div class="stat-caption">Directs sur le marché français premium</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">0</div>
+          <div class="stat-unit">MARQUE</div>
+          <div class="stat-caption">Marque lace premium qui revendique un sourcing africain</div>
+        </div>
+      </div>
+
+      <h3 class="subsection">Les 5 constats clés</h3>
+      <ol>
+        <li><strong>Le nom « Pearlace » est un actif fort</strong> — il porte déjà un ADN premium qu'il faut déployer, pas remplacer.</li>
+        <li><strong>Le site est fonctionnel mais n'incarne pas la marque</strong> — palette correcte, mais visuels générés par IA, copy générique, codes promotionnels agressifs.</li>
+        <li><strong>Le positionnement « premium accessible » est juste</strong> — c'est précisément la zone vide du marché français.</li>
+        <li><strong>Le sourcing Burkina + Vietnam peut devenir l'angle différenciant majeur</strong> — aucune marque francophone ne raconte ce récit.</li>
+        <li><strong>L'absence d'Instagram de marque coûte 40 à 60 % de croissance organique potentielle</strong> — mais attaquer les réseaux avant de poser la marque serait prématuré.</li>
+      </ol>
+
+      <div class="reco-final">
+        Démarrer par <strong>l'Offre A — Diagnostic (1 200 € HT)</strong>, ou passer directement à <strong>l'Offre B — Refondation (12 000 € HT sur 3 mois)</strong> si la décision de transformation est déjà prise.
+      </div>
+    </section>
+
+    <!-- 03 — DIAGNOSTIC -->
+    <section class="audit-section" id="diagnostic">
+      <p class="section-tag"><strong>03 ·</strong> DIAGNOSTIC 360</p>
+      <h2 class="section-title">Cinq axes. <em>Une note.</em></h2>
+      <p class="intro">Nous avons évalué Pearlace sur cinq dimensions qui déterminent la force d'une marque e-commerce. Chacune est notée sur 100, avec une observation concrète et une recommandation.</p>
+
+      <div class="audit-axis">
+        <div class="axis-head">
+          <span class="axis-label">IDENTITÉ DE MARQUE</span>
+          <span class="axis-score">30<span>/100</span></span>
+        </div>
+        <div class="axis-bar"><div class="axis-fill" style="width:30%"></div></div>
+        <p class="axis-obs"><strong>Observation.</strong> Pas de manifeste, pas de récit fondateur écrit, pas de tone of voice défini. Le logo est faible (typographie corporate, mention « Hair Extension » incohérente avec l'activité réelle). Aucun « À propos » travaillé visible depuis la home.</p>
+        <p class="axis-reco"><strong>Recommandation.</strong> Construire la plateforme de marque complète : manifeste, positionnement, mission, vision, valeurs, tone of voice. C'est la fondation sur laquelle tout le reste s'appuiera.</p>
+      </div>
+
+      <div class="audit-axis">
+        <div class="axis-head">
+          <span class="axis-label">DIRECTION ARTISTIQUE</span>
+          <span class="axis-score">25<span>/100</span></span>
+        </div>
+        <div class="axis-bar"><div class="axis-fill" style="width:25%"></div></div>
+        <p class="axis-obs"><strong>Observation.</strong> La bannière hero et plusieurs visuels clés sont générés par intelligence artificielle (signatures détectables). Les photos produit sont des « wigs tenues à bout de bras », code fournisseur, pas code marque. Aucune cohérence de shooting entre les vignettes catégories.</p>
+        <p class="axis-reco"><strong>Recommandation.</strong> Remplacer tous les visuels IA par un shooting photo professionnel structuré : 30 visuels portés, 10 lifestyle éditoriaux, 6 packshots premium. Définir une direction artistique référencée (cinéma, photographie, mode).</p>
+      </div>
+
+      <div class="audit-axis">
+        <div class="axis-head">
+          <span class="axis-label">COPYWRITING & TONE OF VOICE</span>
+          <span class="axis-score">40<span>/100</span></span>
+        </div>
+        <div class="axis-bar"><div class="axis-fill" style="width:40%"></div></div>
+        <p class="axis-obs"><strong>Observation.</strong> Les accroches restent techniques (« Indétectable. Instantané », « sans colle au rendu cuir chevelu naturel »). Mélange tu/vous. Le programme ambassadrice utilise un langage transactionnel (« remporte de l'argent ») incompatible avec le positionnement premium.</p>
+        <p class="axis-reco"><strong>Recommandation.</strong> Réécrire intégralement le copy du site (home, catégories, fiches produit, page À propos, FAQ). Adopter un tone of voice cohérent — chaleureux, affirmé, éditorial.</p>
+      </div>
+
+      <div class="audit-axis">
+        <div class="axis-head">
+          <span class="axis-label">PREUVE SOCIALE</span>
+          <span class="axis-score">35<span>/100</span></span>
+        </div>
+        <div class="axis-bar"><div class="axis-fill" style="width:35%"></div></div>
+        <p class="axis-obs"><strong>Observation.</strong> Compte TikTok @thepearlace_20 actif mais embryonnaire (2 074 followers, 1 644 likes cumulés — ratio d'engagement faible). Pas de compte Instagram de marque. Pas de Pinterest. Aucun témoignage client structuré, aucun UGC organisé, aucune presse.</p>
+        <p class="axis-reco"><strong>Recommandation.</strong> Lancer un Instagram de marque avec une direction éditoriale claire (3 posts/semaine minimum). Structurer un programme ambassadrice exigeant (pas un programme affilié transactionnel). Documenter les clientes réelles.</p>
+      </div>
+
+      <div class="audit-axis">
+        <div class="axis-head">
+          <span class="axis-label">UX & CONVERSION</span>
+          <span class="axis-score">55<span>/100</span></span>
+        </div>
+        <div class="axis-bar"><div class="axis-fill" style="width:55%"></div></div>
+        <p class="axis-obs"><strong>Observation.</strong> Le site Shopify est fonctionnel, la navigation claire, le chat présent, le paiement fluide. Mais le bandeau promotionnel permanent « Offre Printemps -20% » et les « stock limité » cassent le positionnement premium à chaque visite.</p>
+        <p class="axis-reco"><strong>Recommandation.</strong> Supprimer la bannière promotionnelle permanente. Refondre les fiches produit avec contenus riches (vidéos de mouvement, détails lace, traçabilité cheveux). Ajouter Alma / Klarna pour fractionner les paiements premium.</p>
+      </div>
+
+      <div class="global-note">
+        <div class="global-note-label">— NOTE GLOBALE</div>
+        <div class="global-note-num">37<span>/100</span></div>
+        <p class="global-note-caption">Une marque à fort potentiel, dont la valeur perçue est actuellement inférieure de 30 à 40 points à ce que l'intuition produit et le positionnement naturel permettraient d'atteindre en 6 à 12 mois.</p>
+      </div>
+    </section>
+
+    <!-- 04 — CONCURRENCE -->
+    <section class="audit-section" id="concurrence">
+      <p class="section-tag"><strong>04 ·</strong> ANALYSE CONCURRENTIELLE</p>
+      <h2 class="section-title">Qui occupe <em>le marché.</em></h2>
+      <p class="intro">Le marché français de la lace wig premium est composé d'une vingtaine d'acteurs identifiables. Six sont des concurrents directs ou indirects significatifs pour Pearlace.</p>
+
+      <div class="table-wrap">
+        <table class="compet-table">
+          <thead>
+            <tr>
+              <th>MARQUE</th>
+              <th>POSITIONNEMENT</th>
+              <th>FORCE</th>
+              <th>FAIBLESSE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Exteeend Paris</td><td>N°1 lace prêt-à-porter</td><td>Notoriété IG, livraison 24h</td><td>Discours produit, pas de récit</td></tr>
+            <tr><td>Glam Lace</td><td>Pionnière (18 ans)</td><td>Légitimité historique forte</td><td>Image datée, site ancien</td></tr>
+            <tr><td>Velvety Paris</td><td>Atelier Paris 1er sur-mesure</td><td>Adresse prestige, artisanat</td><td>Faible visibilité, peu de contenu</td></tr>
+            <tr><td>Flawlace</td><td>Full lace HD + médical</td><td>Angle médical + esthétique</td><td>Positionnement confus</td></tr>
+            <tr><td>Maison des Mèches</td><td>Boutique Paris 14 + online</td><td>Retail physique, multi-produits</td><td>Pas de focus lace premium</td></tr>
+            <tr><td>Lace Wig Paris</td><td>Généraliste 500 références</td><td>Volume, avis clients</td><td>Pas de marque, low-mid</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pullquote">
+        Aucune de ces marques n'occupe la position de <em>maison éditoriale</em> de la lace wig. C'est cette place que Pearlace peut conquérir.
+      </div>
+
+      <h3 class="subsection">Les trois zones du marché.</h3>
+      <div class="zones-grid">
+        <div class="zone-block">
+          <div class="zone-label">ZONE BASSE — &lt; 150 €</div>
+          <p class="zone-desc"><strong>Acteurs :</strong> AliExpress, Amazon, dropshippers génériques. <strong>Logique :</strong> volume, promotions permanentes, pas de marque.</p>
+        </div>
+        <div class="zone-block">
+          <div class="zone-label">ZONE INTERMÉDIAIRE — 150–300 €</div>
+          <p class="zone-desc"><strong>Acteurs :</strong> Lace Wig Paris, Hairdiva, Exteeend (entrée de gamme), <strong>et Pearlace aujourd'hui.</strong> <strong>Logique :</strong> prix juste, promesse produit claire.</p>
+        </div>
+        <div class="zone-block highlight">
+          <div class="zone-label">ZONE À CONQUÉRIR — 250–500 €</div>
+          <p class="zone-desc"><strong>Acteurs :</strong> Exteeend haut de gamme, quelques pièces signatures Glam Lace. <strong>Logique :</strong> valeur perçue, storytelling, expérience client soignée. <strong>C'est ici que Pearlace doit s'installer.</strong></p>
+        </div>
+        <div class="zone-block">
+          <div class="zone-label">ZONE LUXE — 500–1 500 €+</div>
+          <p class="zone-desc"><strong>Acteurs :</strong> Velvety Paris, ateliers couture. <strong>Logique :</strong> artisanat, exclusivité. Zone que Pearlace pourra explorer via une ligne capsule plus tard.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 — POSITIONNEMENT -->
+    <section class="audit-section" id="positionnement">
+      <p class="section-tag"><strong>05 ·</strong> POSITIONNEMENT</p>
+      <h2 class="section-title">La voie <em>recommandée.</em></h2>
+      <p class="intro">Après analyse du produit, du marché, de la concurrence et de ton intuition de fondateur, nous recommandons sans ambiguïté le positionnement suivant.</p>
+
+      <div class="pullquote" style="background: var(--black); border: 1px solid var(--gold);">
+        « Pearlace, la belle lace wig<br>que la femme moderne porte,<br><em>et ne cache plus.</em> »
+      </div>
+
+      <h3 class="subsection">Les trois mots-clés</h3>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0 48px;">
+        <div style="background: var(--cream-light); padding: 24px; border-top: 2px solid var(--gold);">
+          <p style="font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--bordeaux); font-weight: 500; margin-bottom: 8px;">Accessible</p>
+          <p style="font-size: 12px; line-height: 1.5; margin: 0;">Des prix justes. Un paiement fractionné. L'entrée de gamme premium, pas le luxe inaccessible.</p>
+        </div>
+        <div style="background: var(--cream-light); padding: 24px; border-top: 2px solid var(--gold);">
+          <p style="font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--bordeaux); font-weight: 500; margin-bottom: 8px;">Éditoriale</p>
+          <p style="font-size: 12px; line-height: 1.5; margin: 0;">Un univers à la hauteur. Portraits, films, journal, voix. La marque comme magazine vivant.</p>
+        </div>
+        <div style="background: var(--cream-light); padding: 24px; border-top: 2px solid var(--gold);">
+          <p style="font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--bordeaux); font-weight: 500; margin-bottom: 8px;">Désirable</p>
+          <p style="font-size: 12px; line-height: 1.5; margin: 0;">Un objet de style porté par choix, pas par défaut. Une pièce qu'on assume et qu'on montre.</p>
+        </div>
+      </div>
+
+      <h3 class="subsection">Cible cliente prioritaire</h3>
+      <div style="background: var(--cream-light); padding: 32px; border-top: 2px solid var(--gold); margin: 24px 0;">
+        <p style="font-family: var(--serif); font-style: italic; font-size: 28px; color: var(--bordeaux); font-weight: 500; margin-bottom: 4px;">Noémie, 34 ans</p>
+        <p style="font-family: var(--mono); font-size: 10px; color: var(--mute); letter-spacing: 1.5px; margin-bottom: 24px;">CHEF DE PROJET EN AGENCE · PARIS</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div>
+            <p style="font-family: var(--mono); font-size: 9px; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px;">SITUATION</p>
+            <p style="font-size: 13px; line-height: 1.5; margin: 0;">Afro-descendante, urbaine, CSP+. Salaire 3 500–4 500 € net. Achète 2 à 4 perruques par an.</p>
+          </div>
+          <div>
+            <p style="font-family: var(--mono); font-size: 9px; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px;">MOTIVATIONS</p>
+            <p style="font-size: 13px; line-height: 1.5; margin: 0;">Qualité (Remy, lace HD). Traçabilité. Veut se sentir unique. Prête à payer 300 € pour une pièce qui dure.</p>
+          </div>
+          <div>
+            <p style="font-family: var(--mono); font-size: 9px; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px;">CANAUX</p>
+            <p style="font-size: 13px; line-height: 1.5; margin: 0;">Instagram (primaire), TikTok (découverte), Pinterest (inspiration). Prescripteurs : amies, hairstylists.</p>
+          </div>
+          <div>
+            <p style="font-family: var(--mono); font-size: 9px; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px;">FREINS</p>
+            <p style="font-size: 13px; line-height: 1.5; margin: 0;">Peur de se faire avoir sur la qualité. Fatiguée des promos permanentes. Veut une marque qui la respecte.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- 06 — BURKINA (SECTION SOMBRE PLEINE LARGEUR) -->
+<section class="dark-section" id="burkina">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 40px;">
+    <div style="display: grid; grid-template-columns: 280px 1fr; gap: 80px; max-width: 1440px;">
+      <div></div>
+      <div style="max-width: 820px;">
+        <p class="section-tag" style="color: var(--gold); border-bottom-color: var(--bordeaux-dark);"><strong style="color: var(--gold);">06 ·</strong> LA PÉPITE STRATÉGIQUE</p>
+        <h2 class="section-title">Le Burkina est<br><em>ton signe distinctif.</em></h2>
+        <p class="intro">Joel, tu m'as dit que tu sources une partie de tes cheveux au Burkina Faso. Cette information, donnée presque en passant, est peut-être la plus importante de toute notre conversation. Laisse-moi t'expliquer pourquoi.</p>
+
+        <div class="pepite-grid">
+          <div class="pepite-card">
+            <div class="pepite-num">01</div>
+            <div class="pepite-title">L'observation</div>
+            <div class="pepite-sep"></div>
+            <p class="pepite-body">Aucune marque lace premium francophone ne revendique aujourd'hui un sourcing africain. Toutes parlent d'Inde, du Vietnam, du Myanmar — jamais d'Afrique. C'est une anomalie historique, presque une contradiction dans un marché majoritairement destiné aux femmes afro-descendantes.</p>
+          </div>
+          <div class="pepite-card">
+            <div class="pepite-num">02</div>
+            <div class="pepite-title">L'opportunité</div>
+            <div class="pepite-sep"></div>
+            <p class="pepite-body">Pearlace peut devenir <em>la première maison lace</em> qui assume — avec fierté, sans militantisme — des cheveux d'Afrique pour des femmes d'ascendance africaine. Un cercle qui se referme. Une fierté que la clientèle attend inconsciemment depuis des années.</p>
+          </div>
+        </div>
+
+        <div class="manner-block">
+          <div class="manner-title">NE PAS LE CRIER. LE RACONTER.</div>
+          <p>Le piège serait de faire du sourcing africain un slogan brandi, un argument commercial plaqué. Ce serait contre-productif et mal reçu. La puissance de ce positionnement tient à sa discrétion revendiquée.</p>
+
+          <div class="manner-items">
+            <div class="manner-item">
+              <div class="manner-arrow">→</div>
+              <p><strong>Documenter la filière burkinabè.</strong> Reportage photo/vidéo sur les collectrices, les ateliers, le processus. Un mini-documentaire de 3 minutes qui circule en slow burn.</p>
+            </div>
+            <div class="manner-item">
+              <div class="manner-arrow">→</div>
+              <p><strong>Nommer les artisanes.</strong> Mettre des visages sur la chaîne de valeur. Les ateliers vietnamiens, les collectrices au Burkina. Des humains, pas des maillons anonymes.</p>
+            </div>
+            <div class="manner-item">
+              <div class="manner-arrow">→</div>
+              <p><strong>Un QR code par perruque.</strong> Qui raconte l'origine des cheveux, la longueur du trajet, les mains qui l'ont fabriquée. Traçabilité comme preuve, pas comme marketing.</p>
+            </div>
+            <div class="manner-item">
+              <div class="manner-arrow">→</div>
+              <p><strong>Une ligne signature « Racines ».</strong> Capsule limitée 100% sourcing africain, numérotée, éditorialisée. Positionnement 350–500 €. Devient la pièce la plus photographiée de la marque.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="main-layout">
+  <aside></aside>
+  <main class="audit-content" style="padding-top: 80px;">
+
+    <!-- 07 — ROADMAP -->
+    <section class="audit-section" id="roadmap">
+      <p class="section-tag"><strong>07 ·</strong> PLAN DE TRANSFORMATION</p>
+      <h2 class="section-title">Une roadmap <em>sur 12 mois.</em></h2>
+      <p class="intro">La transformation de Pearlace se déploie en quatre phases de trois mois chacune. Chaque phase a un livrable signature qui consolide la suivante.</p>
+
+      <div class="roadmap-item">
+        <div class="roadmap-head">
+          <span class="roadmap-phase">TRIMESTRE 1</span>
+          <h4 class="roadmap-title">Foundation — L'identité écrite</h4>
+        </div>
+        <p class="roadmap-body">Construction de la plateforme de marque (manifeste, positionnement, mission, tone of voice). Refonte de l'identité visuelle (logo, charte graphique, typographies). Réécriture intégrale du copy site.</p>
+        <p class="roadmap-deliverable"><strong>Livrable signature :</strong> Brand Book Pearlace (50 pages, PDF premium).</p>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-head">
+          <span class="roadmap-phase">TRIMESTRE 2</span>
+          <h4 class="roadmap-title">Visibility — La présence posée</h4>
+        </div>
+        <p class="roadmap-body">Shooting photo professionnel (30 visuels + 10 lifestyle + packshots). Production du film de marque hero (60 à 90 secondes). Lancement de l'Instagram Pearlace avec 30 premiers contenus. Lancement du Pinterest.</p>
+        <p class="roadmap-deliverable"><strong>Livrable signature :</strong> Film de marque Pearlace « Première Apparition ».</p>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-head">
+          <span class="roadmap-phase">TRIMESTRE 3</span>
+          <h4 class="roadmap-title">Desire — Le désir construit</h4>
+        </div>
+        <p class="roadmap-body">Série « Pearlace Portraits » (films courts 60–90 sec sur 4 clientes/ambassadrices). Documentaire sourcing Burkina. Lancement de la capsule « Racines ». Programme d'influence stratifié.</p>
+        <p class="roadmap-deliverable"><strong>Livrable signature :</strong> Documentaire « La filière Pearlace » (3 min).</p>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-head">
+          <span class="roadmap-phase">TRIMESTRE 4</span>
+          <h4 class="roadmap-title">Growth — La croissance pilotée</h4>
+        </div>
+        <p class="roadmap-body">Funnel paid structuré (Meta + TikTok). Email marketing et automation Klaviyo. Programme fidélité et parrainage. Community WhatsApp privée. Premier média tier-1 obtenu.</p>
+        <p class="roadmap-deliverable"><strong>Livrable signature :</strong> Bilan annuel + Stratégie année 2.</p>
+      </div>
+    </section>
+
+    <!-- 08 — KPI -->
+    <section class="audit-section" id="kpi">
+      <p class="section-tag"><strong>08 ·</strong> INDICATEURS DE SUCCÈS</p>
+      <h2 class="section-title">Comment mesurer <em>le progrès.</em></h2>
+      <p class="intro">Une marque ne se construit pas sur l'intuition seule. Voici les sept indicateurs que nous suivrons ensemble, mois après mois.</p>
+
+      <div class="table-wrap">
+        <table class="kpi-table">
+          <thead>
+            <tr>
+              <th>INDICATEUR</th>
+              <th>ACTUEL</th>
+              <th>CIBLE 6 MOIS</th>
+              <th>CIBLE 12 MOIS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Followers Instagram</td><td>0</td><td>5 000</td><td>20 000</td></tr>
+            <tr><td>Followers TikTok</td><td>2 074</td><td>8 000</td><td>30 000</td></tr>
+            <tr><td>Ticket moyen</td><td>~180 €</td><td>220 €</td><td>280 €</td></tr>
+            <tr><td>Taux de réachat 9 mois</td><td>nc.</td><td>25 %</td><td>40 %</td></tr>
+            <tr><td>Part du CA hors promotion</td><td>nc.</td><td>60 %</td><td>85 %</td></tr>
+            <tr><td>Net Promoter Score</td><td>nc.</td><td>50</td><td>70+</td></tr>
+            <tr><td>Mentions presse / an</td><td>0</td><td>2</td><td>6</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <p><strong>Indicateur clé à surveiller.</strong> La <em>part du CA hors promotion</em>. Tant que Pearlace vendra majoritairement sous promotion, la marque ne sera pas construite. L'objectif est d'atteindre 85 % de ventes au prix plein en 12 mois.</p>
+      </div>
+    </section>
+
+    <!-- 09 — OFFRES -->
+    <section class="audit-section" id="offres">
+      <p class="section-tag"><strong>09 ·</strong> PROPOSITIONS D'ACCOMPAGNEMENT</p>
+      <h2 class="section-title">Trois niveaux <em>d'engagement.</em></h2>
+      <p class="intro">Okapi World Média propose trois formules d'accompagnement, du diagnostic ponctuel à l'alliance stratégique de 12 mois. Tu choisis le niveau qui correspond à ton ambition.</p>
+
+      <div class="offers-wrap">
+        <div class="offer-card">
+          <p class="offer-tag">OFFRE A</p>
+          <p class="offer-name">LE DIAGNOSTIC</p>
+          <p class="offer-price">1 200 € HT</p>
+          <p class="offer-unit">SUR 2 SEMAINES</p>
+          <ul class="offer-features">
+            <li>Audit 360° du site et des réseaux</li>
+            <li>Analyse concurrentielle approfondie</li>
+            <li>Plan de transformation 12 mois</li>
+            <li>Rapport stratégique 40–60 pages</li>
+            <li>Restitution en visio de 1h30</li>
+          </ul>
+          <p class="offer-note">Idéal pour un point d'étape professionnel avant toute décision.</p>
+        </div>
+
+        <div class="offer-card highlight">
+          <p class="offer-tag" style="color: var(--gold);">★ OFFRE B — RECOMMANDÉE</p>
+          <p class="offer-name">LA REFONDATION</p>
+          <p class="offer-price">12 000 € HT</p>
+          <p class="offer-unit">SUR 3 MOIS</p>
+          <ul class="offer-features">
+            <li>Tout l'Offre A inclus en ouverture</li>
+            <li>Plateforme de marque complète</li>
+            <li>Nouvelle identité visuelle</li>
+            <li>Shooting photo (30 visuels)</li>
+            <li>Film de marque 60 secondes</li>
+            <li>Refonte intégrale du copy site</li>
+            <li>Lancement Instagram et Pinterest</li>
+          </ul>
+          <p class="offer-note">Le parcours cohérent pour construire Pearlace comme marque.</p>
+        </div>
+
+        <div class="offer-card">
+          <p class="offer-tag">OFFRE C</p>
+          <p class="offer-name">L'ALLIANCE</p>
+          <p class="offer-price">30 000 € HT</p>
+          <p class="offer-unit">SUR 12 MOIS (2 500 € / MOIS)</p>
+          <ul class="offer-features">
+            <li>Tout l'Offre B étalé sur 12 mois</li>
+            <li>Direction artistique continue</li>
+            <li>4 films Pearlace Portraits</li>
+            <li>Documentaire sourcing Burkina</li>
+            <li>Calendrier éditorial mensuel</li>
+            <li>COMEX stratégique mensuel</li>
+          </ul>
+          <p class="offer-note">Pour une construction de marque complète et pilotée.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 — NEXT STEPS -->
+    <section class="audit-section" id="next">
+      <p class="section-tag"><strong>10 ·</strong> PROCHAINES ÉTAPES</p>
+      <h2 class="section-title">Construisons <em>Pearlace.</em></h2>
+
+      <div class="step-block">
+        <span class="step-num">01</span>
+        <div>
+          <h4 class="step-title">Validation de l'orientation stratégique</h4>
+          <p class="step-body-text">Nous nous retrouvons en visio pour parcourir ensemble ce document. Tu poses tes questions. Nous décidons ensemble de la formule.</p>
+          <p class="step-timing">CETTE SEMAINE OU LA SUIVANTE</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <span class="step-num">02</span>
+        <div>
+          <h4 class="step-title">Signature du devis et acompte</h4>
+          <p class="step-body-text">Okapi World Média émet un devis formel. Modalité : 30 % à la signature, 40 % à mi-parcours, 30 % à la livraison finale.</p>
+          <p class="step-timing">SEMAINE +1</p>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <span class="step-num">03</span>
+        <div>
+          <h4 class="step-title">Kick-off stratégique</h4>
+          <p class="step-body-text">Session de travail de 2h en visio. Immersion dans le produit, clarification des ambitions, alignement sur les contraintes.</p>
+          <p class="step-timing">SEMAINE +1 OU +2</p>
+        </div>
+      </div>
+
+      <div class="step-block" style="border-bottom: none;">
+        <span class="step-num">04</span>
+        <div>
+          <h4 class="step-title">Premiers livrables et jalons</h4>
+          <p class="step-body-text">Première restitution majeure à 30 jours (plateforme de marque présentée en comité). Cadence mensuelle avec bilans.</p>
+          <p class="step-timing">SEMAINE +4 ET ENSUITE</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- CLÔTURE -->
+<section class="closing">
+  <div class="closing-inner">
+    <div class="closing-label">— POUR JOEL</div>
+    <h1 class="closing-title">
+      Pearlace,<br>une marque qui mérite<br>
+      <em>d'être vue.</em>
+    </h1>
+    <p class="closing-sub">Nous sommes là pour ça.</p>
+    <div class="closing-sig">
+      <strong>OKAPI WORLD MÉDIA</strong>
+      <span>Yamakasi — Fondateur & Directeur créatif</span>
+      <span>yamakasi@okapiworldmedia.com · okapiworldmedia.com</span>
+    </div>
+  </div>
+</section>
+
+<div class="footer-mini">
+  OKAPI WORLD MÉDIA × PEARLACE — AUDIT STRATÉGIQUE — AVRIL 2026
+</div>
+
+<script>
+  // Highlight TOC selon scroll
+  const sections = document.querySelectorAll('section.audit-section, #burkina');
+  const tocLinks = document.querySelectorAll('.toc-list a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tocLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

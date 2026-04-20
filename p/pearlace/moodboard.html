@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- CONFIDENTIALITÉ — non indexable -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+
+<!-- Meta descriptives -->
+<title>Pearlace — Moodboard · Okapi World Média</title>
+<meta name="description" content="Document confidentiel préparé pour Joel Desteney — Moodboard de direction artistique Pearlace.">
+<meta name="author" content="Okapi World Média">
+
+<!-- OpenGraph (utile si partage WhatsApp/Slack) -->
+<meta property="og:title" content="Pearlace — Moodboard de direction artistique">
+<meta property="og:description" content="Document confidentiel préparé par Okapi World Média.">
+<meta property="og:type" content="article">
+
+<!-- Favicon minimal -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%236D2E46'/%3E%3Ctext x='50' y='68' font-family='Georgia' font-style='italic' font-size='60' fill='%23C9A84C' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bordeaux: #6D2E46;
+    --bordeaux-dark: #4A1F30;
+    --cream: #F5EFE6;
+    --cream-light: #FAF5ED;
+    --gold: #C9A84C;
+    --gold-light: #E6C97A;
+    --black: #0A0A0A;
+    --ink: #1A1A1A;
+    --mute: #8A7968;
+    --line: #D4C9B8;
+    --serif: 'Cormorant Garamond', 'Georgia', serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'DM Mono', 'Consolas', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Texture grain overlay pour donner de l'âme */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 25% 25%, rgba(201, 168, 76, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(109, 46, 70, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ============ BANDEAU CONFIDENTIEL ============ */
+  .confidential-banner {
+    background: var(--black);
+    color: var(--gold);
+    padding: 10px 40px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    z-index: 101;
+    border-bottom: 0.5px solid var(--bordeaux-dark);
+  }
+
+  .confidential-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .conf-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .conf-text {
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #C9C0B3;
+  }
+
+  .conf-text strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ============ HEADER ============ */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--cream);
+    border-bottom: 0.5px solid var(--line);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    background: rgba(245, 239, 230, 0.92);
+  }
+
+  .top-bar-left {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--mute);
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .top-bar-left:hover {
+    color: var(--bordeaux);
+  }
+
+  .top-bar-left strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .top-bar-left .separator {
+    color: var(--mute);
+    margin: 0 8px;
+    font-weight: 300;
+  }
+
+  .top-bar-right {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--bordeaux);
+    font-weight: 500;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    min-height: 92vh;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+    padding: 120px 0 80px;
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 32px;
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .hero-label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(56px, 7vw, 104px);
+    line-height: 0.92;
+    color: var(--bordeaux);
+    letter-spacing: -2px;
+    margin-bottom: 40px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--black);
+    display: block;
+    font-weight: 500;
+  }
+
+  .hero-title .gold-word {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .hero-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--bordeaux-dark);
+    max-width: 480px;
+    margin-bottom: 48px;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+
+  .meta-item {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--mute);
+    text-transform: uppercase;
+  }
+
+  .meta-item strong {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--bordeaux);
+    letter-spacing: 0;
+    text-transform: none;
+    margin-top: 6px;
+  }
+
+  /* Hero visual — composition éditoriale */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    max-height: 720px;
+  }
+
+  .hero-card {
+    position: absolute;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hero-card-main {
+    inset: 0;
+    background: linear-gradient(180deg, var(--bordeaux-dark) 0%, var(--bordeaux) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 48px;
+    color: var(--cream);
+  }
+
+  .hero-card-main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(201, 168, 76, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(245, 239, 230, 0.08) 0%, transparent 50%);
+  }
+
+  .hero-card-main::after {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    right: 32px;
+    bottom: 32px;
+    border: 0.5px solid rgba(201, 168, 76, 0.3);
+    pointer-events: none;
+  }
+
+  .hero-card-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-card-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+
+  .hero-card-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--cream);
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+
+  .hero-card-attr {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+
+  .hero-side-card {
+    position: absolute;
+    right: -80px;
+    top: 8%;
+    width: 42%;
+    aspect-ratio: 3/4;
+    background: var(--gold);
+    padding: 32px;
+    transform: rotate(3deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--black);
+  }
+
+  .hero-side-card:hover { transform: rotate(1deg) scale(1.02); }
+
+  .hero-side-card-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+
+  .hero-side-card-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 42px;
+    line-height: 0.95;
+    font-weight: 500;
+  }
+
+  .hero-side-card-footer {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-top: 0.5px solid rgba(10, 10, 10, 0.3);
+    padding-top: 12px;
+  }
+
+  /* ============ SECTIONS ============ */
+  section {
+    padding: 120px 0;
+    position: relative;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    align-items: baseline;
+    margin-bottom: 64px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .section-index {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .section-index strong {
+    color: var(--bordeaux);
+    margin-right: 12px;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 1;
+    color: var(--bordeaux);
+    letter-spacing: -1px;
+  }
+
+  .section-title em {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* ============ ADN GRID ============ */
+  .adn {
+    background: var(--cream-light);
+    margin: 0 -40px;
+    padding: 120px 40px;
+  }
+
+  .adn-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+  }
+
+  .adn-cell {
+    padding: 56px 40px;
+    border-right: 1px solid var(--line);
+    background: var(--cream);
+    position: relative;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background 0.4s ease;
+  }
+
+  .adn-cell:last-child { border-right: none; }
+
+  .adn-cell:hover {
+    background: var(--cream-light);
+  }
+
+  .adn-cell:hover .adn-word {
+    color: var(--gold);
+  }
+
+  .adn-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .adn-word {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--bordeaux);
+    font-weight: 500;
+    margin-bottom: 32px;
+    letter-spacing: -1px;
+    transition: color 0.4s ease;
+  }
+
+  .adn-separator {
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .adn-body {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* ============ PALETTE ============ */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 12px;
+    height: 360px;
+  }
+
+  .color-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .color-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .color-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .color-info {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    line-height: 1.7;
+  }
+
+  .color-info strong {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .color-1 { background: var(--bordeaux); color: var(--cream); }
+  .color-2 { background: var(--black); color: var(--cream); }
+  .color-3 { background: var(--gold); color: var(--black); }
+  .color-4 { background: var(--cream); color: var(--bordeaux); border: 1px solid var(--line); }
+
+  /* ============ TYPOGRAPHIE ============ */
+  .typo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--line);
+  }
+
+  .typo-cell {
+    padding: 48px;
+    background: var(--cream);
+    border-right: 1px solid var(--line);
+  }
+
+  .typo-cell:last-child { border-right: none; }
+
+  .typo-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .typo-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 48px;
+    font-weight: 500;
+    color: var(--bordeaux);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .typo-name-sans {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 42px;
+    color: var(--bordeaux);
+    letter-spacing: -1.5px;
+    margin-bottom: 16px;
+  }
+
+  .typo-role {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--mute);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .typo-sample {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .typo-sample-sans {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .typo-specs {
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--mute);
+    line-height: 1.8;
+  }
+
+  /* ============ REFS GRID ============ */
+  .refs-wrapper {
+    background: var(--black);
+    margin: 0 -40px;
+    padding: 120px 40px;
+    color: var(--cream);
+  }
+
+  .refs-wrapper .section-title { color: var(--cream); }
+  .refs-wrapper .section-title em { color: var(--gold); }
+  .refs-wrapper .section-head { border-bottom-color: var(--bordeaux-dark); }
+
+  .refs-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 200px;
+    gap: 12px;
+  }
+
+  .ref-cell {
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ref-cell:hover { transform: scale(1.02); }
+
+  .ref-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .ref-content {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.25;
+    font-weight: 500;
+  }
+
+  /* Cellules spécifiques */
+  .ref-a { grid-column: span 2; grid-row: span 2; background: var(--bordeaux); color: var(--cream); }
+  .ref-a .ref-content { font-size: 32px; }
+  .ref-a .ref-tag { color: var(--gold); }
+
+  .ref-b { grid-column: span 2; background: var(--gold); color: var(--black); }
+  .ref-b .ref-tag { color: var(--bordeaux); }
+
+  .ref-c { grid-column: span 2; background: var(--bordeaux-dark); color: var(--cream); }
+  .ref-c .ref-tag { color: var(--gold); }
+
+  .ref-d { grid-column: span 2; background: #1F1515; color: var(--gold); border: 0.5px solid var(--bordeaux-dark); }
+  .ref-d .ref-tag { color: var(--cream); }
+
+  .ref-e { grid-column: span 2; background: #8B4A5C; color: var(--cream); }
+  .ref-e .ref-tag { color: var(--gold-light); }
+
+  /* ============ AVANT/APRÈS ============ */
+  .transform {
+    padding: 160px 0;
+  }
+
+  .transform-grid {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .transform-col {
+    padding: 56px 48px;
+    border: 1px solid var(--line);
+    background: var(--cream-light);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .transform-col.after {
+    background: var(--bordeaux);
+    color: var(--cream);
+    border: none;
+  }
+
+  .transform-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 40px;
+    color: var(--gold);
+  }
+
+  .transform-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+
+  .transform-col.before .transform-label { color: var(--mute); }
+  .transform-col.after .transform-label { color: var(--gold); }
+
+  .transform-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 38px;
+    line-height: 1.1;
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+
+  .transform-col.before .transform-title { color: var(--ink); }
+  .transform-col.after .transform-title { color: var(--cream); }
+
+  .transform-list {
+    list-style: none;
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .transform-list li {
+    padding: 12px 0 12px 24px;
+    position: relative;
+    border-bottom: 0.5px solid var(--line);
+  }
+
+  .transform-col.after .transform-list li {
+    border-bottom: 0.5px solid rgba(201, 168, 76, 0.2);
+  }
+
+  .transform-col.before .transform-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--mute);
+  }
+
+  .transform-col.after .transform-list li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 11px;
+    top: 14px;
+  }
+
+  /* ============ SIGNATURE FINALE ============ */
+  .closing {
+    background: var(--black);
+    color: var(--cream);
+    margin: 0 -40px;
+    padding: 160px 40px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, transparent 10%, var(--gold) 50%, transparent 90%);
+    margin-left: 40px;
+  }
+
+  .closing-inner {
+    max-width: 1000px;
+    padding-left: 80px;
+  }
+
+  .closing-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .closing-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(48px, 6vw, 88px);
+    line-height: 1;
+    color: var(--cream);
+    letter-spacing: -2px;
+    margin-bottom: 48px;
+  }
+
+  .closing-title em {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+    display: block;
+  }
+
+  .closing-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #C9C0B3;
+    max-width: 640px;
+    margin-bottom: 80px;
+  }
+
+  .closing-sig {
+    padding-top: 40px;
+    border-top: 1px solid rgba(201, 168, 76, 0.2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .closing-sig-block {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    line-height: 1.8;
+  }
+
+  .closing-sig-block strong {
+    display: block;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .closing-sig-block span {
+    color: var(--mute);
+    display: block;
+  }
+
+  /* ============ FOOTER MINI ============ */
+  .footer-mini {
+    padding: 32px 40px;
+    text-align: center;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--mute);
+    text-transform: uppercase;
+    background: var(--cream);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 960px) {
+    .container { padding: 0 24px; }
+    .confidential-banner { padding: 10px 20px; font-size: 9px; letter-spacing: 1.5px; }
+    .conf-text { letter-spacing: 1.5px; font-size: 9px; }
+    .top-bar { padding: 14px 24px; }
+    .top-bar-left, .top-bar-right { font-size: 9px; letter-spacing: 2px; }
+    .top-bar-right { display: none; } /* cache sur petit écran */
+
+    .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 0; min-height: auto; }
+    .hero-visual { aspect-ratio: 3/4; max-height: 520px; }
+    .hero-side-card { right: -16px; top: 12%; width: 48%; padding: 20px; transform: rotate(2deg); }
+    .hero-side-card-title { font-size: 28px; }
+    .hero-card-main { padding: 28px; }
+    .hero-card-main::after { top: 20px; left: 20px; right: 20px; bottom: 20px; }
+    .hero-card-quote { font-size: 20px; }
+    .hero-meta { flex-wrap: wrap; gap: 24px; }
+    .meta-item strong { font-size: 18px; }
+
+    section { padding: 72px 0; }
+    .section-head { grid-template-columns: 1fr; gap: 16px; margin-bottom: 36px; }
+    .adn { margin: 0 -24px; padding: 72px 24px; }
+    .adn-grid { grid-template-columns: 1fr; }
+    .adn-cell { border-right: none; border-bottom: 1px solid var(--line); min-height: auto; padding: 40px 28px; }
+    .adn-cell:last-child { border-bottom: none; }
+    .adn-word { font-size: 44px; margin-bottom: 20px; }
+
+    .palette-grid { grid-template-columns: 1fr 1fr; height: auto; gap: 8px; }
+    .color-card { min-height: 180px; padding: 20px; }
+    .color-name { font-size: 20px; }
+
+    .typo-grid { grid-template-columns: 1fr; }
+    .typo-cell { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 24px; }
+    .typo-cell:last-child { border-bottom: none; }
+    .typo-name { font-size: 36px; }
+    .typo-name-sans { font-size: 32px; }
+    .typo-sample { font-size: 22px; }
+
+    .refs-wrapper { margin: 0 -24px; padding: 72px 24px; }
+    .refs-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; gap: 8px; }
+    .ref-a, .ref-b, .ref-c, .ref-d, .ref-e { grid-column: span 2; grid-row: span 1; }
+    .ref-cell { padding: 20px; }
+    .ref-content { font-size: 18px; }
+    .ref-a .ref-content { font-size: 22px; }
+
+    .transform { padding: 72px 0; }
+    .transform-grid { grid-template-columns: 1fr; }
+    .transform-arrow { padding: 16px 0; font-size: 32px; transform: rotate(90deg); }
+    .transform-col { padding: 32px 24px; }
+    .transform-title { font-size: 28px; }
+
+    .closing { margin: 0 -24px; padding: 80px 24px; }
+    .closing::before { margin-left: 20px; }
+    .closing-inner { padding-left: 40px; }
+    .closing-title { font-size: 44px; }
+    .closing-sub { font-size: 18px; margin-bottom: 48px; }
+    .closing-sig { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 44px; letter-spacing: -1px; }
+    .section-title { font-size: 32px; }
+    .hero-side-card { width: 56%; right: -20px; }
+    .hero-side-card-title { font-size: 22px; }
+  }
+
+  /* ============ STYLES D'IMPRESSION ============ */
+  @media print {
+    .confidential-banner, .top-bar { display: none; }
+    .hero { min-height: auto; page-break-after: always; }
+    section { page-break-inside: avoid; padding: 40px 0; }
+    .closing { page-break-before: always; }
+    body { background: white; }
+    .refs-wrapper { background: white; color: var(--black); }
+    .refs-wrapper .section-title { color: var(--bordeaux); }
+  }
+
+  /* Animation subtile à l'apparition */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-label,
+  .hero-title,
+  .hero-sub,
+  .hero-meta,
+  .hero-visual {
+    animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero-title { animation-delay: 0.1s; }
+  .hero-sub { animation-delay: 0.2s; }
+  .hero-meta { animation-delay: 0.3s; }
+  .hero-visual { animation-delay: 0.15s; }
+
+</style>
+</head>
+<body>
+
+<!-- ============ BANDEAU CONFIDENTIEL ============ -->
+<div class="confidential-banner">
+  <div class="confidential-inner">
+    <span class="conf-dot"></span>
+    <span class="conf-text">Document préparé pour <strong>Joel Desteney</strong> · Confidentiel · Ne pas diffuser</span>
+  </div>
+</div>
+
+<!-- ============ TOP BAR ============ -->
+<div class="top-bar">
+  <a href="https://okapiworldmedia.com" class="top-bar-left" target="_blank" rel="noopener">
+    <strong>OKAPI WORLD MÉDIA</strong> <span class="separator">×</span> PEARLACE
+  </a>
+  <div class="top-bar-right">
+    MOODBOARD · AVRIL 2026
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-label">Moodboard de Direction Artistique</div>
+      <h1 class="hero-title">
+        Pearlace,
+        <em>la belle lace wig</em>
+        <span class="gold-word">qu'on porte.</span>
+      </h1>
+      <p class="hero-sub">Ce document donne chair à la vision. Il montre, sans rien construire encore, à quoi pourrait ressembler Pearlace dans six mois — son ADN, sa voix, ses couleurs, ses références.</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          POSITIONNEMENT
+          <strong>Accessible Premium</strong>
+        </div>
+        <div class="meta-item">
+          TONALITÉ
+          <strong>Éditoriale</strong>
+        </div>
+        <div class="meta-item">
+          CIBLE
+          <strong>Sistas modernes</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card hero-card-main">
+        <div class="hero-card-inner">
+          <div class="hero-card-num">— 01 / Intention</div>
+          <p class="hero-card-quote">« Une perruque qui ne se cache plus. Qui se porte. Qui se signe. »</p>
+          <div class="hero-card-attr">— MANIFESTE PEARLACE</div>
+        </div>
+      </div>
+      <div class="hero-card hero-side-card">
+        <div class="hero-side-card-tag">POUR ELLES</div>
+        <div class="hero-side-card-title">celles qui<br>savent.</div>
+        <div class="hero-side-card-footer">PAS POUR TOUTES — POUR CELLES-LÀ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ADN EN 3 MOTS ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-index">
+        <strong>01.</strong> ADN DE MARQUE
+      </div>
+      <h2 class="section-title">
+        Trois mots <em>qui tiennent tout.</em>
+      </h2>
+    </div>
+  </section>
+</div>
+
+<div class="adn">
+  <div class="container">
+    <div class="adn-grid">
+      <div class="adn-cell">
+        <div>
+          <div class="adn-num">— 01</div>
+          <div class="adn-word">Accessible</div>
+        </div>
+        <div>
+          <div class="adn-separator"></div>
+          <p class="adn-body">Des prix justes, cohérents avec la qualité. Un paiement fractionné. Une expérience fluide. Pas le luxe inaccessible — la qualité comme un droit, pas comme un privilège.</p>
+        </div>
+      </div>
+      <div class="adn-cell">
+        <div>
+          <div class="adn-num">— 02</div>
+          <div class="adn-word">Éditoriale</div>
+        </div>
+        <div>
+          <div class="adn-separator"></div>
+          <p class="adn-body">Un univers visuel et narratif à la hauteur du produit. Des portraits, des films, un journal, des voix. La marque comme magazine vivant — pas comme catalogue produit.</p>
+        </div>
+      </div>
+      <div class="adn-cell">
+        <div>
+          <div class="adn-num">— 03</div>
+          <div class="adn-word">Désirable</div>
+        </div>
+        <div>
+          <div class="adn-separator"></div>
+          <p class="adn-body">Un objet de style qu'on porte par choix, pas par défaut. Une pièce qu'on assume, qu'on montre, qu'on recommande. Le fit d'abord, l'effet ensuite — et les deux irréprochables.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ============ PALETTE ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-index">
+        <strong>02.</strong> PALETTE CHROMATIQUE
+      </div>
+      <h2 class="section-title">
+        Une couleur dominante, <em>trois supports.</em>
+      </h2>
+    </div>
+
+    <div class="palette-grid">
+      <div class="color-card color-1">
+        <div>
+          <div class="color-info">01 — PRIMAIRE</div>
+        </div>
+        <div>
+          <div class="color-name">Bordeaux<br>Profond</div>
+          <div class="color-info" style="margin-top:16px;">
+            <strong>#6D2E46</strong>
+            Chaleur · Élégance · Soin
+          </div>
+        </div>
+      </div>
+      <div class="color-card color-2">
+        <div class="color-info">02 — ANCRAGE</div>
+        <div>
+          <div class="color-name">Encre</div>
+          <div class="color-info" style="margin-top:12px;">
+            <strong>#0A0A0A</strong>
+            Rigueur<br>Contraste
+          </div>
+        </div>
+      </div>
+      <div class="color-card color-3">
+        <div class="color-info">03 — ACCENT</div>
+        <div>
+          <div class="color-name">Or Doux</div>
+          <div class="color-info" style="margin-top:12px;">
+            <strong>#C9A84C</strong>
+            Rareté<br>Lumière
+          </div>
+        </div>
+      </div>
+      <div class="color-card color-4">
+        <div class="color-info">04 — RESPIRATION</div>
+        <div>
+          <div class="color-name">Crème<br>Nacré</div>
+          <div class="color-info" style="margin-top:12px;">
+            <strong>#F5EFE6</strong>
+            Douceur<br>Dignité
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TYPOGRAPHIE ============ -->
+  <section>
+    <div class="section-head">
+      <div class="section-index">
+        <strong>03.</strong> TYPOGRAPHIE
+      </div>
+      <h2 class="section-title">
+        Un duo qui <em>raconte.</em>
+      </h2>
+    </div>
+
+    <div class="typo-grid">
+      <div class="typo-cell">
+        <div class="typo-tag">— TITRES &amp; ÉDITORIAL</div>
+        <div class="typo-name">Cormorant Garamond</div>
+        <div class="typo-role">Serif italique · 400 / 500 / 700</div>
+        <p class="typo-sample">La beauté qu'on choisit de porter, jamais celle qu'on subit.</p>
+        <div class="typo-specs">
+          POIDS : REGULAR · MEDIUM · BOLD<br>
+          USAGE : TITRES · CITATIONS · MANIFESTE<br>
+          INSPIRATION : VOGUE · APARTAMENTO · KINFOLK
+        </div>
+      </div>
+      <div class="typo-cell">
+        <div class="typo-tag">— CORPS &amp; INTERFACE</div>
+        <div class="typo-name-sans">Inter</div>
+        <div class="typo-role">Sans-serif · 300 / 400 / 500 / 600</div>
+        <p class="typo-sample-sans">Textes longs, fiches produit, emails, newsletters. Une lecture propre, sans friction, qui laisse toute la place au contenu.</p>
+        <div class="typo-specs">
+          POIDS : LIGHT · REGULAR · MEDIUM · SEMIBOLD<br>
+          USAGE : CORPS DE TEXTE · UX · NAVIGATION<br>
+          INSPIRATION : SÉZANE · MEJURI · AIMÉ LEON DORE
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ RÉFÉRENCES ============ -->
+<div class="refs-wrapper">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-index" style="color: var(--gold);">
+        <strong style="color: var(--gold);">04.</strong> RÉFÉRENCES VISUELLES
+      </div>
+      <h2 class="section-title">
+        Les épaules <em>sur lesquelles on construit.</em>
+      </h2>
+    </div>
+
+    <div class="refs-grid">
+      <div class="ref-cell ref-a">
+        <div class="ref-tag">— CINÉMA</div>
+        <div class="ref-content">Barry Jenkins<br>Denis Villeneuve<br>Mati Diop<br>Julie Dash</div>
+      </div>
+      <div class="ref-cell ref-b">
+        <div class="ref-tag">— PHOTOGRAPHIE</div>
+        <div class="ref-content">Tyler Mitchell<br>Campbell Addy</div>
+      </div>
+      <div class="ref-cell ref-c">
+        <div class="ref-tag">— MODE</div>
+        <div class="ref-content">Aimé Leon Dore<br>Jacquemus</div>
+      </div>
+      <div class="ref-cell ref-d">
+        <div class="ref-tag">— MATIÈRES</div>
+        <div class="ref-content">Soie · Velours<br>Laiton · Laine</div>
+      </div>
+      <div class="ref-cell ref-e">
+        <div class="ref-tag">— BANDE-SON</div>
+        <div class="ref-content">Sade · Solange<br>SZA · H.E.R.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ============ AVANT / APRÈS ============ -->
+  <section class="transform">
+    <div class="section-head">
+      <div class="section-index">
+        <strong>05.</strong> CE QUE ÇA CHANGE
+      </div>
+      <h2 class="section-title">
+        Pearlace aujourd'hui, <em>Pearlace demain.</em>
+      </h2>
+    </div>
+
+    <div class="transform-grid">
+      <div class="transform-col before">
+        <div class="transform-label">AUJOURD'HUI</div>
+        <h3 class="transform-title">Un e-shop qui vend des perruques.</h3>
+        <ul class="transform-list">
+          <li>Visuels hero générés par IA, peu crédibles</li>
+          <li>Bandeau promo « -20% » permanent</li>
+          <li>Photos produit « wigs à bout de bras »</li>
+          <li>Copy technique, mélange tu/vous</li>
+          <li>Programme ambassadrice transactionnel</li>
+          <li>Compte TikTok embryonnaire, pas d'Instagram</li>
+          <li>Pas de récit fondateur, pas de manifeste</li>
+        </ul>
+      </div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-col after">
+        <div class="transform-label">DANS SIX MOIS</div>
+        <h3 class="transform-title">Une maison qui raconte des femmes.</h3>
+        <ul class="transform-list">
+          <li>Shootings pros — portraits, backstage, détails</li>
+          <li>Plein tarif assumé, promos rares et construites</li>
+          <li>Perruques portées, en mouvement, incarnées</li>
+          <li>Copy éditorial, une voix claire et tenue</li>
+          <li>Programme ambassadrice sélectif et éditorial</li>
+          <li>Instagram 5 000+ · TikTok 8 000+ · Pinterest lancé</li>
+          <li>Manifeste écrit, récit fondateur, voix de marque</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ CLÔTURE ============ -->
+<div class="closing">
+  <div class="closing-inner">
+    <div class="closing-label">— POUR JOEL, AVANT NOTRE CALL</div>
+    <h2 class="closing-title">
+      Pearlace,
+      <em>une marque qui mérite d'être vue.</em>
+    </h2>
+    <p class="closing-sub">Ce moodboard n'est pas une promesse — c'est une hypothèse visuelle. Il existe pour que nous puissions, ensemble, décider si cette direction est la bonne. Si elle te parle, on la construit. Si elle doit bouger, on l'ajuste. Tu décides.</p>
+
+    <div class="closing-sig">
+      <div class="closing-sig-block">
+        <strong>OKAPI WORLD MÉDIA</strong>
+        <span>Yamakasi — Fondateur &amp; Directeur créatif</span>
+        <span>yamakasi@okapiworldmedia.com</span>
+        <span>okapiworldmedia.com</span>
+      </div>
+      <div class="closing-sig-block">
+        <strong>POUR PEARLACE</strong>
+        <span>Joel Desteney — Fondateur</span>
+        <span>Document préparé pour le call du 21 avril 2026</span>
+        <span>Confidentiel — Non destiné à diffusion</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer-mini">
+  OKAPI WORLD MÉDIA × PEARLACE — MOODBOARD DE DIRECTION ARTISTIQUE — AVRIL 2026
+</div>
+
+</body>
+</html>
