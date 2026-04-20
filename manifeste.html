@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Manifeste Okapi World Média — Comment l'IA m'a rendu réalisateur. Du Congo à Paris, l'histoire derrière le studio.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Manifeste — Okapi World Média">
+  <meta property="og:description" content="Comment l'IA m'a rendu réalisateur. Du Congo à Paris, l'histoire derrière le studio.">
+  <meta property="og:url" content="https://okapiworldmedia.com/manifeste">
+  <meta property="og:image" content="https://okapiworldmedia.com/og_image.png">
+  <title>Manifeste — Okapi World Média</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .manifeste-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      background: #0A0A0A;
+    }
+    .manifeste-hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+    }
+    .manifeste-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #0A0A0A 0%, rgba(10,10,10,0.4) 40%, transparent 70%);
+    }
+    .manifeste-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 56px 100px;
+    }
+    .manifeste-hero-content .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 24px;
+    }
+    .manifeste-hero-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 300;
+      line-height: 1.1;
+      color: #F5F0E8;
+      margin-bottom: 20px;
+    }
+    .manifeste-hero-content h1 em {
+      color: #C9A84C;
+      font-style: italic;
+    }
+    .manifeste-hero-content .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(245,240,232,0.75);
+      max-width: 560px;
+    }
+
+    .manifeste-blocks {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 48px;
+    }
+    .manifeste-block {
+      margin-bottom: 100px;
+    }
+    .manifeste-block .block-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 56px;
+      color: rgba(201,168,76,0.2);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .manifeste-block h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      color: #F5F0E8;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .manifeste-block h2 em {
+      color: #C9A84C;
+      font-style: italic;
+    }
+    .manifeste-block p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 300;
+      color: rgba(245,240,232,0.75);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .manifeste-block .block-divider {
+      width: 48px;
+      height: 1px;
+      background: #C9A84C;
+      margin-top: 32px;
+    }
+
+    .manifeste-cta {
+      text-align: center;
+      padding: 120px 48px;
+      border-top: 1px solid rgba(201,168,76,0.1);
+    }
+    .manifeste-cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 300;
+      color: #F5F0E8;
+      margin-bottom: 16px;
+    }
+    .manifeste-cta h2 em {
+      color: #C9A84C;
+      font-style: italic;
+    }
+    .manifeste-cta p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: rgba(245,240,232,0.6);
+      margin-bottom: 48px;
+    }
+    .manifeste-cta .btn-primary {
+      display: inline-block;
+      padding: 18px 44px;
+      border: 1px solid #C9A84C;
+      color: #C9A84C;
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .manifeste-cta .btn-primary:hover {
+      background: #C9A84C;
+      color: #0A0A0A;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo"><a href="/"><img src="assets/img_02_252ae974ae16.webp" alt="Okapi World Média"></a></div>
+  <ul class="nav-links">
+    <li><a href="/#branches">Studios</a></li>
+    <li><a href="/manifeste.html">Manifeste</a></li>
+    <li><a href="/about.html">À propos</a></li>
+    <li><a href="/#offres">Offres</a></li>
+    <li><a href="/#clients">Clients</a></li>
+    <li><a href="/crealab.html">Créa Lab</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO — Film manifeste plein écran -->
+<section class="manifeste-hero">
+  <video autoplay muted loop playsinline>
+    <source src="assets/manifeste-film.mp4" type="video/mp4">
+  </video>
+  <div class="manifeste-hero-overlay"></div>
+  <div class="manifeste-hero-content">
+    <div class="hero-label">Manifeste · Okapi World Média</div>
+    <h1>Comment l'IA m'a rendu <em>réalisateur.</em></h1>
+    <p class="hero-sub">Du Congo-Brazzaville à Paris. D'un rêve impossible à un studio créatif. Voici l'histoire.</p>
+  </div>
+</section>
+
+<!-- 4 BLOCS NARRATIFS -->
+<div class="manifeste-blocks">
+
+  <!-- 01 · CONGO -->
+  <div class="manifeste-block">
+    <div class="block-num">01</div>
+    <h2>Je suis né au Congo<br><em>avec des images plein la tête.</em></h2>
+    <p>Des histoires ambitieuses que je voulais montrer au monde. Des personnages, des lumières, des cadres — tout était déjà là, dans ma tête. Mais pas les moyens. Pas les connexions. Pas le passeport qui ouvre les portes.</p>
+    <p>À Brazzaville, rêver de cinéma, c'est rêver en silence.</p>
+    <div class="block-divider"></div>
+  </div>
+
+  <!-- 02 · LE MUR -->
+  <div class="manifeste-block">
+    <div class="block-num">02</div>
+    <h2>Le mur.<br><em>Celui que tout créatif connaît.</em></h2>
+    <p>Trouver des financements ressemblait à un parcours du combattant. Rassembler des artistes — un chemin de croix. Chaque projet avançait au ralenti, freiné par un système qui n'était pas conçu pour nous.</p>
+    <p>Le talent ne manquait pas. Les ressources, si.</p>
+    <div class="block-divider"></div>
+  </div>
+
+  <!-- 03 · LA RÉVÉLATION -->
+  <div class="manifeste-block">
+    <div class="block-num">03</div>
+    <h2>Puis l'IA est arrivée.<br><em>Et le mur s'est effondré.</em></h2>
+    <p>Pas pour remplacer l'humain. Pour amplifier sa vision. En quelques mois, j'ai pu créer ce que des années de recherche de financement n'avaient pas permis : des films, des campagnes, des univers visuels entiers.</p>
+    <p>L'IA n'a pas fait de moi un artiste. Elle m'a donné les outils pour le devenir pleinement.</p>
+    <div class="block-divider"></div>
+  </div>
+
+  <!-- 04 · LA MISSION -->
+  <div class="manifeste-block">
+    <div class="block-num">04</div>
+    <h2>Okapi World Média existe pour ceux<br><em>qui ont des rêves plus grands que leurs moyens.</em></h2>
+    <p>Il y a des milliers de fondateurs, de créatifs, de marques ambitieuses qui ont des histoires extraordinaires à raconter. Des histoires vraies. Qui méritent d'exister.</p>
+    <p>Notre mission : leur donner une direction artistique digne de leur vision — sans le budget Hollywood, sans les compromis.</p>
+    <div class="block-divider"></div>
+  </div>
+
+</div>
+
+<!-- CTA FIN DE PAGE -->
+<section class="manifeste-cta">
+  <h2>Parlons de <em>votre vision.</em></h2>
+  <p>20 minutes pour comprendre votre projet et voir si nous pouvons créer ensemble.</p>
+  <a href="/#contact" class="btn-primary">Réserver un appel &rarr;</a>
+</section>
+
+<footer>
+  <div class="footer-logo"><img loading="lazy" src="assets/img_02_252ae974ae16.webp" alt="Okapi World Média"></div>
+  <div class="footer-copy">&copy; 2026 · Yamakasi · Okapi World Média · Paris</div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
