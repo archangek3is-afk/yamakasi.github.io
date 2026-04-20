@@ -1039,6 +1039,16 @@ nav.scrolled {
   }
 }
 
+/* === CARTES NON-CLIQUABLES TEMPORAIRES === */
+.audience-card.coming-soon {
+  cursor: default !important;
+  pointer-events: auto;
+}
+
+.audience-card.coming-soon:hover {
+  transform: translateY(-4px);
+}
+
 /* 3. RESET GLOBAL anti-liens bleus */
 
 a {
