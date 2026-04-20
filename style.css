@@ -221,6 +221,33 @@
     img.client-logo[alt="Heroes"]:hover { filter: brightness(1.3); opacity: 1; }
     img.client-logo[alt="EJP Films"]:hover { filter: brightness(1.3); opacity: 1; }
 
+    /* ── SECTION DIVIDER (okapi symbol) ── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 60px 0;
+    }
+    .section-divider::before {
+      content: '';
+      height: 1px;
+      width: 120px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .section-divider::after {
+      content: '';
+      height: 1px;
+      width: 120px;
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+    .section-divider-icon {
+      width: 52px;
+      height: 52px;
+      opacity: 0.75;
+      flex-shrink: 0;
+    }
+
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 900px) {
