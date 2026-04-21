@@ -253,8 +253,7 @@
     @media (max-width: 900px) {
       nav { padding: 20px 24px; }
       .nav-links { display: none; }
-      .hero { padding: 100px 24px 80px; }
-      .hero-stats { gap: 32px; }
+      /* .hero mobile → géré dans le bloc dédié plus bas (ligne ~823) */
       .branches-inner, .clients-inner, .offres-inner { padding: 0 24px; }
       .branches-grid, .offres-grid { grid-template-columns: 1fr; }
       .manifeste-section { padding: 72px 24px; }
