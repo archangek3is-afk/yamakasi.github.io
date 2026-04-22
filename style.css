@@ -709,12 +709,15 @@ nav.scrolled {
   position: absolute;
   top: 0;
   left: 0;
-  width: 60%;
+  width: 85%;
   height: 100%;
   background: linear-gradient(
     to right,
     var(--owm-noir) 0%,
-    rgba(10,10,10,0.8) 40%,
+    var(--owm-noir) 20%,
+    rgba(10,10,10,0.92) 38%,
+    rgba(10,10,10,0.6) 58%,
+    rgba(10,10,10,0.15) 75%,
     transparent 100%
   );
   z-index: 2;
