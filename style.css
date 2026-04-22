@@ -120,8 +120,8 @@
     .offre-title { font-size: 28px; font-weight: 300; font-style: italic; margin-bottom: 20px; }
     .offre-desc { font-size: 16px; font-weight: 400; line-height: 1.75; color: rgba(245,240,232,0.85); margin-bottom: 32px; }
     .offre-tags { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--grey); text-transform: uppercase; margin-bottom: 36px; }
-    .offre-price { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--white); }
-    .offre-price span { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--grey); letter-spacing: 2px; display: block; margin-top: 4px; }
+    .offre-cta { font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 3px; color: #C9A84C; text-decoration: none; border-bottom: 1px solid #C9A84C; padding-bottom: 2px; text-transform: uppercase; transition: opacity 0.3s; }
+    .offre-cta:hover { opacity: 0.7; }
 
     /* CLIENTS */
     .clients-section { background: var(--dark); padding: 80px 0; border-top: 1px solid rgba(201,168,76,0.08); }
@@ -182,15 +182,6 @@
       letter-spacing: 4px; 
     }
     
-    /* Offre price */
-    .offre-price { 
-      font-size: 32px; 
-    }
-    .offre-price span { 
-      font-size: 11px; 
-      letter-spacing: 2px; 
-      opacity: 0.65;
-    }
 
     /* Branch card padding tighter with bigger logos */
     .branch-card {
@@ -828,6 +819,19 @@ nav.scrolled {
     position: relative;
     overflow: hidden;
     padding: 0;
+    margin-top: 0;
+  }
+
+  /* Empêche la bande noire entre nav et hero au scroll */
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: -50px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: var(--owm-noir);
+    z-index: 0;
   }
 
   /* Image en fond plein écran */
@@ -888,13 +892,15 @@ nav.scrolled {
   }
 
   /* Logo OWM centré en haut, au niveau du front */
-  nav {
+  nav,
+  nav.scrolled {
     position: absolute !important;
     top: 18vh !important;
     left: 0 !important;
     right: 0 !important;
     justify-content: center !important;
     background: none !important;
+    border-bottom: none !important;
     padding: 0 !important;
     z-index: 20;
   }
