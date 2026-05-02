@@ -8,7 +8,7 @@
 <link rel="shortcut icon" href="/assets/okapi-symbol-premium.png">
 <link rel="apple-touch-icon" href="/assets/okapi-symbol-premium.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Direction artistique cinématographique pour marques DNVB et scale-ups. Vous êtes une marque. Devenez un univers. Productions à partir de 3 000€ HT.">
+<meta name="description" content="Direction artistique cinématographique pour marques DNVB et scale-ups. Vous êtes une marque. Devenez un univers.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MARQUES — Okapi World Média | Direction artistique cinématographique">
 <meta property="og:description" content="Vous êtes une marque. Devenez un univers. Direction artistique cinématographique pour les marques qui veulent passer du produit au mythe.">
@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Poppins:wght@500&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/marques/mode/mode-aisance-bandeau.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/marques/aisance/aisance-hero.jpg" fetchpriority="high">
 <style>
 :root{
   --gold:#C9A84C;--dark:#0A0A0A;--dark2:#111111;--dark3:#1A1A1A;
@@ -67,10 +67,6 @@ body{background:var(--dark);color:var(--white);font-family:'Cormorant Garamond',
   transition:all 0.3s;
 }
 .hero-cta:hover{background:rgba(201,168,76,0.12);border-color:var(--gold);}
-.hero-floor{
-  margin-top:48px;font-family:'Space Mono',monospace;font-size:12px;
-  color:rgba(245,240,232,0.45);letter-spacing:2px;
-}
 
 /* =============================== */
 /* S2 — LE PROBLÈME                */
@@ -103,10 +99,10 @@ body{background:var(--dark);color:var(--white);font-family:'Cormorant Garamond',
 }
 
 /* =============================== */
-/* S4 — GALERIE                    */
+/* S4 — GALERIE (CASE STUDIES)     */
 /* =============================== */
 .galerie{background:var(--white);padding:120px 56px;}
-.galerie-header{text-align:center;margin-bottom:64px;}
+.galerie-header{text-align:center;margin-bottom:80px;}
 .galerie-header h2{
   font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,56px);
   letter-spacing:0.04em;color:var(--dark);margin-bottom:12px;
@@ -114,39 +110,40 @@ body{background:var(--dark);color:var(--white);font-family:'Cormorant Garamond',
 .galerie-header p{
   font-family:'Space Mono',monospace;font-style:italic;font-size:16px;color:var(--grey);
 }
-.galerie-cat{margin-bottom:72px;}
-.galerie-cat h3{
+.case-study{max-width:1200px;margin:0 auto 120px;position:relative;}
+.case-study::after{
+  content:'';display:block;width:200px;height:1px;
+  background:var(--gold);margin:120px auto 0;
+}
+.case-study:last-of-type::after{display:none;}
+.case-hero{overflow:hidden;}
+.case-hero img{width:100%;max-height:70vh;object-fit:cover;display:block;}
+.case-meta{
+  display:flex;align-items:baseline;justify-content:space-between;
+  padding:32px 0;gap:24px;
+}
+.case-meta h3{
   font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
-  font-size:36px;color:var(--dark);margin-bottom:8px;
+  font-size:clamp(32px,4vw,48px);color:var(--dark);
 }
-.galerie-cat > p{
-  font-family:'Space Mono',monospace;font-size:13px;color:var(--grey);
-  margin-bottom:32px;letter-spacing:1px;
+.case-caption{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;
+  color:#1C1C1C;
 }
-.galerie-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
-.galerie-card{
-  position:relative;overflow:hidden;background:var(--dark);display:block;
-  text-decoration:none;
+.case-categorie{
+  font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;
+  color:#666;white-space:nowrap;
 }
-.galerie-card img{
-  width:100%;height:400px;object-fit:cover;display:block;
-  transition:transform 0.5s ease;
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.case-grid img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;display:block;
+  transition:transform 0.4s ease;
 }
-.galerie-card:hover img{transform:scale(1.03);}
-.galerie-card::after{
-  content:'';position:absolute;inset:0;
-  background:rgba(201,168,76,0);transition:background 0.3s;pointer-events:none;
-}
-.galerie-card:hover::after{background:rgba(201,168,76,0.08);}
-.galerie-caption{
-  padding:20px 24px;background:var(--dark);
-  font-family:'Space Mono',monospace;font-size:12px;
-  color:rgba(245,240,232,0.7);letter-spacing:1px;
-}
-.galerie-note{
-  text-align:center;margin-top:48px;
+.case-grid img:hover{transform:scale(1.03);}
+.galerie-disclaimer{
+  text-align:center;margin-top:80px;max-width:700px;margin-left:auto;margin-right:auto;
   font-family:'Space Mono',monospace;font-style:italic;font-size:12px;
-  color:rgba(136,136,136,0.6);max-width:700px;margin-left:auto;margin-right:auto;
+  color:rgba(136,136,136,0.6);
 }
 
 /* =============================== */
@@ -246,7 +243,10 @@ footer{
 @media(max-width:900px){
   .promesse-grid{grid-template-columns:1fr;gap:48px;}
   .offres-grid{grid-template-columns:1fr;gap:24px;}
-  .galerie-grid{grid-template-columns:1fr;}
+  .case-grid{grid-template-columns:repeat(2,1fr);}
+  .case-meta{flex-direction:column;gap:8px;}
+  .case-study{margin-bottom:60px;}
+  .case-study::after{margin-top:60px;}
 }
 @media(max-width:768px){
   .nav{padding:0 20px;height:52px;}
@@ -290,14 +290,13 @@ footer{
 <!-- ======================================== -->
 <section class="hero" id="manifeste">
   <div class="hero-bg">
-    <img src="assets/marques/mode/mode-aisance-bandeau.jpg" alt="Direction artistique cinématographique — campagne mode AISANCE">
+    <img src="assets/marques/aisance/aisance-hero.jpg" alt="Direction artistique cinématographique — campagne mode AISANCE">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <h1 class="hero-tagline">Vous êtes une marque.<br>Devenez un univers.</h1>
     <p class="hero-sub">Direction artistique cinématographique pour les marques qui veulent passer du produit au mythe.</p>
     <a href="#contact" class="hero-cta">Démarrer une conversation</a>
-    <div class="hero-floor">Productions à partir de 3 000€ HT</div>
   </div>
 </section>
 
@@ -334,7 +333,7 @@ footer{
 </section>
 
 <!-- ======================================== -->
-<!-- SECTION 4 — GALERIE SPEC PROJECTS       -->
+<!-- SECTION 4 — GALERIE CASE STUDIES        -->
 <!-- ======================================== -->
 <section class="galerie" id="galerie">
   <div class="galerie-header">
@@ -342,39 +341,92 @@ footer{
     <p>Voici ce que nous pourrions imaginer pour vous.</p>
   </div>
 
-  <!-- 4A — MODE & MAROQUINERIE -->
-  <div class="galerie-cat">
-    <h3>Mode & Maroquinerie</h3>
-    <p>L'objet comme totem. La mode comme rituel.</p>
-    <div class="galerie-grid">
-      <div class="galerie-card">
-        <img src="assets/marques/mode/mode-aisance-bandeau.jpg" alt="AISANCE — Campagne maroquinerie luxe, groupe de femmes en tailleur, yeux bandés, sac tote camel, intérieur minimaliste et cerisiers japonais" loading="lazy">
-        <div class="galerie-caption">AISANCE — Certaines savent déjà où regarder.</div>
-      </div>
-      <div class="galerie-card">
-        <img src="assets/marques/mode/mode-suburban-sac.jpg" alt="Campagne mode pop suburban — sac rose géant surplombant un quartier résidentiel miniature, esthétique Wes Anderson, couleurs saturées" loading="lazy">
-        <div class="galerie-caption">Pop Suburban — Une grammaire colorée pour l'inattendu.</div>
-      </div>
+  <!-- CASE STUDY 1 — AISANCE -->
+  <article class="case-study">
+    <div class="case-hero">
+      <img src="assets/marques/aisance/aisance-hero.jpg" alt="AISANCE — Campagne maroquinerie luxe, groupe de cinq femmes en tailleur aux yeux bandés, sac tote camel au sol, intérieur vitré minimaliste" loading="lazy">
     </div>
-  </div>
-
-  <!-- 4B — BEAUTÉ & LIFESTYLE -->
-  <div class="galerie-cat">
-    <h3>Beauté & Lifestyle</h3>
-    <p>Le produit comme acte. La sensation comme signature.</p>
-    <div class="galerie-grid">
-      <div class="galerie-card">
-        <img src="assets/marques/beaute-lifestyle/beaute-miel-packshot.jpg" alt="MIELLE — Rouge à lèvres rouge dans un splash de miel doré, éclairage chaud cinématographique, packshot macro luxe" loading="lazy">
-        <div class="galerie-caption">MIELLE — Le rouge qui se mange.</div>
+    <div class="case-meta">
+      <div>
+        <h3>AISANCE</h3>
+        <p class="case-caption">Certaines savent déjà où regarder.</p>
       </div>
-      <div class="galerie-card">
-        <img src="assets/marques/beaute-lifestyle/lifestyle-moyi-canette.jpg" alt="MOYI — Canette energy drink dorée et cuivrée, fumée et glace, ambiance dark et moody, packshot premium" loading="lazy">
-        <div class="galerie-caption">MOYI — L'énergie comme un soleil intérieur.</div>
-      </div>
+      <span class="case-categorie">Mode & Maroquinerie</span>
     </div>
-  </div>
+    <div class="case-grid">
+      <img src="assets/marques/aisance/aisance-01.jpg" alt="AISANCE — Groupe de sept femmes aux yeux bandés, intérieur vitré, cerisiers en arrière-plan" loading="lazy">
+      <img src="assets/marques/aisance/aisance-02.jpg" alt="AISANCE — Campagne avec tagline et logo, groupe de femmes yeux bandés, sac tote camel" loading="lazy">
+      <img src="assets/marques/aisance/aisance-03.jpg" alt="AISANCE — Mannequin en trench coat sous cerisiers en fleurs, golden hour, sac camel à l'épaule" loading="lazy">
+      <img src="assets/marques/aisance/aisance-04.jpg" alt="AISANCE — Packshot sac tote camel avec foulard, intérieur minimaliste lumineux" loading="lazy">
+      <img src="assets/marques/aisance/aisance-05.jpg" alt="AISANCE — Sac tote camel avec foulard coloré posé sur parquet, baie vitrée et végétation" loading="lazy">
+    </div>
+  </article>
 
-  <p class="galerie-note">Tous les visuels présentés sont des projets de création originaux Okapi World Média. Marques imaginaires. Univers réels.</p>
+  <!-- CASE STUDY 2 — MIELLE -->
+  <article class="case-study">
+    <div class="case-hero">
+      <img src="assets/marques/mielle/mielle-hero.jpg" alt="MIELLE — Rouge à lèvres rouge dans un splash dynamique de miel doré, éclairage cinématographique chaud" loading="lazy">
+    </div>
+    <div class="case-meta">
+      <div>
+        <h3>MIELLE</h3>
+        <p class="case-caption">Le rouge qui se mange.</p>
+      </div>
+      <span class="case-categorie">Beauté</span>
+    </div>
+    <div class="case-grid">
+      <img src="assets/marques/mielle/mielle-01.jpg" alt="MIELLE — Portrait mannequin regard intense tenant le lipstick fermé, robe rouge satinée" loading="lazy">
+      <img src="assets/marques/mielle/mielle-02.jpg" alt="MIELLE — Lipstick rouge debout dans une flaque de miel doré, packshot frontal" loading="lazy">
+      <img src="assets/marques/mielle/mielle-03.jpg" alt="MIELLE — Portrait mannequin avec reflet miroir, produit en main, fond rouge" loading="lazy">
+      <img src="assets/marques/mielle/mielle-04.jpg" alt="MIELLE — Main élégante tenant le produit au bord d'un miroir, éclairage cuivré" loading="lazy">
+      <img src="assets/marques/mielle/mielle-05.jpg" alt="MIELLE — Portrait yeux fermés, deux lipsticks de chaque côté du visage, fond rouge" loading="lazy">
+    </div>
+  </article>
+
+  <!-- CASE STUDY 3 — MOYI -->
+  <article class="case-study">
+    <div class="case-hero">
+      <img src="assets/marques/moyi/moyi-hero.jpg" alt="MOYI — Canette energy drink dorée face caméra, fumée dense, reflet au sol, ambiance dark moody" loading="lazy">
+    </div>
+    <div class="case-meta">
+      <div>
+        <h3>MOYI</h3>
+        <p class="case-caption">L'énergie comme un soleil intérieur.</p>
+      </div>
+      <span class="case-categorie">Lifestyle & Beverage</span>
+    </div>
+    <div class="case-grid">
+      <img src="assets/marques/moyi/moyi-01.jpg" alt="MOYI — Canette vue plongeante, fumée dense enveloppante, ambiance sombre" loading="lazy">
+      <img src="assets/marques/moyi/moyi-02.jpg" alt="MOYI — Canette orange dans glaçons, palette cyan et cuivre, condensation" loading="lazy">
+      <img src="assets/marques/moyi/moyi-03.jpg" alt="MOYI — Vue plongeante sur capsule de canette, fumée blanche, macro artistique" loading="lazy">
+      <img src="assets/marques/moyi/moyi-04.jpg" alt="MOYI — Silhouette canette dorée sur fond noir total, rim light or, fumée basse" loading="lazy">
+    </div>
+  </article>
+
+  <!-- CASE STUDY 4 — POP SUBURBAN -->
+  <article class="case-study">
+    <div class="case-hero">
+      <img src="assets/marques/pop-suburban/pop-suburban-hero.jpg" alt="Pop Suburban — Sac à main rose géant surplombant un quartier résidentiel miniature, mannequin en jaune, esthétique Wes Anderson" loading="lazy">
+    </div>
+    <div class="case-meta">
+      <div>
+        <h3>POP SUBURBAN</h3>
+        <p class="case-caption">Une grammaire colorée pour l'inattendu.</p>
+      </div>
+      <span class="case-categorie">Mode pop</span>
+    </div>
+    <div class="case-grid">
+      <img src="assets/marques/pop-suburban/pop-suburban-01.jpg" alt="Pop Suburban — Sac rose géant vu en surplomb sur quartier de maisons colorées, ciel bleu" loading="lazy">
+      <img src="assets/marques/pop-suburban/pop-suburban-02.jpg" alt="Pop Suburban — Mannequin en tailleur bleu marine devant réverbère et maison jaune, fond rouge" loading="lazy">
+      <img src="assets/marques/pop-suburban/pop-suburban-03.jpg" alt="Pop Suburban — Satchel hot pink sur colline de maisons pastel colorées, ciel bleu vif" loading="lazy">
+      <img src="assets/marques/pop-suburban/pop-suburban-04.jpg" alt="Pop Suburban — Sac rose géant avec mannequin jaune assise dessus, maisons miniatures pastel" loading="lazy">
+      <img src="assets/marques/pop-suburban/pop-suburban-05.jpg" alt="Pop Suburban — Mannequin tailleur navy avec sac jaune devant maison maquette et fond rouge" loading="lazy">
+    </div>
+  </article>
+
+  <div class="galerie-disclaimer">
+    <p>Tous les visuels présentés sont des projets de création originaux Okapi World Média. Marques imaginaires. Univers réels.</p>
+  </div>
 </section>
 
 <!-- ======================================== -->
@@ -404,7 +456,7 @@ footer{
     </div>
   </div>
 
-  <p class="offres-floor">Productions à partir de 3 000€ HT — projets calibrés à votre ambition.</p>
+  <p class="offres-floor">Chaque projet est calibré à votre ambition. Discutons-en.</p>
   <div class="offres-cta">
     <a href="#contact">Discutons de votre univers</a>
   </div>
