@@ -140,6 +140,12 @@ body{background:var(--dark);color:var(--white);font-family:'Cormorant Garamond',
   transition:transform 0.4s ease;
 }
 .case-grid img:hover{transform:scale(1.03);}
+.case-grid-full{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.case-grid-full img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;display:block;
+  transition:transform 0.4s ease;
+}
+.case-grid-full img:hover{transform:scale(1.03);}
 .galerie-disclaimer{
   text-align:center;margin-top:80px;max-width:700px;margin-left:auto;margin-right:auto;
   font-family:'Space Mono',monospace;font-style:italic;font-size:12px;
@@ -244,6 +250,7 @@ footer{
   .promesse-grid{grid-template-columns:1fr;gap:48px;}
   .offres-grid{grid-template-columns:1fr;gap:24px;}
   .case-grid{grid-template-columns:repeat(2,1fr);}
+  .case-grid-full{grid-template-columns:repeat(2,1fr);}
   .case-meta{flex-direction:column;gap:8px;}
   .case-study{margin-bottom:60px;}
   .case-study::after{margin-top:60px;}
@@ -357,12 +364,33 @@ footer{
       <img src="assets/marques/aisance/aisance-01.jpg" alt="AISANCE — Groupe de sept femmes aux yeux bandés, intérieur vitré, cerisiers en arrière-plan" loading="lazy">
       <img src="assets/marques/aisance/aisance-02.jpg" alt="AISANCE — Campagne avec tagline et logo, groupe de femmes yeux bandés, sac tote camel" loading="lazy">
       <img src="assets/marques/aisance/aisance-03.jpg" alt="AISANCE — Mannequin en trench coat sous cerisiers en fleurs, golden hour, sac camel à l'épaule" loading="lazy">
-      <img src="assets/marques/aisance/aisance-04.jpg" alt="AISANCE — Packshot sac tote camel avec foulard, intérieur minimaliste lumineux" loading="lazy">
-      <img src="assets/marques/aisance/aisance-05.jpg" alt="AISANCE — Sac tote camel avec foulard coloré posé sur parquet, baie vitrée et végétation" loading="lazy">
+      <img src="assets/marques/aisance/aisance-04.jpg" alt="AISANCE — Cinq femmes en tailleur debout et assises, intérieur béton vitré minimaliste, sac tote camel au sol" loading="lazy">
+      <img src="assets/marques/aisance/aisance-05.jpg" alt="AISANCE — Trois femmes assises sur canapé, mannequin asiatique au centre avec sac AISANCE, cerisiers en arrière-plan" loading="lazy">
     </div>
   </article>
 
-  <!-- CASE STUDY 2 — MIELLE -->
+  <!-- CASE STUDY 2 — AISANCE PRINTEMPS -->
+  <article class="case-study">
+    <div class="case-hero">
+      <img src="assets/marques/aisance-printemps/aisance-printemps-hero.jpg" alt="AISANCE PRINTEMPS — Mannequin asiatique en trench beige sous cerisier en fleurs, golden hour, temple japonais" loading="lazy">
+    </div>
+    <div class="case-meta">
+      <div>
+        <h3>AISANCE — Édition Printemps</h3>
+        <p class="case-caption">Quand la légèreté devient une saison.</p>
+      </div>
+      <span class="case-categorie">Mode & Maroquinerie — Collection Printemps</span>
+    </div>
+    <div class="case-grid">
+      <img src="assets/marques/aisance-printemps/aisance-printemps-01.jpg" alt="AISANCE PRINTEMPS — Mannequin marchant dans jardin de cerisiers, trench long beige, sac sur le bras" loading="lazy">
+      <img src="assets/marques/aisance-printemps/aisance-printemps-02.jpg" alt="AISANCE PRINTEMPS — Mannequin debout sous cerisiers en fleurs, trench et top blanc, sac rose nude" loading="lazy">
+      <img src="assets/marques/aisance-printemps/aisance-printemps-03.jpg" alt="AISANCE PRINTEMPS — Mannequin trench beige, pétales volant, temple japonais, pose dynamique" loading="lazy">
+      <img src="assets/marques/aisance-printemps/aisance-printemps-04.jpg" alt="AISANCE PRINTEMPS — Mannequin en trench classique sous cerisiers, lumière naturelle, pose large" loading="lazy">
+      <img src="assets/marques/aisance-printemps/aisance-printemps-05.jpg" alt="AISANCE PRINTEMPS — Mannequin trench et sac, style éditorial magazine, cerisiers au crépuscule" loading="lazy">
+    </div>
+  </article>
+
+  <!-- CASE STUDY 3 — MIELLE -->
   <article class="case-study">
     <div class="case-hero">
       <img src="assets/marques/mielle/mielle-hero.jpg" alt="MIELLE — Rouge à lèvres rouge dans un splash dynamique de miel doré, éclairage cinématographique chaud" loading="lazy">
@@ -374,16 +402,25 @@ footer{
       </div>
       <span class="case-categorie">Beauté</span>
     </div>
-    <div class="case-grid">
+    <div class="case-grid-full">
       <img src="assets/marques/mielle/mielle-01.jpg" alt="MIELLE — Portrait mannequin regard intense tenant le lipstick fermé, robe rouge satinée" loading="lazy">
       <img src="assets/marques/mielle/mielle-02.jpg" alt="MIELLE — Lipstick rouge debout dans une flaque de miel doré, packshot frontal" loading="lazy">
       <img src="assets/marques/mielle/mielle-03.jpg" alt="MIELLE — Portrait mannequin avec reflet miroir, produit en main, fond rouge" loading="lazy">
       <img src="assets/marques/mielle/mielle-04.jpg" alt="MIELLE — Main élégante tenant le produit au bord d'un miroir, éclairage cuivré" loading="lazy">
       <img src="assets/marques/mielle/mielle-05.jpg" alt="MIELLE — Portrait yeux fermés, deux lipsticks de chaque côté du visage, fond rouge" loading="lazy">
+      <img src="assets/marques/mielle/mielle-06.jpg" alt="MIELLE — Mannequin afro cheveux bouclés tenant le lipstick, fond rouge intense" loading="lazy">
+      <img src="assets/marques/mielle/mielle-07.jpg" alt="MIELLE — Mannequin afro wink kiss, lipstick en main, fond rouge cuivré" loading="lazy">
+      <img src="assets/marques/mielle/mielle-08.jpg" alt="MIELLE — Macro bullet lipstick rouge, texture détaillée, fond orange doré" loading="lazy">
+      <img src="assets/marques/mielle/mielle-09.jpg" alt="MIELLE — Macro bullet lipstick angle latéral, lumière dorée chaude" loading="lazy">
+      <img src="assets/marques/mielle/mielle-10.jpg" alt="MIELLE — Bullet lipstick couché dans miel doré, vue macro plongée" loading="lazy">
+      <img src="assets/marques/mielle/mielle-11.jpg" alt="MIELLE — Macro bullet avec visage souriant en flou, lumière cuivrée" loading="lazy">
+      <img src="assets/marques/mielle/mielle-12.jpg" alt="MIELLE — Lipstick rouge dans splash de miel doré dynamique, fond rouge" loading="lazy">
+      <img src="assets/marques/mielle/mielle-13.jpg" alt="MIELLE — Macro lèvres application lipstick rouge, close-up ultra" loading="lazy">
+      <img src="assets/marques/mielle/mielle-14.jpg" alt="MIELLE — Mannequin portrait application lipstick rouge, fond rouge intense" loading="lazy">
     </div>
   </article>
 
-  <!-- CASE STUDY 3 — MOYI -->
+  <!-- CASE STUDY 4 — MOYI -->
   <article class="case-study">
     <div class="case-hero">
       <img src="assets/marques/moyi/moyi-hero.jpg" alt="MOYI — Canette energy drink dorée face caméra, fumée dense, reflet au sol, ambiance dark moody" loading="lazy">
@@ -403,7 +440,7 @@ footer{
     </div>
   </article>
 
-  <!-- CASE STUDY 4 — POP SUBURBAN -->
+  <!-- CASE STUDY 5 — POP SUBURBAN -->
   <article class="case-study">
     <div class="case-hero">
       <img src="assets/marques/pop-suburban/pop-suburban-hero.jpg" alt="Pop Suburban — Sac à main rose géant surplombant un quartier résidentiel miniature, mannequin en jaune, esthétique Wes Anderson" loading="lazy">
