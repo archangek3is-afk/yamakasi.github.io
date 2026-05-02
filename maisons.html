@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Poppins:wght@500&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/maisons/mailu/campagne/mailu-hero-couple.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/mailu-hero-couple-parc.webp" fetchpriority="high">
 <style>
 :root{
   --gold:#C9A84C;--dark:#0A0A0A;--dark2:#111111;--dark3:#1A1A1A;
@@ -80,7 +80,7 @@ body{background:var(--dark);color:var(--white);font-family:'Cormorant Garamond',
   font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,56px);
   letter-spacing:0.04em;color:var(--dark);margin-bottom:56px;text-align:center;
 }
-.genese-grid{display:grid;grid-template-columns:1fr 300px;gap:64px;max-width:1000px;margin:0 auto;align-items:center;}
+.genese-grid{display:grid;grid-template-columns:1fr 400px;gap:64px;max-width:1100px;margin:0 auto;align-items:center;}
 .genese-text{
   font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;
   color:#1C1C1C;line-height:1.8;
@@ -89,7 +89,7 @@ body{background:var(--dark);color:var(--white);font-family:'Cormorant Garamond',
   font-family:'Space Mono',monospace;font-style:normal;font-size:14px;
   color:#333;line-height:2;margin-top:24px;
 }
-.genese-visual img{width:100%;border:1px solid rgba(0,0,0,0.06);}
+.genese-visual img{width:100%;border:none;outline:none;box-shadow:none;background:transparent;}
 .genese-note{
   text-align:center;margin-top:48px;max-width:700px;margin-left:auto;margin-right:auto;
   font-family:'Space Mono',monospace;font-style:italic;font-size:14px;
@@ -204,11 +204,17 @@ body{background:var(--dark);color:var(--white);font-family:'Cormorant Garamond',
 }
 .films-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:48px;max-width:1100px;margin:0 auto;}
 .film-card{text-align:center;}
-.film-card .embed-wrap{
-  background:var(--dark2);border:1px solid rgba(201,168,76,0.06);
-  padding:24px;min-height:480px;display:flex;align-items:center;justify-content:center;
+.film-card a.film-link{display:block;position:relative;overflow:hidden;text-decoration:none;}
+.film-card a.film-link img{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;transition:transform 0.4s ease,filter 0.4s ease;filter:brightness(0.85);}
+.film-card a.film-link:hover img{transform:scale(1.03);filter:brightness(0.7);}
+.film-card .film-voir{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  font-family:'Poppins',sans-serif;font-weight:500;font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);background:rgba(10,10,10,0.8);
+  border:1px solid rgba(201,168,76,0.4);padding:12px 32px;
+  transition:all 0.3s;white-space:nowrap;
 }
-.film-card .embed-wrap blockquote{max-width:100%;width:100%;}
+.film-card a.film-link:hover .film-voir{background:rgba(201,168,76,0.15);border-color:var(--gold);}
 .film-card figcaption{
   font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;
   color:var(--gold);margin-top:20px;
@@ -299,7 +305,7 @@ footer{background:var(--dark);border-top:1px solid rgba(201,168,76,0.06);padding
   .scenes-grid{grid-template-columns:1fr;gap:12px;max-width:500px;}
   .films{padding:80px 24px;}
   .films-grid{grid-template-columns:1fr;gap:40px;max-width:500px;margin:0 auto;}
-  .film-card .embed-wrap{min-height:400px;padding:16px;}
+  .film-card a.film-link img{aspect-ratio:9/16;}
   .maison{padding:80px 24px;}
   .contact{padding:80px 24px;}
   .contact-grid{flex-direction:column;max-width:400px;}
@@ -335,7 +341,10 @@ footer{background:var(--dark);border-top:1px solid rgba(201,168,76,0.06);padding
 <!-- ======================================== -->
 <section class="hero" role="banner">
   <div class="hero-bg">
-    <img src="assets/maisons/mailu/campagne/mailu-hero-couple.jpg" alt="Sara et Malik dans un jardin — Key Visual MAÏLU, campagne de marque par Okapi World Média" width="1920" height="1080">
+    <picture>
+      <source srcset="assets/mailu-hero-couple-parc.webp" type="image/webp">
+      <img src="assets/mailu-hero-couple-parc.jpg" alt="Un couple afro-descendant marche ensemble dans un parc, lumière dorée." width="2400" height="1339">
+    </picture>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -370,7 +379,7 @@ footer{background:var(--dark);border-top:1px solid rgba(201,168,76,0.06);padding
       </div>
     </div>
     <div class="genese-visual">
-      <img src="assets/maisons/mailu/logos/mailu-logo-ancien.jpg" alt="Ancien logo MAÏLU — Agence matrimoniale, version originale avant refonte par OWM" width="1563" height="633" loading="lazy">
+      <img src="assets/mailu-logo-transparent.png" alt="MAÏLU — Agence matrimoniale" width="637" height="305" loading="lazy">
     </div>
   </div>
 
@@ -422,17 +431,17 @@ footer{background:var(--dark);border-top:1px solid rgba(201,168,76,0.06);padding
 
   <div class="campagne-grid">
     <figure class="campagne-card">
-      <img src="assets/maisons/mailu/campagne/mailu-kv-sara.jpg" alt="Key Visual Sara — portrait femme aux locs devant une fenêtre lumineuse, texte Aimer autrement Aimer à nouveau, campagne MAÏLU" loading="lazy">
+      <img src="assets/mailu-kv1-sara.webp" alt="Sara — la renaissance. Après 40 ans, aimer devient un choix." width="1792" height="2400" loading="lazy">
       <figcaption>Sara — la renaissance.</figcaption>
     </figure>
 
     <figure class="campagne-card">
-      <img src="assets/maisons/mailu/campagne/mailu-kv-malik.jpg" alt="Key Visual Malik — homme en smoking dans un salon feutré, texte La force attire La profondeur retient, campagne MAÏLU" loading="lazy">
+      <img src="assets/mailu-kv2-malik.webp" alt="Malik — la maturité. Après 50 ans, on ne cherche plus juste à séduire." width="1080" height="1440" loading="lazy">
       <figcaption>Malik — la maturité.</figcaption>
     </figure>
 
     <figure class="campagne-card">
-      <img src="assets/maisons/mailu/campagne/mailu-kv-couple.jpg" alt="Key Visual Sara et Malik — couple dans un jardin, texte Deux parcours Une même intention, campagne MAÏLU" loading="lazy">
+      <img src="assets/mailu-kv3-couple.webp" alt="Sara &amp; Malik — la rencontre. Ce n'est pas juste une rencontre, c'est un alignement." width="2752" height="1536" loading="lazy">
       <figcaption>Sara &amp; Malik — la rencontre.</figcaption>
       <span class="tag-inedit">Inédit</span>
     </figure>
@@ -469,29 +478,24 @@ footer{background:var(--dark);border-top:1px solid rgba(201,168,76,0.06);padding
 
   <div class="films-grid">
     <figure class="film-card">
-      <div class="embed-wrap">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXw-MZIMFDI/" data-instgrm-version="14">
-          <a href="https://www.instagram.com/p/DXw-MZIMFDI/" target="_blank" rel="noopener">Voir le teaser Homme sur Instagram</a>
-        </blockquote>
-      </div>
+      <a class="film-link" href="https://www.instagram.com/p/DXw-MZIMFDI/" target="_blank" rel="noopener">
+        <img src="assets/mailu-vignette-malik.png" alt="Vignette teaser Homme — Malik au restaurant, scène du film de marque MAÏLU" loading="lazy">
+        <span class="film-voir">Voir ici</span>
+      </a>
       <figcaption>Teaser Homme — La maturité éclairée.</figcaption>
     </figure>
 
     <figure class="film-card">
-      <div class="embed-wrap">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXSA1BEsbEE/" data-instgrm-version="14">
-          <a href="https://www.instagram.com/p/DXSA1BEsbEE/" target="_blank" rel="noopener">Voir le teaser Femme sur Instagram</a>
-        </blockquote>
-      </div>
+      <a class="film-link" href="https://www.instagram.com/p/DXSA1BEsbEE/" target="_blank" rel="noopener">
+        <img src="assets/mailu-vignette-sara.png" alt="Vignette teaser Femme — Sara devant un miroir, scène du film de marque MAÏLU" loading="lazy">
+        <span class="film-voir">Voir ici</span>
+      </a>
       <figcaption>Teaser Femme — La renaissance assumée.</figcaption>
     </figure>
   </div>
 
   <p class="films-note">Réalisation OWM. Direction artistique OWM. Production OWM.</p>
 </section>
-
-<!-- Instagram Embed Script -->
-<script async src="//www.instagram.com/embed.js"></script>
 
 <!-- ======================================== -->
 <!-- SECTION 6 — POURQUOI UNE MAISON         -->
