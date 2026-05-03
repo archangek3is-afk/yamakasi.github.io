@@ -900,7 +900,7 @@ nav.scrolled {
     display: none !important;
   }
 
-  /* Logo OWM centré en haut, au niveau du front */
+  /* Logo Okapi centré en haut, au niveau du front */
   nav,
   nav.scrolled {
     position: absolute !important;
@@ -927,7 +927,7 @@ nav.scrolled {
     margin-top: 32px !important;
   }
 
-  /* Logo OWM repositionné sur mobile */
+  /* Logo Okapi repositionné sur mobile */
   .hero-logo {
     top: 16px !important;
     left: 20px !important;
