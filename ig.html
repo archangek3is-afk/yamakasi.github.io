@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Okapi World Media — Cinéma pour ta marque</title>
+<meta name="description" content="Studio créatif parisien. Brand films, identité de marque, stratégie visuelle pour les Maisons, Marques et Auteurs.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Okapi World Media — Cinéma pour ta marque">
+<meta property="og:description" content="Studio créatif parisien. Brand films, identité de marque, stratégie visuelle pour les Maisons, Marques et Auteurs.">
+<meta property="og:image" content="https://okapiworldmedia.com/assets/maisons/mailu/og/og-cover.jpg">
+<meta property="og:url" content="https://okapiworldmedia.com/ig">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/assets/okapi-symbol-premium.png">
+<link rel="apple-touch-icon" href="/assets/okapi-symbol-premium.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+<!-- Plausible Analytics -->
+<script defer data-domain="okapiworldmedia.com" src="https://plausible.io/js/script.js"></script>
+<script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+<style>
+:root{
+  --noir:#0A0A0A;--or:#C9A84C;--or-pale:#E8D5A0;
+  --ivoire:#F5F0E8;--ivoire-dim:rgba(245,240,232,0.55);
+  --gris:#141414;--gris-light:#666;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{background:var(--noir);color:var(--ivoire);font-family:'Cormorant Garamond',serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{max-width:100%;height:auto;}
+
+/* ======================== */
+/* BLOC 1 — HERO           */
+/* ======================== */
+.ig-hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:60px 24px 48px;
+}
+.ig-symbol{
+  width:48px;height:48px;
+  margin-bottom:32px;
+  opacity:0.85;
+}
+.ig-eyebrow{
+  font-family:'Space Mono',monospace;
+  font-size:9px;letter-spacing:0.4em;
+  text-transform:uppercase;color:var(--or);
+  margin-bottom:28px;
+}
+.ig-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(32px,7vw,56px);
+  font-weight:400;line-height:1.2;
+  color:var(--ivoire);
+  margin-bottom:20px;
+  max-width:560px;
+}
+.ig-title em{
+  color:var(--or);font-style:italic;
+}
+.ig-subtitle{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:300;
+  font-size:clamp(16px,3vw,20px);
+  color:var(--ivoire-dim);
+  max-width:400px;
+}
+
+/* ======================== */
+/* BLOC 2 — SHOWREEL       */
+/* ======================== */
+.ig-showreel{
+  width:100%;
+  background:var(--noir);
+  border-top:1px solid rgba(201,168,76,0.08);
+  border-bottom:1px solid rgba(201,168,76,0.08);
+}
+.ig-showreel video{
+  width:100%;display:block;
+  aspect-ratio:16/9;
+  object-fit:cover;
+}
+
+/* ======================== */
+/* BLOC 3 — CARTES CIBLES  */
+/* ======================== */
+.ig-cards{
+  padding:64px 24px;
+}
+.ig-cards-label{
+  font-family:'Space Mono',monospace;
+  font-size:9px;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--or);
+  text-align:center;margin-bottom:32px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.ig-cards-label::before,.ig-cards-label::after{
+  content:'';width:24px;height:1px;background:rgba(201,168,76,0.3);
+}
+.ig-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  max-width:480px;
+  margin:0 auto;
+}
+@media(min-width:768px){
+  .ig-grid{
+    grid-template-columns:repeat(3,1fr);
+    max-width:1100px;
+    gap:20px;
+  }
+}
+.ig-card{
+  display:block;
+  padding:40px 28px;
+  background-color:var(--noir);
+  background-size:cover;
+  background-position:center;
+  border:1px solid rgba(201,168,76,0.2);
+  text-decoration:none;color:var(--ivoire);
+  position:relative;
+  transition:all 0.4s ease;
+  min-height:320px;
+  overflow:hidden;
+}
+.ig-card::before{
+  content:'';position:absolute;
+  top:0;left:0;width:24px;height:24px;
+  border-top:2px solid var(--or);
+  border-left:2px solid var(--or);
+  transition:all 0.4s;z-index:2;
+}
+.ig-card:hover{
+  border-color:var(--or);
+  transform:translateY(-4px);
+}
+.ig-card:hover::before{
+  width:40px;height:40px;
+}
+.ig-card-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:0.3em;
+  color:var(--or);
+  margin-bottom:32px;
+  display:block;position:relative;z-index:2;
+}
+.ig-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;font-size:24px;
+  line-height:1.2;color:var(--ivoire);
+  margin-bottom:16px;
+  position:relative;z-index:2;
+}
+.ig-card p{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:400;font-size:14px;
+  line-height:1.55;color:var(--ivoire-dim);
+  position:relative;z-index:2;
+  margin-bottom:24px;
+}
+.ig-card-arrow{
+  font-family:'Space Mono',monospace;
+  font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--or);
+  position:relative;z-index:2;
+  transition:transform 0.3s;
+}
+.ig-card:hover .ig-card-arrow{
+  transform:translateX(6px);
+}
+
+/* ======================== */
+/* BLOC 4 — PREUVE + CTA   */
+/* ======================== */
+.ig-proof{
+  padding:64px 24px 80px;
+  text-align:center;
+  border-top:1px solid rgba(201,168,76,0.08);
+}
+.ig-stats{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:0;
+  margin-bottom:48px;
+}
+.ig-stat{
+  flex:1;max-width:160px;
+  padding:0 20px;
+}
+.ig-stat-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(32px,6vw,48px);
+  color:var(--or);line-height:1;
+  margin-bottom:6px;
+}
+.ig-stat-label{
+  font-family:'Space Mono',monospace;
+  font-size:8px;letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--gris-light);
+}
+.ig-stat-sep{
+  width:1px;height:48px;
+  background:rgba(201,168,76,0.25);
+  flex-shrink:0;
+}
+.ig-cta{
+  display:inline-block;
+  font-family:'Poppins',sans-serif;
+  font-weight:500;font-size:12px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--noir);background:var(--or);
+  padding:16px 40px;
+  text-decoration:none;border:none;
+  transition:all 0.3s;
+  margin-bottom:16px;
+}
+.ig-cta:hover{
+  background:var(--or-pale);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(201,168,76,0.2);
+}
+.ig-cta-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:300;
+  font-size:16px;color:var(--ivoire-dim);
+}
+</style>
+</head>
+<body>
+
+<!-- ======================== -->
+<!-- BLOC 1 — HERO           -->
+<!-- ======================== -->
+<section class="ig-hero">
+  <img class="ig-symbol" src="/assets/okapi-symbol-premium.png" alt="Okapi World Média">
+  <div class="ig-eyebrow">Studio de création</div>
+  <h1 class="ig-title">
+    On ne fait pas du contenu.<br>
+    <em>On fait du cinéma.</em>
+  </h1>
+  <p class="ig-subtitle">Pour les marques qui veulent être inoubliables.</p>
+</section>
+
+<!-- ======================== -->
+<!-- BLOC 2 — SHOWREEL       -->
+<!-- ======================== -->
+<section class="ig-showreel">
+  <!--
+    SHOWREEL V1 — remplacer la source ci-dessous par le showreel monté
+    quand il sera disponible. Pour l'instant : hero ASICS comme placeholder.
+  -->
+  <video autoplay muted loop playsinline>
+    <source src="/assets/videos/asics/asics-hero.mp4" type="video/mp4">
+  </video>
+</section>
+
+<!-- ======================== -->
+<!-- BLOC 3 — CARTES CIBLES  -->
+<!-- ======================== -->
+<section class="ig-cards">
+  <div class="ig-cards-label">Ce qu'on fait</div>
+  <div class="ig-grid">
+
+    <a class="ig-card" href="/maisons-premium/" style="background-image:linear-gradient(rgba(10,10,10,0.75),rgba(10,10,10,0.9)),url('/assets/img_10_eca7700ec36a.webp');">
+      <span class="ig-card-num">01 / MAISONS</span>
+      <h3>Donner à votre marque<br>l'aura d'une grande maison.</h3>
+      <p>Pour les agences matrimoniales, coachs, écoles de savoir-être et retraites qui vendent une transformation. On rend cette transformation visible — au niveau de prix qu'elle mérite.</p>
+      <span class="ig-card-arrow">Découvrir →</span>
+    </a>
+
+    <a class="ig-card" href="/marques-auteur.html" style="background-image:linear-gradient(rgba(10,10,10,0.75),rgba(10,10,10,0.9)),url('/assets/img_36_44b6d1b1c439.webp');">
+      <span class="ig-card-num">02 / MARQUES</span>
+      <h3>Faire ressentir le prix<br>de votre savoir-faire.</h3>
+      <p>Pour les parfums, cosmétiques, bijoux et prêt-à-porter d'auteur qui sont déjà excellents — mais que le marché regarde encore comme petits. On corrige le décalage.</p>
+      <span class="ig-card-arrow">Découvrir →</span>
+    </a>
+
+    <a class="ig-card" href="/auteurs-projets.html" style="background-image:linear-gradient(rgba(10,10,10,0.75),rgba(10,10,10,0.9)),url('/assets/img_06_ed83d578b56f.webp');">
+      <span class="ig-card-num">03 / AUTEURS</span>
+      <h3>Donner à vos premières œuvres<br>l'image des œuvres confirmées.</h3>
+      <p>Pour les premiers films, premiers projets, premières fondations. Direction artistique cinématographique pour que vos visions naissantes aient l'impact des œuvres établies.</p>
+      <span class="ig-card-arrow">Découvrir →</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ======================== -->
+<!-- BLOC 4 — PREUVE + CTA   -->
+<!-- ======================== -->
+<section class="ig-proof">
+  <div class="ig-stats">
+    <div class="ig-stat">
+      <div class="ig-stat-num">14</div>
+      <div class="ig-stat-label">Prix festivals</div>
+    </div>
+    <div class="ig-stat-sep"></div>
+    <div class="ig-stat">
+      <div class="ig-stat-num">7+</div>
+      <div class="ig-stat-label">Années d'expérience</div>
+    </div>
+    <div class="ig-stat-sep"></div>
+    <div class="ig-stat">
+      <div class="ig-stat-num">3</div>
+      <div class="ig-stat-label">Studios</div>
+    </div>
+  </div>
+  <a class="ig-cta" id="ig-cta-btn"
+     href="mailto:yamakasi@okapiworldmedia.com?subject=Projet%20%E2%80%94%20%5BTon%20nom%5D&body=Bonjour%20Yamakasi%2C%0A%0AJe%20te%20contacte%20depuis%20Instagram.%0A%0AMon%20projet%20%3A%20%0AMon%20budget%20%3A%20%0AMa%20deadline%20%3A%20%0A%0AMerci.">
+    Réserver un appel de 20 min
+  </a>
+  <p class="ig-cta-sub">Parlons de ton projet.</p>
+</section>
+
+<!-- Plausible Events -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  plausible('IG_Page_Loaded');
+  document.getElementById('ig-cta-btn').addEventListener('click', function() {
+    plausible('IG_CTA_Click');
+  });
+});
+</script>
+</body>
+</html>
