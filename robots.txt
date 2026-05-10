@@ -1,2 +1,13 @@
 User-agent: *
 Disallow: /
+
+# BP confidentiel — ne pas indexer
+User-agent: *
+Disallow: /strategy-internal-x7k9-2026/
+Disallow: /strategy-internal-*/
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /

@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKAPI WORLD MEDIA — Business Plan 2026-2028</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noir: #0A0A0A;
+    --noir-profond: #050505;
+    --noir-soft: #141414;
+    --or: #C9A84C;
+    --or-clair: #E0C77A;
+    --or-sombre: #8A6F2A;
+    --ivoire: #F5F0E8;
+    --ivoire-soft: #B8B3A8;
+    --gris: #6E6A60;
+    --gris-fonce: #2A2825;
+    --rouge-alerte: #C04848;
+    --vert-validation: #5C9970;
+    --serif: 'Cormorant Garamond', serif;
+    --sans: 'Manrope', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--noir);
+    color: var(--ivoire);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* === Grain overlay subtil cinéma === */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* === Conteneur principal === */
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 64px;
+  }
+
+  /* === Top bar fixe === */
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gris-fonce);
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .topbar .brand {
+    color: var(--or);
+  }
+
+  .topbar .meta {
+    color: var(--ivoire-soft);
+  }
+
+  /* === COUVERTURE === */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 64px;
+    position: relative;
+    text-align: center;
+    background: 
+      radial-gradient(ellipse at top, rgba(201, 168, 76, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(201, 168, 76, 0.04) 0%, transparent 60%),
+      var(--noir);
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: var(--or);
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: var(--or);
+  }
+
+  .cover .eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 32px;
+    animation: fadeUp 1.2s ease-out;
+  }
+
+  .cover h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ivoire);
+    margin-bottom: 24px;
+    animation: fadeUp 1.2s ease-out 0.2s both;
+  }
+
+  .cover h1 .accent {
+    color: var(--or);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .cover .tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--ivoire-soft);
+    font-weight: 300;
+    margin-bottom: 80px;
+    max-width: 600px;
+    animation: fadeUp 1.2s ease-out 0.4s both;
+  }
+
+  .cover .doc-type {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--or);
+    padding: 16px 32px;
+    border: 1px solid var(--or);
+    margin-bottom: 16px;
+    animation: fadeUp 1.2s ease-out 0.6s both;
+  }
+
+  .cover .doc-period {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--ivoire);
+    margin-bottom: 8px;
+    animation: fadeUp 1.2s ease-out 0.7s both;
+  }
+
+  .cover .doc-subtitle {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--gris);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 100px;
+    animation: fadeUp 1.2s ease-out 0.8s both;
+  }
+
+  .cover .signature {
+    animation: fadeUp 1.2s ease-out 1s both;
+  }
+
+  .cover .signature .name {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--ivoire);
+    margin-bottom: 4px;
+  }
+
+  .cover .signature .role {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ivoire-soft);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .cover .signature .contact {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--gris);
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === SECTIONS === */
+  section {
+    padding: 120px 0 60px;
+    border-bottom: 1px solid var(--gris-fonce);
+  }
+
+  section:last-of-type {
+    border-bottom: none;
+  }
+
+  .section-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 24px;
+    display: inline-block;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--or);
+  }
+
+  h2.section-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--ivoire);
+    margin-bottom: 64px;
+    max-width: 720px;
+  }
+
+  h2.section-title .italic {
+    font-style: italic;
+    color: var(--or);
+  }
+
+  h3 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--ivoire);
+    margin: 48px 0 20px;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin: 40px 0 16px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ivoire);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  p.lead {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.55;
+    font-weight: 400;
+    color: var(--ivoire);
+    margin-bottom: 32px;
+  }
+
+  p.muted {
+    color: var(--ivoire-soft);
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  strong {
+    color: var(--or);
+    font-weight: 600;
+  }
+
+  em {
+    color: var(--ivoire-soft);
+    font-style: italic;
+  }
+
+  /* === LISTES === */
+  ul {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  ul li {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 14px;
+    color: var(--ivoire);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 16px;
+    height: 1px;
+    background: var(--or);
+  }
+
+  ul li strong {
+    color: var(--or);
+    font-weight: 600;
+  }
+
+  /* === PULL QUOTE / CARTON CINÉMA === */
+  .pull-quote {
+    margin: 64px -32px;
+    padding: 48px 64px;
+    background: 
+      linear-gradient(135deg, rgba(201, 168, 76, 0.06) 0%, transparent 100%),
+      var(--noir-soft);
+    border-left: 2px solid var(--or);
+    position: relative;
+  }
+
+  .pull-quote::before {
+    content: '"';
+    position: absolute;
+    top: 16px;
+    left: 32px;
+    font-family: var(--serif);
+    font-size: 80px;
+    color: var(--or);
+    opacity: 0.25;
+    line-height: 1;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--ivoire);
+    font-weight: 400;
+    margin: 0;
+    padding-left: 24px;
+  }
+
+  /* === KPI BOX / TABLEAUX === */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 32px 0;
+    border-top: 1px solid var(--gris-fonce);
+  }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    border-bottom: 1px solid var(--gris-fonce);
+    padding: 16px 0;
+    transition: background 0.3s;
+  }
+
+  .kpi-row:hover {
+    background: rgba(201, 168, 76, 0.03);
+  }
+
+  .kpi-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--or);
+    padding-right: 24px;
+  }
+
+  .kpi-value {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ivoire);
+    font-weight: 400;
+  }
+
+  /* === TABLEAU avancé === */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 14px;
+  }
+
+  .data-table thead th {
+    background: var(--noir-profond);
+    color: var(--or);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 16px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--or);
+    border-top: 1px solid var(--or);
+  }
+
+  .data-table tbody td {
+    padding: 16px 14px;
+    border-bottom: 1px solid var(--gris-fonce);
+    color: var(--ivoire);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .data-table tbody tr:hover {
+    background: rgba(201, 168, 76, 0.025);
+  }
+
+  .data-table tbody td.label {
+    font-weight: 600;
+    color: var(--or-clair);
+    font-family: var(--sans);
+    font-size: 13px;
+  }
+
+  .data-table tbody td.numeric {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  .data-table tbody tr.total {
+    background: rgba(201, 168, 76, 0.06);
+  }
+
+  .data-table tbody tr.total td {
+    color: var(--or);
+    font-weight: 700;
+    border-top: 1px solid var(--or);
+    border-bottom: 1px solid var(--or);
+  }
+
+  .data-table tbody td.alert-high {
+    color: var(--rouge-alerte);
+    font-weight: 600;
+  }
+
+  .data-table tbody td.alert-mid {
+    color: var(--or);
+    font-weight: 500;
+  }
+
+  /* === EXEC SUMMARY GRID === */
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin: 48px 0;
+  }
+
+  .pillar {
+    padding: 32px 0;
+    border-top: 1px solid var(--gris-fonce);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .pillar:last-child {
+    border-bottom: 1px solid var(--gris-fonce);
+  }
+
+  .pillar-num {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--or);
+    font-style: italic;
+  }
+
+  .pillar-content h4 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ivoire);
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0 0 8px;
+  }
+
+  .pillar-content p {
+    font-size: 15px;
+    color: var(--ivoire-soft);
+    margin: 0;
+  }
+
+  /* === ALERT BOXES === */
+  .alert-box {
+    margin: 32px 0;
+    padding: 24px 28px;
+    background: var(--noir-soft);
+    border-left: 3px solid var(--rouge-alerte);
+    font-size: 14px;
+  }
+
+  .alert-box .alert-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rouge-alerte);
+    margin-bottom: 8px;
+  }
+
+  .alert-box p {
+    margin: 0;
+    color: var(--ivoire);
+    font-size: 15px;
+  }
+
+  /* === SOMMAIRE === */
+  .toc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 48px;
+    margin: 48px 0;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gris-fonce);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: var(--ivoire);
+  }
+
+  .toc-item:hover {
+    border-bottom-color: var(--or);
+  }
+
+  .toc-item:hover .toc-title {
+    color: var(--or);
+  }
+
+  .toc-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--or);
+    margin-right: 16px;
+    letter-spacing: 0.1em;
+    width: 24px;
+  }
+
+  .toc-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ivoire);
+    transition: color 0.3s;
+  }
+
+  /* === SCALE: phases === */
+  .phases {
+    margin: 48px 0;
+  }
+
+  .phase {
+    padding: 32px 0;
+    border-top: 1px solid var(--gris-fonce);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+  }
+
+  .phase:last-child {
+    border-bottom: 1px solid var(--gris-fonce);
+  }
+
+  .phase-meta .phase-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--or);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .phase-meta .phase-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--ivoire);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .phase-meta .phase-period {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ivoire-soft);
+    letter-spacing: 0.1em;
+  }
+
+  .phase-content ul {
+    margin-bottom: 0;
+  }
+
+  /* === KPI CARDS === */
+  .kpi-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin: 32px 0;
+  }
+
+  .kpi-card {
+    background: var(--noir-soft);
+    border: 1px solid var(--gris-fonce);
+    padding: 28px 24px;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .kpi-card:hover {
+    border-color: var(--or);
+    transform: translateY(-2px);
+  }
+
+  .kpi-card .kpi-card-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 12px;
+  }
+
+  .kpi-card .kpi-card-value {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 400;
+    color: var(--ivoire);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .kpi-card .kpi-card-detail {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ivoire-soft);
+  }
+
+  /* === BACK TO TOP === */
+  .back-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    background: var(--noir-soft);
+    border: 1px solid var(--or);
+    color: var(--or);
+    font-family: var(--sans);
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 100;
+    opacity: 0;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .back-top.visible {
+    opacity: 1;
+  }
+
+  .back-top:hover {
+    background: var(--or);
+    color: var(--noir);
+  }
+
+  /* === FOOTER === */
+  footer {
+    padding: 100px 0 60px;
+    text-align: center;
+    border-top: 1px solid var(--gris-fonce);
+    margin-top: 80px;
+  }
+
+  footer .footer-mark {
+    font-family: var(--serif);
+    font-size: 32px;
+    color: var(--or);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  footer .footer-text {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 8px;
+  }
+
+  /* === PRINT / PDF === */
+  @media print {
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+    }
+
+    body {
+      background: white !important;
+      color: black !important;
+      font-size: 10.5pt;
+    }
+
+    body::before { display: none !important; }
+
+    .topbar, .back-top, .toc { display: none !important; }
+
+    .page { padding: 0; max-width: 100%; }
+
+    .cover {
+      min-height: 100vh;
+      page-break-after: always;
+      background: var(--noir) !important;
+      color: var(--ivoire) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .cover * { color: var(--ivoire) !important; }
+    .cover .eyebrow, .cover h1 .accent, .cover .doc-type { color: var(--or) !important; }
+
+    section {
+      page-break-inside: auto;
+      padding: 24px 0;
+      border-bottom: 0.5pt solid #ccc;
+    }
+
+    h2.section-title { color: black !important; page-break-after: avoid; font-size: 26pt; margin-bottom: 24pt; }
+    h2.section-title .italic { color: var(--or) !important; }
+    h3 { color: black !important; page-break-after: avoid; font-size: 16pt; }
+    h4 { color: var(--or-sombre) !important; }
+
+    p, li { color: black !important; font-size: 10.5pt; line-height: 1.55; }
+    p.muted { color: #666 !important; }
+    strong { color: var(--or-sombre) !important; }
+    em { color: #555 !important; }
+
+    .section-num { color: var(--or-sombre) !important; border-bottom-color: var(--or-sombre) !important; }
+
+    ul li::before { background: var(--or-sombre) !important; }
+    ul li strong { color: var(--or-sombre) !important; }
+
+    .pull-quote {
+      background: #f8f5ee !important;
+      border-left: 3pt solid var(--or-sombre) !important;
+      page-break-inside: avoid;
+      margin: 18pt 0;
+      padding: 20pt 24pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .pull-quote::before { color: var(--or-sombre) !important; opacity: 0.3 !important; }
+    .pull-quote p { color: black !important; font-size: 13pt; }
+
+    .data-table { font-size: 9pt; page-break-inside: avoid; }
+    .data-table thead th {
+      background: var(--noir) !important;
+      color: var(--or) !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .data-table tbody td { color: black !important; padding: 8pt; }
+    .data-table tbody td.label { color: var(--or-sombre) !important; }
+    .data-table tbody tr.total {
+      background: #f8f5ee !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .data-table tbody tr.total td { color: var(--or-sombre) !important; }
+
+    .kpi-row { padding: 8pt 0; }
+    .kpi-label { color: var(--or-sombre) !important; }
+    .kpi-value { color: black !important; }
+
+    .pillar { page-break-inside: avoid; }
+    .pillar-num { color: var(--or-sombre) !important; }
+    .pillar-content h4 { color: black !important; }
+    .pillar-content p { color: #444 !important; }
+
+    .phase { page-break-inside: avoid; }
+    .phase-meta .phase-label { color: var(--or-sombre) !important; }
+    .phase-meta .phase-name { color: black !important; }
+    .phase-meta .phase-period { color: #666 !important; }
+
+    .alert-box {
+      background: #fdf5f5 !important;
+      border-left: 3pt solid var(--rouge-alerte) !important;
+      page-break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .alert-box p { color: black !important; }
+
+    .kpi-cards { display: block; }
+    .kpi-card {
+      background: #f8f5ee !important;
+      border: 0.5pt solid #ccc !important;
+      margin-bottom: 8pt;
+      page-break-inside: avoid;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .kpi-card .kpi-card-label { color: var(--or-sombre) !important; }
+    .kpi-card .kpi-card-value { color: black !important; font-size: 28pt; }
+    .kpi-card .kpi-card-detail { color: #555 !important; }
+
+    footer { page-break-before: always; }
+    footer .footer-mark { color: var(--or-sombre) !important; }
+    footer .footer-text { color: #666 !important; }
+  }
+
+
+  /* Watermark discret de confidentialité */
+  .confidential-watermark {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gris);
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 99;
+    white-space: nowrap;
+  }
+  @media print { .confidential-watermark { display: none; } }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 720px) {
+    .page { padding: 0 24px; }
+    .topbar { padding: 12px 20px; font-size: 9px; }
+    .topbar .meta { display: none; }
+    .cover { padding: 80px 24px; }
+    .pull-quote { margin: 48px -24px; padding: 36px 32px; }
+    .pull-quote p { font-size: 19px; }
+    .toc { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+    .pillar { grid-template-columns: 1fr; gap: 12px; }
+    .pillar-num { font-size: 40px; }
+    .phase { grid-template-columns: 1fr; gap: 16px; }
+    .kpi-cards { grid-template-columns: 1fr; }
+    .data-table { font-size: 12px; }
+    .data-table thead th, .data-table tbody td { padding: 10px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="brand">OKAPI WORLD MEDIA</span>
+  <span class="meta">Business Plan · 2026 — 2028 · Confidentiel</span>
+</div>
+
+<!-- ===================== COUVERTURE ===================== -->
+<section class="cover">
+  <div class="eyebrow">Maison de récits stratégiques</div>
+  <h1>Okapi <span class="accent">World</span><br>Media</h1>
+  <p class="tagline">On ne fait pas du contenu.<br>On fait du cinéma.</p>
+  <div class="doc-type">Business Plan</div>
+  <div class="doc-period">2026 — 2028</div>
+  <div class="doc-subtitle">Document de pilotage stratégique · Version 1.0 · Mai 2026</div>
+  <div class="signature">
+    <div class="name">Archange Kiyindou — <em>Yamakasi</em></div>
+    <div class="role">Fondateur · Réalisateur · Directeur de Création</div>
+    <div class="contact">Asnières-sur-Seine · SIRET 918 020 975 00028 · yamakasi@okapiworldmedia.com</div>
+  </div>
+</section>
+
+<div class="page">
+
+<!-- ===================== AVERTISSEMENT ===================== -->
+<section id="avertissement">
+  <div class="section-num">Préambule</div>
+  <h2 class="section-title">Cadre du <span class="italic">document</span></h2>
+  <p class="lead">Ce business plan est un document de pilotage interne, conçu pour structurer la stratégie d'Okapi World Média sur la période 2026-2028. Il n'est pas un investor memo destiné à une levée immédiate.</p>
+  <p>Toutefois, sa structure, son niveau de rigueur et ses données ont été pensés pour qu'il puisse, sans réécriture majeure, devenir un investor memo en 2027 si les jalons de traction définis en partie 8 sont atteints. C'est un document à double lecture : exécutable aujourd'hui par un fondateur seul, et lisible demain par un Business Angel ou un fonds ICC.</p>
+  <p class="muted">Tous les chiffres présentés sont fondés sur les contrats signés, le pipeline qualifié, et des hypothèses explicitées. Les zones d'incertitude sont assumées, pas dissimulées.</p>
+
+  <div class="pull-quote">
+    <p>« On ne fait pas du contenu. On fait du cinéma. Pour les marques qui veulent être inoubliables. »</p>
+  </div>
+</section>
+
+<!-- ===================== SOMMAIRE ===================== -->
+<section id="sommaire">
+  <div class="section-num">Sommaire</div>
+  <h2 class="section-title">Quinze <span class="italic">chapitres</span> pour cadrer trois ans</h2>
+  <div class="toc">
+    <a class="toc-item" href="#s1"><span class="toc-num">01</span><span class="toc-title">Executive Summary</span></a>
+    <a class="toc-item" href="#s2"><span class="toc-num">02</span><span class="toc-title">La société : OKAPI WORLD MEDIA</span></a>
+    <a class="toc-item" href="#s3"><span class="toc-num">03</span><span class="toc-title">Le problème & la thèse de marché</span></a>
+    <a class="toc-item" href="#s4"><span class="toc-num">04</span><span class="toc-title">La solution & l'offre</span></a>
+    <a class="toc-item" href="#s5"><span class="toc-num">05</span><span class="toc-title">Le marché : TAM / SAM / SOM</span></a>
+    <a class="toc-item" href="#s6"><span class="toc-num">06</span><span class="toc-title">Concurrence & positionnement</span></a>
+    <a class="toc-item" href="#s7"><span class="toc-num">07</span><span class="toc-title">Modèle économique & unit economics</span></a>
+    <a class="toc-item" href="#s8"><span class="toc-num">08</span><span class="toc-title">Traction actuelle & pipeline</span></a>
+    <a class="toc-item" href="#s9"><span class="toc-num">09</span><span class="toc-title">Stratégie d'acquisition</span></a>
+    <a class="toc-item" href="#s10"><span class="toc-num">10</span><span class="toc-title">Roadmap 2026-2028</span></a>
+    <a class="toc-item" href="#s11"><span class="toc-num">11</span><span class="toc-title">Équipe & gouvernance</span></a>
+    <a class="toc-item" href="#s12"><span class="toc-num">12</span><span class="toc-title">Prévisionnel financier 3 ans</span></a>
+    <a class="toc-item" href="#s13"><span class="toc-num">13</span><span class="toc-title">Risques & plans de mitigation</span></a>
+    <a class="toc-item" href="#s14"><span class="toc-num">14</span><span class="toc-title">Besoins de financement</span></a>
+    <a class="toc-item" href="#s15"><span class="toc-num">15</span><span class="toc-title">Annexes</span></a>
+  </div>
+</section>
+
+<!-- ===================== 1. EXEC SUMMARY ===================== -->
+<section id="s1">
+  <div class="section-num">01 — Executive Summary</div>
+  <h2 class="section-title">Une <span class="italic">maison</span> de récits stratégiques</h2>
+
+  <p class="lead">Okapi World Média (OWM) est un studio cinématographique indépendant, fondé et dirigé par Yamakasi (Archange Kiyindou) à Asnières-sur-Seine, qui produit des récits visuels stratégiques pour les marques exigeantes — combinant la rigueur narrative du cinéma d'auteur (Villeneuve, Fincher) à un workflow de production hybride humain/IA propriétaire : le <strong>Protocole OWM Production IA Fidèle</strong>.</p>
+
+  <h3>Positionnement</h3>
+  <div class="pull-quote"><p>Le cinéma pour les ambitieux, pas pour les fortunés.</p></div>
+  <p>OWM démocratise l'accès à une production de qualité cinématographique pour les marques émergentes (DNVB, créateurs, maisons premium en construction) qui ne peuvent pas s'offrir les budgets des grandes agences mais refusent l'esthétique générique du contenu standardisé.</p>
+
+  <h3>Activité actuelle</h3>
+  <ul>
+    <li><strong>Trois branches opérationnelles —</strong> Okapi Studios (films de marque, documentaires), L'Agence Okapi (contenu de marque, stratégie digitale), Okapi Animation (IP narratif propriétaire — projet Bau).</li>
+    <li><strong>Cinq contrats actifs en 2026 —</strong> ~20 233 € HT contractuels (MAÏLU, UNIKIDSLAND, Le Miroir de l'âme, Ballet de la Diaspora Camerounaise, MBOAM DÉCO).</li>
+    <li><strong>Cinq prospects qualifiés —</strong> pipeline mai 2026 (HYDRANE, Grâce Isabelle, Queen Stelyna, Pearlace, MBOAM DÉCO confirmé).</li>
+    <li><strong>Workflow IA validé —</strong> Higgsfield (Nano Banana 2, Seedance 2.0, Soul 2.0), Protocole 4 étapes documenté et reproductible.</li>
+  </ul>
+
+  <h3>Ambition 2026-2028</h3>
+  <div class="kpi-cards">
+    <div class="kpi-card">
+      <div class="kpi-card-label">2026 · Consolidation</div>
+      <div class="kpi-card-value">100 K€</div>
+      <div class="kpi-card-detail">CA HT cible · marge nette ≥ 35%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">2027 · Structuration</div>
+      <div class="kpi-card-value">215 K€</div>
+      <div class="kpi-card-detail">CA HT cible · équipe de 3-4</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-card-label">2028 · Scale</div>
+      <div class="kpi-card-value">420 K€</div>
+      <div class="kpi-card-detail">CA HT cible · IP en production</div>
+    </div>
+  </div>
+
+  <h3>Asymétrie défendable</h3>
+  <p>Le moat d'OWM ne réside pas dans l'IA (commodité), mais dans trois actifs combinés :</p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-content">
+        <h4>L'œil de réalisateur</h4>
+        <p>7+ ans d'expérience, 14 prix en festivals, références Villeneuve/Fincher assumées. Profil rare combinant vision d'auteur et capacité de production.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-content">
+        <h4>Le Protocole de Production IA Fidèle</h4>
+        <p>Méthode propriétaire en 4 étapes garantissant la fidélité visuelle (zéro dérive AI), validée sur 5 contrats. Codifiable, reproductible, défendable.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-content">
+        <h4>Le pipeline d'IPs narratifs</h4>
+        <p>Bau (animation), Lucioles, Illusion, Mille Visages — bibliothèque qui transforme OWM d'un studio de service linéaire en maison média potentiellement scalable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 2. SOCIÉTÉ ===================== -->
+<section id="s2">
+  <div class="section-num">02 — La société</div>
+  <h2 class="section-title">OKAPI <span class="italic">WORLD</span> MEDIA</h2>
+
+  <h3>Identité & structure juridique actuelle</h3>
+  <div class="kpi-grid">
+    <div class="kpi-row"><div class="kpi-label">Raison sociale</div><div class="kpi-value">OKAPI WORLD MEDIA — Entreprise Individuelle (EI)</div></div>
+    <div class="kpi-row"><div class="kpi-label">Fondateur & dirigeant</div><div class="kpi-value">Archange Kiyindou (alias Yamakasi)</div></div>
+    <div class="kpi-row"><div class="kpi-label">SIRET</div><div class="kpi-value">918 020 975 00028</div></div>
+    <div class="kpi-row"><div class="kpi-label">Siège</div><div class="kpi-value">Asnières-sur-Seine (92)</div></div>
+    <div class="kpi-row"><div class="kpi-label">Domaine</div><div class="kpi-value">okapiworldmedia.com</div></div>
+    <div class="kpi-row"><div class="kpi-label">Email pro</div><div class="kpi-value">yamakasi@okapiworldmedia.com</div></div>
+    <div class="kpi-row"><div class="kpi-label">Régime fiscal</div><div class="kpi-value">EI — TVA non applicable Art. 293 B CGI</div></div>
+    <div class="kpi-row"><div class="kpi-label">Date de création</div><div class="kpi-value">Active depuis 2019</div></div>
+  </div>
+
+  <div class="alert-box">
+    <div class="alert-label">Point de vigilance juridique</div>
+    <p>La structure actuelle en EI est un plafond stratégique. Elle est adaptée au stade solo mais devient un frein dès qu'il s'agit de : (a) recruter en CDI, (b) accueillir un associé, (c) lever du capital, (d) mutualiser le risque patrimonial. <strong>Le passage en SAS est planifié pour Q1 2027</strong> (voir partie 10).</p>
+  </div>
+
+  <h3>Les trois branches</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Branche</th><th>Activité</th><th>Cible & positionnement</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">Okapi Studios</td><td>Films de marque, documentaires, capsules cinématographiques. Production hybride humain/IA.</td><td>Maisons premium, marques d'auteur, projets éditoriaux. Tickets 1,5K-15K€.</td></tr>
+      <tr><td class="label">L'Agence Okapi</td><td>Contenu de marque récurrent, stratégie digitale, identité visuelle, social planning.</td><td>DNVB, créateurs, marques émergentes. Tickets 500-3,5K€/mois.</td></tr>
+      <tr><td class="label">Okapi Animation</td><td>Développement et production d'IPs narratifs propriétaires (animation, série).</td><td>Diffuseurs (TV, streaming), partenaires de coproduction. Modèle pré-vente / royalties.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Logique stratégique des trois branches</h3>
+  <p>Les trois branches ne sont pas trois business indépendants. Elles forment un système :</p>
+  <ul>
+    <li><strong>L'Agence Okapi génère du cash récurrent —</strong> tickets plus faibles, mais marges et récurrence permettent de stabiliser la trésorerie.</li>
+    <li><strong>Okapi Studios génère de la marge & de la réputation —</strong> tickets élevés, créations remarquables qui alimentent le portfolio et la prospection.</li>
+    <li><strong>Okapi Animation est le pari long terme —</strong> investissement R&D narrative dont les retours peuvent être asymétriques (royalties, pré-ventes diffuseur, exploitation IP).</li>
+  </ul>
+</section>
+
+<!-- ===================== 3. PROBLÈME ===================== -->
+<section id="s3">
+  <div class="section-num">03 — Problème & thèse</div>
+  <h2 class="section-title">Le marché est <span class="italic">cassé</span> au milieu</h2>
+
+  <h3>Le problème côté marque</h3>
+  <p>Les marques émergentes (DNVB, créateurs, maisons en construction) sont prises dans un dilemme structurel :</p>
+  <ul>
+    <li><strong>Option A — Agence créative établie :</strong> qualité cinématographique mais devis 30K€-200K€, délais 3-6 mois, processus inadapté à une jeune marque.</li>
+    <li><strong>Option B — Freelance / création standardisée :</strong> tarifs accessibles (500€-3K€) mais esthétique générique, indistinguable de la concurrence, faible pouvoir narratif.</li>
+    <li><strong>Option C — IA générative pure (Runway, Sora, Midjourney en self-service) :</strong> coût marginal, mais résultats incohérents, dérives visuelles, absence de vision d'auteur, pas de garantie de fidélité à une marque.</li>
+  </ul>
+
+  <div class="pull-quote">
+    <p>Aucune des trois options ne permet à une marque émergente d'avoir, en même temps : un récit cinématographique, une fidélité visuelle stricte, un budget accessible, et un délai compatible avec un cycle de lancement marque.</p>
+  </div>
+
+  <h3>Le problème côté secteur créatif</h3>
+  <p>Du côté des studios de production et des agences créatives, l'arrivée de l'IA générative (2023-2026) a créé un séisme silencieux :</p>
+  <ul>
+    <li>Les freelances vidéastes voient leurs marges s'effondrer (clients tentés par le DIY IA).</li>
+    <li>Les agences créatives traditionnelles sont lentes à intégrer l'IA dans leurs workflows (résistance interne, peur de cannibaliser leurs équipes).</li>
+    <li>Les studios IA-native produisent en masse mais sans direction artistique forte (output indistinguable, qualité variable, pas de vision).</li>
+    <li>Le marché manque cruellement de figures hybrides : <strong>réalisateurs avec un œil cinéma + maîtrise IA + capacité de direction de production</strong>.</li>
+  </ul>
+
+  <h3>La thèse OWM</h3>
+  <div class="pull-quote">
+    <p>La valeur ne réside plus dans la production. Elle réside dans la direction de production. L'IA est un nouveau corps de métier à diriger, pas un outil à utiliser seul.</p>
+  </div>
+  <p>OWM postule que le métier de demain dans la création visuelle est celui de <strong>Réalisateur-Directeur de Production IA</strong> : quelqu'un qui sait diriger l'IA comme on dirige un chef-opérateur, un chef-décorateur ou un acteur. Cette direction implique :</p>
+  <ul>
+    <li>Une vision narrative en amont (storyboard, scénario, mood, intention émotionnelle).</li>
+    <li>Un protocole de fidélité visuelle (références physiques, itérations dirigées, validation à froid).</li>
+    <li>Une capacité de garantie auprès du client (livrable conforme, pas un coup de chance algorithmique).</li>
+  </ul>
+  <p>OWM est l'incarnation opérationnelle de cette thèse, validée sur cinq contrats actifs en 2026.</p>
+</section>
+
+<!-- ===================== 4. SOLUTION & OFFRE ===================== -->
+<section id="s4">
+  <div class="section-num">04 — La solution & l'offre</div>
+  <h2 class="section-title">Le <span class="italic">Protocole</span> & les trois portes</h2>
+
+  <h3>Le Protocole OWM Production IA Fidèle</h3>
+  <p>Méthode propriétaire en 4 étapes garantissant la fidélité visuelle et la cohérence narrative de toute production IA-augmentée :</p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-content">
+        <h4>Capture de référence physique</h4>
+        <p>Shooting référence (produit, visage, lieu) ou collecte d'archives validées par le client. Aucune génération sans ancrage réel.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-content">
+        <h4>Génération itérative dirigée</h4>
+        <p>Maximum 6 itérations par plan, avec brief écrit, validation intermédiaire, ajustements de direction (cadre, lumière, expression).</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-content">
+        <h4>Validation à froid 24h</h4>
+        <p>Obligatoire avant envoi client. Filtre les biais de proximité, vérifie la cohérence inter-plans.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-content">
+        <h4>Validation client par échantillon</h4>
+        <p>Présentation d'un panel curé (3-5 plans) avant production complète. Engagement contractuel sur la fidélité.</p>
+      </div>
+    </div>
+  </div>
+  <p class="muted">Ce protocole est le différenciateur opérationnel d'OWM. Il transforme l'IA d'un générateur aléatoire en un instrument de réalisation dirigé.</p>
+
+  <h3>Architecture des offres</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Niveau</th><th>Le Premier Regard</th><th>L'Histoire qu'on n'oublie pas</th><th>Le Regard sur 3 Mois</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">Ticket d'entrée</td><td>dès 500 € HT</td><td>dès 1 200 € HT</td><td>dès 3 000 € HT</td></tr>
+      <tr><td class="label">Promesse</td><td>Une signature visuelle en 7 jours.</td><td>Un récit de marque mémorable.</td><td>Une présence cinématographique sur 90 jours.</td></tr>
+      <tr><td class="label">Cible</td><td>Test marché / lancement freelance / nouveau produit.</td><td>Marque en consolidation cherchant un récit fondateur.</td><td>DNVB scaling / personal brands en croissance.</td></tr>
+      <tr><td class="label">Livrable type</td><td>3-5 visuels signature + 1 capsule 15s.</td><td>Film 60-90s + suite de visuels + déclinaisons réseaux.</td><td>Direction de marque + production récurrente + social planning.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>La pile technologique propriétaire</h3>
+  <ul>
+    <li><strong>Higgsfield AI :</strong> Nano Banana 2 (image 4K), Seedance 2.0 (vidéo référence-driven), Soul 2.0 (caractères réutilisables).</li>
+    <li><strong>Pipeline carrousels :</strong> HTML + Playwright + Poppins, format 1080×1350px, 9 slides — système de production scalable validé sur C01-C40.</li>
+    <li><strong>Infrastructure :</strong> GitHub Pages (okapiworldmedia.com), Firebase Firestore (sync temps réel), Cloudflare Worker (proxy email), ntfy.sh (alertes push).</li>
+    <li><strong>Gestion projet :</strong> Hub PWA propriétaire avec dashboard contrats, facturation ReportLab, drafts Gmail automatisés.</li>
+  </ul>
+</section>
+
+<!-- ===================== 5. MARCHÉ ===================== -->
+<section id="s5">
+  <div class="section-num">05 — Le marché</div>
+  <h2 class="section-title">TAM · SAM · <span class="italic">SOM</span></h2>
+
+  <h3>Marché total adressable (TAM)</h3>
+  <p>Le marché européen de la production de contenu de marque (brand content) est estimé entre <strong>8 et 12 milliards d'euros</strong> en 2026, en croissance de 12-15% par an, porté par : la fragmentation des médias, la verticalisation des canaux (IG, TikTok, YouTube Shorts), et l'inflation du coût d'attention.</p>
+  <p>Le sous-segment de la production IA-augmentée (création visuelle hybride) est estimé à <strong>1,5-2,5 milliards d'euros</strong> en Europe en 2026, avec un taux de croissance projeté de <strong>35-50% par an sur 2026-2028</strong> — c'est le segment le plus dynamique du marché créatif.</p>
+
+  <p class="muted">Note méthodologique : ces estimations sont indicatives, agrégées de plusieurs études (IDC, Statista, McKinsey Creative Economy 2025). Elles seront raffinées avec sources vérifiables si ce document devient un investor memo en 2027.</p>
+
+  <h3>Marché serviçable (SAM)</h3>
+  <p>Le SAM réaliste pour OWM est le marché français des marques émergentes (DNVB, créateurs, PME premium) cherchant une production cinématographique accessible.</p>
+  <ul>
+    <li><strong>Estimation —</strong> 8 000 à 15 000 marques en France entrant chaque année dans la fenêtre tarifaire 1 K€-50 K€ par projet créatif.</li>
+    <li><strong>Volume annuel —</strong> 300 à 600 millions d'euros, avec un panier moyen de 5-15 K€ par marque sur 12 mois.</li>
+  </ul>
+
+  <h3>Marché obtenable réaliste (SOM 3 ans)</h3>
+  <p>Avec une stratégie de prospection ciblée + acquisition organique (community + IG + recommandations), OWM peut viser de manière crédible :</p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Année</th><th class="numeric">Clients actifs</th><th class="numeric">Panier moyen</th><th class="numeric">CA HT cible</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">2026</td><td class="numeric">8-12</td><td class="numeric">8-12 K€</td><td class="numeric"><strong>80-120 K€</strong></td></tr>
+      <tr><td class="label">2027</td><td class="numeric">15-20</td><td class="numeric">12-15 K€</td><td class="numeric"><strong>180-250 K€</strong></td></tr>
+      <tr><td class="label">2028</td><td class="numeric">25-35</td><td class="numeric">14-18 K€</td><td class="numeric"><strong>350-500 K€</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="muted">Le SOM 2028 cible représente moins de 0,15% du SAM français — une part de marché absorbable sans guerre concurrentielle frontale.</p>
+
+  <h3>Tendances de marché favorables</h3>
+  <ul>
+    <li><strong>La démocratisation de l'IA générative déplace la valeur vers la direction artistique.</strong> Les outils deviennent commodity, l'œil reste rare.</li>
+    <li><strong>La fatigue du contenu standardisé.</strong> Les marques cherchent à se distinguer par le récit et la signature visuelle.</li>
+    <li><strong>La montée des marques d'auteur et DNVB.</strong> Croissance forte des marques small-to-mid avec besoin créatif récurrent.</li>
+    <li><strong>Le passage du modèle agence au modèle studio-créateur.</strong> Les marques préfèrent une figure créatrice incarnée à une agence opaque.</li>
+  </ul>
+</section>
+
+<!-- ===================== 6. CONCURRENCE ===================== -->
+<section id="s6">
+  <div class="section-num">06 — Concurrence & positionnement</div>
+  <h2 class="section-title">Le quadrant <span class="italic">vacant</span></h2>
+
+  <h3>Cartographie concurrentielle</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Catégorie</th><th>Acteurs types</th><th>Forces</th><th>Faiblesses</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">Agences créatives premium</td><td>BETC, Buzzman, agences indé établies</td><td>Réputation, accès grands comptes, équipes pluridisciplinaires.</td><td>Tarifs inaccessibles aux marques émergentes, lenteur, processus rigides.</td></tr>
+      <tr><td class="label">Studios IA-native</td><td>Nouveaux entrants 2024-2026</td><td>Vitesse, prix bas, volume.</td><td>Pas de direction artistique, qualité variable, pas de garantie de fidélité.</td></tr>
+      <tr><td class="label">Vidéastes / freelances</td><td>Réalisateurs indé, monteurs, motion designers</td><td>Tarifs accessibles, relation directe.</td><td>Capacité limitée, pas de vision stratégique, peu de récurrence.</td></tr>
+      <tr><td class="label">Outils self-service IA</td><td>Runway, Sora, Higgsfield direct, Canva</td><td>Coût marginal, accès immédiat.</td><td>Aucune direction, dérives visuelles, pas adapté aux marques exigeantes.</td></tr>
+      <tr><td class="label">Studios hybrides positionnés</td><td>5-15 acteurs en France (2025-2026)</td><td>Workflow IA + direction artistique. Concurrents directs.</td><td>Souvent jeunes, pas encore de protocole stabilisé, identité fragile.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Le quadrant de positionnement OWM</h3>
+  <p>Sur deux axes — <strong>Qualité cinématographique</strong> et <strong>Accessibilité tarifaire</strong> — OWM occupe le quadrant haut-droite (qualité élevée + accessibilité élevée), un quadrant peu peuplé en France :</p>
+  <ul>
+    <li><strong>Quadrant haut-gauche</strong> (qualité haute, prix élevé) — agences premium type BETC, Buzzman.</li>
+    <li><strong>Quadrant bas-gauche</strong> (qualité basse, prix élevé) — agences en perte de vitesse à fuir.</li>
+    <li><strong>Quadrant bas-droite</strong> (qualité basse, prix bas) — freelances et studios IA-native sans direction.</li>
+    <li><strong>Quadrant haut-droite</strong> (qualité haute, prix accessible) — <em>OWM. Très peu d'acteurs structurés. Fenêtre stratégique.</em></li>
+  </ul>
+
+  <h3>Différenciateurs défendables</h3>
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-content">
+        <h4>Le Protocole de Production IA Fidèle</h4>
+        <p>Méthode codifiée, documentée, reproductible. Brevetable comme méthodologie commerciale ou défendable comme actif de propriété intellectuelle.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-content">
+        <h4>La double signature : réalisateur d'auteur + opérateur IA</h4>
+        <p>Profil rare combinant 7 ans de réalisation + 14 prix + maîtrise stack IA. Difficile à répliquer en moins de 3-5 ans.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-content">
+        <h4>La verticalisation par communauté</h4>
+        <p>OWM est ancré dans des communautés afro-descendantes et créatives spécifiques (réseau direct, recommandations) — un canal d'acquisition opaque pour les concurrents.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-content">
+        <h4>Le portefeuille d'IPs propriétaires</h4>
+        <p>Bau, Lucioles, Illusion, Mille Visages. Aucun concurrent direct ne dispose d'une telle bibliothèque narrative. Effet de halo créatif et potentiel de revenus asymétriques.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 7. MODÈLE ÉCO ===================== -->
+<section id="s7">
+  <div class="section-num">07 — Modèle économique</div>
+  <h2 class="section-title">Unit <span class="italic">economics</span> & vérité</h2>
+
+  <h3>Sources de revenus</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Source</th><th>Logique</th><th class="numeric">Marge brute</th><th class="numeric">% CA cible 2027</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">Films de marque (one-shot)</td><td>Production unitaire, ticket 3-15 K€.</td><td class="numeric">60-70%</td><td class="numeric">45%</td></tr>
+      <tr><td class="label">Identités visuelles</td><td>Direction de marque, charte, déclinaisons. Ticket 1,5-5 K€.</td><td class="numeric">70-80%</td><td class="numeric">15%</td></tr>
+      <tr><td class="label">Contrats récurrents (Le Regard sur 3 Mois)</td><td>Production + stratégie sur 90 jours. 3-10 K€/mois.</td><td class="numeric">55-65%</td><td class="numeric">25%</td></tr>
+      <tr><td class="label">Documentaires</td><td>Projets long-format, ticket 5-25 K€.</td><td class="numeric">40-55%</td><td class="numeric">10%</td></tr>
+      <tr><td class="label">Formation / masterclass</td><td>Transmission protocole IA, partenariats type BNC Academy.</td><td class="numeric">70-85%</td><td class="numeric">5%</td></tr>
+    </tbody>
+  </table>
+  <p class="muted">Le portefeuille de revenus est délibérément diversifié pour : (a) lisser la trésorerie, (b) limiter la dépendance à un seul type de client, (c) ouvrir progressivement le canal IP/animation à plus long terme.</p>
+
+  <h3>Unit economics — Contrat type 2026</h3>
+  <p>Exemple basé sur le contrat MAÏLU (OKP-2026-MAL-01) — référence représentative de la typologie cible 2026 :</p>
+  <div class="kpi-grid">
+    <div class="kpi-row"><div class="kpi-label">Ticket contrat (HT)</div><div class="kpi-value">1 650 €</div></div>
+    <div class="kpi-row"><div class="kpi-label">Durée production</div><div class="kpi-value">~6 semaines</div></div>
+    <div class="kpi-row"><div class="kpi-label">Coûts directs (IA crédits, stock, outils)</div><div class="kpi-value">~150 €</div></div>
+    <div class="kpi-row"><div class="kpi-label">Temps fondateur</div><div class="kpi-value">~30 heures</div></div>
+    <div class="kpi-row"><div class="kpi-label">Coût d'opportunité (taux interne 80 €/h)</div><div class="kpi-value">2 400 €</div></div>
+    <div class="kpi-row"><div class="kpi-label">Marge brute hors coût d'opportunité</div><div class="kpi-value">1 500 € (91%)</div></div>
+    <div class="kpi-row"><div class="kpi-label">Marge brute incluant coût d'opportunité</div><div class="kpi-value">≈ déficit de 900 € — <strong>signal critique</strong></div></div>
+  </div>
+
+  <div class="pull-quote">
+    <p>Lecture critique : sur le ticket entry-level, OWM n'est pas rentable au coût d'opportunité réel du fondateur. La rentabilité réelle commence à partir de 3 500-5 000 € HT par contrat. C'est un point structurant de la stratégie 2026-2027 : remonter le ticket moyen.</p>
+  </div>
+
+  <h3>Unit economics — Ticket cible 2027</h3>
+  <div class="kpi-grid">
+    <div class="kpi-row"><div class="kpi-label">Ticket cible (HT)</div><div class="kpi-value">8 000 €</div></div>
+    <div class="kpi-row"><div class="kpi-label">Durée production</div><div class="kpi-value">~5 semaines</div></div>
+    <div class="kpi-row"><div class="kpi-label">Coûts directs</div><div class="kpi-value">~600 €</div></div>
+    <div class="kpi-row"><div class="kpi-label">Temps fondateur</div><div class="kpi-value">~50 heures</div></div>
+    <div class="kpi-row"><div class="kpi-label">Coût d'opportunité</div><div class="kpi-value">4 000 €</div></div>
+    <div class="kpi-row"><div class="kpi-label">Marge brute hors coût d'opp.</div><div class="kpi-value">7 400 € (92%)</div></div>
+    <div class="kpi-row"><div class="kpi-label">Marge brute incluant coût d'opp.</div><div class="kpi-value">3 400 € (43%) — <strong>modèle viable</strong></div></div>
+  </div>
+</section>
+
+<!-- ===================== 8. TRACTION ===================== -->
+<section id="s8">
+  <div class="section-num">08 — Traction & pipeline</div>
+  <h2 class="section-title">Cinq <span class="italic">contrats</span>, cinq prospects</h2>
+
+  <h3>Contrats actifs (Mai 2026)</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Client</th><th>Contrat</th><th class="numeric">Montant HT</th><th>Statut & échéances</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">MAÏLU</td><td>OKP-2026-MAL-01</td><td class="numeric">1 650 €</td><td>1 050 € encaissés. 600 € en attente sur module Stratégie digitale.</td></tr>
+      <tr><td class="label">UNIKIDSLAND</td><td>OKP-2026-UKL-01</td><td class="numeric">8 333 €</td><td>Échelonné mai-novembre 2026. Pack Saison animation jeunesse.</td></tr>
+      <tr><td class="label">Le Miroir de l'âme</td><td>OKP-2026-EVE01</td><td class="numeric">1 700 €</td><td>Tournage mai 2026. 510€ signature, 510€ montage, 680€ livraison.</td></tr>
+      <tr><td class="label">Ballet Diaspora Camerounaise</td><td>OKP-2026-BDC01-A1</td><td class="numeric">5 050 €</td><td>Documentaire 4 tournages Paris + Casino de Paris finale mai 2027. 5 jalons.</td></tr>
+      <tr><td class="label">MBOAM DÉCO</td><td>OKP-2026-MBO-01</td><td class="numeric">3 500 €</td><td>Kickoff fin mai 2026. Échelonnement 30/40/30.</td></tr>
+      <tr class="total"><td>TOTAL CA contractualisé</td><td></td><td class="numeric">≈ 20 233 €</td><td>Hypothèse : 100% d'encaissement.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Pipeline qualifié (Mai 2026)</h3>
+  <ul>
+    <li><strong>HYDRANE (Kelly Sibenou) —</strong> campagne visuelle 500 € HT, 5-6 visuels IA. NHA deadline 6-7 juin Parc Floral.</li>
+    <li><strong>Grâce Isabelle (lancement marque maquillage) —</strong> devis OKP-2026-GIB-01 envoyé. Offre 3 modules. Production 100% IA validée.</li>
+    <li><strong>Queen Stelyna (MC / personal branding) —</strong> personal branding cliente, asset radio Askip Radio comme canal de référence.</li>
+    <li><strong>Joel Desteney / Pearlace —</strong> marque lace wig, sourcing africain (Burkina Faso) à valider.</li>
+    <li><strong>Maryline Kouame / MBOAM DÉCO —</strong> transformé en contrat (voir ci-dessus).</li>
+  </ul>
+
+  <p class="muted">Tous les prospects 2026 ont été générés par : (a) événements physiques, (b) communauté hebdomadaire récurrente. Aucun via prospection froide ou Instagram. Lecture critique : <strong>Instagram fonctionne comme outil de réassurance post-rencontre, pas comme canal d'acquisition</strong>.</p>
+
+  <h3>Lecture stratégique de la traction</h3>
+  <ul>
+    <li><strong>Force —</strong> validation de l'offre sur 5 typologies de clients différentes (matchmaking, animation jeunesse, spirituel, documentaire diaspora, déco). L'offre est élastique.</li>
+    <li><strong>Force —</strong> tickets en montée — du 500 € (HYDRANE) au 8 333 € (UNIKIDSLAND). Capacité démontrée à signer des contrats annuels structurés.</li>
+    <li><strong>Faiblesse —</strong> concentration géographique et communautaire (Île-de-France + diaspora afro-descendante). Risque de plafond de marché si non élargi.</li>
+    <li><strong>Faiblesse —</strong> ticket moyen (3 246 € sur les 5 contrats) en dessous du seuil de rentabilité au coût d'opportunité (≈ 5 000 €).</li>
+    <li><strong>Opportunité —</strong> le pipeline 2026 démontre la capacité de transformation. Si reproduit en S2 2026, la cible 80-120 K€ est atteignable.</li>
+  </ul>
+</section>
+
+<!-- ===================== 9. ACQUISITION ===================== -->
+<section id="s9">
+  <div class="section-num">09 — Acquisition & croissance</div>
+  <h2 class="section-title">Le mythe d'<span class="italic">Instagram</span></h2>
+
+  <div class="pull-quote">
+    <p>Instagram ne génère pas de prospects. Il rassure les prospects déjà rencontrés. Continuer à investir 80% de l'effort éditorial sur Instagram en attendant qu'il devienne magiquement un canal d'acquisition est une erreur stratégique.</p>
+  </div>
+  <p>Les 5 prospects de mai 2026 sont tous venus d'événements physiques ou de la communauté hebdomadaire. Cette donnée doit conditionner toute la stratégie 2026-2028.</p>
+
+  <h3>Les 5 canaux ranked par cost-efficiency</h3>
+  <ul>
+    <li><strong>1. Communauté physique récurrente —</strong> événements hebdo, soirées thématiques, incubateurs. Coût marginal : ~50 €/événement. CAC très faible. À industrialiser : créer un format propriétaire OWM (Cinéclub Okapi, soirée mensuelle).</li>
+    <li><strong>2. Recommandations clients —</strong> chaque contrat livré doit générer 0,5-1 nouveau prospect via NPS et asks structurés. Coût : zéro. À industrialiser : process de demande de recommandation dans le contrat.</li>
+    <li><strong>3. Cold outreach ciblé DNVB —</strong> approche personnalisée auprès de 30-50 marques/mois via LinkedIn + email. CAC moyen 200-500 €. À industrialiser : séquence de 3 messages avec hook créatif.</li>
+    <li><strong>4. Contenu éducatif YouTube long-format —</strong> 1 vidéo/mois sur le Protocole IA, behind-the-scenes des productions OWM, masterclass courtes. SEO compounding sur 18-24 mois.</li>
+    <li><strong>5. Instagram cinématographique —</strong> rétrogradé en outil de réassurance. 3 posts/semaine max, série Inspiration en cours, pas de croissance forcée.</li>
+  </ul>
+
+  <h3>Calendrier d'exécution hebdomadaire-type</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Bloc</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">Lundi</td><td>Production : sessions IA, tournages, montage. Aucune réunion commerciale.</td></tr>
+      <tr><td class="label">Mardi</td><td>Production + envoi de 10 cold outreach DNVB ciblés (1h30 max).</td></tr>
+      <tr><td class="label">Mercredi</td><td>Calls prospects + relances pipeline. Création de 1 carrousel Inspiration.</td></tr>
+      <tr><td class="label">Jeudi</td><td>Production. Bloc rédaction YouTube/blog.</td></tr>
+      <tr><td class="label">Vendredi</td><td>Communauté hebdo (présence systématique). Networking événements.</td></tr>
+      <tr><td class="label">Samedi</td><td>Bloc IP propriétaire (Bau, Lucioles, Mille Visages). 4 heures protégées.</td></tr>
+      <tr><td class="label">Dimanche</td><td>Repos + planification semaine suivante (1h max).</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Split organique vs payant</h3>
+  <ul>
+    <li><strong>Année 1 (2026)</strong> — 95% organique, 5% paid (tests Meta Ads très ciblés sur lookalikes, budget &lt; 200 €/mois).</li>
+    <li><strong>Année 2 (2027)</strong> — 80% organique, 20% paid (tests YouTube Ads sur contenus éducatifs propres, retargeting prospects).</li>
+    <li><strong>Année 3 (2028)</strong> — 70% organique, 30% paid (logique d'amplification d'un système d'acquisition prouvé).</li>
+  </ul>
+
+  <h3>Leviers asymétriques</h3>
+  <ul>
+    <li><strong>1. Cinéclub Okapi (rituel propriétaire)</strong> — soirée mensuelle projection + analyse cinéma + apéro. Crée un actif communautaire reproductible et différenciant. Investissement : 200-400 €/mois. Output : 3-5 leads qualifiés/soirée.</li>
+    <li><strong>2. Bau comme actif marketing</strong> — le développement de l'animation Bau crée un narratif de réalisateur-créateur authentique, pas un commercial déguisé. Asset de réputation longue durée.</li>
+    <li><strong>3. Programme partenariat creative-friends</strong> — 5-10 alliés (créatrices marques, photographes, MCs comme Queen Stelyna) qui se recommandent entre eux. Coût zéro, output exponentiel.</li>
+  </ul>
+</section>
+
+<!-- ===================== 10. ROADMAP ===================== -->
+<section id="s10">
+  <div class="section-num">10 — Roadmap 2026-2028</div>
+  <h2 class="section-title">Quatre <span class="italic">phases</span>, trois ans</h2>
+
+  <div class="phases">
+    <div class="phase">
+      <div class="phase-meta">
+        <span class="phase-label">Phase 1</span>
+        <div class="phase-name">Stabiliser</div>
+        <div class="phase-period">Juin — Décembre 2026</div>
+      </div>
+      <div class="phase-content">
+        <ul>
+          <li><strong>Juridique —</strong> audit juridique préparatoire au passage SAS prévu Q1 2027.</li>
+          <li><strong>Commercial —</strong> porter le ticket moyen de 3 246 € à 5 500 € via revue d'offre et discipline tarifaire.</li>
+          <li><strong>Production —</strong> industrialiser le Protocole IA, documenter chaque étape, créer un manuel interne (transmissible).</li>
+          <li><strong>Outils —</strong> stabiliser Hub PWA, Firebase, automatisations Mylo. Zéro développement nouveau, focus stabilité.</li>
+          <li><strong>KPI cible fin 2026 —</strong> 80-120 K€ HT encaissés, 8-12 contrats signés, marge nette ≥ 35%, ticket moyen ≥ 5 500 €.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-meta">
+        <span class="phase-label">Phase 2</span>
+        <div class="phase-name">Structurer</div>
+        <div class="phase-period">Janvier — Juin 2027</div>
+      </div>
+      <div class="phase-content">
+        <ul>
+          <li><strong>Juridique —</strong> création SAS Okapi World Média, transfert de l'activité EI, ouverture capital potentielle (max 25% réservée smart money).</li>
+          <li><strong>Recrutement #1 — Producteur·rice / Chef·fe de projet</strong> (CDD 6 mois → CDI). Coût : 35-45 K€ chargé/an. Mission : décharger Yamakasi de l'opérationnel client.</li>
+          <li><strong>Recrutement #2 (Q3 2027) — Directeur·rice Artistique IA junior</strong>. Coût : 30-40 K€ chargé/an. Mission : exécution du Protocole IA sur les contrats récurrents.</li>
+          <li><strong>Lancement commercial Bau —</strong> préparation dossier diffuseur, identification 5-10 cibles (Arte, France TV, Studio+, Apple TV).</li>
+          <li><strong>KPI cible mi-2027 —</strong> 100-130 K€ HT encaissés sur S1, équipe de 2-3, premier RDV diffuseur Bau.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-meta">
+        <span class="phase-label">Phase 3</span>
+        <div class="phase-name">Déployer</div>
+        <div class="phase-period">Juillet — Décembre 2027</div>
+      </div>
+      <div class="phase-content">
+        <ul>
+          <li><strong>Recrutement #3 — Business developer / Strategist</strong>. Coût : 40-55 K€ chargé/an. Mission : industrialiser cold outreach et grands comptes.</li>
+          <li><strong>Lancement formation propriétaire —</strong> module "Diriger l'IA en production". Cible : agences, studios, indépendants. Tarif 1 200-2 500 € par participant.</li>
+          <li><strong>Test marché Bau —</strong> premier pilote financé (interne ou pré-vente partielle), démo réalisée.</li>
+          <li><strong>KPI cible fin 2027 —</strong> 180-250 K€ HT, équipe de 4-5, 1 contrat formation signé, 1 LOI diffuseur Bau.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-meta">
+        <span class="phase-label">Phase 4</span>
+        <div class="phase-name">Scaler</div>
+        <div class="phase-period">2028</div>
+      </div>
+      <div class="phase-content">
+        <ul>
+          <li><strong>Modèle agence stabilisé —</strong> OWM opère sans dépendance opérationnelle au fondateur sur les contrats récurrents. Yamakasi se concentre sur direction artistique + IPs.</li>
+          <li><strong>Bau en production —</strong> soit pré-vente diffuseur, soit coproduction, soit sortie pilote financé via subventions CNC / aides ICC.</li>
+          <li><strong>Internationalisation prudente —</strong> premiers contrats hors France (Belgique, Suisse francophone, Côte d'Ivoire, Cameroun selon réseau).</li>
+          <li><strong>KPI cible fin 2028 —</strong> 350-500 K€ HT, équipe de 5-7, 1 IP en production financée, 30% du CA récurrent.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 11. ÉQUIPE ===================== -->
+<section id="s11">
+  <div class="section-num">11 — Équipe & gouvernance</div>
+  <h2 class="section-title">L'<span class="italic">équipe</span> de demain</h2>
+
+  <h3>Équipe actuelle</h3>
+  <ul>
+    <li><strong>Yamakasi (Archange Kiyindou) —</strong> Fondateur, Réalisateur, Directeur de Création. 7+ ans d'expérience cinéma, 14 prix en festivals. Formation cinéma 3IS, Module 201 BNC Academy. Compétences clés : réalisation, direction artistique, écriture, direction IA.</li>
+    <li><strong>Michele Joumessi —</strong> Membre d'équipe légitime OWM. Accès autorisé aux documents produits. Rôle à formaliser dans la structure SAS 2027 (associée potentielle ou salariée selon accord).</li>
+  </ul>
+
+  <h3>Conseillers informels mobilisables</h3>
+  <ul>
+    <li>Réseau BNC Academy (formation, transmission).</li>
+    <li>Bastien Lestrelin (script doctoring, relations milieu cinéma).</li>
+    <li>Réseau communauté hebdomadaire (prospection, validation marché).</li>
+    <li>Margot Lucas (co-autrice Bau).</li>
+  </ul>
+
+  <h3>Plan de recrutement 2026-2028</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Période</th><th>Poste</th><th>Type contrat</th><th class="numeric">Coût annuel chargé</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">Q1 2027</td><td>Producteur·rice / Chef·fe de projet</td><td>CDD 6m → CDI</td><td class="numeric">35-45 K€</td></tr>
+      <tr><td class="label">Q3 2027</td><td>Directeur·rice Artistique IA junior</td><td>CDI</td><td class="numeric">30-40 K€</td></tr>
+      <tr><td class="label">Q4 2027</td><td>Business developer / Strategist</td><td>CDI</td><td class="numeric">40-55 K€</td></tr>
+      <tr><td class="label">Q2 2028</td><td>Monteur·euse / Motion designer senior</td><td>CDI</td><td class="numeric">38-48 K€</td></tr>
+      <tr><td class="label">Q4 2028</td><td>Producteur·rice IP / Animation (Bau)</td><td>Mission/CDI</td><td class="numeric">45-60 K€</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Gouvernance cible (post-SAS)</h3>
+  <ul>
+    <li><strong>Yamakasi</strong> — Président, Directeur Création. Minimum 75% du capital.</li>
+    <li><strong>Michele Joumessi</strong> — associée minoritaire (5-10%) ou salariée selon accord.</li>
+    <li><strong>Pool smart money</strong> — 10-25% réservé pour Business Angels ICC ou opérateurs media (entrée 2027).</li>
+    <li><strong>Conseil consultatif</strong> — 3-5 conseillers stratégiques (cinéma, branding, finance ICC), rémunération en parts ou rétrocession.</li>
+  </ul>
+</section>
+
+<!-- ===================== 12. PRÉVISIONNEL ===================== -->
+<section id="s12">
+  <div class="section-num">12 — Prévisionnel financier</div>
+  <h2 class="section-title">Trois <span class="italic">années</span>, en chiffres</h2>
+
+  <h3>Hypothèses centrales</h3>
+  <ul>
+    <li>Ticket moyen : 3 246 € (2026) → 5 500 € (2027) → 7 500 € (2028).</li>
+    <li>Volume contrats/an : 8-12 (2026) → 15-20 (2027) → 25-35 (2028).</li>
+    <li>Marge brute moyenne pondérée : 65% (2026) → 60% (2027) → 55% (2028 — érosion liée à la structuration équipe).</li>
+    <li>Charges fixes : 8 K€ (2026, structure EI) → 75 K€ (2027, équipe + SAS) → 220 K€ (2028, équipe complète).</li>
+    <li>Pas de levée de fonds modélisée — autofinancement intégral.</li>
+  </ul>
+
+  <h3>Compte de résultat prévisionnel (synthèse, K€ HT)</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th></th><th class="numeric">2026</th><th class="numeric">2027</th><th class="numeric">2028</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">Chiffre d'affaires HT</td><td class="numeric">100</td><td class="numeric">215</td><td class="numeric">420</td></tr>
+      <tr><td>Coûts directs production</td><td class="numeric">-15</td><td class="numeric">-43</td><td class="numeric">-105</td></tr>
+      <tr class="total"><td>Marge brute</td><td class="numeric">85</td><td class="numeric">172</td><td class="numeric">315</td></tr>
+      <tr><td>Charges de personnel</td><td class="numeric">0</td><td class="numeric">-58</td><td class="numeric">-185</td></tr>
+      <tr><td>Charges externes (outils, locaux, juridique)</td><td class="numeric">-8</td><td class="numeric">-17</td><td class="numeric">-35</td></tr>
+      <tr><td>Marketing / acquisition</td><td class="numeric">-3</td><td class="numeric">-12</td><td class="numeric">-25</td></tr>
+      <tr><td>Investissement IP (Bau & R&D)</td><td class="numeric">-2</td><td class="numeric">-15</td><td class="numeric">-30</td></tr>
+      <tr class="total"><td>Résultat avant impôt</td><td class="numeric">72</td><td class="numeric">70</td><td class="numeric">40</td></tr>
+      <tr class="total"><td>Marge nette avant impôt</td><td class="numeric">72%</td><td class="numeric">33%</td><td class="numeric">10%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="pull-quote">
+    <p>La marge nette chute de 72% à 10% en 3 ans. Ce n'est pas un échec : c'est le coût de la structuration. La logique est de transformer une rentabilité solo (luxe pour le fondateur) en capacité de production scalable (luxe pour le futur).</p>
+  </div>
+
+  <h3>Trois alertes financières à surveiller</h3>
+
+  <div class="alert-box">
+    <div class="alert-label">Alerte 1 — Trésorerie 2027</div>
+    <p>Le passage en SAS + recrutements crée un besoin de fonds de roulement de 30-50 K€. À sécuriser via réserve cash 2026 ou ligne BPI.</p>
+  </div>
+
+  <div class="alert-box">
+    <div class="alert-label">Alerte 2 — Rentabilité 2028</div>
+    <p>10% de marge nette est trop faible si imprévu. Plan B obligatoire (ralentir recrutements ou accélérer pricing).</p>
+  </div>
+
+  <div class="alert-box">
+    <div class="alert-label">Alerte 3 — Investissement IP</div>
+    <p>Investissements R&D Bau cumulés ~47 K€ sans retour modélisé. Risque assumé mais à monitorer trimestriellement. Stop-loss à 60 K€ cumulé sans pré-vente.</p>
+  </div>
+</section>
+
+<!-- ===================== 13. RISQUES ===================== -->
+<section id="s13">
+  <div class="section-num">13 — Risques</div>
+  <h2 class="section-title">Pré-mortem & <span class="italic">mitigations</span></h2>
+
+  <h3>Top des risques critiques</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Risque</th><th>Probabilité</th><th>Impact</th><th>Mitigation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">R1 — Burn-out fondateur</td><td class="alert-high">Élevée</td><td class="alert-high">Critique</td><td>Recrutement Producteur·rice Q1 2027 prioritaire. Bloc IP samedi non négociable. Coach business mensuel.</td></tr>
+      <tr><td class="label">R2 — Commoditisation de l'IA</td><td class="alert-high">Élevée</td><td class="alert-high">Élevé</td><td>Verrouiller le moat "direction d'auteur + Protocole". Ne jamais vendre l'IA, vendre la garantie de fidélité.</td></tr>
+      <tr><td class="label">R3 — Concentration géographique/communautaire</td><td class="alert-mid">Moyenne</td><td class="alert-high">Élevé</td><td>Diversifier canaux d'acquisition (cold outreach DNVB hors communauté dès Q3 2026).</td></tr>
+      <tr><td class="label">R4 — Erreur juridique / fiscale (SAS)</td><td class="alert-mid">Moyenne</td><td class="alert-high">Élevé</td><td>Audit avocat ICC + expert-comptable Q4 2026. Pacte d'associés rédigé avant entrée capital.</td></tr>
+      <tr><td class="label">R5 — Investissement Bau sans retour</td><td class="alert-mid">Moyenne</td><td class="alert-mid">Moyen</td><td>Plafonner R&D IP à 8-10% du CA annuel. Stop-loss à 60 K€ cumulé. Subventions CNC à explorer.</td></tr>
+      <tr><td class="label">R6 — Évolution réglementaire IA</td><td class="alert-high">Élevée</td><td class="alert-mid">Moyen</td><td>Veille mensuelle CNIL/EU AI Act. Documentation pipeline (logs, références, validations) systématique.</td></tr>
+      <tr><td class="label">R7 — Dépendance Higgsfield (SPOF)</td><td>Faible</td><td class="alert-high">Élevé</td><td>Plan B opérationnel : équivalents Runway / Sora / Kling testés trimestriellement. Protocole agnostique de l'outil.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Top 3 des modes d'échec les plus probables</h3>
+  <div class="pull-quote">
+    <p>Si OWM échoue d'ici 2028, voici les 3 scénarios les plus probables — par ordre de probabilité décroissante.</p>
+  </div>
+  <ul>
+    <li><strong>Mode 1 — Le fondateur s'épuise sans avoir délégué.</strong> Yamakasi continue à porter 100% de la création + commerce + production. À 16-20 contrats simultanés, le système casse. Solution : recrutement Producteur·rice non reportable au-delà de Q1 2027.</li>
+    <li><strong>Mode 2 — Le ticket moyen ne remonte pas.</strong> Rester à 3 K€/contrat = saturation à 30-40 contrats/an = plafond 100-120 K€ = pas de business scalable. Solution : discipline tarifaire + revue offre dès Q3 2026.</li>
+    <li><strong>Mode 3 — La verticalisation diaspora bloque l'élargissement.</strong> L'identité communautaire forte est un atout d'acquisition mais peut devenir un frein si elle est perçue comme niche par les marques mainstream. Solution : créer un récit "global creative house" en parallèle, sans dénier la communauté d'origine.</li>
+  </ul>
+</section>
+
+<!-- ===================== 14. FINANCEMENT ===================== -->
+<section id="s14">
+  <div class="section-num">14 — Besoins de financement</div>
+  <h2 class="section-title">Smart <span class="italic">money</span>, ou rien</h2>
+
+  <h3>Hypothèse centrale : autofinancement</h3>
+  <p>Le scénario central de ce BP n'inclut <strong>aucune levée de fonds</strong>. La trajectoire 2026-2028 est conçue pour être autofinancée par le cash généré par l'activité de service.</p>
+  <p>Cette discipline est volontaire : elle évite la dilution prématurée et garantit que toute entrée de smart money en 2027 se fera sur une valorisation construite sur traction réelle, pas sur projection.</p>
+
+  <h3>Scénario alternatif : entrée smart money fin 2027</h3>
+  <p>Si la traction fin 2027 est conforme au prévisionnel (180-250 K€ HT, équipe de 4, 1 LOI diffuseur Bau), une ouverture de capital limitée à 10-25% peut être envisagée auprès de :</p>
+  <ul>
+    <li><strong>Business Angels ICC —</strong> profils Mediawan, Banijay, anciens cadres Studio Canal, fondateurs de studios indé établis.</li>
+    <li><strong>Fonds régionaux Île-de-France —</strong> Paris Mozaïc, Bourse French Tech, dispositifs ICC BPI.</li>
+    <li><strong>Subventions ICC —</strong> CNC (aide à la production), Aide aux entreprises culturelles innovantes IDF, Crédit d'Impôt Audiovisuel (CIAV) éligible si bras production audiovisuelle structuré.</li>
+  </ul>
+
+  <h3>Use of funds (scénario smart money 80-150 K€)</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>Poste d'investissement</th><th class="numeric">% allocation</th><th class="numeric">Montant indicatif</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="label">Recrutements seniors (BizDev + DA Senior)</td><td class="numeric">45%</td><td class="numeric">36-67 K€</td></tr>
+      <tr><td class="label">Pré-production Bau / pilote IP</td><td class="numeric">25%</td><td class="numeric">20-37 K€</td></tr>
+      <tr><td class="label">Marketing / acquisition pro</td><td class="numeric">15%</td><td class="numeric">12-22 K€</td></tr>
+      <tr><td class="label">Trésorerie de sécurité 6 mois</td><td class="numeric">10%</td><td class="numeric">8-15 K€</td></tr>
+      <tr><td class="label">R&D protocole + outils propriétaires</td><td class="numeric">5%</td><td class="numeric">4-8 K€</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Profil du smart money idéal</h3>
+  <p>OWM ne cherche pas du capital générique — toute levée est conditionnée à un apport stratégique réel. Le profil cible :</p>
+  <ul>
+    <li>Carnet d'adresses en diffuseurs (TV, plateformes) ou en grandes marques.</li>
+    <li>Expérience structuration agence ou studio (passage de 2 à 10 personnes).</li>
+    <li>Compréhension du modèle hybride service + IP (anciens cadres production audiovisuelle, fondateurs studios indé revendus).</li>
+    <li>Alignement sur la vision 7-10 ans (pas un investisseur cherchant exit &lt; 4 ans).</li>
+  </ul>
+</section>
+
+<!-- ===================== 15. ANNEXES ===================== -->
+<section id="s15">
+  <div class="section-num">15 — Annexes</div>
+  <h2 class="section-title">Annexes & <span class="italic">références</span></h2>
+
+  <h3>Lexique</h3>
+  <ul>
+    <li><strong>Protocole OWM Production IA Fidèle —</strong> méthodologie propriétaire en 4 étapes (capture référence physique → génération itérative dirigée → validation à froid 24h → validation client par échantillon).</li>
+    <li><strong>DNVB —</strong> Digital Native Vertical Brand. Marque nativement digitale, contrôlant sa chaîne de valeur de la conception à la distribution.</li>
+    <li><strong>ICC —</strong> Industries Culturelles et Créatives. Secteur économique reconnu (BPI, dispositifs spécifiques).</li>
+    <li><strong>CIAV —</strong> Crédit d'Impôt Audiovisuel. 20% des dépenses éligibles, sous conditions structurelles.</li>
+    <li><strong>LOI —</strong> Letter of Intent. Engagement non contraignant marquant l'intérêt formel d'un diffuseur.</li>
+    <li><strong>TAM / SAM / SOM —</strong> Total / Serviceable / Serviceable Obtainable Market.</li>
+  </ul>
+
+  <h3>Liste des actifs OWM (Mai 2026)</h3>
+  <ul>
+    <li><strong>Identité visuelle —</strong> Okapi symbol premium validé, OWM Logo officiel (navy/or), L'Agence Okapi logo cursive.</li>
+    <li><strong>Site web —</strong> okapiworldmedia.com — copy 2026 finalisé, 3 landing pages dédiées (maisons-premium, marques-auteur, auteurs-projets).</li>
+    <li><strong>Système Hub PWA —</strong> dashboard contrats temps réel, sync Firebase, alertes ntfy.sh.</li>
+    <li><strong>Pipelines de production —</strong> carrousels HTML+Playwright (V8), facturation ReportLab, drafts Gmail automatisés.</li>
+    <li><strong>Bibliothèque IP —</strong> Bau (animation, character designs complets), Lucioles, Illusion, Mille Visages.</li>
+    <li><strong>Portfolio festivals —</strong> 14 prix cumulés sur 7+ ans.</li>
+  </ul>
+
+  <h3>Indicateurs de pilotage mensuels</h3>
+  <ul>
+    <li>CA encaissé du mois (€ HT).</li>
+    <li>Pipeline qualifié à 30/60/90 jours (€ HT pondéré probabilité).</li>
+    <li>Ticket moyen mois glissant.</li>
+    <li>Nouveaux prospects par canal (communauté, recommandation, cold, IG, YouTube).</li>
+    <li>Taux de transformation prospect → contrat.</li>
+    <li>Heures fondateur sur création vs administratif vs commercial (objectif 50/20/30).</li>
+    <li>Trésorerie disponible (€) et runway (mois).</li>
+    <li>Avancement R&D Bau (jalons trimestriels).</li>
+  </ul>
+
+  <h3>Note de cohérence stratégique</h3>
+  <div class="pull-quote">
+    <p>Le succès d'OWM ne sera pas mesuré par sa taille en 2028, mais par sa capacité à devenir une maison où le récit prime sur le volume, où le fondateur peut se retirer du quotidien sans que la valeur s'effondre, et où chaque production raconte quelque chose qui mérite d'exister.</p>
+  </div>
+</section>
+
+</div><!-- /.page -->
+
+<footer>
+  <div class="footer-mark">Okapi World Media</div>
+  <div class="footer-text">Document confidentiel · Pilotage interne</div>
+  <div class="footer-text">© 2026 — Tous droits réservés</div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Retour en haut">↑</button>
+
+<script>
+  // Back-to-top button
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) backTop.classList.add('visible');
+    else backTop.classList.remove('visible');
+  });
+  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Smooth anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+
+<div class="confidential-watermark">Document confidentiel — distribution restreinte — Okapi World Media</div>
+
+</body>
+</html>
