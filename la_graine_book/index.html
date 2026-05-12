@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0A0A0A">
+<title>LA GRAINE — Yamakasi / Okapi World Media</title>
+<meta name="description" content="Le plan reçu en 2020 dans une chambre d'étudiant du Bourget. 7 phases. 7 ans. Un témoignage.">
+
+<!-- Open Graph (pour partage DM) -->
+<meta property="og:title" content="LA GRAINE — Un témoignage en 7 phases">
+<meta property="og:description" content="Le plan reçu en 2020 dans une chambre d'étudiant du Bourget. 7 phases. 7 ans.">
+<meta property="og:image" content="img_00_cover.jpg">
+<meta property="og:type" content="article">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+:root {
+  --noir: #0A0A0A;
+  --noir-soft: #141414;
+  --or: #C9A84C;
+  --or-soft: #A48838;
+  --ivoire: #F5F0E8;
+  --ivoire-dim: rgba(245,240,232,0.78);
+  --ivoire-faint: rgba(245,240,232,0.55);
+}
+html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body {
+  background:var(--noir);
+  color:var(--ivoire);
+  font-family:'Poppins',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+  font-size:17px;
+}
+
+/* === HERO === */
+.hero {
+  position:relative;
+  width:100%;
+  min-height:100vh;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  padding:32px 28px 56px;
+  overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background-image: url('img_00_cover.jpg');
+  background-size:cover;
+  background-position:center;
+  z-index:0;
+}
+.hero-overlay {
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 35%, rgba(10,10,10,0.7) 80%, rgba(10,10,10,0.95) 100%);
+  z-index:1;
+}
+.hero-content {
+  position:relative; z-index:2;
+}
+.hero-marker {
+  display:flex; align-items:center; gap:12px;
+  color:var(--or);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:3.5px;
+  margin-bottom:24px;
+  text-transform:uppercase;
+}
+.hero-marker::after {
+  content:'';
+  flex:1;
+  height:1px;
+  background:var(--or);
+  opacity:0.4;
+  max-width:80px;
+}
+.hero-title {
+  font-family:'Poppins',sans-serif;
+  font-weight:900;
+  font-size:88px;
+  line-height:0.9;
+  letter-spacing:-2.5px;
+  color:#fff;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero-subtitle {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:22px;
+  line-height:1.4;
+  color:var(--ivoire-dim);
+  margin-bottom:48px;
+  max-width:380px;
+}
+.hero-subtitle em { color:var(--or); font-style:normal; font-weight:500; }
+
+.scroll-cue {
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  color:var(--ivoire-faint);
+  font-size:10px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+.scroll-arrow {
+  width:1px; height:36px;
+  background: linear-gradient(180deg, var(--or) 0%, transparent 100%);
+  animation: pulse-scroll 2.5s ease-in-out infinite;
+}
+@keyframes pulse-scroll {
+  0%, 100% { opacity:0.3; transform:scaleY(0.7); }
+  50% { opacity:1; transform:scaleY(1); }
+}
+
+/* === SECTIONS === */
+section {
+  padding:80px 28px;
+  position:relative;
+}
+.section-image {
+  margin: -80px -28px 48px;
+  position:relative;
+  aspect-ratio: 3 / 4;
+  overflow:hidden;
+}
+.section-image img {
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+.section-image::after {
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:35%;
+  background: linear-gradient(180deg, transparent 0%, var(--noir) 95%);
+  pointer-events:none;
+}
+
+.year-stamp {
+  color:var(--or);
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:5px;
+  margin-bottom:20px;
+  text-transform:uppercase;
+}
+.chapter-marker {
+  color:var(--or);
+  font-weight:500;
+  font-size:11px;
+  letter-spacing:4px;
+  margin-bottom:18px;
+  text-transform:uppercase;
+}
+h2 {
+  font-family:'Poppins',sans-serif;
+  font-weight:900;
+  font-size:54px;
+  line-height:0.95;
+  letter-spacing:-1.5px;
+  color:#fff;
+  margin-bottom:18px;
+  text-transform:uppercase;
+}
+h2 .gold { color:var(--or); }
+.phase-subtitle {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:24px;
+  color:var(--or);
+  margin-bottom:36px;
+  line-height:1.3;
+}
+
+.prose {
+  font-size:17px;
+  line-height:1.85;
+  color:var(--ivoire-dim);
+  margin-bottom:22px;
+  font-weight:300;
+}
+.prose strong {
+  color:var(--ivoire);
+  font-weight:500;
+}
+.prose em {
+  color:var(--or);
+  font-style:normal;
+  font-weight:400;
+}
+
+.pull-quote {
+  border-left:2px solid var(--or);
+  padding:18px 0 18px 22px;
+  margin:36px 0;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:22px;
+  line-height:1.45;
+  color:#fff;
+  font-weight:500;
+}
+
+.gold-seal {
+  display:flex; align-items:center; gap:16px;
+  margin-top:48px;
+  padding-top:36px;
+  border-top:1px solid rgba(201,168,76,0.25);
+  color:var(--or);
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-weight:500;
+}
+.gold-seal-dot {
+  width:8px; height:8px;
+  background:var(--or);
+  border-radius:50%;
+  flex-shrink:0;
+}
+
+/* === PROLOGUE === */
+.prologue { background:var(--noir-soft); padding-top:100px; padding-bottom:100px; }
+.prologue .prose { font-family:'Cormorant Garamond',serif; font-size:21px; font-style:italic; }
+
+/* === PRINCIPE === */
+.principe h2 { font-size:48px; }
+.principe-quote {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;
+  font-style:italic;
+  font-size:32px;
+  line-height:1.3;
+  color:var(--or);
+  text-align:center;
+  margin:48px 0;
+  padding:0 8px;
+}
+
+/* === FRUITS LIST (Phase 7) === */
+.fruits-list {
+  margin:32px 0;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.fruit-card {
+  padding:18px 20px;
+  background:rgba(201,168,76,0.06);
+  border-left:2px solid var(--or);
+  color:var(--ivoire);
+  font-size:16px;
+  line-height:1.5;
+  font-weight:400;
+}
+.fruit-card em {
+  color:var(--or);
+  font-style:normal;
+  font-weight:500;
+}
+
+/* === EPILOGUE === */
+.epilogue {
+  background:var(--noir-soft);
+  padding-top:100px;
+  padding-bottom:120px;
+  text-align:left;
+}
+.epilogue h2 {
+  font-size:60px;
+}
+.epilogue .prose {
+  font-size:19px;
+}
+.epilogue-cta {
+  margin-top:56px;
+  padding:32px 24px;
+  border:1px solid rgba(201,168,76,0.4);
+  text-align:left;
+}
+.epilogue-cta-label {
+  color:var(--or);
+  font-size:11px;
+  letter-spacing:4px;
+  font-weight:500;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.epilogue-cta-text {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:20px;
+  line-height:1.45;
+  color:var(--ivoire);
+  margin-bottom:24px;
+}
+.epilogue-cta-btn {
+  display:inline-block;
+  padding:14px 28px;
+  background:var(--or);
+  color:var(--noir);
+  text-decoration:none;
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  transition:background 0.2s;
+}
+.epilogue-cta-btn:active { background:var(--or-soft); }
+
+/* === COLOPHON === */
+.colophon {
+  padding:60px 28px 80px;
+  text-align:center;
+  background:var(--noir);
+  border-top:1px solid rgba(201,168,76,0.15);
+}
+.colophon-logo {
+  margin-bottom:24px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.colophon-logo svg { width:32px; height:32px; }
+.colophon-logo-text {
+  text-align:left;
+  display:flex;
+  flex-direction:column;
+}
+.colophon-logo-text .name {
+  font-family:'Arial Black',sans-serif;
+  font-weight:900;
+  font-size:18px;
+  color:var(--ivoire);
+  letter-spacing:2px;
+  line-height:1;
+}
+.colophon-logo-text .sub {
+  font-family:Arial,sans-serif;
+  font-weight:700;
+  font-size:8px;
+  color:var(--ivoire);
+  letter-spacing:3px;
+  margin-top:2px;
+}
+.colophon-credit {
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  color:var(--ivoire-faint);
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:6px;
+}
+.colophon-credit strong {
+  color:var(--or);
+  font-style:normal;
+  font-weight:500;
+  letter-spacing:1px;
+}
+.colophon-handle {
+  margin-top:16px;
+  font-size:11px;
+  letter-spacing:3px;
+  color:var(--or);
+  text-decoration:none;
+  font-weight:500;
+  display:inline-block;
+}
+
+/* === Reveal on scroll === */
+.reveal {
+  opacity:0;
+  transform:translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* === Responsive desktop === */
+@media (min-width: 768px) {
+  body { font-size:18px; }
+  .hero { padding:60px 80px 80px; }
+  .hero-title { font-size:160px; }
+  .hero-subtitle { font-size:26px; max-width:560px; }
+  section { padding:120px 0; }
+  section > * { max-width:680px; margin-left:auto; margin-right:auto; padding-left:40px; padding-right:40px; }
+  .section-image { max-width:none; margin:-120px 0 64px; padding:0; aspect-ratio: 16 / 9; }
+  h2 { font-size:72px; }
+  .prose { font-size:19px; }
+  .pull-quote { font-size:26px; padding-left:32px; }
+  .colophon { padding:80px 28px 100px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ====================== HERO ====================== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-marker">Okapi World Media · Témoignage</div>
+    <h1 class="hero-title">LA<br>GRAINE</h1>
+    <p class="hero-subtitle">Le plan reçu en 2020 dans une chambre d'étudiant du Bourget.<br><em>7 phases. 7 ans.</em></p>
+    <div class="scroll-cue">
+      <div class="scroll-arrow"></div>
+      <div>Commencer la lecture</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== PROLOGUE ====================== -->
+<section class="prologue reveal">
+  <div class="chapter-marker">Avant-propos</div>
+  <p class="prose">Ce que tu vas lire n'est pas un programme.</p>
+  <p class="prose">Ce n'est pas une méthode pour réussir, ni une liste de hacks, ni une formule à appliquer.</p>
+  <p class="prose">C'est un <strong>témoignage</strong>.</p>
+  <p class="prose">L'histoire d'un plan que je n'avais pas choisi, sur sept années que je n'avais pas négociées. Une parabole vécue.</p>
+  <p class="prose">Je l'écris aujourd'hui parce qu'il est temps. Et parce que peut-être, quelque part dans ces lignes, tu reconnaîtras la phase que tu es en train de traverser.</p>
+</section>
+
+<!-- ====================== CHAPITRE I — RÉVÉLATION ====================== -->
+<section class="chapter reveal">
+  <div class="section-image"><img src="img_01_revelation.jpg" alt="Chambre du Bourget"></div>
+  <div class="chapter-marker">Chapitre I · La Révélation</div>
+  <h2>2020.<br><span class="gold">21h. Le Bourget.</span></h2>
+  <p class="prose">Une chambre d'étudiant. Pas grande. Les murs nus, un bureau, un lit, une Bible posée sur la table.</p>
+  <p class="prose">Ce soir-là, une <em>lumière entre</em>. Mais ce n'était pas la lumière de la rue.</p>
+  <p class="prose">Je n'ai pas entendu de voix. Je n'ai pas eu de vision spectaculaire. J'ai juste reçu — clairement, paisiblement — un <strong>plan</strong>. Un plan sur sept ans. Avec une forme très précise : celle d'un arbre. Une graine, une éclosion, un enracinement. Sept phases. Sept années.</p>
+  <p class="prose">Je n'ai pas tout compris ce soir-là. Mais j'ai su que je venais d'être <em>planté</em>.</p>
+  <div class="pull-quote">Aucun livre de business ne contenait ce plan. Aucun mentor ne me l'aurait formulé ainsi. Il fallait que ce soit reçu, pas appris.</div>
+</section>
+
+<!-- ====================== CHAPITRE II — PRINCIPE ====================== -->
+<section class="principe reveal">
+  <div class="section-image"><img src="img_02_principe.jpg" alt="Sept graines dans la paume"></div>
+  <div class="chapter-marker">Chapitre II · Le Principe</div>
+  <h2>Chaque vie<br>est une <span class="gold">graine.</span></h2>
+  <p class="prose">Chaque entreprise aussi.</p>
+  <p class="prose">Et toute graine, qu'elle soit semée dans un cœur, un projet ou une mission, suit la même loi. <em>Sept phases.</em> Toujours dans le même ordre. Aucune ne peut être sautée. Aucune ne peut être accélérée par la volonté seule.</p>
+  <p class="prose">Tu peux refuser ce qui pousse en toi. Mais tu ne peux pas inverser le processus.</p>
+  <div class="principe-quote">« Tout ce qui vit a été planté avant d'être vu. »</div>
+</section>
+
+<!-- ====================== PHASE 1 — PLANTÉ ====================== -->
+<section class="phase reveal">
+  <div class="section-image"><img src="img_phase1_plante.jpg" alt="Une graine entre deux doigts"></div>
+  <div class="year-stamp">Phase 1 · 2020</div>
+  <h2>Planté.</h2>
+  <p class="phase-subtitle">Sur cette terre.</p>
+  <p class="prose">J'arrive en France. Sur ce territoire qui n'était pas le mien à la naissance, mais qui devient le sol où je vais pousser.</p>
+  <p class="prose">Au début, <em>tout va bien</em>. Trop bien, même. Pas de tension, pas d'épreuve, pas d'avertissement. J'ai des études, des projets, un environnement qui m'entoure. La graine vient de tomber dans la terre — et personne, à ce stade, ne devine ce qu'elle va devenir.</p>
+  <p class="prose">Une graine, c'est un instant. Le reste, c'est le travail invisible.</p>
+  <div class="pull-quote">Tu ne choisis pas où tu tombes. Tu choisis si tu acceptes la terre.</div>
+  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 1 · Acceptation</div>
+</section>
+
+<!-- ====================== PHASE 2 — ÉCLORE ====================== -->
+<section class="phase reveal">
+  <div class="section-image"><img src="img_phase2_brisement.jpg" alt="Graine qui éclot par brisement"></div>
+  <div class="year-stamp">Phase 2 · 2021</div>
+  <h2>Éclore.</h2>
+  <p class="phase-subtitle">Le craquement.</p>
+  <p class="prose">Une graine ne s'ouvre pas en douceur. Elle <strong>craque</strong>. Elle se brise. Elle perd sa coque.</p>
+  <p class="prose">Cette année-là, tout commence à s'effondrer en même temps. Une rupture amoureuse, brutale. Au travail, je découvre qu'on me méprise — une incompétence caractérisée, m'a-t-on fait comprendre. Un contrat manga à <em>9 000 €</em> que je rate de peu, alors que tout le projet aurait dû y trouver son souffle. Spirituellement, je perds mes repères.</p>
+  <p class="prose">Et dans le noir — il faut que je le dise — j'ai <em>pensé au suicide</em>. Plusieurs fois. Je n'osais même pas le nommer.</p>
+  <p class="prose">Je n'ai pas compris à l'époque que c'était l'éclosion. Que c'était la phase prévue. <strong>Une graine éclot toujours par brisement.</strong></p>
+  <div class="pull-quote">Personne n'éclôt sans se briser. C'est la loi de la graine, pas une malédiction.</div>
+  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 2 · Brisement</div>
+</section>
+
+<!-- ====================== PHASE 3 — S'ENRACINER ====================== -->
+<section class="phase reveal">
+  <div class="section-image"><img src="img_phase3_enraciner.jpg" alt="Racines lumineuses sous terre"></div>
+  <div class="year-stamp">Phase 3 · 2022</div>
+  <h2>S'enraciner.</h2>
+  <p class="phase-subtitle">Dans le silence.</p>
+  <p class="prose">Après le brisement, je descends. Je me connecte à la Parole. Je lis, j'écoute, je relis.</p>
+  <p class="prose"><em>Myles Munroe. Les Brown. Jim Rohn. John Maxwell.</em> Chaque enseignement devient une racine. Je travaille mon mindset, mon caractère — l'orgueil que je cachais derrière de la timidité, le besoin d'attention déguisé en générosité, l'insoumission aux autorités spirituelles que j'avais mises au-dessus de moi.</p>
+  <p class="prose">Je crée mon premier projet d'envergure : une œuvre théâtrale multimédia pour <strong>Jeunes Prodiges Édition 1</strong>. Le spectacle est un succès. J'aurais pu en parler partout, en faire un coup de communication.</p>
+  <p class="prose">Mais quelque chose en moi savait : <em>je n'étais pas prêt pour l'exposition</em>. Pas encore. Les racines n'étaient pas assez profondes pour soutenir le poids que la lumière allait apporter.</p>
+  <div class="pull-quote">Avant de monter, tu descends. Plus l'arbre sera haut, plus les racines devront être profondes.</div>
+  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 3 · Caractère</div>
+</section>
+
+<!-- ====================== PHASE 4 — SORTIR DE TERRE ====================== -->
+<section class="phase reveal">
+  <div class="section-image"><img src="img_phase4_sortir.jpg" alt="Pousse qui perce la terre"></div>
+  <div class="year-stamp">Phase 4 · 2023</div>
+  <h2>Sortir<br>de terre.</h2>
+  <p class="phase-subtitle">L'Engagement.</p>
+  <p class="prose">Le film <strong>L'Engagement</strong>. C'est lui qui me sort de l'ombre.</p>
+  <p class="prose">Pour la première fois, on me regarde sérieusement. Des pairs commencent à parler de mon travail. Des portes s'ouvrent que je n'avais pas frappées. La première lumière. Je sens qu'elle m'est rendue, enfin — mais je sais aussi que je suis <em>encore tendre</em>.</p>
+  <p class="prose">C'est la phase la plus fragile. Celle où beaucoup s'effondrent — pas par manque de capacité, mais par excès trop tôt. La lumière qui te révèle peut aussi te brûler.</p>
+  <div class="pull-quote">Le monde te voit enfin. Mais tu es encore tendre. Ne demande pas plus de lumière. Demande plus de fermeté.</div>
+  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 4 · Émergence</div>
+</section>
+
+<!-- ====================== PHASE 5 — S'ÉTENDRE ====================== -->
+<section class="phase reveal">
+  <div class="section-image"><img src="img_phase5_etendre.jpg" alt="Jeune arbre qui s'étend"></div>
+  <div class="year-stamp">Phase 5 · 2024</div>
+  <h2>S'étendre.</h2>
+  <p class="phase-subtitle">« Élargis l'espace de ta tente. »</p>
+  <p class="prose">Cette phase commence par une parole reçue dans la prière. Six mots qui changent l'année : <em>« Élargis l'espace de ta tente. »</em></p>
+  <p class="prose">Je sens que je dois sortir du terrain unique. Diversifier. Tendre les branches là où il y a de l'espace à prendre.</p>
+  <p class="prose">Bande dessinée. Films. Je deviens responsable d'un département d'Église — <strong>EJP FILMS</strong>. Je commence à porter d'autres que moi. Mon terrain s'élargit, et avec lui, le poids que je dois soutenir.</p>
+  <p class="prose">Je ne suis plus une pousse. Je deviens <em>un jeune arbre</em>.</p>
+  <div class="pull-quote">L'extension n'est pas une ambition. C'est une obéissance. Là où il y a de la place, il faut prendre racine.</div>
+  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 5 · Expansion</div>
+</section>
+
+<!-- ====================== PHASE 6 — PORTER DU FRUIT ====================== -->
+<section class="phase reveal">
+  <div class="section-image"><img src="img_phase6_fruit.jpg" alt="Branches lourdes de fruits"></div>
+  <div class="year-stamp">Phase 6 · 2025</div>
+  <h2>Porter<br>du <span class="gold">fruit.</span></h2>
+  <p class="phase-subtitle">Le coût du fruit.</p>
+  <p class="prose">Le fruit arrive. Mais il a un coût.</p>
+  <p class="prose">Mes disciples se multiplient. Mes responsabilités aussi. <em>Je me marie</em> — une bénédiction qui devient une discipline. Les premiers vrais clients arrivent — pas des amis qui me soutiennent, mais des marques qui me paient pour la valeur que je leur apporte.</p>
+  <p class="prose">Et puis, dans la même saison — <strong>je perds mon emploi</strong>.</p>
+  <p class="prose">À l'instant où je commence à porter mes propres fruits, le système qui me retenait me lâche. Ce n'est pas un accident. C'est une <em>loi</em> : tu ne peux pas porter tes fruits tant que tu te nourris de ceux d'un autre.</p>
+  <div class="pull-quote">L'arbre ne mange pas ses propres fruits. Il les produit pour d'autres. Et il ne les porte qu'au prix d'un renoncement.</div>
+  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 6 · Renoncement</div>
+</section>
+
+<!-- ====================== PHASE 7 — COURONNEMENT ====================== -->
+<section class="phase reveal">
+  <div class="section-image"><img src="img_phase7_couronnement.jpg" alt="Arbre couronné au lever du jour"></div>
+  <div class="year-stamp">Phase 7 · 2026</div>
+  <h2>Couronnement.</h2>
+  <p class="phase-subtitle">L'arbre devient repère.</p>
+  <p class="prose">C'est la phase que je suis en train de vivre, à l'instant où j'écris ces mots.</p>
+  <p class="prose">Je ne pensais pas que sept ans après ce soir au Bourget, je verrais ce que je vois. Mais les fruits du couronnement ne sont pas des récompenses — ce sont des <em>preuves</em>. La preuve que la graine a tenu sa promesse.</p>
+
+  <div class="fruits-list">
+    <div class="fruit-card"><em>La Voix de Mélodie</em> — un film qui a touché <strong>18 000 personnes</strong> sur la plateforme ImpactX.</div>
+    <div class="fruit-card"><em>Garde à Vue</em> — sélectionné au festival AICFF au Nigeria.</div>
+    <div class="fruit-card">Je lance officiellement <em>Okapi World Media</em>.</div>
+    <div class="fruit-card">Mon pasteur m'honore <em>devant toute l'Église</em>.</div>
+    <div class="fruit-card">Les clients se multiplient. La communauté s'agrandit.</div>
+    <div class="fruit-card">Je sors enfin sur les réseaux — pour <em>transmettre</em>, plus seulement pour exister.</div>
+  </div>
+
+  <p class="prose">L'arbre est devenu repère. On vient s'asseoir à son ombre. <strong>La graine a tenu sa promesse.</strong></p>
+  <div class="pull-quote">Le couronnement n'est pas la fin. C'est le moment où tu deviens à ton tour la terre dans laquelle d'autres graines vont tomber.</div>
+  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 7 · Transmission</div>
+</section>
+
+<!-- ====================== ÉPILOGUE ====================== -->
+<section class="epilogue reveal">
+  <div class="section-image"><img src="img_epilogue.jpg" alt="Une main qui offre une graine"></div>
+  <div class="chapter-marker">Épilogue</div>
+  <h2>Et toi ?</h2>
+  <p class="prose">Maintenant que tu connais les sept phases — pose-toi la question, honnêtement.</p>
+  <p class="prose"><strong>Quelle phase es-tu en train de traverser ?</strong></p>
+  <p class="prose">Si tu es dans le brisement, tu n'es pas en train de mourir. Tu es en train d'éclore. Le silence où tu es n'est pas un abandon. C'est l'enracinement.</p>
+  <p class="prose">Si tu sens que tu es encore sous terre — <em>tu n'es pas en retard.</em></p>
+  <p class="prose">Tu es à l'heure.</p>
+
+  <div class="epilogue-cta">
+    <div class="epilogue-cta-label">Si ce texte t'a parlé</div>
+    <div class="epilogue-cta-text">Écris-moi en DM la phase que tu traverses. Je lis tout. Je réponds quand je peux. Et si tu veux que ton entreprise — ou ton projet — soit accompagné comme une graine sérieuse, pas comme un coup de communication, on en parle.</div>
+    <a href="https://www.instagram.com/yamakasi_creative" class="epilogue-cta-btn" target="_blank" rel="noopener">Écrire à Yamakasi →</a>
+  </div>
+</section>
+
+<!-- ====================== COLOPHON ====================== -->
+<footer class="colophon">
+  <div class="colophon-logo">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45" stroke="#F5F0E8" stroke-width="5" fill="none"/>
+      <ellipse cx="50" cy="50" rx="22" ry="45" stroke="#F5F0E8" stroke-width="3.5" fill="none"/>
+      <line x1="5" y1="50" x2="95" y2="50" stroke="#F5F0E8" stroke-width="3.5"/>
+      <path d="M14 28 Q50 38 86 28" stroke="#F5F0E8" stroke-width="3" fill="none"/>
+      <path d="M14 72 Q50 62 86 72" stroke="#F5F0E8" stroke-width="3" fill="none"/>
+      <polygon points="37,34 37,66 70,50" fill="#F5F0E8"/>
+    </svg>
+    <div class="colophon-logo-text">
+      <span class="name">OKAPI</span>
+      <span class="sub">WORLD MEDIA</span>
+    </div>
+  </div>
+  <p class="colophon-credit">Écrit & réalisé par <strong>YAMAKASI</strong></p>
+  <p class="colophon-credit">Okapi World Media — 2026</p>
+  <a href="https://www.instagram.com/yamakasi_creative" class="colophon-handle" target="_blank" rel="noopener">@yamakasi_creative</a>
+</footer>
+
+<script>
+// Reveal sections on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
