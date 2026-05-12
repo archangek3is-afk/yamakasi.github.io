@@ -559,6 +559,7 @@ h2 .gold { color:var(--or); }
     <div class="fruit-card"><em>Garde à Vue</em> — sélectionné au festival <strong>AICFF</strong> au Nigeria.</div>
     <div class="fruit-card">Je lance officiellement <a href="https://okapiworldmedia.com" target="_blank" rel="noopener" style="color:var(--or); text-decoration:underline; text-decoration-color:rgba(201,168,76,0.4); font-style:normal; font-weight:500;">Okapi World Media</a>.</div>
 
+    <div class="fruit-card" data-i18n="ph7f5">La confirmation publique de mon appel <em>par ceux qui m'ont vu grandir en silence.</em></div>
     <div class="fruit-card">Les clients se multiplient. La communauté s'agrandit.</div>
     <div class="fruit-card">Je sors enfin sur les réseaux — pour <em>transmettre</em>, plus seulement pour exister.</div>
   </div>
@@ -624,6 +625,14 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Translations
+const translations = {
+  ph7f5: {
+    fr: 'La confirmation publique de mon appel <em>par ceux qui m\'ont vu grandir en silence.</em>',
+    en: 'The public confirmation of my calling <em>by those who watched me grow in silence.</em>'
+  },
+};
 </script>
 
 </body>
