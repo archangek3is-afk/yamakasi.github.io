@@ -1,661 +1,734 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0A0A0A">
-<title>LA GRAINE — Yamakasi / Okapi World Media</title>
-<meta name="description" content="Le plan reçu en 2020 dans une chambre d'étudiant du Bourget. 7 phases. 7 ans. Un témoignage.">
-
-<!-- Open Graph (pour partage DM) -->
-<meta property="og:title" content="LA GRAINE — Un témoignage en 7 phases">
-<meta property="og:description" content="Le plan reçu en 2020 dans une chambre d'étudiant du Bourget. 7 phases. 7 ans.">
-<meta property="og:image" content="https://okapiworldmedia.com/la_graine_book/img_00_cover.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="1489">
-<meta property="og:url" content="https://okapiworldmedia.com/la_graine_book/">
-<meta property="og:type" content="article">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://okapiworldmedia.com/la_graine_book/img_00_cover.jpg">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
-
-<style>
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-:root {
-  --noir: #0A0A0A;
-  --noir-soft: #141414;
-  --or: #C9A84C;
-  --or-soft: #A48838;
-  --ivoire: #F5F0E8;
-  --ivoire-dim: rgba(245,240,232,0.78);
-  --ivoire-faint: rgba(245,240,232,0.55);
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/okapi-symbol-premium.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/okapi-symbol-premium.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/okapi-symbol-premium.png">
+  <link rel="shortcut icon" href="/assets/okapi-symbol-premium.png">
+  <link rel="apple-touch-icon" href="/assets/okapi-symbol-premium.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Okapi World Média — Studio créatif parisien fondé par Yamakasi. Films de marque, direction artistique IA et animation. 14 awards · Paris.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Okapi World Média — Studio Créatif Paris">
+  <meta property="og:description" content="Studio créatif parisien · Films, brand content et animation IA · Okapi Studios · L'Agence Okapi · Okapi Animation">
+  <meta property="og:url" content="https://okapiworldmedia.com/">
+  <meta property="og:image" content="https://okapiworldmedia.com/og_image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://okapiworldmedia.com/og_image.png">
+  <meta name="google-site-verification" content="jfEzKW32lVE5_lF9YtCXj-MapRieiSpWaSdomaN4CxY">
+  <meta name="google-site-verification" content="duhFWNYdb1TClmV3S4wsRAzYCUCdydg7vFI_aySG7cw">
+  <link rel="canonical" href="https://okapiworldmedia.com/">
+  <link rel="preload" as="image" href="assets/img_03_de86fec94fbf.webp" fetchpriority="high">
+  <title>Okapi World Média — Studio Créatif Paris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Poppins:wght@500&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-574RVNPM6S"></script>
+  <link rel="stylesheet" href="style.css?v=20260422">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Okapi World Média",
+  "description": "Studio créatif parisien — Films, brand content et animation IA",
+  "url": "https://okapiworldmedia.com",
+  "email": "yamakasi@okapiworldmedia.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "20 rue Teddy Riner",
+    "addressLocality": "Asnières-sur-Seine",
+    "postalCode": "92600",
+    "addressCountry": "FR"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Archange Kiyindou",
+    "jobTitle": "Directeur Créatif"
+  },
+  "sameAs": [
+    "https://www.instagram.com/yamakasi_ak"
+  ]
 }
-html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
-body {
-  background:var(--noir);
-  color:var(--ivoire);
-  font-family:'Poppins',sans-serif;
-  font-weight:300;
-  line-height:1.7;
-  overflow-x:hidden;
-  font-size:17px;
-}
-
-/* === HERO === */
-.hero {
-  position:relative;
-  width:100%;
-  min-height:100vh;
-  min-height:100svh;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:32px 28px 56px;
-  overflow:hidden;
-}
-.hero-bg {
-  position:absolute; inset:0;
-  background-image: url('img_00_cover.jpg');
-  background-size:cover;
-  background-position:center;
-  z-index:0;
-}
-.hero-overlay {
-  position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 35%, rgba(10,10,10,0.7) 80%, rgba(10,10,10,0.95) 100%);
-  z-index:1;
-}
-.hero-content {
-  position:relative; z-index:2;
-}
-.hero-marker {
-  display:flex; align-items:center; gap:12px;
-  color:var(--or);
-  font-size:11px;
-  font-weight:500;
-  letter-spacing:3.5px;
-  margin-bottom:24px;
-  text-transform:uppercase;
-}
-.hero-marker::after {
-  content:'';
-  flex:1;
-  height:1px;
-  background:var(--or);
-  opacity:0.4;
-  max-width:80px;
-}
-.hero-title {
-  font-family:'Poppins',sans-serif;
-  font-weight:900;
-  font-size:88px;
-  line-height:0.9;
-  letter-spacing:-2.5px;
-  color:#fff;
-  text-transform:uppercase;
-  margin-bottom:24px;
-}
-.hero-subtitle {
-  font-family:'Cormorant Garamond',serif;
-  font-style:italic;
-  font-weight:400;
-  font-size:22px;
-  line-height:1.4;
-  color:var(--ivoire-dim);
-  margin-bottom:48px;
-  max-width:380px;
-}
-.hero-subtitle em { color:var(--or); font-style:normal; font-weight:500; }
-
-.scroll-cue {
-  display:flex; flex-direction:column; align-items:center; gap:14px;
-  color:var(--ivoire-faint);
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-}
-.scroll-arrow {
-  width:1px; height:36px;
-  background: linear-gradient(180deg, var(--or) 0%, transparent 100%);
-  animation: pulse-scroll 2.5s ease-in-out infinite;
-}
-@keyframes pulse-scroll {
-  0%, 100% { opacity:0.3; transform:scaleY(0.7); }
-  50% { opacity:1; transform:scaleY(1); }
-}
-
-/* === SECTIONS === */
-section {
-  padding:80px 28px;
-  position:relative;
-}
-.section-image {
-  margin: -80px -28px 48px;
-  position:relative;
-  aspect-ratio: 3 / 4;
-  overflow:hidden;
-}
-.section-image img {
-  width:100%; height:100%;
-  object-fit:cover;
-  display:block;
-}
-.section-image::after {
-  content:'';
-  position:absolute;
-  bottom:0; left:0; right:0;
-  height:35%;
-  background: linear-gradient(180deg, transparent 0%, var(--noir) 95%);
-  pointer-events:none;
-}
-
-.year-stamp {
-  color:var(--or);
-  font-weight:600;
-  font-size:12px;
-  letter-spacing:5px;
-  margin-bottom:20px;
-  text-transform:uppercase;
-}
-.chapter-marker {
-  color:var(--or);
-  font-weight:500;
-  font-size:11px;
-  letter-spacing:4px;
-  margin-bottom:18px;
-  text-transform:uppercase;
-}
-h2 {
-  font-family:'Poppins',sans-serif;
-  font-weight:900;
-  font-size:54px;
-  line-height:0.95;
-  letter-spacing:-1.5px;
-  color:#fff;
-  margin-bottom:18px;
-  text-transform:uppercase;
-}
-h2 .gold { color:var(--or); }
-.phase-subtitle {
-  font-family:'Cormorant Garamond',serif;
-  font-style:italic;
-  font-weight:400;
-  font-size:24px;
-  color:var(--or);
-  margin-bottom:36px;
-  line-height:1.3;
-}
-
-.prose {
-  font-size:17px;
-  line-height:1.85;
-  color:var(--ivoire-dim);
-  margin-bottom:22px;
-  font-weight:300;
-}
-.prose strong {
-  color:var(--ivoire);
-  font-weight:500;
-}
-.prose em {
-  color:var(--or);
-  font-style:normal;
-  font-weight:400;
-}
-
-.pull-quote {
-  border-left:2px solid var(--or);
-  padding:18px 0 18px 22px;
-  margin:36px 0;
-  font-family:'Cormorant Garamond',serif;
-  font-style:italic;
-  font-size:22px;
-  line-height:1.45;
-  color:#fff;
-  font-weight:500;
-}
-
-.gold-seal {
-  display:flex; align-items:center; gap:16px;
-  margin-top:48px;
-  padding-top:36px;
-  border-top:1px solid rgba(201,168,76,0.25);
-  color:var(--or);
-  font-size:11px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  font-weight:500;
-}
-.gold-seal-dot {
-  width:8px; height:8px;
-  background:var(--or);
-  border-radius:50%;
-  flex-shrink:0;
-}
-
-/* === PROLOGUE === */
-.prologue { background:var(--noir-soft); padding-top:100px; padding-bottom:100px; }
-.prologue .prose { font-family:'Cormorant Garamond',serif; font-size:21px; font-style:italic; }
-
-/* === PRINCIPE === */
-.principe h2 { font-size:48px; }
-.principe-quote {
-  font-family:'Cormorant Garamond',serif;
-  font-weight:500;
-  font-style:italic;
-  font-size:32px;
-  line-height:1.3;
-  color:var(--or);
-  text-align:center;
-  margin:48px 0;
-  padding:0 8px;
-}
-
-/* === FRUITS LIST (Phase 7) === */
-.fruits-list {
-  margin:32px 0;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-.fruit-card {
-  padding:18px 20px;
-  background:rgba(201,168,76,0.06);
-  border-left:2px solid var(--or);
-  color:var(--ivoire);
-  font-size:16px;
-  line-height:1.5;
-  font-weight:400;
-}
-.fruit-card em {
-  color:var(--or);
-  font-style:normal;
-  font-weight:500;
-}
-
-/* === EPILOGUE === */
-.epilogue {
-  background:var(--noir-soft);
-  padding-top:100px;
-  padding-bottom:120px;
-  text-align:left;
-}
-.epilogue h2 {
-  font-size:60px;
-}
-.epilogue .prose {
-  font-size:19px;
-}
-.epilogue-cta {
-  margin-top:56px;
-  padding:32px 24px;
-  border:1px solid rgba(201,168,76,0.4);
-  text-align:left;
-}
-.epilogue-cta-label {
-  color:var(--or);
-  font-size:11px;
-  letter-spacing:4px;
-  font-weight:500;
-  text-transform:uppercase;
-  margin-bottom:14px;
-}
-.epilogue-cta-text {
-  font-family:'Cormorant Garamond',serif;
-  font-style:italic;
-  font-size:20px;
-  line-height:1.45;
-  color:var(--ivoire);
-  margin-bottom:24px;
-}
-.epilogue-cta-btn {
-  display:inline-block;
-  padding:14px 28px;
-  background:var(--or);
-  color:var(--noir);
-  text-decoration:none;
-  font-weight:600;
-  font-size:12px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  transition:background 0.2s;
-}
-.epilogue-cta-btn:active { background:var(--or-soft); }
-
-/* === COLOPHON === */
-.colophon {
-  padding:60px 28px 80px;
-  text-align:center;
-  background:var(--noir);
-  border-top:1px solid rgba(201,168,76,0.15);
-}
-.colophon-logo {
-  margin-bottom:24px;
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-}
-.colophon-logo svg { width:32px; height:32px; }
-.colophon-logo-text {
-  text-align:left;
-  display:flex;
-  flex-direction:column;
-}
-.colophon-logo-text .name {
-  font-family:'Arial Black',sans-serif;
-  font-weight:900;
-  font-size:18px;
-  color:var(--ivoire);
-  letter-spacing:2px;
-  line-height:1;
-}
-.colophon-logo-text .sub {
-  font-family:Arial,sans-serif;
-  font-weight:700;
-  font-size:8px;
-  color:var(--ivoire);
-  letter-spacing:3px;
-  margin-top:2px;
-}
-.colophon-credit {
-  font-family:'Cormorant Garamond',serif;
-  font-style:italic;
-  color:var(--ivoire-faint);
-  font-size:14px;
-  line-height:1.6;
-  margin-bottom:6px;
-}
-.colophon-credit strong {
-  color:var(--or);
-  font-style:normal;
-  font-weight:500;
-  letter-spacing:1px;
-}
-.colophon-handle {
-  margin-top:16px;
-  font-size:11px;
-  letter-spacing:3px;
-  color:var(--or);
-  text-decoration:none;
-  font-weight:500;
-  display:inline-block;
-}
-
-/* === Reveal on scroll === */
-.reveal {
-  opacity:0;
-  transform:translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-.reveal.visible { opacity:1; transform:translateY(0); }
-
-/* === Responsive desktop === */
-@media (min-width: 768px) {
-  body { font-size:18px; }
-  .hero { padding:60px 80px 80px; }
-  .hero-title { font-size:160px; }
-  .hero-subtitle { font-size:26px; max-width:560px; }
-  section { padding:120px 0; }
-  section > * { max-width:680px; margin-left:auto; margin-right:auto; padding-left:40px; padding-right:40px; }
-  .section-image { max-width:none; margin:-120px 0 64px; padding:0; aspect-ratio: 16 / 9; }
-  h2 { font-size:72px; }
-  .prose { font-size:19px; }
-  .pull-quote { font-size:26px; padding-left:32px; }
-  .colophon { padding:80px 28px 100px; }
-}
-</style>
+</script>
 </head>
 <body>
 
-<div class="lang-toggle" role="group" aria-label="Language">
-  <button class="lang-btn active" data-lang="fr">FR</button>
-  <button class="lang-btn" data-lang="en">EN</button>
+<nav>
+  <div class="nav-logo"><img width="600" height="319" src="assets/img_02_252ae974ae16.webp" alt="Okapi World Média"></div>
+  <ul class="nav-links">
+    <li><a href="#branches">Studios</a></li>
+    <li><a href="#manifeste">Manifeste</a></li>
+    <li><a href="/about.html">À propos</a></li>
+    <li><a href="#offres">Offres</a></li>
+    <li><a href="#clients">Clients</a></li>
+    <li><a href="/crealab.html">Créa Lab</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<a href="#manifeste" style="position:absolute;left:-9999px;top:0;z-index:99999;padding:8px 16px;background:#C9A84C;color:#0A0A0A;font-family:monospace;font-size:11px;" onfocus="this.style.left='0'" onblur="this.style.left='-9999px'">Aller au contenu principal</a>
+<section class="hero">
+
+  <!-- Colonne gauche : texte -->
+  <div class="hero-content">
+
+    <div class="hero-crest">
+      <img width="500" height="450" src="assets/okapi-symbol-transparent.png" alt="Okapi" class="hero-crest-symbol">
+    </div>
+
+    <h1 class="hero-title">
+      Pour les maisons qui portent <em>une vision</em>.
+    </h1>
+
+    <p class="hero-sub">
+      Le cinéma au service de votre histoire.<br>
+      Direction artistique humaine, production augmentée par l'IA.
+    </p>
+
+    <div class="hero-ctas">
+      <a href="#manifeste" class="btn-primary">Voir le manifeste</a>
+      <a href="#contact" class="btn-secondary">Réserver un appel de 20 min</a>
+    </div>
+
+  </div>
+
+  <!-- Colonne droite : visuel -->
+  <div class="hero-visual">
+    <img width="1200" height="1489" src="assets/img_03_de86fec94fbf.webp" alt="Campagne beauté Okapi">
+  </div>
+
+  <!-- Ticker pleine largeur -->
+  <div style="position:absolute; bottom:0; left:0; right:0; overflow:hidden; border-top:1px solid rgba(201,168,76,0.15); padding:14px 0; background:rgba(10,10,10,0.7); z-index:10;">
+    <div class="ticker-track">
+      <span class="ticker-item">Films de Marque</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Direction Artistique</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Storytelling Visuel</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Brand Content</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Conseil Créatif</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Impact Transformationnel</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Films de Marque</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Direction Artistique</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Storytelling Visuel</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Brand Content</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Conseil Créatif</span><span class="ticker-item">·</span>
+      <span class="ticker-item">Impact Transformationnel</span><span class="ticker-item">·</span>
+    </div>
+  </div>
+
+</section>
+
+<section class="audiences">
+
+  <div class="section-label">Les maisons que nous servons</div>
+
+  <h2>Trois univers.<br>Une même exigence narrative.</h2>
+
+  <div class="audience-grid">
+
+    <!-- CARTE 01 -->
+    <div class="audience-card coming-soon" title="Page en préparation" style="background-image: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.9)), url('assets/img_10_eca7700ec36a.webp');">
+      <span class="audience-num">01 / MAISONS</span>
+      <h3>Maisons premium &<br>services identitaires</h3>
+      <p>
+        Agences matrimoniales, coaching, écoles de savoir-être,
+        retraites spirituelles — les structures où la culture
+        est le produit.
+      </p>
+    </div>
+
+    <!-- CARTE 02 -->
+    <div class="audience-card coming-soon" title="Page en préparation" style="background-image: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.9)), url('assets/img_36_44b6d1b1c439.webp');">
+      <span class="audience-num">02 / MARQUES</span>
+      <h3>DNVB &<br>marques d'auteur</h3>
+      <p>
+        Parfumerie de niche, cosmétiques indépendants,
+        bijouterie d'auteur, prêt-à-porter confidentiel
+        — les maisons qui ont un regard.
+      </p>
+    </div>
+
+    <!-- CARTE 03 -->
+    <div class="audience-card coming-soon" title="Page en préparation" style="background-image: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.9)), url('assets/img_06_ed83d578b56f.webp');">
+      <span class="audience-num">03 / AUTEURS</span>
+      <h3>Auteurs &<br>projets culturels</h3>
+      <p>
+        Premiers réalisateurs, producteurs indépendants,
+        compagnies, labels et fondations — les visions
+        qui cherchent leur forme.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<div class="section-divider" role="separator"><img width="2048" height="2048" loading="lazy" class="section-divider-icon" src="assets/okapi-symbol-premium.webp" alt="Okapi"></div>
+<div class="branches-section" id="branches">
+  <div class="branches-inner">
+    <div class="branches-intro">
+      <div class="section-label" style="justify-content:center; margin-bottom:12px;">Okapi World Média</div>
+      <h2 class="section-title" style="text-align:center; margin-bottom:16px;">L'excellence n'est pas réservée aux grandes marques.</h2>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:400; color:rgba(245,240,232,0.75); max-width:560px; margin:0 auto 20px; line-height:1.7;">
+        Cinéma. Branding. Animation. Trois studios. Une même exigence.
+      </p>
+      <!-- 3 pillars quick read -->
+      <div style="display:flex; flex-direction:column; gap:0; margin-bottom:0; max-width:420px; margin-left:auto; margin-right:auto; width:100%;">
+        <div style="display:flex; align-items:center; gap:20px; padding:12px 0; border-bottom:1px solid rgba(201,168,76,0.12);">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--gold); line-height:1; min-width:36px; text-align:right;">01</div>
+          <div style="width:1px; height:28px; background:rgba(201,168,76,0.25); flex-shrink:0;"></div>
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(245,240,232,0.7); text-transform:uppercase;">Production audiovisuelle</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:20px; padding:12px 0; border-bottom:1px solid rgba(201,168,76,0.12);">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--gold); line-height:1; min-width:36px; text-align:right;">02</div>
+          <div style="width:1px; height:28px; background:rgba(201,168,76,0.25); flex-shrink:0;"></div>
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(245,240,232,0.7); text-transform:uppercase;">Branding &amp; communication</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:20px; padding:12px 0;">
+          <div style="font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--gold); line-height:1; min-width:36px; text-align:right;">03</div>
+          <div style="width:1px; height:28px; background:rgba(201,168,76,0.25); flex-shrink:0;"></div>
+          <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; color:rgba(245,240,232,0.7); text-transform:uppercase;">Animation 100% IA</div>
+        </div>
+      </div>
+    </div>
+    <div class="branches-grid">
+      <div class="branch-card">
+        <img width="600" height="600" loading="lazy" class="branch-logo" src="assets/img_04_17fa00b4d0ae.webp" alt="Okapi Studios">
+        <div class="branch-name">Okapi Studios</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(245,240,232,0.5);margin-bottom:16px;">Films · Audiovisuel · Photo · IA</div>
+        <a href="javascript:void(0)" onclick="vlOpen('g-EfyiKaTSI')"
+           style="display:block; position:relative; overflow:hidden; margin-top:20px; border:1px solid rgba(201,168,76,0.25); cursor:pointer; text-decoration:none; aspect-ratio:4/5;"
+           onmouseover="this.querySelector('.sm-overlay').style.opacity='0'; this.querySelector('.sm-btn').style.transform='translate(-50%,-50%) scale(1.12)'; this.querySelector('.sm-btn').style.background='rgba(201,168,76,1)'"
+           onmouseout="this.querySelector('.sm-overlay').style.opacity='1'; this.querySelector('.sm-btn').style.transform='translate(-50%,-50%) scale(1)'; this.querySelector('.sm-btn').style.background='rgba(0,0,0,0.65)'">
+          <img width="800" height="1071" loading="lazy" src="assets/img_05_80fa6ebb61e5.webp" alt="Raging Moon" style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;">
+          <div class="sm-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.2); transition:opacity 0.3s;"></div>
+          <div class="sm-btn" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:56px; height:56px; background:rgba(0,0,0,0.65); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; border:2px solid rgba(201,168,76,0.8);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#C9A84C" style="margin-left:4px;"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div style="position:absolute; bottom:0; left:0; right:0; padding:12px 14px; background:linear-gradient(to top, rgba(0,0,0,0.9), transparent);">
+            <p style="font-family:'Bebas Neue',sans-serif; font-size:18px; color:#fff; letter-spacing:2px; margin:0;">RAGING MOON</p>
+            <p style="font-family:'Space Mono',monospace; font-size:7px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase; margin:3px 0 0;">▶ Voir sur YouTube</p>
+          </div>
+        </a>
+
+        <!-- ILLUSION — affiche après Raging Moon -->
+        <div style="position:relative;overflow:hidden;width:100%;margin-top:4px;"
+             onmouseover="this.querySelector('.il-ov').style.opacity='1'"
+             onmouseout="this.querySelector('.il-ov').style.opacity='0'">
+          <img width="700" height="937" loading="lazy" src="assets/img_06_ed83d578b56f.webp" alt="ILLUSION"
+            style="width:100%;display:block;object-fit:contain;background:#0a0a0a;transition:transform 0.5s;"
+            onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <div class="il-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0) 50%);opacity:0;transition:opacity 0.4s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;">
+            <p style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0 0 2px;letter-spacing:1px;">ILLUSION</p>
+            <p style="font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:#C9A84C;text-transform:uppercase;margin:0;">Court métrage · Okapi Studios × EJP Films</p>
+          </div>
+        </div>
+
+        <!-- MILLE VISAGES -->
+        <div style="position:relative;overflow:hidden;width:100%;margin-top:4px;"
+             onmouseover="this.querySelector('.mv-ov').style.opacity='1'"
+             onmouseout="this.querySelector('.mv-ov').style.opacity='0'">
+          <img width="800" height="993" loading="lazy" src="assets/img_07_bdfefe3961c1.webp" alt="Mille Visages"
+            style="width:100%;display:block;object-fit:contain;background:#c8b49a;transition:transform 0.5s;"
+            onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <div class="mv-ov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0) 45%);opacity:0;transition:opacity 0.4s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;">
+            <p style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;margin:0 0 2px;letter-spacing:1px;">MILLE VISAGES</p>
+            <p style="font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:#C9A84C;text-transform:uppercase;margin:0;">Série photo IA · La beauté sous toutes ses formes</p>
+          </div>
+        </div>
+
+        <div style="position:relative;overflow:hidden;width:100%;margin-top:4px;" onmouseover="this.querySelector('.cov').style.opacity='1'" onmouseout="this.querySelector('.cov').style.opacity='0'">
+          <img width="597" height="800" loading="lazy" src="assets/img_08_f6e58957f103.webp" style="width:100%;display:block;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <div class="cov" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85),transparent);opacity:0;transition:opacity 0.3s;">
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;">
+              <p style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;margin:0 0 2px;">EN ROUTE POUR LE CASINO DE PARIS</p>
+              <p style="font-family:'Space Mono',monospace;font-size:6px;letter-spacing:2px;color:#C9A84C;text-transform:uppercase;margin:0;">Film documentaire · 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="branch-card">
+        <img width="600" height="332" loading="lazy" class="branch-logo" src="assets/img_09_389450573b44.webp" alt="L'Agence Okapi">
+        <div class="branch-name">L'Agence Okapi</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(245,240,232,0.5);margin-bottom:16px;">Branding · Communication · Design</div>
+
+        <!-- HERO IMAGE — homme smoking, fort impact -->
+        <div style="position:relative; overflow:hidden; width:100%; margin-bottom:4px;">
+          <img width="900" height="1205" loading="lazy" src="assets/img_10_eca7700ec36a.webp" alt="Portrait Premium"
+            style="width:100%; height:280px; object-fit:cover; object-position:center top; display:block;">
+          <!-- Gradient + texte overlay -->
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.1) 60%,transparent 100%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 18px;">
+            <p style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin:0 0 4px;">Direction Artistique · Portrait Premium</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:#F5F0E8;margin:0;font-style:italic;">L'image qui impose le respect.</p>
+          </div>
+        </div>
+
+        <!-- Sport lifestyle — second hero -->
+        <div style="position:relative; overflow:hidden; width:100%; margin-bottom:4px;">
+          <img width="900" height="1205" loading="lazy" src="assets/img_11_1081591a0b4d.webp" alt="Brand Content Lifestyle"
+            style="width:100%; height:220px; object-fit:cover; object-position:center 30%; display:block;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 55%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:14px 18px;">
+            <p style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:#C9A84C;text-transform:uppercase;margin:0 0 3px;">Brand Content</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;color:#F5F0E8;margin:0;">Contenu lifestyle &amp; campagne</p>
+          </div>
+        </div>
+
+        <div style="overflow:hidden;width:100%;margin-bottom:4px;"><img width="675" height="900" loading="lazy" src="assets/img_12_ff229b3c63d8.webp" style="width:100%;display:block;object-fit:cover;"></div>
+        <div style="overflow:hidden;width:100%;margin-bottom:4px;"><img width="675" height="900" loading="lazy" src="assets/img_13_75290ddfb35b.webp" style="width:100%;display:block;object-fit:cover;"></div>
+
+        <!-- Packshots 4 col -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:16px;">
+          <div style="overflow:hidden;aspect-ratio:1/1;">
+            <img width="700" height="933" loading="lazy" src="assets/img_14_f72cd5c7a13f.webp" alt="Packshot lipstick"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div style="overflow:hidden;aspect-ratio:1/1;">
+            <img width="700" height="933" loading="lazy" src="assets/img_15_4c6152d272d5.webp" alt="Packshot sac"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div style="overflow:hidden;aspect-ratio:1/1;">
+            <img width="700" height="937" loading="lazy" src="assets/img_16_2a381571fb4d.webp" alt="Packshot parfum"
+              style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div style="overflow:hidden;aspect-ratio:1/1;">
+            <img width="800" height="993" loading="lazy" src="assets/img_17_8e15d6ae809d.webp" alt="Packshot canette Okapi"
+              style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+          </div>
+        </div>
+
+        <!-- Logos clients -->
+        <div style="padding:16px 4px 8px;border-top:1px solid rgba(201,168,76,0.15);">
+          <p style="font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;margin:0 0 16px;">Identité visuelle · Design de logos</p>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%;">
+
+            <!-- Maïlu — logo bordeaux/or -->
+            <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+              <img width="500" height="237" loading="lazy" src="assets/img_18_8e140af7e4e6.webp" alt="Maïlu"
+                style="max-width:100%; height:56px; width:auto; object-fit:contain; display:block;">
+            </div>
+
+            <!-- Séparateur -->
+            <div style="width:1px; height:40px; background:rgba(201,168,76,0.2); flex-shrink:0;"></div>
+
+            <!-- Testify -->
+            <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+              <img width="500" height="169" loading="lazy" src="assets/img_19_327816c57353.webp" alt="Testify Online"
+                style="max-width:100%; height:44px; width:auto; object-fit:contain; display:block;">
+            </div>
+
+            <!-- Séparateur -->
+            <div style="width:1px; height:40px; background:rgba(201,168,76,0.2); flex-shrink:0;"></div>
+
+            <!-- SPRKLTV — dark bg, affiché en pleine couleur -->
+            <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+              <img width="320" height="428" loading="lazy" src="assets/img_20_d40f57377c03.webp" alt="SPRKLTV"
+                style="max-width:100%; height:64px; width:auto; object-fit:contain; display:block;">
+            </div>
+
+          </div>
+        </div>
+        </div>
+      <div class="branch-card">
+        <img width="600" height="600" loading="lazy" class="branch-logo" src="assets/img_21_e66d0f63b06a.webp" alt="Okapi Animation">
+        <div class="branch-name">Okapi Animation</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:rgba(245,240,232,0.5);margin-bottom:16px;">Animation · Séries · Éducatif · IA</div>
+
+        <!-- La Vie de Tati — layout vertical naturel -->
+        <div style="display:flex; flex-direction:column; gap:4px; margin-top:16px;">
+          <div style="position:relative; overflow:hidden; width:100%;">
+            <img width="700" height="1050" loading="lazy" src="assets/img_22_26c80d1fee97.webp" style="width:100%; height:auto; display:block;">
+            <div style="position:absolute; bottom:0; left:0; right:0; padding:12px 16px; background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+              <p style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:#fff; margin:0 0 2px; letter-spacing:1px;">LA VIE DE TATI</p>
+              <p style="font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase; margin:0;">Série IA · Saison 1</p>
+            </div>
+          </div>
+          <div style="position:relative; overflow:hidden; width:100%;">
+            <img width="700" height="868" loading="lazy" src="assets/img_23_109bf32e6b23.webp" style="width:100%; height:auto; display:block;">
+            <div style="position:absolute; bottom:0; left:0; right:0; padding:12px 16px; background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+              <p style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:#fff; margin:0 0 2px; letter-spacing:1px;">VLT</p>
+              <p style="font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase; margin:0;">Série IA · Saison 2</p>
+            </div>
+          </div>
+          <div style="position:relative; overflow:hidden; width:100%;">
+            <img width="800" height="1071" loading="lazy" src="assets/img_24_3f775d35577b.webp" style="width:100%; height:auto; display:block;">
+            <div style="position:absolute; bottom:0; left:0; right:0; padding:12px 16px; background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+              <p style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:#fff; margin:0 0 2px; letter-spacing:1px;">UNIKIDSLAND</p>
+              <p style="font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase; margin:0;">Série éducative · IA</p>
+            </div>
+          </div>
+        </div>
+          <!-- L'INFABULEUSE HISTOIRE DE BAU -->
+          <div style="position:relative; overflow:hidden; width:100%;">
+            <img width="597" height="800" loading="lazy" src="assets/img_25_f901adf5e89a.webp" style="width:100%; height:auto; display:block;">
+            <div style="position:absolute; bottom:0; left:0; right:0; padding:12px 16px; background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+              <p style="font-family:'Bebas Neue',sans-serif; font-size:16px; color:#fff; margin:0 0 2px; letter-spacing:1px;">L'INFABULEUSE HISTOIRE DE BAU</p>
+              <p style="font-family:'Space Mono',monospace; font-size:6px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase; margin:0;">Court métrage animation · 2020</p>
+            </div>
+          </div>
+</div>
+    </div>
+  </div>
 </div>
 
-<!-- ====================== HERO ====================== -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-marker">Okapi World Media · Témoignage</div>
-    <h1 class="hero-title">LA<br>GRAINE</h1>
-    <p class="hero-subtitle">Le plan reçu en 2020 dans une chambre d'étudiant du Bourget.<br><em>7 phases. 7 ans.</em></p>
-    <div class="scroll-cue">
-      <div class="scroll-arrow"></div>
-      <div>Commencer la lecture</div>
+<!-- OKAPI STUDIOS — AFFICHES FILMS -->
+<div style="background:#0D0D0D; padding:80px 0; border-top:1px solid rgba(201,168,76,0.06);">
+  <div style="max-width:1200px; margin:0 auto; padding:0 48px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:#C9A84C; margin-bottom:16px; display:flex; align-items:center; gap:16px;">Okapi Studios · Filmographie<span style="flex:1;height:1px;background:rgba(201,168,76,0.15);"></span></div>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(28px,4vw,50px); font-weight:300; line-height:1.1; color:#F5F0E8; margin-bottom:12px;">Des œuvres.<br><em>Pas des projets.</em></h2>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:17px; font-weight:300; color:rgba(245,240,232,0.5); margin-bottom:48px; max-width:480px;">Courts métrages, thrillers, westerns IA — chaque titre est une intention cinématographique.</p>
+
+    <!-- Grille affiches : 4 films -->
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:4px;">
+
+      <!-- ILLUSION -->
+      <div style="position:relative; overflow:hidden; aspect-ratio:2/3; cursor:pointer;" onmouseover="this.querySelector('.film-overlay').style.opacity='1'" onmouseout="this.querySelector('.film-overlay').style.opacity='0'">
+        <img width="800" height="993" loading="lazy" src="assets/img_26_504460c002f7.webp" alt="Illusion" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="film-overlay" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:20px;">
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:#fff; margin-bottom:4px;">ILLUSION</p>
+          <p style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase;">Court métrage · IA animée</p>
+        </div>
+      </div>
+
+      <!-- GARDE À VUE -->
+      <div style="position:relative;">
+<div style="position:relative; overflow:hidden; aspect-ratio:2/3; cursor:pointer;" onmouseover="this.querySelector('.film-overlay').style.opacity='1'" onmouseout="this.querySelector('.film-overlay').style.opacity='0'">
+        <img width="800" height="993" loading="lazy" src="assets/img_27_ca9017806735.webp" alt="Garde à Vue" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="film-overlay" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:20px;">
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:#fff; margin-bottom:4px;">GARDE À VUE</p>
+          <p style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase;">Thriller · Yamakasi & Dave-Ali Ndiay</p>
+        </div>
+      </div>
+      <a href="javascript:void(0)" onclick="vlOpen('z766QaSr4P0')" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(10,10,10,0.85);border:1px solid rgba(201,168,76,0.7);color:#C9A84C;font-family:monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;white-space:nowrap;backdrop-filter:blur(4px);">&#9654; Voir le film</a></div>
+
+      <!-- RAGING MOON -->
+      <div style="position:relative; overflow:hidden; aspect-ratio:2/3; cursor:pointer;" onmouseover="this.querySelector('.film-overlay').style.opacity='1'" onmouseout="this.querySelector('.film-overlay').style.opacity='0'">
+        <img width="1434" height="1920" loading="lazy" src="assets/img_28_8428973b8779.webp" alt="Raging Moon" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block; transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="film-overlay" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 50%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:20px;">
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:22px; color:#fff; margin-bottom:4px;">RAGING MOON</p>
+          <p style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase; margin-bottom:12px;">Western IA · Okapi Studios</p>
+          <a href="javascript:void(0)" onclick="vlOpen('g-EfyiKaTSI')" style="display:inline-flex; align-items:center; gap:8px; padding:8px 14px; background:rgba(201,168,76,0.9); color:#0A0A0A; text-decoration:none; font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; width:fit-content;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#0A0A0A"><path d="M8 5v14l11-7z"/></svg>Voir le film
+          </a>
+        </div>
+      </div>
+
+      <!-- LA VOIX DE MÉLODIE -->
+      <div style="position:relative;">
+<div style="position:relative; overflow:hidden; aspect-ratio:2/3; cursor:pointer;" onmouseover="this.querySelector('.film-overlay').style.opacity='1'" onmouseout="this.querySelector('.film-overlay').style.opacity='0'">
+        <img width="800" height="1066" loading="lazy" src="assets/img_29_4488485ffc68.webp" alt="La Voix de Mélodie" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="film-overlay" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0) 50%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:20px;">
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:20px; color:#fff; margin-bottom:4px; line-height:1.1;">LA VOIX DE MÉLODIE</p>
+          <p style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase;">Drame fantastique · EJP Films × ImpactX</p>
+        </div>
+      </div>
+      <a href="https://impactxapp.com/streaming/watch/masterclass/6995bb9709295950f2d358ea" target="_blank" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(10,10,10,0.85);border:1px solid rgba(201,168,76,0.7);color:#C9A84C;font-family:monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;white-space:nowrap;backdrop-filter:blur(4px);">&#9654; Voir le film</a></div>
+
+      
+
+      <!-- LUCIOLES -->
+      <div style="position:relative; overflow:hidden; aspect-ratio:2/3; cursor:pointer;"
+           onmouseover="this.querySelector('.film-overlay').style.opacity='1'"
+           onmouseout="this.querySelector('.film-overlay').style.opacity='0'">
+        <img width="800" height="993" loading="lazy" src="assets/img_30_43e199e35a97.webp" alt="Lucioles"
+          style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s;"
+          onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="film-overlay" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 55%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:16px;">
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:20px; color:#fff; margin:0 0 4px; letter-spacing:1px;">LUCIOLES</p>
+          <p style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase; margin:0;">Série documentaire · Okapi Studios</p>
+        </div>
+      </div>
+
+      <!-- LES FANTÔMES DE GAZA -->
+      <div style="position:relative; overflow:hidden; aspect-ratio:2/3; cursor:pointer;"
+           onmouseover="this.querySelector('.film-overlay').style.opacity='1'"
+           onmouseout="this.querySelector('.film-overlay').style.opacity='0'">
+        <img width="800" height="993" loading="lazy" src="assets/img_31_46c77e14f282.webp" alt="Les Fantômes de Gaza"
+          style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform 0.6s;"
+          onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="film-overlay" style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 55%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:16px;">
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:20px; color:#fff; margin:0 0 4px; letter-spacing:1px;">LES FANTÔMES DE GAZA</p>
+          <p style="font-family:'Space Mono',monospace; font-size:8px; letter-spacing:2px; color:#C9A84C; text-transform:uppercase; margin:0;">Documentaire IA · Yamakasi, 2026</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Vignette YouTube cliquable Raging Moon -->
+    <div style="margin-top:48px;">
+      <p style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px; text-transform:uppercase; color:#C9A84C; margin-bottom:20px; opacity:0.8;">▶ Visionner maintenant</p>
+      <a href="javascript:void(0)" onclick="vlOpen('g-EfyiKaTSI')"
+         style="display:block; position:relative; overflow:hidden; border:1px solid rgba(201,168,76,0.2); max-width:800px; cursor:pointer;"
+         onmouseover="this.querySelector('.yt-overlay').style.background='rgba(0,0,0,0.35)'; this.querySelector('.yt-btn').style.transform='scale(1.12)'; this.querySelector('.yt-btn').style.background='rgba(201,168,76,1)'"
+         onmouseout="this.querySelector('.yt-overlay').style.background='rgba(0,0,0,0.55)'; this.querySelector('.yt-btn').style.transform='scale(1)'; this.querySelector('.yt-btn').style.background='rgba(0,0,0,0.75)'">
+
+        <!-- Vignette image -->
+        <img width="1100" height="618" loading="lazy" src="assets/img_32_47b80ee8c97e.webp"
+             alt="Raging Moon — A film by Yamakasi"
+             style="width:100%; display:block; object-fit:cover;">
+
+        <!-- Overlay sombre permanent -->
+        <div class="yt-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.55); transition:background 0.3s;"></div>
+
+        <!-- Bouton play centré -->
+        <div class="yt-btn" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:72px; height:72px; background:rgba(0,0,0,0.75); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.3s; border:2px solid rgba(201,168,76,0.7);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#C9A84C" style="margin-left:4px;"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+
+        <!-- Titre en bas -->
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:20px 24px; background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+          <p style="font-family:'Bebas Neue',sans-serif; font-size:26px; color:#FFFFFF; letter-spacing:3px; margin-bottom:4px;">RAGING MOON</p>
+          <p style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; color:#C9A84C; text-transform:uppercase;">Western IA · A film by Yamakasi · Okapi Studios</p>
+        </div>
+
+      </a>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ====================== PROLOGUE ====================== -->
-<section class="prologue reveal">
-  <div class="chapter-marker">Avant-propos</div>
-  <p class="prose">Ce que tu vas lire n'est pas un programme.</p>
-  <p class="prose">Ce n'est pas une méthode pour réussir, ni une liste de hacks, ni une formule à appliquer.</p>
-  <p class="prose">C'est un <strong>témoignage</strong>.</p>
-  <p class="prose">L'histoire d'un plan que je n'avais pas choisi, sur sept années que je n'avais pas négociées. Une parabole vécue.</p>
-  <p class="prose">Je l'écris aujourd'hui parce qu'il est temps. Et parce que peut-être, quelque part dans ces lignes, tu reconnaîtras la phase que tu es en train de traverser.</p>
-</section>
+<div style="text-align:center; padding:80px 40px 60px; border-top:1px solid #1a1a1a;">
+  <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:13px; letter-spacing:3px; text-transform:uppercase; color:#888; margin-bottom:16px;">Okapi Studios · Filmographie</p>
+  <h2 style="font-family:'Cormorant Garamond',Georgia,serif; font-size:42px; font-weight:300; color:#F5F0E8; margin-bottom:12px;">Une histoire à raconter ?</h2>
+  <p style="font-family:'Cormorant Garamond',Georgia,serif; font-size:20px; font-style:italic; color:#C9A84C; margin-bottom:40px;">Travaillons ensemble.</p>
+  <a href="#contact" style="display:inline-block; border:1px solid #C9A84C; color:#C9A84C; padding:14px 36px; font-size:12px; letter-spacing:2px; text-transform:uppercase; text-decoration:none; font-family:Georgia,serif;">Parlons de ton projet →</a>
+</div>
 
-<!-- ====================== CHAPITRE I — RÉVÉLATION ====================== -->
-<section class="chapter reveal">
-  <div class="section-image"><img src="img_01_revelation.jpg" alt="Chambre du Bourget"></div>
-  <div class="chapter-marker">Chapitre I · La Révélation</div>
-  <h2>2020.<br><span class="gold">21h. Le Bourget.</span></h2>
-  <p class="prose">Une chambre d'étudiant. Pas grande. Les murs nus, un bureau, un lit, une Bible posée sur la table.</p>
-  <p class="prose">Ce soir-là, je suis en prière.</p>
-  <p class="prose">Et au cœur de la prière — je <strong>vois</strong>. Une graine. Puis un arbre qui en sort. Et j'entends, très clairement, un seul mot : <em>« germination »</em>.</p>
-  <p class="prose">Pas une voix audible. Pas un coup de tonnerre. Mais une certitude posée. Un plan sur sept ans, avec une forme très précise : celle d'un arbre qui pousse. Une graine, une éclosion, un enracinement. <strong>Sept phases. Sept années.</strong></p>
-  <p class="prose">Je n'ai pas tout compris ce soir-là. Mais j'ai su que je venais d'être <em>planté</em>.</p>
-  <div class="pull-quote">Aucun livre de business ne contenait ce plan. Aucun mentor ne me l'aurait formulé ainsi. Il fallait que ce soit reçu, pas appris.</div>
-</section>
+<div class="section-divider" role="separator"><img width="2048" height="2048" loading="lazy" class="section-divider-icon" src="assets/okapi-symbol-premium.webp" alt="Okapi"></div>
+<section class="manifeste-section" id="manifeste" role="region" aria-label="Manifeste créatif">
+  <div class="section-label">01 · Manifeste</div>
+  <div class="manifeste-grid" style="grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;">
+    <div class="manifeste-text">
+      <h2 class="section-title">Je suis né au Congo<br><em>avec des images plein la tête.</em></h2>
+      <p>Des histoires ambitieuses que je voulais montrer au monde — mais pas les moyens pour les concrétiser. Trouver des financements ressemblait à un parcours du combattant. Rassembler des artistes — un chemin de croix.</p>
+      <p>Puis l’IA est arrivée. <em>Et le mur s’est effondré.</em></p>
+      <p>Pas pour moi seul. Pour tous ceux qui avaient grandi avec des rêves plus grands que leurs moyens. Il y a des milliers de fondateurs, de créatifs, de marques ambitieuses qui ont des histoires extraordinaires à raconter. Des histoires vraies. Qui méritent d’exister.</p>
+      <p><em>Okapi World Média existe pour leur dire que c’est possible.</em></p>
+    </div>
 
-<!-- ====================== CHAPITRE II — PRINCIPE ====================== -->
-<section class="principe reveal">
-  <div class="section-image"><img src="img_02_principe.jpg" alt="Sept graines dans la paume"></div>
-  <div class="chapter-marker">Chapitre II · Le Principe</div>
-  <h2>Chaque vie<br>est une <span class="gold">graine.</span></h2>
-  <p class="prose">Chaque entreprise aussi.</p>
-  <p class="prose">Et toute graine, qu'elle soit semée dans un cœur, un projet ou une mission, suit la même loi. <em>Sept phases.</em> Toujours dans le même ordre. Aucune ne peut être sautée. Aucune ne peut être accélérée par la volonté seule.</p>
-  <p class="prose">Tu peux refuser ce qui pousse en toi. Mais tu ne peux pas inverser le processus.</p>
-  <div class="principe-quote">« Tout ce qui vit a été planté avant d'être vu. »</div>
-</section>
+    <!-- Portrait + quote stacked -->
+    <div style="display: flex; flex-direction: column; gap: 0;">
 
-<!-- ====================== PHASE 1 — PLANTÉ ====================== -->
-<section class="phase reveal">
-  <div class="section-image"><img src="img_phase1_plante.jpg" alt="Une graine entre deux doigts"></div>
-  <div class="year-stamp">Phase 1 · 2020</div>
-  <h2>Planté.</h2>
-  <p class="phase-subtitle">Sur cette terre.</p>
-  <p class="prose">J'arrive en France. Sur ce territoire qui n'était pas le mien à la naissance, mais qui devient le sol où je vais pousser.</p>
-  <p class="prose">Au début, <em>tout va bien</em>. Trop bien, même. Pas de tension, pas d'épreuve, pas d'avertissement. J'ai des études, des projets, un environnement qui m'entoure. La graine vient de tomber dans la terre — et personne, à ce stade, ne devine ce qu'elle va devenir.</p>
-  <p class="prose">Une graine, c'est un instant. Le reste, c'est le travail invisible.</p>
-  <div class="pull-quote">Tu ne choisis pas où tu tombes. Tu choisis si tu acceptes la terre.</div>
-  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 1 · Acceptation</div>
-</section>
+      <!-- Portrait on set -->
+      <div style="position: relative; overflow: hidden;">
+        <img width="900" height="1079" loading="lazy" src="assets/img_33_06b9fb87d367.webp" alt="Yamakasi — réalisateur"
+          style="width: 100%; display: block; object-fit: cover; object-position: center top; filter: contrast(1.05);">
+        <!-- Overlay bas -->
+        <div style="position:absolute; bottom:0; left:0; right:0; padding:20px 24px; background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);">
+          <p style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:3px; color:#C9A84C; text-transform:uppercase; margin:0 0 4px;">Yamakasi · Directeur créatif</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:13px; font-style:italic; color:rgba(245,240,232,0.7); margin:0;">Sur le tournage du clip Balade Nocturne · Nobu</p>
+        </div>
+      </div>
 
-<!-- ====================== PHASE 2 — ÉCLORE ====================== -->
-<section class="phase reveal">
-  <div class="section-image"><img src="img_phase2_brisement.jpg" alt="Graine qui éclot par brisement"></div>
-  <div class="year-stamp">Phase 2 · 2021</div>
-  <h2>Éclore.</h2>
-  <p class="phase-subtitle">Le craquement.</p>
-  <p class="prose">Une graine ne s'ouvre pas en douceur. Elle <strong>craque</strong>. Elle se brise. Elle perd sa coque.</p>
-  <p class="prose">Cette année-là, tout commence à s'effondrer en même temps. Une rupture amoureuse, brutale. Au travail, je découvre qu'on me méprise — une incompétence caractérisée, m'a-t-on fait comprendre. Un contrat manga à <em>9 000 €</em> que je rate de peu, alors que tout le projet aurait dû y trouver son souffle. Spirituellement, je perds mes repères.</p>
-  <p class="prose">Et dans le noir — il faut que je le dise — j'ai <em>pensé au suicide</em>. Plusieurs fois. Je n'osais même pas le nommer.</p>
-  <p class="prose">Je n'ai pas compris à l'époque que c'était l'éclosion. Que c'était la phase prévue. <strong>Une graine éclot toujours par brisement.</strong></p>
-  <div class="pull-quote">Personne n'éclôt sans se briser. C'est la loi de la graine, pas une malédiction.</div>
-  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 2 · Brisement</div>
-</section>
+      <!-- Quote -->
+      <div class="manifeste-aside">
+      <blockquote class="manifeste-quote">"Je transforme tes idées en images qu’on n’oublie pas."</blockquote>
+      <div class="manifeste-author">— Archange Kiyindou · Yamakasi</div>
 
-<!-- ====================== PHASE 3 — S'ENRACINER ====================== -->
-<section class="phase reveal">
-  <div class="section-image"><img src="img_phase3_enraciner.jpg" alt="Racines lumineuses sous terre"></div>
-  <div class="year-stamp">Phase 3 · 2022</div>
-  <h2>S'enraciner.</h2>
-  <p class="phase-subtitle">Dans le silence.</p>
-  <p class="prose">Après le brisement, je descends. Je me connecte à la Parole. Je lis, j'écoute, je relis.</p>
-  <p class="prose"><em>Myles Munroe. Les Brown. Jim Rohn. John Maxwell. Yvan Castanou. Yves Castanou. Juliana Ondo.</em> Chaque enseignement devient une racine. Je travaille mon mindset, mon caractère — l'orgueil que je cachais derrière de la timidité, le besoin d'attention déguisé en générosité, l'insoumission aux autorités spirituelles que j'avais mises au-dessus de moi.</p>
-  <p class="prose">Je crée mon premier projet d'envergure : une œuvre théâtrale multimédia pour <strong>Jeunes Prodiges Édition 1</strong>. Le spectacle est un succès.</p>
-  <p class="prose">Un ami me prend à part. <em>« Tu dois publier ce que tu fais. En parler. Le montrer. »</em> Il me presse, avec sincérité, de prendre la lumière. De saisir l'élan. De ne pas laisser passer le moment.</p>
-  <p class="prose">Mais quelque chose en moi savait : <strong>ce n'était pas le moment.</strong> C'était le <em>temps de rester caché</em>. Les racines n'étaient pas assez profondes pour soutenir le poids que la lumière allait apporter.</p>
-  <div class="pull-quote">Avant de monter, tu descends. Plus l'arbre sera haut, plus les racines devront être profondes.</div>
-  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 3 · Caractère</div>
-</section>
-
-<!-- ====================== PHASE 4 — SORTIR DE TERRE ====================== -->
-<section class="phase reveal">
-  <div class="section-image"><img src="img_phase4_sortir.jpg" alt="Pousse qui perce la terre"></div>
-  <div class="year-stamp">Phase 4 · 2023</div>
-  <h2>Sortir<br>de terre.</h2>
-  <p class="phase-subtitle">L'Engagement.</p>
-  <p class="prose">Le film <strong>L'Engagement</strong>. C'est lui qui me sort de l'ombre.</p>
-  <p class="prose">Pour la première fois, on me regarde sérieusement. Des pairs commencent à parler de mon travail. Des portes s'ouvrent que je n'avais pas frappées. La première lumière. Je sens qu'elle m'est rendue, enfin — mais je sais aussi que je suis <em>encore tendre</em>.</p>
-  <p class="prose">C'est la phase la plus fragile. Celle où beaucoup s'effondrent — pas par manque de capacité, mais par excès trop tôt. La lumière qui te révèle peut aussi te brûler.</p>
-  <div class="pull-quote">Le monde te voit enfin. Mais tu es encore tendre. Ne demande pas plus de lumière. Demande plus de fermeté.</div>
-  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 4 · Émergence</div>
-</section>
-
-<!-- ====================== PHASE 5 — S'ÉTENDRE ====================== -->
-<section class="phase reveal">
-  <div class="section-image"><img src="img_phase5_etendre.jpg" alt="Jeune arbre qui s'étend"></div>
-  <div class="year-stamp">Phase 5 · 2024</div>
-  <h2>S'étendre.</h2>
-  <p class="phase-subtitle">« Élargis l'espace de ta tente. »<br><span style="font-size:14px;font-family:Poppins,sans-serif;font-style:normal;letter-spacing:2px;color:var(--ivoire-faint);font-weight:500;">— ÉSAÏE 54:2</span></p>
-  <p class="prose">Cette phase commence par une parole reçue dans la prière. Six mots qui changent l'année : <em>« Élargis l'espace de ta tente. »</em></p>
-  <p class="prose">Je sens que je dois sortir du terrain unique. Diversifier. Tendre les branches là où il y a de l'espace à prendre.</p>
-  <p class="prose">Bande dessinée. Films. Je deviens responsable d'un département d'Église — <strong>EJP FILMS</strong>. Je commence à porter d'autres que moi. Mon terrain s'élargit, et avec lui, le poids que je dois soutenir.</p>
-  <p class="prose">Je ne suis plus une pousse. Je deviens <em>un jeune arbre</em>.</p>
-  <div class="pull-quote">L'extension n'est pas une ambition. C'est une obéissance. Là où il y a de la place, il faut prendre racine.</div>
-  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 5 · Expansion</div>
-</section>
-
-<!-- ====================== PHASE 6 — PORTER DU FRUIT ====================== -->
-<section class="phase reveal">
-  <div class="section-image"><img src="img_phase6_fruit.jpg" alt="Branches lourdes de fruits"></div>
-  <div class="year-stamp">Phase 6 · 2025</div>
-  <h2>Porter<br>du <span class="gold">fruit.</span></h2>
-  <p class="phase-subtitle">Le coût du fruit.</p>
-  <div style="margin:0 0 36px; padding:22px 22px; background:rgba(201,168,76,0.06); border-left:2px solid var(--or);">
-    <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; line-height:1.55; color:var(--ivoire); font-weight:400; margin:0;">« En vérité, en vérité, je vous le dis : si le grain de blé qui est tombé en terre ne meurt, il reste seul ; mais, s'il meurt, il porte beaucoup de fruit. »</p>
-    <p style="font-family:'Poppins',sans-serif; font-style:normal; font-size:12px; letter-spacing:2.5px; color:var(--or); font-weight:500; margin-top:12px;">— JEAN 12:24</p>
-  </div>
-  <p class="prose">Le fruit arrive. Mais il a un coût.</p>
-  <p class="prose">Mes disciples se multiplient. Mes responsabilités aussi. <em>Je me marie</em> — une bénédiction qui devient une discipline. Les premiers vrais clients arrivent — pas des amis qui me soutiennent, mais des marques qui me paient pour la valeur que je leur apporte.</p>
-  <p class="prose">Et puis, dans la même saison — <strong>je perds mon emploi</strong>.</p>
-  <p class="prose">À l'instant où je commence à porter mes propres fruits, le système qui me retenait me lâche. Ce n'est pas un accident. C'est une <em>loi</em> : tu ne peux pas porter tes fruits tant que tu te nourris de ceux d'un autre.</p>
-  <div class="pull-quote">L'arbre ne mange pas ses propres fruits. Il les produit pour d'autres. Et il ne les porte qu'au prix d'un renoncement.</div>
-  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 6 · Renoncement</div>
-</section>
-
-<!-- ====================== PHASE 7 — COURONNEMENT ====================== -->
-<section class="phase reveal">
-  <div class="section-image"><img src="img_phase7_couronnement.jpg" alt="Arbre couronné au lever du jour"></div>
-  <div class="year-stamp">Phase 7 · 2026</div>
-  <h2>Couronnement.</h2>
-  <p class="phase-subtitle">L'arbre devient repère.</p>
-  <p class="prose">C'est la phase que je suis en train de vivre, à l'instant où j'écris ces mots.</p>
-  <p class="prose">Je ne pensais pas que sept ans après ce soir au Bourget, je verrais ce que je vois. Mais les fruits du couronnement ne sont pas des récompenses — ce sont des <em>preuves</em>. La preuve que la graine a tenu sa promesse.</p>
-
-  <div class="fruits-list">
-    <div class="fruit-card"><em>La Voix de Mélodie</em> — près de <strong>20 000 personnes touchées</strong> en moins d'un mois. Des témoignages documentés de vies transformées.</div>
-    <div class="fruit-card">Premier film jamais diffusé sur la plateforme <em>ImpactX</em>.</div>
-    <div class="fruit-card"><em>Garde à Vue</em> — sélectionné au festival <strong>AICFF</strong> au Nigeria.</div>
-    <div class="fruit-card">Je lance officiellement <a href="https://okapiworldmedia.com" target="_blank" rel="noopener" style="color:var(--or); text-decoration:underline; text-decoration-color:rgba(201,168,76,0.4); font-style:normal; font-weight:500;">Okapi World Media</a>.</div>
-
-    <div class="fruit-card" data-i18n="ph7f5">La confirmation publique de mon appel <em>par ceux qui m'ont vu grandir en silence.</em></div>
-    <div class="fruit-card">Les clients se multiplient. La communauté s'agrandit.</div>
-    <div class="fruit-card">Je sors enfin sur les réseaux — pour <em>transmettre</em>, plus seulement pour exister.</div>
+    </div>
+  </div></div>
   </div>
 
-  <p class="prose">L'arbre est devenu repère. On vient s'asseoir à son ombre. <strong>La graine a tenu sa promesse.</strong></p>
 
-  <div style="margin:32px 0 0; padding:22px 22px; background:rgba(201,168,76,0.06); border-left:2px solid var(--or);">
-    <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:19px; line-height:1.55; color:var(--ivoire); font-weight:400; margin:0;">« C'est la plus petite de toutes les semences ; mais, quand elle a poussé, elle est plus grande que les légumes et devient un arbre, de sorte que les oiseaux du ciel viennent habiter dans ses branches. »</p>
-    <p style="font-family:'Poppins',sans-serif; font-style:normal; font-size:12px; letter-spacing:2.5px; color:var(--or); font-weight:500; margin-top:12px;">— MATTHIEU 13:32</p>
-  </div>
 
-  <div class="pull-quote">Le couronnement n'est pas la fin. C'est le moment où tu deviens à ton tour la terre dans laquelle d'autres graines vont tomber. Et ensemble, ces graines deviendront à leur tour des arbres. Et ces arbres deviendront une forêt.<br><br><strong style="color:var(--or); font-style:normal;">Tu es plus qu'une graine. Tu es une forêt en devenir.</strong></div>
-  <div class="gold-seal"><div class="gold-seal-dot"></div>Année 7 · Transmission</div>
-</section>
+</div>
 
-<!-- ====================== ÉPILOGUE ====================== -->
-<section class="epilogue reveal">
-  <div class="section-image"><img src="img_epilogue.jpg" alt="Une main qui offre une graine"></div>
-  <div class="chapter-marker">Épilogue</div>
-  <h2>Et toi ?</h2>
-  <p class="prose">Maintenant que tu connais les sept phases — pose-toi la question, honnêtement.</p>
-  <p class="prose"><strong>Quelle phase es-tu en train de traverser ?</strong></p>
-  <p class="prose">Si tu es dans le brisement, tu n'es pas en train de mourir. Tu es en train d'éclore. Le silence où tu es n'est pas un abandon. C'est l'enracinement.</p>
-  <p class="prose">Si tu sens que tu es encore sous terre — <em>tu n'es pas en retard.</em></p>
-  <p class="prose">Tu es à l'heure.</p>
+<!-- OFFRES -->
+<div id="offres" role="region" aria-label="Nos offres" style="background:#141414; padding:100px 0;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 48px;">
+    <div class="section-label">Ce que je crée</div>
+    <div class="offres-grid" style="margin-top:48px;">
 
-  <div class="epilogue-cta">
-    <div class="epilogue-cta-label">Si ce texte t'a parlé</div>
-    <div class="epilogue-cta-text">Écris-moi en DM la phase que tu traverses. Je lis tout. Je réponds quand je peux. Et si tu veux que ton entreprise — ou ton projet — soit accompagné comme une graine sérieuse, pas comme un coup de communication, on en parle.</div>
-    <a href="https://www.instagram.com/yamakasi_creative" class="epilogue-cta-btn" target="_blank" rel="noopener">Écrire à Yamakasi →</a>
-  </div>
-</section>
+      <div class="offre-card" style="background:#1a1212;">
+        <div style="position:relative;width:calc(100% + 72px);margin:-48px -36px 28px;height:260px;overflow:hidden;">
+          <img width="800" height="1200" loading="lazy" src="assets/img_34_1652a168fba9.webp" alt="Portrait de Marque" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:brightness(0.9) contrast(1.05);">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,#1a1212 100%);pointer-events:none;"></div>
+          
+        </div>
+        <div class="offre-num">01</div>
+        <div class="offre-name">L'Étincelle</div>
+        <h3 class="offre-title">Portrait de Marque</h3>
+        <p class="offre-desc">5 à 8 visuels cinématographiques. Un univers visuel fort. Prêt à publier en 5 jours.</p>
+        <div class="offre-tags">Direction artistique · Prêt en 5 jours</div>
+        <a href="#contact" class="offre-cta">Découvrir →</a>
+      </div>
 
-<!-- ====================== COLOPHON ====================== -->
-<footer class="colophon">
-  <div class="colophon-logo">
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="45" stroke="#F5F0E8" stroke-width="5" fill="none"/>
-      <ellipse cx="50" cy="50" rx="22" ry="45" stroke="#F5F0E8" stroke-width="3.5" fill="none"/>
-      <line x1="5" y1="50" x2="95" y2="50" stroke="#F5F0E8" stroke-width="3.5"/>
-      <path d="M14 28 Q50 38 86 28" stroke="#F5F0E8" stroke-width="3" fill="none"/>
-      <path d="M14 72 Q50 62 86 72" stroke="#F5F0E8" stroke-width="3" fill="none"/>
-      <polygon points="37,34 37,66 70,50" fill="#F5F0E8"/>
-    </svg>
-    <div class="colophon-logo-text">
-      <span class="name">OKAPI</span>
-      <span class="sub">WORLD MEDIA</span>
+      <div class="offre-card" style="background:#121218;">
+        <div style="position:relative;width:calc(100% + 72px);margin:-48px -36px 28px;height:260px;overflow:hidden;">
+          <img width="800" height="446" loading="lazy" src="assets/img_35_f79b21af3359.webp" alt="Film de Marque" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:brightness(0.9) contrast(1.05);">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,#121218 100%);pointer-events:none;"></div>
+          <a href="javascript:void(0)" onclick="vlOpen('LZ7eFKEsqwQ')" rel="noopener" style="position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.72);border:1px solid rgba(255,255,255,0.18);border-radius:20px;padding:5px 12px;color:#fff;font-size:0.72rem;text-decoration:none;backdrop-filter:blur(4px);z-index:2;"><svg width="14" height="14" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6a3 3 0 0 0-2.1 2.1C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8z"/><polygon points="9.7,15.5 15.8,12 9.7,8.5" fill="#fff"/></svg>Voir la vidéo</a>
+        </div>
+        <div class="offre-num">02</div>
+        <div class="offre-name">L'Histoire</div>
+        <h3 class="offre-title">Film de Marque</h3>
+        <p class="offre-desc">Un film. 60 à 90 secondes. Tout ce qu'il faut pour que ton histoire existe.</p>
+        <div class="offre-tags">Film de marque · Live action · Direction artistique</div>
+        <a href="#contact" class="offre-cta">Découvrir →</a>
+      </div>
+
+      <div class="offre-card" style="background:#121a12;">
+        <div style="position:relative;width:calc(100% + 72px);margin:-48px -36px 28px;height:260px;overflow:hidden;">
+          <img width="800" height="1066" loading="lazy" src="assets/img_36_44b6d1b1c439.webp" alt="Univers de Marque" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:brightness(0.9) contrast(1.05);">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,#121a12 100%);pointer-events:none;"></div>
+          
+        </div>
+        <div class="offre-num">03</div>
+        <div class="offre-name">La Légende</div>
+        <h3 class="offre-title">Univers de Marque</h3>
+        <p class="offre-desc">3 mois. Une direction artistique complète. Un univers visuel qui dure.</p>
+        <div class="offre-tags">Accompagnement · Projets culturels · Long terme</div>
+        <a href="#contact" class="offre-cta">Découvrir →</a>
+      </div>
+
     </div>
   </div>
-  <p class="colophon-credit">Écrit & réalisé par <strong>YAMAKASI</strong></p>
-  <p class="colophon-credit">Okapi World Media — 2026</p>
-  <a href="https://www.instagram.com/yamakasi_creative" class="colophon-handle" target="_blank" rel="noopener">@yamakasi_creative</a>
+</div>
+
+<!-- CAMPAGNE MAILU -->
+<div style="background:#0A0A0A; padding: 100px 0;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 48px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:#C9A84C; margin-bottom:16px; display:flex; align-items:center; gap:16px;">03 · Campagne Brand Content<span style="flex:1;height:1px;background:rgba(201,168,76,0.2);"></span></div>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(32px,4.5vw,56px); font-weight:300; line-height:1.1; margin-bottom:12px;">Maïlu — <em>Aimer Autrement.<br>Aimer à Nouveau.</em></h2>
+    <p style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:3px; color:#888; text-transform:uppercase; margin-bottom:60px;">Campagne de lancement · Direction artistique IA · Okapi World Média × Maïlu</p>
+    <div style="margin-bottom:4px; overflow:hidden;">
+      <img width="2000" height="1125" loading="lazy" src="assets/img_37_4ca2cc10ff40.webp" alt="KV Malik" style="width:100%; display:block;">
+    </div>
+    <div style="margin-bottom:4px; overflow:hidden;">
+      <img width="2000" height="1125" loading="lazy" src="assets/img_38_f33a5d64ad1f.webp" alt="KV Couple" style="width:100%; display:block;">
+    </div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4px;">
+      <div style="overflow:hidden;">
+        <img width="1792" height="2400" loading="lazy" src="assets/kv_sara_nouvelle.webp" alt="KV Sara" style="width:100%; height:100%; object-fit:cover; display:block;">
+      </div>
+      <div style="background:#111; padding:48px 40px; display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:4px; color:#C9A84C; text-transform:uppercase; margin-bottom:32px;">Direction Artistique IA</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(22px,2.5vw,36px); font-weight:300; font-style:italic; line-height:1.5; color:#F5F0E8; margin-bottom:32px;">"Le temps n'efface pas l'amour,<br>il le clarifie."</p>
+        <div style="width:48px; height:1px; background:#C9A84C; margin-bottom:32px;"></div>
+        <p style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:2px; color:#888; line-height:2;">Identité visuelle · Copywriting<br>Direction artistique · Storyboard<br>Production IA complète</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- PORTRAITS IA -->
+<div style="background:#111111; padding:100px 0;">
+  <div style="max-width:1200px; margin:0 auto; padding:0 48px;">
+    <div style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:5px; text-transform:uppercase; color:#C9A84C; margin-bottom:16px; display:flex; align-items:center; gap:16px;">04 · Portraits Photo-Réalisme IA<span style="flex:1;height:1px;background:rgba(201,168,76,0.2);"></span></div>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(32px,4.5vw,56px); font-weight:300; line-height:1.1; margin-bottom:12px;">Des portraits.<br><em>Pas des images.</em></h2>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:300; color:rgba(245,240,232,0.65); margin-bottom:60px; max-width:560px;">Chaque portrait est une direction artistique. La lumière, le regard, la matière — tout est pensé avant d'être généré.</p>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:4px;">
+      <div style="overflow:hidden; aspect-ratio:3/4;"><img width="900" height="1205" loading="lazy" src="assets/img_40_f8f7b85db5a7.webp" alt="Portrait IA" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+      <div style="overflow:hidden; aspect-ratio:3/4;"><img width="900" height="1200" loading="lazy" src="assets/img_41_ccf5459dc3ad.webp" alt="Portrait IA" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+      <div style="overflow:hidden; aspect-ratio:3/4;"><img width="900" height="1200" loading="lazy" src="assets/img_42_2520f01b0a44.webp" alt="Portrait IA" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+      <div style="overflow:hidden; aspect-ratio:3/4;"><img width="900" height="1200" loading="lazy" src="assets/img_43_786442a354fa.webp" alt="Portrait IA" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+      <div style="overflow:hidden; aspect-ratio:3/4;"><img width="900" height="1200" loading="lazy" src="assets/img_44_b629e9a1d1a2.webp" alt="Portrait IA" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+      <div style="overflow:hidden; aspect-ratio:3/4;"><img width="900" height="1200" loading="lazy" src="assets/img_45_86ef4deda1ff.webp" alt="Portrait IA" style="width:100%; height:100%; object-fit:cover; display:block;"></div>
+    </div>
+    <div style="margin-top:48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;">
+      <p style="font-family:'Space Mono',monospace; font-size:10px; letter-spacing:3px; color:#888; text-transform:uppercase;">Série Mille Visages · Okapi Studios · 2026</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:15px; font-style:italic; color:rgba(245,240,232,0.4);">Toutes les images sont générées par IA sous direction artistique humaine.</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="section-divider" role="separator"><img width="2048" height="2048" loading="lazy" class="section-divider-icon" src="assets/okapi-symbol-premium.webp" alt="Okapi"></div>
+<div class="clients-section" id="clients">
+  <div class="clients-inner">
+    <div class="clients-label">Clients confirmés</div>
+    <div class="clients-grid">
+      <img width="600" height="285" loading="lazy" class="client-logo" src="assets/img_46_bfbffe5d6bf0.webp" alt="Maïlu">
+      <img width="600" height="727" loading="lazy" class="client-logo" src="assets/img_47_694e4dc19d2b.webp" alt="ImpactX">
+      <img width="548" height="186" loading="lazy" class="client-logo" src="assets/img_48_4221e03f925f.webp" alt="Testify Online">
+      <!-- Heroes -->
+      <img width="600" height="337" loading="lazy" class="client-logo" src="assets/img_49_2769fd62af20.webp" alt="Heroes">
+      <!-- EJP Films -->
+      <img width="300" height="300" loading="lazy" class="client-logo" src="assets/img_50_6255ebb6fb5a.webp" alt="EJP Films">
+    </div>
+  </div>
+</div>
+
+
+<div class="section-divider" role="separator"><img width="2048" height="2048" loading="lazy" class="section-divider-icon" src="assets/okapi-symbol-premium.webp" alt="Okapi"></div>
+<section class="contact-section" id="contact" role="region" aria-label="Contact">
+  <div class="section-label" style="justify-content:center; margin-bottom:12px;">Contact</div>
+  <h2 class="section-title contact-title">Parlons de<br><em>ton projet.</em></h2>
+  <p class="contact-sub">Je te réponds sous 48h.</p>
+  <a href="mailto:yamakasi@okapiworldmedia.com" class="contact-email">yamakasi@okapiworldmedia.com</a>
+  <form class="contact-form" id="contact-form">
+    <input type="hidden" name="access_key" value="1b8e57a6-8161-44ba-a150-5d0cf5c2f633">
+    <input type="hidden" name="subject" value="Nouveau message - Okapi World Media">
+    <input type="hidden" name="autoresponse_subject" value="Merci pour ton message — Okapi World Média">
+    <input type="hidden" name="autoresponse_message" value="Bonjour,
+
+Merci pour ton message. Je l'ai bien reçu et je te réponds dans les plus brefs délais.
+
+À très bientôt,
+Yamakasi — Okapi World Média
+yamakasi@okapiworldmedia.com">
+    <input type="hidden" name="from_name" value="Okapi World Media">
+    <input type="hidden" name="replyto" value="yamakasi@okapiworldmedia.com">
+    <input type="hidden" name="redirect" value="https://okapiworldmedia.com/">
+    <div class="form-field"><input type="text" name="name" placeholder="Prénom & Nom" required></div>
+    <div class="form-field"><input type="text" name="organisation" placeholder="Organisation"></div>
+    <div class="form-field"><input type="email" name="email" placeholder="Email" required></div>
+    <div class="form-field">
+      <select name="projet">
+        <option value="" disabled selected>Type de projet</option>
+        <option>Portrait de Marque</option>
+        <option>Film de Marque</option>
+        <option>Univers de Marque</option>
+        <option>Autre — j'ai une idée à te soumettre</option>
+      </select>
+    </div>
+    <div class="form-field full"><textarea name="message" placeholder="Décris ton projet en quelques lignes…"></textarea></div>
+    <div class="form-submit"><button type="submit" class="btn-submit">Envoyer le message</button></div>
+  </form>
+  <div class="form-success" id="formSuccess">Message reçu. Je te réponds sous 48h.</div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img width="600" height="319" loading="lazy" src="assets/img_02_252ae974ae16.webp" alt="Okapi World Média"></div>
+  <div class="footer-copy">© 2026 · Yamakasi · Okapi World Média · Paris</div>
 </footer>
 
-<script>
-// Reveal sections on scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Translations
-const translations = {
-  ph7f5: {
-    fr: 'La confirmation publique de mon appel <em>par ceux qui m\'ont vu grandir en silence.</em>',
-    en: 'The public confirmation of my calling <em>by those who watched me grow in silence.</em>'
-  },
-};
-</script>
 
-<style>
-.lang-toggle{position:fixed;top:16px;right:16px;z-index:100;display:flex;align-items:center;background:rgba(10,10,10,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(201,168,76,0.35);border-radius:24px;padding:6px;gap:2px;font-family:'Poppins',sans-serif;font-weight:600;font-size:11px;letter-spacing:1.5px;box-shadow:0 4px 18px rgba(0,0,0,0.4);}
-.lang-btn{background:transparent;border:none;color:rgba(245,240,232,0.5);padding:6px 12px;border-radius:18px;cursor:pointer;transition:all 0.25s ease;font-family:inherit;font-weight:inherit;font-size:inherit;letter-spacing:inherit;}
-.lang-btn.active{background:#C9A84C;color:#0A0A0A;}
-.lang-btn:not(.active):hover{color:#F5F0E8;}
-</style>
+<!-- LIGHTBOX -->
+<div id="lb-overlay" onclick="lbClose()" aria-label="Fermer la prévisualisation" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,0.96);">
+  <div style="position:absolute;top:14px;right:14px;z-index:10001;">
+    <button onclick="lbClose()" aria-label="Fermer la prévisualisation" style="background:rgba(0,0,0,0.6);border:1px solid rgba(201,168,76,0.6);color:#C9A84C;font-family:monospace;font-size:11px;letter-spacing:2px;cursor:pointer;padding:10px 18px;">&#10005; FERMER</button>
+  </div>
+  <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Yamakasi — Directeur Créatif · Okapi World Média · Paris</h1>
+          <img loading="lazy" id="lb-img" src="" alt="Image en plein écran" onclick="event.stopPropagation()"
+    style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:96vw;height:92vh;object-fit:contain;display:block;">
+</div>
 
-<script>
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('htmlRoot') && document.getElementById('htmlRoot').setAttribute('lang', btn.dataset.lang);
-  });
-});
-</script>
+<!-- SCROLL ANIMATIONS -->
+<!-- DESIGN ENHANCEMENTS -->
+<!-- LOADER HTML -->
+<div id="page-loader">
+  <div class="loader-text">Okapi World Média</div>
+  <div class="loader-bar"></div>
+</div>
 
+<!-- CURSEUR -->
+<div id="custom-cursor"></div>
+<div id="custom-cursor-ring"></div>
+
+<div id="vl-overlay" onclick="if(event.target===this)vlClose()">
+  <div id="vl-container">
+    <button id="vl-close" onclick="vlClose()">✕ FERMER</button>
+    <iframe id="vl-iframe" src="" allowfullscreen allow="autoplay"></iframe>
+  </div>
+</div>
+  <script src="app.js" defer></script>
 </body>
 </html>
