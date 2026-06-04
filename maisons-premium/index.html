@@ -165,7 +165,7 @@ body::after {
       <div class="owm-name-tag">Cinematic Brand Studio</div>
     </div>
   </a>
-  <a href="/ig.html" class="owm-back">
+  <a href="/" class="owm-back" id="backLink">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
     <span>Retour</span>
   </a>
@@ -301,5 +301,19 @@ body::after {
   <div class="footer-final">On ne fait pas du contenu. On fait du cin&eacute;ma.</div>
 </footer>
 
+<script>
+(function(){
+  var ig=new URLSearchParams(location.search).get('from')==='ig';
+  if(ig){
+    var back=document.getElementById('backLink');
+    if(back) back.href='/ig.html';
+    document.querySelectorAll('a[href]').forEach(function(a){
+      var h=a.getAttribute('href');
+      if(h&&h.startsWith('/')&&!h.startsWith('/ig')&&!h.startsWith('#')&&!h.startsWith('//'))
+        a.href=h+(h.indexOf('?')>-1?'&':'?')+'from=ig';
+    });
+  }
+})();
+</script>
 </body>
 </html>

@@ -590,5 +590,20 @@ footer{
   <div class="footer-copy">© 2026 · Yamakasi · Okapi World Média · Paris</div>
 </footer>
 
+<script>
+(function(){
+  var ig=new URLSearchParams(location.search).get('from')==='ig';
+  if(ig){
+    document.querySelectorAll('.nav-logo, .nav-links a').forEach(function(a){
+      if(a.getAttribute('href')==='/') a.href='/ig.html';
+    });
+    document.querySelectorAll('a[href]').forEach(function(a){
+      var h=a.getAttribute('href');
+      if(h&&h.startsWith('/')&&!h.startsWith('/ig')&&!h.startsWith('#')&&!h.startsWith('//'))
+        a.href=h+(h.indexOf('?')>-1?'&':'?')+'from=ig';
+    });
+  }
+})();
+</script>
 </body>
 </html>

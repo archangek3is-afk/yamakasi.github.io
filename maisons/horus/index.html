@@ -496,5 +496,17 @@ body::after {
   <div class="footer-final">&Agrave; l&apos;&eacute;preuve du temps. Reine d&apos;&eacute;ternit&eacute;.</div>
 </footer>
 
+<script>
+(function(){
+  var ig=new URLSearchParams(location.search).get('from')==='ig';
+  if(ig){
+    document.querySelectorAll('a[href]').forEach(function(a){
+      var h=a.getAttribute('href');
+      if(h&&h.startsWith('/')&&!h.startsWith('/ig')&&!h.startsWith('#')&&!h.startsWith('//'))
+        a.href=h+(h.indexOf('?')>-1?'&':'?')+'from=ig';
+    });
+  }
+})();
+</script>
 </body>
 </html>
