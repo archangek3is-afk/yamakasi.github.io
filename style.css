@@ -1078,7 +1078,7 @@ nav.scrolled {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.55;
-  color: var(--owm-ivoire-sombre) !important;
+  color: rgba(245,240,232,0.85) !important;
   margin: 0 0 40px 0;
   font-style: normal;
   position: relative;
