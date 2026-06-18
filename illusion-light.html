@@ -137,6 +137,90 @@ ul.clean li:before { content:'—'; position:absolute; left:0; color:var(--or); 
   h1.title-serif { font-size:2.8rem; } h2 { font-size:1.8rem; }
   p,p.lead { font-size:.95rem; }
 }
+
+@media (max-width:600px) {
+  body { overflow:hidden; }
+  .slide { overflow-y:auto; -webkit-overflow-scrolling:touch; justify-content:flex-start; }
+  .pad { padding:3.5vh 5vw 12vh; }
+  .center-col { text-align:center; }
+
+  /* typography */
+  h1.title-serif { font-size:2rem; }
+  h1 .sub { font-size:1.1rem; }
+  h2 { font-size:1.4rem; margin-bottom:.8rem; }
+  h2.big { font-size:1.8rem; }
+  .eyebrow { font-size:.58rem; letter-spacing:.3em; margin-bottom:.8rem; }
+  p { font-size:.88rem; line-height:1.7; }
+  p.lead { font-size:1rem; line-height:1.65; }
+  blockquote { font-size:1.1rem; line-height:1.45; padding-left:1rem; margin:1rem 0; }
+  blockquote.small { font-size:.95rem; }
+  blockquote cite { font-size:.6rem; }
+  .theme { font-size:1.3rem; padding:1.5rem .8rem; }
+
+  /* cover */
+  .cover-overlay .kicker { font-size:.6rem; letter-spacing:.35em; }
+
+  /* split */
+  .split-slide, .split-slide.reverse { flex-direction:column; }
+  .split-img { flex:0 0 auto; height:35vh; min-height:200px; }
+  .split-txt { flex:1; padding:3vh 5vw; }
+
+  /* cards */
+  .cards4 { grid-template-columns:1fr 1fr; gap:.8rem; }
+  .ccard-img { height:16vh; }
+  .ccard-b { padding:.8rem; }
+  .ccard-b p { font-size:.72rem; }
+
+  /* breakdown slides */
+  .bd-slide, .bd-slide.reverse { flex-direction:column; }
+  .bd-img { flex:0 0 auto; height:25vh; min-height:160px; }
+  .bd-txt { flex:1; padding:2.5vh 5vw; }
+  .bd-note { font-size:.72rem; }
+
+  /* tables */
+  .bd-table th { font-size:.54rem; padding:.4rem .3rem; }
+  .bd-table td { font-size:.68rem; padding:.45rem .3rem; }
+  .bd-table td:first-child { width:30%; }
+  .bd-table td:last-child { width:auto; white-space:normal; }
+  .bd-table.dense td { font-size:.64rem; padding:.35rem .3rem; }
+
+  /* cost / plan tables */
+  .cost-slide { padding-top:3vh; padding-bottom:12vh; }
+  .cost-table td:last-child { white-space:normal; }
+  .cost-table tr.total td { font-size:.78rem; }
+  .cost-table tr.total td:last-child { font-size:.88rem; }
+  .cost-table tr.cap td:last-child { font-size:1rem; }
+  .plan-table td:nth-child(2) { white-space:normal; }
+  .cost-foot { font-size:.6rem; }
+
+  /* tags */
+  .tag { font-size:.5rem; padding:.08rem .35rem; }
+
+  /* opt row (costume options) */
+  .opt-row { flex-direction:column; gap:.6rem; }
+  .opt img { height:20vh; }
+
+  /* duo */
+  .duo { flex-direction:column; }
+  .duo img { width:100%; height:28vh; }
+
+  /* specs table */
+  .specs td { font-size:.82rem; padding:.6rem 0; }
+  .specs td:first-child { font-size:.58rem; width:28%; }
+
+  /* list */
+  ul.clean li { font-size:.85rem; line-height:1.5; margin-bottom:.5rem; padding-left:1.2rem; }
+
+  /* nav */
+  .nav { bottom:1.2vh; gap:1rem; }
+  .nav button { width:36px; height:36px; font-size:.9rem; }
+  .counter { font-size:.65rem; }
+
+  /* dots & brand */
+  .dots { gap:.3rem; left:2vw; top:1.5vh; }
+  .dot { width:5px; height:5px; }
+  .brandtag { font-size:.5rem; right:2vw; top:1.5vh; }
+}
 </style></head>
 <body>
 <div class="brandtag">ILLUSION · L'EXPÉRIENCE LIVE</div>
