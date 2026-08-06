@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Acteur Vivant — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450;1,9..144,600&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --noir:#0a0a0a;
+    --noir-2:#131210;
+    --noir-3:#1b1916;
+    --or:#c9a84c;
+    --ambre:#e3b765;
+    --ivoire:#f5f0e8;
+    --ivoire-dim:#c9c3b6;
+    --bordeaux:#5c1a21;
+    --bordeaux-l:#8a2c34;
+    --fumee:#948e7f;
+    --line: rgba(245,240,232,0.12);
+    --serif: 'Fraunces', serif;
+    --sans: 'Poppins', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--noir);
+    color:var(--ivoire);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--or); color:var(--noir);}
+
+  img,svg{display:block; max-width:100%;}
+
+  /* ---------- texture ---------- */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 20% 15%, rgba(201,168,76,0.06), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(92,26,33,0.10), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- gaffer mark signature ---------- */
+  .mark{
+    position:relative;
+    width:26px; height:26px;
+    display:inline-block;
+    flex-shrink:0;
+  }
+  .mark::before,.mark::after{
+    content:"";
+    position:absolute;
+    left:2px; top:11px;
+    width:22px; height:4px;
+    background:var(--or);
+    border-radius:1px;
+  }
+  .mark::before{ transform:rotate(45deg); }
+  .mark::after{ transform:rotate(-45deg); }
+  .mark.dim::before,.mark.dim::after{ background:var(--fumee); opacity:.5; }
+
+  /* ---------- nav ---------- */
+  header.top{
+    position:sticky; top:0; z-index:100;
+    background:rgba(10,10,10,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+  }
+  .brand{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+    color:var(--ivoire-dim); text-transform:uppercase;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand b{ color:var(--or); font-weight:500; }
+  nav.links{ display:none; gap:32px; align-items:center; }
+  nav.links a{
+    color:var(--ivoire-dim); text-decoration:none;
+    font-size:13px; letter-spacing:.06em; text-transform:uppercase;
+    font-weight:500;
+    position:relative; padding-bottom:4px;
+    transition:color .25s ease;
+  }
+  nav.links a::after{
+    content:""; position:absolute; left:0; bottom:0; height:1px; width:0;
+    background:var(--or); transition:width .3s ease;
+  }
+  nav.links a:hover, nav.links a.active{ color:var(--ivoire); }
+  nav.links a:hover::after, nav.links a.active::after{ width:100%; }
+  .burger{
+    display:flex; flex-direction:column; gap:5px; background:none; border:none;
+    cursor:pointer; padding:6px;
+  }
+  .burger span{ width:22px; height:1.5px; background:var(--ivoire); display:block; }
+  .mobile-menu{
+    display:none; flex-direction:column;
+    background:var(--noir-2); border-bottom:1px solid var(--line);
+    padding:8px 24px 20px;
+  }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{
+    color:var(--ivoire-dim); text-decoration:none; padding:12px 0;
+    border-bottom:1px solid var(--line); font-size:14px; letter-spacing:.04em;
+  }
+  .mobile-menu a:last-child{ border-bottom:none; }
+
+  @media(min-width:860px){
+    nav.links{ display:flex; }
+    .burger{ display:none; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:120px 24px 80px;
+    overflow:hidden;
+  }
+  .spot{
+    position:absolute; top:-10%; left:50%; transform:translateX(-50%);
+    width:900px; height:900px;
+    background:radial-gradient(circle, rgba(201,168,76,0.16) 0%, rgba(201,168,76,0.05) 32%, transparent 62%);
+    pointer-events:none; z-index:0;
+    animation:breathe 8s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{ opacity:.75; }
+    50%{ opacity:1; }
+  }
+  .curtain{
+    position:fixed; inset:0; z-index:1000;
+    display:flex; pointer-events:none;
+  }
+  .curtain .panel{
+    flex:1; background:linear-gradient(180deg, var(--bordeaux) 0%, #3a1013 100%);
+    transition:transform 1.1s cubic-bezier(.76,0,.24,1);
+  }
+  .curtain .panel.l{ transform-origin:left; }
+  .curtain .panel.r{ transform-origin:right; }
+  body.raised .curtain .panel.l{ transform:translateX(-101%); }
+  body.raised .curtain .panel.r{ transform:translateX(101%); }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:.28em;
+    color:var(--or); text-transform:uppercase; margin-bottom:28px;
+    position:relative; z-index:1;
+    opacity:0; animation:fadeUp .9s .3s ease forwards;
+  }
+  h1.title{
+    font-family:var(--serif); font-weight:600; font-style:normal;
+    font-size:clamp(48px,12vw,128px);
+    line-height:.94; letter-spacing:-0.01em;
+    color:var(--ivoire);
+    position:relative; z-index:1;
+    opacity:0; animation:fadeUp .9s .5s ease forwards;
+  }
+  h1.title em{ font-style:italic; color:var(--or); font-weight:450; }
+  .subtitle{
+    font-family:var(--serif); font-style:italic; font-weight:450;
+    font-size:clamp(17px,2.6vw,24px);
+    color:var(--ivoire-dim);
+    max-width:560px; margin:26px auto 0;
+    position:relative; z-index:1;
+    opacity:0; animation:fadeUp .9s .7s ease forwards;
+  }
+  .stats{
+    display:flex; flex-wrap:wrap; gap:0;
+    margin-top:56px; position:relative; z-index:1;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    opacity:0; animation:fadeUp .9s .9s ease forwards;
+  }
+  .stats .stat{
+    padding:20px 30px; text-align:left;
+    border-right:1px solid var(--line);
+  }
+  .stats .stat:last-child{ border-right:none; }
+  .stats .stat .n{ font-family:var(--serif); font-size:26px; color:var(--or); font-weight:600;}
+  .stats .stat .l{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:var(--fumee); text-transform:uppercase; margin-top:4px;}
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(18px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* ---------- generic section scaffolding ---------- */
+  main{ position:relative; z-index:1; }
+  section{ padding:100px 24px; max-width:1200px; margin:0 auto; }
+  .section-head{ margin-bottom:56px; }
+  .section-head .tag{
+    font-family:var(--mono); font-size:11px; letter-spacing:.22em;
+    color:var(--or); text-transform:uppercase; display:flex; align-items:center; gap:12px;
+    margin-bottom:18px;
+  }
+  .section-head h2{
+    font-family:var(--serif); font-weight:600; font-size:clamp(32px,5vw,54px);
+    line-height:1.05; max-width:820px;
+  }
+  .section-head p.lede{
+    font-family:var(--serif); font-style:italic; font-size:19px; color:var(--ivoire-dim);
+    max-width:640px; margin-top:20px; line-height:1.5;
+  }
+
+  .fade-in{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
+  .fade-in.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- act divider ---------- */
+  .act-divider{
+    display:flex; align-items:center; gap:20px;
+    margin:0 auto 60px; max-width:1200px; padding:0 24px 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .act-divider .num{
+    font-family:var(--serif); font-size:clamp(60px,9vw,120px); font-weight:300;
+    color:transparent; -webkit-text-stroke:1px var(--or); line-height:.8;
+  }
+  .act-divider .info h2{
+    font-family:var(--serif); font-size:clamp(26px,4vw,42px); font-weight:600;
+  }
+  .act-divider .info .sub{
+    font-family:var(--mono); font-size:12px; color:var(--fumee); letter-spacing:.08em;
+    margin-top:6px; text-transform:uppercase;
+  }
+
+  .pull{
+    font-family:var(--serif); font-style:italic; font-weight:450;
+    font-size:clamp(22px,3.4vw,32px); line-height:1.4;
+    color:var(--ambre);
+    max-width:760px; margin:0 auto 70px; padding:0 24px;
+    text-align:center; position:relative;
+  }
+  .pull::before{ content:"«"; color:var(--or); margin-right:4px; }
+  .pull::after{ content:"»"; color:var(--or); margin-left:4px; }
+
+  /* ---------- cards grid ---------- */
+  .grid{ display:grid; gap:20px; grid-template-columns:1fr; }
+  @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr; } }
+  @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr; } }
+
+  .card{
+    background:var(--noir-2);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:28px;
+    position:relative;
+  }
+  .card h3{
+    font-family:var(--serif); font-weight:600; font-size:19px; margin-bottom:12px;
+    color:var(--ivoire);
+  }
+  .card p{ color:var(--ivoire-dim); font-size:14.5px; line-height:1.65; }
+  .card .k{ color:var(--or); font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:10px;}
+
+  /* module vs module comparison */
+  .versus{ display:grid; grid-template-columns:1fr; gap:2px; background:var(--line); border:1px solid var(--line); margin-bottom:60px;}
+  @media(min-width:720px){ .versus{ grid-template-columns:1fr 1fr; } }
+  .versus .side{ background:var(--noir-2); padding:32px; }
+  .versus .side.acte2{ background:#161311; }
+  .versus .side .m{ font-family:var(--mono); font-size:11px; color:var(--fumee); letter-spacing:.1em; text-transform:uppercase;}
+  .versus .side h4{ font-family:var(--serif); font-size:24px; margin:8px 0 18px; color:var(--or);}
+  .versus .row{ display:flex; justify-content:space-between; gap:16px; padding:12px 0; border-top:1px solid var(--line);}
+  .versus .row:first-of-type{ border-top:none; }
+  .versus .row .rk{ font-size:12px; color:var(--fumee); font-family:var(--mono); text-transform:uppercase; letter-spacing:.05em; flex-shrink:0; width:90px;}
+  .versus .row .rv{ font-size:14px; color:var(--ivoire-dim); text-align:right; }
+  .versus .row .rv.verb{ color:var(--ambre); font-family:var(--serif); font-style:italic; font-size:16px;}
+
+  /* ---------- timeline ---------- */
+  .timeline{ position:relative; margin:0 0 70px; }
+  .tl-item{
+    display:grid; grid-template-columns:70px 1fr; gap:18px;
+    padding:16px 0; border-top:1px solid var(--line);
+    align-items:baseline;
+  }
+  .tl-item:first-child{ border-top:none; }
+  .tl-item .time{ font-family:var(--mono); font-size:13px; color:var(--or); }
+  .tl-item .desc{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  .tl-item .desc .name{ font-size:14.5px; color:var(--ivoire); }
+  .tl-item .desc .dur{ font-family:var(--mono); font-size:11px; color:var(--fumee); white-space:nowrap;}
+  .tl-item.pause .desc .name{ color:var(--fumee); font-style:italic; }
+  .tl-item.risk .time{ color:var(--bordeaux-l); }
+  .tl-item.risk .desc .name{ color:var(--ambre); }
+
+  @media(min-width:720px){
+    .tl-item{ grid-template-columns:90px 1fr; }
+  }
+
+  /* ---------- accordion blocks ---------- */
+  .bloc{
+    border:1px solid var(--line);
+    background:var(--noir-2);
+    margin-bottom:14px;
+    border-left:2px solid var(--or);
+  }
+  .bloc.risk{ border-left-color:var(--bordeaux-l); }
+  .bloc summary{
+    list-style:none;
+    cursor:pointer;
+    padding:22px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .bloc summary::-webkit-details-marker{ display:none; }
+  .bloc summary .s-left{ display:flex; align-items:center; gap:16px; }
+  .bloc summary .s-num{ font-family:var(--mono); color:var(--or); font-size:12px; flex-shrink:0; }
+  .bloc.risk summary .s-num{ color:var(--bordeaux-l); }
+  .bloc summary h4{
+    font-family:var(--serif); font-weight:600; font-size:17px; color:var(--ivoire);
+  }
+  .bloc summary .s-dur{ font-family:var(--mono); font-size:11px; color:var(--fumee); flex-shrink:0; }
+  .bloc summary .chev{
+    width:18px; height:18px; flex-shrink:0; color:var(--or);
+    transition:transform .3s ease;
+  }
+  .bloc[open] summary .chev{ transform:rotate(45deg); }
+  .bloc .body{ padding:0 24px 26px; }
+  .bloc .intention{
+    font-family:var(--serif); font-style:italic; color:var(--ambre);
+    font-size:15.5px; margin-bottom:18px; padding-left:14px; border-left:2px solid var(--or);
+  }
+  .bloc .sub-ex{ margin-bottom:16px; }
+  .bloc .sub-ex .lbl{
+    font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee);
+    text-transform:uppercase; margin-bottom:6px; display:block;
+  }
+  .bloc ul{ list-style:none; }
+  .bloc ul li{
+    position:relative; padding-left:20px; margin-bottom:8px;
+    color:var(--ivoire-dim); font-size:14.5px; line-height:1.6;
+  }
+  .bloc ul li::before{
+    content:"—"; position:absolute; left:0; color:var(--or);
+  }
+  .bloc .warn{
+    background:rgba(92,26,33,0.25); border:1px solid var(--bordeaux-l);
+    padding:14px 16px; margin-top:14px; font-size:13.5px; color:#e3b9bc;
+  }
+  .bloc .warn b{ color:var(--ambre); }
+
+  /* ---------- redline table (posture formateur) ---------- */
+  .redline{ width:100%; border-collapse:collapse; margin-top:10px; }
+  .redline th{
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--fumee); text-align:left; padding:10px 14px; border-bottom:1px solid var(--line);
+  }
+  .redline td{ padding:14px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:top;}
+  .redline td.bad{ color:var(--fumee); text-decoration:line-through; text-decoration-color:var(--bordeaux-l); }
+  .redline td.good{ color:var(--ivoire); }
+  .redline{ display:block; overflow-x:auto; white-space:nowrap; }
+  .redline th, .redline td{ white-space:normal; min-width:220px; }
+
+  /* charte box */
+  .charte{
+    background:var(--noir-2); border:1px solid var(--or);
+    padding:0; margin-top:20px;
+  }
+  .charte .head{
+    background:var(--or); color:var(--noir); padding:14px 24px;
+    font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    display:flex; justify-content:space-between; align-items:center; font-weight:500;
+  }
+  .charte ol{ padding:26px 24px 10px 44px; }
+  .charte ol li{ margin-bottom:16px; color:var(--ivoire-dim); font-size:14.5px; line-height:1.6; }
+  .charte ol li b{ color:var(--ambre); }
+  .charte .stop{
+    margin:10px 24px 24px; padding:16px 18px;
+    border:1px dashed var(--bordeaux-l); font-size:13.5px; color:#e3b9bc;
+  }
+  .charte .stop b{ color:var(--ambre); font-family:var(--mono); letter-spacing:.06em; }
+
+  /* stat table generic */
+  table.plain{ width:100%; border-collapse:collapse; margin-top:8px; }
+  table.plain th{
+    text-align:left; font-family:var(--mono); font-size:10.5px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--or); padding:10px 12px; border-bottom:1px solid var(--or);
+  }
+  table.plain td{ padding:12px; border-bottom:1px solid var(--line); font-size:13.5px; color:var(--ivoire-dim); }
+  .table-wrap{ overflow-x:auto; }
+  table.plain{ min-width:520px; }
+
+  /* comparatif avant/apres */
+  .compare-strip{
+    display:flex; align-items:center; justify-content:center; gap:24px;
+    margin:36px auto 0; flex-wrap:wrap; text-align:center;
+  }
+  .compare-strip .box{
+    border:1px solid var(--line); padding:20px 28px; background:var(--noir-2);
+    min-width:160px;
+  }
+  .compare-strip .box .t{ font-family:var(--mono); font-size:10px; color:var(--fumee); letter-spacing:.1em; text-transform:uppercase;}
+  .compare-strip .box .v{ font-family:var(--serif); font-size:20px; color:var(--or); margin-top:8px; font-style:italic;}
+  .compare-strip .arrow{ color:var(--or); font-size:20px; }
+
+  /* ---------- annexes ---------- */
+  .annexe-card{
+    background:var(--noir-2); border:1px solid var(--line); padding:26px;
+    border-top:2px solid var(--or);
+  }
+  .annexe-card .letter{
+    font-family:var(--serif); font-size:34px; color:var(--or); font-weight:600; line-height:1;
+    margin-bottom:10px;
+  }
+  .annexe-card h3{ font-family:var(--serif); font-size:17px; margin-bottom:10px; }
+  .annexe-card p{ font-size:13.5px; color:var(--ivoire-dim); line-height:1.6; }
+  .tagcloud{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .tagcloud span{
+    font-family:var(--mono); font-size:11px; padding:5px 10px;
+    border:1px solid var(--line); color:var(--ivoire-dim);
+  }
+  .tagcloud span.no{ border-color:var(--bordeaux-l); color:#c98d92; text-decoration:line-through; }
+
+  /* footer */
+  footer{
+    border-top:1px solid var(--line); padding:70px 24px 40px;
+    text-align:center;
+  }
+  footer .manifesto{
+    font-family:var(--serif); font-style:italic; font-size:clamp(20px,3vw,30px);
+    color:var(--ivoire); max-width:600px; margin:0 auto 30px;
+  }
+  footer .brandline{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--fumee);
+    text-transform:uppercase; margin-top:20px;
+  }
+  footer .brandline b{ color:var(--or); }
+
+  /* misc */
+  .divider-mark{ display:flex; align-items:center; justify-content:center; gap:16px; margin:60px 0; }
+  .divider-mark .line{ flex:1; height:1px; background:var(--line); max-width:200px; }
+
+  ::-webkit-scrollbar{ width:8px; }
+  ::-webkit-scrollbar-track{ background:var(--noir); }
+  ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--or); }
+
+  @media(prefers-reduced-motion: reduce){
+    *{ animation-duration:.001s !important; transition-duration:.001s !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="curtain"><div class="panel l"></div><div class="panel r"></div></div>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="mark" style="width:16px;height:16px;"></span> OKAPI <b>STUDIOS</b> — MANUEL</div>
+    <nav class="links">
+      <a href="#cadre">Cadre</a>
+      <a href="#acte1">Acte I</a>
+      <a href="#acte2">Acte II</a>
+      <a href="#annexes">Annexes</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#cadre">Cadre pédagogique</a>
+    <a href="#acte1">Acte I — L'Acteur Organique</a>
+    <a href="#acte2">Acte II — L'Architecture du Personnage</a>
+    <a href="#annexes">Annexes</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:0;">
+    <div class="spot" aria-hidden="true"></div>
+    <div class="eyebrow">Okapi Studios — Manuel formateur · v1.0</div>
+    <h1 class="title">L'ACTEUR<br><em>VIVANT</em></h1>
+    <p class="subtitle">Deux actes de sept heures. D'abord l'instrument — le corps, la voix, l'émotion disponible. Ensuite la partition — le texte, le personnage, la stratégie de jeu.</p>
+    <div class="stats">
+      <div class="stat"><div class="n">14H</div><div class="l">Face à face</div></div>
+      <div class="stat"><div class="n">02</div><div class="l">Modules</div></div>
+      <div class="stat"><div class="n">8–12</div><div class="l">Stagiaires</div></div>
+      <div class="stat"><div class="n">01</div><div class="l">Caméra plateau</div></div>
+    </div>
+  </section>
+
+  <!-- CADRE -->
+  <section id="cadre">
+    <div class="section-head fade-in">
+      <div class="tag"><span class="mark dim" style="width:16px;height:16px;"></span> Cadre pédagogique</div>
+      <h2>Ce ne sont pas deux ateliers.<br>C'est un système.</h2>
+      <p class="lede">L'un sans l'autre produit un acteur incomplet — sensible mais flou, ou intelligent mais sec. L'ordre compte : l'instrument avant la partition.</p>
+    </div>
+
+    <div class="versus fade-in">
+      <div class="side acte1">
+        <span class="m">Acte I</span>
+        <h4>L'Acteur Organique</h4>
+        <div class="row"><span class="rk">Objet</span><span class="rv">L'instrument — corps, voix, émotion disponible</span></div>
+        <div class="row"><span class="rk">Question</span><span class="rv">Suis-je vivant, ici, maintenant ?</span></div>
+        <div class="row"><span class="rk">Danger&nbsp;isolé</span><span class="rv">Acteur sensible mais flou, incapable de reproduire</span></div>
+        <div class="row"><span class="rk">Verbe</span><span class="rv verb">Être</span></div>
+      </div>
+      <div class="side acte2">
+        <span class="m">Acte II</span>
+        <h4>L'Architecture du Personnage</h4>
+        <div class="row"><span class="rk">Objet</span><span class="rv">La partition — texte, personnage, stratégie</span></div>
+        <div class="row"><span class="rk">Question</span><span class="rv">Qui est cet être, que veut-il, par quels moyens ?</span></div>
+        <div class="row"><span class="rk">Danger&nbsp;isolé</span><span class="rv">Acteur intelligent mais sec, qui « explique » son personnage</span></div>
+        <div class="row"><span class="rk">Verbe</span><span class="rv verb">Faire</span></div>
+      </div>
+    </div>
+
+    <div class="grid g3 fade-in">
+      <div class="card">
+        <span class="k">Public cible</span>
+        <h3>Qui est dans la salle</h3>
+        <p>Comédiens en formation ou en début de carrière, comédiens confirmés en reprise théâtre → caméra, créateurs de contenu et présentateurs, ou porte-parole à forte exposition — sur groupe dédié uniquement, jamais mélangé aux comédiens.</p>
+      </div>
+      <div class="card">
+        <span class="k">Prérequis</span>
+        <h3>Entrée en piste</h3>
+        <p><b style="color:var(--ambre)">Acte I</b> — aucun, une tenue de mouvement suffit.<br><b style="color:var(--ambre)">Acte II</b> — avoir suivi l'Acte I, ou justifier d'un an de pratique / deux projets tournés. Vérifié à l'inscription, jamais sur déclaration le matin même.</p>
+      </div>
+      <div class="card">
+        <span class="k">Contre-indication</span>
+        <h3>Ce que ce n'est pas</h3>
+        <p>Le travail de mémoire sensorielle n'est pas un espace thérapeutique. Ne convient pas à une personne en crise psychique actuelle — indiqué calmement dans le formulaire d'inscription.</p>
+      </div>
+    </div>
+
+    <div class="divider-mark"><div class="line"></div><span class="mark"></span><div class="line"></div></div>
+
+    <div class="grid g2 fade-in">
+      <div class="card">
+        <span class="k">Évaluation</span>
+        <h3>Ce qui reste, une fois la salle vidée</h3>
+        <div class="table-wrap">
+        <table class="plain">
+          <tr><th>Moment</th><th>Dispositif</th><th>Trace</th></tr>
+          <tr><td>Entrée</td><td>Auto-positionnement, 6 items</td><td>Fiche stagiaire</td></tr>
+          <tr><td>Continu</td><td>Grille d'observation formateur</td><td>Grille / stagiaire</td></tr>
+          <tr><td>Sortie</td><td>Passage filmé 2 min + auto-éval</td><td>Rush + fiche</td></tr>
+          <tr><td>J+30</td><td>Plan de travail personnel</td><td>Mail de relance</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="card">
+        <span class="k">Dispositif matériel</span>
+        <h3>Ce qu'il faut au plateau</h3>
+        <p>Salle 80–120 m², sol praticable pieds nus. Un tapis et une chaise à dossier droit par stagiaire. Caméra sur pied + micro-cravate, un moniteur de retour, <b style="color:var(--ambre)">un opérateur dédié l'après-midi</b> — le formateur ne peut pas diriger et cadrer en même temps. C'est la première économie qu'on fait, et la première qui casse la journée.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARTE -->
+  <section style="padding-top:0;">
+    <div class="section-head fade-in">
+      <div class="tag"><span class="mark dim" style="width:16px;height:16px;"></span> Charte du plateau</div>
+      <h2>Ce qui autorise l'engagement.</h2>
+      <p class="lede">Lue à voix haute chaque matin, en quatre minutes. Elle n'est pas décorative — elle est la condition de tout ce qui suit.</p>
+    </div>
+    <div class="charte fade-in">
+      <div class="head"><span>Sept règles</span><span>Lecture obligatoire</span></div>
+      <ol>
+        <li><b>On ne se moque pas.</b> Le ridicule est la matière première du métier ; il ne circule pas comme monnaie sociale.</li>
+        <li><b>Confidentialité.</b> Ce qui est dit ou montré ici ne sort pas de la salle.</li>
+        <li><b>Le mot STOP.</b> N'importe qui, à tout moment, interrompt un exercice sans se justifier. Application immédiate, sans commentaire.</li>
+        <li><b>Contact physique</b> uniquement annoncé et accepté. Entre stagiaires : chorégraphié, jamais improvisé.</li>
+        <li><b>Pas de thérapie.</b> On utilise le matériau personnel comme carburant. On ne l'analyse pas, on ne demande jamais « ça vient d'où ? ».</li>
+        <li><b>Portables rangés</b>, sauf usage pédagogique annoncé.</li>
+        <li><b>Le retour porte sur le travail</b>, jamais sur la personne. Interdiction du verdict.</li>
+      </ol>
+      <div class="stop"><b>PROTOCOLE D'URGENCE</b> — sortir de l'exercice → nommer le réel à voix haute → orientation vers le sol, poids et respiration → eau → 5 min hors regard du groupe → reprise jamais forcée. Le groupe n'assiste jamais à la « gestion » d'une crise.</div>
+    </div>
+  </section>
+
+  <!-- POSTURE -->
+  <section style="padding-top:0;">
+    <div class="section-head fade-in">
+      <div class="tag"><span class="mark dim" style="width:16px;height:16px;"></span> Posture du formateur</div>
+      <h2>On dirige par le verbe,<br>jamais par l'adjectif.</h2>
+    </div>
+    <div class="fade-in table-wrap">
+      <table class="redline">
+        <tr><th>Ne jamais dire</th><th>Dire à la place</th></tr>
+        <tr><td class="bad">« Sois plus triste »</td><td class="good">« Essaie de le retenir »</td></tr>
+        <tr><td class="bad">« Mets plus d'énergie »</td><td class="good">« Tu as 20 secondes avant qu'elle parte : convaincs-la »</td></tr>
+        <tr><td class="bad">« C'est pas juste »</td><td class="good">« Qu'est-ce que tu veux qu'il fasse, là, à cette réplique ? »</td></tr>
+        <tr><td class="bad">« Joue la peur »</td><td class="good">« Vérifie si la porte est verrouillée sans qu'il le voie »</td></tr>
+        <tr><td class="bad">« Sois plus naturel »</td><td class="good">« Écoute-le vraiment. Réponds à ce qu'il vient de faire »</td></tr>
+      </table>
+    </div>
+    <div class="grid g2 fade-in" style="margin-top:24px;">
+      <div class="card">
+        <span class="k">Trois relances universelles</span>
+        <ul style="margin-top:6px;">
+          <li>Qu'est-ce que tu veux ?</li>
+          <li>Qu'est-ce qui t'en empêche ?</li>
+          <li>Qu'est-ce que tu essaies de lui faire faire ?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="k">Ratio de parole</span>
+        <h3>Maximum 30 %</h3>
+        <p>Un formateur qui explique est un formateur qui ne dirige pas. Le retour : ce qui a fonctionné → un seul axe → une consigne concrète pour le rejeu. <b style="color:var(--ambre)">Trois notes = zéro note.</b></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTE I -->
+  <div id="acte1">
+  <div class="act-divider fade-in">
+    <div class="num">I</div>
+    <div class="info">
+      <h2>L'Acteur Organique</h2>
+      <div class="sub">Présence, corps et vérité émotionnelle</div>
+    </div>
+  </div>
+
+  <p class="pull fade-in">L'émotion n'est pas un objectif, c'est un déchet. On ne la fabrique pas ; elle apparaît quand le corps est disponible, l'écoute réelle, l'enjeu concret.</p>
+
+  <section style="padding-top:0;">
+    <div class="timeline fade-in">
+      <div class="tl-item"><span class="time">09h30</span><div class="desc"><span class="name">Accueil, contrat, auto-positionnement</span><span class="dur">30'</span></div></div>
+      <div class="tl-item"><span class="time">10h00</span><div class="desc"><span class="name">Ancrage, poids, gestion de l'espace</span><span class="dur">50'</span></div></div>
+      <div class="tl-item"><span class="time">10h50</span><div class="desc"><span class="name">Relaxation et gestion du trac</span><span class="dur">40'</span></div></div>
+      <div class="tl-item pause"><span class="time">11h30</span><div class="desc"><span class="name">Pause</span><span class="dur">15'</span></div></div>
+      <div class="tl-item"><span class="time">11h45</span><div class="desc"><span class="name">Voix — souffle, appui, résonateurs, projection</span><span class="dur">60'</span></div></div>
+      <div class="tl-item"><span class="time">12h45</span><div class="desc"><span class="name">Le silence et le sous-texte</span><span class="dur">45'</span></div></div>
+      <div class="tl-item pause"><span class="time">13h30</span><div class="desc"><span class="name">Déjeuner</span><span class="dur">60'</span></div></div>
+      <div class="tl-item"><span class="time">14h30</span><div class="desc"><span class="name">Écoute active — la répétition</span><span class="dur">55'</span></div></div>
+      <div class="tl-item risk"><span class="time">15h25</span><div class="desc"><span class="name">Le muscle émotionnel — mémoire sensorielle</span><span class="dur">55'</span></div></div>
+      <div class="tl-item pause"><span class="time">16h20</span><div class="desc"><span class="name">Pause</span><span class="dur">10'</span></div></div>
+      <div class="tl-item"><span class="time">16h30</span><div class="desc"><span class="name">Scènes courtes + direction individuelle (caméra)</span><span class="dur">75'</span></div></div>
+      <div class="tl-item"><span class="time">17h45</span><div class="desc"><span class="name">Bilan, plan personnel, clôture</span><span class="dur">30'</span></div></div>
+    </div>
+
+    <!-- Blocs Acte I -->
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">1.3</span><h4>Ancrage, poids, gestion de l'espace</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">50'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Faire passer le stagiaire de « je pense à mon corps » à « je suis dans mon corps ». Le poids comme premier vecteur de présence.</p>
+        <div class="sub-ex"><span class="lbl">Le scan debout</span><ul><li>Appuis, genoux déverrouillés, bassin neutre, nuque longue, regard posé sur un point réel.</li><li>« Ne cherchez pas la bonne position. Cherchez le moment où vous arrêtez de tenir. »</li></ul></div>
+        <div class="sub-ex"><span class="lbl">La marche neutre</span><ul><li>Remplir les trous de l'espace, changer de direction sur une décision, arrêts nets — et rester dans l'arrêt.</li><li>Observation : qui regarde le sol ? qui a le buste en avance sur les jambes ?</li></ul></div>
+        <div class="sub-ex"><span class="lbl">Occuper le cadre</span><ul><li>30 secondes dans un carré au sol, sans texte : « vous attendez quelqu'un qui devrait déjà être là ».</li><li>Erreur fréquente : jouer l'attente au lieu d'attendre. On recommence en attendant vraiment.</li></ul></div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">1.4</span><h4>Relaxation et gestion du trac</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">40'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Donner un protocole reproductible. Recadrer le trac comme énergie, non comme défaut.</p>
+        <div class="sub-ex"><span class="lbl">Le trac, en une phrase</span><ul><li>L'activation n'est pas le problème — sa direction l'est. Tournée vers soi, elle paralyse. Tournée vers l'objectif, elle propulse.</li></ul></div>
+        <div class="sub-ex"><span class="lbl">Outillage</span><ul><li>Respiration 4–6 (inspire 4, expire 6) × 6 cycles.</li><li>Ancrage sensoriel 5-4-3-2-1 avant l'entrée plateau.</li><li>Transfert d'attention : une tâche extérieure concrète juste avant d'entrer.</li></ul></div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">1.5</span><h4>Voix — souffle, appui, résonateurs, projection</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">60'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Dissocier volume et effort. Sortir de la voix de gorge.</p>
+        <ul>
+          <li>Souffle bas — « fff » long et stable, 10 s → 30 s.</li>
+          <li>Appui diaphragmatique — « ch-ch-ch » saccadé, sentir le rebond au-dessus du nombril.</li>
+          <li>Résonateurs — masque, palais, poitrine, crâne ; ces couleurs deviennent des outils de composition (Acte II, 2.6).</li>
+          <li>Projection sans cri — être entendu, pas être fort. Arrêt dès le serrement laryngé.</li>
+        </ul>
+        <div class="warn"><b>Point caméra —</b> au cinéma, on n'articule que ce que la perche entend tout. On ne projette pas.</div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">1.6</span><h4>Le silence et le sous-texte</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">45'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Le sens ne loge pas dans les mots, mais sous les mots. Le silence est un acte de jeu.</p>
+        <div class="sub-ex"><span class="lbl">Les cinq intentions</span><ul><li>Une réplique unique — « Tu es encore là. » — jouée cinq fois avec cinq objectifs secrets différents.</li><li>Le texte est une constante. L'intention est la variable. C'est là que naît le jeu.</li></ul></div>
+        <div class="sub-ex"><span class="lbl">Le silence tenu</span><ul><li>Duo muet de 60 s, deux personnes qui viennent de se disputer et partagent la table.</li></ul></div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">1.7</span><h4>Écoute active — la répétition</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">55'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Casser l'anticipation. L'acteur qui sait ce qui va arriver joue le souvenir de la scène, pas la scène.</p>
+        <ul>
+          <li>La répétition (Meisner, format condensé) : observation objective en boucle, jusqu'à l'ennui — et au-delà.</li>
+          <li>Autorisation de nommer ce qui change chez le partenaire, puis ce qu'on perçoit chez lui.</li>
+          <li>Impro à contrainte : objectifs opposés, non partagés. Interruption à la première anticipation visible.</li>
+        </ul>
+        <div class="warn"><b>Consigne cardinale —</b> « Ne prépare rien. Ta réponse doit t'être arrachée par ce qu'il fait. »</div>
+      </div>
+    </details>
+
+    <details class="bloc risk fade-in">
+      <summary><div class="s-left"><span class="s-num">1.8</span><h4>Le muscle émotionnel — mémoire sensorielle</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">55'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <div class="warn" style="margin-top:0; margin-bottom:18px;"><b>Bloc à haut risque —</b> conduit uniquement si la charte a été posée et respectée toute la matinée. Jamais programmé en fin de journée.</div>
+        <p class="intention">L'émotion s'atteint par la porte des sens, jamais par la porte de l'émotion. Et surtout : on apprend à en sortir.</p>
+        <div class="sub-ex"><span class="lbl">La boisson du matin</span><ul><li>Reconstruction sensorielle guidée — température, poids, odeur, bruit, lumière. Jamais de question émotionnelle.</li></ul></div>
+        <div class="sub-ex"><span class="lbl">Le souvenir choisi</span><ul><li>Plafond imposé : intensité 3/10. Superposition d'une réplique neutre sur le socle sensoriel actif.</li></ul></div>
+        <div class="sub-ex"><span class="lbl">La sortie — non négociable</span><ul><li>Secouer les membres → nommer 5 objets réels → regarder trois personnes → boire → une phrase du quotidien.</li></ul></div>
+        <div class="warn"><b>Doctrine —</b> la mémoire affective est le carburant le moins fiable en tournage, car elle ne se répète pas prise après prise. Substitution, imagination active et enjeu concret sont plus reproductibles.</div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">1.9</span><h4>Scènes courtes + direction individuelle</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">75'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Intégrer. Chaque stagiaire reçoit une direction personnalisée devant le groupe, filmée — plan taille puis plan poitrine.</p>
+        <div class="sub-ex"><span class="lbl">Méthode en 4 temps</span><ul><li>Constat factuel → question → consigne concrète unique → rejeu immédiat.</li></ul></div>
+        <div class="warn"><b>À dire au moins une fois —</b> la caméra enregistre l'intention, pas l'effort. Ce qui se voit en plan serré, c'est ce que l'acteur pense.</div>
+      </div>
+    </details>
+  </section>
+  </div>
+
+  <!-- ACTE II -->
+  <div id="acte2">
+  <div class="act-divider fade-in">
+    <div class="num">II</div>
+    <div class="info">
+      <h2>L'Architecture du Personnage</h2>
+      <div class="sub">Du script à l'écran</div>
+    </div>
+  </div>
+
+  <p class="pull fade-in">Un personnage n'est pas une personnalité, c'est une trajectoire de désir contrariée. Ce qu'il veut, ce qui l'en empêche, ce qu'il tente.</p>
+
+  <section style="padding-top:0;">
+    <div class="timeline fade-in">
+      <div class="tl-item"><span class="time">09h30</span><div class="desc"><span class="name">Cadrage + lecture à froid filmée</span><span class="dur">30'</span></div></div>
+      <div class="tl-item"><span class="time">10h00</span><div class="desc"><span class="name">Décoder le texte — faits, hypothèses, masques</span><span class="dur">60'</span></div></div>
+      <div class="tl-item pause"><span class="time">11h00</span><div class="desc"><span class="name">Pause</span><span class="dur">15'</span></div></div>
+      <div class="tl-item"><span class="time">11h15</span><div class="desc"><span class="name">Les trois piliers — objectif, obstacle, actions</span><span class="dur">75'</span></div></div>
+      <div class="tl-item"><span class="time">12h30</span><div class="desc"><span class="name">Test de tactiques sur pieds</span><span class="dur">45'</span></div></div>
+      <div class="tl-item pause"><span class="time">13h15</span><div class="desc"><span class="name">Déjeuner</span><span class="dur">60'</span></div></div>
+      <div class="tl-item"><span class="time">14h15</span><div class="desc"><span class="name">Biographie et passé secret</span><span class="dur">50'</span></div></div>
+      <div class="tl-item"><span class="time">15h05</span><div class="desc"><span class="name">Corporalité — centre, tempo-rythme, marche</span><span class="dur">55'</span></div></div>
+      <div class="tl-item pause"><span class="time">16h00</span><div class="desc"><span class="name">Pause</span><span class="dur">10'</span></div></div>
+      <div class="tl-item"><span class="time">16h10</span><div class="desc"><span class="name">Laboratoire — objectifs secrets + direction (caméra)</span><span class="dur">80'</span></div></div>
+      <div class="tl-item"><span class="time">17h30</span><div class="desc"><span class="name">Comparatif + plan 30 jours</span><span class="dur">30'</span></div></div>
+    </div>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">2.3</span><h4>Décoder le texte — faits, hypothèses, masques</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">60'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Une hygiène d'analyse. La majorité des acteurs inventent avant d'avoir lu.</p>
+        <div class="table-wrap">
+        <table class="plain">
+          <tr><th>Faits</th><th>Hypothèses</th><th>Masques</th></tr>
+          <tr><td>Indiscutable, écrit — dialogue, didascalies</td><td>Motivations plausibles, choix d'acteur</td><td>Mensonges, omissions, ironie, déni</td></tr>
+        </table>
+        </div>
+        <div class="sub-ex" style="margin-top:16px;"><span class="lbl">L'enquête</span><ul><li>Que s'est-il passé dans les 5 minutes avant l'entrée ? (l'événement antérieur — le plus sous-exploité)</li><li>Qu'est-ce qui est en jeu si j'échoue ici ?</li></ul></div>
+        <div class="warn"><b>Provocation —</b> « Un personnage ne ment pas au spectateur. Il se ment à lui-même. »</div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in" open>
+      <summary><div class="s-left"><span class="s-num">2.4</span><h4>Les trois piliers — objectif, obstacle, actions</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">75'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Le cœur du module. Un outil opérant, transposable à n'importe quel texte, n'importe quel format.</p>
+        <div class="grid g3" style="margin-bottom:18px;">
+          <div class="card" style="padding:18px;"><span class="k">Objectif de scène</span><p>Ce que je veux de mon partenaire, maintenant. Verbe transitif, dirigé, atteignable, urgent.</p></div>
+          <div class="card" style="padding:18px;"><span class="k">Obstacle</span><p>L'autre, le monde, ou soi-même. <b style="color:var(--ambre)">Le meilleur obstacle est intérieur.</b></p></div>
+          <div class="card" style="padding:18px;"><span class="k">Tactiques</span><p>Séduire, menacer, amadouer, tester, acculer, désarmer — on change quand la précédente échoue.</p></div>
+        </div>
+        <div class="warn"><b>Règle d'or —</b> une scène bien jouée est une suite d'échecs tactiques. C'est ce qui produit le mouvement.</div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">2.5</span><h4>Test de tactiques sur pieds</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">45'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Vérifier physiquement que la table produit du jeu, pas de la théorie.</p>
+        <ul>
+          <li>Passage 1 — tactiques choisies. Passage 2 — bascule imposée en temps réel par le formateur. Passage 3 — bascule libre.</li>
+        </ul>
+        <div class="warn"><b>Démonstration centrale —</b> le texte n'a pas bougé d'un mot. Tout a changé.</div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">2.6</span><h4>Biographie et passé secret</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">50'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Du matériau jouable, pas un roman. Toute donnée qui ne modifie pas un comportement dans la scène est supprimée.</p>
+        <ul>
+          <li>Fiche remplie en 15 minutes chrono — la contrainte de temps empêche la littérature.</li>
+          <li>Filtre : entourer les 3 seules données utiles, barrer le reste devant témoin.</li>
+          <li>Passé secret : une phrase, jamais dite, jamais jouée frontalement — « il se résiste ».</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">2.7</span><h4>Corporalité — centre, tempo-rythme, marche</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">55'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">Traduire le psychologique en physique — la voie la plus rapide pour un acteur bloqué mentalement.</p>
+        <ul>
+          <li>Centre imaginaire (Tchekhov) — front, gorge, sternum, ventre, bassin, genoux, dos.</li>
+          <li>Tempo-rythme dissocié — extérieur 2 / intérieur 8 : l'homme calme qui bout.</li>
+          <li>Tension et point de serrage — mâchoire, poings, ventre, épaules.</li>
+        </ul>
+        <div class="warn"><b>Transposition caméra —</b> le plan serré ne filme que le tempo intérieur.</div>
+      </div>
+    </details>
+
+    <details class="bloc fade-in">
+      <summary><div class="s-left"><span class="s-num">2.8</span><h4>Laboratoire — objectifs secrets + direction</h4></div><div style="display:flex;align-items:center;gap:14px;"><span class="s-dur">80'</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg></div></summary>
+      <div class="body">
+        <p class="intention">L'atelier culminant. Faire varier une scène à volonté sans toucher au texte.</p>
+        <ul>
+          <li>Objectifs compatibles, puis opposés, puis objectif-surprise glissé en cours de scène.</li>
+          <li>Une note de direction, un rejeu, après chaque série.</li>
+        </ul>
+        <div class="warn"><b>À nommer en clôture —</b> un partenaire qui ne connaît pas votre objectif ne peut pas anticiper. C'est exactement ce que la caméra cherche.</div>
+      </div>
+    </details>
+
+    <div class="fade-in" style="text-align:center; margin-top:20px;">
+      <span class="k" style="display:block; margin-bottom:12px;">2.2 → 2.9 — Le comparatif</span>
+      <div class="compare-strip">
+        <div class="box"><div class="t">09h30</div><div class="v">Lecture à froid</div></div>
+        <div class="arrow">→</div>
+        <div class="box"><div class="t">17h30</div><div class="v">Même scène, rejouée</div></div>
+      </div>
+      <p style="color:var(--fumee); font-size:13.5px; max-width:480px; margin:20px auto 0;">Silence pendant la projection. Chaque stagiaire nomme une seule différence — c'est le levier de preuve le plus puissant de la journée.</p>
+    </div>
+  </section>
+  </div>
+
+  <!-- ANNEXES -->
+  <section id="annexes">
+    <div class="section-head fade-in">
+      <div class="tag"><span class="mark dim" style="width:16px;height:16px;"></span> Annexes opérationnelles</div>
+      <h2>Ce qui tient la formation debout entre les deux journées.</h2>
+    </div>
+
+    <div class="grid g3 fade-in">
+      <div class="annexe-card">
+        <div class="letter">B</div>
+        <h3>Fiche personnage</h3>
+        <p>Identité, corps, relations, système (objectif/obstacle/tactiques), secret — filtrée aux 3 données qui changent réellement un comportement. Verso : les 8 questions à poser à n'importe quel texte.</p>
+      </div>
+      <div class="annexe-card">
+        <div class="letter">C</div>
+        <h3>Grille d'observation</h3>
+        <p>Dix critères notés 1–5 sur chaque passage plateau : disponibilité corporelle, trac, voix, écoute, intention, variation tactique, sous-texte, rapport caméra, direction, autonomie.</p>
+      </div>
+      <div class="annexe-card">
+        <div class="letter">D</div>
+        <h3>Banque de verbes</h3>
+        <p>Attaquer, séduire, obtenir, protéger, se retirer, explorer — verbes actifs transitifs uniquement.</p>
+        <div class="tagcloud">
+          <span>accuser</span><span>charmer</span><span>négocier</span><span>rassurer</span><span>esquiver</span>
+          <span class="no">être triste</span><span class="no">ressentir</span>
+        </div>
+      </div>
+      <div class="annexe-card">
+        <div class="letter">E</div>
+        <h3>Scènes-supports</h3>
+        <p>Domaine public (Molière, Marivaux, Tchekhov) pour la sécurité juridique immédiate. Scènes originales écrites pour la formation — la meilleure option, actif propriétaire du studio.</p>
+      </div>
+      <div class="annexe-card">
+        <div class="letter">F</div>
+        <h3>Théâtre vs caméra</h3>
+        <div class="table-wrap">
+        <table class="plain" style="min-width:0;">
+          <tr><td>Adresse</td><td>Salle → partenaire seul</td></tr>
+          <tr><td>Intensité</td><td>Constante → ajustée au plan</td></tr>
+          <tr><td>Ce qui se voit</td><td>Ce que l'acteur fait → ce qu'il pense</td></tr>
+        </table>
+        </div>
+      </div>
+      <div class="annexe-card">
+        <div class="letter">G</div>
+        <h3>Checklist logistique</h3>
+        <p>J-14 convocations et autorisations d'image · J-7 scènes et kit caméra · J-1 test complet du son · J+30 relance — <b style="color:var(--ambre)">le point de contact commercial le plus rentable</b> de tout le dispositif.</p>
+      </div>
+    </div>
+
+    <div class="grid g2 fade-in" style="margin-top:20px;">
+      <div class="card">
+        <span class="k">Questionnaire à chaud</span>
+        <h3>L'indicateur qui compte</h3>
+        <p>Sept items notés, dont un seul fait ou défait la formation : <b style="color:var(--ambre)">« vous êtes-vous senti en sécurité pour vous engager ? »</b> Sous 4,5/5 de moyenne, le problème est le cadre — pas le contenu.</p>
+      </div>
+      <div class="card">
+        <span class="k">Références</span>
+        <h3>Ce sur quoi le manuel s'appuie</h3>
+        <p>Stanislavski, Michael Tchekhov, Sanford Meisner, Uta Hagen, Ivana Chubbuck, Declan Donnellan, Judith Weston — pour le vocabulaire de direction, verbes contre résultats.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="manifesto fade-in">« On ne fait pas du contenu.<br>On fait du cinéma. »</p>
+  <div class="brandline">Manuel formateur v1.0 — <b>Okapi Studios</b> · Okapi World Média</div>
+</footer>
+
+<script>
+  // curtain rise
+  window.addEventListener('load', ()=>{
+    requestAnimationFrame(()=>{
+      setTimeout(()=> document.body.classList.add('raised'), 250);
+    });
+  });
+
+  // mobile menu
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', ()=> menu.classList.toggle('open'));
+  menu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> menu.classList.remove('open')));
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+    });
+  }, { threshold:0.12 });
+  document.querySelectorAll('.fade-in').forEach(el=> io.observe(el));
+
+  // active nav
+  const sections = ['cadre','acte1','acte2','annexes'].map(id=>document.getElementById(id)).filter(Boolean);
+  const navLinks = document.querySelectorAll('nav.links a');
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        navLinks.forEach(l=> l.classList.toggle('active', l.getAttribute('href') === '#'+id));
+      }
+    });
+  }, { rootMargin:'-40% 0px -50% 0px' });
+  sections.forEach(s=> spy.observe(s));
+</script>
+
+</body>
+</html>
