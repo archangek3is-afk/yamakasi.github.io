@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Manuel du Décor — Direction artistique & décoration de cinéma</title>
+<meta name="description" content="Manuel d'initiation à la direction artistique et à la décoration de cinéma. Illustré, avec exercices et vidéos.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Courier+Prime:wght@400;700&family=Karla:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --platre:#E6E9E0;
+  --platre-2:#DDE1D6;
+  --papier:#F3F4EE;
+  --encre:#232B2B;
+  --encre-dim:#5A6360;
+  --prusse:#1F4E5F;
+  --prusse-l:#2E7186;
+  --ocre:#D9A441;
+  --rose:#C97B63;
+  --vert:#5E7C58;
+  --ligne:rgba(35,43,43,0.14);
+  --ombre:0 2px 0 rgba(35,43,43,0.10);
+  --disp:'Bricolage Grotesque', sans-serif;
+  --body:'Karla', sans-serif;
+  --mono:'Courier Prime', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  background:var(--platre);
+  color:var(--encre);
+  font-family:var(--body);
+  font-size:16.5px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(rgba(35,43,43,0.045) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+::selection{background:var(--ocre);color:var(--encre)}
+img,svg{display:block;max-width:100%}
+a{color:var(--prusse)}
+
+/* ---------------- HEADER ---------------- */
+header.top{
+  position:sticky;top:0;z-index:200;
+  background:rgba(230,233,224,.94);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--ligne);
+}
+.nav{max-width:1240px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim)}
+.logo b{color:var(--prusse)}
+.chipmark{width:14px;height:20px;border-radius:2px;background:linear-gradient(180deg,var(--ocre) 0 33%,var(--rose) 33% 66%,var(--prusse) 66% 100%);flex-shrink:0}
+.progress-wrap{flex:1;max-width:300px;display:none;align-items:center;gap:10px}
+.progress-bar{flex:1;height:6px;background:var(--platre-2);border:1px solid var(--ligne);border-radius:20px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:var(--vert);transition:width .4s ease}
+.progress-label{font-family:var(--mono);font-size:11px;color:var(--encre-dim);white-space:nowrap}
+.burger{background:none;border:1px solid var(--ligne);border-radius:4px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:4px}
+.burger span{width:18px;height:2px;background:var(--encre);display:block}
+@media(min-width:1080px){ .progress-wrap{display:flex} .burger{display:none} }
+
+/* ---------------- LAYOUT ---------------- */
+.shell{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:1080px){ .shell{grid-template-columns:250px 1fr;gap:48px;padding:0 20px} }
+
+aside{
+  display:none;
+  position:sticky;top:90px;height:calc(100vh - 110px);overflow-y:auto;
+  padding:32px 0 40px;
+}
+@media(min-width:1080px){ aside{display:block} }
+aside .sec-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:14px}
+aside a{
+  display:flex;gap:10px;align-items:baseline;
+  text-decoration:none;color:var(--encre-dim);font-size:14px;
+  padding:7px 10px;border-radius:4px;transition:.2s;line-height:1.3;
+}
+aside a .n{font-family:var(--mono);font-size:11px;color:var(--ocre);flex-shrink:0}
+aside a:hover{background:var(--papier);color:var(--encre)}
+aside a.active{background:var(--prusse);color:#fff}
+aside a.active .n{color:var(--ocre)}
+
+.mobile-nav{display:none;background:var(--papier);border-bottom:1px solid var(--ligne);padding:14px 20px 20px}
+.mobile-nav.open{display:block}
+.mobile-nav a{display:block;text-decoration:none;color:var(--encre);padding:10px 0;border-bottom:1px solid var(--ligne);font-size:14.5px}
+.mobile-nav a .n{font-family:var(--mono);color:var(--ocre);margin-right:8px;font-size:12px}
+
+main{padding:0 20px 80px;min-width:0}
+@media(min-width:1080px){ main{padding:0 0 100px} }
+
+/* ---------------- HERO ---------------- */
+.hero{padding:60px 0 50px;position:relative}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--prusse);margin-bottom:20px}
+h1{font-family:var(--disp);font-weight:800;font-size:clamp(38px,7.5vw,76px);line-height:.98;letter-spacing:-.02em;max-width:14ch}
+h1 .hl{position:relative;display:inline-block}
+h1 .hl::after{content:"";position:absolute;left:-2px;right:-2px;bottom:.08em;height:.32em;background:var(--ocre);z-index:-1;transform:rotate(-.6deg)}
+.hero p.lede{font-size:19px;max-width:56ch;margin-top:26px;color:var(--encre-dim);line-height:1.6}
+.hero .swatches{display:flex;gap:6px;margin-top:34px;flex-wrap:wrap}
+.hero .swatches div{width:46px;height:62px;border-radius:3px;box-shadow:var(--ombre)}
+.hero-note{
+  margin-top:36px;background:var(--papier);border:1px solid var(--ligne);border-left:4px solid var(--rose);
+  padding:20px 22px;max-width:62ch;box-shadow:var(--ombre);
+}
+.hero-note b{font-family:var(--disp);font-weight:600}
+
+/* ---------------- SECTIONS / CHAPTERS ---------------- */
+.chapter{padding:54px 0 10px;border-top:1px solid var(--ligne);margin-top:40px}
+.chapter-head{display:flex;gap:18px;align-items:flex-start;margin-bottom:26px}
+.chip{
+  width:56px;flex-shrink:0;border-radius:3px;overflow:hidden;box-shadow:var(--ombre);
+  border:1px solid rgba(35,43,43,.12);
+}
+.chip .top{height:44px;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:20px;color:#fff}
+.chip .bot{background:var(--papier);padding:5px 4px;text-align:center;font-family:var(--mono);font-size:8.5px;letter-spacing:.04em;color:var(--encre-dim)}
+h2{font-family:var(--disp);font-weight:800;font-size:clamp(26px,4.4vw,40px);line-height:1.05;letter-spacing:-.015em}
+.chapter-head .sub{font-family:var(--mono);font-size:11.5px;color:var(--encre-dim);text-transform:uppercase;letter-spacing:.06em;margin-top:8px}
+
+h3{font-family:var(--disp);font-weight:600;font-size:21px;margin:32px 0 12px;letter-spacing:-.01em}
+h4{font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:8px}
+p{margin-bottom:14px;max-width:72ch}
+strong{font-weight:700}
+em.term{font-style:normal;background:rgba(217,164,65,.28);padding:1px 5px;border-radius:3px;font-weight:500}
+
+ul.plain{list-style:none;margin:0 0 16px;max-width:72ch}
+ul.plain li{position:relative;padding-left:22px;margin-bottom:9px}
+ul.plain li::before{content:"■";position:absolute;left:0;top:-1px;color:var(--ocre);font-size:11px}
+
+/* ---------------- CARDS ---------------- */
+.grid{display:grid;gap:16px;grid-template-columns:1fr;margin:22px 0}
+@media(min-width:640px){.grid.g2{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.grid.g3{grid-template-columns:repeat(3,1fr)}.grid.g4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1200px){.grid.g4{grid-template-columns:repeat(4,1fr)}}
+
+.card{background:var(--papier);border:1px solid var(--ligne);padding:20px;box-shadow:var(--ombre);border-radius:2px}
+.card .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--prusse);display:block;margin-bottom:8px}
+.card p{font-size:14.5px;margin-bottom:0;color:var(--encre-dim)}
+.card p + p{margin-top:10px}
+
+/* fiche décor */
+.fiche{
+  background:var(--papier);border:1px solid var(--ligne);box-shadow:var(--ombre);
+  position:relative;margin:26px 0;border-radius:2px;
+}
+.fiche .fiche-head{
+  background:var(--prusse);color:#fff;padding:12px 20px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.fiche .fiche-body{padding:22px 20px}
+.fiche .fiche-body p:last-child{margin-bottom:0}
+
+/* encadré astuce / piège */
+.tip,.trap{border:1px solid var(--ligne);padding:18px 20px;margin:22px 0;box-shadow:var(--ombre);border-radius:2px;max-width:74ch}
+.tip{background:rgba(94,124,88,.12);border-left:4px solid var(--vert)}
+.trap{background:rgba(201,123,99,.14);border-left:4px solid var(--rose)}
+.tip .t,.trap .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:block;font-weight:700}
+.tip .t{color:var(--vert)}
+.trap .t{color:#a8543c}
+.tip p,.trap p{margin-bottom:0;font-size:15px}
+
+/* ---------------- VIDEO LINKS ---------------- */
+.vlinks{display:grid;gap:10px;grid-template-columns:1fr;margin:20px 0}
+@media(min-width:700px){.vlinks{grid-template-columns:1fr 1fr}}
+a.vlink{
+  display:flex;align-items:center;gap:14px;text-decoration:none;
+  background:var(--papier);border:1px solid var(--ligne);padding:13px 16px;
+  box-shadow:var(--ombre);border-radius:2px;transition:.18s;color:var(--encre);
+}
+a.vlink:hover{transform:translateY(-2px);border-color:var(--prusse)}
+a.vlink .play{
+  width:34px;height:24px;border-radius:5px;background:var(--rose);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+a.vlink .play::after{content:"";border-left:8px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px}
+a.vlink.search .play{background:var(--prusse)}
+a.vlink.search .play::after{border:none;content:"⌕";color:#fff;font-size:16px;margin:0;line-height:1}
+a.vlink .txt{min-width:0}
+a.vlink .txt .n{font-family:var(--disp);font-weight:600;font-size:14.5px;line-height:1.25;display:block}
+a.vlink .txt .s{font-family:var(--mono);font-size:10.5px;color:var(--encre-dim);text-transform:uppercase;letter-spacing:.05em}
+
+/* ---------------- EXERCISE ---------------- */
+.exo{
+  background:#fff;border:2px dashed var(--rose);padding:0;margin:30px 0;
+  box-shadow:0 3px 0 rgba(201,123,99,.25);border-radius:3px;
+}
+.exo .exo-head{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  padding:14px 20px;border-bottom:2px dashed rgba(201,123,99,.4);
+}
+.exo .exo-head .l{display:flex;align-items:center;gap:12px}
+.exo .exo-num{
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;
+  background:var(--rose);color:#fff;padding:3px 9px;border-radius:3px;
+}
+.exo .exo-head h4{margin:0;font-size:17px}
+.exo .exo-meta{font-family:var(--mono);font-size:10.5px;color:var(--encre-dim);text-transform:uppercase}
+.exo .exo-body{padding:20px}
+.exo .exo-body p{font-size:15px}
+.exo ol{padding-left:20px;margin-bottom:12px}
+.exo ol li{margin-bottom:8px;font-size:15px}
+.exo .done-row{display:flex;align-items:center;gap:10px;padding:12px 20px;border-top:2px dashed rgba(201,123,99,.4);background:rgba(201,123,99,.06)}
+.exo label{display:flex;align-items:center;gap:10px;cursor:pointer;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--encre-dim)}
+.exo input[type=checkbox]{width:18px;height:18px;accent-color:var(--vert);cursor:pointer}
+.exo.done{border-color:var(--vert);box-shadow:0 3px 0 rgba(94,124,88,.25)}
+.exo.done .exo-num{background:var(--vert)}
+
+/* ---------------- INTERACTIVE PALETTE ---------------- */
+.palette-tool{background:var(--papier);border:1px solid var(--ligne);box-shadow:var(--ombre);margin:26px 0;border-radius:2px;overflow:hidden}
+.pt-tabs{display:flex;flex-wrap:wrap;border-bottom:1px solid var(--ligne);background:var(--platre-2)}
+.pt-tabs button{
+  flex:1;min-width:110px;background:none;border:none;border-right:1px solid var(--ligne);
+  padding:13px 8px;cursor:pointer;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--encre-dim);transition:.2s;
+}
+.pt-tabs button:last-child{border-right:none}
+.pt-tabs button:hover{background:var(--papier)}
+.pt-tabs button.on{background:var(--prusse);color:#fff}
+.pt-body{padding:22px 20px}
+.pt-strip{display:flex;height:110px;border-radius:3px;overflow:hidden;border:1px solid var(--ligne);margin-bottom:18px}
+.pt-strip div{flex:1;position:relative;transition:flex .3s ease}
+.pt-strip div:hover{flex:1.6}
+.pt-strip div span{
+  position:absolute;bottom:6px;left:6px;font-family:var(--mono);font-size:9px;
+  color:rgba(255,255,255,.85);letter-spacing:.04em;
+}
+.pt-name{font-family:var(--disp);font-weight:600;font-size:19px;margin-bottom:6px}
+.pt-desc{font-size:15px;color:var(--encre-dim);margin-bottom:12px}
+.pt-use{font-family:var(--mono);font-size:11.5px;color:var(--prusse);text-transform:uppercase;letter-spacing:.05em}
+
+/* ---------------- DEPTH DIAGRAM ---------------- */
+.depth-tool{background:var(--papier);border:1px solid var(--ligne);box-shadow:var(--ombre);margin:26px 0;padding:20px;border-radius:2px}
+.depth-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.depth-btns button{
+  background:var(--platre-2);border:1px solid var(--ligne);padding:8px 14px;cursor:pointer;
+  font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;border-radius:3px;transition:.2s;
+}
+.depth-btns button.on{background:var(--prusse);color:#fff;border-color:var(--prusse)}
+.depth-cap{font-size:14.5px;color:var(--encre-dim);margin-top:14px;min-height:44px}
+.layer{transition:opacity .35s ease}
+.layer.off{opacity:.12}
+
+/* ---------------- VOCAB FLIP ---------------- */
+.vocab{display:grid;gap:10px;grid-template-columns:1fr 1fr;margin:22px 0}
+@media(min-width:820px){.vocab{grid-template-columns:repeat(4,1fr)}}
+.vcard{perspective:800px;height:104px;cursor:pointer}
+.vinner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.vcard.flip .vinner{transform:rotateY(180deg)}
+.vface{
+  position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--ligne);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:10px;border-radius:2px;box-shadow:var(--ombre);
+}
+.vfront{background:var(--papier)}
+.vfront .fr{font-family:var(--disp);font-weight:600;font-size:15px;line-height:1.2}
+.vfront .hint{font-family:var(--mono);font-size:9px;color:var(--encre-dim);margin-top:8px;letter-spacing:.06em}
+.vback{background:var(--prusse);color:#fff;transform:rotateY(180deg)}
+.vback .en{font-family:var(--mono);font-size:13px;color:var(--ocre);margin-bottom:5px}
+.vback .def{font-size:12px;line-height:1.35;color:rgba(255,255,255,.9)}
+
+/* ---------------- QUIZ ---------------- */
+.quiz{background:var(--papier);border:1px solid var(--ligne);box-shadow:var(--ombre);padding:24px 20px;margin:26px 0;border-radius:2px}
+.q{margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--ligne)}
+.q:last-of-type{border-bottom:none;margin-bottom:8px}
+.q .qt{font-family:var(--disp);font-weight:600;font-size:16.5px;margin-bottom:12px;display:flex;gap:10px}
+.q .qt .qn{font-family:var(--mono);color:var(--ocre);font-size:13px;flex-shrink:0}
+.q .opts{display:grid;gap:8px}
+.q .opts button{
+  text-align:left;background:var(--platre);border:1px solid var(--ligne);padding:11px 14px;
+  cursor:pointer;font-family:var(--body);font-size:14.5px;border-radius:3px;transition:.15s;color:var(--encre);
+}
+.q .opts button:hover{border-color:var(--prusse)}
+.q .opts button.ok{background:rgba(94,124,88,.2);border-color:var(--vert);font-weight:700}
+.q .opts button.ko{background:rgba(201,123,99,.2);border-color:var(--rose);text-decoration:line-through}
+.q .fb{margin-top:12px;font-size:14px;color:var(--encre-dim);display:none;padding-left:14px;border-left:3px solid var(--ocre)}
+.q .fb.show{display:block}
+#quizScore{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--prusse)}
+
+/* ---------------- TABLE ---------------- */
+.tw{overflow-x:auto;margin:20px 0;border:1px solid var(--ligne);background:var(--papier);box-shadow:var(--ombre)}
+table{width:100%;border-collapse:collapse;min-width:540px}
+th{background:var(--platre-2);text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;border-bottom:1px solid var(--ligne)}
+td{padding:12px 14px;border-bottom:1px solid var(--ligne);font-size:14.5px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+
+/* ---------------- KIT CHECKLIST ---------------- */
+.kit{display:grid;gap:8px;grid-template-columns:1fr;margin:22px 0}
+@media(min-width:640px){.kit{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.kit{grid-template-columns:1fr 1fr 1fr}}
+.kit label{
+  display:flex;align-items:flex-start;gap:11px;background:var(--papier);border:1px solid var(--ligne);
+  padding:12px 14px;cursor:pointer;box-shadow:var(--ombre);border-radius:2px;font-size:14px;transition:.15s;
+}
+.kit label:hover{border-color:var(--prusse)}
+.kit input{margin-top:3px;width:16px;height:16px;accent-color:var(--vert);flex-shrink:0;cursor:pointer}
+.kit label.checked{background:rgba(94,124,88,.12);border-color:var(--vert)}
+.kit .kn{font-weight:700;display:block}
+.kit .kd{font-size:12.5px;color:var(--encre-dim);display:block;line-height:1.4}
+
+/* ---------------- FOOTER ---------------- */
+footer{border-top:1px solid var(--ligne);margin-top:60px;padding:50px 20px 60px;text-align:center}
+footer .fm{font-family:var(--disp);font-weight:600;font-size:clamp(20px,3.4vw,30px);max-width:22ch;margin:0 auto 18px;line-height:1.2}
+footer .fb2{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--encre-dim)}
+footer .fb2 b{color:var(--prusse)}
+
+.backtop{
+  position:fixed;right:16px;bottom:16px;z-index:150;background:var(--prusse);color:#fff;border:none;
+  width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:18px;box-shadow:0 3px 10px rgba(0,0,0,.2);
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.backtop.show{opacity:1;pointer-events:auto}
+
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav">
+    <div class="logo"><span class="chipmark"></span> LE MANUEL DU <b>DÉCOR</b></div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="pfill"></div></div>
+      <span class="progress-label" id="plabel">0 / 9 exercices</span>
+    </div>
+    <button class="burger" id="burger" aria-label="Sommaire"><span></span><span></span><span></span></button>
+  </div>
+  <nav class="mobile-nav" id="mnav">
+    <a href="#ch0"><span class="n">00</span>Avant de commencer</a>
+    <a href="#ch1"><span class="n">01</span>Qui fait quoi dans un décor</a>
+    <a href="#ch2"><span class="n">02</span>Lire un scénario</a>
+    <a href="#ch3"><span class="n">03</span>La couleur</a>
+    <a href="#ch4"><span class="n">04</span>Lumière & matière</a>
+    <a href="#ch5"><span class="n">05</span>L'espace et le cadre</a>
+    <a href="#ch6"><span class="n">06</span>L'objet qui parle</a>
+    <a href="#ch7"><span class="n">07</span>Présenter son travail</a>
+    <a href="#ch8"><span class="n">08</span>Le terrain</a>
+    <a href="#quiz"><span class="n">✽</span>Quiz</a>
+    <a href="#final"><span class="n">✽</span>Projet final</a>
+  </nav>
+</header>
+
+<div class="shell">
+
+  <aside>
+    <div class="sec-title">Sommaire</div>
+    <a href="#ch0" class="navlink"><span class="n">00</span>Avant de commencer</a>
+    <a href="#ch1" class="navlink"><span class="n">01</span>Qui fait quoi dans un décor</a>
+    <a href="#ch2" class="navlink"><span class="n">02</span>Lire un scénario</a>
+    <a href="#ch3" class="navlink"><span class="n">03</span>La couleur</a>
+    <a href="#ch4" class="navlink"><span class="n">04</span>Lumière &amp; matière</a>
+    <a href="#ch5" class="navlink"><span class="n">05</span>L'espace et le cadre</a>
+    <a href="#ch6" class="navlink"><span class="n">06</span>L'objet qui parle</a>
+    <a href="#ch7" class="navlink"><span class="n">07</span>Présenter son travail</a>
+    <a href="#ch8" class="navlink"><span class="n">08</span>Le terrain</a>
+    <div class="sec-title" style="margin-top:24px">Mise à l'épreuve</div>
+    <a href="#quiz" class="navlink"><span class="n">✽</span>Quiz</a>
+    <a href="#final" class="navlink"><span class="n">✽</span>Projet final</a>
+  </aside>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="kicker">Manuel d'initiation · Okapi Studios</div>
+      <h1>Le manuel du <span class="hl">décor</span></h1>
+      <p class="lede">Direction artistique et décoration de cinéma, expliquées simplement. Tu sais déjà rendre un espace beau. Ici, tu vas apprendre à le rendre <strong>vrai</strong>, <strong>utile</strong>, et <strong>bavard</strong> — un décor qui raconte l'histoire à la place des dialogues.</p>
+      <div class="swatches" aria-hidden="true">
+        <div style="background:#1F4E5F"></div>
+        <div style="background:#2E7186"></div>
+        <div style="background:#D9A441"></div>
+        <div style="background:#C97B63"></div>
+        <div style="background:#5E7C58"></div>
+        <div style="background:#232B2B"></div>
+      </div>
+      <div class="hero-note">
+        <b>Comment utiliser ce manuel.</b> Neuf chapitres, neuf exercices. Fais-les dans l'ordre — chacun s'appuie sur le précédent. Coche les exercices terminés, la barre en haut suit ta progression. Les vignettes bleues et roses ouvrent des vidéos ou des sélections YouTube : regarde-les, c'est là que tu verras les principes en mouvement.
+      </div>
+    </section>
+
+    <!-- ============ CH 0 ============ -->
+    <section class="chapter" id="ch0">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#1F4E5F">00</div><div class="bot">DÉPART</div></div>
+        <div><h2>Avant de commencer</h2><div class="sub">La seule idée à comprendre aujourd'hui</div></div>
+      </div>
+
+      <p>Décorer un salon et décorer un plateau de tournage, ce sont deux métiers qui utilisent les mêmes gestes pour des raisons opposées.</p>
+
+      <div class="grid g2">
+        <div class="card">
+          <span class="lbl">Décoration d'intérieur</span>
+          <p><strong>Le client est celui qui habite.</strong> Le lieu doit être agréable, fonctionnel, durable. On regarde depuis partout. La réussite : on s'y sent bien.</p>
+        </div>
+        <div class="card">
+          <span class="lbl">Décoration de cinéma</span>
+          <p><strong>Le client est la caméra.</strong> Le lieu doit être crédible, lisible, et raconter quelque chose. On regarde depuis un seul point à la fois. La réussite : on ne remarque rien — et pourtant on a tout compris.</p>
+        </div>
+      </div>
+
+      <h3>Les trois questions que se pose une cheffe décoratrice</h3>
+      <ul class="plain">
+        <li><strong>Qui vit ici ?</strong> Pas « quel style » — <em class="term">qui</em>. Son âge, son argent, son métier, ses manies, ce qu'il cache.</li>
+        <li><strong>Que doit comprendre le spectateur en trois secondes ?</strong> Un plan dure rarement plus longtemps. Si le décor met dix secondes à parler, il est muet.</li>
+        <li><strong>Où sera la caméra ?</strong> Ce qui n'est pas dans le cadre n'existe pas. Ce qui est derrière la tête de l'acteur, en revanche, sera vu pendant toute la scène.</li>
+      </ul>
+
+      <div class="tip">
+        <span class="t">Le déclic</span>
+        <p>Un décor de cinéma n'est pas un lieu. C'est un <strong>portrait</strong>. Tu ne meubles pas une pièce, tu écris la biographie de quelqu'un avec des objets.</p>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink" href="https://www.youtube.com/watch?v=83hYhbknuJc" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="txt"><span class="n">Production Design — The Underrated Role Explained</span><span class="s">StudioBinder · vidéo</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=what+is+production+design+in+film+explained" target="_blank" rel="noopener">
+          <span class="play"></span>
+          <span class="txt"><span class="n">« What is production design in film »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="1">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 01</span><h4>Le portrait par le vide</h4></div>
+          <span class="exo-meta">30 min · téléphone</span>
+        </div>
+        <div class="exo-body">
+          <p>Choisis une pièce de ta maison. Photographie-la telle quelle.</p>
+          <ol>
+            <li>Retire <strong>trois objets</strong> qui disent quelque chose sur la personne qui y vit. Rephotographie.</li>
+            <li>Ajoute <strong>trois objets</strong> qui appartiendraient à quelqu'un d'autre : un étudiant fauché, une femme qui vient de divorcer, un homme qui prépare un départ. Rephotographie à chaque fois.</li>
+            <li>Montre les quatre photos à quelqu'un, sans rien expliquer, et demande : « Qui habite ici ? »</li>
+          </ol>
+          <p><strong>Ce que tu apprends :</strong> combien peu d'objets suffisent à changer entièrement une identité. C'est ton super-pouvoir de décoratrice.</p>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ CH 1 ============ -->
+    <section class="chapter" id="ch1">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#2E7186">01</div><div class="bot">ÉQUIPE</div></div>
+        <div><h2>Qui fait quoi dans un décor</h2><div class="sub">Le département artistique, sans jargon</div></div>
+      </div>
+
+      <p>Sur un tournage, le décor est fabriqué par une équipe entière. Voici l'organigramme, du haut vers le bas — et surtout, où <strong>toi</strong> tu commenceras.</p>
+
+      <svg viewBox="0 0 700 380" style="margin:24px auto;max-width:700px;width:100%" role="img" aria-label="Organigramme du département artistique">
+        <defs><style>
+          .bx{fill:#F3F4EE;stroke:#232B2B;stroke-opacity:.25}
+          .bxh{fill:#1F4E5F}
+          .bxs{fill:#D9A441}
+          .tt{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:13px;fill:#232B2B}
+          .tw{font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:13px;fill:#fff}
+          .ts{font-family:'Courier Prime',monospace;font-size:9.5px;fill:#5A6360}
+          .tsw{font-family:'Courier Prime',monospace;font-size:9.5px;fill:rgba(255,255,255,.75)}
+          .ln{stroke:#232B2B;stroke-opacity:.3;stroke-width:1.2;fill:none}
+        </style></defs>
+
+        <rect class="bxh" x="240" y="10" width="220" height="52" rx="3"/>
+        <text class="tw" x="350" y="32" text-anchor="middle">Chef·fe décorateur·rice</text>
+        <text class="tsw" x="350" y="48" text-anchor="middle">PRODUCTION DESIGNER</text>
+
+        <path class="ln" d="M350 62 V90 M120 90 H580 M120 90 V116 M350 90 V116 M580 90 V116"/>
+
+        <rect class="bx" x="30" y="116" width="180" height="50" rx="3"/>
+        <text class="tt" x="120" y="137" text-anchor="middle">Directeur·rice artistique</text>
+        <text class="ts" x="120" y="152" text-anchor="middle">ART DIRECTOR</text>
+
+        <rect class="bxs" x="260" y="116" width="180" height="50" rx="3"/>
+        <text class="tt" x="350" y="137" text-anchor="middle">Ensemblier·ère</text>
+        <text class="ts" x="350" y="152" text-anchor="middle">SET DECORATOR</text>
+
+        <rect class="bx" x="490" y="116" width="180" height="50" rx="3"/>
+        <text class="tt" x="580" y="137" text-anchor="middle">Chef·fe constructeur·rice</text>
+        <text class="ts" x="580" y="152" text-anchor="middle">CONSTRUCTION MANAGER</text>
+
+        <path class="ln" d="M120 166 V196 M350 166 V196 M580 166 V196"/>
+
+        <rect class="bx" x="30" y="196" width="180" height="46" rx="3"/>
+        <text class="tt" x="120" y="216" text-anchor="middle">Dessinateur·rice</text>
+        <text class="ts" x="120" y="231" text-anchor="middle">SET DESIGNER</text>
+
+        <rect class="bx" x="260" y="196" width="180" height="46" rx="3"/>
+        <text class="tt" x="350" y="216" text-anchor="middle">Accessoiriste</text>
+        <text class="ts" x="350" y="231" text-anchor="middle">PROPS MASTER</text>
+
+        <rect class="bx" x="490" y="196" width="180" height="46" rx="3"/>
+        <text class="tt" x="580" y="216" text-anchor="middle">Peintre · Tapissier</text>
+        <text class="ts" x="580" y="231" text-anchor="middle">SCENIC PAINTER</text>
+
+        <path class="ln" d="M350 242 V272"/>
+        <rect class="bx" x="260" y="272" width="180" height="46" rx="3" stroke-dasharray="4 3"/>
+        <text class="tt" x="350" y="292" text-anchor="middle">Assistant·e déco</text>
+        <text class="ts" x="350" y="307" text-anchor="middle">TON POINT D'ENTRÉE</text>
+
+        <text class="ts" x="350" y="350" text-anchor="middle" style="font-size:10.5px">On monte : assistante → accessoiriste → ensemblière → directrice artistique → chef décoratrice</text>
+      </svg>
+
+      <div class="tw">
+        <table>
+          <tr><th>Poste</th><th>En une phrase</th><th>Ce qu'elle/il ne fait PAS</th></tr>
+          <tr><td><strong>Chef·fe décorateur·rice</strong></td><td>Décide de l'univers visuel du film avec le réalisateur et le chef opérateur. Signe le style, tient le budget.</td><td>Ne va pas acheter les coussins.</td></tr>
+          <tr><td><strong>Directeur·rice artistique</strong></td><td>Traduit la vision en plans, en délais et en équipes. C'est le bras exécutif.</td><td>Ne redéfinit pas le style tout seul.</td></tr>
+          <tr><td><strong>Ensemblier·ère</strong></td><td><strong>Le poste le plus proche de ton don.</strong> Meuble et habille les décors : mobilier, tissus, tapis, rideaux, tableaux, plantes.</td><td>Ne gère pas les objets que les acteurs manipulent.</td></tr>
+          <tr><td><strong>Accessoiriste</strong></td><td>Gère tout ce qu'un acteur touche : la tasse, le pistolet, la lettre, le téléphone. Et les doublons en cas de casse.</td><td>Ne pose pas les rideaux.</td></tr>
+          <tr><td><strong>Chef·fe constructeur·rice</strong></td><td>Fabrique : cloisons, murs mobiles, faux plafonds, praticables.</td><td>Ne choisit pas les couleurs.</td></tr>
+        </table>
+      </div>
+
+      <h3>Le vocabulaire à connaître (clique pour retourner la carte)</h3>
+      <div class="vocab" id="vocab">
+        <div class="vcard"><div class="vinner">
+          <div class="vface vfront"><span class="fr">Ensemblier</span><span class="hint">CLIQUE</span></div>
+          <div class="vface vback"><span class="en">SET DECORATOR</span><span class="def">Celui qui habille le décor construit : meubles, tissus, tapis.</span></div>
+        </div></div>
+        <div class="vcard"><div class="vinner">
+          <div class="vface vfront"><span class="fr">Accessoire de jeu</span><span class="hint">CLIQUE</span></div>
+          <div class="vface vback"><span class="en">HERO PROP</span><span class="def">L'objet manipulé par l'acteur. Toujours prévu en plusieurs exemplaires.</span></div>
+        </div></div>
+        <div class="vcard"><div class="vinner">
+          <div class="vface vfront"><span class="fr">Praticable</span><span class="hint">CLIQUE</span></div>
+          <div class="vface vback"><span class="en">PRACTICAL</span><span class="def">Une lampe visible dans le plan qui éclaire pour de vrai.</span></div>
+        </div></div>
+        <div class="vcard"><div class="vinner">
+          <div class="vface vfront"><span class="fr">Mur mobile</span><span class="hint">CLIQUE</span></div>
+          <div class="vface vback"><span class="en">WILD WALL</span><span class="def">Un mur démontable, retiré pour laisser passer la caméra.</span></div>
+        </div></div>
+        <div class="vcard"><div class="vinner">
+          <div class="vface vfront"><span class="fr">Dépouillement</span><span class="hint">CLIQUE</span></div>
+          <div class="vface vback"><span class="en">BREAKDOWN</span><span class="def">L'inventaire, scène par scène, de tout ce qu'il faut fournir.</span></div>
+        </div></div>
+        <div class="vcard"><div class="vinner">
+          <div class="vface vfront"><span class="fr">Patine</span><span class="hint">CLIQUE</span></div>
+          <div class="vface vback"><span class="en">AGING / DISTRESSING</span><span class="def">Vieillir volontairement un objet neuf pour qu'il ait vécu.</span></div>
+        </div></div>
+        <div class="vcard"><div class="vinner">
+          <div class="vface vfront"><span class="fr">Raccord</span><span class="hint">CLIQUE</span></div>
+          <div class="vface vback"><span class="en">CONTINUITY</span><span class="def">Le fait que tout soit exactement à la même place d'un plan à l'autre.</span></div>
+        </div></div>
+        <div class="vcard"><div class="vinner">
+          <div class="vface vfront"><span class="fr">Planche d'ambiance</span><span class="hint">CLIQUE</span></div>
+          <div class="vface vback"><span class="en">MOOD BOARD</span><span class="def">La planche d'images qui fixe l'atmosphère avant de dépenser un euro.</span></div>
+        </div></div>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=set+decorator+vs+production+designer+film+crew+roles" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Set decorator vs production designer »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/channel/UCUFoQUaVRt3MVFxqwPUMLCQ" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">La chaîne StudioBinder</span><span class="s">À s'abonner en premier</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="2">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 02</span><h4>Lis les génériques</h4></div>
+          <span class="exo-meta">20 min · un film</span>
+        </div>
+        <div class="exo-body">
+          <p>Prends un film que tu aimes. Regarde le générique de fin en entier — oui, en entier.</p>
+          <ol>
+            <li>Note tous les postes du département artistique et leur nombre.</li>
+            <li>Cherche le nom du chef décorateur, puis sa filmographie : ses autres films se ressemblent-ils ?</li>
+            <li>Écris trois phrases : qu'est-ce qui, visuellement, semble être <em class="term">sa signature</em> ?</li>
+          </ol>
+          <p><strong>Ce que tu apprends :</strong> les décorateurs ont un style reconnaissable, comme les réalisateurs. Tu vas commencer à construire le tien.</p>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ CH 2 ============ -->
+    <section class="chapter" id="ch2">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#5E7C58">02</div><div class="bot">MÉTHODE</div></div>
+        <div><h2>Lire un scénario</h2><div class="sub">Le dépouillement, ou comment transformer 90 pages en liste de courses</div></div>
+      </div>
+
+      <p>Un scénario n'est pas un roman : c'est un <strong>bon de commande déguisé</strong>. Ton travail commence par le lire trois fois, et à chaque fois avec des lunettes différentes.</p>
+
+      <div class="grid g3">
+        <div class="card"><span class="lbl">Lecture 1 — l'histoire</span><p>Tu lis comme une spectatrice. Tu ne notes rien. Tu ressens. À la fin, écris <strong>une seule phrase</strong> : de quoi parle vraiment ce film ?</p></div>
+        <div class="card"><span class="lbl">Lecture 2 — les lieux</span><p>Tu surlignes chaque décor : intérieur/extérieur, jour/nuit, combien de scènes s'y passent. Un décor qui revient six fois mérite six fois plus de budget qu'un décor vu une fois.</p></div>
+        <div class="card"><span class="lbl">Lecture 3 — les objets</span><p>Tu notes tout ce qui est nommé ou touché. Une lettre, une bague, un couteau de cuisine. Rien n'est écrit par hasard dans un scénario.</p></div>
+      </div>
+
+      <h3>La fiche de décor</h3>
+      <p>Pour chaque lieu, tu remplis une fiche. Toujours la même. C'est ce document que tu montreras au réalisateur, et c'est lui qui te fera passer pour une professionnelle dès ton premier stage.</p>
+
+      <div class="fiche">
+        <div class="fiche-head"><span>FICHE DÉCOR — MODÈLE</span><span>DÉC. 04 / APPARTEMENT DE SARAH</span></div>
+        <div class="fiche-body">
+          <div class="grid g2" style="margin:0">
+            <div>
+              <h4>Identité</h4>
+              <ul class="plain" style="margin-bottom:18px">
+                <li><strong>Qui vit là ?</strong> Sarah, 34 ans, infirmière de nuit, seule depuis 8 mois.</li>
+                <li><strong>Depuis quand ?</strong> 3 ans — donc des traces, pas des cartons.</li>
+                <li><strong>Combien d'argent ?</strong> Juste assez. Meubles de seconde main, un seul objet cher.</li>
+                <li><strong>Que cache-t-elle ?</strong> Elle ne dort plus. Il faut le voir sans le dire.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Traduction concrète</h4>
+              <ul class="plain" style="margin-bottom:18px">
+                <li><strong>Palette :</strong> vert d'eau délavé, bois clair, un accent rouge unique.</li>
+                <li><strong>Matières :</strong> textile usé, plastique, formica. Rien de neuf.</li>
+                <li><strong>Lumière :</strong> deux lampes seulement, jamais le plafonnier.</li>
+                <li><strong>Le détail qui parle :</strong> le canapé est fait comme un lit. Elle y dort.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tip" style="margin:0">
+            <span class="t">La règle du détail qui parle</span>
+            <p>Chaque fiche doit contenir <strong>un seul détail</strong> que personne ne remarquera consciemment, mais qui fera comprendre le personnage. Un seul. Deux, c'est déjà de la démonstration.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="trap">
+        <span class="t">Piège de débutante</span>
+        <p>Vouloir tout dire. Un décor surchargé de symboles se met à crier, et le spectateur décroche. Le bon décor <strong>chuchote une seule fois</strong>.</p>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=script+breakdown+film+production+tutorial" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Script breakdown tutorial »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=how+production+designers+read+a+script" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« How production designers read a script »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="3">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 03</span><h4>Dépouille une scène réelle</h4></div>
+          <span class="exo-meta">45 min · papier</span>
+        </div>
+        <div class="exo-body">
+          <p>Voici une scène. Lis-la, puis remplis une fiche décor complète sur le modèle ci-dessus.</p>
+          <div class="card" style="background:#fff;font-family:var(--mono);font-size:13.5px;line-height:1.7;margin-bottom:16px">
+            <p style="margin-bottom:10px"><strong>INT. CUISINE — PETIT MATIN</strong></p>
+            <p style="margin-bottom:10px">MARC, 52 ans, en costume, mange debout au-dessus de l'évier. Il regarde une enveloppe posée sur la table, sans la toucher.<br>Sa fille CLARA, 19 ans, entre en manteau, sac sur l'épaule.</p>
+            <p style="margin-bottom:10px">CLARA — Tu l'as ouverte ?<br>MARC — Pas encore.<br>CLARA — Elle est là depuis mardi.</p>
+            <p style="margin-bottom:0">Clara prend l'enveloppe, hésite, la repose exactement au même endroit. Elle sort.<br>Marc continue de manger.</p>
+          </div>
+          <ol>
+            <li>Qui vit là ? Depuis quand ? Avec quel argent ? Qu'est-ce qui a changé récemment ?</li>
+            <li>Quelle palette ? Quelles matières ? Quelle lumière à cette heure-là ?</li>
+            <li>Trouve <strong>le détail qui parle</strong> — celui qui dit qu'il manque quelqu'un dans cette cuisine.</li>
+            <li>Liste les accessoires de jeu (ce que les acteurs touchent) séparément du reste.</li>
+          </ol>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ CH 3 ============ -->
+    <section class="chapter" id="ch3">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#D9A441">03</div><div class="bot">COULEUR</div></div>
+        <div><h2>La couleur</h2><div class="sub">Ton outil le plus puissant, et le plus facile à rater</div></div>
+      </div>
+
+      <p>Trois mots suffisent à décrire n'importe quelle couleur, et à en parler comme une pro :</p>
+
+      <div class="grid g3">
+        <div class="card"><span class="lbl">Teinte</span><p><strong>Quelle couleur c'est.</strong> Rouge, bleu, vert. C'est la position sur la roue chromatique.</p></div>
+        <div class="card"><span class="lbl">Saturation</span><p><strong>À quel point elle est intense.</strong> Un rouge pompier est saturé, un rose poussière ne l'est pas. Baisser la saturation = rendre réaliste.</p></div>
+        <div class="card"><span class="lbl">Valeur</span><p><strong>À quel point elle est claire ou sombre.</strong> C'est ce qui crée le contraste — donc la lisibilité du plan.</p></div>
+      </div>
+
+      <div class="tip">
+        <span class="t">Le raccourci qui marche</span>
+        <p>Si un décor te semble « faux » ou « toc », c'est presque toujours un problème de <strong>saturation trop haute</strong>. La vraie vie est délavée. Baisse tout de 20 %, ça devient crédible.</p>
+      </div>
+
+      <h3>Le nuancier — clique pour explorer</h3>
+      <div class="palette-tool">
+        <div class="pt-tabs" id="ptTabs">
+          <button class="on" data-p="0">Monochrome</button>
+          <button data-p="1">Analogue</button>
+          <button data-p="2">Complémentaire</button>
+          <button data-p="3">Triadique</button>
+          <button data-p="4">Désaturée</button>
+        </div>
+        <div class="pt-body">
+          <div class="pt-strip" id="ptStrip"></div>
+          <div class="pt-name" id="ptName"></div>
+          <div class="pt-desc" id="ptDesc"></div>
+          <div class="pt-use" id="ptUse"></div>
+        </div>
+      </div>
+
+      <h3>La couleur comme personnage</h3>
+      <p>Dans un film bien construit, une couleur n'est jamais décorative : elle est <strong>attribuée</strong>. À un personnage, à un lieu, à un état émotionnel. Puis elle se déplace.</p>
+      <ul class="plain">
+        <li>Le personnage porte du bleu au début, du rouge à la fin → il a changé de camp.</li>
+        <li>La maison de l'enfance est chaude, l'appartement d'adulte est froid → il a perdu quelque chose.</li>
+        <li>Une seule tache de couleur vive dans un décor gris → c'est là que le spectateur regardera. Utilise ça pour diriger l'œil.</li>
+      </ul>
+
+      <div class="trap">
+        <span class="t">Piège de débutante</span>
+        <p>Choisir une palette parce qu'elle est jolie sur Pinterest. Une palette se choisit <strong>après</strong> avoir répondu à « de quoi parle ce film ». Sinon tu décores, tu ne racontes pas.</p>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=color+theory+in+film+how+filmmakers+use+color" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Color theory in film »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=movie+color+palettes+explained+cinematography" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Movie color palettes explained »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="4">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 04</span><h4>Vole trois palettes</h4></div>
+          <span class="exo-meta">1 h · captures d'écran</span>
+        </div>
+        <div class="exo-body">
+          <ol>
+            <li>Choisis un film que tu trouves beau. Fais <strong>10 captures d'écran</strong> réparties du début à la fin.</li>
+            <li>Pour chaque image, identifie les 5 couleurs dominantes (à l'œil, ou avec l'outil pipette d'une appli de retouche).</li>
+            <li>Range les 10 palettes dans l'ordre du film. <strong>Que se passe-t-il ?</strong> Les couleurs se réchauffent ? Se vident ? Une couleur apparaît-elle uniquement à la fin ?</li>
+            <li>Écris en trois lignes ce que ce déplacement de couleurs raconte sur le personnage principal.</li>
+          </ol>
+          <p><strong>Ce que tu apprends :</strong> à lire un film comme une partition de couleurs. Après cet exercice, tu ne regarderas plus jamais un film pareil.</p>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ CH 4 ============ -->
+    <section class="chapter" id="ch4">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#C97B63">04</div><div class="bot">MATIÈRE</div></div>
+        <div><h2>Lumière &amp; matière</h2><div class="sub">Pourquoi ton décor sera magnifique — ou plat</div></div>
+      </div>
+
+      <p>Voici la chose que personne ne dit aux débutants : <strong>tu ne décides pas de la beauté de ton décor. La lumière décide.</strong> Ton travail est de donner à la lumière de quoi travailler.</p>
+
+      <h3>Les quatre matières et ce qu'elles font à la lumière</h3>
+      <div class="grid g4">
+        <div class="card"><span class="lbl">Mat</span><p>Plâtre, bois brut, lin, papier. La lumière s'y pose et s'arrête. <strong>Résultat :</strong> doux, calme, réaliste. Le plus sûr.</p></div>
+        <div class="card"><span class="lbl">Satiné</span><p>Peinture satinée, cuir, céramique. Reflet doux et étalé. <strong>Résultat :</strong> élégant, un peu riche.</p></div>
+        <div class="card"><span class="lbl">Brillant</span><p>Verre, laque, métal poli, carrelage. Renvoie des éclats durs. <strong>Résultat :</strong> froid, moderne, dur — et un cauchemar pour l'équipe lumière.</p></div>
+        <div class="card"><span class="lbl">Translucide</span><p>Voilage, verre dépoli, rideau de douche, plastique. La lumière traverse et se diffuse. <strong>Résultat :</strong> mystère, profondeur, silhouettes.</p></div>
+      </div>
+
+      <div class="tip">
+        <span class="t">Le truc de pro</span>
+        <p>Sur un plateau, les reflets parasites se tuent avec un <strong>spray anti-reflet</strong> (dulling spray) ou, faute de budget, de la laque à cheveux mate ou un chiffon de savon sec. Les vitres de cadre photo se retirent purement et simplement — personne ne le remarquera.</p>
+      </div>
+
+      <h3>Les praticables : les lampes qui sont dans le plan</h3>
+      <p>Une <em class="term">lampe praticable</em>, c'est une lampe visible à l'image qui éclaire réellement. C'est le point de rencontre entre ton métier et celui du chef opérateur — et souvent ton meilleur argument face à lui.</p>
+      <ul class="plain">
+        <li><strong>Place-les toi-même, tôt.</strong> Une lampe de chevet, une applique, une enseigne, un néon de cuisine : ce sont autant de sources gratuites pour l'image.</li>
+        <li><strong>Pense à la hauteur.</strong> Une lampe basse crée des ombres montantes, inquiétantes. Une lampe haute rassure.</li>
+        <li><strong>Prévois des abat-jour clairs.</strong> Un abat-jour opaque ne sert à rien : il fait joli et n'éclaire personne.</li>
+      </ul>
+
+      <h3>La patine : l'art de salir intelligemment</h3>
+      <p>Un objet neuf sur un plateau se voit immédiatement. Personne ne vit dans du neuf. La patine se fait <strong>là où le corps touche</strong> :</p>
+      <div class="tw">
+        <table>
+          <tr><th>Objet</th><th>Où il s'use dans la vraie vie</th><th>Comment le faire</th></tr>
+          <tr><td>Poignée de porte</td><td>Autour, sur le mur, à hauteur de main</td><td>Thé fort ou glacis dilué, tamponné au chiffon</td></tr>
+          <tr><td>Livre</td><td>Coins, tranche, dos cassé</td><td>Frottement au papier de verre fin, coins arrondis à la main</td></tr>
+          <tr><td>Meuble en bois</td><td>Arêtes, pieds, devant des tiroirs</td><td>Cire foncée dans les creux, essuyée sur les reliefs</td></tr>
+          <tr><td>Textile</td><td>Assise, accoudoirs, ourlets</td><td>Lavage à chaud répété, brossage, thé pour jaunir</td></tr>
+          <tr><td>Métal</td><td>Là où ça frotte, pas partout</td><td>Paille de fer + vinaigre pour l'oxydation rapide</td></tr>
+        </table>
+      </div>
+
+      <div class="trap">
+        <span class="t">Piège de débutante</span>
+        <p>Salir partout, uniformément. L'usure réelle est <strong>logique et localisée</strong> : elle suit les gestes. Avant de patiner, mime le geste. Où la main passe-t-elle vraiment ?</p>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=practical+lights+in+film+production+design" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Practical lights in film »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=set+dressing+aging+distressing+props+tutorial" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Aging and distressing props »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="5">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 05</span><h4>Une lampe, trois humeurs</h4></div>
+          <span class="exo-meta">40 min · une lampe, un téléphone</span>
+        </div>
+        <div class="exo-body">
+          <p>Prends un coin de table, trois objets, et une seule lampe mobile.</p>
+          <ol>
+            <li>Photographie la même scène trois fois : lampe <strong>haute et devant</strong>, lampe <strong>basse et de côté</strong>, lampe <strong>derrière les objets</strong>.</li>
+            <li>Ne change rien d'autre. Ni les objets, ni le cadre.</li>
+            <li>Regarde les trois images côte à côte et écris pour chacune : quel genre de film ça pourrait être ?</li>
+          </ol>
+          <p><strong>Ce que tu apprends :</strong> le même décor peut être une comédie ou un thriller. La différence tient à une lampe — donc à une conversation avec le chef opérateur.</p>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ CH 5 ============ -->
+    <section class="chapter" id="ch5">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#1F4E5F">05</div><div class="bot">ESPACE</div></div>
+        <div><h2>L'espace et le cadre</h2><div class="sub">La caméra ne voit qu'un tiers de ton travail. Choisis lequel.</div></div>
+      </div>
+
+      <p>Une image de cinéma est plate. Tout ton travail consiste à lui rendre de la <strong>profondeur</strong> — et ça se fabrique en empilant trois couches.</p>
+
+      <div class="depth-tool">
+        <div class="depth-btns" id="depthBtns">
+          <button class="on" data-l="all">Tout</button>
+          <button data-l="fg">Avant-plan</button>
+          <button data-l="mg">Plan moyen</button>
+          <button data-l="bg">Arrière-plan</button>
+        </div>
+        <svg viewBox="0 0 700 300" style="width:100%;border:1px solid var(--ligne);background:#EFF1EA" role="img" aria-label="Diagramme des trois plans de profondeur">
+          <!-- BG -->
+          <g class="layer" id="lbg">
+            <rect x="0" y="0" width="700" height="220" fill="#CBD3CD"/>
+            <rect x="80" y="50" width="120" height="150" fill="#B7C0BA"/>
+            <rect x="95" y="70" width="40" height="55" fill="#E8EDE5"/>
+            <rect x="145" y="70" width="40" height="55" fill="#E8EDE5"/>
+            <rect x="420" y="30" width="200" height="170" fill="#BFC8C1"/>
+            <rect x="440" y="55" width="70" height="90" fill="#DCE3DA"/>
+            <circle cx="580" cy="80" r="22" fill="#D9A441" opacity=".55"/>
+            <text x="350" y="26" text-anchor="middle" font-family="Courier Prime,monospace" font-size="11" fill="#5A6360">ARRIÈRE-PLAN — le monde, l'époque, l'échelle</text>
+          </g>
+          <!-- MG -->
+          <g class="layer" id="lmg">
+            <rect x="0" y="200" width="700" height="100" fill="#A8B3AC"/>
+            <rect x="250" y="120" width="200" height="110" fill="#7E8C85"/>
+            <rect x="272" y="145" width="60" height="85" fill="#5B6862"/>
+            <rect x="360" y="145" width="70" height="50" fill="#D9A441" opacity=".7"/>
+            <circle cx="345" cy="118" r="26" fill="#1F4E5F"/>
+            <rect x="325" y="140" width="42" height="90" fill="#1F4E5F"/>
+            <text x="350" y="255" text-anchor="middle" font-family="Courier Prime,monospace" font-size="11" fill="#232B2B">PLAN MOYEN — le personnage et ce qu'il touche</text>
+          </g>
+          <!-- FG -->
+          <g class="layer" id="lfg">
+            <rect x="0" y="150" width="90" height="150" fill="#232B2B"/>
+            <rect x="610" y="90" width="90" height="210" fill="#232B2B"/>
+            <ellipse cx="120" cy="290" rx="80" ry="34" fill="#3A4340"/>
+            <rect x="580" y="230" width="60" height="70" fill="#C97B63"/>
+            <text x="350" y="290" text-anchor="middle" font-family="Courier Prime,monospace" font-size="11" fill="#F3F4EE">AVANT-PLAN — le cadre dans le cadre, le flou, la texture</text>
+          </g>
+        </svg>
+        <div class="depth-cap" id="depthCap">Trois couches empilées : chacune fait un travail différent. Clique sur les boutons pour isoler chaque plan.</div>
+      </div>
+
+      <h3>Le plan au sol et le mur mobile</h3>
+      <p>Avant de meubler, on dessine. Un plan au sol simple, à l'échelle, avec les positions de caméra possibles. C'est ce qui évite de construire un mur que l'équipe devra démolir le jour du tournage.</p>
+
+      <svg viewBox="0 0 640 340" style="margin:22px auto;max-width:640px;width:100%" role="img" aria-label="Plan au sol d'un décor avec mur mobile et positions caméra">
+        <defs><style>
+          .wall{stroke:#232B2B;stroke-width:6;fill:none}
+          .wildw{stroke:#C97B63;stroke-width:6;fill:none;stroke-dasharray:12 8}
+          .furn{fill:#CBD3CD;stroke:#232B2B;stroke-opacity:.4}
+          .lbl{font-family:'Courier Prime',monospace;font-size:10px;fill:#5A6360}
+          .cam{fill:#1F4E5F}
+          .cone{fill:#D9A441;opacity:.22}
+        </style></defs>
+        <rect x="120" y="50" width="400" height="230" fill="#F3F4EE" stroke="none"/>
+        <path class="wall" d="M120 280 V50 H520 V280"/>
+        <path class="wildw" d="M120 280 H520"/>
+        <text class="lbl" x="320" y="300" text-anchor="middle" fill="#C97B63">MUR MOBILE — retiré pour placer la caméra</text>
+
+        <rect class="furn" x="150" y="80" width="110" height="45" rx="3"/>
+        <text class="lbl" x="205" y="107" text-anchor="middle">canapé</text>
+        <rect class="furn" x="300" y="90" width="70" height="70" rx="3"/>
+        <text class="lbl" x="335" y="130" text-anchor="middle">table</text>
+        <rect class="furn" x="430" y="70" width="70" height="130" rx="3"/>
+        <text class="lbl" x="465" y="140" text-anchor="middle">biblio.</text>
+        <rect class="furn" x="150" y="200" width="60" height="60" rx="3"/>
+        <text class="lbl" x="180" y="235" text-anchor="middle">fenêtre</text>
+
+        <polygon class="cone" points="320,325 180,180 460,180"/>
+        <circle class="cam" cx="320" cy="325" r="11"/>
+        <text class="lbl" x="320" y="332" text-anchor="middle" fill="#fff" font-size="9">CAM</text>
+        <text class="lbl" x="560" y="200">Ce que la caméra voit</text>
+        <text class="lbl" x="560" y="216">= la zone jaune</text>
+        <text class="lbl" x="560" y="240" fill="#C97B63">Tout le reste :</text>
+        <text class="lbl" x="560" y="256" fill="#C97B63">budget gaspillé</text>
+      </svg>
+
+      <div class="tip">
+        <span class="t">La règle des 180 degrés du décorateur</span>
+        <p>Demande <strong>toujours</strong> au réalisateur : « De quel côté sera la caméra ? » S'il ne sait pas encore, habille en priorité le mur qui sera <strong>derrière l'acteur</strong> quand il parle. C'est ce mur que le spectateur regardera pendant toute la scène.</p>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=depth+in+cinematography+foreground+midground+background" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Foreground midground background »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=film+set+floor+plan+wild+wall+design" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Film set floor plan &amp; wild walls »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="6">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 06</span><h4>Fabrique la profondeur</h4></div>
+          <span class="exo-meta">45 min · téléphone</span>
+        </div>
+        <div class="exo-body">
+          <ol>
+            <li>Photographie une pièce de face, à hauteur d'yeux. C'est ta photo « plate » de référence.</li>
+            <li>Reprends la même pièce en plaçant volontairement <strong>quelque chose au premier plan</strong> : le bord d'une porte, une plante, un dossier de chaise, un rideau.</li>
+            <li>Ajoute une <strong>source lumineuse visible au fond</strong> (lampe allumée, fenêtre).</li>
+            <li>Compare. La deuxième image doit sembler avoir été prise dans un film, la première dans une annonce immobilière.</li>
+          </ol>
+          <p><strong>Ce que tu apprends :</strong> la profondeur n'est pas une question de grande pièce. C'est une question de <em class="term">couches</em>.</p>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ CH 6 ============ -->
+    <section class="chapter" id="ch6">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#5E7C58">06</div><div class="bot">OBJETS</div></div>
+        <div><h2>L'objet qui parle</h2><div class="sub">Comment un cendrier peut valoir trois pages de dialogue</div></div>
+      </div>
+
+      <p>C'est ici que ton don naturel devient un métier. Un objet bien choisi porte trois informations en même temps :</p>
+
+      <div class="grid g3">
+        <div class="card"><span class="lbl">1 · L'information sociale</span><p>Combien coûte cet objet ? Est-il hérité, acheté, volé, offert ? Le prix d'un objet dit le milieu d'un personnage plus vite que n'importe quelle réplique.</p></div>
+        <div class="card"><span class="lbl">2 · L'information temporelle</span><p>De quelle décennie date-t-il ? Est-il en avance ou en retard sur son propriétaire ? Un téléphone d'il y a 15 ans dans un appartement neuf raconte déjà une histoire.</p></div>
+        <div class="card"><span class="lbl">3 · L'information intime</span><p>Est-il rangé ou abandonné ? Utilisé ou exposé ? Réparé ou remplacé ? C'est le niveau le plus fort — et celui que les débutants oublient.</p></div>
+      </div>
+
+      <h3>La règle des trois objets</h3>
+      <p>Pour n'importe quel personnage, avant de meubler quoi que ce soit, choisis trois objets seulement :</p>
+      <ul class="plain">
+        <li><strong>L'objet qu'il montre.</strong> Ce qu'il veut qu'on pense de lui. Bien placé, en évidence, souvent un peu trop.</li>
+        <li><strong>L'objet qu'il utilise.</strong> Le vrai, l'usé, celui qu'il ne remarque plus. C'est lui qui dit la vérité.</li>
+        <li><strong>L'objet qu'il cache.</strong> Rangé, retourné, dans un tiroir. Le spectateur ne le verra peut-être jamais — mais l'acteur saura qu'il est là, et ça change son jeu.</li>
+      </ul>
+
+      <div class="tip">
+        <span class="t">Le test infaillible</span>
+        <p>Si tu retires un objet du décor et que <strong>rien ne change</strong> dans la compréhension de la scène, cet objet n'a rien à y faire. Un décor de cinéma n'a pas de figurants.</p>
+      </div>
+
+      <h3>Accessoire de jeu ≠ accessoire de décor</h3>
+      <div class="tw">
+        <table>
+          <tr><th></th><th>Accessoire de jeu</th><th>Accessoire de décor</th></tr>
+          <tr><td><strong>Définition</strong></td><td>L'acteur le touche, le manipule, le casse</td><td>Il est là, il habille, personne ne le prend</td></tr>
+          <tr><td><strong>Qui le gère</strong></td><td>L'accessoiriste</td><td>L'ensemblier</td></tr>
+          <tr><td><strong>Quantité</strong></td><td>Toujours 3 à 5 exemplaires identiques</td><td>Un seul suffit</td></tr>
+          <tr><td><strong>Piège</strong></td><td>Une seule lettre à déchirer = une seule prise possible</td><td>Un objet trop voyant vole l'attention à l'acteur</td></tr>
+        </table>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=props+that+tell+a+story+film+object+symbolism" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« How props tell a story in film »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=mise+en+scene+explained+film+analysis" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Mise en scène expliquée »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="7">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 07</span><h4>Le coin de table, trois vies</h4></div>
+          <span class="exo-meta">1 h · objets de la maison</span>
+        </div>
+        <div class="exo-body">
+          <p>Un seul coin de table. Un seul cadrage, jamais déplacé. Trois personnages différents.</p>
+          <ol>
+            <li><strong>Une étudiante en fin de mois.</strong> Cinq objets maximum. Photographie.</li>
+            <li><strong>Un homme de 60 ans qui vit seul depuis longtemps.</strong> Cinq objets. Photographie.</li>
+            <li><strong>Quelqu'un qui vient d'emménager avec une nouvelle personne.</strong> Cinq objets. Photographie.</li>
+            <li>Pour chaque version, note quel objet est « montré », lequel est « utilisé », lequel est « caché ».</li>
+          </ol>
+          <p><strong>Ce que tu apprends :</strong> à composer avec une contrainte. Cinq objets, c'est déjà beaucoup — un vrai plan en contient rarement plus dans la zone nette.</p>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ CH 7 ============ -->
+    <section class="chapter" id="ch7">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#2E7186">07</div><div class="bot">DOSSIER</div></div>
+        <div><h2>Présenter son travail</h2><div class="sub">Le moment où on t'engage, ou pas</div></div>
+      </div>
+
+      <p>Une idée qui reste dans ta tête ne vaut rien. Le métier se joue sur ta capacité à faire <strong>voir</strong> ton intention à un réalisateur, avant que le décor n'existe.</p>
+
+      <h3>Les quatre documents du dossier</h3>
+      <div class="grid g2">
+        <div class="card"><span class="lbl">1 · La planche d'ambiance</span><p>9 à 12 images maximum, sans texte. Elle ne montre pas des meubles : elle montre <strong>une sensation</strong>. Textures, lumières, couleurs, un ou deux détails d'objets. Jamais de captures d'un autre film récent — on t'accusera de copier.</p></div>
+        <div class="card"><span class="lbl">2 · La palette</span><p>Six couleurs, nommées, avec pour chacune une phrase : à quoi elle sert, où on la trouve dans le décor, à quel personnage elle appartient.</p></div>
+        <div class="card"><span class="lbl">3 · Le plan au sol</span><p>À l'échelle, avec les meubles, les fenêtres, les portes et au moins deux positions de caméra. Même dessiné à la main proprement, ça impressionne.</p></div>
+        <div class="card"><span class="lbl">4 · La liste chiffrée</span><p>Ce qu'on achète, ce qu'on loue, ce qu'on emprunte, ce qu'on fabrique — avec un prix en face de chaque ligne. C'est ce document qui te fait passer d'« elle a du goût » à « on peut lui confier un budget ».</p></div>
+      </div>
+
+      <div class="tip">
+        <span class="t">La phrase qui vend</span>
+        <p>Commence toujours ta présentation par <strong>une seule phrase</strong> qui résume l'intention : « L'appartement est un endroit qu'elle n'a jamais fini d'habiter. » Tout le reste du dossier doit prouver cette phrase. Un réalisateur retient une phrase, pas quarante images.</p>
+      </div>
+
+      <div class="trap">
+        <span class="t">Piège de débutante</span>
+        <p>La planche d'ambiance trop belle. Si elle est plus jolie que ce que tu peux réellement fabriquer avec le budget, tu crées une déception — et la déception, sur un tournage, on s'en souvient longtemps.</p>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=how+to+make+a+mood+board+film+production+design" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« How to make a mood board (film) »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/channel/UCDylnpLJWDj2gKWujjwap9w" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">StudioBinder Academy</span><span class="s">Tutoriels de pré-production</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="8">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 08</span><h4>Ta première planche</h4></div>
+          <span class="exo-meta">1 h 30 · Canva, Pinterest ou papier</span>
+        </div>
+        <div class="exo-body">
+          <p>Reprends la scène de la cuisine (exercice 03). Construis le dossier complet.</p>
+          <ol>
+            <li>Une phrase d'intention. Une seule.</li>
+            <li>Une planche de 9 images : textures, lumière, matières, deux objets. Aucun texte dessus.</li>
+            <li>Six couleurs nommées avec leur rôle.</li>
+            <li>Un plan au sol à la main, avec une position de caméra.</li>
+          </ol>
+          <p><strong>Ce que tu apprends :</strong> à défendre une idée. Montre le dossier à trois personnes et demande-leur de te décrire les habitants de la cuisine. Si les trois disent la même chose, tu as réussi.</p>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ CH 8 ============ -->
+    <section class="chapter" id="ch8">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#232B2B">08</div><div class="bot">TERRAIN</div></div>
+        <div><h2>Le terrain</h2><div class="sub">Budget, chine, kit de survie et raccords</div></div>
+      </div>
+
+      <h3>Où trouver les objets sans argent</h3>
+      <ul class="plain">
+        <li><strong>Emmaüs, ressourceries, dépôts-ventes</strong> — le terrain de chasse n°1. Les objets y sont déjà patinés, ce qui t'économise des heures de travail.</li>
+        <li><strong>Leboncoin, Marketplace</strong> — filtre par « à donner » et par quartier. Beaucoup de décors se font là.</li>
+        <li><strong>Loueurs d'accessoires</strong> — cher, mais c'est là qu'on trouve l'objet d'époque introuvable. À réserver aux pièces qui comptent.</li>
+        <li><strong>Ton propre réseau</strong> — la moitié des décors de courts métrages sortent des greniers de la famille et des amis. Note dans un carnet ce que tu vois chez les gens.</li>
+      </ul>
+
+      <div class="tip">
+        <span class="t">Règle d'or du budget</span>
+        <p>Répartis toujours ainsi : <strong>60 %</strong> pour ce qui est vu de près et longtemps (le mur derrière l'acteur, la table, les objets manipulés), <strong>30 %</strong> pour le reste du décor, <strong>10 %</strong> gardés pour les imprévus du jour du tournage. Il y en aura.</p>
+      </div>
+
+      <h3>La boîte du décorateur — coche ce que tu possèdes déjà</h3>
+      <div class="kit" id="kit">
+        <label><input type="checkbox"><span><span class="kn">Gaffer noir + gaffer blanc</span><span class="kd">Fixe tout, se retire sans trace</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Pâte adhésive repositionnable</span><span class="kd">Colle les objets qui glissent, les cadres qui penchent</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Spray anti-reflet</span><span class="kd">Tue les brillances parasites</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Mètre ruban 5 m</span><span class="kd">Tu mesureras tout, tout le temps</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Cutter + ciseaux + pince</span><span class="kd">La base</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Cales en bois et feutrines</span><span class="kd">Meubles qui bougent, sols qui grincent</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Chiffons, éponges, produit</span><span class="kd">Un décor propre se filme mieux</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Thé fort, cirage, terre de Sienne</span><span class="kd">Le kit de patine express</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Ampoules de rechange, chaudes et froides</span><span class="kd">Pour les praticables</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Rallonges + multiprises</span><span class="kd">On en manque toujours</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Téléphone chargé + batterie</span><span class="kd">C'est ton appareil à raccords</span></span></label>
+        <label><input type="checkbox"><span><span class="kn">Carnet et crayon</span><span class="kd">Rien ne se retient de tête sur un plateau</span></span></label>
+      </div>
+
+      <h3>Le raccord : l'erreur qui coûte le plus cher</h3>
+      <p>Une scène se tourne en dizaines de prises, parfois sur plusieurs jours. Si le verre est à moitié plein sur un plan et plein sur le suivant, le montage devient impossible. Ta discipline :</p>
+      <ul class="plain">
+        <li><strong>Photographie le décor terminé</strong> avant la première prise, sous plusieurs angles.</li>
+        <li><strong>Rephotographie après chaque modification</strong>, même minime.</li>
+        <li><strong>Ne range jamais rien</strong> pendant le tournage sans avoir vérifié la photo de référence.</li>
+        <li><strong>Note l'état des accessoires consommables</strong> : niveau du liquide, cigarettes fumées, nourriture entamée.</li>
+      </ul>
+
+      <div class="trap">
+        <span class="t">Piège de débutante</span>
+        <p>Vouloir « améliorer » le décor entre deux prises parce qu'on trouve mieux. Une fois que ça tourne, <strong>le décor est figé</strong>. Les bonnes idées se notent pour la prochaine scène.</p>
+      </div>
+
+      <div class="vlinks">
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=low+budget+production+design+tips+filmmakers" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Low budget production design tips »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+        <a class="vlink search" href="https://www.youtube.com/results?search_query=script+supervisor+continuity+on+set+explained" target="_blank" rel="noopener">
+          <span class="play"></span><span class="txt"><span class="n">« Continuity on set expliqué »</span><span class="s">Sélection YouTube</span></span>
+        </a>
+      </div>
+
+      <div class="exo" data-exo="9">
+        <div class="exo-head">
+          <div class="l"><span class="exo-num">EXERCICE 09</span><h4>La chine à 20 €</h4></div>
+          <span class="exo-meta">Une demi-journée · 20 €</span>
+        </div>
+        <div class="exo-body">
+          <p>Avant de partir, écris le personnage : « Homme, 45 ans, ancien militaire, vit seul, fait semblant que tout va bien. »</p>
+          <ol>
+            <li>Va en ressourcerie ou en brocante avec <strong>20 € maximum</strong>.</li>
+            <li>Ramène <strong>cinq objets</strong> qui appartiennent à ce personnage. Un montré, un utilisé, un caché, deux de remplissage crédible.</li>
+            <li>Compose un coin de décor chez toi, éclaire-le avec une seule lampe, photographie-le.</li>
+            <li>Envoie la photo à quelqu'un avec une seule question : « Qui vit là ? » — sans autre indication.</li>
+          </ol>
+          <p><strong>Ce que tu apprends :</strong> tout le métier, en une demi-journée. Contrainte de budget, choix narratif, lumière, cadrage, et la seule évaluation qui compte : est-ce que ça se comprend sans explication ?</p>
+        </div>
+        <div class="done-row"><label><input type="checkbox" class="exo-check"> Exercice terminé</label></div>
+      </div>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section class="chapter" id="quiz">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#D9A441">✽</div><div class="bot">TEST</div></div>
+        <div><h2>Vérifie que c'est rentré</h2><div class="sub">Cinq questions · réponse immédiate</div></div>
+      </div>
+
+      <div class="quiz" id="quizBox">
+        <div class="q" data-a="1">
+          <div class="qt"><span class="qn">01</span><span>Ton décor a l'air « faux », comme un magasin de meubles. Quel est le coupable le plus probable ?</span></div>
+          <div class="opts">
+            <button data-i="0">Il manque des objets</button>
+            <button data-i="1">Les couleurs sont trop saturées et tout est trop neuf</button>
+            <button data-i="2">La pièce est trop petite</button>
+          </div>
+          <div class="fb">La vraie vie est délavée et usée. Baisse la saturation, patine les arêtes et les zones où la main passe.</div>
+        </div>
+        <div class="q" data-a="2">
+          <div class="qt"><span class="qn">02</span><span>Le réalisateur n'a pas encore décidé de ses axes caméra. Quel mur habilles-tu en priorité ?</span></div>
+          <div class="opts">
+            <button data-i="0">Le mur du fond, toujours</button>
+            <button data-i="1">Celui avec la fenêtre</button>
+            <button data-i="2">Celui qui sera derrière l'acteur quand il parle</button>
+          </div>
+          <div class="fb">C'est ce mur que le spectateur regarde pendant toute la scène, par-dessus l'épaule du personnage.</div>
+        </div>
+        <div class="q" data-a="0">
+          <div class="qt"><span class="qn">03</span><span>Un acteur doit déchirer une lettre. Combien d'exemplaires prépares-tu ?</span></div>
+          <div class="opts">
+            <button data-i="0">Au moins cinq exemplaires identiques</button>
+            <button data-i="1">Un seul, il suffit d'être précis</button>
+            <button data-i="2">Deux, par sécurité</button>
+          </div>
+          <div class="fb">Un accessoire de jeu destructible se prévoit toujours en multiple. Une prise ratée sans doublon arrête le tournage.</div>
+        </div>
+        <div class="q" data-a="2">
+          <div class="qt"><span class="qn">04</span><span>Tu hésites à garder un vase sur l'étagère. Quel test appliques-tu ?</span></div>
+          <div class="opts">
+            <button data-i="0">Est-ce qu'il est joli ?</button>
+            <button data-i="1">Est-ce qu'il va avec la palette ?</button>
+            <button data-i="2">Si je le retire, est-ce que la compréhension de la scène change ?</button>
+          </div>
+          <div class="fb">Un décor de cinéma n'a pas de figurants. Chaque objet doit porter une information, sinon il encombre.</div>
+        </div>
+        <div class="q" data-a="1">
+          <div class="qt"><span class="qn">05</span><span>Entre deux prises, tu trouves une meilleure disposition pour la table. Que fais-tu ?</span></div>
+          <div class="opts">
+            <button data-i="0">Tu la changes, c'est mieux pour le film</button>
+            <button data-i="1">Tu ne touches à rien et tu notes l'idée pour la scène suivante</button>
+            <button data-i="2">Tu demandes à l'acteur ce qu'il préfère</button>
+          </div>
+          <div class="fb">Une fois que ça tourne, le décor est figé. Un raccord cassé peut rendre une scène entière inmontable.</div>
+        </div>
+        <div id="quizScore">Score : 0 / 5</div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL ============ -->
+    <section class="chapter" id="final">
+      <div class="chapter-head">
+        <div class="chip"><div class="top" style="background:#C97B63">✽</div><div class="bot">PROJET</div></div>
+        <div><h2>Le projet final</h2><div class="sub">Ton premier vrai dossier de décoration</div></div>
+      </div>
+
+      <p>Quand les neuf exercices sont faits, tu passes à ça. C'est ce dossier que tu montreras pour décrocher ton premier plateau — et il vaut mieux qu'un CV.</p>
+
+      <div class="fiche">
+        <div class="fiche-head"><span>CAHIER DES CHARGES</span><span>2 SEMAINES</span></div>
+        <div class="fiche-body">
+          <h4>La commande</h4>
+          <p>Choisis un court métrage de 5 à 10 minutes — écris-le toi-même en deux pages, ou demande un scénario existant. Deux décors maximum. Puis produis un dossier complet :</p>
+          <ul class="plain">
+            <li><strong>Une note d'intention</strong> — une page, avec la phrase-clé en haut.</li>
+            <li><strong>Une fiche par décor</strong> — identité du lieu, habitants, palette, matières, lumière, le détail qui parle.</li>
+            <li><strong>Deux planches d'ambiance</strong> — 9 images chacune, sans texte.</li>
+            <li><strong>Deux plans au sol</strong> — à l'échelle, avec les positions de caméra.</li>
+            <li><strong>Une liste chiffrée</strong> — achat / location / emprunt / fabrication, avec un total réel.</li>
+            <li><strong>Une maquette photographique</strong> — reconstitue un coin de chaque décor pour de vrai chez toi, et photographie-le comme un plan de film.</li>
+          </ul>
+          <div class="tip" style="margin-bottom:0">
+            <span class="t">Le critère de réussite</span>
+            <p>Fais lire le dossier à quelqu'un qui n'a pas lu le scénario. S'il peut te décrire les personnages sans les avoir jamais rencontrés, ton décor parle. C'est tout ce qu'on demande à une décoratrice de cinéma.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Et après</h3>
+      <ul class="plain">
+        <li><strong>Propose-toi sur des courts métrages.</strong> Écoles de cinéma, collectifs, associations. Le poste s'appelle « assistante déco » et il est presque toujours vacant.</li>
+        <li><strong>Documente tout.</strong> Photographie chaque décor que tu fais, avant / pendant / après. C'est ton portfolio.</li>
+        <li><strong>Abonne-toi à trois chaînes</strong> et regarde une vidéo par semaine. En un an, tu auras vu 50 analyses de films.</li>
+        <li><strong>Chine en permanence.</strong> Une bonne décoratrice a toujours un stock. Commence le tien maintenant, un objet à la fois.</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <p class="fm">Un décor réussi, personne ne le remarque. Tout le monde le comprend.</p>
+  <div class="fb2">Manuel du décor · <b>Okapi Studios</b> — Okapi World Média</div>
+</footer>
+
+<button class="backtop" id="backtop" aria-label="Haut de page">↑</button>
+
+<script>
+(function(){
+  // ---- mobile nav
+  var burger=document.getElementById('burger'), mnav=document.getElementById('mnav');
+  burger.addEventListener('click',function(){ mnav.classList.toggle('open'); });
+  mnav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ mnav.classList.remove('open'); }); });
+
+  // ---- exercise progress
+  var checks=document.querySelectorAll('.exo-check');
+  var fill=document.getElementById('pfill'), label=document.getElementById('plabel');
+  function updateProgress(){
+    var done=0;
+    checks.forEach(function(c){
+      var card=c.closest('.exo');
+      if(c.checked){ done++; card.classList.add('done'); } else { card.classList.remove('done'); }
+    });
+    fill.style.width=(done/checks.length*100)+'%';
+    label.textContent=done+' / '+checks.length+' exercices';
+  }
+  checks.forEach(function(c){ c.addEventListener('change',updateProgress); });
+  updateProgress();
+
+  // ---- kit checklist
+  document.querySelectorAll('#kit label').forEach(function(l){
+    var inp=l.querySelector('input');
+    inp.addEventListener('change',function(){ l.classList.toggle('checked',inp.checked); });
+  });
+
+  // ---- vocab flip
+  document.querySelectorAll('.vcard').forEach(function(c){
+    c.addEventListener('click',function(){ c.classList.toggle('flip'); });
+  });
+
+  // ---- palette tool
+  var palettes=[
+    {name:'Monochrome — une seule teinte',
+     desc:"Une couleur, déclinée en clair et en foncé. C'est la palette la plus sûre et la plus élégante : impossible de se tromper, et le décor semble immédiatement composé.",
+     use:"À utiliser pour : un personnage enfermé, un univers clos, une ambiance très maîtrisée",
+     cols:['#0F2C33','#1F4E5F','#2E7186','#5A9BAE','#9BC3CE','#D6E5E9']},
+    {name:'Analogue — des couleurs voisines',
+     desc:"Trois ou quatre teintes côte à côte sur la roue chromatique. Ça donne une harmonie naturelle, chaleureuse, sans tension — comme un coucher de soleil ou une forêt.",
+     use:"À utiliser pour : la mémoire, l'enfance, le confort, les scènes de famille",
+     cols:['#7A3B1F','#B4611F','#D9A441','#C9B45A','#8E9B4F','#5E7C58']},
+    {name:'Complémentaire — deux opposés',
+     desc:"Deux couleurs face à face sur la roue. C'est la palette du conflit : elle crée une tension visuelle immédiate. Le classique du cinéma reste orange (la peau) contre bleu (l'ombre).",
+     use:"À utiliser pour : l'affrontement, le thriller, deux mondes qui s'opposent",
+     cols:['#1F4E5F','#2E7186','#8FB3BE','#E8C9A0','#D9A441','#B4611F']},
+    {name:'Triadique — trois pôles',
+     desc:"Trois teintes réparties à distance égale. Riche, vivante, un peu ludique. Dangereuse aussi : mal dosée, elle vire au cirque. Règle de survie — une dominante, une secondaire, une par petites touches.",
+     use:"À utiliser pour : la comédie, l'enfance, un univers stylisé assumé",
+     cols:['#1F4E5F','#4D7C8A','#C4453A','#E07A5F','#D9A441','#EBD8A8']},
+    {name:'Désaturée — le réalisme',
+     desc:"Presque pas de couleur, une seule accentuation. C'est la palette du documentaire, du drame social, du quotidien. Le moindre point de couleur devient alors énorme.",
+     use:"À utiliser pour : le drame réaliste, la précarité, le deuil, l'attente",
+     cols:['#3B3F3C','#5A6360','#7C837E','#A5AAA3','#C9CCC4','#C97B63']}
+  ];
+  var strip=document.getElementById('ptStrip'), pn=document.getElementById('ptName'),
+      pd=document.getElementById('ptDesc'), pu=document.getElementById('ptUse');
+  function drawPalette(i){
+    var p=palettes[i];
+    strip.innerHTML=p.cols.map(function(c){
+      return '<div style="background:'+c+'"><span>'+c+'</span></div>';
+    }).join('');
+    pn.textContent=p.name; pd.textContent=p.desc; pu.textContent=p.use;
+  }
+  document.querySelectorAll('#ptTabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#ptTabs button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      drawPalette(parseInt(b.dataset.p,10));
+    });
+  });
+  drawPalette(0);
+
+  // ---- depth diagram
+  var caps={
+    all:"Trois couches empilées : chacune fait un travail différent. Clique sur les boutons pour isoler chaque plan.",
+    fg:"L'AVANT-PLAN encadre l'image et donne l'impression qu'on est dans la pièce, pas devant. Un rideau, une plante, le bord d'une porte : souvent flou, toujours efficace. C'est ce que les débutants oublient et ce qui manque à 90 % des plans amateurs.",
+    mg:"Le PLAN MOYEN, c'est là que vit le personnage. Tout ce qu'il touche s'y trouve. C'est la zone nette : ton budget et ton attention vont ici en priorité.",
+    bg:"L'ARRIÈRE-PLAN dit où on est et à quelle époque. Il travaille en silence — souvent flou, souvent sombre — mais c'est lui qui rend le monde crédible au-delà du cadre."
+  };
+  var dcap=document.getElementById('depthCap');
+  var layers={fg:document.getElementById('lfg'),mg:document.getElementById('lmg'),bg:document.getElementById('lbg')};
+  document.querySelectorAll('#depthBtns button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#depthBtns button').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      var t=b.dataset.l;
+      Object.keys(layers).forEach(function(k){
+        layers[k].classList.toggle('off', t!=='all' && k!==t);
+      });
+      dcap.textContent=caps[t];
+    });
+  });
+
+  // ---- quiz
+  var score=0, answered={};
+  document.querySelectorAll('.q').forEach(function(q,qi){
+    var correct=parseInt(q.dataset.a,10);
+    q.querySelectorAll('.opts button').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        if(answered[qi]) return;
+        answered[qi]=true;
+        var i=parseInt(btn.dataset.i,10);
+        if(i===correct){ btn.classList.add('ok'); score++; }
+        else{
+          btn.classList.add('ko');
+          q.querySelector('.opts button[data-i="'+correct+'"]').classList.add('ok');
+        }
+        q.querySelector('.fb').classList.add('show');
+        document.getElementById('quizScore').textContent='Score : '+score+' / 5';
+      });
+    });
+  });
+
+  // ---- scrollspy
+  var links=document.querySelectorAll('.navlink');
+  var secs=Array.prototype.map.call(links,function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+  var spy=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){ l.classList.toggle('active', l.getAttribute('href')==='#'+e.target.id); });
+      }
+    });
+  },{rootMargin:'-25% 0px -65% 0px'});
+  secs.forEach(function(s){ spy.observe(s); });
+
+  // ---- back to top
+  var bt=document.getElementById('backtop');
+  window.addEventListener('scroll',function(){ bt.classList.toggle('show', window.scrollY>700); });
+  bt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>
