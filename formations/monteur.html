@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Monteur — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#0e1113; --noir-2:#161a1c; --noir-3:#1e2326;
+  --teal:#2dd4bf; --teal-d:#1fa895; --magenta:#e0529c;
+  --craie:#eef2f1; --fumee:#8b9491; --line: rgba(238,242,241,0.12);
+  --display:'JetBrains Mono', monospace; --body:'Poppins', sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--teal); color:var(--noir); }
+img,svg{ display:block; max-width:100%; }
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background: radial-gradient(circle at 20% 8%, rgba(45,212,191,0.10), transparent 45%), radial-gradient(circle at 85% 85%, rgba(224,82,156,0.08), transparent 45%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(14,17,19,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--display); font-size:11px; letter-spacing:.04em; color:var(--fumee); text-transform:uppercase;}
+.brand .play{ width:0; height:0; border-top:6px solid transparent; border-bottom:6px solid transparent; border-left:9px solid var(--teal);}
+.brand b{ color:var(--craie); font-weight:700;}
+nav.links{ display:none; gap:26px; } nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--teal); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--craie);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--display); font-size:11px; letter-spacing:.16em; color:var(--teal); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:700; font-size:clamp(34px,8vw,80px); line-height:1.05; letter-spacing:-.01em; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--teal);}
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:580px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.timeline-strip{ position:relative; z-index:1; margin-top:44px; width:100%; max-width:520px; opacity:0; animation:up .8s .65s ease forwards;}
+.ts-track{ height:46px; background:var(--noir-2); border:1px solid var(--line); position:relative; overflow:hidden; display:flex;}
+.ts-clip{ height:100%; flex-shrink:0;}
+.ts-play{ position:absolute; top:0; bottom:0; width:2px; background:var(--teal); left:38%; box-shadow:0 0 8px var(--teal);}
+.ts-play::before{ content:""; position:absolute; top:-5px; left:-4px; width:10px; height:10px; background:var(--teal); clip-path:polygon(0 0,100% 50%,0 100%);}
+.ts-code{ font-family:var(--display); font-size:11px; color:var(--fumee); margin-top:10px; letter-spacing:.04em;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:700; font-size:22px; color:var(--teal);}
+.stats .stat .l{ font-family:var(--display); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--display); font-size:11px; letter-spacing:.14em; color:var(--teal); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(24px,4vw,40px); line-height:1.2; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--teal);}
+.role-card h4{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:8px;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-weight:700; font-size:30px; color:transparent; -webkit-text-stroke:1.3px var(--teal); line-height:1; flex-shrink:0; width:54px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:700; font-size:clamp(16px,2.2vw,21px);}
+.ch-head .ch-tag{ font-family:var(--body); font-size:11px; color:var(--magenta); text-transform:uppercase; letter-spacing:.06em; margin-top:5px; font-weight:500;}
+.ch-chev{ width:20px; height:20px; color:var(--teal); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--teal); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--teal);}
+
+.callout{ background:rgba(45,212,191,0.08); border:1px solid var(--teal-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--craie);} .callout b{ color:var(--teal);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--teal); transform:translateY(-2px);} .watch-card img{ width:96px; height:64px; object-fit:cover; flex-shrink:0; background:#000;}
+.watch-card .wc-src{ font-family:var(--display); font-size:9.5px; color:var(--teal); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--craie); margin-top:4px; line-height:1.35; font-weight:500;}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--craie);} .book-card .spine{ width:8px; align-self:stretch; background:var(--magenta); flex-shrink:0;}
+.book-card .auth{ font-family:var(--display); font-size:10px; color:var(--magenta); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-weight:700; font-size:14px; margin-top:4px; color:var(--craie);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--teal);}
+.exercice .ex-tag{ font-family:var(--display); font-size:10.5px; text-transform:uppercase; color:var(--teal-d); font-weight:700; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#1c1f1e; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+.diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--display); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
+
+.rule6{ display:flex; flex-direction:column; gap:10px;}
+.rule6 .r6-row{ display:grid; grid-template-columns:150px 1fr 50px; gap:12px; align-items:center;}
+.rule6 .r6-label{ font-family:var(--display); font-size:12px; color:var(--craie);}
+.rule6 .r6-bar-bg{ height:14px; background:var(--noir-2); border:1px solid var(--line);}
+.rule6 .r6-bar{ height:100%; background:linear-gradient(90deg, var(--teal), var(--magenta));}
+.rule6 .r6-pct{ font-family:var(--display); font-size:12px; color:var(--fumee); text-align:right;}
+
+.jl-diagram{ display:flex; flex-direction:column; gap:16px;}
+.jl-row{ display:flex; align-items:center; gap:10px;}
+.jl-label{ font-family:var(--display); font-size:11px; color:var(--fumee); width:60px; flex-shrink:0;}
+.jl-block{ height:26px; flex:1; position:relative; display:flex;}
+.jl-a{ background:var(--teal); opacity:.85;} .jl-b{ background:var(--magenta); opacity:.85;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--display); font-size:10.5px; color:var(--teal); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--teal);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--magenta);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:17px; margin-bottom:6px;} .case-card .signature{ font-family:var(--display); font-size:10.5px; color:var(--magenta); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-weight:700; font-size:14.5px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--magenta);}
+.quiz-opt input{ accent-color:var(--teal);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--magenta); background:rgba(224,82,156,0.1);} .quiz-opt.wrong span{ color:var(--magenta);}
+#quizScore{ font-family:var(--display); font-weight:700; font-size:19px; color:var(--teal); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-weight:700; font-size:clamp(17px,2.6vw,24px); color:var(--craie); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--display); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--teal);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--teal);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="play"></span> OKAPI STUDIOS — <b>LE MONTEUR</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Références</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Approches d'auteurs</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">00:00:00:00 — Manuel de formation, montage</div>
+  <h1 class="title">LE <span>MONTEUR</span></h1>
+  <p class="subtitle">Rythme, coupe, silence — le dernier scénariste du film, celui qui réécrit l'histoire une deuxième fois avec ce qui a été tourné.</p>
+  <div class="timeline-strip">
+    <div class="ts-track">
+      <div class="ts-clip" style="width:22%; background:var(--teal); opacity:.5;"></div>
+      <div class="ts-clip" style="width:14%; background:var(--magenta); opacity:.5;"></div>
+      <div class="ts-clip" style="width:30%; background:var(--teal); opacity:.3;"></div>
+      <div class="ts-clip" style="width:18%; background:var(--magenta); opacity:.4;"></div>
+      <div class="ts-clip" style="width:16%; background:var(--teal); opacity:.5;"></div>
+      <div class="ts-play"></div>
+    </div>
+    <div class="ts-code">SEQ01 · 00:38:14:07 / 01:32:00:00</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">51%</div><div class="l">Poids de l'émotion (Murch)</div></div>
+    <div class="stat"><div class="n">06</div><div class="l">Règles de la coupe</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">CUT.</div>
+    <h2>Le montage est la dernière réécriture du scénario.</h2>
+    <p class="lede">Le monteur ne "range" pas des images dans l'ordre — il <b style="color:var(--craie)">reconstruit une histoire</b> à partir de ce qui a réellement été filmé, souvent très différent de ce qui était prévu sur le papier.</p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>✂️ Ce qu'il décide</h4><p>Où couper, quand tenir un plan, quel rythme donner à chaque scène et au film entier — souvent en désaccord silencieux avec le scénario original.</p></div>
+    <div class="role-card"><h4>👁️ Sa vraie compétence</h4><p>Repérer l'émotion qui fonctionne dans une prise "imparfaite" plutôt que la prise techniquement propre mais froide.</p></div>
+    <div class="role-card"><h4>🤐 Son silence</h4><p>Un bon montage ne se voit pas — le spectateur ne doit jamais penser "tiens, on a coupé ici".</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>À retenir —</b> Walter Murch dit que couper trop tôt ou trop tard casse la confiance du spectateur : le bon moment de coupe, c'est celui où l'œil du spectateur a déjà envie de regarder ailleurs.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">TIMELINE</div><h2>Neuf chapitres, du premier assemblage au rythme d'auteur.</h2></div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Le rôle du monteur</h3><div class="ch-tag">Traduction du tournage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le monteur reçoit des heures de rushes et doit trouver <b>le film qui existe réellement</b> à l'intérieur — pas forcément celui qui était écrit. C'est un poste de réécriture silencieuse, souvent la première salle où l'on découvre si une scène fonctionne vraiment.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — Le dérushage à l'aveugle</span><h4>Regarde des rushes sans le scénario</h4><ol><li>Trouve n'importe quelle vidéo brute (même un tournage amateur) sans contexte.</li><li>Note ce que tu comprends de la scène sans aucune explication.</li><li>Compare avec l'intention réelle si tu peux la retrouver.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>La règle de six de Walter Murch</h3><div class="ch-tag">Priorités de la coupe</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Dans <i>In the Blink of an Eye</i>, Walter Murch classe six critères qui justifient une coupe, du plus important au moins important. <b>Quand ils entrent en conflit, on sacrifie toujours la continuité avant l'émotion.</b></p>
+      <div class="diagram-wrap">
+        <div class="rule6">
+          <div class="r6-row"><span class="r6-label">Émotion</span><div class="r6-bar-bg"><div class="r6-bar" style="width:51%;"></div></div><span class="r6-pct">51%</span></div>
+          <div class="r6-row"><span class="r6-label">Histoire</span><div class="r6-bar-bg"><div class="r6-bar" style="width:23%;"></div></div><span class="r6-pct">23%</span></div>
+          <div class="r6-row"><span class="r6-label">Rythme</span><div class="r6-bar-bg"><div class="r6-bar" style="width:10%;"></div></div><span class="r6-pct">10%</span></div>
+          <div class="r6-row"><span class="r6-label">Trajectoire du regard</span><div class="r6-bar-bg"><div class="r6-bar" style="width:7%;"></div></div><span class="r6-pct">7%</span></div>
+          <div class="r6-row"><span class="r6-label">Plan de l'écran (2D)</span><div class="r6-bar-bg"><div class="r6-bar" style="width:5%;"></div></div><span class="r6-pct">5%</span></div>
+          <div class="r6-row"><span class="r6-label">Continuité 3D</span><div class="r6-bar-bg"><div class="r6-bar" style="width:4%;"></div></div><span class="r6-pct">4%</span></div>
+        </div>
+        <div class="cap">La Règle de Six — pondération approximative donnée par Murch lui-même</div>
+      </div>
+      <div class="watch-row"><a class="watch-card" href="https://www.studiobinder.com/blog/walter-murch-rule-of-six/" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">StudioBinder — Article</div><div class="wc-title">La Règle de Six de Walter Murch, expliquée avec exemples</div></div></a></div>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — Le conflit de règles</span><h4>Choisis entre deux coupes</h4><ol><li>Imagine une scène où la coupe "émotionnellement juste" casse le 180°.</li><li>Justifie par écrit pourquoi tu choisirais quand même l'émotion.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>Le rythme : timing, pacing, phrasé</h3><div class="ch-tag">Rhétorique du montage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Karen Pearlman compare le montage à la chorégraphie : chaque plan a une <b>durée</b>, un <b>poids</b>, et s'inscrit dans une <b>phrase</b> plus large. Couper trop vite épuise ; couper trop lent endort — le bon tempo dépend de la scène, jamais d'une règle fixe.</p>
+      <div class="watch-row"><a class="book-card" href="https://www.amazon.com/Cutting-Rhythms-Intuitive-Pearlman-2015-12-16/dp/B01FIY4KB2" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Karen Pearlman</span><div class="ttl">Cutting Rhythms: Intuitive Film Editing</div><div class="desc">Le montage pensé comme chorégraphie — timing, pacing, phrasé de trajectoire.</div></div></a></div>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — Trois tempos, une scène</span><h4>Monte mentalement la même scène 3 fois</h4><ol><li>Imagine une scène d'attente (quelqu'un patiente dans une salle).</li><li>Décris-la en montage rapide, puis lent, puis irrégulier.</li><li>Quelle version sert le mieux le sentiment d'angoisse ?</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Les types de coupe</h3><div class="ch-tag">Vocabulaire technique</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le J-cut et le L-cut sont les outils les plus utilisés et les moins remarqués du montage — <b>le son arrive ou reste avant/après l'image</b>, ce qui rend une conversation fluide au lieu de saccadée.</p>
+      <div class="diagram-wrap">
+        <div class="jl-diagram">
+          <div class="jl-row"><span class="jl-label">J-CUT</span><div class="jl-block"><div class="jl-a" style="width:35%;"></div><div class="jl-b" style="width:65%; margin-left:-15%;"></div></div></div>
+          <div class="jl-row"><span class="jl-label">L-CUT</span><div class="jl-block"><div class="jl-a" style="width:65%;"></div><div class="jl-b" style="width:35%; margin-left:-15%;"></div></div></div>
+        </div>
+        <div class="cap">Teal = image, magenta = son — le décalage crée la fluidité</div>
+      </div>
+      <div class="watch-row two">
+        <a class="watch-card" href="https://www.youtube.com/watch?v=FVR8zz8ci2k" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">StudioBinder</div><div class="wc-title">6 Ways to Edit Any Scene — techniques essentielles</div></div></a>
+        <a class="watch-card" href="https://www.studiobinder.com/blog/what-is-an-l-cut-in-film/" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">StudioBinder — Article</div><div class="wc-title">Qu'est-ce qu'un L-cut ? Explications et exemples</div></div></a>
+      </div>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — Repère les J/L cuts</span><h4>Chasse aux coupes invisibles</h4><ol><li>Regarde 3 minutes d'une conversation dans un film.</li><li>Repère au moins 2 J-cuts ou L-cuts — le son a-t-il précédé ou suivi l'image ?</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Construire une scène de dialogue</h3><div class="ch-tag">Couverture et réactions</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une scène de dialogue n'est pas que la personne qui parle — souvent, <b>le plan le plus fort est celui de la personne qui écoute</b>. La couverture (les plans de réaction tournés en plus) donne au monteur les options nécessaires pour trouver ce moment.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Le plan qui manque</span><h4>Repère un manque de couverture</h4><ol><li>Regarde une scène de dialogue à deux personnages.</li><li>Note les moments où tu aurais aimé voir la réaction de celui qui écoute plutôt que celui qui parle.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Le montage parallèle et la tension</h3><div class="ch-tag">Structure croisée</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Alterner entre deux lignes d'action simultanées <b>crée une tension que ni l'une ni l'autre n'aurait seule</b> — le spectateur redoute la collision avant qu'elle n'arrive.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — Deux lignes qui se croisent</span><h4>Écris un montage parallèle</h4><ol><li>Imagine deux personnages qui se dirigent vers la même pièce sans le savoir.</li><li>Décris en 6 plans alternés comment tu construirais la tension avant leur rencontre.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Premier assemblage vs montage final</h3><div class="ch-tag">Processus</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le premier assemblage (rough cut) est souvent long, plat, honnête — il montre ce qui existe réellement. <b>Chaque passe suivante retire</b>, jamais l'inverse. Le montage final est presque toujours plus court que prévu.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — Coupe 20%</span><h4>Réduis un texte de 20% sans perdre le sens</h4><ol><li>Prends un texte que tu as écrit (100-150 mots).</li><li>Coupe-le à 80% de sa longueur en gardant l'essentiel.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Travailler avec le réalisateur</h3><div class="ch-tag">Collaboration</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le meilleur monteur n'exécute pas les notes du réalisateur au pied de la lettre — il traduit l'intention derrière la note. <b>"Ça manque de punch"</b> peut vouloir dire couper plus tôt, pas ajouter de la musique plus forte.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Traduire une note vague</span><h4>Décode 3 notes de réalisateur</h4><ol><li>"Ça traîne", "je ne sens pas l'urgence", "on perd le personnage" — pour chacune, propose une action de montage concrète.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Trouver son rythme d'auteur</h3><div class="ch-tag">Style</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Voir la section « Approches d'auteurs » ci-dessous pour deux philosophies opposées du rythme — la retenue et l'accélération — et ce que chacune raconte sur son metteur en scène.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Ton tempo naturel</span><h4>Observe ta propre tendance</h4><ol><li>Monte (ou décris) la même scène deux fois — une fois "instinctive", une fois délibérément à l'opposé de ton instinct.</li><li>Laquelle sonne le plus juste pour toi ?</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Approches d'auteurs</div><h2>Deux philosophies du rythme.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">Thelma Schoonmaker</div><div class="signature">L'énergie cinétique</div><p>Monteuse historique de Scorsese — coupes rapides, musicales, qui épousent l'énergie physique des personnages plutôt que la logique narrative pure.</p></div>
+    <div class="case-card"><div class="name">Walter Murch</div><div class="signature">L'émotion avant tout</div><p>Monteur et théoricien — chaque coupe justifiée d'abord par ce que ressent le spectateur, la technique venant toujours après.</p></div>
+    <div class="case-card"><div class="name">Joe Walker</div><div class="signature">La patience structurée</div><p>Monteur de Denis Villeneuve — de longues respirations, peu de coupes, un montage qui fait confiance au plan pour porter la tension seul.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Bibliographie et ressources.</h2></div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://en.wikipedia.org/wiki/In_the_Blink_of_an_Eye_(Murch_book)" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Walter Murch</span><div class="ttl">In the Blink of an Eye (1992)</div><div class="desc">Le texte fondateur — considéré comme la référence littéraire essentielle sur le montage.</div></div></a>
+    <a class="book-card" href="https://www.amazon.com/Cutting-Rhythms-Intuitive-Pearlman-2015-12-16/dp/B01FIY4KB2" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Karen Pearlman</span><div class="ttl">Cutting Rhythms (2015)</div><div class="desc">Le montage comme chorégraphie — un vocabulaire pour la créativité rythmique de l'éditeur.</div></div></a>
+    <a class="book-card" href="https://www.studiobinder.com/blog/walter-murch-rule-of-six/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">StudioBinder — Article</span><div class="ttl">The Rule of Six, expliquée</div><div class="desc">Décomposition de chaque règle avec exemples tirés de films récents.</div></div></a>
+    <a class="book-card" href="https://www.youtube.com/watch?v=FVR8zz8ci2k" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">StudioBinder — Vidéo</span><div class="ttl">6 Ways to Edit Any Scene</div><div class="desc">Guide vidéo complet des techniques de montage essentielles.</div></div></a>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">1. Selon Walter Murch, quel critère pèse le plus dans une coupe ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>L'émotion</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>La continuité 3D</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le plan de l'écran</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Dans un J-cut :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>L'image précède toujours le son</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Il n'y a pas de son du tout</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Le son de la scène suivante arrive avant l'image</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">3. Le montage parallèle sert surtout à :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Raccourcir le film</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Créer une tension entre deux lignes d'action simultanées</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Éviter de tourner des plans de réaction</span></label></div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:12px; text-transform:uppercase; background:var(--teal); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">CUT TO BLACK.<br>Le meilleur montage est celui qu'on ne remarque jamais.</p>
+  <div class="brandline">Le Monteur — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.getElementById('quizBtn').addEventListener('click',()=>{
+    let score=0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
+      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
+      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+    });
+    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+  });
+</script>
+</body>
+</html>
