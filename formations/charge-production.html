@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Chargé de Production — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#10151c; --noir-2:#171d25; --noir-3:#1f262f;
+  --bleu:#4a7fd6; --bleu-d:#3862ac; --jaune:#e8b23f;
+  --craie:#eef1f5; --fumee:#8b93a0; --line: rgba(238,241,245,0.12);
+  --display:'Work Sans', sans-serif; --body:'Poppins', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--jaune); color:var(--noir);} img,svg{ display:block; max-width:100%;}
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 15% 10%, rgba(74,127,214,0.14), transparent 45%), radial-gradient(circle at 88% 85%, rgba(232,178,63,0.08), transparent 40%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(16,21,28,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;}
+.brand .dot{ width:9px; height:9px; border-radius:2px; background:var(--jaune);}
+.brand b{ color:var(--craie); font-weight:700;}
+nav.links{ display:none; gap:26px;} nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--bleu); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--craie);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.18em; color:var(--bleu); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:800; font-size:clamp(32px,7.5vw,74px); line-height:1.08; letter-spacing:-.01em; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--bleu);}
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:600px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.callsheet-mini{ position:relative; z-index:1; margin-top:44px; background:var(--noir-2); border:1px solid var(--line); max-width:440px; width:100%; opacity:0; animation:up .8s .65s ease forwards;}
+.cs-head{ background:var(--bleu); color:var(--noir); padding:10px 16px; font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; display:flex; justify-content:space-between;}
+.cs-body{ display:grid; grid-template-columns:1fr 1fr; }
+.cs-item{ padding:12px 16px; border-right:1px solid var(--line); border-bottom:1px solid var(--line);}
+.cs-item:nth-child(2n){ border-right:none;}
+.cs-item .l{ font-family:var(--mono); font-size:9px; color:var(--fumee); text-transform:uppercase;}
+.cs-item .v{ font-family:var(--display); font-weight:600; font-size:14px; color:var(--craie); margin-top:2px;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:800; font-size:20px; color:var(--bleu);} .stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--bleu); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(24px,4vw,40px); line-height:1.2; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--bleu);}
+.role-card h4{ font-family:var(--display); font-weight:700; font-size:14px; margin-bottom:8px;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-weight:800; font-size:28px; color:transparent; -webkit-text-stroke:1.2px var(--bleu); line-height:1; flex-shrink:0; width:52px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:700; font-size:clamp(15px,2.1vw,19px);}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--jaune); text-transform:uppercase; letter-spacing:.04em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--bleu); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--bleu); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--bleu);}
+.callout{ background:rgba(74,127,214,0.08); border:1px solid var(--bleu-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--craie);} .callout b{ color:var(--bleu);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--bleu); transform:translateY(-2px);}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--bleu); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--bleu); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--craie); margin-top:4px; line-height:1.35; font-weight:500;}
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--craie);} .book-card .spine{ width:8px; align-self:stretch; background:var(--jaune); flex-shrink:0;}
+.book-card .auth{ font-family:var(--mono); font-size:10px; color:var(--jaune); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-weight:700; font-size:13.5px; margin-top:4px; color:var(--craie);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--bleu);}
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--bleu-d); font-weight:600; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#181c22; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+.checklist{ display:grid; gap:10px; grid-template-columns:1fr;} @media(min-width:640px){ .checklist{ grid-template-columns:1fr 1fr;} }
+.check-item{ display:flex; align-items:flex-start; gap:12px; background:var(--noir-2); border:1px solid var(--line); padding:14px 16px; cursor:pointer;}
+.check-item input{ margin-top:3px; accent-color:var(--bleu); width:16px; height:16px; flex-shrink:0;}
+.check-item span{ font-size:13.5px; color:var(--craie); line-height:1.5;}
+.check-item.checked{ opacity:.5; text-decoration:line-through;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--bleu); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--bleu);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--jaune);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:6px;} .case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--jaune); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-weight:700; font-size:14px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--jaune);}
+.quiz-opt input{ accent-color:var(--bleu);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--jaune); background:rgba(232,178,63,0.1);} .quiz-opt.wrong span{ color:var(--jaune);}
+#quizScore{ font-family:var(--display); font-weight:800; font-size:18px; color:var(--bleu); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,22px); color:var(--craie); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--bleu);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--bleu);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span> OKAPI STUDIOS — <b>LE CHARGÉ DE PRODUCTION</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Références</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Évolution</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">Bureau de production — Manuel de formation</div>
+  <h1 class="title">LE CHARGÉ DE <span>PRODUCTION</span></h1>
+  <p class="subtitle">Le cœur battant du bureau — celui qui sait toujours où est tout le monde, ce qui a changé, et ce qui doit être envoyé avant ce soir.</p>
+  <div class="callsheet-mini">
+    <div class="cs-head"><span>CALL SHEET</span><span>J-1</span></div>
+    <div class="cs-body">
+      <div class="cs-item"><div class="l">Lieu</div><div class="v">Confirmé</div></div>
+      <div class="cs-item"><div class="l">Météo</div><div class="v">Vérifiée</div></div>
+      <div class="cs-item"><div class="l">Équipe</div><div class="v">12 contacts</div></div>
+      <div class="cs-item"><div class="l">Envoi</div><div class="v">18h00</div></div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">Bureau, tout le monde en dépend</div></div>
+    <div class="stat"><div class="n">24H</div><div class="l">Avant chaque tournage</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">CENTRE DE COORDINATION</div>
+    <h2>Rien ne s'arrête si le bureau de production tient.</h2>
+    <p class="lede">Le chargé de production ne tourne jamais — il fait en sorte que <b style="color:var(--craie)">tout le monde qui tourne ait ce qu'il faut</b>, où il faut, quand il faut. C'est un poste d'entrée dans le métier qui apprend tout, très vite.</p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>📋 Ce qu'il gère</h4><p>Call sheets, révisions de scénario, listes de contacts, voyages, rapports quotidiens — le flux d'informations qui fait tourner une production.</p></div>
+    <div class="role-card"><h4>📞 Ce qu'il centralise</h4><p>Il est souvent le premier point de contact — téléphone, mails, questions de tout le monde, tout le temps.</p></div>
+    <div class="role-card"><h4>🚀 Sa vraie compétence</h4><p>L'organisation sous pression — un poste qui mène souvent, avec l'expérience, à line producer ou producteur.</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>À retenir —</b> officiellement appelé "production office coordinator" par le syndicat IATSE aux États-Unis, ce poste est considéré comme un point d'entrée classique dans l'industrie — beaucoup de producteurs actuels ont commencé exactement là.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">DESK</div><h2>Neuf chapitres, du bureau vide au dernier rapport.</h2></div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Le rôle du chargé de production</h3><div class="ch-tag">Position dans l'équipe</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Il rapporte au directeur de production ou au régisseur général, gère une équipe de <b>runners/assistants</b>, et n'est presque jamais lui-même sur le plateau — son terrain, c'est le bureau.</p>
+      <div class="watch-row"><a class="watch-card" href="https://www.studiobinder.com/blog/what-is-a-production-coordinator-job-description/" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">StudioBinder — Article</div><div class="wc-title">Want to Be a Production Coordinator? Duties Explained</div></div></a></div>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — Ta journée type</span><h4>Liste une journée imaginaire</h4><ol><li>Écris 6 tâches qu'un chargé de production ferait probablement entre 9h et 18h un jour de pré-tournage.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Monter le bureau de production</h3><div class="ch-tag">Mise en place</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Avant le premier jour de tournage, il faut un lieu de travail fonctionnel — téléphones, imprimante, fournitures, accès internet fiable — <b>un bureau qui plante retarde tout un film</b>.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — La checklist du bureau</span><h4>Liste l'essentiel</h4><ol><li>Liste 6 éléments indispensables pour qu'un bureau de production fonctionne dès le premier jour.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>Le call sheet</h3><div class="ch-tag">Construire et distribuer</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le call sheet est le document le plus important de la journée de tournage suivante — <b>une erreur d'adresse ou d'horaire</b> peut faire perdre une heure entière à toute une équipe.</p>
+      <div class="table-wrap"><table class="plain"><tr><th>Élément</th><th>Pourquoi c'est critique</th></tr><tr><td>Adresse et heure d'arrivée</td><td>Erreur = équipe entière en retard</td></tr><tr><td>Contacts d'urgence</td><td>Vital en cas d'incident</td></tr><tr><td>Météo du jour</td><td>Impacte les décisions de dernière minute</td></tr></table></div>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — Construis un call sheet</span><h4>Rédige les infos essentielles</h4><ol><li>Pour un tournage fictif demain à 8h, rédige les 5 informations non négociables d'un call sheet.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Gérer les révisions de scénario</h3><div class="ch-tag">Contrôle de version</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un scénario change souvent jusqu'au dernier moment — <b>chaque révision a une couleur de page standardisée</b> dans l'industrie pour que personne ne travaille sur une version périmée.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — Traque une révision</span><h4>Note ce qui change</h4><ol><li>Imagine 3 changements mineurs dans un scénario (une réplique, une scène coupée, un lieu modifié).</li><li>Liste qui doit absolument être prévenu pour chacun.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Voyages, hébergement, visas</h3><div class="ch-tag">Logistique équipe</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Pour un tournage en déplacement, coordonner transport, hôtels et documents administratifs de toute l'équipe est un projet en soi — <b>un oubli de visa peut immobiliser un tournage entier</b>.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Anticipe les besoins</span><h4>Planifie un déplacement d'équipe</h4><ol><li>Pour une équipe de 5 personnes tournant à 3h de route, liste ce qu'il faut organiser en logistique.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>La liste d'équipe et les contacts</h3><div class="ch-tag">Répertoire vivant</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une liste de contacts à jour n'est pas un détail administratif — <b>c'est ce qui permet de joindre n'importe qui en 30 secondes</b> en cas de problème.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — Structure un répertoire</span><h4>Organise une liste de contacts</h4><ol><li>Pour une équipe de 10 personnes, propose une structure de répertoire (colonnes, tri) qui permette de retrouver quelqu'un instantanément.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Les rapports de production</h3><div class="ch-tag">Suivi quotidien</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Chaque jour de tournage produit un rapport — ce qui a été tourné, ce qui a pris du retard, ce qui reste à faire. <b>Sans ce document, personne ne sait vraiment où en est le film.</b></p>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — Rédige un rapport de fin de journée</span><h4>Résume une journée fictive</h4><ol><li>Écris un rapport de production de 4 lignes pour une journée de tournage imaginaire avec un léger retard.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Coordonner entre les départements</h3><div class="ch-tag">Le point de passage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Décor, costume, casting, régie — chaque département a des besoins qui passent souvent par le bureau de production. <b>Le chargé de production connaît tout le monde et tout ce qui se passe.</b></p>
+      <div class="checklist" id="checklist">
+        <label class="check-item"><input type="checkbox"><span>Call sheet du lendemain envoyé à tous</span></label>
+        <label class="check-item"><input type="checkbox"><span>Dernière révision de scénario distribuée</span></label>
+        <label class="check-item"><input type="checkbox"><span>Rapport de production du jour rédigé</span></label>
+        <label class="check-item"><input type="checkbox"><span>Contacts d'urgence à jour</span></label>
+        <label class="check-item"><input type="checkbox"><span>Transport du lendemain confirmé</span></label>
+        <label class="check-item"><input type="checkbox"><span>Fournitures du bureau vérifiées</span></label>
+      </div>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Le pont entre équipes</span><h4>Transmets une info sensible</h4><ol><li>Le décorateur signale un retard qui impacte le planning caméra. Rédige le message que tu enverrais aux deux départements concernés.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>De coordinateur à producteur</h3><div class="ch-tag">Évolution de carrière</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Ce poste est souvent le tremplin vers line producer puis producteur — <b>la maîtrise de la logistique complète d'un film</b> s'apprend rarement mieux qu'au bureau de production.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Ta trajectoire</span><h4>Prépare ta prochaine étape</h4><ol><li>Liste 3 compétences que ce poste t'apprendrait et qui te seraient utiles pour évoluer vers un rôle de producteur.</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Évolution</div><h2>Le poste qui apprend tout le métier.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">Le tremplin classique</div><div class="signature">Runner → coordinateur → producteur</div><p>La trajectoire la plus commune dans l'industrie — chaque étape enseigne une couche différente de la logistique de production.</p></div>
+    <div class="case-card"><div class="name">L'expertise permanente</div><div class="signature">Rester coordinateur, devenir indispensable</div><p>Certains font carrière entière dans ce rôle — devenant la mémoire vive et la fiabilité de chaque production sur laquelle ils passent.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Bibliographie et ressources.</h2></div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://www.studiobinder.com/blog/what-is-a-production-coordinator-job-description/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">StudioBinder — Article</span><div class="ttl">Want to Be a Production Coordinator?</div><div class="desc">Description complète du poste, compétences et salaire.</div></div></a>
+    <a class="book-card" href="https://www.studiobinder.com/blog/things-every-working-production-coordinator-should-know/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">StudioBinder — Article</span><div class="ttl">22 Things Every Working Production Coordinator Should Know</div><div class="desc">Conseils pratiques issus de coordinateurs en exercice.</div></div></a>
+    <a class="book-card" href="https://en.wikipedia.org/wiki/Production_coordinator" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Référence générale</span><div class="ttl">Production Coordinator — vue d'ensemble</div><div class="desc">Définition syndicale et responsabilités standard du poste.</div></div></a>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Le chargé de production travaille principalement :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Sur le plateau, en permanence</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Au bureau de production</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>En salle de montage</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Pourquoi les révisions de scénario ont-elles des couleurs de page ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Pour décorer le document</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>C'est une tradition sans fonction pratique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Pour que personne ne travaille sur une version périmée</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">3. Ce poste mène souvent, avec l'expérience, vers :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Line producer puis producteur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Directeur de la photographie</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Monteur</span></label></div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--bleu); color:var(--craie); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">Personne ne remarque le bureau de production quand il fonctionne. C'est le but.</p>
+  <div class="brandline">Le Chargé de Production — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.querySelectorAll('.check-item input').forEach(inp=>{ inp.addEventListener('change', ()=> inp.closest('.check-item').classList.toggle('checked', inp.checked)); });
+  document.getElementById('quizBtn').addEventListener('click',()=>{
+    let score=0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
+      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
+      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+    });
+    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+  });
+</script>
+</body>
+</html>

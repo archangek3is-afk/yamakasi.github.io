@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>L'Animateur IA — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#0c0b10; --noir-2:#151319; --noir-3:#1d1a22;
+  --violet:#9d6ce0; --violet-d:#7b4fb8; --or:#c9a84c; --cyan:#5fd0c9;
+  --ivoire:#f2eee6; --fumee:#938d9c; --line: rgba(242,238,230,0.12);
+  --display:'Sora', sans-serif; --body:'Poppins', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--ivoire); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--violet); color:var(--noir);} img,svg{ display:block; max-width:100%;}
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 18% 12%, rgba(157,108,224,0.14), transparent 45%), radial-gradient(circle at 85% 85%, rgba(201,168,76,0.08), transparent 40%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(12,11,16,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;}
+.brand .node{ width:9px; height:9px; border-radius:50%; background:var(--violet); box-shadow:0 0 8px var(--violet);}
+.brand b{ color:var(--ivoire); font-weight:600;}
+nav.links{ display:none; gap:26px;} nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--violet); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--ivoire);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--ivoire);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.18em; color:var(--violet); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:800; font-size:clamp(32px,7.5vw,74px); line-height:1.08; letter-spacing:-.01em; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--violet);}
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:600px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .7s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:700; font-size:20px; color:var(--violet);} .stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--violet); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(24px,4vw,40px); line-height:1.2; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--violet);}
+.role-card h4{ font-family:var(--display); font-weight:600; font-size:14px; margin-bottom:8px;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-weight:700; font-size:28px; color:transparent; -webkit-text-stroke:1.2px var(--violet); line-height:1; flex-shrink:0; width:52px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:600; font-size:clamp(15px,2.1vw,19px);}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--or); text-transform:uppercase; letter-spacing:.04em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--violet); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--ivoire); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--violet); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--violet);}
+.callout{ background:rgba(157,108,224,0.08); border:1px solid var(--violet-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--ivoire);} .callout b{ color:var(--violet);}
+.callout.warn{ background:rgba(201,168,76,0.08); border-color:var(--or);} .callout.warn b{ color:var(--or);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--violet); transform:translateY(-2px);} .watch-card img{ width:96px; height:64px; object-fit:cover; flex-shrink:0; background:#000;}
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--violet); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--ivoire); margin-top:4px; line-height:1.35; font-weight:500;}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--violet); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+
+/* prompt anatomy — signature */
+.prompt-box{ background:var(--noir-3); border:1px solid var(--violet-d); padding:0; margin:20px 0; overflow:hidden;}
+.prompt-box .pb-head{ background:rgba(157,108,224,0.15); padding:10px 18px; font-family:var(--mono); font-size:10.5px; color:var(--violet); text-transform:uppercase; letter-spacing:.06em;}
+.prompt-line{ display:flex; border-bottom:1px solid var(--line); }
+.prompt-line:last-child{ border-bottom:none;}
+.prompt-line .pl-tag{ width:130px; flex-shrink:0; padding:12px 14px; font-family:var(--mono); font-size:10.5px; color:var(--or); text-transform:uppercase; background:rgba(201,168,76,0.06); border-right:1px solid var(--line);}
+.prompt-line .pl-val{ padding:12px 16px; font-size:13px; color:var(--ivoire); line-height:1.6;}
+@media(max-width:600px){ .prompt-line{ flex-direction:column;} .prompt-line .pl-tag{ width:100%; border-right:none; border-bottom:1px solid var(--line);} }
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--ivoire);} .book-card .spine{ width:8px; align-self:stretch; background:var(--cyan); flex-shrink:0;}
+.book-card .auth{ font-family:var(--mono); font-size:10px; color:var(--cyan); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-weight:600; font-size:13.5px; margin-top:4px; color:var(--ivoire);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--ivoire); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--violet);}
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--violet-d); font-weight:600; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:600; font-size:15px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#1c1a20; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--violet); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--violet);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--cyan);}
+.case-card .name{ font-family:var(--display); font-weight:600; font-size:16px; margin-bottom:6px;} .case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--cyan); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-weight:600; font-size:14px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--or);}
+.quiz-opt input{ accent-color:var(--violet);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--violet); background:rgba(157,108,224,0.1);} .quiz-opt.wrong span{ color:var(--violet);}
+#quizScore{ font-family:var(--display); font-weight:700; font-size:18px; color:var(--violet); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-weight:600; font-size:clamp(16px,2.4vw,22px); color:var(--ivoire); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--violet);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--violet);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="node"></span> OKAPI STUDIOS — <b>L'ANIMATEUR IA</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Éthique</a><a href="#biblio">Ressources</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Éthique et droits</a><a href="#biblio">Ressources</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">Manuel de formation — Réalisation augmentée par IA</div>
+  <h1 class="title">L'ANIMATEUR <span>IA</span></h1>
+  <p class="subtitle">Faire des films avec l'intelligence artificielle sans perdre le métier de cinéaste en chemin — l'outil change, le regard reste.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">01</div><div class="l">Anatomie de prompt</div></div>
+    <div class="stat"><div class="n">v1.0</div><div class="l">Doctrine OWM</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">NOUVELLE DISCIPLINE</div>
+    <h2>L'IA ne remplace pas les postes du cinéma. Elle t'oblige à tous les connaître.</h2>
+    <p class="lede">Un animateur IA qui ignore la grammaire du plan, la lumière, le montage ou la direction d'acteur ne fait pas des films — il fait des images qui se ressemblent. <b style="color:var(--ivoire)">Chaque manuel de cette collection reste ton vrai fondement.</b></p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>🧠 Ce qu'il orchestre</h4><p>Une chaîne d'outils — génération d'image, de vidéo, de voix, de musique — assemblée avec la même exigence qu'un plateau traditionnel.</p></div>
+    <div class="role-card"><h4>✍️ Sa vraie compétence</h4><p>Écrire des prompts avec un vocabulaire de cinéaste, pas de simple utilisateur — caméra, optique, lumière, référence.</p></div>
+    <div class="role-card"><h4>⚠️ Son piège</h4><p>Confondre "ça a l'air impressionnant" avec "ça sert l'histoire" — l'IA produit vite, elle ne juge jamais à ta place.</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>Doctrine de studio —</b> les outils IA ne sont jamais nommés dans les documents destinés aux clients : ce qui compte pour un client, c'est le résultat cinématographique, pas la mécanique derrière.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">PIPELINE</div><h2>Neuf chapitres, du prompt au film fini.</h2></div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Ce que l'IA change (et ne change pas)</h3><div class="ch-tag">Cadrage du métier</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">L'IA change les moyens de production — plus besoin de plateau, de caméra, d'équipe complète pour un premier jet visuel. Elle <b>ne change rien</b> à ce qui rend une image ou un plan bon : composition, lumière, intention, rythme. Tous les autres manuels de cette collection s'appliquent toujours.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — Le test du vocabulaire</span><h4>Décris un plan comme un DP, pas comme un utilisateur</h4><ol><li>Écris deux descriptions d'un même plan imaginaire : une en langage vague ("une belle image de coucher de soleil"), une en langage technique de cinéaste (échelle de plan, focale, température de couleur).</li><li>Laquelle produirait un meilleur résultat avec un outil de génération ?</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Les briques du pipeline</h3><div class="ch-tag">Vue d'ensemble</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un film généré par IA combine plusieurs briques distinctes, chacune avec ses propres outils spécialisés — <b>aucun outil unique ne fait tout bien</b>.</p>
+      <div class="table-wrap"><table class="plain">
+        <tr><th>Brique</th><th>Rôle</th></tr>
+        <tr><td>Image fixe</td><td>Character sheets, décors, références de style</td></tr>
+        <tr><td>Vidéo</td><td>Animation du plan, mouvement de caméra, durée du segment</td></tr>
+        <tr><td>Voix</td><td>Dialogue, narration, doublage</td></tr>
+        <tr><td>Musique / son</td><td>Score, ambiance, sound design</td></tr>
+      </table></div>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — Cartographie ton pipeline</span><h4>Découpe un plan en briques</h4><ol><li>Imagine un plan de 5 secondes pour un court métrage.</li><li>Liste ce qui relève de l'image, de la vidéo, de la voix et du son — même sans outil précis en tête.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>L'anatomie d'un bon prompt cinématographique</h3><div class="ch-tag">Prompt engineering</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un prompt vague produit un résultat générique. <b>Un prompt écrit comme une fiche technique de plateau</b> — avec de vraies références de caméra, d'optique et de cinéastes — produit un résultat qui ressemble à du cinéma plutôt qu'à de l'illustration.</p>
+      <div class="prompt-box">
+        <div class="pb-head">Structure d'un prompt cinématographique</div>
+        <div class="prompt-line"><div class="pl-tag">Sujet</div><div class="pl-val">Description précise du personnage ou de la scène, pas juste un nom générique</div></div>
+        <div class="prompt-line"><div class="pl-tag">Action</div><div class="pl-val">Ce qui se passe concrètement dans le plan, en verbes actifs</div></div>
+        <div class="prompt-line"><div class="pl-tag">Caméra / optique</div><div class="pl-val">Référence réelle : ex. "ARRI Alexa, focale 35mm, profondeur de champ réduite"</div></div>
+        <div class="prompt-line"><div class="pl-tag">Lumière</div><div class="pl-val">Température de couleur, direction, dureté — pas juste "belle lumière"</div></div>
+        <div class="prompt-line"><div class="pl-tag">Référence de style</div><div class="pl-val">Cinéastes ou films dont l'univers visuel doit orienter le rendu</div></div>
+        <div class="prompt-line"><div class="pl-tag">Texture</div><div class="pl-val">Préciser explicitement ce qu'on entend par "hyperréaliste" (grain de peau, matière) plutôt que le laisser vague</div></div>
+      </div>
+      <div class="callout"><b>Règle de studio —</b> toujours inclure de vraies références cinématographiques et des caméras/optiques réelles dans un prompt — cela oriente le modèle vers un rendu hyperréaliste au lieu d'un rendu générique "IA".</div>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — Réécris ton prompt</span><h4>Passe du vague au précis</h4><ol><li>Écris un prompt en une phrase simple pour un portrait de personnage.</li><li>Réécris-le en suivant les 6 lignes de la structure ci-dessus.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Cohérence de personnage</h3><div class="ch-tag">Continuité visuelle</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le problème n°1 d'un film généré par IA est qu'un même personnage change de visage d'un plan à l'autre. Les outils avancés permettent d'ancrer une <b>identité de personnage réutilisable</b> — l'équivalent d'un acteur qu'on peut rappeler dans plusieurs scènes.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — Ta fiche de continuité</span><h4>Documente un personnage pour la cohérence</h4><ol><li>Décris un personnage en 8 points fixes (visage, coiffure, tenue, posture type) qui ne doivent jamais varier d'un plan à l'autre.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Composer un plan en langage IA</h3><div class="ch-tag">Caméra, optique, lumière</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Tout le vocabulaire des manuels « Réalisateur » et « Directeur de la Photographie » de cette collection est directement transposable en prompt — échelle de plan, mouvement de caméra, température de couleur.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Traduis un plan classique</span><h4>D'un manuel à l'autre</h4><ol><li>Reprends un des plans imaginés dans le manuel DP (chapitre 5 ou 6).</li><li>Réécris-le comme un prompt complet en suivant l'anatomie du chapitre 03.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Montage et assemblage de segments générés</h3><div class="ch-tag">Post-production</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Les outils actuels génèrent des segments courts (quelques secondes) qu'il faut ensuite assembler comme n'importe quel montage — les principes du manuel « Monteur » s'appliquent à l'identique, y compris la règle de six de Murch.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — Planifie tes segments</span><h4>Découpe une scène en clips</h4><ol><li>Découpe une scène de 20 secondes en segments de 5 secondes maximum.</li><li>Prévois les plans de coupe nécessaires pour cacher les imperfections entre segments.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Le son : voix, musique, sound design</h3><div class="ch-tag">Audio génératif</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Musique et voix générées donnent un premier jet rapide, mais <b>les droits associés sont rarement clairs</b> — une bonne pratique de studio est de composer une base à l'IA puis de la ré-enregistrer en conditions réelles pour sécuriser les droits définitifs.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — Le brief de composition</span><h4>Décris une ambiance musicale à générer</h4><ol><li>Décris en mots (pas en notes) l'ambiance musicale d'une scène — tempo, instrumentation, émotion.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Éthique, droits et divulgation</h3><div class="ch-tag">Responsabilité</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Générer un visage réel identifiable, imiter une œuvre existante, ou masquer l'usage de l'IA à un client dans un contexte où ça compte, sont des lignes qu'un studio sérieux ne franchit pas. <b>Voir la section « Éthique et droits » ci-dessous.</b></p>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Ta ligne rouge</span><h4>Écris ta propre charte en 3 règles</h4><ol><li>Écris 3 règles que tu ne franchirais jamais dans l'usage de l'IA pour un projet créatif.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Construire son propre workflow</h3><div class="ch-tag">Méthode personnelle</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Les outils évoluent chaque semaine — un bon workflow personnel documente <b>tes tests, ce qui a marché, ce qui a échoué</b>, pour ne pas repartir de zéro à chaque nouvelle version d'un modèle.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Ton journal de test</span><h4>Documente une itération</h4><ol><li>La prochaine fois que tu testes un outil IA, note en 3 lignes : ce que tu as demandé, ce que tu as obtenu, ce que tu changerais.</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Éthique et droits</div><h2>Les lignes qu'un studio sérieux ne franchit pas.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">Consentement</div><div class="signature">Visages et voix réels</div><p>Ne jamais générer le visage ou la voix d'une personne réelle identifiable sans son accord explicite — même pour un test interne.</p></div>
+    <div class="case-card"><div class="name">Divulgation</div><div class="signature">Transparence quand ça compte</div><p>Quand l'usage de l'IA change la nature de ce qu'un client ou un public reçoit, le silence devient trompeur — savoir quand le dire.</p></div>
+    <div class="case-card"><div class="name">Droits d'auteur</div><div class="signature">Musique et voix générées</div><p>Une composition ou une voix entièrement générée porte souvent des droits ambigus — sécuriser par un ré-enregistrement réel avant diffusion commerciale.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Ressources et formations.</h2></div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://curiousrefuge.com/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Curious Refuge</span><div class="ttl">Formation en ligne — AI Filmmaking</div><div class="desc">La référence la plus établie en formation de réalisation par IA, utilisée par des professionnels de studios.</div></div></a>
+    <a class="book-card" href="https://www.youtube.com/channel/UClnFtyUEaxQOCd1s5NKYGFA" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Curious Refuge — Chaîne</span><div class="ttl">Actualités et démonstrations hebdomadaires</div><div class="desc">Suivi des nouveaux outils et techniques, gratuit, mis à jour en continu.</div></div></a>
+    <a class="book-card" href="https://www.studiobinder.com/blog/what-is-mise-en-scene/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Rappel utile</span><div class="ttl">Tous les autres manuels de cette collection</div><div class="desc">Le fondement technique reste identique — l'IA est un nouvel outil, pas un nouveau métier.</div></div></a>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Qu'est-ce qui rend un prompt cinématographique plus efficace qu'un prompt vague ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Utiliser le plus de mots possible</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Des références précises de caméra, lumière et style</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Ne jamais mentionner de cinéastes</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Le problème principal de cohérence en génération vidéo IA concerne :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>La durée des segments uniquement</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Le prix des outils</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Le visage d'un personnage qui change d'un plan à l'autre</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">3. Pourquoi ré-enregistrer une musique générée par IA en studio réel ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Pour sécuriser des droits clairs et exploitables</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Parce que l'IA ne peut pas composer de musique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Ce n'est jamais nécessaire</span></label></div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--violet); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">L'outil change. Le regard de cinéaste, lui, ne se génère pas.</p>
+  <div class="brandline">L'Animateur IA — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.getElementById('quizBtn').addEventListener('click',()=>{
+    let score=0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
+      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
+      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+    });
+    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+  });
+</script>
+</body>
+</html>

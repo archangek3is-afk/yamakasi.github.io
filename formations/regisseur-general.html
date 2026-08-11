@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Régisseur Général — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#15130f; --noir-2:#1c1a15; --noir-3:#24211b;
+  --kaki:#9a9366; --kaki-d:#7a7550; --orange:#e2762f;
+  --craie:#f3efe4; --fumee:#948e7c; --line: rgba(243,239,228,0.12);
+  --display:'Barlow Condensed', sans-serif; --body:'Poppins', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--orange); color:var(--noir);} img,svg{ display:block; max-width:100%;}
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 15% 10%, rgba(154,147,102,0.10), transparent 45%), radial-gradient(circle at 88% 85%, rgba(226,118,47,0.08), transparent 40%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(21,19,15,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;}
+.brand .pin{ width:10px; height:10px; background:var(--orange); clip-path:polygon(50% 0%, 100% 100%, 0% 100%);}
+.brand b{ color:var(--craie); font-weight:700;}
+nav.links{ display:none; gap:26px;} nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--orange); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--craie);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--orange); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:800; font-size:clamp(38px,9vw,92px); line-height:1; letter-spacing:-.01em; text-transform:uppercase; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--orange);}
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:600px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.permit-strip{ position:relative; z-index:1; margin-top:44px; display:flex; gap:0; border:1px dashed var(--kaki-d); opacity:0; animation:up .8s .65s ease forwards;}
+.permit-strip .p-field{ padding:12px 20px; border-right:1px dashed var(--kaki-d);} .permit-strip .p-field:last-child{ border-right:none;}
+.permit-strip .p-l{ font-family:var(--mono); font-size:9px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em;}
+.permit-strip .p-v{ font-family:var(--display); font-weight:600; font-size:16px; color:var(--orange); margin-top:2px;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:800; font-size:22px; color:var(--orange);} .stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--orange); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(26px,4.4vw,44px); line-height:1.15; max-width:820px; text-transform:uppercase;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--orange);}
+.role-card h4{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:8px; text-transform:uppercase;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-weight:800; font-size:34px; color:transparent; -webkit-text-stroke:1.3px var(--orange); line-height:1; flex-shrink:0; width:56px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:700; font-size:clamp(17px,2.4vw,22px); text-transform:uppercase;}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--kaki); text-transform:uppercase; letter-spacing:.04em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--orange); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--orange); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--orange);}
+.callout{ background:rgba(226,118,47,0.08); border:1px solid var(--orange); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--craie);} .callout b{ color:var(--orange);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--orange); transform:translateY(-2px);}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--orange); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--orange); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--craie); margin-top:4px; line-height:1.35; font-weight:500;}
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--craie);} .book-card .spine{ width:8px; align-self:stretch; background:var(--kaki); flex-shrink:0;}
+.book-card .auth{ font-family:var(--mono); font-size:10px; color:var(--kaki); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-weight:700; font-size:14.5px; margin-top:4px; color:var(--craie);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--orange);}
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--orange); font-weight:600; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:700; font-size:17px; margin-bottom:10px; text-transform:uppercase;} .exercice p, .exercice li{ font-size:14px; color:#211f19; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+.diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--orange); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--orange);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--kaki);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:18px; margin-bottom:6px; text-transform:uppercase;} .case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--kaki); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--kaki);}
+.quiz-opt input{ accent-color:var(--orange);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--orange); background:rgba(226,118,47,0.1);} .quiz-opt.wrong span{ color:var(--orange);}
+#quizScore{ font-family:var(--display); font-weight:800; font-size:20px; color:var(--orange); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-weight:700; font-size:clamp(18px,2.8vw,26px); color:var(--craie); max-width:600px; margin:0 auto 22px; text-transform:uppercase;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--orange);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--orange);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="pin"></span> OKAPI STUDIOS — <b>LE RÉGISSEUR GÉNÉRAL</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Références</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Approches</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">Terrain — Manuel de formation, régie</div>
+  <h1 class="title">LE RÉGISSEUR<br><span>GÉNÉRAL</span></h1>
+  <p class="subtitle">Le point de contact entre le film qu'on imagine et le monde réel qui ne demande jamais la permission de bouger.</p>
+  <div class="permit-strip">
+    <div class="p-field"><span class="p-l">Lieu</span><div class="p-v">Confirmé</div></div>
+    <div class="p-field"><span class="p-l">Permis</span><div class="p-v">Obtenu</div></div>
+    <div class="p-field"><span class="p-l">Statut</span><div class="p-v">Prêt tournage</div></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">Plan B toujours prêt</div></div>
+    <div class="stat"><div class="n">24H</div><div class="l">Anticipation minimale</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">SUR LE TERRAIN</div>
+    <h2>Le régisseur transforme un scénario en coordonnées GPS.</h2>
+    <p class="lede">Un scénario dit "INT. CAFÉ — JOUR". Le régisseur doit trouver ce café, obtenir l'autorisation de le fermer au public, prévoir où l'équipe se gare, mange, et se change. <b style="color:var(--craie)">Rien de tout ça n'est écrit dans le scénario.</b></p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>📍 Ce qu'il trouve</h4><p>Les lieux de tournage, qualifiés pour la lumière, l'accès, l'acoustique et la disponibilité réelle.</p></div>
+    <div class="role-card"><h4>📋 Ce qu'il sécurise</h4><p>Permis, autorisations, assurance, relation avec les riverains et les autorités locales.</p></div>
+    <div class="role-card"><h4>🧰 Sa vraie compétence</h4><p>Anticiper ce qui va mal se passer avant que ça n'arrive — météo, accès bloqué, voisin mécontent.</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>À retenir —</b> historiquement, ce travail revenait au premier assistant réalisateur ; le régisseur (location manager) est devenu un poste à part entière dans les années 70 pour que la mise en scène ne soit jamais freinée par la logistique.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">CARNET DE ROUTE</div><h2>Neuf chapitres, du repérage au dernier clap.</h2></div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Qui est le régisseur</h3><div class="ch-tag">Chef d'orchestre logistique</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le régisseur est <b>le visage public de la production</b> — celui qui négocie avec les propriétaires, les mairies, les riverains. Une bonne relation ici évite des blocages coûteux le jour J.</p>
+      <div class="watch-row"><a class="watch-card" href="https://en.wikipedia.org/wiki/Location_manager" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">Référence générale</div><div class="wc-title">Location Manager — définition et historique du poste</div></div></a></div>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — Le premier contact</span><h4>Rédige une demande d'accès</h4><ol><li>Écris un message de 4 phrases pour demander l'accès à un lieu (café, jardin, immeuble) pour un tournage d'une journée.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Le repérage</h3><div class="ch-tag">Trouver et qualifier un lieu</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un lieu "joli" n'est pas forcément tournable — il faut vérifier l'accès pour les véhicules, le bruit ambiant, la lumière naturelle aux heures prévues, et la disponibilité réelle du propriétaire.</p>
+      <div class="table-wrap"><table class="plain"><tr><th>Critère</th><th>Pourquoi ça compte</th></tr><tr><td>Accès véhicules</td><td>Camion technique, loges, catering doivent pouvoir se garer</td></tr><tr><td>Bruit ambiant</td><td>Un lieu magnifique mais bruyant ruine la prise de son</td></tr><tr><td>Lumière à l'heure du tournage</td><td>Un repérage à midi ne dit rien de la lumière à 18h</td></tr></table></div>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — La fiche de repérage</span><h4>Qualifie un lieu réel</h4><ol><li>Choisis un lieu près de chez toi.</li><li>Note son accès, son bruit ambiant, et sa lumière à deux heures différentes de la journée.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>Les autorisations et permis</h3><div class="ch-tag">Cadre légal</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Tourner sur la voie publique, dans un lieu privé, ou avec du matériel spécifique (drone, arme factice) demande presque toujours une autorisation écrite — <b>l'obtenir après coup n'est jamais une option</b>.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — La checklist de permis</span><h4>Liste ce qu'il faut demander</h4><ol><li>Pour un tournage fictif en extérieur urbain avec un drone, liste toutes les autorisations à obtenir avant le jour J.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Le plan de travail et son impact terrain</h3><div class="ch-tag">Schedule</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le régisseur traduit le planning en réalité physique — combien de temps pour changer de lieu, combien de temps pour installer le matériel, quelles fenêtres horaires sont vraiment disponibles.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — Calcule les temps morts</span><h4>Additionne les trajets</h4><ol><li>Pour un planning fictif à 3 lieux dans une journée, estime le temps de trajet et d'installation entre chaque.</li><li>Reste-t-il assez de temps pour tourner ?</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>La sécurité sur le plateau</h3><div class="ch-tag">Prévention</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Câbles au sol, matériel lourd, cascades, conditions météo — la sécurité de l'équipe et du public passe toujours avant le plan, <b>même si ça coûte du temps de tournage</b>.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Le briefing sécurité</span><h4>Rédige 3 consignes essentielles</h4><ol><li>Pour un tournage en extérieur nocturne, écris 3 consignes de sécurité à donner à l'équipe avant le début.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Relation avec riverains et autorités</h3><div class="ch-tag">Diplomatie de terrain</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un tournage dérange forcément quelqu'un — bruit, circulation bloquée, horaires inhabituels. <b>Prévenir avant plutôt que s'excuser après</b> évite la majorité des conflits.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — Le mot aux voisins</span><h4>Rédige une note d'information</h4><ol><li>Écris une note de 4 lignes à distribuer aux riverains la veille d'un tournage bruyant.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>La logistique du jour J</h3><div class="ch-tag">Loges, catering, transport</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une équipe mal nourrie, mal logée ou coincée dans les transports travaille mal. <b>Le confort logistique n'est pas un luxe, c'est un facteur de qualité du tournage.</b></p>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — La checklist du jour J</span><h4>Liste ce qu'il faut sur place</h4><ol><li>Pour un tournage d'une journée avec 8 personnes, liste ce qu'il faut prévoir en loges, catering et parking.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Le budget régie</h3><div class="ch-tag">Coûts logistiques</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Location de lieu, permis, catering, transport — la régie a son propre budget, souvent sous-estimé par les productions débutantes.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Estime un budget régie</span><h4>Chiffre les postes essentiels</h4><ol><li>Pour un tournage fictif d'une journée, liste 5 postes de dépense régie et une estimation grossière pour chacun.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Gérer l'imprévu</h3><div class="ch-tag">Plan B</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Météo, panne, changement de dernière minute — un régisseur qui n'a pas de plan B n'a pas fini son travail de préparation.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Ton plan B</span><h4>Prévois l'imprévu</h4><ol><li>Pour un tournage extérieur, écris un plan de repli en cas de pluie.</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Approches</div><h2>Deux façons d'occuper le terrain.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">Le régisseur de studio</div><div class="signature">Contrôle total</div><p>Travaille sur des décors construits ou des studios réservés — la logistique est intégralement maîtrisable, la variable humaine reste la principale inconnue.</p></div>
+    <div class="case-card"><div class="name">Le régisseur de terrain</div><div class="signature">Négociation constante</div><p>Travaille avec de vrais lieux, de vrais propriétaires, de vraies autorités — chaque tournage est une nouvelle relation humaine à construire vite et bien.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Bibliographie et ressources.</h2></div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://en.wikipedia.org/wiki/Location_manager" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Référence générale</span><div class="ttl">Location Manager — vue d'ensemble du poste</div><div class="desc">Historique, responsabilités et évolution du métier.</div></div></a>
+    <a class="book-card" href="https://en.wikipedia.org/wiki/Unit_production_manager" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Référence générale</span><div class="ttl">Unit Production Manager — vue d'ensemble</div><div class="desc">Le poste qui supervise l'administration physique d'une production.</div></div></a>
+    <a class="book-card" href="https://www.videomaker.com/article/c20/18168-how-to-build-a-video-budget/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Videomaker — Article</span><div class="ttl">How to Build a Film Budget</div><div class="desc">Décomposition pratique des postes de dépense d'un tournage.</div></div></a>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Un lieu "joli" mais bruyant pose surtout problème pour :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le budget régie</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>La prise de son</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le montage</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">2. Pourquoi prévenir les riverains avant un tournage bruyant ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Pour éviter les conflits plutôt que de s'excuser après</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Ce n'est jamais nécessaire</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Pour obtenir une réduction de permis</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">3. Que doit toujours avoir un régisseur en cas d'imprévu météo ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Un budget illimité</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Un deuxième réalisateur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Un plan B de repli</span></label></div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:12px; text-transform:uppercase; background:var(--orange); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">Le décor le plus important n'est jamais celui qu'on construit — c'est celui qu'on trouve.</p>
+  <div class="brandline">Le Régisseur Général — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.getElementById('quizBtn').addEventListener('click',()=>{
+    let score=0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
+      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
+      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+    });
+    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+  });
+</script>
+</body>
+</html>

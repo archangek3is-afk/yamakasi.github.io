@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Scénariste — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#171512;
+  --noir-2:#1f1c18;
+  --noir-3:#28241f;
+  --papier:#f2ede0;
+  --papier-d:#e2dac6;
+  --encre:#b23a2f;
+  --encre-d:#8f2e25;
+  --mine:#8a8477;
+  --fumee:#9a9488;
+  --line: rgba(242,237,224,0.12);
+  --display:'Courier Prime', monospace;
+  --body:'Poppins', sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{ scroll-behavior:smooth; }
+body{ background:var(--noir); color:var(--papier); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+::selection{ background:var(--encre); color:var(--papier); }
+img,svg{ display:block; max-width:100%; }
+
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image: radial-gradient(rgba(242,237,224,0.03) 1px, transparent 1px);
+  background-size:5px 5px;
+}
+
+/* ---------- nav ---------- */
+header.top{ position:sticky; top:0; z-index:200; background:rgba(23,21,18,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--display); font-size:11px; letter-spacing:.05em; color:var(--fumee); text-transform:uppercase;}
+.brand .car{ width:9px; height:9px; background:var(--encre); flex-shrink:0;}
+.brand b{ color:var(--papier); font-weight:700;}
+nav.links{ display:none; gap:26px; }
+nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px; font-family:var(--body);}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--encre); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--papier); }
+nav.links a:hover::after, nav.links a.active::after{ width:100%; }
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+.burger span{ width:22px; height:2px; background:var(--papier); }
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;}
+.mmenu.open{ display:flex; }
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;}
+.mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex; } .burger{ display:none; } }
+
+/* ---------- hero ---------- */
+.hero{ position:relative; min-height:90vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--display); font-size:11px; letter-spacing:.2em; color:var(--encre); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:700; font-size:clamp(36px,9vw,88px); line-height:1.02; letter-spacing:-0.01em; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--encre); }
+.subtitle{ font-family:var(--body); font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:580px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.page-stack{
+  position:relative; z-index:1; margin-top:44px; opacity:0; animation:up .8s .65s ease forwards;
+  width:220px; height:130px;
+}
+.page-stack .pg{ position:absolute; inset:0; background:var(--papier); box-shadow:0 6px 16px rgba(0,0,0,0.35); }
+.page-stack .pg1{ transform:rotate(-4deg); }
+.page-stack .pg2{ transform:rotate(2deg) translateY(4px); }
+.page-stack .pg3{ transform:rotate(-1deg) translateY(8px); z-index:2; display:flex; align-items:center; justify-content:center; }
+.page-stack .pg3 span{ font-family:var(--display); font-size:11px; color:var(--noir); letter-spacing:.03em; text-align:center; line-height:1.6;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;}
+.stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:700; font-size:22px; color:var(--encre);}
+.stats .stat .l{ font-family:var(--body); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.08em; margin-top:3px; font-weight:500;}
+
+/* ---------- scaffolding ---------- */
+main{ position:relative; z-index:1; }
+section{ max-width:1180px; margin:0 auto; padding:90px 22px; }
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.fade.in{ opacity:1; transform:translateY(0); }
+.section-head{ margin-bottom:46px; }
+.section-head .tag{ font-family:var(--display); font-size:11px; letter-spacing:.15em; color:var(--encre); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(24px,4vw,40px); line-height:1.2; max-width:820px;}
+.section-head p.lede{ font-family:var(--body); font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr; }
+@media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr; } }
+@media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr; } }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--encre);}
+.role-card h4{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:8px;}
+.role-card p{ font-family:var(--body); font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+/* chapter accordion */
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px; }
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap; }
+.ch-num{ font-family:var(--display); font-weight:700; font-size:32px; color:transparent; -webkit-text-stroke:1.4px var(--encre); line-height:1; flex-shrink:0; width:56px;}
+.ch-head .ch-info{ flex:1; min-width:200px; }
+.ch-head h3{ font-family:var(--display); font-weight:700; font-size:clamp(16px,2.2vw,21px);}
+.ch-head .ch-tag{ font-family:var(--body); font-size:11px; color:var(--mine); text-transform:uppercase; letter-spacing:.06em; margin-top:5px; font-weight:500;}
+.ch-chev{ width:20px; height:20px; color:var(--encre); flex-shrink:0; transition:transform .3s ease;}
+.chapitre.open .ch-chev{ transform:rotate(135deg); }
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px; }
+.chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px; }
+.ch-lead{ font-family:var(--body); font-size:15px; color:var(--papier); line-height:1.75; max-width:780px; margin-bottom:20px;}
+.ch-lead b{ color:var(--encre); font-weight:600; }
+.sub-ex{ margin-bottom:16px; }
+.sub-ex .lbl{ font-family:var(--display); font-size:11px; letter-spacing:.04em; color:var(--fumee); text-transform:uppercase; margin-bottom:6px; display:block;}
+.ch-body ul{ list-style:none; }
+.ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-family:var(--body); font-size:14px; line-height:1.6;}
+.ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--encre);}
+
+/* red-pen callout — script coverage note style */
+.redpen{ position:relative; margin-top:16px; padding:14px 16px 14px 20px; border-left:3px solid var(--encre); font-family:var(--body); font-size:13.5px; color:var(--papier); background:rgba(178,58,47,0.08);}
+.redpen b{ color:var(--encre); font-family:var(--display); font-size:11px; text-transform:uppercase; letter-spacing:.04em; display:block; margin-bottom:6px;}
+
+/* script format sample */
+.script-page{ background:var(--papier); color:var(--noir); padding:28px 30px; font-family:var(--display); font-size:12.5px; line-height:1.9; box-shadow:0 8px 22px rgba(0,0,0,0.35); max-width:520px; margin:18px auto;}
+.script-page .slug{ font-weight:700; letter-spacing:.02em;}
+.script-page .action{ margin:10px 0; }
+.script-page .char{ text-align:center; margin-top:14px; font-weight:700; }
+.script-page .dial{ max-width:340px; margin:0 auto; text-align:left; }
+.script-page .paren{ text-align:center; font-style:italic; font-size:11.5px; color:#555;}
+
+/* video / book cards */
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px; }
+@media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr; } }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--encre); transform:translateY(-2px); }
+.watch-card img{ width:96px; height:64px; object-fit:cover; flex-shrink:0; background:#000;}
+.watch-card .wc-info{ min-width:0; }
+.watch-card .wc-src{ font-family:var(--display); font-size:9.5px; color:var(--encre); text-transform:uppercase; letter-spacing:.04em;}
+.watch-card .wc-title{ font-family:var(--body); font-size:13.5px; color:var(--papier); margin-top:4px; line-height:1.35; font-weight:500;}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--encre); display:flex; align-items:center; justify-content:center;}
+.watch-card .wc-play svg{ width:12px; height:12px; fill:var(--papier); }
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--papier); }
+.book-card .spine{ width:8px; align-self:stretch; background:var(--mine); flex-shrink:0;}
+.book-card .bk-info .auth{ font-family:var(--display); font-size:10px; color:var(--mine); text-transform:uppercase; letter-spacing:.04em;}
+.book-card .bk-info .ttl{ font-family:var(--display); font-weight:700; font-size:14px; margin-top:4px; color:var(--papier);}
+.book-card .bk-info .desc{ font-family:var(--body); font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+/* exercice card */
+.exercice{ background:var(--papier); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28); }
+.exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--encre); }
+.exercice .ex-tag{ font-family:var(--display); font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--encre-d); font-weight:700; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:10px;}
+.exercice p, .exercice li{ font-family:var(--body); font-size:14px; color:#2c2822; line-height:1.7;}
+.exercice ol{ padding-left:20px; margin-top:8px;}
+.exercice li{ margin-bottom:6px;}
+
+/* corkboard beat sheet — signature */
+.corkboard{ background:#5a4636; border:1px solid var(--line); padding:24px; margin:22px 0; position:relative; }
+.corkboard .cap{ font-family:var(--display); font-size:11px; color:var(--papier); text-align:center; margin-top:16px; letter-spacing:.03em; opacity:.8;}
+.cork-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+@media(min-width:720px){ .cork-grid{ grid-template-columns:repeat(5,1fr); } }
+.cork-card{
+  background:var(--papier); color:var(--noir); padding:10px 8px; font-family:var(--display); font-size:9.5px; line-height:1.4;
+  box-shadow:0 4px 10px rgba(0,0,0,0.35); position:relative; text-align:center; min-height:64px; display:flex; align-items:center; justify-content:center;
+  transform:rotate(var(--r,0deg));
+}
+.cork-card::before{ content:""; position:absolute; top:-5px; left:50%; transform:translateX(-50%); width:9px; height:9px; border-radius:50%; background:var(--encre); box-shadow:0 1px 2px rgba(0,0,0,0.4);}
+
+/* case study */
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr; }
+@media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr; } }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--encre);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:17px; color:var(--papier); margin-bottom:6px;}
+.case-card .signature{ font-family:var(--display); font-size:10.5px; color:var(--encre); text-transform:uppercase; letter-spacing:.04em; margin-bottom:14px;}
+.case-card p{ font-family:var(--body); font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;}
+table.plain th{ text-align:left; font-family:var(--display); font-size:10.5px; color:var(--encre); text-transform:uppercase; letter-spacing:.04em; padding:10px; border-bottom:1px solid var(--encre);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-family:var(--body); font-size:13px; color:var(--fumee);}
+.table-wrap{ overflow-x:auto; }
+table.plain{ min-width:520px; }
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px; }
+.quiz-q p.q-text{ font-family:var(--display); font-weight:700; font-size:14.5px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer; transition:border-color .2s ease;}
+.quiz-opt:hover{ border-color:var(--mine); }
+.quiz-opt input{ accent-color:var(--encre); }
+.quiz-opt span{ font-family:var(--body); font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);}
+.quiz-opt.correct span{ color:#9fc19f; }
+.quiz-opt.wrong{ border-color:var(--encre); background:rgba(178,58,47,0.1);}
+.quiz-opt.wrong span{ color:var(--encre); }
+#quizScore{ font-family:var(--display); font-weight:700; font-size:19px; color:var(--encre); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center; }
+footer .manifesto{ font-family:var(--display); font-weight:700; font-size:clamp(17px,2.6vw,24px); color:var(--papier); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--display); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;}
+footer .brandline b{ color:var(--encre); }
+
+::-webkit-scrollbar{ width:8px; }
+::-webkit-scrollbar-track{ background:var(--noir); }
+::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--encre); }
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="car"></span> OKAPI STUDIOS — <b>LE SCÉNARISTE</b></div>
+    <nav class="links">
+      <a href="#role">Le rôle</a>
+      <a href="#chapitres">Chapitres</a>
+      <a href="#references">Références</a>
+      <a href="#biblio">Bibliographie</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu">
+    <a href="#role">Le rôle</a>
+    <a href="#chapitres">Les 9 chapitres</a>
+    <a href="#references">Approches d'auteurs</a>
+    <a href="#biblio">Bibliographie</a>
+    <a href="#quiz">Quiz</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">FADE IN: — Manuel de formation, écriture de scénario</div>
+  <h1 class="title">LE <span>SCÉNARISTE</span></h1>
+  <p class="subtitle">Structure, personnage, dialogue, formatage — l'art de faire tenir un monde entier dans 90 à 120 pages que quelqu'un doit avoir envie de tourner.</p>
+  <div class="page-stack">
+    <div class="pg pg1"></div>
+    <div class="pg pg2"></div>
+    <div class="pg pg3"><span>INT. BUREAU — NUIT<br>Page 1 / 90</span></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">15</div><div class="l">Beats (Save the Cat)</div></div>
+    <div class="stat"><div class="n">12pt</div><div class="l">Courier obligatoire</div></div>
+  </div>
+</section>
+
+<!-- ROLE -->
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">FADE IN</div>
+    <h2>Le scénario n'est pas de la littérature. C'est un plan de construction.</h2>
+    <p class="lede">Un roman se lit. Un scénario se <b style="color:var(--papier)">lit deux fois</b> : une fois par le lecteur, une fois par cent quatre-vingts personnes qui vont devoir en faire un film. Chaque ligne inutile coûte de l'argent réel à quelqu'un.</p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card">
+      <h4>📄 Ce qu'il produit</h4>
+      <p>Un document technique lisible en une heure par page, format Courier 12, qui décrit uniquement ce qui se voit et s'entend — jamais ce que pense un personnage.</p>
+    </div>
+    <div class="role-card">
+      <h4>🎯 Sa vraie compétence</h4>
+      <p>Compresser : faire tenir une psychologie entière de personnage dans une action, un objet, une réplique de six mots.</p>
+    </div>
+    <div class="role-card">
+      <h4>✂️ Son ennemi</h4>
+      <p>L'attachement. Chaque scène magnifique qui ne sert pas l'histoire doit mourir — c'est le vrai sujet du chapitre 07.</p>
+    </div>
+  </div>
+  <div class="redpen fade" style="margin-top:26px;">
+    <b>Note de lecture</b>
+    Robert McKee le dit sans détour dans <i>Story</i> : la structure n'est pas une formule qui brime la créativité, c'est ce qui la rend lisible par un public. Sans structure, il n'y a que du bruit émotionnel.
+  </div>
+</section>
+
+<!-- CHAPITRES -->
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">INT. FORMATION — JOUR</div>
+    <h2>Neuf chapitres, du pitch à la voix d'auteur.</h2>
+  </div>
+
+  <!-- CH01 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">01</div>
+      <div class="ch-info"><h3>Le pitch et la logline</h3><div class="ch-tag">Compression narrative</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Si tu ne peux pas résumer ton histoire en une phrase, c'est qu'elle n'est pas encore claire pour toi non plus. <b>La logline</b> contient un protagoniste, un objectif concret, un antagoniste ou obstacle, et un enjeu.</p>
+      <div class="sub-ex"><span class="lbl">Formule minimale</span><ul>
+        <li>Quand [événement déclencheur], [protagoniste] doit [objectif], sinon [enjeu].</li>
+      </ul></div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 01 — Trois loglines</span>
+        <h4>Écris 3 loglines pour 3 films différents</h4>
+        <ol>
+          <li>Choisis 3 films que tu connais bien.</li>
+          <li>Résume chacun en une phrase, avec la formule ci-dessus.</li>
+          <li>Fais-les lire à quelqu'un sans dire le titre — est-ce que ça donne envie ?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH02 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">02</div>
+      <div class="ch-info"><h3>La structure en trois actes</h3><div class="ch-tag">Save the Cat, beat sheet</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">La structure en trois actes n'est pas une prison créative — c'est un squelette. Le <b>beat sheet</b> de Blake Snyder la découpe en 15 beats précis, de l'image d'ouverture à l'image finale, chacun avec une fonction dramatique.</p>
+      <div class="corkboard">
+        <div class="cork-grid">
+          <div class="cork-card" style="--r:-2deg;">1. IMAGE D'OUVERTURE</div>
+          <div class="cork-card" style="--r:1deg;">2. ÉNONCÉ DU THÈME</div>
+          <div class="cork-card" style="--r:-1deg;">3. MISE EN PLACE</div>
+          <div class="cork-card" style="--r:2deg;">4. CATALYSEUR</div>
+          <div class="cork-card" style="--r:-2deg;">5. DÉBAT</div>
+          <div class="cork-card" style="--r:1deg;">6. PASSAGE À L'ACTE 2</div>
+          <div class="cork-card" style="--r:-1deg;">7. INTRIGUE B</div>
+          <div class="cork-card" style="--r:2deg;">8. JEUX & PLAISIR</div>
+          <div class="cork-card" style="--r:-2deg;">9. POINT MÉDIAN</div>
+          <div class="cork-card" style="--r:1deg;">10. LES MÉCHANTS SE RAPPROCHENT</div>
+        </div>
+        <div class="cap">Les 10 premiers des 15 beats de Blake Snyder — un plan de tournage narratif</div>
+      </div>
+      <div class="watch-row two">
+        <a class="watch-card" href="https://www.youtube.com/watch?v=2kil95fwMVo" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/2kil95fwMVo/hqdefault.jpg" alt="">
+          <div class="wc-info"><div class="wc-src">StudioBinder</div><div class="wc-title">Parasite expliqué en 15 beats — Save the Cat en pratique</div></div>
+          <div class="wc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+        <a class="watch-card" href="https://www.youtube.com/watch?v=BDIayz-hyKk" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/BDIayz-hyKk/hqdefault.jpg" alt="">
+          <div class="wc-info"><div class="wc-src">StudioBinder</div><div class="wc-title">Avengers: Infinity War vs le beat sheet — Thanos est-il le héros ?</div></div>
+          <div class="wc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+      </div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 02 — Découpe un film en 15 cartes</span>
+        <h4>Reconstruis un beat sheet</h4>
+        <ol>
+          <li>Choisis un film que tu connais par cœur.</li>
+          <li>Sur 15 cartes (ou post-it), écris un beat par carte.</li>
+          <li>Étale-les sur une table — vois-tu la mécanique à nu ?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH03 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">03</div>
+      <div class="ch-info"><h3>Le personnage et son désir</h3><div class="ch-tag">Want vs Need</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Tout bon protagoniste veut deux choses différentes : ce qu'il <b>croit</b> vouloir (want, souvent extérieur et concret) et ce dont il a <b>vraiment besoin</b> (need, souvent intérieur et émotionnel). L'histoire les fait se percuter.</p>
+      <div class="redpen">
+        <b>Note de lecture</b>
+        Ce principe fait écho au « super-objectif » travaillé côté acteur (voir « L'Acteur Vivant », Module 2) — le want du scénariste est ce que l'acteur transforme en objectif de scène jouable.
+      </div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 03 — Want vs Need</span>
+        <h4>Sépare les deux désirs d'un personnage</h4>
+        <ol>
+          <li>Invente un personnage en 2 phrases.</li>
+          <li>Écris son want (ce qu'il poursuit activement) et son need (ce qui le guérirait vraiment).</li>
+          <li>Imagine une scène où obtenir le want l'éloigne du need.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH04 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">04</div>
+      <div class="ch-info"><h3>Le formatage professionnel</h3><div class="ch-tag">Standard industrie</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Un scénario mal formaté se repère en 5 secondes et finit rarement lu. <b>Une page en Courier 12 = environ une minute de film</b> — c'est pour ça que le format n'est pas cosmétique, il sert à budgéter un tournage avant même le premier jour.</p>
+      <div class="script-page">
+        <div class="slug">INT. CUISINE — NUIT</div>
+        <div class="action">Une lampe unique éclaire la table. LÉA (30 ans, épuisée) fixe une lettre non ouverte.</div>
+        <div class="char">LÉA</div>
+        <div class="paren">(sans lever les yeux)</div>
+        <div class="dial">Tu savais, n'est-ce pas.</div>
+      </div>
+      <div class="table-wrap">
+        <table class="plain">
+          <tr><th>Élément</th><th>Règle</th></tr>
+          <tr><td>Scene heading</td><td>INT./EXT. — LIEU — MOMENT, toujours en majuscules</td></tr>
+          <tr><td>Action</td><td>Présent, ce qui se voit uniquement, pas de pensées internes</td></tr>
+          <tr><td>Nom du personnage</td><td>Majuscules, centré, avant chaque réplique</td></tr>
+        </table>
+      </div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 04 — Reformate une scène</span>
+        <h4>Passe du roman au scénario</h4>
+        <ol>
+          <li>Prends un court passage d'un roman (3-4 phrases avec dialogue).</li>
+          <li>Réécris-le au format scénario — supprime tout ce qui n'est ni visible ni audible.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH05 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">05</div>
+      <div class="ch-info"><h3>Le dialogue qui sonne juste</h3><div class="ch-tag">Sous-texte</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Personne, dans la vraie vie, ne dit exactement ce qu'il pense. <b>Le bon dialogue cache autant qu'il révèle.</b> Si tes personnages disent tout ce qu'ils ressentent, ton dialogue explique — il ne dramatise pas.</p>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 05 — Dire sans dire</span>
+        <h4>Écris une rupture sans le mot "rupture"</h4>
+        <ol>
+          <li>Écris une scène de rupture amoureuse de 8 répliques.</li>
+          <li>Interdiction d'utiliser les mots "aimer", "quitter", "fini", "rompre".</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH06 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">06</div>
+      <div class="ch-info"><h3>Entrer tard, sortir tôt</h3><div class="ch-tag">Construction de scène</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">La plupart des scènes commencent trop tôt (on voit les personnages arriver, s'installer) et finissent trop tard (on voit la conséquence évidente). <b>Coupe au dernier moment possible, quitte dès que le point est fait.</b></p>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 06 — Coupe les deux bouts</span>
+        <h4>Élague une scène existante</h4>
+        <ol>
+          <li>Reprends une scène que tu as déjà écrite (ou une scène de film transcrite).</li>
+          <li>Coupe la première et la dernière réplique. La scène fonctionne-t-elle encore ?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH07 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">07</div>
+      <div class="ch-info"><h3>La réécriture : tuer ses chouchous</h3><div class="ch-tag">Révision</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Le premier jet sert à découvrir l'histoire. La réécriture sert à la servir — même si ça veut dire supprimer la réplique la plus brillante que tu aies jamais écrite parce qu'elle ralentit la scène. <b>"Kill your darlings"</b> n'est pas une punition, c'est un tri.</p>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 07 — Le sacrifice</span>
+        <h4>Coupe ta meilleure phrase</h4>
+        <ol>
+          <li>Relis un texte que tu as écrit récemment.</li>
+          <li>Trouve la phrase dont tu es le plus fier.</li>
+          <li>Supprime-la. Le texte est-il plus faible, ou juste différent ?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH08 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">08</div>
+      <div class="ch-info"><h3>Le pitch oral et la note d'intention</h3><div class="ch-tag">Vendre son histoire</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Un scénario ne se défend pas seul. Savoir le pitcher en 60 secondes, et écrire une note d'intention qui explique <b>pourquoi ce film et pourquoi maintenant</b>, fait souvent la différence entre un tiroir et un tournage.</p>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 08 — Le pitch de l'ascenseur</span>
+        <h4>60 secondes, chrono</h4>
+        <ol>
+          <li>Pitche ton histoire à voix haute, minuté à 60 secondes.</li>
+          <li>Enregistre-toi. Réécoute — où t'essouffles-tu ? Où perds-tu le fil ?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH09 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">09</div>
+      <div class="ch-info"><h3>Trouver sa voix d'auteur</h3><div class="ch-tag">Style</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">La structure et le format sont communs à tous. Ce qui distingue un scénariste, c'est <b>ce qui l'obsède</b> — les questions qu'il pose toujours, les types de personnages qu'il revisite. Voir la section « Approches d'auteurs » ci-dessous.</p>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 09 — Ton obsession</span>
+        <h4>Nomme ta question récurrente</h4>
+        <ol>
+          <li>Relis 3 histoires que tu as commencé à écrire, même abandonnées.</li>
+          <li>Cherche la question qui revient — c'est probablement ton vrai sujet.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Approches d'auteurs</div>
+    <h2>Trois écoles, trois façons de penser la structure.</h2>
+  </div>
+  <div class="case-strip fade">
+    <div class="case-card">
+      <div class="name">Robert McKee</div>
+      <div class="signature">La structure comme substance</div>
+      <p>La forme naît du contenu, jamais l'inverse. McKee refuse les formules toutes faites au profit de principes universels sur le conflit et le changement.</p>
+    </div>
+    <div class="case-card">
+      <div class="name">Blake Snyder</div>
+      <div class="signature">La structure comme carte précise</div>
+      <p>15 beats, à la page près. Une approche pragmatique et commerciale, pensée pour vendre un scénario à Hollywood — redoutablement efficace en diagnostic.</p>
+    </div>
+    <div class="case-card">
+      <div class="name">Syd Field</div>
+      <div class="signature">La structure comme paradigme fondateur</div>
+      <p>Le premier à avoir rendu la structure en trois actes accessible au grand public — la base sur laquelle presque tous les autres modèles se sont construits.</p>
+    </div>
+  </div>
+  <div class="watch-row fade" style="margin-top:26px;">
+    <a class="watch-card" href="https://www.youtube.com/channel/UCErSSa3CaP_GJxmFpdjG9Jw" target="_blank" rel="noopener">
+      <div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="wc-info"><div class="wc-src">Lessons from the Screenplay — chaîne</div><div class="wc-title">Analyses de scénarios primés, scène par scène</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- BIBLIOGRAPHIE -->
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Pour aller plus loin</div>
+    <h2>Bibliographie et ressources.</h2>
+  </div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://www.amazon.com/Story-Substance-Structure-Principles-Screenwriting/dp/0060391685" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Robert McKee</span><div class="ttl">Story (1997)</div><div class="desc">La référence exigeante — principes universels de structure et de conflit, au-delà des formules.</div></div>
+    </a>
+    <a class="book-card" href="https://www.goodreads.com/book/show/49464.Save_the_Cat" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Blake Snyder</span><div class="ttl">Save the Cat! (2005)</div><div class="desc">Le beat sheet en 15 étapes — la carte la plus utilisée dans l'industrie aujourd'hui.</div></div>
+    </a>
+    <div class="book-card">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Syd Field</span><div class="ttl">Screenplay: The Foundations of Screenwriting</div><div class="desc">Le paradigme fondateur en trois actes — le point de départ historique de tous les autres modèles.</div></div>
+    </div>
+    <div class="book-card">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Linda Seger</span><div class="ttl">Making a Good Script Great</div><div class="desc">Un manuel de diagnostic — comment repérer et réparer les failles structurelles d'un premier jet.</div></div>
+    </div>
+    <a class="book-card" href="https://www.studiobinder.com/blog/save-the-cat-beat-sheet/" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">StudioBinder — Article</span><div class="ttl">Save the Cat Beat Sheet Explained (avec template gratuit)</div><div class="desc">Décomposition beat par beat, avec exemples tirés de The Matrix.</div></div>
+    </a>
+    <a class="book-card" href="https://www.studiobinder.com/blog/three-act-structure/" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">StudioBinder — Article</span><div class="ttl">La structure en trois actes, expliquée via Jurassic Park</div><div class="desc">Application concrète du paradigme de Syd Field sur un film connu.</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Vérifie ce que tu as retenu</div>
+    <h2>Le petit quiz de fin de parcours.</h2>
+  </div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text">1. Une logline doit contenir, au minimum :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le nom de tous les personnages secondaires</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Le titre et le genre du film</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Un protagoniste, un objectif, un enjeu</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text">2. À combien de pages correspond environ une minute de film ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>3 pages</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>1 page</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>5 pages</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text">3. La différence entre "want" et "need" d'un personnage :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Le want est visible et poursuivi, le need est intérieur et souvent ignoré</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Ce sont deux mots pour la même chose</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Le need n'apparaît jamais dans un bon scénario</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text">4. "Entrer tard, sortir tôt" dans une scène signifie :</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Écrire des scènes très courtes uniquement</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Couper avant et après le strict nécessaire dramatique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Toujours commencer par une entrée de personnage</span></label>
+    </div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:12px; letter-spacing:.04em; text-transform:uppercase; background:var(--encre); color:var(--papier); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="manifesto">FADE OUT.<br>Une bonne histoire n'a pas besoin d'être expliquée — elle a besoin d'être structurée.</p>
+  <div class="brandline">Le Scénariste — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const mmenu = document.getElementById('mmenu');
+  burger.addEventListener('click', ()=> mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mmenu.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.1 });
+  document.querySelectorAll('.fade').forEach(el=> io.observe(el));
+
+  const secIds = ['role','chapitres','references','biblio','quiz'];
+  const sections = secIds.map(id=>document.getElementById(id)).filter(Boolean);
+  const navLinks = document.querySelectorAll('nav.links a');
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        navLinks.forEach(l=> l.classList.toggle('active', l.getAttribute('href') === '#'+entry.target.id));
+      }
+    });
+  }, { rootMargin:'-40% 0px -50% 0px' });
+  sections.forEach(s=> spy.observe(s));
+
+  document.querySelectorAll('[data-toggle]').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      const ch = head.closest('.chapitre');
+      const wasOpen = ch.classList.contains('open');
+      document.querySelectorAll('.chapitre.open').forEach(c=> c.classList.remove('open'));
+      if(!wasOpen){ ch.classList.add('open'); }
+    });
+  });
+  document.querySelector('[data-ch]')?.classList.add('open');
+
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
+    });
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / 4 bonnes réponses' + (score===4 ? ' — parfait !' : '');
+  });
+</script>
+
+</body>
+</html>

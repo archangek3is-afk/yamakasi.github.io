@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>La Collection — Manuels de formation par poste de cinéma · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#141414; --noir-2:#1c1c1c; --noir-3:#242424;
+  --rouge:#e4312b; --parchemin:#ede6d6; --craie:#f4f1e8;
+  --fumee:#8a8a85; --line:rgba(244,241,232,0.12);
+  --display:'Archivo', sans-serif; --body:'Poppins', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.6; }
+header{ padding:70px 22px 40px; text-align:center; border-bottom:1px solid var(--line); }
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.24em; color:var(--rouge); text-transform:uppercase; margin-bottom:18px;}
+h1{ font-family:var(--display); font-weight:800; font-size:clamp(38px,8vw,76px); letter-spacing:-0.01em;}
+h1 span{ color:var(--rouge); }
+p.lede{ font-family:var(--body); font-size:16px; color:var(--fumee); max-width:520px; margin:20px auto 0;}
+main{ max-width:1100px; margin:0 auto; padding:60px 22px 100px; }
+.grid{ display:grid; gap:16px; grid-template-columns:1fr; }
+@media(min-width:680px){ .grid{ grid-template-columns:1fr 1fr; } }
+@media(min-width:980px){ .grid{ grid-template-columns:1fr 1fr 1fr; } }
+.card{
+  background:var(--noir-2); border:1px solid var(--line); padding:26px;
+  border-top:3px solid var(--rouge); position:relative; text-decoration:none; color:inherit; display:block;
+  transition:transform .25s ease, border-color .25s ease;
+}
+.card.live:hover{ transform:translateY(-3px); border-top-color:var(--craie); }
+.card.soon{ opacity:.45; border-top-color:var(--fumee); cursor:default; }
+.card .num{ font-family:var(--mono); font-size:11px; color:var(--fumee); letter-spacing:.06em;}
+.card h3{ font-family:var(--display); font-weight:700; font-size:19px; margin:10px 0 8px;}
+.card p{ font-size:13px; color:var(--fumee); line-height:1.6;}
+.card .status{
+  display:inline-block; margin-top:14px; font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+  padding:5px 10px; border:1px solid var(--rouge); color:var(--rouge);
+}
+.card.soon .status{ border-color:var(--fumee); color:var(--fumee); }
+footer{ text-align:center; padding:50px 22px; border-top:1px solid var(--line); font-family:var(--mono); font-size:11px; color:var(--fumee); letter-spacing:.1em; text-transform:uppercase;}
+footer b{ color:var(--rouge); }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Okapi Studios — Centre de formation</div>
+  <h1>LA <span>COLLECTION</span></h1>
+  <p class="lede">Un manuel par poste de cinéma. Théorie, exercices, vidéos et bibliographie — pour apprendre le métier, pas juste le vocabulaire.</p>
+</header>
+<main>
+  <div class="grid">
+    <a class="card live" href="realisateur.html">
+      <span class="num">01 — Mise en scène</span>
+      <h3>Le Réalisateur</h3>
+      <p>Découpage de scénario, grammaire du plan, direction d'acteurs, style personnel.</p>
+      <span class="status">● Disponible</span>
+    </a>
+    <a class="card live" href="directeur-photographie.html">
+      <span class="num">02 — Image</span>
+      <h3>Le Directeur de la photographie</h3>
+      <p>Lumière, optique, mouvement de caméra, dialogue avec la mise en scène.</p>
+      <span class="status">● Disponible</span>
+    </a>
+    <div class="card soon">
+      <span class="num">03 — Écriture</span>
+      <h3>Le Scénariste</h3>
+      <p>Structure, personnage, dialogue, formatage professionnel.</p>
+      <span class="status">À venir</span>
+    </div>
+    <div class="card soon">
+      <span class="num">04 — Post-production</span>
+      <h3>Le Monteur</h3>
+      <p>Rythme, raccords, construction de la tension, montage son image.</p>
+      <span class="status">À venir</span>
+    </div>
+    <div class="card soon">
+      <span class="num">05 — Son</span>
+      <h3>L'Ingénieur du son</h3>
+      <p>Prise de son de tournage, sound design, mixage.</p>
+      <span class="status">À venir</span>
+    </div>
+    <a class="card live" href="decoration-cinema.html">
+      <span class="num">06 — Décor</span>
+      <h3>Le Décorateur</h3>
+      <p>Direction artistique, moodboard, symbolisme des objets, budget.</p>
+      <span class="status">● Disponible</span>
+    </a>
+    <div class="card soon">
+      <span class="num">07 — Costume</span>
+      <h3>La Costumière</h3>
+      <p>Silhouette de personnage, continuité, recherche historique.</p>
+      <span class="status">À venir</span>
+    </div>
+    <div class="card soon">
+      <span class="num">08 — Casting</span>
+      <h3>Le Directeur de casting</h3>
+      <p>Lecture d'audition, association acteur-personnage, négociation.</p>
+      <span class="status">À venir</span>
+    </div>
+    <div class="card soon">
+      <span class="num">09 — Production</span>
+      <h3>Le Producteur</h3>
+      <p>Financement, planning, gestion de risque, relation studio.</p>
+      <span class="status">À venir</span>
+    </div>
+    <div class="card soon">
+      <span class="num">10 — Régie</span>
+      <h3>Le Régisseur général</h3>
+      <p>Repérages, logistique de tournage, sécurité du plateau.</p>
+      <span class="status">À venir</span>
+    </div>
+    <div class="card soon">
+      <span class="num">11 — Étalonnage</span>
+      <h3>L'Étalonneur</h3>
+      <p>Grading, look final, cohérence colorimétrique du film.</p>
+      <span class="status">À venir</span>
+    </div>
+    <a class="card live" href="acteur-vivant.html">
+      <span class="num">00 — Interprétation</span>
+      <h3>L'Acteur Vivant</h3>
+      <p>Présence, corps, vérité émotionnelle, architecture du personnage.</p>
+      <span class="status">● Disponible</span>
+    </a>
+  </div>
+</main>
+<footer>Okapi Studios — <b>Centre de formation</b> · Okapi World Média</footer>
+</body>
+</html>

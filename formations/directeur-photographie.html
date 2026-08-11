@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Directeur de la Photographie — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#0d0d0f;
+  --noir-2:#161619;
+  --noir-3:#1e1e22;
+  --tungsten:#f2a154;
+  --tungsten-d:#c97e38;
+  --daylight:#6fa8c9;
+  --film:#eae4d3;
+  --fumee:#8f8b81;
+  --line: rgba(234,228,211,0.12);
+  --display:'Space Grotesk', sans-serif;
+  --body:'Poppins', sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{ scroll-behavior:smooth; }
+body{ background:var(--noir); color:var(--film); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased; }
+::selection{ background:var(--tungsten); color:var(--noir); }
+img,svg{ display:block; max-width:100%; }
+
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(242,161,84,0.10), transparent 40%),
+    radial-gradient(circle at 88% 82%, rgba(111,168,201,0.10), transparent 40%);
+}
+
+/* ---------- nav ---------- */
+header.top{ position:sticky; top:0; z-index:200; background:rgba(13,13,15,0.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--fumee); text-transform:uppercase;}
+.brand .iris{ width:14px; height:14px; border-radius:50%; border:2px solid var(--tungsten); position:relative; flex-shrink:0;}
+.brand .iris::after{ content:""; position:absolute; inset:3px; border-radius:50%; background:var(--daylight);}
+.brand b{ color:var(--film); font-weight:600;}
+nav.links{ display:none; gap:26px; }
+nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--tungsten); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--film); }
+nav.links a:hover::after, nav.links a.active::after{ width:100%; }
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+.burger span{ width:22px; height:2px; background:var(--film); }
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;}
+.mmenu.open{ display:flex; }
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;}
+.mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex; } .burger{ display:none; } }
+
+/* ---------- hero ---------- */
+.hero{ position:relative; min-height:90vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.26em; color:var(--tungsten); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:700; font-size:clamp(40px,10vw,100px); line-height:.98; letter-spacing:-0.01em; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span.t{ color:var(--tungsten); }
+h1.title span.d{ color:var(--daylight); }
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:580px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:48px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .7s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;}
+.stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:700; font-size:24px; color:var(--tungsten);}
+.stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.08em; margin-top:3px;}
+
+/* ---------- scaffolding ---------- */
+main{ position:relative; z-index:1; }
+section{ max-width:1180px; margin:0 auto; padding:90px 22px; }
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.fade.in{ opacity:1; transform:translateY(0); }
+.section-head{ margin-bottom:46px; }
+.section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--tungsten); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(28px,4.4vw,46px); line-height:1.08; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr; }
+@media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr; } }
+@media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr; } }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--tungsten);}
+.role-card.d{ border-top-color:var(--daylight); }
+.role-card h4{ font-family:var(--display); font-weight:600; font-size:16px; margin-bottom:8px;}
+.role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+/* chapter accordion */
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px; }
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap; }
+.ch-num{ font-family:var(--display); font-weight:700; font-size:36px; color:transparent; -webkit-text-stroke:1.4px var(--tungsten); line-height:1; flex-shrink:0; width:58px;}
+.ch-head .ch-info{ flex:1; min-width:200px; }
+.ch-head h3{ font-family:var(--display); font-weight:600; font-size:clamp(18px,2.4vw,23px);}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--daylight); text-transform:uppercase; letter-spacing:.06em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--tungsten); flex-shrink:0; transition:transform .3s ease;}
+.chapitre.open .ch-chev{ transform:rotate(135deg); }
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px; }
+.chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px; }
+.ch-lead{ font-size:15px; color:var(--film); line-height:1.75; max-width:780px; margin-bottom:20px;}
+.ch-lead b{ color:var(--tungsten); font-weight:600; }
+.sub-ex{ margin-bottom:16px; }
+.sub-ex .lbl{ font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase; margin-bottom:6px; display:block;}
+.ch-body ul{ list-style:none; }
+.ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;}
+.ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--tungsten);}
+.callout{ background:rgba(242,161,84,0.08); border:1px solid var(--tungsten-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--film);}
+.callout b{ color:var(--tungsten); }
+.callout.cool{ background:rgba(111,168,201,0.08); border-color:var(--daylight); }
+.callout.cool b{ color:var(--daylight); }
+
+/* video / book cards */
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px; }
+@media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr; } }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--tungsten); transform:translateY(-2px); }
+.watch-card img{ width:96px; height:64px; object-fit:cover; flex-shrink:0; background:#000;}
+.watch-card .wc-info{ min-width:0; }
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--tungsten); text-transform:uppercase; letter-spacing:.06em;}
+.watch-card .wc-title{ font-size:13.5px; color:var(--film); margin-top:4px; line-height:1.35; font-weight:500;}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--tungsten); display:flex; align-items:center; justify-content:center;}
+.watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir); }
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--film); }
+.book-card .spine{ width:8px; align-self:stretch; background:var(--daylight); flex-shrink:0;}
+.book-card .bk-info .auth{ font-family:var(--mono); font-size:10px; color:var(--daylight); text-transform:uppercase; letter-spacing:.06em;}
+.book-card .bk-info .ttl{ font-family:var(--display); font-weight:600; font-size:14.5px; margin-top:4px; color:var(--film);}
+.book-card .bk-info .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+/* exercice card */
+.exercice{ background:var(--film); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28); }
+.exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--tungsten); }
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--tungsten-d); font-weight:500; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:600; font-size:17px; margin-bottom:10px;}
+.exercice p, .exercice li{ font-size:14px; color:#2c2822; line-height:1.7;}
+.exercice ol{ padding-left:20px; margin-top:8px;}
+.exercice li{ margin-bottom:6px;}
+
+/* diagrams */
+.diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0; }
+.diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px; letter-spacing:.03em;}
+
+/* kelvin interactive slider */
+.kelvin-app{ display:flex; flex-direction:column; align-items:center; gap:20px; }
+.kelvin-preview{ width:100%; max-width:420px; height:120px; border-radius:2px; transition:background .2s ease; display:flex; align-items:center; justify-content:center;}
+.kelvin-preview .k-label{ font-family:var(--mono); font-size:22px; font-weight:600; color:#0d0d0f; text-shadow:0 1px 2px rgba(255,255,255,0.2);}
+.kelvin-slider{ width:100%; max-width:420px; }
+.kelvin-slider input{ width:100%; accent-color:var(--tungsten); height:6px;}
+.kelvin-tags{ display:flex; justify-content:space-between; width:100%; max-width:420px; font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em;}
+.kelvin-desc{ font-size:13px; color:var(--fumee); text-align:center; max-width:420px; }
+
+/* triangle diagram */
+.tri-labels{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:18px;}
+.tri-labels div{ text-align:center; }
+.tri-labels .k{ font-family:var(--mono); font-size:11px; color:var(--tungsten); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:4px;}
+.tri-labels p{ font-size:12.5px; color:var(--fumee); }
+
+/* case study */
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr; }
+@media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr; } }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--daylight);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:19px; color:var(--film); margin-bottom:6px;}
+.case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--daylight); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px;}
+.case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;}
+table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--tungsten); text-transform:uppercase; letter-spacing:.06em; padding:10px; border-bottom:1px solid var(--tungsten);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);}
+.table-wrap{ overflow-x:auto; }
+table.plain{ min-width:520px; }
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px; }
+.quiz-q p.q-text{ font-family:var(--display); font-weight:600; font-size:15.5px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer; transition:border-color .2s ease;}
+.quiz-opt:hover{ border-color:var(--daylight); }
+.quiz-opt input{ accent-color:var(--tungsten); }
+.quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);}
+.quiz-opt.correct span{ color:#9fc19f; }
+.quiz-opt.wrong{ border-color:var(--tungsten); background:rgba(242,161,84,0.1);}
+.quiz-opt.wrong span{ color:var(--tungsten); }
+#quizScore{ font-family:var(--display); font-weight:700; font-size:20px; color:var(--tungsten); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center; }
+footer .manifesto{ font-family:var(--display); font-weight:600; font-size:clamp(20px,3vw,28px); color:var(--film); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; color:var(--fumee); text-transform:uppercase;}
+footer .brandline b{ color:var(--tungsten); }
+
+::-webkit-scrollbar{ width:8px; }
+::-webkit-scrollbar-track{ background:var(--noir); }
+::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--tungsten); }
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="iris"></span> OKAPI STUDIOS — <b>LE DIRECTEUR DE LA PHOTOGRAPHIE</b></div>
+    <nav class="links">
+      <a href="#role">Le rôle</a>
+      <a href="#chapitres">Chapitres</a>
+      <a href="#references">Références</a>
+      <a href="#biblio">Bibliographie</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu">
+    <a href="#role">Le rôle</a>
+    <a href="#chapitres">Les 9 chapitres</a>
+    <a href="#references">Références créatives</a>
+    <a href="#biblio">Bibliographie</a>
+    <a href="#quiz">Quiz</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">Manuel de formation — Direction de la photographie</div>
+  <h1 class="title">LE <span class="t">DIRECTEUR</span><br>DE LA <span class="d">PHOTOGRAPHIE</span></h1>
+  <p class="subtitle">Exposition, lumière, optique, mouvement — le métier qui traduit une intention en photons, un f-stop à la fois.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">03</div><div class="l">Études de style</div></div>
+    <div class="stat"><div class="n">3200–5600</div><div class="l">Kelvin</div></div>
+  </div>
+</section>
+
+<!-- LE ROLE -->
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">Avant de commencer</div>
+    <h2>Le réalisateur dit "j'ai peur". Le DP répond en f-stops.</h2>
+    <p class="lede">Le directeur de la photographie (DP, ou chef opérateur) est le traducteur : il prend une intention émotionnelle, souvent floue, et la convertit en décisions techniques précises — exposition, optique, position de la source lumineuse.</p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card">
+      <h4>📷 Ce qu'il décide</h4>
+      <p>Le cadrage, la lumière, l'optique, le mouvement de caméra — et surtout la <b style="color:var(--film)">cohérence visuelle</b> du film du premier au dernier plan.</p>
+    </div>
+    <div class="role-card d">
+      <h4>🤝 Son binôme</h4>
+      <p>Le réalisateur choisit le sens. Le DP choisit les moyens. Le meilleur travail vient d'un dialogue permanent, jamais d'un DP qui exécute sans discuter.</p>
+    </div>
+    <div class="role-card">
+      <h4>💡 Sa vraie compétence</h4>
+      <p>Contrôler la lumière — pas juste "avoir assez de lumière", mais sculpter où elle tombe et où elle ne tombe pas.</p>
+    </div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;">
+    <b>À retenir —</b> Blain Brown, dans <i>Cinematography: Theory and Practice</i>, insiste : le rôle du DP inclut la responsabilité de faire comprendre au réalisateur ce que la caméra peut et ne peut pas faire — la collaboration ne marche que dans les deux sens.
+  </div>
+</section>
+
+<!-- CHAPITRES -->
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Le parcours</div>
+    <h2>Neuf chapitres, de l'exposition au style personnel.</h2>
+    <p class="lede">Clique sur un chapitre pour l'ouvrir.</p>
+  </div>
+
+  <!-- CH01 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">01</div>
+      <div class="ch-info"><h3>La triade de l'exposition</h3><div class="ch-tag">Fondations techniques</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Trois réglages contrôlent la quantité de lumière qui atteint le capteur — et chacun a un <b>effet secondaire créatif</b> en plus de son effet technique. Comprendre ce triangle, c'est comprendre pourquoi un DP ne "monte" jamais un seul réglage sans compenser les deux autres.</p>
+      <div class="diagram-wrap">
+        <div class="tri-labels">
+          <div><span class="k">Ouverture</span><p>Contrôle la lumière ET la profondeur de champ — grand ouvert = arrière-plan flou.</p></div>
+          <div><span class="k">Vitesse</span><p>Contrôle la lumière ET le flou de mouvement — lent = filé, rapide = net et saccadé.</p></div>
+          <div><span class="k">ISO / Sensibilité</span><p>Contrôle la lumière ET le grain/bruit — plus haut = image plus sensible mais plus bruitée.</p></div>
+        </div>
+        <div class="cap">Le triangle d'exposition — chaque réglage a un prix créatif, pas seulement technique</div>
+      </div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 01 — Le compromis volontaire</span>
+        <h4>Choisis un effet, déduis le réglage</h4>
+        <ol>
+          <li>Imagine une scène de poursuite nocturne : tu veux un flou de mouvement marqué.</li>
+          <li>Quel réglage de vitesse choisis-tu ? Que dois-tu ajuster en conséquence pour garder une exposition correcte ?</li>
+          <li>Fais le même exercice pour un portrait avec arrière-plan totalement flou en plein jour.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH02 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">02</div>
+      <div class="ch-info"><h3>La focale et la perspective</h3><div class="ch-tag">Optique</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Une focale n'est pas qu'un zoom — elle change la <b>relation psychologique</b> entre le sujet et son environnement. Un grand angle proche du visage déforme et intensifie ; un téléobjectif compresse l'espace et isole le sujet du décor.</p>
+      <div class="watch-row two">
+        <a class="watch-card" href="https://www.youtube.com/watch?v=XauCohV3r-Q" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/XauCohV3r-Q/hqdefault.jpg" alt="">
+          <div class="wc-info"><div class="wc-src">YouTube</div><div class="wc-title">From Boring to Cinematic: The Power of Focal Length</div></div>
+          <div class="wc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+        <a class="watch-card" href="https://www.studiobinder.com/blog/focal-length-camera-lenses-explained/" target="_blank" rel="noopener">
+          <div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="wc-info"><div class="wc-src">StudioBinder — Article</div><div class="wc-title">Focal Length: guide complet des objectifs de caméra</div></div>
+        </a>
+      </div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 02 — Le même plan, deux focales</span>
+        <h4>Observe la compression en vrai</h4>
+        <ol>
+          <li>Prends deux photos du même sujet à la même taille dans le cadre — une avec ton téléphone très proche (grand angle), une très loin en zoomant (téléobjectif).</li>
+          <li>Compare : que se passe-t-il à l'arrière-plan dans les deux cas ?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH03 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">03</div>
+      <div class="ch-info"><h3>La lumière comme langage</h3><div class="ch-tag">Éclairage à trois points</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Le schéma de base — clé, remplissage, contre-jour — n'est pas une recette à suivre aveuglément, c'est un <b>vocabulaire</b> à partir duquel on choisit consciemment de s'écarter. John Alton, pionnier du film noir, construisait des ambiances entières en retirant volontairement le remplissage.</p>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 600 220" style="width:100%; height:auto;">
+          <rect width="600" height="220" fill="#0a0a0c"/>
+          <circle cx="300" cy="130" r="34" fill="#3a3833"/>
+          <line x1="140" y1="40" x2="278" y2="112" stroke="#f2a154" stroke-width="3"/>
+          <circle cx="140" cy="40" r="8" fill="#f2a154"/>
+          <text x="130" y="28" fill="#f2a154" font-family="IBM Plex Mono" font-size="10" text-anchor="middle">CLÉ (KEY)</text>
+          <line x1="460" y1="70" x2="322" y2="118" stroke="#6fa8c9" stroke-width="2" stroke-dasharray="4 3"/>
+          <circle cx="460" cy="70" r="7" fill="#6fa8c9"/>
+          <text x="470" y="58" fill="#6fa8c9" font-family="IBM Plex Mono" font-size="10" text-anchor="middle">REMPLISSAGE</text>
+          <line x1="300" y1="10" x2="300" y2="96" stroke="#eae4d3" stroke-width="2"/>
+          <circle cx="300" cy="10" r="7" fill="#eae4d3"/>
+          <text x="300" y="200" fill="#8f8b81" font-family="IBM Plex Mono" font-size="10" text-anchor="middle">CONTRE-JOUR — sépare le sujet du fond</text>
+        </svg>
+        <div class="cap">Schéma d'éclairage à trois points — la base à connaître avant de savoir s'en écarter</div>
+      </div>
+      <div class="watch-row two">
+        <div class="book-card">
+          <div class="spine"></div>
+          <div class="bk-info"><span class="auth">John Alton</span><div class="ttl">Painting with Light (1949)</div><div class="desc">Le texte fondateur sur l'usage dramatique de la lumière — encore la référence des DP contemporains.</div></div>
+        </div>
+      </div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 03 — Une lampe, un visage</span>
+        <h4>Éclaire un visage avec une seule source</h4>
+        <ol>
+          <li>Utilise une seule lampe (même le flash de ton téléphone) sur un visage, dans une pièce sombre.</li>
+          <li>Déplace-la : au-dessus, en dessous, sur le côté, en contre-jour. Photographie chaque position.</li>
+          <li>Note l'émotion que chaque position évoque, sans rien changer d'autre.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH04 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">04</div>
+      <div class="ch-info"><h3>La température de couleur</h3><div class="ch-tag">Tungstène vs lumière du jour</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Toute lumière a une couleur, mesurée en degrés Kelvin. Une ampoule tungstène (≈3200K) est orangée ; la lumière du jour (≈5600K) est bleutée. <b>Mélanger les deux sans le vouloir</b> est l'erreur n°1 des débutants — mélanger les deux volontairement est un outil narratif puissant.</p>
+      <div class="diagram-wrap">
+        <div class="kelvin-app">
+          <div class="kelvin-preview" id="kelvinPreview"><span class="k-label" id="kelvinLabel">4400K</span></div>
+          <div class="kelvin-slider"><input type="range" id="kelvinSlider" min="2000" max="10000" value="4400" step="100"></div>
+          <div class="kelvin-tags"><span>Bougie 1900K</span><span>Tungstène 3200K</span><span>Jour 5600K</span><span>Ombre 9000K</span></div>
+          <div class="kelvin-desc" id="kelvinDesc">Déplace le curseur pour voir comment la couleur perçue change avec la température.</div>
+        </div>
+        <div class="cap">Simulateur de température de couleur — de la bougie au ciel ombragé</div>
+      </div>
+      <div class="callout cool"><b>Usage narratif —</b> Spielberg et son DP Janusz Kamiński opposent souvent une lumière chaude intérieure à une lumière froide extérieure pour marquer la frontière entre sécurité et danger.</div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 04 — Chasse aux mélanges</span>
+        <h4>Repère les températures mélangées autour de toi</h4>
+        <ol>
+          <li>Le soir, dans une pièce éclairée à l'intérieur avec une fenêtre donnant sur l'extérieur encore lumineux, observe les deux teintes de lumière.</li>
+          <li>Prends une photo en laissant la balance des blancs automatique — regarde comment l'appareil "choisit" une teinte dominante.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH05 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">05</div>
+      <div class="ch-info"><h3>Composition et cadrage</h3><div class="ch-tag">Langage visuel</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">La règle des tiers, la symétrie, le cadre dans le cadre, l'espace négatif — ce sont des outils pour diriger l'œil du spectateur <b>avant même qu'il ne sache qu'on le dirige</b>.</p>
+      <div class="watch-row two">
+        <a class="watch-card" href="https://www.youtube.com/watch?v=qQNiqzuXjoM" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/qQNiqzuXjoM/hqdefault.jpg" alt="">
+          <div class="wc-info"><div class="wc-src">StudioBinder</div><div class="wc-title">Camera Framing: Shot Composition & Cinematography Techniques Explained</div></div>
+          <div class="wc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+        <a class="watch-card" href="https://www.youtube.com/watch?v=wLfZL9PZI9k" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/wLfZL9PZI9k/hqdefault.jpg" alt="">
+          <div class="wc-info"><div class="wc-src">StudioBinder</div><div class="wc-title">Ultimate Guide to Camera Angles — chaque angle expliqué</div></div>
+          <div class="wc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+      </div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 05 — Casse la règle, volontairement</span>
+        <h4>Compose une image "fausse", puis justifie-la</h4>
+        <ol>
+          <li>Cadre un sujet parfaitement centré (contre la règle des tiers).</li>
+          <li>Trouve une raison narrative qui rendrait ce choix juste (isolement, rigidité du personnage, symétrie du décor).</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH06 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">06</div>
+      <div class="ch-info"><h3>Le mouvement de caméra</h3><div class="ch-tag">Grammaire du mouvement</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Un travelling, un panoramique, une caméra à l'épaule ne sont jamais interchangeables — chacun installe une relation différente entre le spectateur et l'action. <b>Le mouvement immobile est aussi un choix</b>, pas une absence de choix.</p>
+      <div class="watch-row">
+        <a class="watch-card" href="https://www.youtube.com/watch?v=IiyBo-qLDeM" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/IiyBo-qLDeM/hqdefault.jpg" alt="">
+          <div class="wc-info"><div class="wc-src">StudioBinder</div><div class="wc-title">Ultimate Guide to Camera Movement — tous les mouvements expliqués</div></div>
+          <div class="wc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+      </div>
+      <div class="table-wrap">
+        <table class="plain">
+          <tr><th>Mouvement</th><th>Sensation produite</th></tr>
+          <tr><td>Travelling avant</td><td>Immersion, urgence, révélation</td></tr>
+          <tr><td>Caméra à l'épaule</td><td>Instabilité, réalisme, tension physique</td></tr>
+          <tr><td>Dolly zoom (vertigo)</td><td>Malaise, vertige psychologique</td></tr>
+          <tr><td>Statique verrouillée</td><td>Contrôle, distance, observation froide</td></tr>
+        </table>
+      </div>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 06 — Choisir le mouvement qui manque</span>
+        <h4>Associe un mouvement à une émotion</h4>
+        <ol>
+          <li>Reprends 3 émotions déjà travaillées dans le manuel du réalisateur (peur, soulagement, colère froide).</li>
+          <li>Associe à chacune un mouvement de caméra — et justifie pourquoi la statique serait un mauvais choix pour au moins une d'entre elles.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH07 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">07</div>
+      <div class="ch-info"><h3>Le dialogue avec le réalisateur</h3><div class="ch-tag">Collaboration</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Le meilleur DP n'est pas celui qui a le plus de technique — c'est celui qui sait <b>traduire une phrase floue en plan de travail</b>. "Je veux que ça fasse froid et solitaire" devient : lumière du jour dominante, teintes désaturées, grand angle qui isole le personnage dans l'espace.</p>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 07 — Traduire une intention</span>
+        <h4>Du mot à la technique</h4>
+        <ol>
+          <li>Prends trois intentions floues : "chaleureux et nostalgique", "menaçant sans être violent", "euphorique".</li>
+          <li>Pour chacune, propose une température de couleur, une focale, et un mouvement de caméra.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH08 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">08</div>
+      <div class="ch-info"><h3>Le matériel : repères essentiels</h3><div class="ch-tag">Équipement</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Le matériel ne fait pas le talent, mais un DP doit savoir de quoi il parle : capteur (taille, sensibilité), monture d'objectifs, supports de caméra (trépied, épaule, gimbal, steadicam, drone), et accessoires de lumière (softbox, réflecteur, drapeaux).</p>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 08 — L'inventaire minimal</span>
+        <h4>Construis ton kit de base imaginaire</h4>
+        <ol>
+          <li>Imagine un budget très serré pour un premier court métrage.</li>
+          <li>Liste 5 outils essentiels (caméra, un objectif polyvalent, un trépied, une source de lumière, un réflecteur) et justifie chaque choix.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH09 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">09</div>
+      <div class="ch-info"><h3>Construire son style de lumière</h3><div class="ch-tag">Voix visuelle</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Un style de lumière naît de choix répétés — pas d'une recette figée. Voir la section « Références créatives » ci-dessous pour trois approches très différentes de la lumière naturaliste, dramatique et hyperréaliste.</p>
+      <div class="exercice">
+        <span class="ex-tag">Exercice 09 — Ton carnet de lumière</span>
+        <h4>Documente 5 lumières qui t'ont marqué</h4>
+        <ol>
+          <li>Repère 5 scènes de films dont la lumière t'a marqué.</li>
+          <li>Pour chacune, note : source dominante, température perçue, contraste (doux ou dur).</li>
+          <li>Cherche un point commun entre tes 5 choix — c'est le début de ton œil.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Études de style</div>
+    <h2>Trois chefs opérateurs, trois rapports à la lumière.</h2>
+  </div>
+  <div class="case-strip fade">
+    <div class="case-card">
+      <div class="name">Roger Deakins</div>
+      <div class="signature">Le naturalisme précis</div>
+      <p>Une lumière qui semble toujours venir d'une source réelle, même hautement sculptée en coulisses — l'artifice ne se voit jamais, seul le résultat compte.</p>
+    </div>
+    <div class="case-card">
+      <div class="name">Emmanuel Lubezki</div>
+      <div class="signature">La lumière naturelle et le plan continu</div>
+      <p>Tournages privilégiant la lumière naturelle disponible (magic hour), souvent combinés à de longs plans-séquences fluides qui immergent plutôt qu'ils ne montrent.</p>
+    </div>
+    <div class="case-card">
+      <div class="name">Janusz Kamiński</div>
+      <div class="signature">Le contraste dramatique</div>
+      <p>Fort contraste, désaturation, sources dures et directionnelles — une lumière qui porte le poids émotionnel du film autant que le jeu des acteurs.</p>
+    </div>
+  </div>
+  <div class="watch-row fade" style="margin-top:26px;">
+    <a class="watch-card" href="https://www.youtube.com/watch?v=yVdhm9P8I6o" target="_blank" rel="noopener">
+      <img src="https://img.youtube.com/vi/yVdhm9P8I6o/hqdefault.jpg" alt="">
+      <div class="wc-info"><div class="wc-src">StudioBinder</div><div class="wc-title">The Colors of Stanley Kubrick — Color Theory expliquée</div></div>
+      <div class="wc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    </a>
+  </div>
+</section>
+
+<!-- BIBLIOGRAPHIE -->
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Pour aller plus loin</div>
+    <h2>Bibliographie et ressources.</h2>
+  </div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://www.amazon.com/Cinematography-Theory-Practice-Cinematographers-Directors/dp/113821258X" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Blain Brown</span><div class="ttl">Cinematography: Theory and Practice</div><div class="desc">La référence académique la plus complète — technique et théorie, utilisée dans la plupart des écoles de cinéma.</div></div>
+    </a>
+    <a class="book-card" href="https://www.amazon.com/Painting-Light-John-Alton/dp/0520089499" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">John Alton</span><div class="ttl">Painting with Light (1949)</div><div class="desc">Le texte fondateur sur la lumière dramatique — écrit par le maître du film noir.</div></div>
+    </a>
+    <div class="book-card">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Joseph V. Mascelli</span><div class="ttl">The Five C's of Cinematography</div><div class="desc">Camera angles, continuité, cutting, close-ups, composition — un classique condensé et pratique.</div></div>
+    </div>
+    <div class="book-card">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Gustavo Mercado</span><div class="ttl">The Filmmaker's Eye</div><div class="desc">Apprendre les règles de composition pour ensuite savoir les briser en connaissance de cause.</div></div>
+    </div>
+    <a class="book-card" href="https://www.studiobinder.com/blog/ultimate-guide-to-camera-shots/" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">StudioBinder — Article</span><div class="ttl">50+ Types of Camera Shots, Angles, and Techniques</div><div class="desc">Le glossaire visuel complet, avec exemples tirés de films connus.</div></div>
+    </a>
+    <a class="book-card" href="https://www.youtube.com/channel/UCDylnpLJWDj2gKWujjwap9w" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">StudioBinder Academy</span><div class="ttl">Chaîne YouTube — masterclass gratuite</div><div class="desc">La série "The Shot List" couvre en 10 épisodes tout ce que ce manuel résume.</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Vérifie ce que tu as retenu</div>
+    <h2>Le petit quiz de fin de parcours.</h2>
+  </div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text">1. Quel réglage contrôle à la fois la lumière ET la profondeur de champ ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>La vitesse d'obturation</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>L'ouverture</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>L'ISO</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text">2. La lumière tungstène (≈3200K) apparaît comme :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Bleutée</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Verte</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Orangée</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text">3. Un téléobjectif, comparé à un grand angle, a tendance à :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Compresser l'espace et isoler le sujet</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Déformer fortement les visages</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Élargir le champ de vision</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text">4. Dans un schéma à trois points, à quoi sert le contre-jour ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>À éclairer uniformément toute la scène</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>À séparer visuellement le sujet de l'arrière-plan</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>À remplacer la lumière clé</span></label>
+    </div>
+    <button id="quizBtn" style="font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:var(--tungsten); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="manifesto">La lumière ne ment jamais sur ce qu'on lui demande — elle ne fait qu'exécuter, à la perfection, ce qu'on n'a pas pris le temps de décider.</p>
+  <div class="brandline">Le Directeur de la Photographie — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const mmenu = document.getElementById('mmenu');
+  burger.addEventListener('click', ()=> mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mmenu.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.1 });
+  document.querySelectorAll('.fade').forEach(el=> io.observe(el));
+
+  const secIds = ['role','chapitres','references','biblio','quiz'];
+  const sections = secIds.map(id=>document.getElementById(id)).filter(Boolean);
+  const navLinks = document.querySelectorAll('nav.links a');
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        navLinks.forEach(l=> l.classList.toggle('active', l.getAttribute('href') === '#'+entry.target.id));
+      }
+    });
+  }, { rootMargin:'-40% 0px -50% 0px' });
+  sections.forEach(s=> spy.observe(s));
+
+  document.querySelectorAll('[data-toggle]').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      const ch = head.closest('.chapitre');
+      const wasOpen = ch.classList.contains('open');
+      document.querySelectorAll('.chapitre.open').forEach(c=> c.classList.remove('open'));
+      if(!wasOpen){ ch.classList.add('open'); }
+    });
+  });
+  document.querySelector('[data-ch]')?.classList.add('open');
+
+  // Kelvin simulator
+  const slider = document.getElementById('kelvinSlider');
+  const preview = document.getElementById('kelvinPreview');
+  const label = document.getElementById('kelvinLabel');
+  const desc = document.getElementById('kelvinDesc');
+  function kelvinToColor(k){
+    // simplified perceptual mapping: warm orange (low K) -> neutral white -> cool blue (high K)
+    if(k <= 3200){
+      const t = (k-2000)/(3200-2000);
+      return lerpColor([242,138,66],[242,161,84], t);
+    } else if(k <= 5600){
+      const t = (k-3200)/(5600-3200);
+      return lerpColor([242,161,84],[230,225,215], t);
+    } else {
+      const t = Math.min((k-5600)/(10000-5600),1);
+      return lerpColor([230,225,215],[111,168,201], t);
+    }
+  }
+  function lerpColor(a,b,t){ return [Math.round(a[0]+(b[0]-a[0])*t), Math.round(a[1]+(b[1]-a[1])*t), Math.round(a[2]+(b[2]-a[2])*t)]; }
+  function updateKelvin(){
+    const k = parseInt(slider.value);
+    const [r,g,b] = kelvinToColor(k);
+    preview.style.background = 'rgb('+r+','+g+','+b+')';
+    label.textContent = k + 'K';
+    let d = 'Zone neutre — proche de la lumière du jour standard.';
+    if(k < 2600) d = 'Bougie / flamme — très chaud, intime, souvent associé au danger feutré ou au romantisme.';
+    else if(k < 3600) d = 'Tungstène — lumière domestique chaude, sécurisante, nostalgique.';
+    else if(k < 5000) d = 'Zone mixte — attention aux dominantes non désirées si deux sources se mélangent.';
+    else if(k < 6500) d = 'Lumière du jour — neutre, reportage, réalisme.';
+    else d = 'Ciel ombragé / très froid — clinique, distant, parfois inquiétant.';
+    desc.textContent = d;
+  }
+  slider.addEventListener('input', updateKelvin);
+  updateKelvin();
+
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
+    });
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / 4 bonnes réponses' + (score===4 ? ' — parfait !' : '');
+  });
+</script>
+
+</body>
+</html>

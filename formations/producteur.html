@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Producteur — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#0d1210; --noir-2:#151b18; --noir-3:#1c231f;
+  --emerald:#3ecf8e; --emerald-d:#2ba86f; --or:#c9a878;
+  --craie:#f0f2ee; --fumee:#8c948e; --line: rgba(240,242,238,0.12);
+  --display:'Libre Franklin', sans-serif; --body:'Poppins', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--emerald); color:var(--noir);} img,svg{ display:block; max-width:100%;}
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 18% 10%, rgba(62,207,142,0.12), transparent 45%), radial-gradient(circle at 85% 88%, rgba(201,168,120,0.08), transparent 40%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(13,18,16,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;}
+.brand .light{ width:10px; height:10px; border-radius:50%; background:var(--emerald); box-shadow:0 0 8px var(--emerald);}
+.brand b{ color:var(--craie); font-weight:700;}
+nav.links{ display:none; gap:26px;} nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--emerald); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--craie);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--emerald); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:800; font-size:clamp(34px,8vw,80px); line-height:1.05; letter-spacing:-.01em; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--emerald);}
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:600px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.greenlight{ position:relative; z-index:1; margin-top:44px; display:flex; gap:16px; align-items:center; opacity:0; animation:up .8s .65s ease forwards;}
+.gl-dot{ width:20px; height:20px; border-radius:50%; }
+.gl-dot.red{ background:#5a2a26;} .gl-dot.amber{ background:#8a6a2a;} .gl-dot.green{ background:var(--emerald); box-shadow:0 0 16px var(--emerald);}
+.gl-label{ font-family:var(--mono); font-size:11px; color:var(--fumee); letter-spacing:.06em; text-transform:uppercase;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:800; font-size:20px; color:var(--emerald);} .stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--emerald); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(24px,4vw,40px); line-height:1.2; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--emerald);}
+.role-card h4{ font-family:var(--display); font-weight:700; font-size:14px; margin-bottom:8px;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-weight:800; font-size:28px; color:transparent; -webkit-text-stroke:1.2px var(--emerald); line-height:1; flex-shrink:0; width:52px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:700; font-size:clamp(15px,2.1vw,19px);}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--or); text-transform:uppercase; letter-spacing:.04em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--emerald); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--emerald); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--emerald);}
+.callout{ background:rgba(62,207,142,0.08); border:1px solid var(--emerald-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--craie);} .callout b{ color:var(--emerald);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--emerald); transform:translateY(-2px);}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--emerald); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--emerald); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--craie); margin-top:4px; line-height:1.35; font-weight:500;}
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--craie);} .book-card .spine{ width:8px; align-self:stretch; background:var(--or); flex-shrink:0;}
+.book-card .auth{ font-family:var(--mono); font-size:10px; color:var(--or); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-weight:700; font-size:13.5px; margin-top:4px; color:var(--craie);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--emerald);}
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--emerald-d); font-weight:600; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#1a1c1a; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+.diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
+.budget-bar{ display:flex; height:44px; width:100%; overflow:hidden; border:1px solid var(--line);}
+.budget-bar div{ display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:10px; color:var(--noir); font-weight:600;}
+.budget-legend{ display:flex; flex-wrap:wrap; gap:16px; margin-top:14px; justify-content:center;}
+.budget-legend span{ font-family:var(--mono); font-size:10.5px; color:var(--fumee); display:flex; align-items:center; gap:6px;}
+.budget-legend .sw{ width:10px; height:10px; display:inline-block;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--emerald); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--emerald);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--or);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:6px;} .case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--or); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-weight:700; font-size:14px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--or);}
+.quiz-opt input{ accent-color:var(--emerald);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--or); background:rgba(201,168,120,0.1);} .quiz-opt.wrong span{ color:var(--or);}
+#quizScore{ font-family:var(--display); font-weight:800; font-size:18px; color:var(--emerald); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,22px); color:var(--craie); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--emerald);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--emerald);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="light"></span> OKAPI STUDIOS — <b>LE PRODUCTEUR</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Références</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Approches</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">GREENLIGHT — Manuel de formation, production</div>
+  <h1 class="title">LE <span>PRODUCTEUR</span></h1>
+  <p class="subtitle">Celui qui rend un film possible avant qu'il ne soit bon — financement, budget, planning, risque.</p>
+  <div class="greenlight">
+    <div class="gl-dot red"></div><div class="gl-dot amber"></div><div class="gl-dot green"></div>
+    <span class="gl-label">Feu vert donné</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">ATL/BTL</div><div class="l">Above / Below the line</div></div>
+    <div class="stat"><div class="n">130+</div><div class="l">Pages d'un budget type</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">FADE IN, FINANCE</div>
+    <h2>Le producteur ne fait pas le film. Il fait exister les conditions du film.</h2>
+    <p class="lede">Avant qu'une caméra ne tourne, quelqu'un a dû convaincre des gens de donner de l'argent à une histoire qui n'existe encore que sur papier. <b style="color:var(--craie)">C'est le premier acte de foi de toute production.</b></p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>💰 Ce qu'il sécurise</h4><p>Le financement, le budget, le planning — les trois piliers qui rendent un tournage matériellement possible.</p></div>
+    <div class="role-card"><h4>🛡️ Ce qu'il protège</h4><p>La vision créative du réalisateur ET la viabilité financière du projet — deux forces souvent en tension.</p></div>
+    <div class="role-card"><h4>⚠️ Son vrai métier</h4><p>Anticiper ce qui peut mal tourner avant que ça n'arrive — le risque est sa matière première.</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>À retenir —</b> Robert Rodriguez a produit et réalisé <i>El Mariachi</i> pour 7 000 $ en réinventant chaque étape du processus classique — la contrainte budgétaire n'est pas un obstacle à la créativité, elle en est souvent le moteur.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">TOP SHEET</div><h2>Neuf chapitres, du développement à la sortie.</h2></div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Les deux producteurs</h3><div class="ch-tag">Créatif vs exécutif</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le mot "producteur" recouvre plusieurs métiers. Le producteur créatif développe le projet, choisit le scénario, l'équipe. Le producteur exécutif (ou line producer) <b>gère l'argent au quotidien</b> — ce sont parfois la même personne, rarement au même moment de la journée.</p>
+      <div class="watch-row"><a class="watch-card" href="https://www.studiobinder.com/blog/above-the-line-film-positions/" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">StudioBinder — Article</div><div class="wc-title">Above the Line vs Below the Line, expliqué</div></div></a></div>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — Qui fait quoi</span><h4>Distingue les deux rôles</h4><ol><li>Liste 5 décisions d'un tournage imaginaire.</li><li>Pour chacune, indique si c'est le producteur créatif ou exécutif qui tranche.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Développer un projet</h3><div class="ch-tag">Option, droits, package</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un projet se "développe" bien avant le tournage — sécuriser les droits d'une histoire, réunir un réalisateur et une tête d'affiche (le "package") pour rendre le film finançable.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — Construis un package</span><h4>Imagine le trio qui vend un projet</h4><ol><li>Choisis une histoire (même une nouvelle que tu aimes).</li><li>Imagine quel réalisateur et quel acteur la rendraient "finançable" aujourd'hui, et pourquoi.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>Le budget : above / below the line</h3><div class="ch-tag">Structure financière</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un budget de film se divise toujours en grandes zones : <b>above the line</b> (talent créatif — scénariste, réalisateur, acteurs), <b>below the line</b> (coûts directs de production), post-production, et divers (assurance, contingence).</p>
+      <div class="diagram-wrap">
+        <div class="budget-bar">
+          <div style="width:20%; background:var(--or);">ATL 20%</div>
+          <div style="width:55%; background:var(--emerald);">BTL 55%</div>
+          <div style="width:15%; background:var(--emerald-d);">Post 15%</div>
+          <div style="width:10%; background:var(--fumee);">Divers 10%</div>
+        </div>
+        <div class="cap">Répartition indicative d'un budget de long métrage — les proportions varient énormément selon le projet</div>
+      </div>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — Classe les postes</span><h4>ATL ou BTL ?</h4><ol><li>Classe ces postes : cachet du réalisateur, location de caméra, assurance, salaire du régisseur, droits du scénario.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Financer un film</h3><div class="ch-tag">Sources de financement</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Rares sont les films financés par une seule source — fonds propres, investisseurs privés, subventions publiques, pré-ventes de distribution s'additionnent souvent pour couvrir un budget.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — Le puzzle de financement</span><h4>Imagine 3 sources pour un court métrage</h4><ol><li>Pour un projet fictif à petit budget, propose 3 sources de financement réalistes et complémentaires.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Le planning de tournage</h3><div class="ch-tag">Schedule et budget</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Chaque jour de tournage supplémentaire coûte cher. <b>Regrouper les scènes par lieu, pas par ordre chronologique</b>, est le réflexe qui économise le plus d'argent sur un planning.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Réordonne un planning</span><h4>Groupe par lieu, pas par histoire</h4><ol><li>Imagine 6 scènes situées dans 3 lieux différents, dans un ordre narratif quelconque.</li><li>Réordonne-les pour tourner tout ce qui se passe au même endroit ensemble.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Constituer l'équipe clé</h3><div class="ch-tag">Heads of department</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le producteur choisit ou valide les chefs de poste — DP, décorateur, monteur — qui recruteront ensuite leurs propres équipes. <b>Une mauvaise embauche à ce niveau se répercute sur tout le film.</b></p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — Le trio essentiel</span><h4>Priorise 3 postes clés</h4><ol><li>Pour un projet à budget serré, choisis les 3 postes que tu sécuriserais en premier, et pourquoi.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Gérer le risque</h3><div class="ch-tag">Assurance et contingence</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une ligne de contingence (souvent 10% du budget) existe pour absorber l'imprévu — météo, blessure, panne de matériel. <b>Ne jamais budgéter à zéro marge</b> est la règle la plus violée par les débutants.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — Calcule une contingence</span><h4>Applique la règle des 10%</h4><ol><li>Sur un budget fictif de 10 000€, calcule la ligne de contingence à 10%.</li><li>Liste 3 imprévus qu'elle pourrait couvrir.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>La distribution et la sortie</h3><div class="ch-tag">Après le tournage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un film fini n'est pas un film vu — festivals, plateformes, distribution en salle sont des stratégies distinctes, choisies souvent dès le développement du projet, pas après le montage final.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Choisis une stratégie</span><h4>Festival, plateforme ou salle ?</h4><ol><li>Pour un projet fictif, choisis une stratégie de sortie et justifie-la en 3 phrases.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Protéger la vision, protéger le budget</h3><div class="ch-tag">L'équilibre</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le meilleur producteur ne dit pas systématiquement non à une idée coûteuse — il trouve <b>où économiser ailleurs</b> pour financer ce qui compte vraiment pour le film.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Le compromis créatif</span><h4>Trouve l'économie qui finance l'ambition</h4><ol><li>Imagine qu'un réalisateur veut un plan de drone coûteux.</li><li>Propose 2 économies ailleurs dans le budget pour le financer sans dépasser le total.</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Approches</div><h2>Deux philosophies de la production.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">Robert Rodriguez</div><div class="signature">La contrainte comme méthode</div><p>A réinventé chaque étape de la production pour tourner à très petit budget — la limite devient un langage créatif à part entière.</p></div>
+    <div class="case-card"><div class="name">Kathleen Kennedy</div><div class="signature">Le mécano à grande échelle</div><p>Produit des franchises massives — orchestre des centaines de collaborateurs sans jamais perdre le fil narratif central.</p></div>
+    <div class="case-card"><div class="name">Christine Vachon</div><div class="signature">Le cinéma d'auteur indépendant</div><p>A produit des œuvres exigeantes avec des budgets restreints, en protégeant farouchement la voix du réalisateur face aux pressions commerciales.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Bibliographie et ressources.</h2></div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://www.amazon.com/Rebel-without-Crew-23-Year-Old-Filmmaker/dp/0452271878" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Robert Rodriguez</span><div class="ttl">Rebel Without a Crew (1995)</div><div class="desc">Comment faire un premier film à 7 000$ — journal de bord devenu texte de référence indépendant.</div></div></a>
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Maureen A. Ryan</span><div class="ttl">Producer to Producer</div><div class="desc">Guide pas à pas pour la production indépendante à petit budget — considéré comme une bible du métier.</div></div></div>
+    <a class="book-card" href="https://en.wikipedia.org/wiki/Film_budgeting" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Référence générale</span><div class="ttl">Film budgeting — vue d'ensemble</div><div class="desc">Structure standard d'un budget de production, sections et logique.</div></div></a>
+    <a class="book-card" href="https://www.studiobinder.com/blog/above-the-line-film-positions/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">StudioBinder — Article</span><div class="ttl">Above the Line Film Positions Explained</div><div class="desc">La distinction ATL/BTL décortiquée avec exemples de postes.</div></div></a>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. "Above the line" désigne généralement :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Les frais de transport</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Le talent créatif (scénariste, réalisateur, acteurs)</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le matériel de tournage</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">2. Pourquoi regrouper les scènes par lieu dans un planning ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Pour réduire les coûts de déplacement et de temps</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Pour respecter l'ordre chronologique du scénario</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Ce n'est jamais recommandé</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">3. À quoi sert une ligne de contingence budgétaire ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>À payer les acteurs principaux</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>À financer la post-production uniquement</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>À absorber les imprévus de tournage</span></label></div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--emerald); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">Un budget bien construit est un acte de foi rendu réaliste.</p>
+  <div class="brandline">Le Producteur — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.getElementById('quizBtn').addEventListener('click',()=>{
+    let score=0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
+      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
+      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+    });
+    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+  });
+</script>
+</body>
+</html>

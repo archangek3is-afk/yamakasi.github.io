@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Directeur de Casting — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#171514; --noir-2:#1e1b19; --noir-3:#262220;
+  --taupe:#a89a8c; --corail:#e3765c; --corail-d:#bd5b45;
+  --craie:#f4efe8; --fumee:#96897e; --line: rgba(244,239,232,0.12);
+  --display:'DM Serif Display', serif; --body:'Poppins', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--corail); color:var(--noir);} img,svg{ display:block; max-width:100%;}
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 18% 10%, rgba(227,118,92,0.10), transparent 45%), radial-gradient(circle at 85% 88%, rgba(168,154,140,0.08), transparent 40%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(23,21,20,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;}
+.brand .frame{ width:12px; height:14px; border:1.5px solid var(--corail);}
+.brand b{ color:var(--craie); font-weight:700;}
+nav.links{ display:none; gap:26px;} nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--corail); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--craie);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.18em; color:var(--corail); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-style:normal; font-weight:400; font-size:clamp(38px,9vw,90px); line-height:1.02; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title em{ font-style:italic; color:var(--corail);}
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:600px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.headshot-strip{ position:relative; z-index:1; margin-top:44px; display:flex; gap:10px; opacity:0; animation:up .8s .65s ease forwards;}
+.hs-card{ width:56px; height:72px; border:1px solid var(--line); background:var(--noir-2); display:flex; align-items:center; justify-content:center; position:relative;}
+.hs-card::after{ content:""; position:absolute; inset:8px; border:1px dashed var(--taupe); opacity:.4;}
+.hs-card.sel{ border-color:var(--corail); }
+.hs-card.sel::before{ content:"✓"; position:absolute; top:-8px; right:-8px; width:16px; height:16px; background:var(--corail); color:var(--noir); font-size:10px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-weight:700;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-size:22px; color:var(--corail);} .stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--corail); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:400; font-size:clamp(26px,4.2vw,42px); line-height:1.2; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--corail);}
+.role-card h4{ font-family:var(--display); font-size:17px; margin-bottom:8px;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-size:32px; color:transparent; -webkit-text-stroke:1.2px var(--corail); line-height:1; flex-shrink:0; width:52px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:400; font-size:clamp(18px,2.4vw,23px);}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--taupe); text-transform:uppercase; letter-spacing:.04em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--corail); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--corail); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--corail);}
+.callout{ background:rgba(227,118,92,0.08); border:1px solid var(--corail-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--craie);} .callout b{ color:var(--corail);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--corail); transform:translateY(-2px);}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--corail); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--corail); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--craie); margin-top:4px; line-height:1.35; font-weight:500;}
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--craie);} .book-card .spine{ width:8px; align-self:stretch; background:var(--taupe); flex-shrink:0;}
+.book-card .auth{ font-family:var(--mono); font-size:10px; color:var(--taupe); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-size:15px; margin-top:4px; color:var(--craie);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--corail);}
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--corail-d); font-weight:600; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-size:17px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#211e1b; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--corail); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--corail);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--taupe);}
+.case-card .name{ font-family:var(--display); font-size:19px; margin-bottom:6px;} .case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--taupe); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-size:17px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--taupe);}
+.quiz-opt input{ accent-color:var(--corail);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--corail); background:rgba(227,118,92,0.1);} .quiz-opt.wrong span{ color:var(--corail);}
+#quizScore{ font-family:var(--display); font-size:20px; color:var(--corail); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-size:clamp(19px,3vw,28px); color:var(--craie); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--corail);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--corail);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="frame"></span> OKAPI STUDIOS — <b>LE DIRECTEUR DE CASTING</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Références</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Approches</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">Salle d'audition — Manuel de formation, casting</div>
+  <h1 class="title">LE DIRECTEUR<br>DE <em>CASTING</em></h1>
+  <p class="subtitle">Celui qui trouve, dans une salle pleine d'inconnus, la seule personne qui rendra un personnage écrit soudain réel.</p>
+  <div class="headshot-strip">
+    <div class="hs-card"></div><div class="hs-card sel"></div><div class="hs-card"></div><div class="hs-card"></div><div class="hs-card"></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">Le bon, parmi des centaines</div></div>
+    <div class="stat"><div class="n">2x</div><div class="l">Callback avant décision</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">CASTING CALL</div>
+    <h2>Le casting est la dernière écriture du personnage avant le tournage.</h2>
+    <p class="lede">Un même rôle, joué par deux acteurs différents, donne deux films différents. <b style="color:var(--craie)">Le directeur de casting ne "trouve" pas un acteur — il devine ce que chaque acteur ferait du rôle avant même l'avoir vu jouer.</b></p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>🔍 Ce qu'il cherche</h4><p>Pas "le plus beau" ou "le plus connu" — celui dont la présence naturelle recoupe ce que le personnage doit porter.</p></div>
+    <div class="role-card"><h4>🤝 Son allié</h4><p>Il défend les acteurs qu'il propose devant le réalisateur et les producteurs — c'est un défenseur autant qu'un juge.</p></div>
+    <div class="role-card"><h4>👂 Sa vraie compétence</h4><p>Repérer en 90 secondes d'audition ce qu'une carrière entière pourrait révéler.</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>À retenir —</b> une casting director le rappelle simplement : les directeurs de casting sont du côté de l'acteur dans la salle d'audition — ils veulent que ça marche, pas que ça échoue.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">CALL SHEET</div><h2>Neuf chapitres, du script à la distribution finale.</h2></div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Le rôle du directeur de casting</h3><div class="ch-tag">Position dans l'équipe</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Il travaille en amont du tournage, en lien direct avec le réalisateur et les producteurs — <b>il ne décide pas seul</b>, il propose, argumente, organise les auditions et les callbacks.</p>
+      <div class="watch-row"><a class="watch-card" href="https://www.backstage.com/magazine/article/casting-director-6395/" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">Backstage — Article</div><div class="wc-title">What Does a Casting Director Do? Une CD explique son métier</div></div></a></div>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — Le brief casting</span><h4>Écris un brief de rôle</h4><ol><li>Décris un personnage imaginaire en 4 lignes destinées à un directeur de casting — âge, énergie, ce qui doit se lire immédiatement à l'écran.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Décoder un personnage</h3><div class="ch-tag">Lecture de script</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Avant de chercher un acteur, il faut comprendre ce que le personnage <b>fait vraiment</b> dans l'histoire — son objectif, sa fonction dramatique — au-delà de sa description physique.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — Au-delà du physique</span><h4>Décris un personnage par sa fonction</h4><ol><li>Prends un personnage secondaire d'un film que tu connais.</li><li>Décris-le sans aucun détail physique — seulement sa fonction dans l'histoire.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>L'appel à candidature</h3><div class="ch-tag">Breakdown et agents</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le "breakdown" est l'annonce envoyée aux agents décrivant chaque rôle — un breakdown vague attire des centaines de candidatures hors sujet, un breakdown précis attire les bonnes personnes.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — Rédige un breakdown</span><h4>Écris une annonce de rôle</h4><ol><li>Rédige un breakdown de 4 lignes pour un rôle secondaire — âge, physique utile, énergie, une ligne de dialogue type.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Diriger une audition</h3><div class="ch-tag">La salle</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une bonne audition met l'acteur à l'aise avant de le juger — <b>le trac fausse tout</b>. Le directeur de casting donne le contexte de la scène, jamais juste "joue".</p>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — Le contexte avant tout</span><h4>Prépare une consigne d'audition</h4><ol><li>Choisis une courte scène.</li><li>Écris le contexte que tu donnerais à un acteur avant qu'il la joue — pas la scène elle-même, juste ce qu'il doit savoir.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Lire une bande d'essai</h3><div class="ch-tag">Self-tape</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">De plus en plus d'auditions se font par vidéo — savoir lire une self-tape (cadrage, lumière, mais surtout la présence brute de l'acteur) sans se laisser distraire par une qualité technique imparfaite.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Regarde au-delà de la forme</span><h4>Analyse une self-tape imaginée</h4><ol><li>Imagine deux self-tapes : une mal éclairée mais avec un jeu fort, une magnifique techniquement mais fade.</li><li>Laquelle retiendrais-tu, et pourquoi ?</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Le callback et l'alchimie de duo</h3><div class="ch-tag">Deuxième tour</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un acteur excellent seul peut ne pas fonctionner avec son partenaire à l'écran. <b>Le callback teste la alchimie</b>, pas seulement le talent individuel.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — Teste une alchimie</span><h4>Imagine un duo de callback</h4><ol><li>Pour un rôle principal déjà casté, propose 2 candidats différents pour le rôle secondaire opposé, et ce que chaque duo produirait de différent.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Négocier avec les agents</h3><div class="ch-tag">Coulisses</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une fois le choix fait, il reste à négocier disponibilité, cachet, conditions — <b>une relation de confiance durable avec les agents</b> facilite chaque futur projet.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — Prépare une négociation</span><h4>Liste tes priorités de négociation</h4><ol><li>Pour un rôle donné, classe par ordre d'importance : cachet, dates de disponibilité, conditions de tournage.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Diversité et justesse de représentation</h3><div class="ch-tag">Responsabilité</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le casting façonne qui se voit représenté à l'écran — une question artistique autant qu'une responsabilité, à prendre en compte dès l'écriture du breakdown.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Élargis ton regard</span><h4>Questionne un breakdown</h4><ol><li>Reprends le breakdown de l'exercice 03.</li><li>Vérifie : les critères physiques sont-ils vraiment nécessaires à l'histoire, ou juste une habitude ?</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Construire une base de talents</h3><div class="ch-tag">Réseau durable</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un bon directeur de casting garde la mémoire des acteurs vus, même non retenus — <b>le rôle d'aujourd'hui refusé peut être le rôle parfait de demain</b>.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Ta fiche mémoire</span><h4>Documente un talent repéré</h4><ol><li>La prochaine fois que tu vois une performance qui te marque, note en 3 lignes ce qui t'a frappé — pour t'en souvenir plus tard.</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Approches</div><h2>Deux philosophies du casting.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">Le casting de type</div><div class="signature">La ressemblance immédiate</div><p>Choisir un acteur dont la présence physique et l'énergie collent instantanément à l'idée qu'on se fait du personnage — rapide, mais parfois prévisible.</p></div>
+    <div class="case-card"><div class="name">Le casting à contre-emploi</div><div class="signature">La surprise assumée</div><p>Choisir délibérément un acteur qui ne "colle" pas sur le papier — un risque qui peut révéler une lecture du rôle que personne n'avait anticipée.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Bibliographie et ressources.</h2></div>
+  <div class="grid g2 fade">
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Joanna Merlin</span><div class="ttl">Auditioning: An Actor-Friendly Guide</div><div class="desc">Écrit par une directrice de casting historique (Broadway, Sondheim) — le point de vue de l'autre côté de la table.</div></div></div>
+    <a class="book-card" href="https://www.backstage.com/magazine/article/casting-director-6395/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Backstage — Article</span><div class="ttl">What Does a Casting Director Do?</div><div class="desc">Le métier expliqué de l'intérieur, avec conseils pratiques pour les deux côtés de la salle.</div></div></a>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Le rôle principal d'un directeur de casting est de :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Décider seul qui est engagé</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Proposer et défendre des acteurs auprès du réalisateur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Écrire le scénario final</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Le callback sert principalement à :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Négocier le cachet</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Vérifier la disponibilité de l'acteur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Tester l'alchimie entre deux acteurs</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">3. Le casting à contre-emploi consiste à :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Choisir un acteur qui ne colle pas évidemment sur le papier</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Toujours choisir la star la plus connue</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Refuser systématiquement les callbacks</span></label></div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:13px; text-transform:uppercase; background:var(--corail); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">Le bon acteur ne "joue" pas le rôle — il le rend impossible à imaginer autrement.</p>
+  <div class="brandline">Le Directeur de Casting — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.getElementById('quizBtn').addEventListener('click',()=>{
+    let score=0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
+      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
+      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+    });
+    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+  });
+</script>
+</body>
+</html>

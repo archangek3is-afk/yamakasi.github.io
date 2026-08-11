@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>La Costumière — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#181513; --noir-2:#201c19; --noir-3:#292420;
+  --rose:#c98b7a; --rose-d:#a86c5d; --or:#c9a44c;
+  --craie:#f5efe6; --fumee:#978a7f; --line: rgba(245,239,230,0.13);
+  --display:'Cormorant Garamond', serif; --body:'Poppins', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--rose); color:var(--noir);} img,svg{ display:block; max-width:100%;}
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 18% 10%, rgba(201,139,122,0.12), transparent 45%), radial-gradient(circle at 85% 88%, rgba(201,164,76,0.08), transparent 40%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(24,21,19,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;}
+.brand .pin{ width:8px; height:8px; border-radius:50%; background:var(--or); box-shadow:0 0 6px var(--or);}
+.brand b{ color:var(--craie); font-weight:600;}
+nav.links{ display:none; gap:26px;} nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--rose); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--craie);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.18em; color:var(--rose); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:600; font-style:italic; font-size:clamp(40px,9.5vw,96px); line-height:1; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--rose); font-style:normal;}
+.subtitle{ font-family:var(--body); font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:600px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.swatch-strip{ position:relative; z-index:1; margin-top:44px; display:flex; gap:8px; opacity:0; animation:up .8s .65s ease forwards;}
+.sw{ width:44px; height:44px; border:1px solid rgba(245,239,230,0.2);}
+.sw-label{ font-family:var(--mono); font-size:9px; color:var(--fumee); text-align:center; margin-top:6px; text-transform:uppercase;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:700; font-size:24px; color:var(--rose);} .stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--rose); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:600; font-size:clamp(28px,4.6vw,46px); line-height:1.15; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--rose);}
+.role-card h4{ font-family:var(--display); font-weight:600; font-size:19px; margin-bottom:8px;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-weight:700; font-size:34px; color:transparent; -webkit-text-stroke:1.2px var(--rose); line-height:1; flex-shrink:0; width:52px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:600; font-size:clamp(19px,2.6vw,25px);}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--or); text-transform:uppercase; letter-spacing:.04em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--rose); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--rose); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--rose);}
+.callout{ background:rgba(201,139,122,0.08); border:1px solid var(--rose-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--craie);} .callout b{ color:var(--rose);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--rose); transform:translateY(-2px);} .watch-card img{ width:96px; height:64px; object-fit:cover; flex-shrink:0; background:#000;}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--rose); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--rose); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--craie); margin-top:4px; line-height:1.35; font-weight:500;}
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--craie);} .book-card .spine{ width:8px; align-self:stretch; background:var(--or); flex-shrink:0;}
+.book-card .auth{ font-family:var(--mono); font-size:10px; color:var(--or); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-weight:600; font-size:16px; margin-top:4px; color:var(--craie);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--rose);}
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--rose-d); font-weight:600; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:600; font-size:19px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#221f1c; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+.diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
+
+.swatch-board{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; } @media(min-width:640px){ .swatch-board{ grid-template-columns:repeat(6,1fr);} }
+.swb-item{ text-align:center;}
+.swb-sw{ width:100%; aspect-ratio:1; border:1px solid rgba(245,239,230,0.15); position:relative;}
+.swb-sw::after{ content:""; position:absolute; inset:0; background-image:repeating-linear-gradient(45deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 5px);}
+.swb-label{ font-family:var(--mono); font-size:9.5px; color:var(--fumee); margin-top:8px; text-transform:uppercase;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--rose); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--rose);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--or);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:20px; margin-bottom:6px;} .case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--or); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-weight:600; font-size:18px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--or);}
+.quiz-opt input{ accent-color:var(--rose);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--rose); background:rgba(201,139,122,0.1);} .quiz-opt.wrong span{ color:var(--rose);}
+#quizScore{ font-family:var(--display); font-weight:700; font-size:22px; color:var(--rose); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-weight:600; font-style:italic; font-size:clamp(20px,3vw,28px); color:var(--craie); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--rose);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--rose);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="pin"></span> OKAPI STUDIOS — <b>LA COSTUMIÈRE</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Références</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Approches</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">Atelier de couture — Manuel de formation, costume</div>
+  <h1 class="title">LA <span>COSTUMIÈRE</span></h1>
+  <p class="subtitle">Chaque vêtement à l'écran raconte une vie entière avant que le personnage n'ait dit un mot.</p>
+  <div class="swatch-strip">
+    <div><div class="sw" style="background:#8a5a4a;"></div><div class="sw-label">Velours</div></div>
+    <div><div class="sw" style="background:#3f4a52;"></div><div class="sw-label">Denim</div></div>
+    <div><div class="sw" style="background:#c9b28a;"></div><div class="sw-label">Lin</div></div>
+    <div><div class="sw" style="background:#5a2e2e;"></div><div class="sw-label">Cuir</div></div>
+    <div><div class="sw" style="background:#e8ddc8;"></div><div class="sw-label">Soie</div></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">Silhouette par personnage</div></div>
+    <div class="stat"><div class="n">∞</div><div class="l">Raccords à tenir</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">SALLE D'ESSAYAGE</div>
+    <h2>Le costume est un choix psychologique déguisé en choix esthétique.</h2>
+    <p class="lede">Avant même que l'acteur ouvre la bouche, ce qu'il porte a déjà dit au spectateur qui il est, d'où il vient, ce qu'il peut ou ne peut pas se permettre. <b style="color:var(--craie)">Rien n'est jamais "juste joli".</b></p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>🪡 Ce qu'elle construit</h4><p>La silhouette d'un personnage — matière, coupe, couleur — au service de qui il est et de son évolution dans l'histoire.</p></div>
+    <div class="role-card"><h4>📏 Ce qu'elle garantit</h4><p>La continuité — un même costume, identique image après image, malgré des jours de tournage non consécutifs.</p></div>
+    <div class="role-card"><h4>👁️ Sa vraie compétence</h4><p>Lire un scénario comme une biographie de garde-robe, pas comme un texte à illustrer.</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>À retenir —</b> Deborah Nadoolman Landis (Indiana Jones, Coming to America, Thriller) le résume simplement : un acteur dit souvent qu'il n'endosse vraiment son personnage qu'au moment où il enfile le costume — c'est là que le rôle devient physique.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">CARNET D'ATELIER</div><h2>Neuf chapitres, du script au dernier raccord.</h2></div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Le rôle de la costumière</h3><div class="ch-tag">Silhouette de personnage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">La costumière (ou designer costume) conçoit l'ensemble de la garde-robe d'un film — cohérente entre les personnages, cohérente dans le temps de l'histoire. Elle travaille en étroite collaboration avec le réalisateur et la DP.</p>
+      <div class="watch-row"><a class="watch-card" href="https://www.youtube.com/watch?v=aK0aNhx3jdY" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">NYFA — Masterclass</div><div class="wc-title">Deborah Nadoolman Landis — Basic Costume 101</div></div></a></div>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — Lis un vêtement</span><h4>Décode une tenue réelle</h4><ol><li>Observe la tenue d'un inconnu (transport, café).</li><li>Écris 3 choses que cette tenue te dit sur qui il est.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Lire un scénario pour habiller</h3><div class="ch-tag">Analyse de personnage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un scénario dit rarement "il porte une veste bleue" — il faut déduire la garde-robe du métier, du milieu social, de l'époque, de la personnalité du personnage.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — Déduis la garde-robe</span><h4>Habille un personnage sans description</h4><ol><li>Choisis un personnage d'un film que tu connais, décrit uniquement par ses actions dans une scène.</li><li>Décris sa garde-robe probable, en justifiant chaque choix.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>La continuité</h3><div class="ch-tag">Raccord costume</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une scène tournée sur 3 jours doit paraître continue à l'écran — <b>chaque bouton, chaque pli, chaque tache doit être photographié et documenté</b> pour être reproduit à l'identique.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — La fiche de continuité</span><h4>Documente une tenue</h4><ol><li>Photographie (ou décris) une tenue en détail — 8 points précis qui devraient rester identiques sur plusieurs jours de tournage.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Couleur et matière au service du personnage</h3><div class="ch-tag">Choix expressifs</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une matière rigide raconte une contrainte ; une matière fluide raconte une liberté. La couleur d'un personnage peut évoluer avec son arc narratif — <b>un choix de tissu est un choix dramatique</b>.</p>
+      <div class="diagram-wrap">
+        <div class="swatch-board">
+          <div class="swb-item"><div class="swb-sw" style="background:#4a3a2e;"></div><div class="swb-label">Rigide / contrainte</div></div>
+          <div class="swb-item"><div class="swb-sw" style="background:#c9b8a0;"></div><div class="swb-label">Fluide / liberté</div></div>
+          <div class="swb-item"><div class="swb-sw" style="background:#2e2a28;"></div><div class="swb-label">Sombre / retrait</div></div>
+          <div class="swb-item"><div class="swb-sw" style="background:#d8c9a0;"></div><div class="swb-label">Clair / exposition</div></div>
+          <div class="swb-item"><div class="swb-sw" style="background:#7a2e2e;"></div><div class="swb-label">Saturé / affirmation</div></div>
+          <div class="swb-item"><div class="swb-sw" style="background:#8a8578;"></div><div class="swb-label">Neutre / effacement</div></div>
+        </div>
+        <div class="cap">Nuancier expressif — matière et couleur comme grammaire de personnage</div>
+      </div>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — L'arc en tissu</span><h4>Fais évoluer une garde-robe</h4><ol><li>Choisis un personnage qui change au cours d'une histoire (gain de confiance, chute, transformation).</li><li>Décris comment sa garde-robe évolue en 3 étapes.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Les essayages</h3><div class="ch-tag">Fittings</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">L'essayage n'est pas qu'une question de taille — c'est le moment où l'acteur et la costumière vérifient ensemble <b>que le vêtement permet le jeu</b> (s'asseoir, courir, se battre) sans jamais gêner la performance.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Teste le mouvement</span><h4>Vérifie la jouabilité</h4><ol><li>Pour une scène d'action imaginaire, liste 3 mouvements que le costume ne doit surtout pas empêcher.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Costume d'époque</h3><div class="ch-tag">Recherche historique</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un costume d'époque mal recherché sonne toujours faux, même pour un œil non expert. <b>La recherche visuelle précède toujours la conception</b> — vraies photos, vrais patrons d'époque.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — L'enquête vestimentaire</span><h4>Documente une décennie</h4><ol><li>Choisis une décennie.</li><li>Trouve 6 vraies photos de tenues de tous les jours (pas de couture haute-couture) de cette époque.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Construire vs louer vs acheter</h3><div class="ch-tag">Stratégie de production</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Construire sur mesure coûte cher mais garantit l'exactitude. Louer est rapide mais limité. Acheter en friperie donne un vécu authentique impossible à fabriquer à neuf.</p>
+      <div class="table-wrap"><table class="plain"><tr><th>Méthode</th><th>Quand la choisir</th></tr><tr><td>Sur mesure</td><td>Rôle principal, besoin de mouvement précis, époque rare</td></tr><tr><td>Location</td><td>Costumes d'époque courants, figuration nombreuse</td></tr><tr><td>Friperie / achat</td><td>Vêtements contemporains, personnages modestes, vécu naturel</td></tr></table></div>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — Choisis ta méthode</span><h4>Décide pour 3 personnages</h4><ol><li>Pour 3 rôles différents (principal, figurant, personnage historique), choisis la méthode d'acquisition et justifie.</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Le vieillissement et le vécu</h3><div class="ch-tag">Distressing</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un vêtement neuf sonne faux pour un personnage qui vit dedans depuis des années. <b>Vieillir un costume</b> — user, tacher, décolorer par endroits — est un savoir-faire à part entière.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Vieillis un vêtement mentalement</span><h4>Imagine 5 ans d'usure</h4><ol><li>Choisis un vêtement du quotidien.</li><li>Décris comment il vieillirait sur 5 ans de port intensif — où s'use-t-il en premier ?</li></ol></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Travailler avec la DP et le décorateur</h3><div class="ch-tag">Collaboration</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un costume qui fonctionne en essayage peut disparaître dans un décor de couleur trop proche, ou changer totalement de teinte sous une lumière donnée. <b>Le costume ne se pense jamais seul.</b></p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Le test de contraste</span><h4>Vérifie contre le décor</h4><ol><li>Pour un personnage et un décor imaginaires, vérifie que la couleur du costume se détache suffisamment du fond.</li></ol></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Approches</div><h2>Deux philosophies du costume.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">Le réalisme documenté</div><div class="signature">L'exactitude comme fondation</div><p>Chaque détail est vérifié historiquement ou sociologiquement — la crédibilité prime sur l'esthétique pure.</p></div>
+    <div class="case-card"><div class="name">Le costume-personnage</div><div class="signature">La silhouette comme langage</div><p>Le costume devient presque un personnage à part entière, immédiatement reconnaissable — pensé comme un logo visuel autant qu'un vêtement.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Bibliographie et ressources.</h2></div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://www.goodreads.com/book/show/13696973-costume-design" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">Deborah Nadoolman Landis</span><div class="ttl">Costume Design</div><div class="desc">Par la créatrice d'Indiana Jones et des costumes de Thriller — une référence du métier.</div></div></a>
+    <a class="book-card" href="https://www.tft.ucla.edu/faculty/deborah-nadoolman-landis/" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">UCLA — Profil</span><div class="ttl">Deborah Nadoolman Landis, parcours complet</div><div class="desc">Carrière et bibliographie complète d'une costumière historique.</div></div></a>
+    <a class="book-card" href="https://www.youtube.com/watch?v=aK0aNhx3jdY" target="_blank" rel="noopener" style="text-decoration:none;"><div class="spine"></div><div><span class="auth">NYFA — Vidéo</span><div class="ttl">Basic Costume 101 — masterclass filmée</div><div class="desc">Leçon complète donnée aux étudiants du New York Film Academy.</div></div></a>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Pourquoi documenter en détail un costume pendant le tournage ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Pour le budget uniquement</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Pour garantir la continuité entre les jours de tournage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Ce n'est jamais nécessaire</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Pourquoi vérifier la jouabilité d'un costume en essayage ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Pour économiser du tissu</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Pour vérifier uniquement la taille</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Pour s'assurer qu'il ne gêne pas les mouvements de jeu</span></label></div>
+    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">3. Le distressing (vieillissement) d'un costume sert à :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Rendre crédible un vêtement porté depuis longtemps</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Économiser sur le budget costume</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Uniquement pour les costumes d'époque</span></label></div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:13px; text-transform:uppercase; background:var(--rose); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">Un personnage n'existe pas encore. Un costume, si — c'est par là qu'il commence.</p>
+  <div class="brandline">La Costumière — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.getElementById('quizBtn').addEventListener('click',()=>{
+    let score=0;
+    document.querySelectorAll('[data-quiz]').forEach(q=>{
+      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
+      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
+      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+    });
+    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+  });
+</script>
+</body>
+</html>
