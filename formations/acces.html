@@ -47,7 +47,7 @@ button:hover{ opacity:.85;}
   <h1>Demander l'accès</h1>
   <p class="lede">Ces manuels sont réservés. Indique tes coordonnées et le manuel qui t'intéresse — ta demande est examinée personnellement, tu recevras un email dès qu'elle sera traitée.</p>
 
-  <form id="accessForm" target="_blank">
+  <form id="accessForm" target="hidden_iframe">
     <div>
       <label for="prenom">Prénom</label>
       <input type="text" id="prenom" name="prenom" required>
@@ -88,11 +88,13 @@ button:hover{ opacity:.85;}
   <div class="confirm" id="confirmBox">
     <div class="ic">✉️</div>
     <h3>Demande envoyée</h3>
-    <p>Un nouvel onglet vient de s'ouvrir pour confirmer l'envoi — tu peux le fermer. Tu recevras un email une fois que ta demande aura été acceptée ou refusée.</p>
+    <p>Elle est en cours d'examen. Tu recevras un email dès qu'elle aura été acceptée ou refusée.</p>
   </div>
 
   <a class="back" href="index-formations.html">← Retour à la collection</a>
 </div>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 <script>
   // Remplace par l'URL /exec obtenue après déploiement de Code.gs (Apps Script)
