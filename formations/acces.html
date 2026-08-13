@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Demander l'accès — Centre de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#141414; --noir-2:#1c1c1c; --noir-3:#242424;
+  --rouge:#e4312b; --craie:#f4f1e8; --fumee:#8a8a85; --line:rgba(244,241,232,0.12);
+  --display:'Archivo', sans-serif; --body:'Poppins', sans-serif; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.6; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:40px 20px;}
+.wrap{ max-width:480px; width:100%;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--rouge); text-transform:uppercase; margin-bottom:16px; text-align:center;}
+h1{ font-family:var(--display); font-weight:800; font-size:clamp(28px,5vw,40px); text-align:center; letter-spacing:-0.01em;}
+p.lede{ color:var(--fumee); font-size:14.5px; text-align:center; margin-top:14px; line-height:1.6;}
+form{ margin-top:34px; display:flex; flex-direction:column; gap:14px;}
+label{ font-family:var(--mono); font-size:10.5px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; display:block;}
+input, select{
+  width:100%; background:var(--noir-2); border:1px solid var(--line); color:var(--craie);
+  padding:13px 14px; font-family:var(--body); font-size:14.5px; border-radius:0;
+}
+input:focus, select:focus{ outline:none; border-color:var(--rouge);}
+select{ appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a8a85' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center;}
+button{
+  margin-top:10px; background:var(--rouge); color:var(--craie); border:none; padding:15px 20px;
+  font-family:var(--mono); font-size:12px; text-transform:uppercase; letter-spacing:.08em; cursor:pointer;
+  transition:opacity .2s ease;
+}
+button:hover{ opacity:.85;}
+.confirm{ display:none; margin-top:34px; text-align:center; border:1px solid var(--line); padding:32px 24px; background:var(--noir-2);}
+.confirm .ic{ font-size:30px; margin-bottom:14px;}
+.confirm h3{ font-family:var(--display); font-size:19px; margin-bottom:10px;}
+.confirm p{ color:var(--fumee); font-size:13.5px; line-height:1.6;}
+.back{ display:block; text-align:center; margin-top:24px; color:var(--fumee); font-family:var(--mono); font-size:11px; text-decoration:none; letter-spacing:.04em;}
+.back:hover{ color:var(--craie);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Okapi Studios — Centre de formation</div>
+  <h1>Demander l'accès</h1>
+  <p class="lede">Ces manuels sont réservés. Indique tes coordonnées et le manuel qui t'intéresse — ta demande est examinée personnellement, tu recevras un email dès qu'elle sera traitée.</p>
+
+  <form id="accessForm" target="hidden_iframe">
+    <div>
+      <label for="prenom">Prénom</label>
+      <input type="text" id="prenom" name="prenom" required>
+    </div>
+    <div>
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" name="nom" required>
+    </div>
+    <div>
+      <label for="email">Adresse email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="manuelSelect">Manuel souhaité</label>
+      <select id="manuelSelect" name="manuel" required>
+        <option value="realisateur">Le Réalisateur</option>
+        <option value="assistant-realisateur">L'Assistant Réalisateur</option>
+        <option value="directeur-photographie">Le Directeur de la Photographie</option>
+        <option value="scenariste">Le Scénariste</option>
+        <option value="monteur">Le Monteur</option>
+        <option value="ingenieur-son">L'Ingénieur du Son</option>
+        <option value="decoration-cinema">Le Décorateur</option>
+        <option value="costumiere">La Costumière</option>
+        <option value="directeur-casting">Le Directeur de Casting</option>
+        <option value="producteur">Le Producteur</option>
+        <option value="regisseur-general">Le Régisseur Général</option>
+        <option value="etalonneur">L'Étalonneur</option>
+        <option value="charge-production">Le Chargé de Production</option>
+        <option value="animateur-ia">L'Animateur IA</option>
+        <option value="directeur-production">Le Directeur de Production</option>
+        <option value="acteur-vivant">L'Acteur Vivant</option>
+        <option value="all">Toute la collection</option>
+      </select>
+    </div>
+    <button type="submit">Envoyer la demande</button>
+  </form>
+
+  <div class="confirm" id="confirmBox">
+    <div class="ic">✉️</div>
+    <h3>Demande envoyée</h3>
+    <p>Elle est en cours d'examen. Tu recevras un email dès qu'elle aura été acceptée ou refusée.</p>
+  </div>
+
+  <a class="back" href="index-formations.html">← Retour à la collection</a>
+</div>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
+<script>
+  // Remplace par l'URL /exec obtenue après déploiement de Code.gs (Apps Script)
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxw-pI2KuhqBazKBiDIW9tAgAv9eBmOGHtThbe4pUZa1WNvxNoLlb_Epbf8ML3ry0tKJA/exec";
+
+  const form = document.getElementById('accessForm');
+  form.action = APPS_SCRIPT_URL;
+  form.method = 'POST';
+
+  // Pré-remplit le manuel si on arrive depuis une page verrouillée (?manuel=slug)
+  const params = new URLSearchParams(window.location.search);
+  const m = params.get('manuel');
+  if (m) {
+    const sel = document.getElementById('manuelSelect');
+    if ([...sel.options].some(o => o.value === m)) sel.value = m;
+  }
+
+  form.addEventListener('submit', function(){
+    setTimeout(() => {
+      form.style.display = 'none';
+      document.getElementById('confirmBox').style.display = 'block';
+    }, 500);
+  });
+</script>
+</body>
+</html>
