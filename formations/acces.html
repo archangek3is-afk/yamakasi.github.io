@@ -100,7 +100,7 @@ button:hover{ opacity:.85;}
 
   const form = document.getElementById('accessForm');
   form.action = APPS_SCRIPT_URL;
-  form.method = 'POST';
+  form.method = 'GET';
 
   // Pré-remplit le manuel si on arrive depuis une page verrouillée (?manuel=slug)
   const params = new URLSearchParams(window.location.search);
