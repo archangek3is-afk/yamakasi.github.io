@@ -423,6 +423,38 @@ button:focus-visible,.chip:focus-visible,.media:focus-visible{outline:2px solid 
   <p class="small" style="margin-top:1vh">Le prompt exact qui produit ce plan reste au studio — vous en avez vu la structure, pas le contenu.</p>
 </section>
 
+<!-- 10A MÉTHODE · START / END FRAME -->
+<section class="slide">
+  <div class="eyebrow">Méthode · Repères visuels</div>
+  <h2>Pourquoi verrouiller un<br><span class="viol">point de départ ET d'arrivée</span></h2>
+  <p class="lede" style="margin-bottom:2.4vh">Donner une seule image de référence laisse le modèle deviner où le mouvement doit s'arrêter. Donner DEUX images — un point de départ et un point d'arrivée — transforme une supposition en trajectoire contrainte.</p>
+  <div class="cols" style="grid-template-columns:1fr 1fr">
+    <div>
+      <div class="media filled" data-media="start-frame">
+        <img src="assets/renard-image-ref.png" alt="Start frame" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="mcap">Start frame</div>
+    </div>
+    <div>
+      <div class="media filled" data-media="end-frame">
+        <img src="assets/end-frame.png" alt="End frame" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div class="mcap">End frame</div>
+    </div>
+  </div>
+</section>
+
+<!-- 10B MÉTHODE · RÉSULTAT START/END -->
+<section class="slide">
+  <div class="eyebrow">Méthode · Le résultat</div>
+  <h2>Entre ces deux images,<br><span class="grad">le mouvement se resserre</span></h2>
+  <div class="media filled" data-media="start-end-result" style="min-height:44vh">
+    <video controls playsinline style="width:100%;height:100%;object-fit:cover">
+      <source src="assets/start-and-end.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
 <!-- 10 PRATIQUE 7 · AVANT / APRÈS -->
 <section class="slide">
   <div class="eyebrow"><span class="prat">Pratique 07</span> · Le même plan, deux prompts — <span class="prat">glissez la poignée</span></div>
@@ -430,7 +462,7 @@ button:focus-visible,.chip:focus-visible,.media:focus-visible{outline:2px solid 
   <div class="cmp" id="cmp">
     <span class="lbl l">Prompt basique</span>
     <span class="lbl r">Prompt studio</span>
-    <div class="side before"><div class="media" data-media="avant" style="border:none;width:100%;height:100%;border-radius:0"><div class="ph"><div class="ic">🖼️</div><div class="t">Glissez ici<br>votre rendu « avant »</div></div></div></div>
+    <div class="side before"><div class="media filled" data-media="avant" style="border:none;width:100%;height:100%;border-radius:0"><video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover"><source src="assets/start-and-end.mp4" type="video/mp4"></video></div></div>
     <div class="side after"><div class="media" data-media="apres" style="border:none;width:100%;height:100%;border-radius:0"><div class="ph"><div class="ic">✨</div><div class="t">Glissez ici<br>votre rendu « après »</div></div></div></div>
     <div class="hnd" id="cmpHnd"></div>
   </div>
