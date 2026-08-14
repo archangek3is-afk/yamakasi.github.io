@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Nuit de l'IA — Animation 3D & Musique avec l'IA · Yamakasi / Okapi World Média</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#07060F; --nuit2:#0D0A1C; --violet:#8B5CF6; --lavande:#C4B5FD;
+  --or:#C9A84C; --ivoire:#F2EEF9; --cyan:#4CC9F0; --gris:#9A8FBF;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--nuit);color:var(--ivoire);
+  font-family:'Poppins',system-ui,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.deck{position:relative;z-index:1;height:100%}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
+  padding:7vh 7vw 9vh;opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .45s ease}
+.slide.active{display:flex;opacity:1;transform:none}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--or);margin-bottom:2vh}
+.eyebrow .part{color:var(--lavande)}
+.eyebrow .prat{color:var(--cyan)}
+h1{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,5.6vw,4.4rem);line-height:1.04;letter-spacing:-.02em}
+h2{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.5rem,3.6vw,2.7rem);line-height:1.1;
+  letter-spacing:-.015em;margin-bottom:2.8vh}
+h3{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.95rem,1.5vw,1.16rem);margin-bottom:.8vh}
+.grad{background:linear-gradient(100deg,var(--lavande),var(--violet) 55%,var(--cyan));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.gold{color:var(--or)} .viol{color:var(--lavande)} .cy{color:var(--cyan)}
+.lede{font-size:clamp(.9rem,1.35vw,1.14rem);line-height:1.62;max-width:64ch;color:#CFC8E4}
+.lede strong{color:var(--ivoire);font-weight:500}
+.small{font-size:clamp(.72rem,.95vw,.86rem);color:var(--gris);line-height:1.55}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:2.6vw;align-items:start}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6vw;align-items:stretch}
+.cols4{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3vw}
+.card{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.24);border-radius:14px;padding:2.2vh 1.4vw}
+.card p{font-size:clamp(.78rem,1.05vw,.94rem);line-height:1.58;color:#CFC8E4}
+.card .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--or);display:block;margin-bottom:.9vh}
+ul.list{list-style:none;display:flex;flex-direction:column;gap:1.3vh;max-width:68ch}
+ul.list li{padding-left:1.5em;position:relative;font-size:clamp(.85rem,1.22vw,1.04rem);line-height:1.55;color:#D9D3EC}
+ul.list li::before{content:"";position:absolute;left:0;top:.55em;width:.5em;height:.5em;border-radius:50%;
+  background:linear-gradient(135deg,var(--violet),var(--cyan))}
+ul.list li strong{color:var(--ivoire);font-weight:500}
+ul.list li em{color:var(--or);font-style:normal}
+
+/* ===== PREUVE : mur de résultats ===== */
+.proof{display:grid;grid-template-columns:repeat(4,1fr);gap:1.3vw;margin-top:1vh}
+.proof .p{border:1px solid rgba(201,168,76,.32);border-radius:14px;padding:2.4vh 1.2vw;
+  background:linear-gradient(160deg,rgba(201,168,76,.09),rgba(139,92,246,.04))}
+.proof .fig{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(1.7rem,3.4vw,2.9rem);
+  line-height:1;color:var(--or);letter-spacing:-.03em}
+.proof .fig .u{font-size:.42em;color:var(--lavande);font-weight:600;letter-spacing:0}
+.proof .lab{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gris);margin-top:1vh;line-height:1.5}
+.proof .det{font-size:.76rem;color:#BBB2D8;margin-top:.8vh;line-height:1.45}
+
+/* ===== zone média (drag & drop) ===== */
+.media{position:relative;border-radius:14px;overflow:hidden;background:#0B0917;
+  border:1px dashed rgba(196,181,253,.3);display:flex;align-items:center;justify-content:center;
+  min-height:22vh;cursor:pointer;transition:border-color .2s}
+.media:hover{border-color:var(--violet)}
+.media.filled{border-style:solid;border-color:rgba(196,181,253,.22);cursor:default}
+.media img,.media video{width:100%;height:100%;object-fit:cover;display:block}
+.media .ph{text-align:center;padding:2vh 1vw;pointer-events:none}
+.media .ph .ic{font-size:1.6rem;opacity:.5}
+.media .ph .t{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gris);margin-top:1vh;line-height:1.7}
+.media.drag{border-color:var(--cyan);background:rgba(76,201,240,.06)}
+.mcap{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;color:var(--gris);margin-top:.9vh;text-transform:uppercase}
+
+/* ===== verrou École Okapi ===== */
+.lock{position:relative;border-radius:12px;overflow:hidden}
+.lock .blur{filter:blur(6.5px);opacity:.5;user-select:none;pointer-events:none}
+.lock .veil{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:repeating-linear-gradient(0deg,rgba(7,6,15,.28) 0 2px,rgba(7,6,15,.06) 2px 4px)}
+.badge{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--or);
+  background:rgba(7,6,15,.88);border:1px solid var(--or);border-radius:999px;padding:.65em 1.2em;
+  display:inline-flex;gap:.6em;align-items:center;text-align:center;animation:pulse 2.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.34)}50%{box-shadow:0 0 0 8px rgba(201,168,76,0)}}
+
+/* ===== donné / gardé ===== */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2.2vw}
+.split .col{border-radius:16px;padding:2.8vh 1.6vw}
+.split .free{background:rgba(76,201,240,.06);border:1px solid rgba(76,201,240,.3)}
+.split .paid{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.4)}
+.split ul{list-style:none;margin-top:1.4vh;display:flex;flex-direction:column;gap:1vh}
+.split li{font-size:clamp(.78rem,1.08vw,.96rem);color:#D9D3EC;padding-left:1.4em;position:relative;line-height:1.5}
+.free li::before{content:"✓";position:absolute;left:0;color:var(--cyan)}
+.paid li::before{content:"🔒";position:absolute;left:0;font-size:.78em;top:.15em}
+
+/* ===== pipeline interactif ===== */
+.pipe{display:flex;gap:.9vw;margin-top:1vh}
+.pipe .step{flex:1;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.26);border-radius:12px;
+  padding:1.8vh .9vw;cursor:pointer;transition:all .25s;position:relative}
+.pipe .step:hover{border-color:var(--lavande);background:rgba(139,92,246,.13)}
+.pipe .step.on{border-color:var(--or);background:rgba(201,168,76,.12);transform:translateY(-4px)}
+.pipe .step .n{font-family:var(--mono);color:var(--or);font-size:.66rem;letter-spacing:.15em}
+.pipe .step h3{font-size:clamp(.74rem,1.05vw,.96rem);margin:.5vh 0 0}
+.pipe .step .tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;
+  margin-top:.7vh;display:inline-block;padding:.25em .6em;border-radius:4px}
+.tag.h{background:rgba(76,201,240,.16);color:var(--cyan)}
+.tag.a{background:rgba(139,92,246,.2);color:var(--lavande)}
+.detail{margin-top:2.4vh;min-height:12vh;border-left:2px solid var(--or);padding-left:1.4vw}
+.detail h3{color:var(--or)}
+.detail p{font-size:clamp(.84rem,1.2vw,1.02rem);line-height:1.6;color:#D9D3EC;max-width:70ch}
+
+/* ===== prompt builder ===== */
+.pb{display:grid;grid-template-columns:.85fr 1.15fr;gap:2vw;align-items:start}
+.chips{display:flex;flex-direction:column;gap:.9vh}
+.chip{display:flex;align-items:center;gap:.8em;padding:.85em 1em;border-radius:10px;cursor:pointer;
+  border:1px solid rgba(139,92,246,.3);background:rgba(139,92,246,.05);transition:all .2s;
+  font-size:clamp(.72rem,1vw,.88rem);color:#CFC8E4;text-align:left;font-family:'Poppins',sans-serif}
+.chip:hover{border-color:var(--lavande)}
+.chip .box{width:1.05em;height:1.05em;border-radius:4px;border:1.5px solid var(--gris);flex:none;
+  display:grid;place-items:center;font-size:.7em;color:var(--nuit)}
+.chip.on{border-color:var(--cyan);background:rgba(76,201,240,.1);color:var(--ivoire)}
+.chip.on .box{background:var(--cyan);border-color:var(--cyan)}
+.chip.locked{border-color:rgba(201,168,76,.45);background:rgba(201,168,76,.06);cursor:not-allowed;color:var(--gris)}
+.chip.locked .box{border-color:var(--or);border-radius:50%}
+.out{font-family:var(--mono);font-size:clamp(.68rem,.92vw,.82rem);line-height:1.85;background:#0B0917;
+  border:1px solid rgba(196,181,253,.2);border-radius:14px;padding:2.2vh 1.4vw;min-height:26vh}
+.out .k{color:var(--or)} .out .v{color:#9FE8AE} .out .c{color:#6E6590}
+.out .lk{color:#5A5178}
+.meter{margin-top:1.4vh;display:flex;align-items:center;gap:.8em;font-family:var(--mono);font-size:.66rem;
+  letter-spacing:.14em;color:var(--gris);text-transform:uppercase}
+.bar{flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:3px;transition:width .35s ease;
+  background:linear-gradient(90deg,var(--violet),var(--cyan))}
+
+/* ===== comparateur avant/après ===== */
+.cmp{position:relative;border-radius:16px;overflow:hidden;height:44vh;background:#0B0917;
+  border:1px solid rgba(196,181,253,.2);user-select:none}
+.cmp .side{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.cmp .after{clip-path:inset(0 0 0 50%)}
+.cmp .hnd{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--cyan);cursor:ew-resize;z-index:3}
+.cmp .hnd::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:2.4em;height:2.4em;border-radius:50%;background:var(--cyan);color:var(--nuit);display:grid;
+  place-items:center;font-size:.9rem;font-weight:600}
+.cmp .lbl{position:absolute;top:1.4vh;font-family:var(--mono);font-size:.64rem;letter-spacing:.18em;
+  text-transform:uppercase;padding:.5em .9em;border-radius:999px;background:rgba(7,6,15,.8);z-index:2}
+.cmp .lbl.l{left:1.2vw;color:#E88;border:1px solid rgba(238,136,136,.4)}
+.cmp .lbl.r{right:1.2vw;color:var(--cyan);border:1px solid rgba(76,201,240,.4)}
+
+/* ===== character sheet demo ===== */
+.sheet{display:grid;grid-template-columns:repeat(6,1fr);gap:.8vw}
+.tile{aspect-ratio:3/4;border-radius:10px;border:1px solid rgba(196,181,253,.2);background:#0B0917;
+  display:grid;place-items:center;position:relative;overflow:hidden;transition:all .3s}
+.tile svg{width:78%;height:78%}
+.tile .ang{position:absolute;bottom:.5em;left:0;right:0;text-align:center;font-family:var(--mono);
+  font-size:.55rem;letter-spacing:.12em;color:var(--gris)}
+.tile.bad{border-color:rgba(238,136,136,.4)}
+.tile.bad .face{filter:hue-rotate(var(--h)) saturate(1.6)}
+
+/* ===== timelines ===== */
+.tl{display:flex;gap:3px;margin-top:1.6vh;height:9vh}
+.tl .seg{flex:var(--f,1);border-radius:8px;cursor:pointer;display:flex;flex-direction:column;
+  justify-content:flex-end;padding:.7em .6em;transition:all .25s;border:1px solid transparent;
+  background:rgba(139,92,246,.14);overflow:hidden}
+.tl .seg:hover{background:rgba(139,92,246,.26)}
+.tl .seg.on{background:rgba(201,168,76,.2);border-color:var(--or)}
+.tl .seg .t{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;color:var(--gris);white-space:nowrap}
+.tl .seg .n{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(.62rem,.92vw,.82rem);
+  color:var(--ivoire);line-height:1.2;margin-top:.3em}
+.tl.acts .seg{background:rgba(76,201,240,.12)}
+.tl.acts .seg.on{background:rgba(76,201,240,.24);border-color:var(--cyan)}
+
+/* ===== toggle bon/mauvais ===== */
+.tog{display:inline-flex;border:1px solid rgba(139,92,246,.35);border-radius:999px;overflow:hidden;margin-bottom:2vh}
+.tog button{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.75em 1.5em;background:none;border:none;color:var(--gris);cursor:pointer;transition:all .2s}
+.tog button.on{background:var(--violet);color:#fff}
+.panel{display:none} .panel.on{display:block}
+
+/* ===== erreurs ===== */
+.err{display:flex;flex-direction:column;gap:1.2vh;max-width:72ch}
+.err .row{display:flex;gap:1vw;align-items:baseline}
+.err .num{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(1.2rem,2.4vw,2rem);color:var(--violet);min-width:1.3em}
+.err p{font-size:clamp(.82rem,1.2vw,1.02rem);line-height:1.5;color:#D9D3EC}
+.err p strong{color:var(--ivoire);font-weight:600}
+
+/* ===== chrome ===== */
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--violet),var(--cyan));z-index:20;transition:width .35s}
+#counter{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:.68rem;letter-spacing:.2em;color:#6E6590;z-index:20}
+#hint{position:fixed;bottom:2vh;left:2vw;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:#4A4266;z-index:20}
+.brand{position:fixed;top:1.8vh;right:2vw;font-family:'Sora',sans-serif;font-weight:700;font-size:.74rem;
+  letter-spacing:.14em;color:#6E6590;z-index:20}
+.brand b{color:var(--or)}
+button:focus-visible,.chip:focus-visible,.media:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:900px){
+  .cols,.cols3,.cols4,.split,.pb,.proof{grid-template-columns:1fr;gap:2vh}
+  .proof{grid-template-columns:1fr 1fr}
+  .pipe{flex-direction:column} .sheet{grid-template-columns:repeat(3,1fr)}
+  .slide{padding:8vh 6vw 10vh;overflow-y:auto;justify-content:flex-start}
+  .cmp{height:32vh}
+}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div id="progress"></div>
+<div class="brand">OKAPI <b>WORLD</b> MÉDIA</div>
+<div id="counter"></div>
+<div id="hint">← → · espace · clic · swipe</div>
+<div class="deck">
+
+<!-- 01 COUVERTURE -->
+<section class="slide">
+  <div class="eyebrow">La Nuit de l'IA · Masterclass live</div>
+  <h1>Films d'animation 3D<br>& musique <span class="grad">avec l'IA</span></h1>
+  <p class="lede" style="margin-top:2.6vh">Animation, bandes annonces, comptines pour enfants : la méthode d'un studio qui en a fait son métier — pas sa curiosité du week-end.</p>
+  <p style="margin-top:2.2vh;font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;color:var(--or)">YAMAKASI — Fondateur & Directeur créatif, OKAPI WORLD MÉDIA</p>
+</section>
+
+<!-- 02 PREUVE OUVERTURE -->
+<section class="slide">
+  <div class="eyebrow">Avant la théorie · La preuve</div>
+  <h2>Ce que ce pipeline a déjà produit<br><span class="grad">en conditions réelles</span></h2>
+  <div class="proof">
+    <div class="p"><div class="fig" data-count="7000">0</div><div class="lab">Spectateurs, 1<sup>re</sup></div><div class="det">ILLUSION, comédie musicale hybride — Méga Place de Croissy-Beaubourg, juillet 2026. Diffusion YouTube + BNC TV.</div></div>
+    <div class="p"><div class="fig" data-count="14">0</div><div class="lab">Prix en festivals</div><div class="det">7 ans de réalisation. Des jurys de cinéma, pas des vues achetées.</div></div>
+    <div class="p"><div class="fig" data-count="3">0</div><div class="lab">Top 3 · AICFF 2026</div><div class="det">IN CUSTODY sélectionné parmi les 3 meilleurs films africains. Projection à Dallas, septembre 2026.</div></div>
+    <div class="p"><div class="fig" data-count="6">0</div><div class="lab">Personnages · série jeunesse</div><div class="det">« Je Suis Unique » — série animée en production pour un client, du character design à la livraison.</div></div>
+  </div>
+  <p class="lede" style="margin-top:2.6vh;font-size:.95em">Je ne vous parlerai de rien que je n'aie pas livré. <strong>Tout ce qui suit sort de projets qui ont un budget, un client, une date de sortie</strong> — et un public qui a payé sa place.</p>
+</section>
+
+<!-- 03 PREUVE VISUELLE -->
+<section class="slide">
+  <div class="eyebrow">Preuve · À l'écran</div>
+  <h2>ILLUSION — long métrage hybride<br><span class="viol">séquences chantées entièrement animées</span></h2>
+  <div class="cols3" style="align-items:stretch">
+    <div><div class="media" data-media="illusion-1"><div class="ph"><div class="ic">🎬</div><div class="t">Glissez ici<br>image ILLUSION 1</div></div></div><div class="mcap">Personnage 3D · décor illustré</div></div>
+    <div><div class="media" data-media="illusion-2"><div class="ph"><div class="ic">🎬</div><div class="t">Glissez ici<br>image ILLUSION 2</div></div></div><div class="mcap">Séquence chantée · lipsync</div></div>
+    <div><div class="media" data-media="illusion-3"><div class="ph"><div class="ic">🎬</div><div class="t">Glissez ici<br>image ILLUSION 3</div></div></div><div class="mcap">Antagoniste · direction de jeu</div></div>
+  </div>
+  <p class="lede" style="margin-top:2.4vh">Une règle fondatrice tient tout le film : <strong>ce qui est vivant a du volume, ce qui est construit reste dessiné.</strong> Les personnages en 3D, les décors en illustration. Ce n'est pas un effet — c'est une thèse de mise en scène, décidée avant la première génération.</p>
+</section>
+
+<!-- 04 QUI PARLE -->
+<section class="slide">
+  <div class="eyebrow">Deux minutes de contexte</div>
+  <h2>Pourquoi m'écouter <span class="viol">à cette heure-ci</span></h2>
+  <div class="cols3">
+    <div class="card"><span class="k">Le terrain</span><p>Réalisateur et directeur créatif. École de cinéma, plateaux, festivals. <strong style="color:var(--ivoire)">L'IA est arrivée après le métier</strong> — pas à la place.</p></div>
+    <div class="card"><span class="k">Le studio</span><p>Okapi World Média : production de films, contenus de marque, animation. Des contrats signés, des livrables datés, des clients qui reviennent.</p></div>
+    <div class="card"><span class="k">La position</span><p>« On ne fait pas du contenu. <strong class="gold">On fait du cinéma.</strong> » L'IA est un département de plus — pas un raccourci pour éviter le métier.</p></div>
+  </div>
+</section>
+
+<!-- 05 CONTRAT -->
+<section class="slide">
+  <div class="eyebrow">Le contrat de cette masterclass</div>
+  <h2>Ce soir je vous donne la carte.<br><span class="viol">Pas les clés du coffre.</span></h2>
+  <div class="split">
+    <div class="col free">
+      <h3><span class="cy">✦</span> Ce que vous repartez avec</h3>
+      <ul>
+        <li>Le pipeline complet, étape par étape</li>
+        <li>Un prompt professionnel construit en direct devant vous</li>
+        <li>Une scène décomposée en plans, pour de vrai</li>
+        <li>Les 5 erreurs qui ruinent 90 % des projets</li>
+        <li>L'anatomie d'une comptine et d'une bande annonce</li>
+      </ul>
+    </div>
+    <div class="col paid">
+      <h3><span class="gold">◆</span> Ce qui reste au studio</h3>
+      <ul>
+        <li>Quel modèle pour quel registre — nos tests comparatifs</li>
+        <li>Le système complet de cohérence de personnage</li>
+        <li>Nos blocs de prompt caméra / matière / références</li>
+        <li>La chaîne de droits musicaux</li>
+        <li>Les correctifs de bugs qui nous ont coûté 6 mois</li>
+      </ul>
+      <p class="small" style="margin-top:1.6vh">Tout ça s'apprend — dans <strong class="gold">L'ÉCOLE OKAPI</strong>. On en reparle à la fin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 PARTIE 1 -->
+<section class="slide">
+  <div class="eyebrow"><span class="part">Partie 1</span> · Films d'animation 3D</div>
+  <h1>L'IA ne fait pas<br>de films. <span class="grad">Vous, si.</span></h1>
+  <p class="lede" style="margin-top:2.8vh">Le mythe du bouton magique a fait plus de dégâts que n'importe quel modèle. La vérité : l'IA a fait tomber <strong>le prix du rendu</strong>, pas <strong>le regard du réalisateur</strong>. Un film d'animation IA raté est presque toujours un film <em class="gold">mal dirigé</em> — pas mal généré.</p>
+</section>
+
+<!-- 07 PIPELINE INTERACTIF -->
+<section class="slide">
+  <div class="eyebrow"><span class="part">Partie 1</span> · La méthode — <span class="prat">cliquez sur une étape</span></div>
+  <h2>Le pipeline : 5 étapes, <span class="viol">aucune optionnelle</span></h2>
+  <div class="pipe" id="pipe">
+    <div class="step on" data-t="Histoire — 100 % humain" data-d="Script, découpage, note d'intention. Aucun modèle ne vous dira ce que votre film doit dire. C'est ici que le film se gagne ou se perd, et c'est l'étape que tout le monde saute parce qu'elle n'a rien de spectaculaire."><span class="n">01</span><h3>Histoire</h3><span class="tag h">humain</span></div>
+    <div class="step" data-t="Direction artistique — 100 % humain" data-d="Registre visuel, palette, références, règle de rendu. Sur ILLUSION, une seule règle tient tout le film : les personnages ont du volume, les décors restent dessinés. Décidée sur papier, avant la première génération. Sans ça, le modèle choisit pour vous — et il choisit toujours la moyenne."><span class="n">02</span><h3>Direction artistique</h3><span class="tag h">humain</span></div>
+    <div class="step" data-t="Images clés — humain + IA" data-d="Character sheets multi-angles, location sheets, plans maîtres. Vous ne générez pas des images : vous fabriquez les références qui rendront les 200 plans suivants cohérents. Une location sheet ratée, c'est trois jours de replanification."><span class="n">03</span><h3>Images clés</h3><span class="tag a">humain + IA</span></div>
+    <div class="step" data-t="Animation — humain + IA" data-d="Image vers vidéo, segment par segment. On dirige le mouvement comme on dirige un acteur : intention, vitesse, où le geste retombe. La qualité du plan dépend à 80 % de l'image d'entrée et de la précision de la direction — pas du modèle."><span class="n">04</span><h3>Animation</h3><span class="tag a">humain + IA</span></div>
+    <div class="step" data-t="Montage & son — 100 % humain" data-d="Montage, musique, mixage, étalonnage. C'est ici que des segments deviennent un film. Un rush magnifique mal monté reste un rush. Et 50 % de l'émotion d'un film d'animation est sonore."><span class="n">05</span><h3>Montage & son</h3><span class="tag h">humain</span></div>
+  </div>
+  <div class="detail" id="pipeDetail"></div>
+  <p class="small" style="margin-top:1.6vh">Regardez la répartition : <strong style="color:var(--cyan)">3 étapes sur 5 sont du cinéma classique.</strong> C'est exactement pour ça que les cinéastes gagnent à ce jeu.</p>
+</section>
+
+<!-- 08 PRATIQUE 1 · DU SCRIPT AU PLAN -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 01</span> · Du script au plan — <span class="prat">cliquez sur un plan</span></div>
+  <h2>Une phrase de scénario<br><span class="viol">= trois plans, pas un</span></h2>
+  <p class="lede" style="margin-bottom:1.4vh"><em class="gold">« Le renardeau hésite au bord du ravin, puis saute. »</em> — Un débutant génère ça en une fois et obtient une bouillie. Voilà comment un réalisateur le découpe :</p>
+  <div class="tl" id="tlPlans">
+    <div class="seg on" style="--f:2" data-t="Plan 1 — Gros plan · 2,5 s" data-d="Ses pattes au bord de la roche, gravier qui roule dans le vide. On ne voit pas encore son visage. Objectif : installer le danger par le détail, pas par le dialogue. Caméra fixe, très légère respiration. Ce plan coûte peu à générer et porte toute la tension."><span class="t">2,5 s</span><span class="n">Gros plan pattes</span></div>
+    <div class="seg" style="--f:3" data-t="Plan 2 — Plan rapproché · 3 s" data-d="Son visage, les oreilles qui se plaquent, le regard qui traverse le ravin. C'est le plan de l'hésitation — donc le plan le plus difficile à générer, et celui qui a besoin de votre character sheet. Direction de jeu : trois couches de mouvement, jamais un visage figé."><span class="t">3 s</span><span class="n">Visage · l'hésitation</span></div>
+    <div class="seg" style="--f:2" data-t="Plan 3 — Plan large latéral · 2 s" data-d="Il saute, la caméra suit en travelling latéral, l'autre rive entre dans le cadre. Deux secondes suffisent : au-delà, le modèle invente de la physique et le saut devient mou. Le montage fait le reste."><span class="t">2 s</span><span class="n">Le saut · large</span></div>
+  </div>
+  <div class="detail" id="plansDetail"></div>
+  <p class="small" style="margin-top:1.2vh">Trois plans courts battent systématiquement un plan long. <strong style="color:var(--ivoire)">Les modèles sont bons sur 2 à 4 secondes</strong> — au-delà, ils dérivent. Le découpage n'est pas une contrainte artistique : c'est la contrainte technique transformée en style.</p>
+</section>
+
+<!-- 09 PRATIQUE 2 · PROMPT BUILDER -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 02</span> · Construisons un prompt — <span class="prat">cochez les blocs</span></div>
+  <h2>Un prompt n'est pas une phrase.<br><span class="viol">C'est une feuille de service.</span></h2>
+  <div class="pb">
+    <div class="chips" id="chips">
+      <button class="chip on" data-k="SUJET"><span class="box">✓</span>Sujet — qui, et dans quel état</button>
+      <button class="chip" data-k="ACTION"><span class="box">✓</span>Action — ce qui se passe, en secondes</button>
+      <button class="chip" data-k="STYLE"><span class="box">✓</span>Style — le registre de rendu</button>
+      <button class="chip" data-k="LUMIERE"><span class="box">✓</span>Lumière — direction, heure, intensité</button>
+      <button class="chip locked" data-k="CAMERA" disabled><span class="box"></span>Caméra — optique, mouvement, hauteur 🔒</button>
+      <button class="chip locked" data-k="MATIERE" disabled><span class="box"></span>Matière — peau, tissu, particules 🔒</button>
+      <button class="chip locked" data-k="VERROUS" disabled><span class="box"></span>Verrous positifs — anti-dérive 🔒</button>
+      <p class="small" style="margin-top:1vh">Les 4 premiers blocs : ce soir, gratuits.<br>Les 3 derniers : <span class="gold">École Okapi</span> — ce sont eux qui séparent « joli » de « cinéma ».</p>
+    </div>
+    <div>
+      <div class="out" id="promptOut"></div>
+      <div class="meter"><span>Niveau de contrôle</span><span class="bar"><i id="ctrlBar"></i></span><span id="ctrlPct">0 %</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09b PRATIQUE 3 · GÉNÉRATION DE L'IMAGE CLÉ -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 03</span> · L'image clé — <span class="prat">avant toute vidéo</span></div>
+  <h2>D'abord une image.<br><span class="viol">Jamais directement une vidéo.</span></h2>
+  <div class="cols" style="grid-template-columns:1fr 1fr">
+    <div>
+      <div class="media" data-media="fox-image"><div class="ph"><div class="ic">🦊</div><div class="t">Glissez ici<br>l'image générée du renard</div></div></div>
+      <div class="mcap">Modèle image · plan fixe, pose de référence</div>
+    </div>
+    <div>
+      <ul class="list">
+        <li><strong>Pourquoi une image d'abord :</strong> elle coûte quelques secondes à générer, contre plusieurs minutes pour une vidéo. On corrige l'identité du personnage <em>ici</em> — pas après avoir payé dix générations vidéo ratées.</li>
+        <li><strong>Ce qu'on verrouille sur cette image :</strong> proportions, teinte de fourrure, forme des yeux, texture. C'est elle qui devient la référence — le point zéro de toute la scène.</li>
+        <li><strong>Le bloc [SUJET] de tout à l'heure</strong> sert ici tel quel : « jeune renard des neiges, oreilles plaquées, regard fixe ». Le style et la lumière aussi. Seul le bloc [ACTION] disparaît — une image ne bouge pas.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 09c PRATIQUE 4 · TEXT-TO-VIDEO SANS RÉFÉRENCE -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 04</span> · Texte → vidéo, sans référence</div>
+  <h2>On saute l'image<br><span class="grad">et on tente direct.</span></h2>
+  <div class="cols" style="grid-template-columns:1fr 1fr">
+    <div>
+      <div class="media" data-media="fox-t2v-noref"><div class="ph"><div class="ic">🎬</div><div class="t">Glissez ici<br>la vidéo générée sans référence</div></div></div>
+      <div class="mcap">Texte seul → vidéo · aucune image d'entrée</div>
+    </div>
+    <div>
+      <ul class="list">
+        <li><strong>Ce qui se passe :</strong> le modèle invente le renard <em>et</em> son mouvement en même temps. Deux problèmes à résoudre d'un coup — c'est là que la plupart des dérives naissent.</li>
+        <li><strong>Le symptôme classique :</strong> un renard qui change légèrement de morphologie entre la première et la dernière image du même plan, parce que rien ne l'ancre.</li>
+        <li><strong>Quand ça reste utilisable :</strong> pour explorer vite une idée de mouvement ou de cadrage, avant de savoir ce qu'on veut vraiment. <span class="gold">Jamais pour un plan qui doit tenir dans un montage.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 09d PRATIQUE 5 · TEXT-TO-VIDEO AVEC RÉFÉRENCE -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 05</span> · Texte → vidéo, avec référence</div>
+  <h2>On repart de l'image clé.<br><span class="viol">Tout change.</span></h2>
+  <div class="cols" style="grid-template-columns:1fr 1fr">
+    <div>
+      <div class="media" data-media="fox-t2v-ref"><div class="ph"><div class="ic">🎬</div><div class="t">Glissez ici<br>la vidéo générée avec référence</div></div></div>
+      <div class="mcap">Image clé + texte → vidéo</div>
+    </div>
+    <div>
+      <ul class="list">
+        <li><strong>Ce qui change :</strong> le modèle n'a plus qu'un seul problème à résoudre — le mouvement. L'identité, elle, est déjà fixée par l'image d'entrée.</li>
+        <li><strong>Résultat direct :</strong> plus de stabilité de la morphologie, de la fourrure, du regard, plan après plan. C'est la différence entre un renard et <em>le même</em> renard.</li>
+        <li><strong>La règle du studio :</strong> aucune génération vidéo sans image de référence validée en amont. Sans exception — même pour un plan de 2 secondes.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 09e PRATIQUE 6 · RENDU STUDIO FINAL -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 06</span> · Le rendu studio</div>
+  <h2>Même sujet. Même modèle.<br><span class="grad">Tous les blocs, cette fois.</span></h2>
+  <div class="media" data-media="fox-studio" style="min-height:44vh"><div class="ph"><div class="ic">✨</div><div class="t">Glissez ici<br>le rendu final — image de référence + prompt complet studio</div></div></div>
+  <p class="lede" style="margin-top:2vh;font-size:.95em">Image de référence, caméra, matière, verrous — les sept blocs, ensemble. <strong>C'est le même sujet que sur les deux essais précédents.</strong> La différence ne vient d'aucun réglage caché : elle vient uniquement de la précision de ce qu'on a écrit.</p>
+  <p class="small" style="margin-top:1vh">Le prompt exact qui produit ce plan reste au studio — vous en avez vu la structure, pas le contenu.</p>
+</section>
+
+<!-- 10 PRATIQUE 7 · AVANT / APRÈS -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 07</span> · Le même plan, deux prompts — <span class="prat">glissez la poignée</span></div>
+  <h2>Voilà ce que valent<br><span class="viol">les trois blocs verrouillés</span></h2>
+  <div class="cmp" id="cmp">
+    <span class="lbl l">Prompt basique</span>
+    <span class="lbl r">Prompt studio</span>
+    <div class="side before"><div class="media" data-media="avant" style="border:none;width:100%;height:100%;border-radius:0"><div class="ph"><div class="ic">🖼️</div><div class="t">Glissez ici<br>votre rendu « avant »</div></div></div></div>
+    <div class="side after"><div class="media" data-media="apres" style="border:none;width:100%;height:100%;border-radius:0"><div class="ph"><div class="ic">✨</div><div class="t">Glissez ici<br>votre rendu « après »</div></div></div></div>
+    <div class="hnd" id="cmpHnd"></div>
+  </div>
+  <p class="lede" style="margin-top:2vh;font-size:.95em">Même sujet. Même modèle. Même durée de génération. La seule différence tient dans trois blocs de texte. <strong>C'est pour ça que le prompting est un métier</strong> — et pas une case à remplir.</p>
+</section>
+
+<!-- 11 PRATIQUE 4 · COHÉRENCE -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 08</span> · Le mur n°1 — <span class="prat">cliquez sur le bouton</span></div>
+  <h2>La cohérence de personnage :<br><span class="grad">le tueur silencieux</span></h2>
+  <div class="tog" id="togCoh">
+    <button class="on" data-p="sans">Sans character sheet</button>
+    <button data-p="avec">Avec character sheet</button>
+  </div>
+  <div class="sheet" id="sheetDemo"></div>
+  <p class="lede" id="cohText" style="margin-top:2vh;font-size:.95em"></p>
+  <div class="lock" style="margin-top:1.6vh;max-width:78ch">
+    <div class="blur"><p style="padding:1.8vh 1.4vw;font-size:.88rem;line-height:1.85">Notre système : sheet multi-angles verrouillée dès l'étape 3, banque de références nommées par personnage, injection systématique en entrée, contrôle qualité automatisé sur ██ points de repère faciaux, procédure de récupération quand un plan dérive…</p></div>
+    <div class="veil"><span class="badge">🔒 Le système de cohérence Okapi — École Okapi</span></div>
+  </div>
+</section>
+
+<!-- 12 MUR N°2 -->
+<section class="slide">
+  <div class="eyebrow"><span class="part">Partie 1</span> · Le mur n°2</div>
+  <h2>Le rendu <span class="viol">« animation junior IA »</span><br>que tout le monde a</h2>
+  <p class="lede">Ce rendu 3D lisse, générique, interchangeable, qui crie « généré par IA » à dix mètres. Ce n'est pas une fatalité technique : <strong>c'est un choix par défaut que vous n'avez pas fait consciemment.</strong></p>
+  <ul class="list" style="margin-top:2.2vh">
+    <li><strong>Pourquoi ça arrive :</strong> sans direction artistique écrite, le modèle retombe sur sa moyenne statistique — le style le plus vu de son entraînement.</li>
+    <li><strong>Le test à faire ce soir :</strong> montrez une image de votre projet à quelqu'un. S'il ne peut pas la distinguer de n'importe quel autre projet IA, vous n'avez pas un film. Vous avez un rendu.</li>
+    <li><strong>La sortie :</strong> une bible visuelle écrite <em>avant</em> la première génération — et le bon modèle pour le bon registre. <span class="gold">Chaque modèle a un tempérament. On ne caste pas un modèle au hasard, comme on ne caste pas un acteur au hasard.</span></li>
+  </ul>
+  <div class="lock" style="margin-top:2vh;max-width:78ch">
+    <div class="blur"><p style="padding:1.6vh 1.4vw;font-family:var(--mono);font-size:.82rem;line-height:1.9">Photoréalisme cinéma → modèle A · 3D stylisée jeunesse → modèle B · Créatures & SF → modèle C + bloc peau renforcé · Fidélité produit & texte → modèle D · Mode & édito → modèle E…</p></div>
+    <div class="veil"><span class="badge">🔒 Notre matrice modèle × registre — École Okapi</span></div>
+  </div>
+</section>
+
+<!-- 13 CINQ ERREURS -->
+<section class="slide">
+  <div class="eyebrow">Cadeau complet · aucun verrou</div>
+  <h2>Les 5 erreurs qui ruinent <span class="viol">90 % des projets</span></h2>
+  <div class="err">
+    <div class="row"><span class="num">1</span><p><strong>Générer avant d'écrire.</strong> On explore, on s'émerveille, on brûle son budget — et deux semaines plus tard on n'a toujours pas d'histoire.</p></div>
+    <div class="row"><span class="num">2</span><p><strong>Juger sur un plan, pas sur une séquence.</strong> Une belle image isolée ne prouve rien. Le film vit dans les raccords.</p></div>
+    <div class="row"><span class="num">3</span><p><strong>Ignorer le son.</strong> La moitié de l'émotion est sonore. Un film muet généré en 4K reste un brouillon en 4K.</p></div>
+    <div class="row"><span class="num">4</span><p><strong>Vouloir des plans longs.</strong> Les modèles dérivent au-delà de quelques secondes. Pensez montage nerveux, pas plan-séquence.</p></div>
+    <div class="row"><span class="num">5</span><p><strong>Cacher que c'est de l'IA.</strong> La transparence est un atout de marque, pas un aveu. Le public pardonne l'outil — jamais le mensonge.</p></div>
+  </div>
+</section>
+
+<!-- 14 PARTIE 2 -->
+<section class="slide">
+  <div class="eyebrow"><span class="part">Partie 2</span> · Musique, bandes annonces, comptines</div>
+  <h1>Le son est <span class="grad">la moitié<br>du film</span></h1>
+  <p class="lede" style="margin-top:2.8vh">Trois formats, une même logique. <strong>L'IA compose vite ; vous, vous savez pourquoi ça doit émouvoir.</strong> C'est cette division du travail qu'on va décortiquer — avec des exemples que vous pourrez refaire demain matin.</p>
+</section>
+
+<!-- 15 PRATIQUE 5 · BRIEF MUSICAL -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 09</span> · Le brief musical — <span class="prat">comparez</span></div>
+  <h2>On ne prompte pas un genre.<br><span class="viol">On prompte une scène.</span></h2>
+  <div class="tog" id="togMus">
+    <button class="on" data-p="mauvais">Ce que tout le monde écrit</button>
+    <button data-p="bon">Ce qu'un studio écrit</button>
+  </div>
+  <div class="panel on" data-p="mauvais">
+    <div class="out" style="min-height:20vh"><span class="c">// Prompt type, 6 mots</span><br><span class="v">musique épique orchestrale, émotion, cinématique</span><br><br><span class="c">// Résultat : la même bouillie héroïque que 400 000 autres.<br>// Aucun accroche, aucune identité, inutilisable en montage.</span></div>
+  </div>
+  <div class="panel" data-p="bon">
+    <div class="out" style="min-height:20vh">
+      <span class="c">// Le même besoin, écrit comme une note au compositeur</span><br>
+      <span class="k">TEMPO</span> <span class="v">lent, ~72 BPM, qui accélère à mi-parcours</span><br>
+      <span class="k">INSTRUMENTATION</span> <span class="v">guitare acoustique en fingerpicking seule, pad discret au refrain</span><br>
+      <span class="k">VOIX</span> <span class="v">masculine française, ténor, registre grave, jamais forcée</span><br>
+      <span class="k">ÉMOTION</span> <span class="v">un jeune homme qui doute de ses rêves, seul, la nuit</span><br>
+      <span class="k">STRUCTURE</span> <span class="v">intro nue / montée / rupture / résolution suspendue</span><br>
+      <span class="k">INTERDITS</span> <span class="v">pas de batterie, pas de montée épique, pas de chœurs</span><br>
+      <span class="lk">[ 3 blocs supplémentaires — verrouillés ]</span>
+    </div>
+  </div>
+  <p class="lede" style="margin-top:1.8vh;font-size:.95em">Notez le bloc <strong>INTERDITS</strong>. C'est celui que personne n'écrit — et c'est souvent lui qui sauve le morceau. <span class="gold">Un modèle musical ne devine pas votre retenue : il faut la lui interdire.</span></p>
+</section>
+
+<!-- 16 PRATIQUE 6 · COMPTINE -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 10</span> · Anatomie d'une comptine — <span class="prat">cliquez sur un segment</span></div>
+  <h2>60 secondes, <span class="viol">quatre blocs</span>,<br>zéro place pour l'improvisation</h2>
+  <div class="tl acts" id="tlCompt">
+    <div class="seg on" style="--f:1" data-t="0–8 s · L'accroche" data-d="Un son reconnaissable, un mot répété, le personnage qui apparaît. Un enfant de 3 ans décide en 4 secondes s'il reste. Pas d'intro instrumentale : la voix entre immédiatement."><span class="t">0–8 s</span><span class="n">Accroche</span></div>
+    <div class="seg" style="--f:1.6" data-t="8–24 s · Le couplet — une seule idée" data-d="Une idée par chanson, jamais deux. « On se lave les mains » n'est pas « on se lave les mains et on range sa chambre ». Vocabulaire limité aux mots qu'un enfant de 4 ans possède déjà. Tempo calé sur un mouvement du corps : marcher, sauter, taper des mains."><span class="t">8–24 s</span><span class="n">Couplet · 1 idée</span></div>
+    <div class="seg on-alt" style="--f:1.2" data-t="24–36 s · Le refrain — le cœur du produit" data-d="Il revient toutes les 20 secondes. La répétition n'est pas de la paresse : c'est le mécanisme d'apprentissage. L'enfant réclame ce qu'il peut anticiper — et c'est l'enfant qui commande la télécommande, pas le parent."><span class="t">24–36 s</span><span class="n">Refrain</span></div>
+    <div class="seg" style="--f:1.4" data-t="36–60 s · Variation + refrain final" data-d="On change un élément (un personnage, un son, un geste) et on rejoue le refrain. Le cerveau reçoit de la nouveauté dans une structure connue : c'est la formule exacte de toutes les comptines qui dépassent le million de vues. Fin nette, pas de fondu long — l'enchaînement automatique doit démarrer tout de suite."><span class="t">36–60 s</span><span class="n">Variation + refrain</span></div>
+  </div>
+  <div class="detail" id="comptDetail"></div>
+  <p class="small" style="margin-top:1.2vh"><strong style="color:var(--ivoire)">Le piège n°1 :</strong> écrire pour plaire aux parents. Testez sur de vrais enfants avant de publier — jamais sur des adultes. <span class="gold">Et une comptine sans clip animé laisse 80 % de l'audience sur la table : c'est ici que les deux sujets de cette nuit se rejoignent.</span></p>
+</section>
+
+<!-- 17 PRATIQUE 7 · TRAILER -->
+<section class="slide">
+  <div class="eyebrow"><span class="prat">Pratique 11</span> · La grammaire du trailer — <span class="prat">cliquez sur un acte</span></div>
+  <h2>Un trailer se monte <span class="viol">sur la musique</span>,<br>jamais sur l'image</h2>
+  <div class="tl" id="tlTrailer">
+    <div class="seg on" style="--f:1.4" data-t="Acte 1 · Le monde — 15 s, plans de 3 à 4 s" data-d="On installe un univers et une promesse. Une voix, une ambiance, une question. Pas encore d'action : de la tension. Les plans sont longs parce que le spectateur a besoin de lire l'espace. Trois à quatre plans maximum."><span class="t">0–15 s · plans 3-4 s</span><span class="n">Le monde</span></div>
+    <div class="seg" style="--f:1.8" data-t="Acte 2 · La rupture — 30 s, plans de 1 à 2 s" data-d="Le rythme s'accélère, les plans raccourcissent, la musique monte. Chaque coupe tombe sur un temps. C'est du montage musical avant d'être du montage image : posez la piste d'abord, marquez les temps forts, et cherchez ensuite les plans qui vont dessus. L'inverse ne marche jamais."><span class="t">15–45 s · plans 1-2 s</span><span class="n">La rupture</span></div>
+    <div class="seg" style="--f:.8" data-t="Acte 3 · Le silence — 10 s" data-d="Coupez tout. Un plan. Une réplique. Le titre. Le silence avant le titre est le plan le plus important du trailer — c'est le seul moment où le spectateur entend sa propre réaction. La plupart des trailers amateurs le suppriment par peur du vide. C'est l'erreur qui les rend oubliables."><span class="t">45–55 s</span><span class="n">Le silence</span></div>
+  </div>
+  <div class="detail" id="trailerDetail"></div>
+  <div class="lock" style="margin-top:1.4vh;max-width:78ch">
+    <div class="blur"><p style="padding:1.6vh 1.4vw;font-family:var(--mono);font-size:.82rem;line-height:1.9">Notre workflow : découpage inverse depuis la piste → grille de ██ plans typés → génération par lots avec continuité vérifiée → sound design en ██ couches → mixage broadcast…</p></div>
+    <div class="veil"><span class="badge">🔒 Le workflow trailer complet — École Okapi</span></div>
+  </div>
+</section>
+
+<!-- 18 DROITS -->
+<section class="slide">
+  <div class="eyebrow"><span class="part">Partie 2</span> · Le sujet dont personne ne parle</div>
+  <h2>Générer une musique, c'est facile.<br><span class="grad">Pouvoir la vendre, c'est le métier.</span></h2>
+  <div class="cols">
+    <div>
+      <ul class="list">
+        <li><strong>La question à poser avant de générer :</strong> à qui appartient ce morceau, et qu'est-ce que j'ai le droit d'en faire commercialement ?</li>
+        <li><strong>Le piège :</strong> livrer à un client une musique dont vous ne pouvez pas garantir l'exploitation. C'est le genre de détail qui se paie deux ans plus tard.</li>
+        <li><strong>Notre principe :</strong> la maquette générée n'est jamais le livrable final. Il y a une étape entre les deux — et c'est elle qui sécurise tout.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="lock">
+        <div class="blur"><p style="padding:2.4vh 1.4vw;font-size:.9rem;line-height:1.9">Notre chaîne : composition en maquette → ré-interprétation et ré-enregistrement ██████████ → dépôt et rattachement complet des droits au studio → exploitation commerciale sans zone grise, y compris en diffusion TV…</p></div>
+        <div class="veil"><span class="badge">🔒 La chaîne de droits Okapi — École Okapi</span></div>
+      </div>
+      <p class="small" style="margin-top:1.4vh">C'est la question que nos clients TV posent en premier. Savoir y répondre vaut plus cher que savoir prompter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 19 ÉTHIQUE -->
+<section class="slide">
+  <div class="eyebrow">Le cadre</div>
+  <h2>Éthique & légal : <span class="viol">les règles du studio</span></h2>
+  <ul class="list">
+    <li><strong>Transparence :</strong> tout contenu généré est signalé. Mention claire, assumée, dans les crédits. Non négociable — et devenu un argument commercial.</li>
+    <li><strong>Pas de visages réels</strong> sans consentement écrit. Ni acteurs, ni anonymes, ni « juste pour tester ». Nos character sheets exigent des traits inventés et une asymétrie volontaire.</li>
+    <li><strong>Le contenu jeunesse est le plus exposé :</strong> publier des comptines engage une responsabilité particulière. Validation humaine de chaque seconde publiée.</li>
+    <li><strong>L'IA augmente les équipes :</strong> chez nous elle a créé des rôles — direction de génération, orchestration, contrôle de continuité. Elle n'en a supprimé aucun.</li>
+  </ul>
+</section>
+
+<!-- 20 RÉCAP -->
+<section class="slide">
+  <div class="eyebrow">Ce que vous savez maintenant</div>
+  <h2>Vous avez la carte.<br><span class="grad">Il vous manque la route.</span></h2>
+  <div class="cols">
+    <div>
+      <h3 class="cy">✦ Acquis ce soir</h3>
+      <ul class="list" style="margin-top:1.2vh">
+        <li>Le pipeline en 5 étapes et la part réelle du cinéma</li>
+        <li>Le découpage d'une scène en plans générables</li>
+        <li>Un prompt professionnel construit bloc par bloc</li>
+        <li>Les 2 murs, les 5 erreurs</li>
+        <li>Brief musical, comptine 60 s, trailer 3 actes</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="gold">◆ Ce qui sépare savoir et produire</h3>
+      <ul class="list" style="margin-top:1.2vh">
+        <li>Quel modèle caster pour quel registre — et pourquoi</li>
+        <li>Le système de cohérence complet, plan après plan</li>
+        <li>Les blocs caméra / matière / verrous positifs</li>
+        <li>L'orchestration de bout en bout</li>
+        <li>Les droits, les coûts réels, la vente à de vrais clients</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 21 PREUVE CLÔTURE -->
+<section class="slide">
+  <div class="eyebrow">Et pour finir · La preuve, encore</div>
+  <h2>Ce n'est pas une théorie.<br><span class="grad">C'est un studio qui tourne.</span></h2>
+  <div class="cols" style="grid-template-columns:1.05fr .95fr">
+    <div>
+      <div class="proof" style="grid-template-columns:1fr 1fr">
+        <div class="p"><div class="fig" data-count="7000">0</div><div class="lab">en salle, une soirée</div><div class="det">ILLUSION, ouverture du Camp Impact 2026.</div></div>
+        <div class="p"><div class="fig" data-count="1">0</div><div class="lab">long métrage en post</div><div class="det">Séquences chantées entièrement animées. Co-production BNC TV & IMPACT X.</div></div>
+        <div class="p"><div class="fig" data-count="22">0</div><div class="lab">septembre · Dallas</div><div class="det">IN CUSTODY projeté au CONTENT Media Conference, African Showcase.</div></div>
+        <div class="p"><div class="fig" data-count="14">0</div><div class="lab">prix en festivals</div><div class="det">Le cinéma d'abord. L'IA ensuite.</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="media" data-media="cloture" style="min-height:34vh"><div class="ph"><div class="ic">🎞️</div><div class="t">Glissez ici<br>votre meilleur plan<br>ou la vidéo teaser</div></div></div>
+      <div class="mcap">Le plan qui clôt la démonstration</div>
+    </div>
+  </div>
+  <p class="lede" style="margin-top:2vh;font-size:.95em"><strong>Personne dans cette salle ne peut vous montrer ça en même temps qu'une méthode.</strong> C'est exactement ce que je vends : pas des astuces d'outil — un système de production qui a déjà passé l'épreuve du public.</p>
+</section>
+
+<!-- 22 CTA -->
+<section class="slide" style="align-items:center;text-align:center">
+  <div class="eyebrow">La suite</div>
+  <h1><span class="grad">L'ÉCOLE OKAPI</span></h1>
+  <p class="lede" style="margin:2.6vh auto 0;max-width:58ch">Tout ce qui était verrouillé ce soir, déverrouillé : la matrice des modèles, le système de cohérence, les blocs caméra / matière / verrous, l'orchestration, la chaîne de droits — et un accompagnement sur <strong>votre</strong> premier projet, jusqu'à la livraison.</p>
+  <p style="margin-top:3vh"><span class="badge" style="font-size:.76rem;padding:.9em 1.8em">🔒 → 🔓 Places limitées · Tarif de lancement pour les présents ce soir</span></p>
+  <p style="margin-top:2.2vh;font-family:var(--mono);font-size:.76rem;letter-spacing:.14em;color:var(--gris)">Lien d'inscription dans le chat Zoom · yamakasi@okapiworldmedia.com</p>
+</section>
+
+<!-- 23 Q&R -->
+<section class="slide" style="align-items:center;text-align:center">
+  <div class="eyebrow">À vous</div>
+  <h1>Questions & <span class="grad">réponses</span></h1>
+  <p class="lede" style="margin:2.6vh auto 0;max-width:52ch">Posez tout — je réponds à tout. <span style="color:var(--gris)">(Sauf ce qui est derrière les verrous. Vous savez où le trouver.)</span></p>
+  <p style="margin-top:3.4vh;font-family:'Sora',sans-serif;font-weight:700;letter-spacing:.12em;font-size:.86rem">YAMAKASI · <span class="gold">OKAPI WORLD MÉDIA</span> · @yamakasi_creative</p>
+</section>
+
+</div>
+<script>
+(function(){
+"use strict";
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- ciel étoilé ---------- */
+var c=document.getElementById('stars'), x=c.getContext('2d'), W,H, st=[];
+function initStars(){W=c.width=innerWidth;H=c.height=innerHeight;
+  var n=Math.min(170,Math.round(W/7));st=[];
+  for(var i=0;i<n;i++)st.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.2,
+    p:Math.random()*6.28,s:.006+Math.random()*.018});}
+function paint(){
+  x.clearRect(0,0,W,H);
+  var g=x.createRadialGradient(W*.5,H*.34,0,W*.5,H*.34,Math.max(W,H)*.85);
+  g.addColorStop(0,'#0D0A1C');g.addColorStop(1,'#07060F');x.fillStyle=g;x.fillRect(0,0,W,H);
+  for(var i=0;i<st.length;i++){var s=st[i];s.p+=s.s;
+    x.globalAlpha=.22+.55*Math.abs(Math.sin(s.p));x.fillStyle='#E8E2FF';
+    x.beginPath();x.arc(s.x,s.y,s.r,0,6.3);x.fill();}
+  x.globalAlpha=1; if(!reduced) requestAnimationFrame(paint);
+}
+initStars();paint();
+addEventListener('resize',function(){initStars();if(reduced)paint();});
+
+/* ---------- navigation ---------- */
+var slides=[].slice.call(document.querySelectorAll('.slide')), i=0;
+var prog=document.getElementById('progress'), cnt=document.getElementById('counter');
+function pad(n){return (n<10?'0':'')+n;}
+function go(n){
+  if(n<0||n>=slides.length||n===i) return;
+  slides[i].classList.remove('active'); i=n; slides[i].classList.add('active');
+  prog.style.width=((i+1)/slides.length*100)+'%';
+  cnt.textContent=pad(i+1)+' / '+pad(slides.length);
+  countUp(slides[i]);
+}
+slides[0].classList.add('active');
+prog.style.width=(1/slides.length*100)+'%';
+cnt.textContent='01 / '+pad(slides.length);
+
+addEventListener('keydown',function(e){
+  if(['ArrowRight','ArrowDown',' ','PageDown'].indexOf(e.key)>-1){e.preventDefault();go(i+1);}
+  else if(['ArrowLeft','ArrowUp','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(i-1);}
+  else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(slides.length-1);}
+});
+addEventListener('click',function(e){
+  if(e.target.closest('button,.chip,.step,.seg,.media,.cmp,a,input')) return;
+  (e.clientX>innerWidth/2)?go(i+1):go(i-1);
+});
+var tx=null,ty=null;
+addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+addEventListener('touchend',function(e){
+  if(tx===null)return;
+  var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)) (dx<0)?go(i+1):go(i-1);
+  tx=null;
+},{passive:true});
+
+/* ---------- compteurs animés ---------- */
+function countUp(slide){
+  slide.querySelectorAll('.fig[data-count]').forEach(function(el){
+    if(el.dataset.done)return; el.dataset.done='1';
+    var target=parseInt(el.dataset.count,10);
+    if(reduced){el.textContent=fmt(target);return;}
+    var t0=null, dur=900;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1);
+      el.textContent=fmt(Math.round(target*(1-Math.pow(1-p,3))));
+      if(p<1)requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  });
+}
+function fmt(n){return n>=1000?n.toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' '):String(n);}
+countUp(slides[0]);
+
+/* ---------- zones média : drag & drop ou clic ---------- */
+var picker=document.createElement('input');
+picker.type='file'; picker.accept='image/*,video/*'; picker.style.display='none';
+document.body.appendChild(picker);
+var pending=null;
+function loadInto(zone,file){
+  if(!file)return;
+  var url=URL.createObjectURL(file);
+  var el=file.type.indexOf('video')===0?document.createElement('video'):document.createElement('img');
+  el.src=url;
+  if(el.tagName==='VIDEO'){el.autoplay=true;el.loop=true;el.muted=true;el.playsInline=true;}
+  zone.innerHTML=''; zone.appendChild(el); zone.classList.add('filled');
+}
+document.querySelectorAll('.media').forEach(function(z){
+  z.tabIndex=0;
+  z.addEventListener('click',function(e){e.stopPropagation(); if(z.classList.contains('filled'))return;
+    pending=z; picker.value=''; picker.click();});
+  z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('drag');});
+  z.addEventListener('dragleave',function(){z.classList.remove('drag');});
+  z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('drag');
+    loadInto(z,e.dataTransfer.files[0]);});
+});
+picker.addEventListener('change',function(){ if(pending) loadInto(pending,picker.files[0]); pending=null; });
+
+/* ---------- pipeline + timelines cliquables ---------- */
+function wire(listId, detailId){
+  var wrap=document.getElementById(listId), out=document.getElementById(detailId);
+  if(!wrap||!out)return;
+  var items=[].slice.call(wrap.children).filter(function(n){return n.dataset.t;});
+  function show(el){
+    items.forEach(function(n){n.classList.remove('on');});
+    el.classList.add('on');
+    out.innerHTML='<h3>'+el.dataset.t+'</h3><p>'+el.dataset.d+'</p>';
+  }
+  items.forEach(function(el){
+    el.tabIndex=0;
+    el.addEventListener('click',function(e){e.stopPropagation();show(el);});
+    el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();show(el);}});
+  });
+  show(items[0]);
+}
+wire('pipe','pipeDetail');
+wire('tlPlans','plansDetail');
+wire('tlCompt','comptDetail');
+wire('tlTrailer','trailerDetail');
+
+/* ---------- prompt builder ---------- */
+var BLOCKS={
+  SUJET:{k:'SUJET',v:'un jeune renard des neiges, oreilles plaquées, regard fixe sur l\'autre rive'},
+  ACTION:{k:'ACTION',v:'0,0–1,2 s il hésite · 1,2–1,6 s il fléchit les pattes · 1,6–2,0 s il saute'},
+  STYLE:{k:'STYLE',v:'animation 3D stylisée, personnage volumétrique, décor illustré en aplats'},
+  LUMIERE:{k:'LUMIÈRE',v:'heure bleue, source froide venant de la gauche, contre-jour doux sur la fourrure'}
+};
+var LOCKED=[
+  {k:'CAMÉRA',v:'████ ██mm · travelling latéral ██ km/h · hauteur ██ cm · inclinaison ██°'},
+  {k:'MATIÈRE',v:'████████ sous-surface · poils ████████ · particules de ████ en suspension'},
+  {k:'VERROUS',v:'████████ maintenu image 1 à image ██ · ██████ interdit · ████ verrouillé ×3'}
+];
+var out=document.getElementById('promptOut'), bar=document.getElementById('ctrlBar'), pct=document.getElementById('ctrlPct');
+function renderPrompt(){
+  var on=[].slice.call(document.querySelectorAll('#chips .chip.on')).map(function(b){return b.dataset.k;});
+  var html='<span class="c">// PLAN 3 — le saut · 2,0 s</span><br>';
+  if(!on.length) html+='<span class="c">// Aucun bloc coché. C\'est exactement le prompt<br>// que 90 % des gens écrivent. Bonne chance.</span><br>';
+  on.forEach(function(k){var b=BLOCKS[k]; html+='<span class="k">['+b.k+']</span> <span class="v">'+b.v+'</span><br>';});
+  html+='<br><span class="c">// Les 3 blocs qui font la différence :</span><br>';
+  LOCKED.forEach(function(b){html+='<span class="lk">['+b.k+'] '+b.v+'</span><br>';});
+  out.innerHTML=html;
+  var p=Math.round(on.length/7*100);
+  bar.style.width=p+'%'; pct.textContent=p+' %';
+}
+document.querySelectorAll('#chips .chip').forEach(function(b){
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(b.classList.contains('locked'))return;
+    b.classList.toggle('on'); renderPrompt();
+  });
+});
+renderPrompt();
+
+/* ---------- démo cohérence de personnage ---------- */
+function faceSVG(seed){
+  // visage stylisé paramétré : la "dérive" change les proportions
+  var eye=8+seed.e, muz=1+seed.m, ear=1+seed.a, w=44+seed.w, hue=seed.h||0;
+  return '<svg viewBox="0 0 100 130" class="face" style="filter:hue-rotate('+hue+'deg)">'+
+    '<ellipse cx="50" cy="70" rx="'+w+'" ry="'+(46+seed.w/2)+'" fill="#C4B5FD" opacity=".22"/>'+
+    '<path d="M'+(50-w*.7)+' 40 L'+(50-w*.55)+' '+(12-ear*6)+' L'+(50-w*.15)+' 34 Z" fill="#8B5CF6" opacity=".55"/>'+
+    '<path d="M'+(50+w*.7)+' 40 L'+(50+w*.55)+' '+(12-ear*6)+' L'+(50+w*.15)+' 34 Z" fill="#8B5CF6" opacity=".55"/>'+
+    '<ellipse cx="'+(50-w*.36)+'" cy="66" rx="'+eye+'" ry="'+(eye*1.05)+'" fill="#4CC9F0"/>'+
+    '<ellipse cx="'+(50+w*.36)+'" cy="66" rx="'+eye+'" ry="'+(eye*1.05)+'" fill="#4CC9F0"/>'+
+    '<ellipse cx="'+(50-w*.36)+'" cy="66" rx="'+(eye*.42)+'" ry="'+(eye*.5)+'" fill="#07060F"/>'+
+    '<ellipse cx="'+(50+w*.36)+'" cy="66" rx="'+(eye*.42)+'" ry="'+(eye*.5)+'" fill="#07060F"/>'+
+    '<ellipse cx="50" cy="'+(92+muz*4)+'" rx="'+(14*muz)+'" ry="'+(9*muz)+'" fill="#F2EEF9" opacity=".5"/>'+
+    '<ellipse cx="50" cy="'+(88+muz*4)+'" rx="4.5" ry="3.4" fill="#C9A84C"/>'+
+    '</svg>';
+}
+var ANGLES=['face','3/4 g','profil g','3/4 d','profil d','dos'];
+var sheet=document.getElementById('sheetDemo'), cohText=document.getElementById('cohText');
+function drawSheet(mode){
+  sheet.innerHTML='';
+  for(var n=0;n<6;n++){
+    var d=document.createElement('div');
+    d.className='tile'+(mode==='sans'?' bad':'');
+    var seed = mode==='avec'
+      ? {e:0,m:0,a:0,w:0,h:0}
+      : {e:(Math.random()*5-2),m:(Math.random()*.5-.2),a:(Math.random()*1.4-.6),
+         w:(Math.random()*12-6),h:(Math.random()*50-25)};
+    d.innerHTML=faceSVG(seed)+'<span class="ang">'+ANGLES[n]+'</span>';
+    sheet.appendChild(d);
+  }
+  cohText.innerHTML = mode==='sans'
+    ? 'Six plans du <strong>même</strong> personnage, générés sans référence. Yeux, museau, largeur du crâne, teinte : tout bouge. Le public ne saura pas nommer le problème — il ressentira juste que <strong>le film est mal fait</strong>. Chaque génération repart de zéro : le modèle n\'a <strong>aucune mémoire</strong> de votre personnage.'
+    : 'Le même personnage, référencé. Six angles, une seule identité. <strong>C\'est la condition d\'existence d\'un film</strong> — pas une option de confort. Recopier le même prompt ne suffit pas : il faut un système de références, et il se construit à l\'étape 3, jamais après.';
+}
+drawSheet('sans');
+document.querySelectorAll('#togCoh button').forEach(function(b){
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    document.querySelectorAll('#togCoh button').forEach(function(o){o.classList.remove('on');});
+    b.classList.add('on'); drawSheet(b.dataset.p);
+  });
+});
+
+/* ---------- toggle brief musical ---------- */
+document.querySelectorAll('#togMus button').forEach(function(b){
+  b.addEventListener('click',function(e){
+    e.stopPropagation();
+    var s=b.closest('.slide');
+    s.querySelectorAll('#togMus button').forEach(function(o){o.classList.remove('on');});
+    b.classList.add('on');
+    s.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('on',p.dataset.p===b.dataset.p);});
+  });
+});
+
+/* ---------- comparateur avant/après ---------- */
+(function(){
+  var cmp=document.getElementById('cmp'); if(!cmp)return;
+  var after=cmp.querySelector('.after'), hnd=document.getElementById('cmpHnd'), drag=false;
+  function set(clientX){
+    var r=cmp.getBoundingClientRect();
+    var p=Math.max(3,Math.min(97,(clientX-r.left)/r.width*100));
+    after.style.clipPath='inset(0 0 0 '+p+'%)'; hnd.style.left=p+'%';
+  }
+  hnd.addEventListener('mousedown',function(e){e.preventDefault();e.stopPropagation();drag=true;});
+  addEventListener('mousemove',function(e){if(drag)set(e.clientX);});
+  addEventListener('mouseup',function(){drag=false;});
+  hnd.addEventListener('touchstart',function(e){e.stopPropagation();drag=true;},{passive:true});
+  addEventListener('touchmove',function(e){if(drag)set(e.touches[0].clientX);},{passive:true});
+  addEventListener('touchend',function(){drag=false;});
+  cmp.addEventListener('click',function(e){if(e.target.closest('.media'))return;e.stopPropagation();set(e.clientX);});
+})();
+})();
+</script>
+</body>
+</html>
