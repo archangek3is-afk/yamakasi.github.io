@@ -184,57 +184,44 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
       <div class="eyebrow">L'École Okapi · Le cinéma à l'ère de l'IA</div>
       <h1>On ne fait pas du contenu.<br>On fait <em>du cinéma.</em></h1>
       <p>Cette formation est pensée avec vous. Répondez à ce court formulaire pour nous aider à la façonner — vos usages, vos blocages, ce que vous voulez vraiment savoir faire.</p>
-      <p class="manif">Huit courtes étapes. Trois minutes. Aucune question piège.</p>
+      <p class="manif">Quatre courtes étapes. Deux minutes. Aucune question piège.</p>
       <button class="startbtn" id="startBtn">Commencer
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
     </div>
   </div>
 
-  <!-- STEP 1 — IDENTITÉ -->
+  <!-- STEP 1 — IDENTITÉ & CONTEXTE -->
   <div class="step" data-step="1">
     <div class="slate">Prise 01 · Vos informations</div>
     <h2>Qui êtes-vous ?</h2>
-    <p class="sub">Vos coordonnées restent strictement confidentielles — elles servent uniquement à vous recontacter au sujet de la formation.</p>
+    <p class="sub">Vos coordonnées restent strictement confidentielles.</p>
     <div class="row2">
       <div class="field"><label>Prénom <span class="req">*</span></label><input type="text" id="prenom" placeholder="Votre prénom"><div class="err-msg">Ce champ est requis.</div></div>
       <div class="field"><label>Nom <span class="req">*</span></label><input type="text" id="nom" placeholder="Votre nom"><div class="err-msg">Ce champ est requis.</div></div>
     </div>
     <div class="row2">
-      <div class="field"><label>Téléphone</label><input type="tel" id="tel" placeholder="+33 6 12 34 56 78"></div>
       <div class="field"><label>Email</label><input type="email" id="email" placeholder="vous@exemple.com"></div>
+      <div class="field"><label>Téléphone</label><input type="tel" id="tel" placeholder="+33 6 12 34 56 78"></div>
     </div>
     <div class="field"><label>Activité / profession <span class="req">*</span></label><input type="text" id="profession" placeholder="Réalisateur, créateur de contenu, marketeur…"><div class="err-msg">Ce champ est requis.</div></div>
-  </div>
-
-  <!-- STEP 2 — LOCALISATION + SOURCE -->
-  <div class="step" data-step="2">
-    <div class="slate">Prise 02 · D'où venez-vous</div>
-    <h2>Vous êtes basé où,<br>et comment nous avez-vous trouvés ?</h2>
-    <div class="row3">
-      <div class="field"><label>Ville</label><input type="text" id="ville" placeholder="Lyon"></div>
-      <div class="field"><label>Région</label><input type="text" id="region" placeholder="Rhône-Alpes"></div>
-      <div class="field"><label>Pays</label><input type="text" id="pays" placeholder="France"></div>
-    </div>
-    <div class="field">
-      <label>Comment avez-vous entendu parler de nous ? <span class="req">*</span></label>
-      <div class="opts" id="src-opts">
-        <div class="opt"><input type="checkbox" name="source" id="src-google" value="Google"><label for="src-google"><span class="b"></span>Google</label></div>
-        <div class="opt"><input type="checkbox" name="source" id="src-linkedin" value="LinkedIn"><label for="src-linkedin"><span class="b"></span>LinkedIn</label></div>
-        <div class="opt"><input type="checkbox" name="source" id="src-facebook" value="Facebook"><label for="src-facebook"><span class="b"></span>Facebook</label></div>
-        <div class="opt"><input type="checkbox" name="source" id="src-instagram" value="Instagram"><label for="src-instagram"><span class="b"></span>Instagram</label></div>
-        <div class="opt"><input type="checkbox" name="source" id="src-cic" value="CIC 2026"><label for="src-cic"><span class="b"></span>CIC 2026</label></div>
-        <div class="opt"><input type="checkbox" name="source" id="src-boot" value="Creative Boot Camp"><label for="src-boot"><span class="b"></span>Creative Boot Camp</label></div>
-        <div class="opt"><input type="checkbox" name="source" id="src-bnc" value="BNC Academy"><label for="src-bnc"><span class="b"></span>BNC Academy</label></div>
-        <div class="opt"><input type="checkbox" name="source" id="src-autre" value="Autre"><label for="src-autre"><span class="b"></span>Autre</label></div>
+    <div class="row2">
+      <div class="field"><label>Ville / Pays</label><input type="text" id="ville" placeholder="Lyon, France"></div>
+      <div class="field">
+        <label>Comment nous avez-vous trouvés ? <span class="req">*</span></label>
+        <select id="source">
+          <option value="">Sélectionnez…</option>
+          <option>Google</option><option>LinkedIn</option><option>Facebook</option><option>Instagram</option>
+          <option>CIC 2026</option><option>Creative Boot Camp</option><option>BNC Academy</option><option>Autre</option>
+        </select>
+        <div class="err-msg">Merci de sélectionner une option.</div>
       </div>
-      <div class="err-msg" id="src-err">Sélectionnez au moins une option.</div>
     </div>
   </div>
 
-  <!-- STEP 3 — RAPPORT À L'IA -->
-  <div class="step" data-step="3">
-    <div class="slate">Prise 03 · Votre rapport à l'IA</div>
+  <!-- STEP 2 — VOTRE RAPPORT À L'IA -->
+  <div class="step" data-step="2">
+    <div class="slate">Prise 02 · Votre rapport à l'IA</div>
     <h2>Où en êtes-vous avec l'IA<br>aujourd'hui ?</h2>
     <div class="field">
       <label>Utilisez-vous déjà l'intelligence artificielle ? <span class="req">*</span></label>
@@ -244,17 +231,31 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
       </div>
       <div class="err-msg" id="useIA-err">Merci de choisir une option.</div>
     </div>
-    <div class="field">
-      <label>Depuis combien de temps ? <span class="req">*</span></label>
-      <select id="depuis">
-        <option value="">Sélectionnez…</option>
-        <option>Moins de 3 mois</option>
-        <option>3-6 mois</option>
-        <option>6-12 mois</option>
-        <option>Plus d'1 an</option>
-        <option>Je n'utilise pas encore l'IA</option>
-      </select>
-      <div class="err-msg">Merci de sélectionner une option.</div>
+    <div class="row2">
+      <div class="field">
+        <label>Depuis combien de temps ? <span class="req">*</span></label>
+        <select id="depuis">
+          <option value="">Sélectionnez…</option>
+          <option>Moins de 3 mois</option><option>3-6 mois</option><option>6-12 mois</option>
+          <option>Plus d'1 an</option><option>Je n'utilise pas encore l'IA</option>
+        </select>
+        <div class="err-msg">Merci de sélectionner une option.</div>
+      </div>
+      <div class="field">
+        <label>Votre principale difficulté <span class="req">*</span></label>
+        <select id="difficulte">
+          <option value="">Sélectionnez…</option>
+          <option>Manque de connaissances</option>
+          <option>Difficulté à formuler des prompts</option>
+          <option>Résultats non professionnels</option>
+          <option>Choix des outils</option>
+          <option>Coût des outils</option>
+          <option>Manque de temps</option>
+          <option>Intégration dans le workflow</option>
+          <option>Autre</option>
+        </select>
+        <div class="err-msg">Merci de sélectionner une option.</div>
+      </div>
     </div>
     <div class="field">
       <label>Quels outils utilisez-vous ?</label>
@@ -269,75 +270,13 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
         <div class="opt"><input type="checkbox" name="outils" id="o-autre" value="Autre"><label for="o-autre"><span class="b"></span>Autre</label></div>
       </div>
     </div>
-    <div class="field">
-      <label>À quelle fréquence ?</label>
-      <div class="opts">
-        <div class="opt"><input type="radio" name="freq" id="f-quot" value="Quotidien"><label for="f-quot"><span class="b"></span>Quotidien</label></div>
-        <div class="opt"><input type="radio" name="freq" id="f-hebdo" value="Hebdomadaire"><label for="f-hebdo"><span class="b"></span>Hebdomadaire</label></div>
-        <div class="opt"><input type="radio" name="freq" id="f-occ" value="Occasionnel"><label for="f-occ"><span class="b"></span>Occasionnel</label></div>
-        <div class="opt"><input type="radio" name="freq" id="f-jamais" value="Jamais"><label for="f-jamais"><span class="b"></span>Jamais</label></div>
-      </div>
-    </div>
   </div>
 
-  <!-- STEP 4 — USAGES & DIFFICULTÉS -->
-  <div class="step" data-step="4">
-    <div class="slate">Prise 04 · Usages & difficultés</div>
-    <h2>Ce que vous voulez faire,<br>ce qui vous freine</h2>
-    <div class="field">
-      <label>Pour quels usages créatifs souhaiteriez-vous utiliser l'IA ?</label>
-      <div class="opts">
-        <div class="opt"><input type="checkbox" name="usages" id="u-ecriture" value="Écriture"><label for="u-ecriture"><span class="b"></span>Écriture</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-scenario" value="Scénario"><label for="u-scenario"><span class="b"></span>Scénario</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-brainstorm" value="Brainstorming"><label for="u-brainstorm"><span class="b"></span>Brainstorming</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-video" value="Réalisation vidéo"><label for="u-video"><span class="b"></span>Réalisation vidéo</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-anim" value="Animation"><label for="u-anim"><span class="b"></span>Animation</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-design" value="Design graphique"><label for="u-design"><span class="b"></span>Design graphique</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-images" value="Création d'images"><label for="u-images"><span class="b"></span>Création d'images</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-site" value="Création de sites web"><label for="u-site"><span class="b"></span>Création de sites web</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-montage" value="Montage"><label for="u-montage"><span class="b"></span>Montage</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-com" value="Communication"><label for="u-com"><span class="b"></span>Communication</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-rs" value="Réseaux sociaux"><label for="u-rs"><span class="b"></span>Réseaux sociaux</label></div>
-        <div class="opt"><input type="checkbox" name="usages" id="u-autre" value="Autre"><label for="u-autre"><span class="b"></span>Autre</label></div>
-      </div>
-    </div>
-    <div class="field">
-      <label>Quelles sont vos principales difficultés avec l'IA ? <span class="req">*</span></label>
-      <div class="opts">
-        <div class="opt"><input type="checkbox" name="diff" id="d-connaiss" value="Manque de connaissances"><label for="d-connaiss"><span class="b"></span>Manque de connaissances</label></div>
-        <div class="opt"><input type="checkbox" name="diff" id="d-prompt" value="Difficulté à formuler des prompts"><label for="d-prompt"><span class="b"></span>Difficulté à formuler des prompts</label></div>
-        <div class="opt"><input type="checkbox" name="diff" id="d-resultat" value="Résultats non professionnels"><label for="d-resultat"><span class="b"></span>Résultats non professionnels</label></div>
-        <div class="opt"><input type="checkbox" name="diff" id="d-choix" value="Choix des outils"><label for="d-choix"><span class="b"></span>Choix des outils</label></div>
-        <div class="opt"><input type="checkbox" name="diff" id="d-cout" value="Coût des outils"><label for="d-cout"><span class="b"></span>Coût des outils</label></div>
-        <div class="opt"><input type="checkbox" name="diff" id="d-temps" value="Manque de temps"><label for="d-temps"><span class="b"></span>Manque de temps</label></div>
-        <div class="opt"><input type="checkbox" name="diff" id="d-workflow" value="Intégration dans le workflow"><label for="d-workflow"><span class="b"></span>Intégration dans le workflow</label></div>
-        <div class="opt"><input type="checkbox" name="diff" id="d-autre" value="Autre"><label for="d-autre"><span class="b"></span>Autre</label></div>
-      </div>
-      <div class="err-msg" id="diff-err">Sélectionnez au moins une option.</div>
-    </div>
-    <div class="field"><label>Précisez si besoin</label><textarea id="precisions" placeholder="Un détail sur vos difficultés…"></textarea></div>
-  </div>
-
-  <!-- STEP 5 — OBJECTIFS -->
-  <div class="step" data-step="5">
-    <div class="slate">Prise 05 · Vos objectifs</div>
+  <!-- STEP 3 — OBJECTIFS & FORMAT -->
+  <div class="step" data-step="3">
+    <div class="slate">Prise 03 · Vos objectifs</div>
     <h2>Qu'aimeriez-vous<br>savoir faire ?</h2>
-    <div class="field"><label>Que souhaitez-vous apprendre concrètement ?</label><textarea id="apprendre" placeholder="Détaillez ce que vous voulez maîtriser…"></textarea></div>
-    <div class="field"><label>Si tu pouvais maîtriser une seule chose grâce à l'IA pour améliorer tes projets créatifs, qu'aimerais-tu savoir faire ?</label><textarea id="unechose" placeholder="Une seule chose, la plus importante…"></textarea></div>
-  </div>
-
-  <!-- STEP 6 — PÉDAGOGIE & FORMAT -->
-  <div class="step" data-step="6">
-    <div class="slate">Prise 06 · Pédagogie & format</div>
-    <h2>Comment préférez-vous<br>apprendre ?</h2>
-    <div class="field">
-      <label>Quel type de pédagogie préférez-vous ?</label>
-      <div class="opts">
-        <div class="opt"><input type="radio" name="pedago" id="p-theorie" value="Théorie"><label for="p-theorie"><span class="b"></span>Théorie</label></div>
-        <div class="opt"><input type="radio" name="pedago" id="p-pratique" value="Pratique"><label for="p-pratique"><span class="b"></span>Pratique</label></div>
-        <div class="opt"><input type="radio" name="pedago" id="p-mix" value="Mix des deux"><label for="p-mix"><span class="b"></span>Mix des deux</label></div>
-      </div>
-    </div>
+    <div class="field"><label>Que souhaitez-vous apprendre concrètement, et quel est votre objectif principal avec l'IA ? <span class="req">*</span></label><textarea id="objectif" placeholder="Détaillez ce que vous voulez maîtriser, et pourquoi…"></textarea><div class="err-msg" id="objectif-err">Ce champ est requis.</div></div>
     <div class="field">
       <label>Format préféré <span class="req">*</span></label>
       <div class="opts">
@@ -350,9 +289,9 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
     </div>
   </div>
 
-  <!-- STEP 7 — LE PACK -->
-  <div class="step" data-step="7">
-    <div class="slate">Prise 07 · Rejoindre l'Ordre</div>
+  <!-- STEP 4 — PACK & ORGANISATION + RÉCAP -->
+  <div class="step" data-step="4">
+    <div class="slate">Prise 04 · Rejoindre l'Ordre</div>
     <h2>Quel pack vous<br>intéresserait le plus ?</h2>
     <div class="packs" id="packs">
       <div class="pack" data-val="Pack Padawan : 500€">
@@ -386,36 +325,32 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
     </div>
     <div class="err-msg" id="pack-err">Sélectionnez un pack.</div>
 
-    <div class="field" style="margin-top:3.4vh"><label>Moyen de paiement favori</label>
+    <div class="row2" style="margin-top:3.4vh">
+      <div class="field">
+        <label>Rythme souhaité <span class="req">*</span></label>
+        <div class="opts">
+          <div class="opt"><input type="radio" name="rythme" id="r-intensif" value="Intensif 2 mois"><label for="r-intensif"><span class="b"></span>Intensif · 2 mois</label></div>
+          <div class="opt"><input type="radio" name="rythme" id="r-regulier" value="Régulier 3 mois"><label for="r-regulier"><span class="b"></span>Régulier · 3 mois</label></div>
+          <div class="opt"><input type="radio" name="rythme" id="r-lent" value="Lent 4 mois"><label for="r-lent"><span class="b"></span>Lent · 4 mois</label></div>
+        </div>
+        <div class="err-msg" id="rythme-err">Merci de choisir une option.</div>
+      </div>
+      <div class="field">
+        <label>Fréquence des cours <span class="req">*</span></label>
+        <div class="opts">
+          <div class="opt"><input type="radio" name="freqcours" id="fc-1" value="1 fois / semaine"><label for="fc-1"><span class="b"></span>1×/semaine</label></div>
+          <div class="opt"><input type="radio" name="freqcours" id="fc-2" value="2 fois / semaine"><label for="fc-2"><span class="b"></span>2×/semaine</label></div>
+        </div>
+        <div class="err-msg" id="freqcours-err">Merci de choisir une option.</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Moyen de paiement favori</label>
       <div class="opts">
         <div class="opt"><input type="radio" name="paiement" id="pay-total" value="Totalité en une fois"><label for="pay-total"><span class="b"></span>Totalité en une fois</label></div>
         <div class="opt"><input type="radio" name="paiement" id="pay-mens" value="Plusieurs mensualités"><label for="pay-mens"><span class="b"></span>Plusieurs mensualités</label></div>
       </div>
     </div>
-    <div class="field">
-      <label>Sur combien de temps souhaiteriez-vous suivre les cours ? <span class="req">*</span></label>
-      <div class="opts">
-        <div class="opt"><input type="radio" name="rythme" id="r-intensif" value="Rythme intensif 2 mois"><label for="r-intensif"><span class="b"></span>Intensif · 2 mois</label></div>
-        <div class="opt"><input type="radio" name="rythme" id="r-regulier" value="Rythme régulier 3 mois"><label for="r-regulier"><span class="b"></span>Régulier · 3 mois</label></div>
-        <div class="opt"><input type="radio" name="rythme" id="r-lent" value="Rythme lent 4 mois"><label for="r-lent"><span class="b"></span>Lent · 4 mois</label></div>
-      </div>
-      <div class="err-msg" id="rythme-err">Merci de choisir une option.</div>
-    </div>
-    <div class="field">
-      <label>À quelle fréquence souhaitez-vous suivre les cours ? <span class="req">*</span></label>
-      <div class="opts">
-        <div class="opt"><input type="radio" name="freqcours" id="fc-1" value="1 fois / semaine"><label for="fc-1"><span class="b"></span>1 fois / semaine</label></div>
-        <div class="opt"><input type="radio" name="freqcours" id="fc-2" value="2 fois / semaine"><label for="fc-2"><span class="b"></span>2 fois / semaine</label></div>
-      </div>
-      <div class="err-msg" id="freqcours-err">Merci de choisir une option.</div>
-    </div>
-  </div>
-
-  <!-- STEP 8 — OBJECTIF + RÉCAP -->
-  <div class="step" data-step="8">
-    <div class="slate">Prise 08 · Dernière étape</div>
-    <h2>Pourquoi l'IA,<br>et pour quoi faire ?</h2>
-    <div class="field"><label>Pourquoi souhaitez-vous utiliser l'IA dans vos projets créatifs, et quel est votre objectif principal ? <span class="req">*</span></label><textarea id="objectif" placeholder="Votre objectif principal…"></textarea><div class="err-msg" id="objectif-err">Ce champ est requis.</div></div>
     <div id="recapBox"></div>
   </div>
 
@@ -447,10 +382,10 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
 /* ⚙️ COLLE ICI L'URL DE DÉPLOIEMENT DE TON GOOGLE APPS SCRIPT (se termine par /exec)
    Tant que cette valeur reste vide, le formulaire fonctionne uniquement
    avec les boutons "Envoyer par email" / "Copier mes réponses". */
-var WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz5IRo8c5UYIqNDfPah1aS4EzgabR5UTSwqNxqKr1XSivWRRKQnfgr54AXzFUnClhX8/exec";
+var WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby-kfETPfgY0pHZKQd4a1G1SYpw9vCgQTLTBnWGsSGEnx_HrC9Bd63d4NKxzO8MvxTZ/exec";
 
-var TOTAL = 8;
-var current = 0; // 0 = hero, 1..8 = steps, 9 = done
+var TOTAL = 4;
+var current = 0; // 0 = hero, 1..4 = steps, 5 = done
 var steps = [].slice.call(document.querySelectorAll('.step[data-step]'));
 var heroStep = document.getElementById('step-hero');
 var doneStep = document.getElementById('step-done');
@@ -484,15 +419,15 @@ function renderClap(){
 
 function show(n){
   heroStep.classList.toggle('active', n===0);
-  doneStep.classList.toggle('active', n===9);
+  doneStep.classList.toggle('active', n===TOTAL+1);
   steps.forEach(function(s){ s.classList.toggle('active', parseInt(s.dataset.step,10)===n); });
   clap.style.display = (n>=1 && n<=TOTAL) ? 'flex' : 'none';
   nav.style.display = (n>=1 && n<=TOTAL) ? 'flex' : 'none';
   prevBtn.style.visibility = (n===1) ? 'hidden' : 'visible';
-  nextBtn.textContent = (n===TOTAL) ? 'Voir le récapitulatif →' : 'Continuer →';
+  nextBtn.textContent = (n===TOTAL) ? "Rejoindre l'Ordre →" : 'Continuer →';
   if(n>=1 && n<=TOTAL) renderClap();
-  if(n===8) buildRecap();
-  if(n===9) submitToSheet();
+  if(n===TOTAL) buildRecap();
+  if(n===TOTAL+1) submitToSheet();
   window.scrollTo({top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
 }
 
@@ -542,31 +477,28 @@ function validateStep(n){
       var v=fieldEl(id).value.trim(); var bad=!v;
       markInvalid(id,bad); if(bad) ok=false;
     });
+    var src=fieldEl('source').value; var badSrc=!src;
+    var srcField=fieldEl('source').closest('.field'); if(srcField) srcField.classList.toggle('invalid',badSrc);
+    if(badSrc) ok=false;
   }
   if(n===2){
-    var bad=!groupChecked('source');
-    showGroupErr('src-err',bad); if(bad) ok=false;
-  }
-  if(n===3){
     var bad1=!groupChecked('useIA'); showGroupErr('useIA-err',bad1); if(bad1) ok=false;
     var dep=fieldEl('depuis').value; var bad2=!dep;
     var depField=fieldEl('depuis').closest('.field'); if(depField) depField.classList.toggle('invalid',bad2);
     if(bad2) ok=false;
+    var diff=fieldEl('difficulte').value; var bad3=!diff;
+    var diffField=fieldEl('difficulte').closest('.field'); if(diffField) diffField.classList.toggle('invalid',bad3);
+    if(bad3) ok=false;
   }
-  if(n===4){
-    var bad=!groupChecked('diff'); showGroupErr('diff-err',bad); if(bad) ok=false;
-  }
-  if(n===6){
-    var bad=!groupChecked('format'); showGroupErr('format-err',bad); if(bad) ok=false;
-  }
-  if(n===7){
-    var bp=!groupChecked('pack'); showGroupErr('pack-err',bp); if(bp) ok=false;
-    var br=!groupChecked('rythme'); showGroupErr('rythme-err',br); if(br) ok=false;
-    var bf=!groupChecked('freqcours'); showGroupErr('freqcours-err',bf); if(bf) ok=false;
-  }
-  if(n===8){
+  if(n===3){
     var v=fieldEl('objectif').value.trim(); var bad=!v;
     markInvalid('objectif',bad); if(bad) ok=false;
+    var bf=!groupChecked('format'); showGroupErr('format-err',bf); if(bf) ok=false;
+  }
+  if(n===4){
+    var bp=!groupChecked('pack'); showGroupErr('pack-err',bp); if(bp) ok=false;
+    var br=!groupChecked('rythme'); showGroupErr('rythme-err',br); if(br) ok=false;
+    var bfc=!groupChecked('freqcours'); showGroupErr('freqcours-err',bfc); if(bfc) ok=false;
   }
   return ok;
 }
@@ -574,7 +506,7 @@ function validateStep(n){
 nextBtn.addEventListener('click', function(){
   if(!validateStep(current)) return;
   if(current < TOTAL){ current++; show(current); }
-  else { current=9; show(current); }
+  else { current=TOTAL+1; show(current); }
 });
 prevBtn.addEventListener('click', function(){ if(current>1){ current--; show(current); } });
 
@@ -585,7 +517,7 @@ document.addEventListener('input', function(e){
 });
 document.addEventListener('change', function(e){
   if(e.target.name){
-    ['src-err','useIA-err','diff-err','format-err','pack-err','rythme-err','freqcours-err'].forEach(function(id){
+    ['useIA-err','format-err','pack-err','rythme-err','freqcours-err'].forEach(function(id){
       var box=document.getElementById(id); if(box) box.style.display='none';
     });
   }
@@ -612,27 +544,24 @@ function checkVals(name){ return [].slice.call(document.querySelectorAll('input[
 function collect(){
   return {
     'Prénom': val('prenom'), 'Nom': val('nom'), 'Téléphone': val('tel'), 'Email': val('email'),
-    'Profession': val('profession'), 'Ville': val('ville'), 'Région': val('region'), 'Pays': val('pays'),
-    'Source': checkVals('source'),
+    'Profession': val('profession'), 'Ville / Pays': val('ville'),
+    'Source': val('source'),
     'Utilise déjà l\'IA': radioVal('useIA'), 'Depuis quand': val('depuis'),
-    'Outils utilisés': checkVals('outils'), 'Fréquence d\'usage': radioVal('freq'),
-    'Usages créatifs souhaités': checkVals('usages'), 'Difficultés': checkVals('diff'), 'Précisions': val('precisions'),
-    'Souhaite apprendre': val('apprendre'), 'Une seule chose à maîtriser': val('unechose'),
-    'Pédagogie préférée': radioVal('pedago'), 'Format préféré': radioVal('format'),
+    'Outils utilisés': checkVals('outils'), 'Difficulté principale': val('difficulte'),
+    'Objectif principal': val('objectif'), 'Format préféré': radioVal('format'),
     'Pack choisi': radioVal('pack'), 'Moyen de paiement': radioVal('paiement'),
-    'Rythme': radioVal('rythme'), 'Fréquence des cours': radioVal('freqcours'),
-    'Objectif principal': val('objectif')
+    'Rythme': radioVal('rythme'), 'Fréquence des cours': radioVal('freqcours')
   };
 }
 
 function buildRecap(){
   var d=collect(); var box=document.getElementById('recapBox'); if(!box) return;
-  var order=['Prénom','Nom','Email','Téléphone','Profession','Ville','Pays','Pack choisi','Rythme',
+  var order=['Prénom','Nom','Email','Téléphone','Profession','Pack choisi','Rythme',
              'Fréquence des cours','Moyen de paiement','Format préféré'];
   var html='<div class="recap">';
   order.forEach(function(k){ if(d[k]) html+='<span class="k">'+k+' → </span><span class="v">'+esc(d[k])+'</span><br>'; });
   html+='</div>';
-  box.innerHTML = '<div class="field" style="margin-top:2.4vh"><label>Récapitulatif</label></div>' + html;
+  box.innerHTML = '<div class="field" style="margin-top:3vh"><label>Récapitulatif</label></div>' + html;
 }
 function esc(s){ return String(s).replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
 
