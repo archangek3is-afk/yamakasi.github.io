@@ -16,17 +16,20 @@
   --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:var(--noir);color:var(--ivoire);font-family:'Poppins',system-ui,sans-serif;
-  font-weight:300;-webkit-font-smoothing:antialiased;min-height:100%}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--ivoire);font-family:'Poppins',system-ui,sans-serif;
+  font-weight:300;-webkit-font-smoothing:antialiased}
 body{background-image:
-  radial-gradient(ellipse 900px 500px at 15% -10%, rgba(201,168,76,.10), transparent 60%),
-  radial-gradient(ellipse 700px 600px at 105% 30%, rgba(201,168,76,.06), transparent 55%);
+  radial-gradient(ellipse 900px 500px at 15% -5%, rgba(201,168,76,.10), transparent 60%),
+  radial-gradient(ellipse 800px 700px at 105% 40%, rgba(201,168,76,.06), transparent 55%),
+  radial-gradient(ellipse 700px 600px at 10% 90%, rgba(201,168,76,.05), transparent 55%);
   background-attachment:fixed}
 ::selection{background:var(--or);color:var(--noir)}
 
-/* ===== wordmark ===== */
-.wordmark{display:flex;align-items:center;gap:.6em;font-family:'Sora',sans-serif;font-weight:800;
-  letter-spacing:.02em}
+/* ===== wordmark / progress ===== */
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--or-d),var(--or));
+  z-index:30;width:0%;transition:width .12s linear}
+.wordmark{display:flex;align-items:center;gap:.6em;font-family:'Sora',sans-serif;font-weight:800;letter-spacing:.02em}
 .wordmark .mark{width:1.5em;height:1.5em;border:1.6px solid var(--or);border-radius:3px;position:relative;flex:none}
 .wordmark .mark::before{content:"";position:absolute;left:22%;top:50%;width:0;height:0;
   border-top:.32em solid transparent;border-bottom:.32em solid transparent;border-left:.5em solid var(--or);
@@ -35,13 +38,14 @@ body{background-image:
 .wordmark b{color:var(--or)}
 
 /* ===== shell ===== */
-.shell{max-width:760px;margin:0 auto;padding:5.5vh 6vw 8vh}
-header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5vh}
-header.top .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;
+.shell{max-width:760px;margin:0 auto;padding:5.5vh 6vw 10vh}
+header.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6vh;position:sticky;
+  top:0;padding:1.6vh 0;background:linear-gradient(var(--noir) 78%, transparent);z-index:20}
+header.top .tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;
   color:var(--ivoire-dim)}
 
-/* ===== hero / intro ===== */
-.hero{padding:4vh 0 2vh}
+/* ===== hero ===== */
+.hero{padding:2vh 0 4vh}
 .hero .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
   color:var(--or);margin-bottom:2.4vh}
 .hero h1{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(1.9rem,5.4vw,3.1rem);
@@ -52,30 +56,18 @@ header.top .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;te
   border-left:2px solid var(--or);padding-left:1em}
 .startbtn{margin-top:4.5vh;display:inline-flex;align-items:center;gap:.7em;background:var(--or);color:var(--noir);
   border:none;border-radius:999px;padding:1em 2em;font-family:'Sora',sans-serif;font-weight:700;font-size:.92rem;
-  cursor:pointer;transition:transform .15s,box-shadow .15s}
+  cursor:pointer;transition:transform .15s,box-shadow .15s;text-decoration:none}
 .startbtn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(201,168,76,.5)}
 .startbtn svg{width:1.1em;height:1.1em}
 
-/* ===== progress "clap" ===== */
-.clap{display:none;align-items:center;gap:1.1vw;margin-bottom:5vh;flex-wrap:wrap}
-.clap .dot{width:2.1em;height:2.1em;border-radius:50%;border:1.5px solid rgba(201,168,76,.35);
-  display:grid;place-items:center;font-family:var(--mono);font-size:.66rem;color:var(--ivoire-dim);
-  flex:none;transition:all .25s}
-.clap .dot.done{background:var(--or);color:var(--noir);border-color:var(--or)}
-.clap .dot.cur{border-color:var(--or);color:var(--or);box-shadow:0 0 0 3px rgba(201,168,76,.15)}
-.clap .bar{flex:1;min-width:24px;height:1.5px;background:rgba(201,168,76,.2)}
-.clap .bar.done{background:var(--or)}
-
-/* ===== step frame ===== */
+/* ===== sections ===== */
+.section{padding:6vh 0;border-top:1px solid rgba(245,240,232,.08)}
 .slate{font-family:var(--mono);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--or);margin-bottom:1vh;display:flex;align-items:center;gap:.8em}
+  color:var(--or);margin-bottom:1.4vh;display:flex;align-items:center;gap:.8em}
 .slate::before{content:"";width:.9em;height:.9em;border:1.4px solid var(--or);transform:rotate(45deg);flex:none}
-.step{display:none}
-.step.active{display:block;animation:rise .4s ease}
-@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.step h2{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.3rem,3vw,1.9rem);
+.section h2{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.3rem,3vw,1.9rem);
   line-height:1.15;margin-bottom:1vh;letter-spacing:-.01em}
-.step .sub{font-size:.88rem;color:var(--ivoire-dim);margin-bottom:3.4vh;line-height:1.5}
+.section .sub{font-size:.88rem;color:var(--ivoire-dim);margin-bottom:3.4vh;line-height:1.5;max-width:60ch}
 
 /* ===== fields ===== */
 .field{margin-bottom:2.6vh}
@@ -91,7 +83,6 @@ header.top .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;te
   background:rgba(201,168,76,.05)}
 .field input::placeholder,.field textarea::placeholder{color:#5C564B}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:1.4vw}
-.row3{display:grid;grid-template-columns:1.3fr .8fr 1fr;gap:1.2vw}
 .err-msg{display:none;color:var(--err);font-size:.74rem;margin-top:.6vh;font-family:var(--mono)}
 .field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--err)}
 .field.invalid .err-msg{display:block}
@@ -109,42 +100,44 @@ header.top .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;te
 .opt input:checked + label .b{background:var(--or);border-color:var(--or)}
 .opt label:hover{border-color:rgba(201,168,76,.5)}
 
-/* ===== pack cards ===== */
-.packs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2vw;margin-bottom:1vh}
-.pack{position:relative;border:1px solid rgba(245,240,232,.16);border-radius:16px;padding:2.4vh 1.3vw;
+/* ===== pack cards (stacked, riches) ===== */
+.packs{display:flex;flex-direction:column;gap:1.4vh;margin-bottom:1vh}
+.pack{position:relative;border:1px solid rgba(245,240,232,.16);border-radius:16px;padding:2.8vh 2vw;
   cursor:pointer;transition:all .22s;background:rgba(255,255,255,.02)}
-.pack:hover{border-color:rgba(201,168,76,.5);transform:translateY(-3px)}
-.pack.sel{border-color:var(--or);background:linear-gradient(160deg,rgba(201,168,76,.14),rgba(201,168,76,.03));
-  box-shadow:0 14px 34px -14px rgba(201,168,76,.4)}
+.pack:hover{border-color:rgba(201,168,76,.5)}
+.pack.sel{border-color:var(--or);background:linear-gradient(160deg,rgba(201,168,76,.13),rgba(201,168,76,.02));
+  box-shadow:0 14px 34px -18px rgba(201,168,76,.4)}
 .pack input{position:absolute;opacity:0}
+.pack .head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:1em;margin-bottom:.6vh}
+.pack .name-wrap{display:flex;align-items:baseline;gap:.9em}
 .pack .tier{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--or)}
-.pack .name{font-family:'Sora',sans-serif;font-weight:700;font-size:1.15rem;margin:.7vh 0 .3vh}
-.pack .price{font-family:'Sora',sans-serif;font-weight:800;font-size:1.7rem;color:var(--ivoire)}
+.pack .name{font-family:'Sora',sans-serif;font-weight:700;font-size:1.28rem}
+.pack .price{font-family:'Sora',sans-serif;font-weight:800;font-size:1.5rem;color:var(--ivoire);flex:none}
 .pack .price sup{font-size:.5em;color:var(--ivoire-dim);font-weight:500}
-.pack .desc{font-size:.76rem;color:var(--ivoire-dim);line-height:1.5;margin-top:1vh}
-.pack .check{position:absolute;top:1.2vh;right:1.2vh;width:1.3em;height:1.3em;border-radius:50%;
+.pack .tagline{font-style:normal;font-size:.86rem;color:var(--or-l);margin:.6vh 0 1.8vh}
+.pack .plus{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ivoire-dim);margin-bottom:1.2vh}
+.pack ul{list-style:none;display:flex;flex-direction:column;gap:.85vh}
+.pack ul li{padding-left:1.4em;position:relative;font-size:.84rem;line-height:1.5;color:#D9D2C4}
+.pack ul li::before{content:"";position:absolute;left:0;top:.5em;width:.5em;height:.5em;border-radius:50%;
+  background:var(--or-d)}
+.pack.sel ul li::before{background:var(--or)}
+.pack .check{position:absolute;top:2vh;right:2vh;width:1.3em;height:1.3em;border-radius:50%;
   border:1.4px solid rgba(245,240,232,.25);display:grid;place-items:center;font-size:.68em;color:transparent}
 .pack.sel .check{background:var(--or);border-color:var(--or);color:var(--noir)}
-.packs-all{margin-top:1.4vh}
+.packs-all{margin-top:.4vh}
 
-/* ===== nav ===== */
-.nav{display:flex;justify-content:space-between;align-items:center;margin-top:4.6vh}
-.btn{font-family:'Sora',sans-serif;font-weight:600;font-size:.88rem;border-radius:999px;padding:.9em 1.9em;
-  cursor:pointer;border:none;transition:transform .15s,opacity .15s}
-.btn.primary{background:var(--or);color:var(--noir)}
-.btn.primary:hover{transform:translateY(-2px)}
-.btn.ghost{background:none;color:var(--ivoire-dim);border:1px solid rgba(245,240,232,.2)}
-.btn.ghost:hover{color:var(--ivoire);border-color:rgba(245,240,232,.4)}
-.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+/* ===== submit / confirmation ===== */
+.submitZone{padding:5vh 0 2vh;text-align:center}
+.submitbtn{background:var(--or);color:var(--noir);border:none;border-radius:999px;padding:1.1em 2.6em;
+  font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.submitbtn:hover{transform:translateY(-2px);box-shadow:0 12px 32px -10px rgba(201,168,76,.5)}
+.submitbtn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.submit-hint{margin-top:1.6vh;font-size:.76rem;color:var(--ivoire-dim)}
 
-/* ===== recap / confirmation ===== */
-.recap{background:rgba(255,255,255,.025);border:1px solid rgba(245,240,232,.14);border-radius:14px;
-  padding:2.6vh 1.6vw;font-family:var(--mono);font-size:.78rem;line-height:2.1;color:#D9D2C4}
-.recap .k{color:var(--ivoire-dim)}
-.recap .v{color:var(--ivoire)}
-.recap hr{border:none;border-top:1px solid rgba(245,240,232,.1);margin:1.2vh 0}
-
-.done{text-align:center;padding:6vh 0}
+.done{display:none;text-align:center;padding:4vh 0 2vh;animation:rise .5s ease}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.done.show{display:block}
 .done .seal{width:5.4em;height:5.4em;margin:0 auto 3vh;border:1.6px solid var(--or);border-radius:50%;
   display:grid;place-items:center;position:relative}
 .done .seal::after{content:"✓";font-size:2rem;color:var(--or)}
@@ -157,43 +150,48 @@ header.top .tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;te
 .done h2{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(1.6rem,4vw,2.3rem)}
 .done p{margin-top:1.6vh;color:var(--ivoire-dim);max-width:46ch;margin-inline:auto;line-height:1.6}
 .done .acts{margin-top:3.4vh;display:flex;gap:1em;justify-content:center;flex-wrap:wrap}
+.btn{font-family:'Sora',sans-serif;font-weight:600;font-size:.88rem;border-radius:999px;padding:.9em 1.9em;
+  cursor:pointer;border:none;transition:transform .15s,opacity .15s}
+.btn.primary{background:var(--or);color:var(--noir)}
+.btn.primary:hover{transform:translateY(-2px)}
+.btn.ghost{background:none;color:var(--ivoire-dim);border:1px solid rgba(245,240,232,.2)}
+.btn.ghost:hover{color:var(--ivoire);border-color:rgba(245,240,232,.4)}
 
-/* ===== footer ===== */
-footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;
+footer{margin-top:5vh;text-align:center;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;
   color:#4A463D;text-transform:uppercase}
 
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 @media (max-width:760px){
-  .row2,.row3,.packs{grid-template-columns:1fr}
-  .shell{padding:4vh 5vw 6vh}
+  .row2{grid-template-columns:1fr}
+  .shell{padding:4vh 5vw 8vh}
+  .pack .head{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
 <body>
+<div id="progress"></div>
 <div class="shell">
   <header class="top">
     <div class="wordmark"><span class="mark"></span><span>OKAPI <b>WORLD</b> MÉDIA</span></div>
-    <div class="tag">L'École Okapi · Formulaire d'inscription</div>
+    <div class="tag">L'École Okapi</div>
   </header>
 
-  <div class="clap" id="clap"></div>
-
-  <!-- HERO / INTRO -->
-  <div class="step active" id="step-hero">
-    <div class="hero">
-      <div class="eyebrow">L'École Okapi · Le cinéma à l'ère de l'IA</div>
-      <h1>On ne fait pas du contenu.<br>On fait <em>du cinéma.</em></h1>
-      <p>Cette formation est pensée avec vous. Répondez à ce court formulaire pour nous aider à la façonner — vos usages, vos blocages, ce que vous voulez vraiment savoir faire.</p>
-      <p class="manif">Quatre courtes étapes. Deux minutes. Aucune question piège.</p>
-      <button class="startbtn" id="startBtn">Commencer
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </button>
-    </div>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">L'École Okapi · Le cinéma à l'ère de l'IA</div>
+    <h1>On ne fait pas du contenu.<br>On fait <em>du cinéma.</em></h1>
+    <p>Cette formation est pensée avec vous. Répondez à ce court formulaire pour nous aider à la façonner — vos usages, vos blocages, ce que vous voulez vraiment savoir faire.</p>
+    <p class="manif">Une seule page. Deux minutes. Aucune question piège.</p>
+    <a href="#s1" class="startbtn">Commencer
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
   </div>
 
-  <!-- STEP 1 — IDENTITÉ & CONTEXTE -->
-  <div class="step" data-step="1">
-    <div class="slate">Prise 01 · Vos informations</div>
+  <form id="okapiForm">
+
+  <!-- SECTION 1 — IDENTITÉ -->
+  <div class="section" id="s1">
+    <div class="slate">Scène 01 · Vos informations</div>
     <h2>Qui êtes-vous ?</h2>
     <p class="sub">Vos coordonnées restent strictement confidentielles.</p>
     <div class="row2">
@@ -212,16 +210,17 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
         <select id="source">
           <option value="">Sélectionnez…</option>
           <option>Google</option><option>LinkedIn</option><option>Facebook</option><option>Instagram</option>
-          <option>CIC 2026</option><option>Creative Boot Camp</option><option>BNC Academy</option><option>Autre</option>
+          <option>CIC 2026</option><option>Creative Boot Camp</option><option>BNC Academy</option>
+          <option>LA NUIT DE L'IA</option><option>Autre</option>
         </select>
         <div class="err-msg">Merci de sélectionner une option.</div>
       </div>
     </div>
   </div>
 
-  <!-- STEP 2 — VOTRE RAPPORT À L'IA -->
-  <div class="step" data-step="2">
-    <div class="slate">Prise 02 · Votre rapport à l'IA</div>
+  <!-- SECTION 2 — VOTRE RAPPORT À L'IA -->
+  <div class="section" id="s2">
+    <div class="slate">Scène 02 · Votre rapport à l'IA</div>
     <h2>Où en êtes-vous avec l'IA<br>aujourd'hui ?</h2>
     <div class="field">
       <label>Utilisez-vous déjà l'intelligence artificielle ? <span class="req">*</span></label>
@@ -258,23 +257,20 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
       </div>
     </div>
     <div class="field">
-      <label>Quels outils utilisez-vous ?</label>
+      <label>Quels types d'outils utilisez-vous ?</label>
       <div class="opts">
-        <div class="opt"><input type="checkbox" name="outils" id="o-chatgpt" value="ChatGPT"><label for="o-chatgpt"><span class="b"></span>ChatGPT</label></div>
-        <div class="opt"><input type="checkbox" name="outils" id="o-midjourney" value="Midjourney"><label for="o-midjourney"><span class="b"></span>Midjourney</label></div>
-        <div class="opt"><input type="checkbox" name="outils" id="o-claude" value="Claude"><label for="o-claude"><span class="b"></span>Claude</label></div>
-        <div class="opt"><input type="checkbox" name="outils" id="o-gemini" value="Gemini"><label for="o-gemini"><span class="b"></span>Gemini</label></div>
-        <div class="opt"><input type="checkbox" name="outils" id="o-runway" value="Runway"><label for="o-runway"><span class="b"></span>Runway</label></div>
-        <div class="opt"><input type="checkbox" name="outils" id="o-eleven" value="ElevenLabs"><label for="o-eleven"><span class="b"></span>ElevenLabs</label></div>
-        <div class="opt"><input type="checkbox" name="outils" id="o-canva" value="Canva IA"><label for="o-canva"><span class="b"></span>Canva IA</label></div>
+        <div class="opt"><input type="checkbox" name="outils" id="o-conv" value="Assistants conversationnels"><label for="o-conv"><span class="b"></span>Assistants conversationnels</label></div>
+        <div class="opt"><input type="checkbox" name="outils" id="o-image" value="Génération d'images"><label for="o-image"><span class="b"></span>Génération d'images</label></div>
+        <div class="opt"><input type="checkbox" name="outils" id="o-video" value="Génération vidéo"><label for="o-video"><span class="b"></span>Génération vidéo</label></div>
+        <div class="opt"><input type="checkbox" name="outils" id="o-audio" value="Génération audio / voix"><label for="o-audio"><span class="b"></span>Génération audio / voix</label></div>
         <div class="opt"><input type="checkbox" name="outils" id="o-autre" value="Autre"><label for="o-autre"><span class="b"></span>Autre</label></div>
       </div>
     </div>
   </div>
 
-  <!-- STEP 3 — OBJECTIFS & FORMAT -->
-  <div class="step" data-step="3">
-    <div class="slate">Prise 03 · Vos objectifs</div>
+  <!-- SECTION 3 — OBJECTIFS & FORMAT -->
+  <div class="section" id="s3">
+    <div class="slate">Scène 03 · Vos objectifs</div>
     <h2>Qu'aimeriez-vous<br>savoir faire ?</h2>
     <div class="field"><label>Que souhaitez-vous apprendre concrètement, et quel est votre objectif principal avec l'IA ? <span class="req">*</span></label><textarea id="objectif" placeholder="Détaillez ce que vous voulez maîtriser, et pourquoi…"></textarea><div class="err-msg" id="objectif-err">Ce champ est requis.</div></div>
     <div class="field">
@@ -289,41 +285,95 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
     </div>
   </div>
 
-  <!-- STEP 4 — PACK & ORGANISATION + RÉCAP -->
-  <div class="step" data-step="4">
-    <div class="slate">Prise 04 · Rejoindre l'Ordre</div>
+  <!-- SECTION 4 — PACKS -->
+  <div class="section" id="s4">
+    <div class="slate">Scène 04 · Rejoindre l'Ordre</div>
     <h2>Quel pack vous<br>intéresserait le plus ?</h2>
+    <p class="sub">Quatre niveaux, une seule doctrine : d'abord le cinéma, l'IA n'est qu'un nouvel outil de tournage.</p>
+
     <div class="packs" id="packs">
-      <div class="pack" data-val="Pack Padawan : 500€">
-        <input type="radio" name="pack" id="pack-padawan">
+      <div class="pack" data-val="Pack Skywalker : 300€">
+        <input type="radio" name="pack" id="pack-sky">
         <span class="check">✓</span>
-        <div class="tier">Niveau I</div>
-        <div class="name">Pack Padawan</div>
-        <div class="price">500<sup>€</sup></div>
-        <div class="desc">Les fondations : comprendre les outils, écrire un prompt qui fonctionne, produire ses premiers rendus.</div>
+        <div class="head">
+          <div class="name-wrap"><span class="tier">Niveau I</span><span class="name">Pack Skywalker</span></div>
+          <div class="price">300<sup>€</sup></div>
+        </div>
+        <p class="tagline">Les fondations — pas celles qu'on trouve déjà sur YouTube.</p>
+        <ul>
+          <li>Comprendre les grandes familles d'outils IA et comment elles se relaient dans un vrai projet</li>
+          <li>La grammaire du prompt professionnel, en blocs — pas la recette générique</li>
+          <li>Le pipeline en 5 étapes d'une production, et pourquoi 60 % du travail reste humain</li>
+          <li>Les 5 erreurs qui ruinent 90 % des débuts, désamorcées avant qu'elles n'arrivent</li>
+          <li>Ne plus jamais gaspiller un crédit de génération sans le savoir</li>
+        </ul>
       </div>
-      <div class="pack" data-val="Pack Jedi : 700€">
-        <input type="radio" name="pack" id="pack-jedi">
+
+      <div class="pack" data-val="Pack Obi-Wan : 500€">
+        <input type="radio" name="pack" id="pack-obiwan">
         <span class="check">✓</span>
-        <div class="tier">Niveau II</div>
-        <div class="name">Pack Jedi</div>
-        <div class="price">700<sup>€</sup></div>
-        <div class="desc">La méthode complète : cohérence de personnage, direction artistique, pipeline de production.</div>
+        <div class="head">
+          <div class="name-wrap"><span class="tier">Niveau II</span><span class="name">Pack Obi-Wan</span></div>
+          <div class="price">500<sup>€</sup></div>
+        </div>
+        <p class="tagline">On sort du prompt isolé pour entrer dans la méthode.</p>
+        <div class="plus">Tout le Pack Skywalker, plus :</div>
+        <ul>
+          <li>Panorama comparé des principales plateformes de génération, et quand basculer de l'une à l'autre selon le projet</li>
+          <li>Caster le bon outil hyperréaliste selon le rendu recherché — chaque outil a un tempérament</li>
+          <li>Les meilleurs upscalers, et comment les régler pour un rendu propre</li>
+          <li>Construire une première bible visuelle pour cadrer un projet avant de générer</li>
+          <li>Vue d'ensemble des pipelines cinéma et animation, en conditions réelles</li>
+          <li>Premiers résultats musique et lip-sync qui tiennent vraiment</li>
+        </ul>
       </div>
-      <div class="pack" data-val="Pack Légende : 1500€">
+
+      <div class="pack" data-val="Pack Maître Yoda : 1500€">
+        <input type="radio" name="pack" id="pack-yoda">
+        <span class="check">✓</span>
+        <div class="head">
+          <div class="name-wrap"><span class="tier">Niveau III</span><span class="name">Pack Maître Yoda</span></div>
+          <div class="price">1500<sup>€</sup></div>
+        </div>
+        <p class="tagline">D'abord le cinéma. Le reste en découle.</p>
+        <div class="plus">Tout le Pack Obi-Wan, plus :</div>
+        <ul>
+          <li>Formation cinéma complète — grammaire du plan, direction, mise en scène : le socle qui change tout</li>
+          <li>Système de cohérence de personnage avancé — character sheets, verrous anti-dérive, récupération de plan</li>
+          <li>Construire un design/cinema system reproductible automatiquement sur tous vos futurs projets</li>
+          <li>Pipelines complets cinéma et animation, de bout en bout, sans angle mort</li>
+          <li>Bibles complètes — graphique et littéraire — prêtes à présenter à un client ou un partenaire</li>
+          <li>L'art du pitch, et l'écriture de scénario pour un film comme pour une série</li>
+          <li>Production musicale de niveau studio — la méthode utilisée sur ILLUSION</li>
+          <li>Lip-sync qui fonctionne réellement, personnages qui dansent en rythme sur une musique</li>
+          <li>VFX replacement qualitatif</li>
+        </ul>
+      </div>
+
+      <div class="pack" data-val="Pack Légende : sur devis">
         <input type="radio" name="pack" id="pack-legende">
         <span class="check">✓</span>
-        <div class="tier">Niveau III</div>
-        <div class="name">Pack Légende</div>
-        <div class="price">1500<sup>€</sup></div>
-        <div class="desc">L'accompagnement studio : votre projet suivi de bout en bout, jusqu'à la livraison.</div>
+        <div class="head">
+          <div class="name-wrap"><span class="tier">Niveau IV</span><span class="name">Pack Légende</span></div>
+          <div class="price" style="font-size:1.1rem">Sur devis</div>
+        </div>
+        <p class="tagline">On ne vous forme plus. On vous fait tourner.</p>
+        <div class="plus">Tout le Pack Maître Yoda, plus :</div>
+        <ul>
+          <li>Accompagnement d'un projet à vous, suivi de bout en bout jusqu'à la livraison</li>
+          <li>Possibilité de participer à une vraie production Okapi, en conditions réelles, aux côtés de Yamakasi</li>
+          <li>Tailler votre projet pour un festival, une chaîne de télévision ou une plateforme de diffusion</li>
+          <li>Stratégie digitale complète pour la sortie du projet</li>
+          <li>Et selon votre parcours, d'autres leviers activés au cas par cas</li>
+        </ul>
       </div>
     </div>
     <div class="opt packs-all">
-      <input type="radio" name="pack" id="pack-tous" value="Je suis intéressé par les trois packs">
-      <label for="pack-tous"><span class="b"></span>Je suis intéressé par les trois packs</label>
+      <input type="radio" name="pack" id="pack-tous" value="Je suis intéressé par plusieurs packs">
+      <label for="pack-tous"><span class="b"></span>Je suis intéressé par plusieurs packs</label>
     </div>
     <div class="err-msg" id="pack-err">Sélectionnez un pack.</div>
+
 
     <div class="row2" style="margin-top:3.4vh">
       <div class="field">
@@ -351,25 +401,24 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
         <div class="opt"><input type="radio" name="paiement" id="pay-mens" value="Plusieurs mensualités"><label for="pay-mens"><span class="b"></span>Plusieurs mensualités</label></div>
       </div>
     </div>
-    <div id="recapBox"></div>
   </div>
+
+  <div class="submitZone">
+    <button type="submit" class="submitbtn" id="submitBtn">Rejoindre l'Ordre</button>
+    <p class="submit-hint">Un seul clic — vos réponses partent directement vers l'équipe Okapi.</p>
+  </div>
+
+  </form>
 
   <!-- CONFIRMATION -->
-  <div class="step" id="step-done">
-    <div class="done">
-      <div class="seal" id="doneSeal"></div>
-      <h2>Bienvenue dans l'Ordre.</h2>
-      <p id="doneStatus">Envoi de votre inscription en cours…</p>
-      <div class="acts">
-        <button class="btn primary" id="mailBtn">Envoyer par email</button>
-        <button class="btn ghost" id="copyBtn">Copier mes réponses</button>
-      </div>
+  <div class="done" id="doneBox">
+    <div class="seal" id="doneSeal"></div>
+    <h2>Bienvenue dans l'Ordre.</h2>
+    <p id="doneStatus">Envoi de votre inscription en cours…</p>
+    <div class="acts">
+      <button class="btn primary" id="mailBtn">Envoyer par email</button>
+      <button class="btn ghost" id="copyBtn">Copier mes réponses</button>
     </div>
-  </div>
-
-  <div class="nav" id="nav" style="display:none">
-    <button class="btn ghost" id="prevBtn">← Précédent</button>
-    <button class="btn primary" id="nextBtn">Continuer →</button>
   </div>
 
   <footer>Okapi World Média · L'École Okapi · Formulaire confidentiel</footer>
@@ -379,166 +428,95 @@ footer{margin-top:6vh;text-align:center;font-family:var(--mono);font-size:.64rem
 (function(){
 "use strict";
 
-/* ⚙️ COLLE ICI L'URL DE DÉPLOIEMENT DE TON GOOGLE APPS SCRIPT (se termine par /exec)
-   Tant que cette valeur reste vide, le formulaire fonctionne uniquement
-   avec les boutons "Envoyer par email" / "Copier mes réponses". */
+/* ⚙️ URL de déploiement Google Apps Script (se termine par /exec) */
 var WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby-kfETPfgY0pHZKQd4a1G1SYpw9vCgQTLTBnWGsSGEnx_HrC9Bd63d4NKxzO8MvxTZ/exec";
 
-var TOTAL = 4;
-var current = 0; // 0 = hero, 1..4 = steps, 5 = done
-var steps = [].slice.call(document.querySelectorAll('.step[data-step]'));
-var heroStep = document.getElementById('step-hero');
-var doneStep = document.getElementById('step-done');
-var clap = document.getElementById('clap');
-var nav = document.getElementById('nav');
-var prevBtn = document.getElementById('prevBtn');
-var nextBtn = document.getElementById('nextBtn');
-var startBtn = document.getElementById('startBtn');
-
-/* build progress dots */
-function buildClap(){
-  clap.innerHTML='';
-  for(var i=1;i<=TOTAL;i++){
-    var d=document.createElement('div'); d.className='dot'; d.textContent=String(i).padStart(2,'0');
-    d.dataset.n=i; clap.appendChild(d);
-    if(i<TOTAL){ var b=document.createElement('div'); b.className='bar'; clap.appendChild(b); }
-  }
+/* ---------- barre de progression liée au scroll ---------- */
+var progressBar = document.getElementById('progress');
+function updateProgress(){
+  var h = document.documentElement;
+  var scrolled = h.scrollTop;
+  var max = h.scrollHeight - h.clientHeight;
+  var pct = max > 0 ? (scrolled / max) * 100 : 0;
+  progressBar.style.width = pct + '%';
 }
-buildClap();
+document.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
 
-function renderClap(){
-  var dots=[].slice.call(clap.querySelectorAll('.dot'));
-  var bars=[].slice.call(clap.querySelectorAll('.bar'));
-  dots.forEach(function(d){
-    var n=parseInt(d.dataset.n,10);
-    d.classList.toggle('done', n<current);
-    d.classList.toggle('cur', n===current);
-  });
-  bars.forEach(function(b,i){ b.classList.toggle('done', (i+1)<current); });
-}
-
-function show(n){
-  heroStep.classList.toggle('active', n===0);
-  doneStep.classList.toggle('active', n===TOTAL+1);
-  steps.forEach(function(s){ s.classList.toggle('active', parseInt(s.dataset.step,10)===n); });
-  clap.style.display = (n>=1 && n<=TOTAL) ? 'flex' : 'none';
-  nav.style.display = (n>=1 && n<=TOTAL) ? 'flex' : 'none';
-  prevBtn.style.visibility = (n===1) ? 'hidden' : 'visible';
-  nextBtn.textContent = (n===TOTAL) ? "Rejoindre l'Ordre →" : 'Continuer →';
-  if(n>=1 && n<=TOTAL) renderClap();
-  if(n===TOTAL) buildRecap();
-  if(n===TOTAL+1) submitToSheet();
-  window.scrollTo({top:0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
-}
-
-/* ---------- envoi vers la Google Sheet ---------- */
-function submitToSheet(){
-  var seal = document.getElementById('doneSeal');
-  var status = document.getElementById('doneStatus');
-  if(!WEBHOOK_URL){
-    seal.className = 'seal';
-    status.textContent = 'Votre réponse est prête à être transmise — utilisez l\'un des boutons ci-dessous.';
-    return;
-  }
-  seal.className = 'seal pending';
-  status.textContent = 'Envoi de votre inscription en cours…';
-  var data = collect();
-  fetch(WEBHOOK_URL, {
-    method: 'POST',
-    mode: 'no-cors', // évite le préflight CORS ; réponse opaque, non lisible
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(data)
-  }).then(function(){
-    seal.className = 'seal';
-    status.textContent = 'Votre inscription a bien été transmise. Nous revenons vers vous très vite — vous pouvez aussi garder une copie ci-dessous.';
-  }).catch(function(){
-    seal.className = 'seal err';
-    status.textContent = 'L\'envoi automatique a échoué. Utilisez l\'un des boutons ci-dessous pour nous transmettre votre réponse.';
-  });
-}
-
-startBtn.addEventListener('click', function(){ current=1; show(current); });
-
-/* ---------- validation per step ---------- */
-function fieldEl(id){ return document.getElementById(id); }
-function markInvalid(fieldWrapId, invalid){
-  var el = document.getElementById(fieldWrapId);
-  if(!el) return;
-  var wrap = el.closest ? el.closest('.field') : null;
-  if(wrap) wrap.classList.toggle('invalid', invalid);
-}
-function groupChecked(name){ return document.querySelectorAll('input[name="'+name+'"]:checked').length>0; }
-function showGroupErr(errId, invalid){ var e=document.getElementById(errId); if(e) e.style.display = invalid?'block':'none'; }
-
-function validateStep(n){
-  var ok=true;
-  if(n===1){
-    ['prenom','nom','profession'].forEach(function(id){
-      var v=fieldEl(id).value.trim(); var bad=!v;
-      markInvalid(id,bad); if(bad) ok=false;
-    });
-    var src=fieldEl('source').value; var badSrc=!src;
-    var srcField=fieldEl('source').closest('.field'); if(srcField) srcField.classList.toggle('invalid',badSrc);
-    if(badSrc) ok=false;
-  }
-  if(n===2){
-    var bad1=!groupChecked('useIA'); showGroupErr('useIA-err',bad1); if(bad1) ok=false;
-    var dep=fieldEl('depuis').value; var bad2=!dep;
-    var depField=fieldEl('depuis').closest('.field'); if(depField) depField.classList.toggle('invalid',bad2);
-    if(bad2) ok=false;
-    var diff=fieldEl('difficulte').value; var bad3=!diff;
-    var diffField=fieldEl('difficulte').closest('.field'); if(diffField) diffField.classList.toggle('invalid',bad3);
-    if(bad3) ok=false;
-  }
-  if(n===3){
-    var v=fieldEl('objectif').value.trim(); var bad=!v;
-    markInvalid('objectif',bad); if(bad) ok=false;
-    var bf=!groupChecked('format'); showGroupErr('format-err',bf); if(bf) ok=false;
-  }
-  if(n===4){
-    var bp=!groupChecked('pack'); showGroupErr('pack-err',bp); if(bp) ok=false;
-    var br=!groupChecked('rythme'); showGroupErr('rythme-err',br); if(br) ok=false;
-    var bfc=!groupChecked('freqcours'); showGroupErr('freqcours-err',bfc); if(bfc) ok=false;
-  }
-  return ok;
-}
-
-nextBtn.addEventListener('click', function(){
-  if(!validateStep(current)) return;
-  if(current < TOTAL){ current++; show(current); }
-  else { current=TOTAL+1; show(current); }
-});
-prevBtn.addEventListener('click', function(){ if(current>1){ current--; show(current); } });
-
-/* live-clear invalid state */
-document.addEventListener('input', function(e){
-  var f = e.target.closest && e.target.closest('.field');
-  if(f) f.classList.remove('invalid');
-});
-document.addEventListener('change', function(e){
-  if(e.target.name){
-    ['useIA-err','format-err','pack-err','rythme-err','freqcours-err'].forEach(function(id){
-      var box=document.getElementById(id); if(box) box.style.display='none';
-    });
-  }
-});
-
-/* ---------- pack cards visual selection ---------- */
+/* ---------- pack cards ---------- */
 document.querySelectorAll('.pack').forEach(function(card){
   card.addEventListener('click', function(){
     document.querySelectorAll('.pack').forEach(function(c){c.classList.remove('sel');});
     card.classList.add('sel');
     card.querySelector('input').checked = true;
     document.getElementById('pack-tous').checked = false;
+    clearGroupErr('pack-err');
   });
 });
 document.getElementById('pack-tous').addEventListener('change', function(){
   document.querySelectorAll('.pack').forEach(function(c){c.classList.remove('sel');});
+  clearGroupErr('pack-err');
 });
 
-/* ---------- collect answers ---------- */
+/* ---------- validation helpers ---------- */
+function fieldEl(id){ return document.getElementById(id); }
+function markInvalid(id, invalid){
+  var el = fieldEl(id); if(!el) return;
+  var wrap = el.closest('.field'); if(wrap) wrap.classList.toggle('invalid', invalid);
+}
+function groupChecked(name){ return document.querySelectorAll('input[name="'+name+'"]:checked').length>0; }
+function showGroupErr(errId, invalid){ var e=fieldEl(errId); if(e) e.style.display = invalid?'block':'none'; }
+function clearGroupErr(errId){ showGroupErr(errId,false); }
+
+/* live-clear invalid state as the person fixes things */
+document.addEventListener('input', function(e){
+  var f = e.target.closest && e.target.closest('.field');
+  if(f) f.classList.remove('invalid');
+});
+document.addEventListener('change', function(e){
+  if(!e.target.name) return;
+  var map={useIA:'useIA-err',format:'format-err',pack:'pack-err',rythme:'rythme-err',freqcours:'freqcours-err'};
+  if(map[e.target.name]) clearGroupErr(map[e.target.name]);
+});
+
+function validateAll(){
+  var firstInvalid = null;
+  function fail(el){ if(!firstInvalid) firstInvalid = el; }
+
+  ['prenom','nom','profession'].forEach(function(id){
+    var v=fieldEl(id).value.trim(); var bad=!v; markInvalid(id,bad); if(bad) fail(fieldEl(id));
+  });
+  var src=fieldEl('source'); var badSrc=!src.value;
+  src.closest('.field').classList.toggle('invalid',badSrc); if(badSrc) fail(src);
+
+  var badIA=!groupChecked('useIA'); showGroupErr('useIA-err',badIA); if(badIA) fail(fieldEl('ia-oui'));
+  var dep=fieldEl('depuis'); var badDep=!dep.value;
+  dep.closest('.field').classList.toggle('invalid',badDep); if(badDep) fail(dep);
+  var diff=fieldEl('difficulte'); var badDiff=!diff.value;
+  diff.closest('.field').classList.toggle('invalid',badDiff); if(badDiff) fail(diff);
+
+  var obj=fieldEl('objectif'); var badObj=!obj.value.trim();
+  markInvalid('objectif',badObj); if(badObj) fail(obj);
+  var badFmt=!groupChecked('format'); showGroupErr('format-err',badFmt); if(badFmt) fail(fieldEl('fmt-ligne'));
+
+  var badPack=!groupChecked('pack'); showGroupErr('pack-err',badPack); if(badPack) fail(fieldEl('packs'));
+  var badRythme=!groupChecked('rythme'); showGroupErr('rythme-err',badRythme); if(badRythme) fail(fieldEl('r-intensif'));
+  var badFreq=!groupChecked('freqcours'); showGroupErr('freqcours-err',badFreq); if(badFreq) fail(fieldEl('fc-1'));
+
+  if(firstInvalid){
+    firstInvalid.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto':'smooth', block:'center'});
+    return false;
+  }
+  return true;
+}
+
+/* ---------- collecte des réponses ---------- */
 function val(id){ var e=fieldEl(id); return e ? e.value.trim() : ''; }
-function radioVal(name){ var e=document.querySelector('input[name="'+name+'"]:checked'); return e ? (e.value || e.closest('.pack').dataset.val) : ''; }
+function radioVal(name){
+  var e=document.querySelector('input[name="'+name+'"]:checked');
+  if(!e) return '';
+  return e.value || (e.closest('.pack') ? e.closest('.pack').dataset.val : '');
+}
 function checkVals(name){ return [].slice.call(document.querySelectorAll('input[name="'+name+'"]:checked')).map(function(e){return e.value;}).join(', '); }
 
 function collect(){
@@ -554,18 +532,45 @@ function collect(){
   };
 }
 
-function buildRecap(){
-  var d=collect(); var box=document.getElementById('recapBox'); if(!box) return;
-  var order=['Prénom','Nom','Email','Téléphone','Profession','Pack choisi','Rythme',
-             'Fréquence des cours','Moyen de paiement','Format préféré'];
-  var html='<div class="recap">';
-  order.forEach(function(k){ if(d[k]) html+='<span class="k">'+k+' → </span><span class="v">'+esc(d[k])+'</span><br>'; });
-  html+='</div>';
-  box.innerHTML = '<div class="field" style="margin-top:3vh"><label>Récapitulatif</label></div>' + html;
-}
-function esc(s){ return String(s).replace(/[&<>]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];}); }
+/* ---------- soumission ---------- */
+var form = document.getElementById('okapiForm');
+var submitBtn = document.getElementById('submitBtn');
+var doneBox = document.getElementById('doneBox');
 
-/* ---------- final actions ---------- */
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  if(!validateAll()) return;
+  submitBtn.disabled = true;
+  doneBox.classList.add('show');
+  doneBox.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto':'smooth', block:'start'});
+  submitToSheet();
+});
+
+function submitToSheet(){
+  var seal = document.getElementById('doneSeal');
+  var status = document.getElementById('doneStatus');
+  if(!WEBHOOK_URL){
+    seal.className = 'seal';
+    status.textContent = 'Votre réponse est prête à être transmise — utilisez l\'un des boutons ci-dessous.';
+    return;
+  }
+  seal.className = 'seal pending';
+  status.textContent = 'Envoi de votre inscription en cours…';
+  var data = collect();
+  fetch(WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(data)
+  }).then(function(){
+    seal.className = 'seal';
+    status.textContent = 'Votre inscription a bien été transmise. Nous revenons vers vous très vite — vous pouvez aussi garder une copie ci-dessous.';
+  }).catch(function(){
+    seal.className = 'seal err';
+    status.textContent = 'L\'envoi automatique a échoué. Utilisez l\'un des boutons ci-dessous pour nous transmettre votre réponse.';
+  });
+}
+
 document.getElementById('mailBtn').addEventListener('click', function(){
   var d=collect();
   var body = Object.keys(d).filter(function(k){return d[k];}).map(function(k){return k+' : '+d[k];}).join('\n');
@@ -580,8 +585,6 @@ document.getElementById('copyBtn').addEventListener('click', function(){
     var old=btn.textContent; btn.textContent='Copié ✓'; setTimeout(function(){btn.textContent=old;},1800);
   }).catch(function(){ alert(text); });
 });
-
-show(0);
 })();
 </script>
 </body>
