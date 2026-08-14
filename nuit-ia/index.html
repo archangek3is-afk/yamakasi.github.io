@@ -251,11 +251,10 @@ button:focus-visible,.chip:focus-visible,.media:focus-visible{outline:2px solid 
 <section class="slide">
   <div class="eyebrow">Preuve · À l'écran</div>
   <h2>ILLUSION — long métrage hybride<br><span class="viol">séquences chantées entièrement animées</span></h2>
-  <div class="cols3" style="align-items:stretch">
-    <div><div class="media" data-media="illusion-1"><div class="ph"><div class="ic">🎬</div><div class="t">Glissez ici<br>image ILLUSION 1</div></div></div><div class="mcap">Personnage 3D · décor illustré</div></div>
-    <div><div class="media" data-media="illusion-2"><div class="ph"><div class="ic">🎬</div><div class="t">Glissez ici<br>image ILLUSION 2</div></div></div><div class="mcap">Séquence chantée · lipsync</div></div>
-    <div><div class="media" data-media="illusion-3"><div class="ph"><div class="ic">🎬</div><div class="t">Glissez ici<br>image ILLUSION 3</div></div></div><div class="mcap">Antagoniste · direction de jeu</div></div>
+  <div class="media filled" data-media="hugo-decor" style="min-height:44vh;max-width:800px;margin:0 auto">
+    <img src="assets/hugo-et-decor.png" alt="ILLUSION — personnage et décor" style="width:100%;height:100%;object-fit:cover">
   </div>
+  <div class="mcap" style="text-align:center">Personnage 3D · décor illustré — la règle fondatrice du film</div>
   <p class="lede" style="margin-top:2.4vh">Une règle fondatrice tient tout le film : <strong>ce qui est vivant a du volume, ce qui est construit reste dessiné.</strong> Les personnages en 3D, les décors en illustration. Ce n'est pas un effet — c'est une thèse de mise en scène, décidée avant la première génération.</p>
 </section>
 
@@ -554,22 +553,6 @@ before lips smile, steady camera eye level, peaceful mood</div>
     </video>
   </div>
   <div class="mcap">Résultat — 5 plans, même personnage, prompt multishot</div>
-</section>
-
-<!-- 11 PRATIQUE 4 · COHÉRENCE -->
-<section class="slide">
-  <div class="eyebrow"><span class="prat">Pratique 08</span> · Le mur n°1 — <span class="prat">cliquez sur le bouton</span></div>
-  <h2>La cohérence de personnage :<br><span class="grad">le tueur silencieux</span></h2>
-  <div class="tog" id="togCoh">
-    <button class="on" data-p="sans">Sans character sheet</button>
-    <button data-p="avec">Avec character sheet</button>
-  </div>
-  <div class="sheet" id="sheetDemo"></div>
-  <p class="lede" id="cohText" style="margin-top:2vh;font-size:.95em"></p>
-  <div class="lock" style="margin-top:1.6vh;max-width:78ch">
-    <div class="blur"><p style="padding:1.8vh 1.4vw;font-size:.88rem;line-height:1.85">Notre système : sheet multi-angles verrouillée dès l'étape 3, banque de références nommées par personnage, injection systématique en entrée, contrôle qualité automatisé sur ██ points de repère faciaux, procédure de récupération quand un plan dérive…</p></div>
-    <div class="veil"><span class="badge">🔒 Le système de cohérence Okapi — École Okapi</span></div>
-  </div>
 </section>
 
 <!-- 12 MUR N°2 -->
@@ -1023,7 +1006,7 @@ function drawSheet(mode){
     ? 'Six plans du <strong>même</strong> personnage, générés sans référence. Yeux, museau, largeur du crâne, teinte : tout bouge. Le public ne saura pas nommer le problème — il ressentira juste que <strong>le film est mal fait</strong>. Chaque génération repart de zéro : le modèle n\'a <strong>aucune mémoire</strong> de votre personnage.'
     : 'Le même personnage, référencé. Six angles, une seule identité. <strong>C\'est la condition d\'existence d\'un film</strong> — pas une option de confort. Recopier le même prompt ne suffit pas : il faut un système de références, et il se construit à l\'étape 3, jamais après.';
 }
-drawSheet('sans');
+if(sheet) drawSheet('sans');
 document.querySelectorAll('#togCoh button').forEach(function(b){
   b.addEventListener('click',function(e){
     e.stopPropagation();
