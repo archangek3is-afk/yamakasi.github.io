@@ -15,8 +15,12 @@
     var el = document.getElementById('gateMsg');
     if (el) el.textContent = text;
   }
-  function unlock(){
+  function unlock(email){
     document.body.classList.add('gate-unlocked');
+    /* Persiste l'email pour que chapter-lock.js puisse syncer avec le serveur */
+    try { localStorage.setItem('okapi_email', email); } catch(e) {}
+    /* Signale aux autres scripts que l'accès vient d'être accordé */
+    document.dispatchEvent(new CustomEvent('okapi:unlocked', { detail: { email: email } }));
   }
 
   function init(){
@@ -55,7 +59,7 @@
         btn.disabled = false;
         btn.textContent = originalLabel;
         if (res && res.approved) {
-          unlock();
+          unlock(email);
         } else {
           setMsg("Cet email n'a pas d'acces autorise a ce manuel. Verifie l'adresse, ou demande l'acces ci-dessous.");
         }

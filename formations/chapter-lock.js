@@ -1,20 +1,29 @@
 /**
- * OKAPI STUDIOS — Système de progression par chapitres v2.0
+ * OKAPI STUDIOS — Système de progression par chapitres v3.0
  *
  * Trois formats détectés automatiquement :
  *   A — Standard  : .chapitre[data-ch]  (14 manuels accordion)
  *   B — Deco      : section.chapter[id^="ch"]  (decoration-cinema)
  *   C — Acteur    : #acte1 / #acte2  (acteur-vivant)
  *
- * Progression sauvegardée dans localStorage (clé : okapi_ch_<manual>).
- * Réponses aux exercices sauvegardées dans localStorage (clé : okapi_ex_<manual>).
+ * Progression sauvegardée dans localStorage (cache) ET dans Google Sheets
+ * via Apps Script (source de vérité — permet réinitialisation admin).
+ * Réponses aux exercices sauvegardées dans localStorage uniquement.
  * Chaque chapitre se déverrouille quand l'exercice du précédent est rédigé (≥100 car.)
  * Le quiz final est bloqué jusqu'à completion de tous les chapitres.
  */
 (function () {
   'use strict';
 
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec';
   var MIN_CHARS = 100;
+
+  var _manual = null;
+  var _email  = null;
+  /* Références gardées pour re-appliquer l'état après sync serveur */
+  var _chapters    = null;
+  var _quizSection = null;
+  var _format      = null; /* 'A' | 'B' | 'C' */
 
   /* ─── CSS injecté ─────────────────────────────────────────────── */
   document.head.insertAdjacentHTML('beforeend', '<style>\
@@ -157,44 +166,87 @@ section.chapter.ch-locked .deco-gate{display:block;}\
 </style>');
 
   /* ─── Helpers localStorage ────────────────────────────────────── */
-  var _manual = null;
-
   function getManual() {
     var gs = document.querySelector('script[src*="gate.js"][data-manual]');
     return gs ? gs.getAttribute('data-manual') : null;
   }
 
-  function storageKey() { return 'okapi_ch_' + _manual; }
+  function storageKey()   { return 'okapi_ch_' + _manual; }
   function exStorageKey() { return 'okapi_ex_' + _manual; }
 
   function getP() {
     try { return JSON.parse(localStorage.getItem(storageKey())) || {}; }
     catch (e) { return {}; }
   }
-
   function saveP(p) {
     try { localStorage.setItem(storageKey(), JSON.stringify(p)); }
     catch (e) {}
   }
-
   function getEx() {
     try { return JSON.parse(localStorage.getItem(exStorageKey())) || {}; }
     catch (e) { return {}; }
   }
-
   function saveEx(ex) {
     try { localStorage.setItem(exStorageKey(), JSON.stringify(ex)); }
     catch (e) {}
   }
 
+  /* ─── Sync serveur (Apps Script) ────────────────────────────── */
+  function jsonpCall(params, cb) {
+    var cbName = 'okapiCb_' + Math.random().toString(36).slice(2);
+    var tid = setTimeout(function () {
+      delete window[cbName];
+      if (sc && sc.parentNode) sc.parentNode.removeChild(sc);
+      if (cb) cb(null);
+    }, 8000);
+    window[cbName] = function (data) {
+      clearTimeout(tid);
+      delete window[cbName];
+      if (sc && sc.parentNode) sc.parentNode.removeChild(sc);
+      if (cb) cb(data);
+    };
+    var qs = Object.keys(params).map(function (k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]);
+    }).join('&');
+    var sc = document.createElement('script');
+    sc.src = APPS_SCRIPT_URL + '?' + qs + '&callback=' + cbName;
+    document.body.appendChild(sc);
+  }
+
+  /* Récupère la progression depuis le serveur et écrase le localStorage */
+  function serverSync(done) {
+    if (!_email || !_manual) { if (done) done(); return; }
+    jsonpCall({ action: 'getProgress', email: _email, manual: _manual }, function (data) {
+      if (data && typeof data === 'object' && !data.error) {
+        saveP(data); /* le serveur est la source de vérité */
+      }
+      if (done) done();
+    });
+  }
+
+  /* Notifie le serveur qu'un chapitre est complété */
+  function serverSetChapter(chIndex) {
+    if (!_email || !_manual) return;
+    jsonpCall({ action: 'setChapter', email: _email, manual: _manual, ch: chIndex }, null);
+  }
+
+  /* Re-applique l'état après sync serveur */
+  function reapply() {
+    if (_format === 'A') applyStandard(_chapters, _quizSection);
+    else if (_format === 'B') applyDeco(_chapters, _quizSection);
+    else if (_format === 'C') applyActeur(_chapters, _quizSection);
+  }
+
   /* ─── Construit une textarea d'exercice ──────────────────────── */
   function buildTextarea(taClass, labelClass, counterClass, placeholder) {
-    var wrap = document.createElement('div');
-    wrap.className = taClass === 'ch-exo-ta'
+    var wrapClass = taClass === 'ch-exo-ta'
       ? 'ch-exo-wrap'
       : taClass === 'ch-exo-ta-deco'
         ? 'ch-exo-wrap-deco'
         : 'ch-exo-wrap-acte';
+
+    var wrap = document.createElement('div');
+    wrap.className = wrapClass;
 
     var label = document.createElement('label');
     label.className = labelClass;
@@ -243,13 +295,12 @@ section.chapter.ch-locked .deco-gate{display:block;}\
      FORMAT A — Standard : .chapitre[data-ch]
   ══════════════════════════════════════════════════════════════ */
   function initStandard(chapters) {
-    var quizSection = document.getElementById('quiz');
+    var quizSection = _quizSection;
     if (quizSection) buildQuizGate(quizSection, chapters.length, 'chapitres');
 
     var ex = getEx();
 
     chapters.forEach(function (ch, i) {
-      /* Badges dans le header */
       var head = ch.querySelector('.ch-head');
       if (head) {
         head.insertAdjacentHTML('beforeend',
@@ -263,39 +314,33 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         }, true);
       }
 
-      /* Textarea + bouton dans .ch-body */
       var body = ch.querySelector('.ch-body');
       if (body) {
-        /* Cherche le bloc .exercice pour y insérer la textarea */
         var exercice = body.querySelector('.exercice');
         var t = buildTextarea('ch-exo-ta', 'ch-exo-label', 'ch-exo-counter', 'Rédige ta réponse ici…');
         var ta = t.ta;
         var counter = t.counter;
 
-        /* Bouton de complétion */
         var btn = document.createElement('button');
         btn.className = 'ch-complete-btn';
         btn.textContent = 'R\u00e9dige l\u2019exercice pour continuer';
         btn.disabled = true;
 
-        /* Restaurer depuis localStorage */
-        if (ex['ch' + i]) {
-          ta.value = ex['ch' + i];
-        }
+        if (ex['ch' + i]) ta.value = ex['ch' + i];
 
-        /* Mise à jour compteur & activation bouton */
         function updateCounter() {
           var len = ta.value.trim().length;
           counter.textContent = len + '\u00a0/\u00a0' + MIN_CHARS;
           if (len >= MIN_CHARS) {
             counter.classList.add('ok');
-            if (!btn.disabled || !getP()['ch' + i]) {
-              btn.disabled = !!getP()['ch' + i];
-            }
-            if (!getP()['ch' + i]) btn.disabled = false;
           } else {
             counter.classList.remove('ok');
-            if (!getP()['ch' + i]) btn.disabled = true;
+          }
+          if (!getP()['ch' + i]) {
+            btn.disabled = len < MIN_CHARS;
+            btn.textContent = len >= MIN_CHARS
+              ? 'Exercice termin\u00e9 \u2014 chapitre suivant \u2192'
+              : 'R\u00e9dige l\u2019exercice pour continuer';
           }
         }
 
@@ -304,15 +349,6 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           curEx['ch' + i] = ta.value;
           saveEx(curEx);
           updateCounter();
-          /* Activer le bouton seulement si pas déjà complété */
-          if (!getP()['ch' + i]) {
-            btn.disabled = ta.value.trim().length < MIN_CHARS;
-            if (!btn.disabled) {
-              btn.textContent = 'Exercice termin\u00e9 \u2014 chapitre suivant \u2192';
-            } else {
-              btn.textContent = 'R\u00e9dige l\u2019exercice pour continuer';
-            }
-          }
         });
 
         if (exercice) {
@@ -322,13 +358,14 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         }
         body.appendChild(btn);
         ch._lockBtn = btn;
-        ch._lockTa = ta;
+        ch._lockTa  = ta;
 
         btn.addEventListener('click', function () {
           if (btn.disabled) return;
           var p = getP();
           p['ch' + i] = 1;
           saveP(p);
+          serverSetChapter(i); /* sync serveur en arrière-plan */
           applyStandard(chapters, quizSection);
           var next = chapters[i + 1];
           if (next && !next.classList.contains('ch-locked')) {
@@ -346,7 +383,6 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           }
         });
 
-        /* Initialiser le compteur */
         updateCounter();
       }
     });
@@ -361,9 +397,8 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     chapters.forEach(function (ch, i) {
       var isDone = !!p['ch' + i];
       var btn = ch._lockBtn;
-      var ta = ch._lockTa;
+      var ta  = ch._lockTa;
 
-      /* Verrou */
       if (i === 0) {
         ch.classList.remove('ch-locked');
       } else {
@@ -375,15 +410,14 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         }
       }
 
-      /* État "terminé" */
       if (isDone) {
         ch.classList.add('ch-done');
-        if (ta) ta.disabled = true;
+        if (ta)  ta.disabled = true;
         if (btn) { btn.textContent = '\u2713 Chapitre termin\u00e9'; btn.disabled = true; }
         done++;
       } else {
         ch.classList.remove('ch-done');
-        if (ta) ta.disabled = false;
+        if (ta)  ta.disabled = false;
         if (btn) {
           var hasEnough = ta && ta.value.trim().length >= MIN_CHARS;
           btn.disabled = !hasEnough;
@@ -401,9 +435,8 @@ section.chapter.ch-locked .deco-gate{display:block;}\
      FORMAT B — decoration-cinema : section.chapter[id^="ch"]
   ══════════════════════════════════════════════════════════════ */
   function initDeco(chapters) {
-    var quizSection = document.getElementById('quiz');
+    var quizSection = _quizSection;
 
-    /* Quiz gate — adapter la palette claire du fichier */
     if (quizSection) {
       buildQuizGate(quizSection, chapters.length, 'chapitres');
       var qg = quizSection.querySelector('.quiz-gate-okapi');
@@ -420,7 +453,6 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     var ex = getEx();
 
     chapters.forEach(function (ch, i) {
-      /* Panneau de verrouillage */
       var dg = document.createElement('div');
       dg.className = 'deco-gate';
       dg.innerHTML =
@@ -428,21 +460,15 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         '<p>Terminez l\u2019exercice du chapitre pr\u00e9c\u00e9dent pour continuer</p>';
       ch.insertBefore(dg, ch.firstChild);
 
-      /* Textarea avant .done-row */
       var t = buildTextarea('ch-exo-ta-deco', 'ch-exo-label-deco', 'ch-exo-counter-deco', 'Rédige ta réponse ici…');
-      var ta = t.ta;
+      var ta      = t.ta;
       var counter = t.counter;
 
       var doneRow = ch.querySelector('.done-row');
-      var check = ch.querySelector('.exo-check');
-
-      /* Désactiver la checkbox tant que la textarea n'est pas remplie */
+      var check   = ch.querySelector('.exo-check');
       if (check) check.disabled = true;
 
-      /* Restaurer depuis localStorage */
-      if (ex['ch' + i]) {
-        ta.value = ex['ch' + i];
-      }
+      if (ex['ch' + i]) ta.value = ex['ch' + i];
 
       function updateDecoCounter() {
         var len = ta.value.trim().length;
@@ -463,7 +489,6 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         updateDecoCounter();
       });
 
-      /* Insérer la textarea juste avant .done-row */
       if (doneRow) {
         ch.insertBefore(t.wrap, doneRow);
       } else {
@@ -472,17 +497,14 @@ section.chapter.ch-locked .deco-gate{display:block;}\
 
       ch._lockTa = ta;
 
-      /* Hooker la checkbox */
       if (check) {
         check.addEventListener('change', function () {
           if (!check.checked) return;
-          if (ta.value.trim().length < MIN_CHARS) {
-            check.checked = false;
-            return;
-          }
+          if (ta.value.trim().length < MIN_CHARS) { check.checked = false; return; }
           var p = getP();
           p['ch' + i] = 1;
           saveP(p);
+          serverSetChapter(i); /* sync serveur en arrière-plan */
           applyDeco(chapters, quizSection);
         });
       }
@@ -494,7 +516,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
   }
 
   function applyDeco(chapters, quizSection) {
-    var p = getP();
+    var p    = getP();
     var done = 0;
 
     chapters.forEach(function (ch, i) {
@@ -511,18 +533,15 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         }
       }
 
-      var ta = ch._lockTa;
+      var ta    = ch._lockTa;
       var check = ch.querySelector('.exo-check');
 
       if (isDone) {
-        if (ta) ta.disabled = true;
+        if (ta)    ta.disabled = true;
         if (check) { check.checked = true; check.disabled = true; }
       } else {
-        if (ta) ta.disabled = false;
-        /* Checkbox active seulement si textarea suffisamment remplie */
-        if (check) {
-          check.disabled = !ta || ta.value.trim().length < MIN_CHARS;
-        }
+        if (ta)    ta.disabled = false;
+        if (check) check.disabled = !ta || ta.value.trim().length < MIN_CHARS;
       }
     });
 
@@ -533,15 +552,12 @@ section.chapter.ch-locked .deco-gate{display:block;}\
      FORMAT C — acteur-vivant : #acte1 + #acte2
   ══════════════════════════════════════════════════════════════ */
   function initActeur(actes) {
-    var quizSection = document.getElementById('quiz');
-    if (quizSection) {
-      buildQuizGate(quizSection, actes.length, 'modules');
-    }
+    var quizSection = _quizSection;
+    if (quizSection) buildQuizGate(quizSection, actes.length, 'modules');
 
     var ex = getEx();
 
     actes.forEach(function (acte, i) {
-      /* Shield de verrouillage (sauf module 1) */
       if (i > 0) {
         var shield = document.createElement('div');
         shield.className = 'acte-shield';
@@ -558,12 +574,10 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         acte.insertBefore(shield, acte.firstChild);
       }
 
-      /* Textarea */
       var t = buildTextarea('ch-exo-ta-acte', 'ch-exo-label-acte', 'ch-exo-counter-acte', 'Rédige ta réponse à l\'exercice ici…');
-      var ta = t.ta;
+      var ta      = t.ta;
       var counter = t.counter;
 
-      /* Bouton de complétion */
       var btn = document.createElement('button');
       btn.className = 'ch-complete-btn';
       btn.style.cssText =
@@ -572,10 +586,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       btn.textContent = 'R\u00e9dige l\u2019exercice pour continuer';
       btn.disabled = true;
 
-      /* Restaurer depuis localStorage */
-      if (ex['ch' + i]) {
-        ta.value = ex['ch' + i];
-      }
+      if (ex['ch' + i]) ta.value = ex['ch' + i];
 
       function updateActeCounter() {
         var len = ta.value.trim().length;
@@ -605,13 +616,14 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       acte.appendChild(t.wrap);
       acte.appendChild(btn);
       acte._lockBtn = btn;
-      acte._lockTa = ta;
+      acte._lockTa  = ta;
 
       btn.addEventListener('click', function () {
         if (btn.disabled) return;
         var p = getP();
         p['ch' + i] = 1;
         saveP(p);
+        serverSetChapter(i); /* sync serveur en arrière-plan */
         applyActeur(actes, quizSection);
         var next = actes[i + 1];
         if (next) {
@@ -628,15 +640,15 @@ section.chapter.ch-locked .deco-gate{display:block;}\
   }
 
   function applyActeur(actes, quizSection) {
-    var p = getP();
+    var p    = getP();
     var done = 0;
 
     actes.forEach(function (acte, i) {
       var isDone = !!p['ch' + i];
       if (isDone) done++;
 
-      var btn = acte._lockBtn;
-      var ta = acte._lockTa;
+      var btn    = acte._lockBtn;
+      var ta     = acte._lockTa;
       var shield = document.getElementById('acte-shield-' + i);
 
       if (i > 0) {
@@ -650,10 +662,10 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       }
 
       if (isDone) {
-        if (ta) ta.disabled = true;
+        if (ta)  ta.disabled = true;
         if (btn) { btn.textContent = '\u2713 Module termin\u00e9'; btn.disabled = true; }
       } else {
-        if (ta) ta.disabled = false;
+        if (ta)  ta.disabled = false;
         if (btn) {
           var hasEnough = ta && ta.value.trim().length >= MIN_CHARS;
           btn.disabled = !hasEnough;
@@ -671,23 +683,43 @@ section.chapter.ch-locked .deco-gate{display:block;}\
   function init() {
     _manual = getManual();
     if (!_manual) return;
+    _email  = localStorage.getItem('okapi_email') || null;
 
-    /* Format A */
     var stdChapters = Array.from(document.querySelectorAll('.chapitre[data-ch]'));
-    if (stdChapters.length) { initStandard(stdChapters); return; }
+    if (stdChapters.length) {
+      _format = 'A'; _chapters = stdChapters;
+      _quizSection = document.getElementById('quiz');
+      initStandard(stdChapters);
+      return;
+    }
 
-    /* Format B */
-    var decoChapters = Array.from(
-      document.querySelectorAll('section.chapter[id^="ch"]')
-    );
-    if (decoChapters.length) { initDeco(decoChapters); return; }
+    var decoChapters = Array.from(document.querySelectorAll('section.chapter[id^="ch"]'));
+    if (decoChapters.length) {
+      _format = 'B'; _chapters = decoChapters;
+      _quizSection = document.getElementById('quiz');
+      initDeco(decoChapters);
+      return;
+    }
 
-    /* Format C */
     var actes = ['acte1', 'acte2']
       .map(function (id) { return document.getElementById(id); })
       .filter(Boolean);
-    if (actes.length) { initActeur(actes); }
+    if (actes.length) {
+      _format = 'C'; _chapters = actes;
+      _quizSection = document.getElementById('quiz');
+      initActeur(actes);
+    }
   }
+
+  /* ─── Écoute le déverrouillage de la gate ────────────────────── */
+  /* Déclenché par gate.js après connexion réussie */
+  document.addEventListener('okapi:unlocked', function (e) {
+    _email = (e.detail && e.detail.email) ? e.detail.email : localStorage.getItem('okapi_email');
+    if (_email && _manual) {
+      /* Sync serveur → override localStorage → re-applique l'état */
+      serverSync(function () { reapply(); });
+    }
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
