@@ -116,16 +116,23 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 #gate-overlay .g-eye{font-size:11px;letter-spacing:.2em;color:#e4312b;text-transform:uppercase;margin-bottom:20px;}
 #gate-overlay h2{font-weight:800;font-size:clamp(22px,5vw,32px);color:#f4f1e8;margin-bottom:14px;}
 #gate-overlay p#gateMsg{color:#8a8a85;font-size:14px;line-height:1.65;max-width:380px;margin:0 auto 26px;}
-#gate-overlay a#gateRequestLink{border:1px solid #e4312b;color:#e4312b;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;}
-#gate-overlay a#gateRequestLink:hover{background:#e4312b;color:#f4f1e8;}
+#gate-overlay form#gateLoginForm{display:flex;flex-direction:column;align-items:center;margin-bottom:14px;gap:10px;}
+#gate-overlay input#gateEmailInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:inherit;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #e4312b;color:#e4312b;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
+#gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#e4312b;color:#f4f1e8;}
 </style>
 </head>
 <body>
 <div id="gate-overlay">
   <div class="g-eye">Okapi Studios &mdash; Accès protégé</div>
   <h2>Contenu réservé</h2>
-  <p id="gateMsg">Ce manuel est réservé aux personnes ayant demandé et obtenu l'accès.</p>
-  <a id="gateRequestLink" href="acces.html">Demander l&rsquo;accès</a>
+  <p id="gateMsg">Entre l'email avec lequel ton accès a été validé.</p>
+  <form id="gateLoginForm">
+    <input type="email" id="gateEmailInput" placeholder="ton@email.com" required>
+    <button type="submit" id="gateLoginBtn">Se connecter</button>
+  </form>
+  <a id="gateRequestLink" href="acces.html">Pas encore d&rsquo;accès&nbsp;? Demander l&rsquo;accès</a>
 </div>
 
 <header class="top">
