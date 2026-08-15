@@ -20,13 +20,38 @@
   var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec';
   var MIN_CHARS = 100;
 
-  /* Google Form unique pour les 3 manuels pratiques */
-  var FORM_URL_BASE    = 'https://docs.google.com/forms/d/e/1FAIpQLSegfrRWJMvMz2dyE3l2IRD9qxZ68iWWVQwD7SmGpuTGy34akg/viewform';
-  var FORM_ENTRY_EMAIL = '1544973329';
-  var FORM_ENTRY_CH    = '1289460951';
-  var FORM_ENTRY_TEXT  = '1104388559';
+  /*
+   * Configuration Google Forms — un form par manuel pratique.
+   * email / ch / text = entry IDs des champs pré-remplis.
+   * Le champ "ch" reçoit l'index du chapitre (0-8) en chiffre seul,
+   * cohérent avec le paramètre &ch= envoyé à checkForm côté Apps Script.
+   *
+   * ⚠️  directeur-photographie et costumiere : entry IDs à compléter
+   *      depuis Google Forms → ⋮ → Obtenir le lien prérempli.
+   *      Format attendu : entry.XXXXXXXXXX=valeur dans l'URL générée.
+   */
+  var FORM_CONFIGS = {
+    'decoration-cinema': {
+      url:   'https://docs.google.com/forms/d/e/1FAIpQLSegfrRWJMvMz2dyE3l2IRD9qxZ68iWWVQwD7SmGpuTGy34akg/viewform',
+      email: '1544973329',
+      ch:    '1289460951',
+      text:  '1104388559'
+    },
+    'directeur-photographie': {
+      url:   'https://docs.google.com/forms/d/e/1FAIpQLSdjgmcJdUv1ldmwTuL2qPbwNxLL8hSWSv2A_syXXfcZnFY7xQ/viewform',
+      email: '1544973329',
+      ch:    '1289460951',
+      text:  '1104388559'
+    },
+    'costumiere': {
+      url:   'https://docs.google.com/forms/d/e/1FAIpQLSceZMPahdg6f0q9R1HXVsdrqFhw2NBYr8kfks6Pmyedw8CjUw/viewform',
+      email: '1544973329',
+      ch:    '1289460951',
+      text:  '1104388559'
+    }
+  };
   /* Manuels dont tous les chapitres utilisent le Form pour la livraison */
-  var FORM_MANUALS = ['decoration-cinema', 'directeur-photographie', 'costumiere'];
+  var FORM_MANUALS = Object.keys(FORM_CONFIGS);
 
   var _manual      = null;
   var _email       = null;
@@ -269,11 +294,12 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     statusMsg.className = 'ch-form-status';
 
     openBtn.addEventListener('click', function () {
-      var url = FORM_URL_BASE
+      var cfg = FORM_CONFIGS[_manual];
+      var url = cfg.url
         + '?usp=pp_url'
-        + '&entry.' + FORM_ENTRY_EMAIL + '=' + encodeURIComponent(_email || '')
-        + '&entry.' + FORM_ENTRY_CH    + '=' + encodeURIComponent(_manual + '-ch' + chIndex)
-        + '&entry.' + FORM_ENTRY_TEXT  + '=';
+        + '&entry.' + cfg.email + '=' + encodeURIComponent(_email || '')
+        + '&entry.' + cfg.ch    + '=' + encodeURIComponent(String(chIndex))
+        + '&entry.' + cfg.text  + '=';
       window.open(url, '_blank');
       try { localStorage.setItem(formOpenedKey, '1'); } catch(e) {}
       setTimeout(function () { verifyBtn.disabled = false; }, 1500);
