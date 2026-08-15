@@ -46,14 +46,15 @@
 .ch-exo-ta{\
   display:block;width:100%;box-sizing:border-box;\
   min-height:120px;padding:12px 14px;\
-  background:#fff;\
+  background:#fff !important;\
   border:1px solid rgba(0,0,0,.18);\
-  color:#1a1a18;font-family:var(--mono,monospace);font-size:13px;\
+  color:#1a1a18 !important;-webkit-text-fill-color:#1a1a18 !important;\
+  font-family:var(--mono,monospace);font-size:13px;\
   line-height:1.7;resize:vertical;\
   transition:border-color .2s;\
 }\
 .ch-exo-ta:focus{outline:none;border-color:var(--rouge,#e4312b);}\
-.ch-exo-ta:disabled{background:#f0ece4;opacity:.6;cursor:not-allowed;resize:none;}\
+.ch-exo-ta:disabled{background:#f0ece4 !important;color:#555 !important;-webkit-text-fill-color:#555 !important;opacity:.6;cursor:not-allowed;resize:none;}\
 .ch-exo-counter{\
   margin-top:6px;font-family:var(--mono,monospace);font-size:10px;\
   color:#888;text-align:right;letter-spacing:.05em;\
