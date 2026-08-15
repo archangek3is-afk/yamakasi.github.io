@@ -6,7 +6,7 @@
  */
 (function(){
   // Remplace par l'URL /exec obtenue après déploiement de Code.gs (Apps Script)
-  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzbtOmEY1MQF9K119ilIURwwnOH4IulD0dkKwxofhUqTM1DslW4IyzvI0CR-V4FjAgxUw/exec";
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzn8MAGZflh7sMwh2i6gJeEbrbGzHi9yuZZ8dx3HThitpKVKMVCtcbvVY2cyq_AfDaTxw/exec";
 
   var scriptTag = document.currentScript;
   var manual = scriptTag.getAttribute('data-manual');
