@@ -48,6 +48,24 @@
       email: '1544973329',
       ch:    '1289460951',
       text:  '1104388559'
+    },
+    'ingenieur-son': {
+      url:   'https://docs.google.com/forms/d/e/1FAIpQLScr_ntSBt-0mJa7NUS1XGcjOkSUiZaIxyvWFp13Tw_YfCwzRw/viewform',
+      email: '1544973329',
+      ch:    '1289460951',
+      text:  '1104388559'
+    },
+    'scenariste': {
+      url:   'https://docs.google.com/forms/d/e/1FAIpQLScVdO3bpxrJvJzzW4Nr4o9gO2Wb9QIrDFnzazDohOHvm-FmgA/viewform',
+      email: '1544973329',
+      ch:    '1289460951',
+      text:  '1104388559'
+    },
+    'regisseur-general': {
+      url:   'https://docs.google.com/forms/d/e/1FAIpQLSfstI5x-W8Wf3lpxEKgkUnAy9hIn6DBoPBhcHMn1W3pZeOXFQ/viewform',
+      email: '1544973329',
+      ch:    '1289460951',
+      text:  '1104388559'
     }
   };
   /* Manuels dont tous les chapitres utilisent le Form pour la livraison */
