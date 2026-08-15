@@ -20,6 +20,9 @@
   var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec';
   var MIN_CHARS = 100;
 
+  /* Emails admins — accès complet sans progression requise */
+  var ADMIN_EMAILS = ['archangek.3is@gmail.com'];
+
   /*
    * Configuration Google Forms — un form par manuel pratique.
    * email / ch / text = entry IDs des champs pré-remplis.
@@ -78,6 +81,7 @@
   var _format      = null; /* 'A' | 'B' | 'C' */
 
   function isFormManual() { return FORM_MANUALS.indexOf(_manual) !== -1; }
+  function isAdmin() { return _email && ADMIN_EMAILS.indexOf(_email.toLowerCase().trim()) !== -1; }
 
   /* ─── CSS injecté ─────────────────────────────────────────────── */
   document.head.insertAdjacentHTML('beforeend', '<style>\
@@ -392,7 +396,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
   }
   function refreshQuizGate(quizSection, done, total) {
     var cnt = quizSection.querySelector('.qg-count');
-    if (done >= total) {
+    if (isAdmin() || done >= total) {
       quizSection.classList.remove('quiz-gated');
     } else {
       quizSection.classList.add('quiz-gated');
@@ -505,13 +509,14 @@ section.chapter.ch-locked .deco-gate{display:block;}\
 
   function applyStandard(chapters, quizSection) {
     var p = getP(); var done = 0;
+    var admin = isAdmin();
     chapters.forEach(function (ch, i) {
-      var isDone = !!p['ch' + i];
+      var isDone = admin || !!p['ch' + i];
       var btn     = ch._lockBtn;
       var ta      = ch._lockTa;
       var openBtn = ch._lockOpenBtn;
 
-      if (i === 0) { ch.classList.remove('ch-locked'); }
+      if (admin || i === 0) { ch.classList.remove('ch-locked'); }
       else {
         if (p['ch' + (i - 1)]) { ch.classList.remove('ch-locked'); }
         else { ch.classList.add('ch-locked'); ch.classList.remove('open'); }
@@ -634,11 +639,12 @@ section.chapter.ch-locked .deco-gate{display:block;}\
 
   function applyDeco(chapters, quizSection) {
     var p = getP(); var done = 0;
+    var admin = isAdmin();
     chapters.forEach(function (ch, i) {
-      var isDone = !!p['ch' + i];
+      var isDone = admin || !!p['ch' + i];
       if (isDone) done++;
 
-      if (i === 0) { ch.classList.remove('ch-locked'); }
+      if (admin || i === 0) { ch.classList.remove('ch-locked'); }
       else {
         if (p['ch' + (i - 1)]) { ch.classList.remove('ch-locked'); }
         else { ch.classList.add('ch-locked'); }
@@ -733,13 +739,14 @@ section.chapter.ch-locked .deco-gate{display:block;}\
 
   function applyActeur(actes, quizSection) {
     var p = getP(); var done = 0;
+    var admin = isAdmin();
     actes.forEach(function (acte, i) {
-      var isDone = !!p['ch' + i];
+      var isDone = admin || !!p['ch' + i];
       if (isDone) done++;
       var btn = acte._lockBtn; var ta = acte._lockTa;
       var shield = document.getElementById('acte-shield-' + i);
       if (i > 0) {
-        if (p['ch' + (i - 1)]) { acte.classList.remove('acte-locked'); if (shield) shield.style.display = 'none'; }
+        if (admin || p['ch' + (i - 1)]) { acte.classList.remove('acte-locked'); if (shield) shield.style.display = 'none'; }
         else { acte.classList.add('acte-locked'); if (shield) shield.style.display = ''; }
       }
       if (isDone) {
