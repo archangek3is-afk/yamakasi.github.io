@@ -61,6 +61,20 @@ button:hover{ opacity:.85;}
       <input type="email" id="email" name="email" required>
     </div>
     <div>
+      <label for="cadreSelect">Dans quel cadre ?</label>
+      <select id="cadreSelect" name="cadre" required>
+        <option value="EJP FILMS">EJP FILMS</option>
+        <option value="L'ÉCOLE OKAPI">L'ÉCOLE OKAPI</option>
+        <option value="LA NUIT DE L'IA">LA NUIT DE L'IA</option>
+        <option value="BNC ACADEMY">BNC ACADEMY</option>
+        <option value="Autre">Autre</option>
+      </select>
+    </div>
+    <div id="cadreAutreWrap" style="display:none;">
+      <label for="cadreAutreInput">Précise</label>
+      <input type="text" id="cadreAutreInput" name="cadreAutre" placeholder="Dans quel cadre ?">
+    </div>
+    <div>
       <label for="manuelSelect">Manuel souhaité</label>
       <select id="manuelSelect" name="manuel" required>
         <option value="realisateur">Le Réalisateur</option>
@@ -79,7 +93,7 @@ button:hover{ opacity:.85;}
         <option value="animateur-ia">L'Animateur IA</option>
         <option value="directeur-production">Le Directeur de Production</option>
         <option value="acteur-vivant">L'Acteur Vivant</option>
-        <option value="all">Toute la collection</option>
+        <option value="all">Toute l'école</option>
       </select>
     </div>
     <button type="submit">Envoyer la demande</button>
@@ -91,7 +105,7 @@ button:hover{ opacity:.85;}
     <p>Elle est en cours d'examen. Tu recevras un email dès qu'elle aura été acceptée ou refusée.</p>
   </div>
 
-  <a class="back" href="index-formations.html">← Retour à la collection</a>
+  <a class="back" href="index-formations.html">← Retour à l'école</a>
 </div>
 
 <iframe name="hidden_iframe" style="display:none;"></iframe>
@@ -111,6 +125,17 @@ button:hover{ opacity:.85;}
     const sel = document.getElementById('manuelSelect');
     if ([...sel.options].some(o => o.value === m)) sel.value = m;
   }
+
+  const cadreSelect = document.getElementById('cadreSelect');
+  const cadreAutreWrap = document.getElementById('cadreAutreWrap');
+  const cadreAutreInput = document.getElementById('cadreAutreInput');
+  function toggleCadreAutre(){
+    const isAutre = cadreSelect.value === 'Autre';
+    cadreAutreWrap.style.display = isAutre ? 'block' : 'none';
+    cadreAutreInput.required = isAutre;
+  }
+  cadreSelect.addEventListener('change', toggleCadreAutre);
+  toggleCadreAutre();
 
   form.addEventListener('submit', function(){
     setTimeout(() => {
