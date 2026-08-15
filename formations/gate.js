@@ -67,10 +67,23 @@
         loaderScript.remove();
       };
 
-      var loaderScript = document.createElement('script');
-      loaderScript.src = APPS_SCRIPT_URL + '?login=1&email=' + encodeURIComponent(email) +
-        '&manuel=' + encodeURIComponent(manual) + '&callback=' + cbName;
-      document.body.appendChild(loaderScript);
+      function startLogin(ip){
+        loaderScript = document.createElement('script');
+        loaderScript.src = APPS_SCRIPT_URL + '?login=1&email=' + encodeURIComponent(email) +
+          '&manuel=' + encodeURIComponent(manual) + '&ip=' + encodeURIComponent(ip || '') +
+          '&callback=' + cbName;
+        document.body.appendChild(loaderScript);
+      }
+
+      var loaderScript;
+      /* Recupere l'IP publique du visiteur pour alerter si un meme email se
+         connecte depuis une IP jamais vue auparavant. En cas d'echec du
+         service (bloque, hors ligne), la connexion continue quand meme
+         sans IP plutot que de bloquer l'etudiant. */
+      fetch('https://api.ipify.org?format=json')
+        .then(function(r){ return r.json(); })
+        .then(function(d){ startLogin(d && d.ip); })
+        .catch(function(){ startLogin(''); });
     });
   }
 
