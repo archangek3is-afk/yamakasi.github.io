@@ -32,33 +32,33 @@
   letter-spacing:.07em;text-transform:uppercase;}\
 .chapitre.ch-done .ch-done-label{display:flex;}\
 .chapitre.ch-done:not(.ch-locked) .ch-chev{color:#7a9a7a !important;}\
-/* === Textarea exercice (A + C) === */\
+/* === Textarea exercice (A) — fond clair car dans .exercice (parchemin) === */\
 .ch-exo-wrap{\
   margin-top:22px;\
-  border-top:1px solid rgba(244,241,232,.1);\
+  border-top:1px solid rgba(0,0,0,.1);\
   padding-top:18px;\
 }\
 .ch-exo-label{\
   display:block;margin-bottom:8px;\
   font-family:var(--mono,monospace);font-size:10px;\
-  color:#8a8a85;letter-spacing:.08em;text-transform:uppercase;\
+  color:#5a5550;letter-spacing:.08em;text-transform:uppercase;\
 }\
 .ch-exo-ta{\
   display:block;width:100%;box-sizing:border-box;\
   min-height:120px;padding:12px 14px;\
-  background:rgba(244,241,232,.05);\
-  border:1px solid rgba(244,241,232,.2);\
-  color:#f4f1e8;font-family:var(--mono,monospace);font-size:13px;\
+  background:#fff;\
+  border:1px solid rgba(0,0,0,.18);\
+  color:#1a1a18;font-family:var(--mono,monospace);font-size:13px;\
   line-height:1.7;resize:vertical;\
   transition:border-color .2s;\
 }\
-.ch-exo-ta:focus{outline:none;border-color:rgba(244,241,232,.5);}\
-.ch-exo-ta:disabled{opacity:.5;cursor:not-allowed;resize:none;}\
+.ch-exo-ta:focus{outline:none;border-color:var(--rouge,#e4312b);}\
+.ch-exo-ta:disabled{background:#f0ece4;opacity:.6;cursor:not-allowed;resize:none;}\
 .ch-exo-counter{\
   margin-top:6px;font-family:var(--mono,monospace);font-size:10px;\
-  color:#8a8a85;text-align:right;letter-spacing:.05em;\
+  color:#888;text-align:right;letter-spacing:.05em;\
 }\
-.ch-exo-counter.ok{color:#7a9a7a;}\
+.ch-exo-counter.ok{color:#4a7a4a;}\
 /* === Bouton de complétion (A + C) === */\
 .ch-complete-btn{\
   display:block;width:100%;margin-top:16px;padding:15px 22px;\
