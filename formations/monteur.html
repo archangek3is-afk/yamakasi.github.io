@@ -320,18 +320,54 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <section id="quiz" style="padding-top:0;">
   <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
   <div class="fade">
-    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">1. Selon Walter Murch, quel critère pèse le plus dans une coupe ?</p>
-      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>L'émotion</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>La continuité 3D</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le plan de l'écran</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Dans un J-cut :</p>
-      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>L'image précède toujours le son</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Il n'y a pas de son du tout</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Le son de la scène suivante arrive avant l'image</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">3. Le montage parallèle sert surtout à :</p>
-      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Raccourcir le film</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Créer une tension entre deux lignes d'action simultanées</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Éviter de tourner des plans de réaction</span></label></div>
+        <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Le monteur recoit les rushes et doit :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Suivre le scenario a la lettre, sans aucun ecart</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Trouver le film qui existe reellement dans ce qui a ete tourne</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Attendre les instructions du producteur uniquement</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Selon Walter Murch, quel critere pese le plus dans une coupe ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>L'emotion</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>La continuite 3D</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Le plan de l'ecran</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Dans un J-cut :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>L'image precede toujours le son</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Il n'y a pas de son du tout</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Le son de la scene suivante arrive avant l'image</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Le montage parallele sert surtout a :</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Raccourcir le film</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Creer une tension entre deux lignes d'action simultanees</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Eviter de tourner des plans de reaction</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. Pourquoi le premier assemblage (rough cut) est-il presque toujours plus long que la version finale ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>Parce que chaque passe suivante retire du materiau, jamais l'inverse</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>Parce que le monteur ajoute des scenes non tournees</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Parce que c'est une obligation contractuelle</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Quand une note de realisateur dit «ca manque de punch», que doit faire le monteur ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Ajouter systematiquement de la musique plus forte</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Chercher l'intention derriere la note plutot que l'executer au pied de la lettre</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Ignorer la note</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Qu'est-ce qui distingue le montage de Thelma Schoonmaker de celui de Joe Walker ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Schoonmaker privilegie l'energie cinetique, Walker la patience et la respiration des plans</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Les deux montent exclusivement en coupe franche</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Walker refuse toute forme de rythme musical</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. En quoi la ponderation de Murch (emotion 51%, histoire 23%...) aide-t-elle a arbitrer un conflit de coupe ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Elle donne un ordre de priorite clair quand deux criteres de montage s'opposent</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Elle sert uniquement a calculer la duree du film</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Elle n'a aucune application pratique</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:12px; text-transform:uppercase; background:var(--teal); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -354,14 +390,24 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   sections.forEach(s=>spy.observe(s));
   document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
   document.querySelector('[data-ch]')?.classList.add('open');
-  document.getElementById('quizBtn').addEventListener('click',()=>{
-    let score=0;
-    document.querySelectorAll('[data-quiz]').forEach(q=>{
-      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
-      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
-      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
     });
-    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
   });
 </script>
 <script src="gate.js" data-manual="monteur"></script>

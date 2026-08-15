@@ -309,18 +309,54 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <section id="quiz" style="padding-top:0;">
   <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
   <div class="fade">
-    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">1. Que fait-on toujours avant le grading créatif ?</p>
+        <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Que fait-on toujours avant le grading creatif ?</p>
       <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>La correction (exposition, balance des blancs, matching)</span></label>
       <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Le montage final</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le mixage son</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">2. La roue "gamma" contrôle principalement :</p>
-      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Les ombres profondes</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Les tons moyens, dont la peau</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Les hautes lumières uniquement</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">3. Pourquoi le teal & orange fonctionne-t-il visuellement ?</p>
-      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Ce sont les couleurs préférées des studios</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Elles sont identiques sur la roue chromatique</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Elles sont complémentaires, ce qui fait ressortir les visages</span></label></div>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le mixage son</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. L'etalonneur intervient :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Avant le tournage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Apres le montage, avant la livraison finale</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Pendant l'ecriture du scenario</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. La roue «gamma» controle principalement :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Les ombres profondes</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Les tons moyens, dont la peau</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Les hautes lumieres uniquement</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Un LUT creatif applique sur une image mal corrigee :</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Corrige automatiquement les erreurs</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Pousse les erreurs a l'extreme plutot que de les cacher</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>N'a aucun effet visible</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. Pourquoi le teal & orange fonctionne-t-il visuellement ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>Ce sont les couleurs preferees des studios</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>Elles sont identiques sur la roue chromatique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Elles sont complementaires, ce qui fait ressortir les visages</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Pourquoi les tons chair sont-ils toujours verifies en priorite, quel que soit le style recherche ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>L'oeil humain est extremement sensible a la moindre derive de couleur de peau</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>La peau n'a aucune importance en etalonnage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>C'est une exigence legale</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Quelle est la difference entre le naturalisme et le style affirme en grading ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Le naturalisme reste invisible, le style affirme devient une signature reconnaissable</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Ce sont deux mots pour la meme approche</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Le naturalisme n'existe qu'en noir et blanc</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. Pourquoi «matcher les plans» est-il considere comme le travail le plus technique et le moins visible de l'etalonneur ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Parce que deux plans tournes a des heures differentes doivent paraitre filmes au meme instant</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Parce que c'est une etape optionnelle</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Parce que ca ne concerne que les films en noir et blanc</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--teal); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -348,14 +384,24 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   ttSubtle.addEventListener('click',()=>{ ttPreview.style.background='linear-gradient(90deg, #14403c, #d99a67)'; ttSubtle.classList.add('active'); ttExtreme.classList.remove('active'); });
   ttExtreme.addEventListener('click',()=>{ ttPreview.style.background='linear-gradient(90deg, #06504a, #ff8a2b)'; ttExtreme.classList.add('active'); ttSubtle.classList.remove('active'); });
 
-  document.getElementById('quizBtn').addEventListener('click',()=>{
-    let score=0;
-    document.querySelectorAll('[data-quiz]').forEach(q=>{
-      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
-      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
-      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
     });
-    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
   });
 </script>
 <script src="gate.js" data-manual="etalonneur"></script>

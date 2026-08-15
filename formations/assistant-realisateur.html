@@ -337,18 +337,54 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <section id="quiz" style="padding-top:0;">
   <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
   <div class="fade">
-    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">1. Qui prononce « Action » sur un plateau ?</p>
-      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le 1<sup>er</sup> assistant réalisateur</span></label>
+        <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Qui prononce «Action» sur un plateau ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le 1er assistant realisateur</span></label>
       <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Le directeur de production</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le réalisateur, toujours</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">2. Quelle est la responsabilité qui passe avant le planning ?</p>
-      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Le budget de la journée</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>La sécurité de l'équipe</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Le confort des comédiens</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">3. À partir de quoi le 1<sup>er</sup> AD construit-il le plan de travail ?</p>
-      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>La liste de plans, en estimant la durée de chacun</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>L'ordre chronologique du scénario</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Les préférences des comédiens</span></label></div>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le realisateur, toujours</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. L'assistant realisateur (AD) est principalement responsable de :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>La mise en scene creative</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Tenir le planning et la securite du plateau</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Le montage final</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Quelle est la responsabilite qui passe avant le planning ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Le budget de la journee</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>La securite de l'equipe</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Le confort des comediens</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Pourquoi l'AD n'est-il pas «un second realisateur» ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Il ne donne jamais d'avis sur la mise en scene, il gere l'execution</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Il remplace le realisateur en cas d'absence</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Il choisit les plans a sa place</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. A partir de quoi le 1er AD construit-il le plan de travail ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>La liste de plans, en estimant la duree de chacun</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>L'ordre chronologique du scenario</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Les preferences des comediens</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Traditionnellement, combien de temps apres la convocation generale le repas a-t-il lieu ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>2 heures</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>6 heures</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>10 heures</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Pourquoi le depouillement de l'AD differe-t-il de celui du directeur de production, meme sur le meme scenario ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>L'AD pense en duree de tournage, le directeur de production pense en budget</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Ce sont exactement les memes depouillements</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Seul le directeur de production depouille le scenario</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. Pourquoi un AD qui accepterait un risque de securite pour gagner 20 minutes ferait-il «le mauvais metier» ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>La securite passe toujours avant le respect du planning, sans exception</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Le planning passe toujours avant la securite</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Cette situation ne se presente jamais en realite</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:14px; text-transform:uppercase; letter-spacing:.05em; background:var(--jaune); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -371,14 +407,24 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   sections.forEach(s=>spy.observe(s));
   document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
   document.querySelector('[data-ch]')?.classList.add('open');
-  document.getElementById('quizBtn').addEventListener('click',()=>{
-    let score=0;
-    document.querySelectorAll('[data-quiz]').forEach(q=>{
-      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
-      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
-      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
     });
-    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
   });
 </script>
 <script src="gate.js" data-manual="assistant-realisateur"></script>

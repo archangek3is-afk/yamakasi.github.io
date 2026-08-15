@@ -290,18 +290,54 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <section id="quiz" style="padding-top:0;">
   <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
   <div class="fade">
-    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Le chargé de production travaille principalement :</p>
+        <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Le charge de production travaille principalement :</p>
       <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Sur le plateau, en permanence</span></label>
       <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Au bureau de production</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>En salle de montage</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Pourquoi les révisions de scénario ont-elles des couleurs de page ?</p>
-      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Pour décorer le document</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>C'est une tradition sans fonction pratique</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Pour que personne ne travaille sur une version périmée</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">3. Ce poste mène souvent, avec l'expérience, vers :</p>
-      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Line producer puis producteur</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Directeur de la photographie</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Monteur</span></label></div>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>En salle de montage</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. La feuille de service (call sheet) sert a :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Decrire le scenario complet</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Informer l'equipe des horaires et details du tournage du lendemain</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Remplacer le budget</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Pourquoi les revisions de scenario ont-elles des couleurs de page ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Pour decorer le document</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>C'est une tradition sans fonction pratique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Pour que personne ne travaille sur une version perimee</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Pourquoi une liste de contacts a jour est-elle critique, pas un detail administratif ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Elle permet de joindre n'importe qui en 30 secondes en cas de probleme</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Elle sert uniquement a la newsletter</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Elle n'a aucune utilite pratique</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. A quoi sert un rapport de production quotidien ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>A remplacer le scenario</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>A suivre ce qui a ete tourne et les eventuels retards</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Ce document n'existe pas en vrai tournage</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Pourquoi une erreur d'adresse sur un call sheet est-elle particulierement grave ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Elle peut faire perdre une heure entiere a toute une equipe</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Elle n'a aucune consequence reelle</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Elle ne concerne que le realisateur</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Ce poste mene souvent, avec l'experience, vers :</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Line producer puis producteur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Directeur de la photographie</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Monteur</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. En quoi le charge de production est-il un point de passage strategique entre les departements ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Il centralise l'information et connait les besoins de chaque departement en temps reel</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Il n'a aucun contact avec les autres postes</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Son role se limite a la papeterie du bureau</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--bleu); color:var(--craie); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -325,14 +361,24 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
   document.querySelector('[data-ch]')?.classList.add('open');
   document.querySelectorAll('.check-item input').forEach(inp=>{ inp.addEventListener('change', ()=> inp.closest('.check-item').classList.toggle('checked', inp.checked)); });
-  document.getElementById('quizBtn').addEventListener('click',()=>{
-    let score=0;
-    document.querySelectorAll('[data-quiz]').forEach(q=>{
-      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
-      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
-      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
     });
-    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
   });
 </script>
 <script src="gate.js" data-manual="charge-production"></script>

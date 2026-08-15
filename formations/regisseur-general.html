@@ -271,18 +271,54 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <section id="quiz" style="padding-top:0;">
   <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
   <div class="fade">
-    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Un lieu "joli" mais bruyant pose surtout problème pour :</p>
-      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le budget régie</span></label>
+        <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Un lieu «joli» mais bruyant pose surtout probleme pour :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le budget regie</span></label>
       <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>La prise de son</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le montage</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">2. Pourquoi prévenir les riverains avant un tournage bruyant ?</p>
-      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Pour éviter les conflits plutôt que de s'excuser après</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Ce n'est jamais nécessaire</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Pour obtenir une réduction de permis</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">3. Que doit toujours avoir un régisseur en cas d'imprévu météo ?</p>
-      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Un budget illimité</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Un deuxième réalisateur</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Un plan B de repli</span></label></div>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le montage</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Le regisseur est souvent :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Le dernier arrive et le premier parti</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Le visage public de la production face aux proprietaires et autorites</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Responsable exclusif du scenario</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Pourquoi prevenir les riverains avant un tournage bruyant ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Pour eviter les conflits plutot que de s'excuser apres</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Ce n'est jamais necessaire</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Pour obtenir une reduction de permis</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Pourquoi verifier la lumiere d'un lieu a differentes heures lors du reperage ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Un reperage a midi ne dit rien de la lumiere au moment reel du tournage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>La lumiere ne change jamais dans la meme journee</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Ce n'est utile que pour les tournages de nuit</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. Que doit toujours avoir un regisseur en cas d'imprevu meteo ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>Un budget illimite</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>Un deuxieme realisateur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Un plan B de repli</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Pourquoi tourner sur la voie publique necessite-t-il presque toujours une autorisation ecrite obtenue en amont ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>L'obtenir apres coup n'est jamais une option viable</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Ce n'est qu'une formalite sans consequence</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Seuls les grands studios ont besoin d'autorisation</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Depuis quand le regisseur (location manager) est-il devenu un poste a part entiere ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Depuis toujours, ce poste a toujours existe separement</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Dans les annees 70, pour que la logistique ne freine jamais la mise en scene</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Ce poste n'existe pas dans l'industrie</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. Pourquoi le confort logistique de l'equipe (loges, catering, transport) n'est-il pas qu'un detail ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Une equipe mal nourrie ou mal logee travaille moins bien, ca impacte la qualite du tournage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Le confort n'a aucun effet sur le travail de l'equipe</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>C'est une depense qu'on peut toujours supprimer sans risque</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:12px; text-transform:uppercase; background:var(--orange); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -305,14 +341,24 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   sections.forEach(s=>spy.observe(s));
   document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
   document.querySelector('[data-ch]')?.classList.add('open');
-  document.getElementById('quizBtn').addEventListener('click',()=>{
-    let score=0;
-    document.querySelectorAll('[data-quiz]').forEach(q=>{
-      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
-      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
-      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
     });
-    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
   });
 </script>
 <script src="gate.js" data-manual="regisseur-general"></script>

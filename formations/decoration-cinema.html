@@ -1154,60 +1154,62 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       </div>
     </section>
 
-    <!-- ============ QUIZ ============ -->
-    <section class="chapter" id="quiz">
+        <section class="chapter" id="quiz">
       <div class="chapter-head">
-        <div class="chip"><div class="top" style="background:#D9A441">✽</div><div class="bot">TEST</div></div>
-        <div><h2>Vérifie que c'est rentré</h2><div class="sub">Cinq questions · réponse immédiate</div></div>
+        <div class="chip"><div class="top" style="background:#D9A441">&#10021;</div><div class="bot">TEST</div></div>
+        <div><h2>V&eacute;rifie que c'est rentr&eacute;</h2><div class="sub">Huit questions &middot; difficult&eacute; progressive</div></div>
       </div>
-
-      <div class="quiz" id="quizBox">
-        <div class="q" data-a="1">
-          <div class="qt"><span class="qn">01</span><span>Ton décor a l'air « faux », comme un magasin de meubles. Quel est le coupable le plus probable ?</span></div>
-          <div class="opts">
-            <button data-i="0">Il manque des objets</button>
-            <button data-i="1">Les couleurs sont trop saturées et tout est trop neuf</button>
-            <button data-i="2">La pièce est trop petite</button>
-          </div>
-          <div class="fb">La vraie vie est délavée et usée. Baisse la saturation, patine les arêtes et les zones où la main passe.</div>
+      <div>
+        <div class="quiz-q-x" data-quiz data-correct="1" style="background:var(--platre);border:1px solid var(--ligne);padding:22px;margin-bottom:16px;">
+          <p style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:14px;color:var(--encre);"><span style="display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Qui choisit et place precisement chaque objet dans une piece du decor ?</p>
+          <label class="quiz-opt-x" data-idx="0" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx1" value="0" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Le realisateur</span></label>
+          <label class="quiz-opt-x" data-idx="1" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx1" value="1" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Le decorateur (set decorator)</span></label>
+          <label class="quiz-opt-x" data-idx="2" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx1" value="2" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Le monteur</span></label>
         </div>
-        <div class="q" data-a="2">
-          <div class="qt"><span class="qn">02</span><span>Le réalisateur n'a pas encore décidé de ses axes caméra. Quel mur habilles-tu en priorité ?</span></div>
-          <div class="opts">
-            <button data-i="0">Le mur du fond, toujours</button>
-            <button data-i="1">Celui avec la fenêtre</button>
-            <button data-i="2">Celui qui sera derrière l'acteur quand il parle</button>
-          </div>
-          <div class="fb">C'est ce mur que le spectateur regarde pendant toute la scène, par-dessus l'épaule du personnage.</div>
+        <div class="quiz-q-x" data-quiz data-correct="2" style="background:var(--platre);border:1px solid var(--ligne);padding:22px;margin-bottom:16px;">
+          <p style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:14px;color:var(--encre);"><span style="display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Que veut dire «mise en scene» ?</p>
+          <label class="quiz-opt-x" data-idx="0" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx2" value="0" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Le montage final du film</span></label>
+          <label class="quiz-opt-x" data-idx="1" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx2" value="1" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">La musique du film</span></label>
+          <label class="quiz-opt-x" data-idx="2" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx2" value="2" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Tout ce qui est organise et visible dans le cadre</span></label>
         </div>
-        <div class="q" data-a="0">
-          <div class="qt"><span class="qn">03</span><span>Un acteur doit déchirer une lettre. Combien d'exemplaires prépares-tu ?</span></div>
-          <div class="opts">
-            <button data-i="0">Au moins cinq exemplaires identiques</button>
-            <button data-i="1">Un seul, il suffit d'être précis</button>
-            <button data-i="2">Deux, par sécurité</button>
-          </div>
-          <div class="fb">Un accessoire de jeu destructible se prévoit toujours en multiple. Une prise ratée sans doublon arrête le tournage.</div>
+        <div class="quiz-q-x" data-quiz data-correct="0" style="background:var(--platre);border:1px solid var(--ligne);padding:22px;margin-bottom:16px;">
+          <p style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:14px;color:var(--encre);"><span style="display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Dans un decor a 3 couches, ou se trouve le personnage en general ?</p>
+          <label class="quiz-opt-x" data-idx="0" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx3" value="0" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Au plan moyen (milieu)</span></label>
+          <label class="quiz-opt-x" data-idx="1" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx3" value="1" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Toujours en arriere-plan</span></label>
+          <label class="quiz-opt-x" data-idx="2" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx3" value="2" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Jamais dans le cadre</span></label>
         </div>
-        <div class="q" data-a="2">
-          <div class="qt"><span class="qn">04</span><span>Tu hésites à garder un vase sur l'étagère. Quel test appliques-tu ?</span></div>
-          <div class="opts">
-            <button data-i="0">Est-ce qu'il est joli ?</button>
-            <button data-i="1">Est-ce qu'il va avec la palette ?</button>
-            <button data-i="2">Si je le retire, est-ce que la compréhension de la scène change ?</button>
-          </div>
-          <div class="fb">Un décor de cinéma n'a pas de figurants. Chaque objet doit porter une information, sinon il encombre.</div>
+        <div class="quiz-q-x" data-quiz data-correct="1" style="background:var(--platre);border:1px solid var(--ligne);padding:22px;margin-bottom:16px;">
+          <p style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:14px;color:var(--encre);"><span style="display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. A quoi sert un moodboard ?</p>
+          <label class="quiz-opt-x" data-idx="0" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx4" value="0" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">A calculer le budget final</span></label>
+          <label class="quiz-opt-x" data-idx="1" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx4" value="1" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">A montrer l'ambiance visuelle avant de commencer</span></label>
+          <label class="quiz-opt-x" data-idx="2" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx4" value="2" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">A filmer une scene</span></label>
         </div>
-        <div class="q" data-a="1">
-          <div class="qt"><span class="qn">05</span><span>Entre deux prises, tu trouves une meilleure disposition pour la table. Que fais-tu ?</span></div>
-          <div class="opts">
-            <button data-i="0">Tu la changes, c'est mieux pour le film</button>
-            <button data-i="1">Tu ne touches à rien et tu notes l'idée pour la scène suivante</button>
-            <button data-i="2">Tu demandes à l'acteur ce qu'il préfère</button>
-          </div>
-          <div class="fb">Une fois que ça tourne, le décor est figé. Un raccord cassé peut rendre une scène entière inmontable.</div>
+        <div class="quiz-q-x" data-quiz data-correct="0" style="background:var(--platre);border:1px solid var(--ligne);padding:22px;margin-bottom:16px;">
+          <p style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:14px;color:var(--encre);"><span style="display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. Pourquoi un decorateur mene-t-il une «enquete» sur un lieu ou une epoque avant de decorer ?</p>
+          <label class="quiz-opt-x" data-idx="0" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx5" value="0" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Pour que le decor sonne juste meme pour un spectateur qui ne remarque rien consciemment</span></label>
+          <label class="quiz-opt-x" data-idx="1" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx5" value="1" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Parce que la loi l'exige</span></label>
+          <label class="quiz-opt-x" data-idx="2" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx5" value="2" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Cette etape n'est jamais necessaire</span></label>
         </div>
-        <div id="quizScore">Score : 0 / 5</div>
+        <div class="quiz-q-x" data-quiz data-correct="0" style="background:var(--platre);border:1px solid var(--ligne);padding:22px;margin-bottom:16px;">
+          <p style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:14px;color:var(--encre);"><span style="display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Pourquoi un objet bien choisi peut-il «remplacer une replique entiere» ?</p>
+          <label class="quiz-opt-x" data-idx="0" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx6" value="0" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Parce qu'il revele silencieusement quelque chose du personnage qui l'habite</span></label>
+          <label class="quiz-opt-x" data-idx="1" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx6" value="1" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Parce que les dialogues coutent plus cher a tourner</span></label>
+          <label class="quiz-opt-x" data-idx="2" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx6" value="2" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Ce n'est jamais vrai en pratique</span></label>
+        </div>
+        <div class="quiz-q-x" data-quiz data-correct="0" style="background:var(--platre);border:1px solid var(--ligne);padding:22px;margin-bottom:16px;">
+          <p style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:14px;color:var(--encre);"><span style="display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Pourquoi la recup et la brocante peuvent-elles donner un resultat superieur a l'achat neuf ?</p>
+          <label class="quiz-opt-x" data-idx="0" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx7" value="0" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Parce qu'elles apportent un vecu authentique impossible a fabriquer artificiellement</span></label>
+          <label class="quiz-opt-x" data-idx="1" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx7" value="1" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Parce que c'est toujours moins cher</span></label>
+          <label class="quiz-opt-x" data-idx="2" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx7" value="2" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Parce que les objets neufs sont interdits sur un plateau</span></label>
+        </div>
+        <div class="quiz-q-x" data-quiz data-correct="0" style="background:var(--platre);border:1px solid var(--ligne);padding:22px;margin-bottom:16px;">
+          <p style="font-family:var(--disp);font-weight:600;font-size:16px;margin-bottom:14px;color:var(--encre);"><span style="display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--encre-dim);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. En quoi le travail du decorateur depend-il directement de celui du directeur de la photographie ?</p>
+          <label class="quiz-opt-x" data-idx="0" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx8" value="0" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">La lumiere et les choix de couleur du decor doivent fonctionner ensemble a l'image</span></label>
+          <label class="quiz-opt-x" data-idx="1" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx8" value="1" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Ces deux postes ne communiquent jamais entre eux</span></label>
+          <label class="quiz-opt-x" data-idx="2" style="display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--ligne);cursor:pointer;"><input type="radio" name="qx8" value="2" style="accent-color:var(--prusse);"><span style="font-family:var(--body);font-size:13.5px;color:var(--encre-dim);">Le decorateur choisit toujours la lumiere finale</span></label>
+        </div>
+        <button id="quizBtn" style="font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:var(--prusse);color:var(--papier);border:none;padding:14px 26px;cursor:pointer;display:block;margin:10px auto 0;">Corriger le quiz</button>
+        <div id="quizScore" style="font-family:var(--disp);font-weight:700;font-size:18px;color:var(--prusse);text-align:center;margin-top:16px;display:none;"></div>
       </div>
     </section>
 
@@ -1391,6 +1393,38 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   window.addEventListener('scroll',function(){ bt.classList.toggle('show', window.scrollY>700); });
   bt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 })();
+</script>
+
+<script>
+document.getElementById('quizBtn').addEventListener('click', function(){
+  var score = 0;
+  var questions = document.querySelectorAll('[data-quiz]');
+  questions.forEach(function(q){
+    var correct = q.getAttribute('data-correct');
+    var opts = q.querySelectorAll('.quiz-opt-x');
+    var checked = q.querySelector('input:checked');
+    opts.forEach(function(opt, idx){
+      opt.style.borderColor = '';
+      opt.querySelector('span').style.color = '';
+      if(String(idx) === correct){
+        opt.style.borderColor = 'var(--vert)';
+        opt.style.background = 'rgba(94,124,88,0.12)';
+        opt.querySelector('span').style.color = 'var(--vert)';
+      }
+    });
+    if(checked && checked.value === correct){
+      score++;
+    } else if(checked){
+      var wrongOpt = checked.closest('.quiz-opt-x');
+      wrongOpt.style.borderColor = 'var(--rose)';
+      wrongOpt.style.background = 'rgba(201,123,99,0.12)';
+    }
+  });
+  var total = questions.length;
+  var out = document.getElementById('quizScore');
+  out.style.display = 'block';
+  out.textContent = score + ' / ' + total + ' bonnes r\u00e9ponses' + (score === total ? ' \u2014 parfait !' : '');
+});
 </script>
 <script src="gate.js" data-manual="decoration-cinema"></script>
 

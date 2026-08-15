@@ -626,29 +626,53 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <h2>Le petit quiz de fin de parcours.</h2>
   </div>
   <div class="fade">
+        <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Qui decide de la lumiere, du cadrage et du mouvement de camera sur un plateau ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le realisateur seul</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Le directeur de la photographie, en dialogue avec le realisateur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Le monteur</span></label>
+    </div>
     <div class="quiz-q" data-quiz data-correct="1">
-      <p class="q-text">1. Quel réglage contrôle à la fois la lumière ET la profondeur de champ ?</p>
-      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>La vitesse d'obturation</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>L'ouverture</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>L'ISO</span></label>
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Quel reglage controle a la fois la lumiere ET la profondeur de champ ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>La vitesse d'obturation</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>L'ouverture</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>L'ISO</span></label>
     </div>
     <div class="quiz-q" data-quiz data-correct="2">
-      <p class="q-text">2. La lumière tungstène (≈3200K) apparaît comme :</p>
-      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Bleutée</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Verte</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Orangée</span></label>
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. La lumiere tungstene (environ 3200K) apparait comme :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Bleutee</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Verte</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Orangee</span></label>
     </div>
     <div class="quiz-q" data-quiz data-correct="0">
-      <p class="q-text">3. Un téléobjectif, comparé à un grand angle, a tendance à :</p>
-      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Compresser l'espace et isoler le sujet</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Déformer fortement les visages</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Élargir le champ de vision</span></label>
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Un teleobjectif, compare a un grand angle, a tendance a :</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Compresser l'espace et isoler le sujet</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Deformer fortement les visages</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Elargir le champ de vision</span></label>
     </div>
     <div class="quiz-q" data-quiz data-correct="1">
-      <p class="q-text">4. Dans un schéma à trois points, à quoi sert le contre-jour ?</p>
-      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>À éclairer uniformément toute la scène</span></label>
-      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>À séparer visuellement le sujet de l'arrière-plan</span></label>
-      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>À remplacer la lumière clé</span></label>
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. Dans un schema a trois points, a quoi sert le contre-jour ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>A eclairer uniformement toute la scene</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>A separer visuellement le sujet de l'arriere-plan</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>A remplacer la lumiere cle</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Pourquoi melanger tungstene et lumiere du jour sans le vouloir est-il un probleme ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Ca cree une dominante de couleur incoherente et non maitrisee</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Ca coute plus cher en electricite</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Ce n'est jamais un probleme</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Qu'est-ce qui caracterise le travail de Roger Deakins par rapport a celui de Janusz Kaminski ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Deakins vise un naturalisme precis, Kaminski un fort contraste dramatique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Les deux evitent systematiquement la lumiere naturelle</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Kaminski ne travaille qu'en noir et blanc</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. Pourquoi le dolly zoom (vertigo) cree-t-il un malaise chez le spectateur ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Il combine un zoom et un travelling opposes, desorientant la perception de l'espace</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Il ralentit systematiquement l'image</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Il necessite toujours une musique dissonante</span></label>
     </div>
     <button id="quizBtn" style="font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:var(--tungsten); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
@@ -732,7 +756,8 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
   document.getElementById('quizBtn').addEventListener('click', ()=>{
     let score = 0;
-    document.querySelectorAll('[data-quiz]').forEach(q=>{
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
       const correct = q.getAttribute('data-correct');
       const opts = q.querySelectorAll('.quiz-opt');
       const checked = q.querySelector('input:checked');
@@ -743,9 +768,10 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       if(checked && checked.value === correct) score++;
       else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
     });
+    const total = questions.length;
     const out = document.getElementById('quizScore');
     out.style.display='block';
-    out.textContent = score + ' / 4 bonnes réponses' + (score===4 ? ' — parfait !' : '');
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
   });
 </script>
 

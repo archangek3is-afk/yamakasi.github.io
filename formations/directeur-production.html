@@ -287,18 +287,54 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <section id="quiz" style="padding-top:0;">
   <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
   <div class="fade">
-    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Le directeur de production traduit principalement :</p>
-      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le scénario en dialogue</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Le budget en plan de tournage exécutable</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>La lumière en température de couleur</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Un stripboard organise les scènes principalement par :</p>
-      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Ordre alphabétique des personnages</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Ordre chronologique du scénario</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Lieu et disponibilité des acteurs</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">3. Un dépassement budgétaire dans un département doit généralement être :</p>
-      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Compensé ailleurs dans le budget</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Ignoré jusqu'à la fin du tournage</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Toujours financé par une rallonge</span></label></div>
+        <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Le directeur de production traduit principalement :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Le scenario en dialogue</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Le budget en plan de tournage executable</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>La lumiere en temperature de couleur</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Le stripboard organise les scenes principalement par :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Ordre alphabetique des personnages</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Ordre chronologique du scenario</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Lieu et disponibilite des acteurs</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Un depassement budgetaire dans un departement doit generalement etre :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Compense ailleurs dans le budget</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Ignore jusqu'a la fin du tournage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Toujours finance par une rallonge</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Pourquoi le directeur de production valide-t-il les embauches proposees par le producteur ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Il verifie qu'elles restent compatibles avec le budget qu'il doit executer</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Cette validation n'existe pas dans la realite</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Il n'a aucun droit de regard sur le recrutement</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. En quoi ce poste differe-t-il du regisseur general ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>Le regisseur gere le terrain et les permis, le directeur de production execute le budget en plan concret</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>Ce sont exactement le meme poste</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Le directeur de production ne travaille jamais avec les chefs de poste</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Pourquoi le «wrap book» doit-il etre complet avant de considerer une production close ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Il rassemble le budget final, les contrats et accords necessaires a la cloture reelle</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>C'est un document purement symbolique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Il ne concerne que le realisateur</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Sur une petite production, pourquoi le directeur de production fusionne-t-il souvent avec le line producer ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>La polyvalence devient necessaire faute de budget pour deux postes separes</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Ces deux postes n'ont jamais de lien entre eux</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>C'est une obligation legale universelle</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. Pourquoi un ecart budgetaire repere tot est-il tellement plus facile a corriger qu'un ecart decouvert a la fin ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Il permet d'ajuster avant que la marge de manoeuvre budgetaire ne disparaisse</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Le moment ou on le decouvre n'a aucune importance</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Un ecart ne peut jamais etre corrige, quel que soit le moment</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:13px; text-transform:uppercase; background:var(--ambre); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -321,14 +357,24 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   sections.forEach(s=>spy.observe(s));
   document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
   document.querySelector('[data-ch]')?.classList.add('open');
-  document.getElementById('quizBtn').addEventListener('click',()=>{
-    let score=0;
-    document.querySelectorAll('[data-quiz]').forEach(q=>{
-      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
-      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
-      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
     });
-    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
   });
 </script>
 <script src="gate.js" data-manual="directeur-production"></script>

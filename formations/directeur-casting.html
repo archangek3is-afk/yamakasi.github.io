@@ -266,18 +266,54 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <section id="quiz" style="padding-top:0;">
   <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
   <div class="fade">
-    <div class="quiz-q" data-quiz data-correct="1"><p class="q-text">1. Le rôle principal d'un directeur de casting est de :</p>
-      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Décider seul qui est engagé</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Proposer et défendre des acteurs auprès du réalisateur</span></label>
-      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Écrire le scénario final</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="2"><p class="q-text">2. Le callback sert principalement à :</p>
-      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Négocier le cachet</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Vérifier la disponibilité de l'acteur</span></label>
-      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Tester l'alchimie entre deux acteurs</span></label></div>
-    <div class="quiz-q" data-quiz data-correct="0"><p class="q-text">3. Le casting à contre-emploi consiste à :</p>
-      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Choisir un acteur qui ne colle pas évidemment sur le papier</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Toujours choisir la star la plus connue</span></label>
-      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Refuser systématiquement les callbacks</span></label></div>
+        <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Le role principal d'un directeur de casting est de :</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Decider seul qui est engage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Proposer et defendre des acteurs aupres du realisateur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Ecrire le scenario final</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Le «breakdown» envoye aux agents sert a :</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Decrire precisement chaque role a pourvoir</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Fixer le budget du film</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Remplacer le scenario complet</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Le callback sert principalement a :</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Negocier le cachet</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Verifier la disponibilite de l'acteur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Tester l'alchimie entre deux acteurs</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Pourquoi donner le contexte d'une scene avant une audition, plutot que juste «jouer» ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Le trac fausse tout sans preparation, le contexte met l'acteur a l'aise</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Ce n'est jamais necessaire</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Pour rallonger la duree de l'audition</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. Pourquoi ne pas juger une self-tape uniquement sur sa qualite technique ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>La presence et le jeu comptent plus que l'eclairage ou le cadrage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>La qualite technique est le seul critere valable</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Les self-tapes ne sont jamais utilisees en vrai casting</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. En quoi le casting faconne-t-il une responsabilite au-dela du choix artistique ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Il determine qui se voit represente a l'ecran</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Le casting n'a aucun impact social</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Cette question ne concerne que les films documentaires</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Le casting a contre-emploi consiste a :</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Choisir un acteur qui ne colle pas evidemment sur le papier</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Toujours choisir la star la plus connue</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Refuser systematiquement les callbacks</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. Pourquoi un bon directeur de casting garde-t-il la memoire d'acteurs non retenus ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Un role refuse aujourd'hui peut etre parfait pour un futur projet</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>C'est une obligation legale</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Cette pratique n'existe pas dans l'industrie</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:13px; text-transform:uppercase; background:var(--corail); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -300,14 +336,24 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   sections.forEach(s=>spy.observe(s));
   document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
   document.querySelector('[data-ch]')?.classList.add('open');
-  document.getElementById('quizBtn').addEventListener('click',()=>{
-    let score=0;
-    document.querySelectorAll('[data-quiz]').forEach(q=>{
-      const correct=q.getAttribute('data-correct'); const opts=q.querySelectorAll('.quiz-opt'); const checked=q.querySelector('input:checked');
-      opts.forEach((opt,idx)=>{opt.classList.remove('correct','wrong'); if(String(idx)===correct)opt.classList.add('correct');});
-      if(checked&&checked.value===correct)score++; else if(checked){checked.closest('.quiz-opt').classList.add('wrong');}
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
     });
-    const out=document.getElementById('quizScore'); out.style.display='block'; out.textContent=score+' / 3 bonnes réponses'+(score===3?' — parfait !':'');
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
   });
 </script>
 <script src="gate.js" data-manual="directeur-casting"></script>
