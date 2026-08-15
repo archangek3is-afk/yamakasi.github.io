@@ -490,7 +490,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       });
 
       if (doneRow) {
-        ch.insertBefore(t.wrap, doneRow);
+        doneRow.parentNode.insertBefore(t.wrap, doneRow);
       } else {
         ch.appendChild(t.wrap);
       }
