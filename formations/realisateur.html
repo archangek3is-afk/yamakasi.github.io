@@ -705,6 +705,18 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Pour garantir que le monteur aura la couverture necessaire a construire le rythme</span></label>
       <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Parce que c'est une obligation contractuelle</span></label>
     </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>9. Pourquoi Lumet insiste-t-il sur le fait que le style vient toujours apres le sens, jamais avant ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>Parce qu'un style plaque sur un film sans savoir de quoi il parle produit des choix arbitraires</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>Parce que le style n'a jamais d'importance au cinema</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>Parce que le style doit toujours etre decide avant l'ecriture</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. En quoi le blocking et le langage visuel (moodboard, couleur) servent-ils la meme finalite malgre des outils differents ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>Les deux traduisent une intention narrative en choix concrets communicables a l'equipe</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>Ils n'ont aucun lien entre eux</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>Le blocking remplace toujours le besoin de moodboard</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:var(--rouge); color:var(--craie); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -767,7 +779,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     const total = questions.length;
     const out = document.getElementById('quizScore');
     out.style.display='block';
-    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#e0524f';
   });
 </script>
 

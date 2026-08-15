@@ -368,6 +368,18 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Elle sert uniquement a calculer la duree du film</span></label>
       <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Elle n'a aucune application pratique</span></label>
     </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>9. Pourquoi la Regle de Six et le principe du J/L-cut partagent-ils la meme priorite : l'emotion avant la technique ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>Un raccord techniquement parfait qui casse l'emotion reste un mauvais montage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>La technique prime toujours sur l'emotion en montage professionnel</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>Ces deux principes n'ont aucun lien entre eux</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. En quoi le travail du monteur avec le realisateur illustre-t-il la meme logique que le montage parallele ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>Les deux exigent de faire dialoguer deux points de vue differents pour construire un sens commun</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>Le monteur ne collabore jamais avec le realisateur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>Le montage parallele n'a rien a voir avec la collaboration</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:12px; text-transform:uppercase; background:var(--teal); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -407,7 +419,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     const total = questions.length;
     const out = document.getElementById('quizScore');
     out.style.display='block';
-    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#e0524f';
   });
 </script>
 <script src="gate.js" data-manual="monteur"></script>

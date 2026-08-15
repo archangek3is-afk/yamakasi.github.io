@@ -338,6 +338,18 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Il n'a aucun contact avec les autres postes</span></label>
       <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Son role se limite a la papeterie du bureau</span></label>
     </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>9. Pourquoi la feuille de service et le rapport quotidien fonctionnent-ils comme un meme flux d'information a double sens ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>L'un prepare le tournage a venir, l'autre rend compte de ce qui vient de se passer</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>Ces deux documents ne se croisent jamais</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>Le rapport de production remplace la feuille de service</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. En quoi la gestion des revisions et la liste de contacts a jour relevent-elles de la meme exigence de fiabilite ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>Une information perimee dans l'un ou l'autre cas peut faire perdre un temps precieux a toute l'equipe</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>Ce sont deux taches purement administratives sans consequence reelle</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>La liste de contacts n'a aucun rapport avec le scenario</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--bleu); color:var(--craie); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -378,7 +390,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     const total = questions.length;
     const out = document.getElementById('quizScore');
     out.style.display='block';
-    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#e0524f';
   });
 </script>
 <script src="gate.js" data-manual="charge-production"></script>

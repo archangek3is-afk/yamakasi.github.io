@@ -314,6 +314,18 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>C'est une obligation legale</span></label>
       <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Cette pratique n'existe pas dans l'industrie</span></label>
     </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>9. Pourquoi le breakdown precis et le contre-emploi ne sont-ils pas contradictoires malgre les apparences ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>Un breakdown clair permet de reperer consciemment quand s'en ecarter pour un effet voulu</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>Le contre-emploi ignore toujours le breakdown</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>Ces deux notions ne coexistent jamais dans un vrai casting</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. En quoi la memoire des acteurs non retenus et le callback relevent-ils de la meme vision a long terme du casting ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>Les deux traitent le casting comme une relation continue, pas une decision ponctuelle isolee</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>Le callback ne sert qu'a negocier le cachet</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>Un acteur refuse une fois ne doit jamais etre revu</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:13px; text-transform:uppercase; background:var(--corail); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -353,7 +365,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     const total = questions.length;
     const out = document.getElementById('quizScore');
     out.style.display='block';
-    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#e0524f';
   });
 </script>
 <script src="gate.js" data-manual="directeur-casting"></script>

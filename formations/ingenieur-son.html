@@ -349,6 +349,18 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Pour valider uniquement le budget son</span></label>
       <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Cette reunion n'existe pas dans un vrai processus de production</span></label>
     </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>9. Pourquoi le carving frequentiel et le choix du silence relevent-ils de la meme logique de hierarchisation ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>Les deux consistent a retirer ou reduire ce qui gene pour laisser de la place a ce qui compte vraiment</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>Le silence n'a rien a voir avec les frequences</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>Le carving ne sert qu'a la musique, jamais au dialogue</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. En quoi la spotting session illustre-t-elle la philosophie de Randy Thom sur le son pense des l'ecriture ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>Elle reunit les decisions de son en amont plutot que de les traiter en dernier moment</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>Elle n'a lieu qu'apres la sortie du film</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>Elle concerne uniquement le mixage final</span></label>
+    </div>
     <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--vert); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
     <div id="quizScore"></div>
   </div>
@@ -388,7 +400,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     const total = questions.length;
     const out = document.getElementById('quizScore');
     out.style.display='block';
-    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '');
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#e0524f';
   });
 </script>
 <script src="gate.js" data-manual="ingenieur-son"></script>
