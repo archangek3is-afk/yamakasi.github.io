@@ -316,5 +316,33 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   });
 </script>
 <script src="gate.js" data-manual="regisseur-general"></script>
+
+<script>
+(function(){
+  var btn = document.getElementById('quizBtn');
+  var scoreEl = document.getElementById('quizScore');
+  if(!btn || !scoreEl) return;
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec";
+  var MANUAL_SLUG = "regisseur-general";
+  var sent = false;
+  btn.addEventListener('click', function(){
+    setTimeout(function(){
+      if(sent) return;
+      var txt = scoreEl.textContent || '';
+      var m = txt.match(/(\d+)\s*\/\s*(\d+)/);
+      if(!m) return;
+      sent = true;
+      var score = m[1], total = m[2];
+      var emailInput = document.getElementById('gateEmailInput');
+      var email = emailInput ? emailInput.value.trim() : '';
+      var s = document.createElement('script');
+      s.src = APPS_SCRIPT_URL + '?exam=1&email=' + encodeURIComponent(email) +
+        '&manuel=' + encodeURIComponent(MANUAL_SLUG) + '&score=' + encodeURIComponent(score) +
+        '&total=' + encodeURIComponent(total);
+      document.body.appendChild(s);
+    }, 60);
+  });
+})();
+</script>
 </body>
 </html>
