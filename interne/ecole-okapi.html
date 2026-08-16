@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>École Okapi — Archive du chantier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#0A0A0A; --noir2:#141110; --noir3:#1D1917;
+  --or:#C9A84C; --or-l:#E4C878; --or-d:#8C7233;
+  --ivoire:#F5F0E8; --ivoire-dim:#B7AF9E;
+  --ok:#7FBF8C; --warn:#D9A24C; --err:#D9695F; --info:#6FA8D9;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--ivoire);font-family:'Poppins',system-ui,sans-serif;font-weight:300;
+  -webkit-font-smoothing:antialiased}
+body{background-image:
+  radial-gradient(ellipse 900px 500px at 10% -5%, rgba(201,168,76,.09), transparent 60%),
+  radial-gradient(ellipse 800px 700px at 100% 30%, rgba(201,168,76,.05), transparent 55%);
+  background-attachment:fixed}
+::selection{background:var(--or);color:var(--noir)}
+img,svg{display:block}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--or-d),var(--or));
+  z-index:50;width:0%;transition:width .1s linear}
+
+/* nav */
+header.top{position:sticky;top:0;z-index:40;background:rgba(10,10,10,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(245,240,232,.08)}
+.topin{max-width:1180px;margin:0 auto;padding:1.6vh 2.4vw;display:flex;align-items:center;justify-content:space-between;gap:2vw}
+.wordmark{display:flex;align-items:center;gap:.6em;font-family:'Sora',sans-serif;font-weight:800;font-size:.9rem;letter-spacing:.02em}
+.wordmark .mark{width:1.4em;height:1.4em;border:1.6px solid var(--or);border-radius:3px;position:relative;flex:none}
+.wordmark .mark::before{content:"";position:absolute;left:22%;top:50%;width:0;height:0;
+  border-top:.3em solid transparent;border-bottom:.3em solid transparent;border-left:.46em solid var(--or);transform:translateY(-50%)}
+.wordmark b{color:var(--or)}
+nav.pillnav{display:flex;gap:.5vw;overflow-x:auto;scrollbar-width:none}
+nav.pillnav::-webkit-scrollbar{display:none}
+nav.pillnav a{white-space:nowrap;font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ivoire-dim);text-decoration:none;padding:.6em 1em;border-radius:999px;transition:all .2s;border:1px solid transparent}
+nav.pillnav a:hover,nav.pillnav a.on{color:var(--or);border-color:rgba(201,168,76,.35);background:rgba(201,168,76,.06)}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 2.4vw}
+
+/* hero */
+.hero{padding:11vh 0 8vh;text-align:center}
+.hero .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--or);margin-bottom:2.6vh}
+.hero h1{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2.1rem,5.6vw,4rem);line-height:1.06;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--or-l),var(--or) 60%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:62ch;margin:2.8vh auto 0;font-size:clamp(.95rem,1.4vw,1.1rem);line-height:1.68;color:#D9D2C4}
+.hero .date{margin-top:3vh;font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:var(--ivoire-dim);text-transform:uppercase}
+
+/* stat band */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:rgba(245,240,232,.08);
+  border:1px solid rgba(245,240,232,.1);border-radius:16px;overflow:hidden;margin:6vh 0}
+.stat{background:var(--noir2);padding:3.2vh 1.4vw;text-align:center}
+.stat .n{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(1.6rem,3vw,2.4rem);color:var(--or)}
+.stat .l{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivoire-dim);margin-top:.6vh}
+
+/* section shell */
+section.block{padding:9vh 0;border-top:1px solid rgba(245,240,232,.08);scroll-margin-top:80px}
+.eyebrow-s{font-family:var(--mono);font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--or);
+  margin-bottom:1.6vh;display:flex;align-items:center;gap:.8em}
+.eyebrow-s::before{content:"";width:.85em;height:.85em;border:1.4px solid var(--or);transform:rotate(45deg);flex:none}
+.block h2{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.15;
+  letter-spacing:-.01em;margin-bottom:1.6vh}
+.block .lede{max-width:74ch;font-size:clamp(.9rem,1.3vw,1.05rem);line-height:1.68;color:#D9D2C4;margin-bottom:4vh}
+.block .lede strong{color:var(--ivoire);font-weight:500}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== TIMELINE ===== */
+.tl{position:relative;padding-left:2.6vw}
+.tl::before{content:"";position:absolute;left:.55vw;top:.4em;bottom:.4em;width:1px;background:linear-gradient(var(--or-d),rgba(201,168,76,.15))}
+.tl-item{position:relative;padding-bottom:4.4vh;cursor:pointer}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;left:calc(-2.6vw + .18vw);top:.3em;width:.85em;height:.85em;border-radius:50%;
+  background:var(--noir);border:2px solid var(--or-d);transition:all .25s;z-index:1}
+.tl-item.on::before{border-color:var(--or);background:var(--or);box-shadow:0 0 0 4px rgba(201,168,76,.18)}
+.tl-item .ph{font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--or-d);
+  transition:color .2s}
+.tl-item.on .ph{color:var(--or)}
+.tl-item h3{font-family:'Sora',sans-serif;font-weight:700;font-size:clamp(1.02rem,1.7vw,1.28rem);margin:.5vh 0 1vh;
+  color:#8f8a7d;transition:color .2s}
+.tl-item.on h3{color:var(--ivoire)}
+.tl-detail{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.tl-item.on .tl-detail{max-height:600px}
+.tl-detail p{font-size:.9rem;line-height:1.62;color:#C9C2B4;max-width:66ch;padding-top:.4vh}
+.tl-detail .tag{display:inline-flex;align-items:center;gap:.5em;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.1em;text-transform:uppercase;padding:.35em .8em;border-radius:999px;margin-top:1.4vh}
+.tag.done{background:rgba(127,191,140,.12);color:var(--ok);border:1px solid rgba(127,191,140,.3)}
+.tag.evol{background:rgba(111,168,217,.12);color:var(--info);border:1px solid rgba(111,168,217,.3)}
+.tag.fix{background:rgba(217,162,76,.12);color:var(--warn);border:1px solid rgba(217,162,76,.3)}
+
+/* ===== MANUALS GALLERY ===== */
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.1vw}
+.mcard{border-radius:14px;padding:2.2vh 1.3vw;position:relative;overflow:hidden;border:1px solid rgba(245,240,232,.1);
+  background:var(--noir2);cursor:pointer;transition:transform .2s,border-color .2s}
+.mcard:hover{transform:translateY(-3px);border-color:rgba(201,168,76,.4)}
+.mcard .swatch{width:2.6em;height:2.6em;border-radius:9px;margin-bottom:1.4vh}
+.mcard .tier{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ivoire-dim)}
+.mcard .name{font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;margin:.4vh 0 1vh;color:var(--ivoire)}
+.mcard .font{font-family:var(--mono);font-size:.68rem;color:var(--or-l)}
+.mcard .chcount{margin-top:1.2vh;font-size:.72rem;color:var(--ivoire-dim)}
+.mcard-detail{display:none;position:fixed;inset:0;z-index:60;background:rgba(10,10,10,.88);backdrop-filter:blur(6px);
+  align-items:center;justify-content:center;padding:4vh 5vw}
+.mcard-detail.show{display:flex}
+.mcard-detail .box{max-width:640px;width:100%;background:var(--noir2);border:1px solid rgba(201,168,76,.3);
+  border-radius:18px;padding:4vh 3vw;max-height:82vh;overflow-y:auto;position:relative}
+.mcard-detail .close{position:absolute;top:1.6vh;right:1.6vw;width:2.2em;height:2.2em;border-radius:50%;
+  border:1px solid rgba(245,240,232,.2);display:grid;place-items:center;cursor:pointer;color:var(--ivoire-dim);
+  background:none;font-size:1rem}
+.mcard-detail h3{font-family:'Sora',sans-serif;font-weight:800;font-size:1.5rem;margin-bottom:.4vh}
+.mcard-detail .sub{font-family:var(--mono);font-size:.72rem;color:var(--or-l);margin-bottom:2.6vh}
+.mcard-detail ol{list-style:none;counter-reset:ch;display:flex;flex-direction:column;gap:1vh}
+.mcard-detail ol li{counter-increment:ch;padding-left:2.2em;position:relative;font-size:.88rem;line-height:1.5;color:#D9D2C4}
+.mcard-detail ol li::before{content:counter(ch,decimal-leading-zero);position:absolute;left:0;top:0;
+  font-family:var(--mono);font-size:.72rem;color:var(--or)}
+
+/* ===== INCIDENTS ACCORDION ===== */
+.incidents{display:flex;flex-direction:column;gap:1vh}
+.inc{border:1px solid rgba(245,240,232,.1);border-radius:12px;background:var(--noir2);overflow:hidden}
+.inc-head{display:flex;align-items:center;gap:1.2vw;padding:1.8vh 1.4vw;cursor:pointer}
+.inc-head .sev{width:.6em;height:.6em;border-radius:50%;flex:none}
+.sev.crit{background:var(--err)} .sev.med{background:var(--warn)} .sev.lesson{background:var(--info)}
+.inc-head .title{font-family:'Sora',sans-serif;font-weight:600;font-size:.94rem;flex:1;color:var(--ivoire)}
+.inc-head .sevlabel{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivoire-dim)}
+.inc-head .chev{width:1em;height:1em;color:var(--ivoire-dim);transition:transform .25s;flex:none}
+.inc.open .chev{transform:rotate(180deg)}
+.inc-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.inc.open .inc-body{max-height:400px}
+.inc-body-in{padding:0 1.4vw 2.2vh}
+.inc-body p{font-size:.86rem;line-height:1.6;color:#C9C2B4;margin-bottom:1vh}
+.inc-body p:last-child{margin-bottom:0}
+.inc-body .lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--or);
+  display:block;margin-bottom:.4vh}
+
+/* ===== SYSTEM DIAGRAMS ===== */
+.sysgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.6vw}
+.syscard{border:1px solid rgba(245,240,232,.1);border-radius:14px;padding:2.6vh 1.6vw;background:var(--noir2)}
+.syscard h4{font-family:'Sora',sans-serif;font-weight:700;font-size:1.02rem;margin-bottom:1.6vh;color:var(--or-l)}
+.evolist{display:flex;flex-direction:column;gap:0}
+.evostep{display:flex;gap:1em;padding:1.2vh 0;border-bottom:1px dashed rgba(245,240,232,.1)}
+.evostep:last-child{border-bottom:none}
+.evostep .en{font-family:var(--mono);font-size:.68rem;color:var(--or-d);flex:none;padding-top:.15em}
+.evostep .et{font-size:.84rem;line-height:1.5;color:#D9D2C4}
+.evostep .et strong{color:var(--ivoire)}
+
+/* form matrix table */
+.matrix{width:100%;border-collapse:collapse;font-size:.82rem}
+.matrix th{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivoire-dim);
+  text-align:left;padding:1vh .8em;border-bottom:1px solid rgba(245,240,232,.15)}
+.matrix td{padding:1.1vh .8em;border-bottom:1px solid rgba(245,240,232,.06);color:#D9D2C4}
+.matrix .badge{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;padding:.3em .7em;
+  border-radius:999px}
+.badge.form{background:rgba(217,162,76,.14);color:var(--warn);border:1px solid rgba(217,162,76,.3)}
+.badge.text{background:rgba(127,191,140,.12);color:var(--ok);border:1px solid rgba(127,191,140,.3)}
+
+/* toggle format A/B/C */
+.fmtToggle{display:flex;gap:.6em;margin-bottom:2.2vh;flex-wrap:wrap}
+.fmtToggle button{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.7em 1.3em;border-radius:999px;border:1px solid rgba(245,240,232,.18);background:none;color:var(--ivoire-dim);
+  cursor:pointer;transition:all .2s}
+.fmtToggle button.on{border-color:var(--or);color:var(--or);background:rgba(201,168,76,.08)}
+.fmtPanel{display:none}
+.fmtPanel.on{display:block}
+
+/* status snapshot */
+.snap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2vw}
+.snapcard{border:1px solid rgba(127,191,140,.25);background:rgba(127,191,140,.05);border-radius:14px;padding:2.2vh 1.4vw}
+.snapcard .ok{color:var(--ok);font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.5em;margin-bottom:1vh}
+.snapcard .ok::before{content:"✓";font-weight:700}
+.snapcard p{font-size:.84rem;line-height:1.55;color:#D9D2C4}
+
+footer{padding:6vh 0 8vh;text-align:center;border-top:1px solid rgba(245,240,232,.08)}
+footer p{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;color:#4A463D;text-transform:uppercase}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media (max-width:820px){
+  .sysgrid,.stats{grid-template-columns:1fr}
+  .mgrid{grid-template-columns:repeat(2,1fr)}
+  nav.pillnav{display:none}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<header class="top">
+  <div class="topin">
+    <div class="wordmark"><span class="mark"></span><span>OKAPI <b>WORLD</b> MÉDIA</span></div>
+    <nav class="pillnav" id="pillnav">
+      <a href="#genese">Genèse</a>
+      <a href="#chrono">Chronologie</a>
+      <a href="#manuels">Les 16 manuels</a>
+      <a href="#acces">Accès</a>
+      <a href="#progression">Progression</a>
+      <a href="#incidents">Incidents</a>
+      <a href="#etat">État actuel</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Archive de chantier · Okapi World Média</div>
+    <h1>École Okapi —<br>la <em>construction</em>, sans filtre</h1>
+    <p>Le process complet derrière la collection de manuels et son infrastructure : les idées de départ, les décisions de direction artistique, les systèmes construits, les régressions subies, et comment chacune a été corrigée. Rien n'est édulcoré — c'est un document de travail, pas une brochure.</p>
+    <div class="date">Document généré le 16 août 2026</div>
+  </div>
+
+  <div class="stats reveal">
+    <div class="stat"><div class="n" data-count="16">0</div><div class="l">Manuels livrés</div></div>
+    <div class="stat"><div class="n" data-count="144">0</div><div class="l">Chapitres au total</div></div>
+    <div class="stat"><div class="n" data-count="10">0</div><div class="l">Questions par quiz</div></div>
+    <div class="stat"><div class="n" data-count="4">0</div><div class="l">Systèmes backend</div></div>
+    <div class="stat"><div class="n" data-count="9">0</div><div class="l">Incidents recensés</div></div>
+  </div>
+
+  <!-- GENÈSE -->
+  <section class="block reveal" id="genese">
+    <div class="eyebrow-s">Point de départ</div>
+    <h2>Un manuel par poste, pas un manuel générique</h2>
+    <p class="lede">L'idée de départ : un centre de formation qui traite chaque poste du cinéma comme un vrai métier — pas une liste de conseils interchangeables. Chaque manuel devait avoir <strong>sa propre direction artistique</strong>, <strong>sa propre bibliographie réelle</strong> (des auteurs qu'on peut vérifier, pas des références inventées), et des exercices pratiques ancrés dans le contenu du chapitre. Le premier manuel livré — Réalisateur — a posé la doctrine que tous les autres ont suivie : neuf chapitres, une DA distincte, un vocabulaire de métier assumé.</p>
+  </section>
+
+  <!-- CHRONOLOGIE -->
+  <section class="block reveal" id="chrono">
+    <div class="eyebrow-s">Vue d'ensemble</div>
+    <h2>La chronologie du chantier</h2>
+    <p class="lede">Cliquez sur une étape pour dérouler ce qui s'y est passé — les décisions prises, ce qui a marché, ce qui a dû être corrigé.</p>
+    <div class="tl" id="timeline"></div>
+  </section>
+
+  <!-- MANUELS -->
+  <section class="block reveal" id="manuels">
+    <div class="eyebrow-s">La collection</div>
+    <h2>16 manuels, 16 identités visuelles</h2>
+    <p class="lede">Chaque poste a sa propre palette et sa propre police — délibérément. Un DP ne lit pas comme une costumière, et la mise en page le rappelle à chaque page. Cliquez sur un manuel pour voir ses 9 chapitres.</p>
+    <div class="mgrid" id="mgrid"></div>
+  </section>
+
+  <!-- ACCÈS -->
+  <section class="block reveal" id="acces">
+    <div class="eyebrow-s">Infrastructure · Contrôle d'accès</div>
+    <h2>Le système d'accès a évolué trois fois</h2>
+    <p class="lede">Ce qui a commencé comme un simple lien à token est devenu un système de connexion par email avec détection d'anomalie — chaque évolution répondait à une faiblesse concrète de la version précédente.</p>
+    <div class="sysgrid">
+      <div class="syscard">
+        <h4>① Lien personnel à token</h4>
+        <div class="evolist">
+          <div class="evostep"><span class="en">V1</span><span class="et">Demande d'accès (nom/prénom/email) → notification Gmail → acceptation → <strong>lien à token</strong> envoyé par email, accès permanent une fois cliqué.</span></div>
+          <div class="evostep"><span class="en">Faille</span><span class="et">Le lien, une fois reçu, est <strong>partageable et non traçable</strong> — rien n'empêche de le transmettre à quelqu'un d'autre.</span></div>
+        </div>
+      </div>
+      <div class="syscard">
+        <h4>② Connexion par email à chaque visite</h4>
+        <div class="evolist">
+          <div class="evostep"><span class="en">V2</span><span class="et">Plus de token : l'email est <strong>vérifié en direct</strong> contre le Sheet à chaque chargement de page, sans persistance. Chaque tentative journalisée dans l'onglet Connexions.</span></div>
+          <div class="evostep"><span class="en">Gain</span><span class="et">Révocation immédiate possible — changer un statut dans le Sheet bloque l'accès dès la tentative suivante, sans redéploiement.</span></div>
+        </div>
+      </div>
+      <div class="syscard">
+        <h4>③ Détection de partage par IP</h4>
+        <div class="evolist">
+          <div class="evostep"><span class="en">V3</span><span class="et">L'IP publique du visiteur est comparée à l'historique de connexions "Autorisé" de cet email. Une IP jamais vue déclenche une <strong>alerte email au propriétaire</strong> — sans jamais bloquer l'accès.</span></div>
+          <div class="evostep"><span class="en">Doctrine</span><span class="et">Premier accès = référence silencieuse. On alerte, on ne punit pas — le système suppose la bonne foi par défaut.</span></div>
+        </div>
+      </div>
+      <div class="syscard">
+        <h4>Le piège récurrent</h4>
+        <div class="evolist">
+          <div class="evostep"><span class="en">⚠️</span><span class="et">Apps Script distingue <strong>« Nouveau déploiement »</strong> (nouvelle URL /exec) de <strong>« Gérer les déploiements → Nouvelle version »</strong> (même URL). Plusieurs sessions de debug perdues en confondant les deux — toujours vérifier laquelle a été faite avant de tester.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRESSION -->
+  <section class="block reveal" id="progression">
+    <div class="eyebrow-s">Infrastructure · Suivi pédagogique</div>
+    <h2>chapter-lock.js — trois formats, un seul cerveau</h2>
+    <p class="lede">Ce système est arrivé par une session parallèle, en plein milieu du travail direct — verrouillage des chapitres en accordéon, exercice obligatoire avant de débloquer le suivant, quiz final masqué tant que tout n'est pas complété. Trois structures de manuels différentes ont dû être détectées automatiquement.</p>
+    <div class="fmtToggle" id="fmtToggle">
+      <button class="on" data-f="A">Format A — 14 manuels standards</button>
+      <button data-f="B">Format B — Décoration</button>
+      <button data-f="C">Format C — Acteur vivant</button>
+    </div>
+    <div class="fmtPanel on" data-f="A">
+      <p style="font-size:.88rem;line-height:1.6;color:#D9D2C4;max-width:70ch">Structure <code style="color:var(--or-l)">.chapitre[data-ch]</code> en accordéon. Exercice résolu par <strong style="color:var(--ivoire)">textarea (≥100 caractères)</strong> — sauf sur les chapitres où un livrable fichier est requis (voir tableau ci-dessous).</p>
+    </div>
+    <div class="fmtPanel" data-f="B">
+      <p style="font-size:.88rem;line-height:1.6;color:#D9D2C4;max-width:70ch">Structure <code style="color:var(--or-l)">section.chapter[id^="ch"]</code> avec cases <code style="color:var(--or-l)">.exo-check</code>. Seul manuel où <strong style="color:var(--ivoire)">les 9 chapitres exigent un Google Form</strong> — chaque exercice y demande une vraie photo ou une planche visuelle, sans exception.</p>
+    </div>
+    <div class="fmtPanel" data-f="C">
+      <p style="font-size:.88rem;line-height:1.6;color:#D9D2C4;max-width:70ch">Structure <code style="color:var(--or-l)">div#acte1 / #acte2</code>. Format théâtral/physique — <strong style="color:var(--ivoire)">pas d'exercice écrit natif</strong>, la progression se limite à cocher les modules terminés.</p>
+    </div>
+
+    <h4 style="font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;margin:4.4vh 0 1.6vh;color:var(--or-l)">La granularité Form vs Texte, chapitre par chapitre</h4>
+    <p style="font-size:.85rem;color:var(--ivoire-dim);margin-bottom:2vh;max-width:70ch">Le système a d'abord forcé le Google Form sur <strong style="color:var(--ivoire)">tous les chapitres</strong> de 6 manuels — y compris ceux qui étaient de la pure écriture. Corrigé après audit du contenu réel de chaque exercice : seuls les chapitres qui produisent vraiment une photo ou un enregistrement gardent le Form.</p>
+    <table class="matrix">
+      <thead><tr><th>Manuel</th><th>Avant</th><th>Après</th><th>Raison</th></tr></thead>
+      <tbody id="matrixBody"></tbody>
+    </table>
+  </section>
+
+  <!-- INCIDENTS -->
+  <section class="block reveal" id="incidents">
+    <div class="eyebrow-s">Ce qui a cassé, et comment ça a été réparé</div>
+    <h2>Incidents & corrections</h2>
+    <p class="lede">Neuf épisodes qui valent la peine d'être documentés — parce que la cause n'était presque jamais celle qu'on soupçonnait en premier.</p>
+    <div class="incidents" id="incidentsList"></div>
+  </section>
+
+  <!-- ÉTAT ACTUEL -->
+  <section class="block reveal" id="etat">
+    <div class="eyebrow-s">Aujourd'hui</div>
+    <h2>Où en est le site</h2>
+    <p class="lede">Dernier audit complet effectué directement sur les fichiers en ligne (pas des copies locales) — 16/16 manuels confirmés propres.</p>
+    <div class="snap">
+      <div class="snapcard"><div class="ok">Structure</div><p>gate.js, chapter-lock.js et l'URL Apps Script identiques et cohérents sur les 16 manuels — aucun ID dupliqué ou manquant.</p></div>
+      <div class="snapcard"><div class="ok">Lisibilité</div><p>Bug du champ email illisible (texte foncé sur fond foncé) corrigé sur les 16 manuels.</p></div>
+      <div class="snapcard"><div class="ok">Mobile</div><p>Overlay de connexion défilable sur petit écran, plus de bouton inatteignable au clavier ouvert.</p></div>
+      <div class="snapcard"><div class="ok">Images</div><p>15 manuels nettoyés des images mal placées ; Réalisateur intact comme demandé ; vignettes YouTube de référence préservées.</p></div>
+      <div class="snapcard"><div class="ok">Form vs Texte</div><p>Granularité par chapitre en production — seuls 3 manuels gardent un Form partiel, Décoration reste 100% Form (légitime).</p></div>
+      <div class="snapcard"><div class="ok">Progression</div><p>Réinitialisation à distance opérationnelle, testée en 7 étapes via l'API Apps Script.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Okapi World Média · École Okapi · Document d'archive interne</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- progress bar ---------- */
+var bar = document.getElementById('progress');
+function updateBar(){
+  var h = document.documentElement;
+  var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  bar.style.width = (pct||0) + '%';
+}
+document.addEventListener('scroll', updateBar, {passive:true});
+updateBar();
+
+/* ---------- nav pill active state ---------- */
+var sections = [].slice.call(document.querySelectorAll('section.block[id]'));
+var pills = [].slice.call(document.querySelectorAll('#pillnav a'));
+function updateNav(){
+  var y = window.scrollY + 120;
+  var current = sections[0];
+  sections.forEach(function(s){ if(s.offsetTop <= y) current = s; });
+  pills.forEach(function(p){ p.classList.toggle('on', p.getAttribute('href') === '#'+current.id); });
+}
+document.addEventListener('scroll', updateNav, {passive:true});
+updateNav();
+
+/* ---------- reveal on scroll ---------- */
+var revealEls = [].slice.call(document.querySelectorAll('.reveal'));
+if(reduced){ revealEls.forEach(function(e){e.classList.add('in');}); }
+else{
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting) en.target.classList.add('in'); });
+  }, {threshold:.12});
+  revealEls.forEach(function(e){ io.observe(e); });
+}
+
+/* ---------- counters ---------- */
+var counted = false;
+var statBand = document.querySelector('.stats');
+function runCounters(){
+  if(counted) return; counted = true;
+  document.querySelectorAll('.stat .n[data-count]').forEach(function(el){
+    var target = parseInt(el.dataset.count, 10);
+    if(reduced){ el.textContent = target; return; }
+    var t0=null, dur=1000;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/dur,1);
+      el.textContent = Math.round(target*(1-Math.pow(1-p,3)));
+      if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  });
+}
+if(reduced){ runCounters(); }
+else{
+  var io2 = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting) runCounters(); });
+  }, {threshold:.4});
+  if(statBand) io2.observe(statBand);
+}
+
+/* ══════════════════════════════════════════════════════════
+   DONNÉES
+══════════════════════════════════════════════════════════ */
+
+var TIMELINE = [
+  {
+    phase: "Phase 1", title: "Genèse — le premier manuel",
+    tag: "done",
+    text: "Décision de traiter chaque poste du cinéma comme un vrai métier, avec sa propre direction artistique et une bibliographie vérifiable. « Le Réalisateur » ouvre la collection : 9 chapitres, DA noir/rouge viewfinder, police Archivo + Poppins. Ce manuel pose la doctrine — découpage de scénario, grammaire du plan, blocking, direction d'acteurs — que les 15 suivants suivront."
+  },
+  {
+    phase: "Phase 2", title: "Montée en cadence — 12 manuels en parallèle",
+    tag: "done",
+    text: "DP, Scénariste, Monteur, Ingénieur du son, Animateur IA, puis Producteur, Régisseur, Directeur de Casting, Étalonneur, Costumière, Chargé de Production, Directeur de Production, Assistant Réalisateur. Chacun reçoit sa propre palette et sa propre police — le DP en noir/tungstène-daylight (Space Grotesk), le Scénariste en brun papier/rouge encre (Courier Prime, format scénario authentique), le Monteur en noir/teal/magenta façon timeline NLE (JetBrains Mono)."
+  },
+  {
+    phase: "Phase 3", title: "Le système d'accès — v1, le lien à token",
+    tag: "evol",
+    text: "Demande d'accès (nom/prénom/email) → notification Gmail → acceptation → lien personnel envoyé par email. Fonctionnel, mais le lien reste partageable et intraçable une fois reçu. Premier Code.gs déployé, premier vrai bug de déploiement : le script modifié n'était jamais réellement redéployé (confusion entre projet Apps Script standalone et lié au Sheet)."
+  },
+  {
+    phase: "Phase 4", title: "Le système d'accès — v2, connexion par email",
+    tag: "evol",
+    text: "Remplacement du token par une vérification d'email en direct à chaque visite, sans persistance. Onglet Connexions journalisant chaque tentative. Révocation immédiate possible en changeant un statut dans le Sheet — sans redéploiement. Formulaire de connexion injecté automatiquement sur les 16 manuels via script Python (patch_login.py)."
+  },
+  {
+    phase: "Phase 5", title: "Régression découverte après validation",
+    tag: "fix",
+    text: "Une régénération externe des 16 manuels (autre session Claude Code, en parallèle) fait régresser deux choses en silence : l'URL Apps Script redevient l'ancienne (cassée), et la règle CSS masquant le contenu tant que non connecté disparaît — rendant tous les manuels visibles malgré l'overlay « Contenu réservé ». Corrigé et vérifié indépendamment sur les 16 fichiers via curl direct en production."
+  },
+  {
+    phase: "Phase 6", title: "chapter-lock.js apparaît — système de progression",
+    tag: "evol",
+    text: "Une session parallèle ajoute un système complet de verrouillage par chapitre : exercice + textarea obligatoire (≥100 caractères) avant de débloquer le suivant, quiz final masqué tant que tout n'est pas fait. Trois formats de manuels détectés automatiquement (A standard, B Décoration, C Acteur vivant). À partir de là, toute modification future doit composer avec ce système sans le casser."
+  },
+  {
+    phase: "Phase 7", title: "Examens et quiz étendus",
+    tag: "done",
+    text: "Capture automatique du score de quiz + email, envoyée par mail et journalisée dans un nouvel onglet Examens. Les quiz passent de 3-4 questions à 8 (difficulté progressive sur 4 niveaux), puis à 10 avec un 5e palier « Maîtrise » et un seuil de réussite fixe à 7/10. Deux manuels à structure historique différente (Décoration, Acteur) traités séparément — patchs dédiés, palette propre à chacun."
+  },
+  {
+    phase: "Phase 8", title: "Le système d'accès — v3, détection par IP",
+    tag: "evol",
+    text: "Ajout d'une couche de protection contre le partage d'accès : l'IP publique du visiteur est comparée à l'historique de connexions autorisées pour cet email. Une IP jamais vue déclenche une alerte au propriétaire — sans jamais bloquer l'accès. Testé en conditions quasi réelles avec un email réellement approuvé : une seule alerte reçue, au bon moment."
+  },
+  {
+    phase: "Phase 9", title: "Chantier images — tentative, puis retour arrière",
+    tag: "fix",
+    text: "Une première tentative d'intégration d'images photoréalistes sur le lot Réalisateur produit des doublons et de mauvais emplacements. L'utilisateur revient en arrière via Claude Code et préfère nettement l'organisation que Claude Code avait mise en place de son côté. Leçon retenue : avant tout patch, toujours re-fetch la version EN LIGNE actuelle plutôt qu'une copie locale — un écart de ce type aurait pu régresser tout le système de progression si poussé tel quel."
+  },
+  {
+    phase: "Phase 10", title: "Audit complet et nettoyage post-lancement",
+    tag: "fix",
+    text: "Audit systématique des 16 manuels, sources récupérées en direct à chaque étape (jamais de copie locale ancienne). Quatre correctifs de fond appliqués partout : images mal placées retirées (15/16, Réalisateur épargné), responsive mobile portrait sur les 16, bug de lisibilité du champ email (texte foncé sur fond foncé) corrigé partout, overlay de connexion rendu défilable sur mobile."
+  },
+  {
+    phase: "Phase 11", title: "Form vs Texte — la granularité par chapitre",
+    tag: "done",
+    text: "Le système forçait le Google Form sur tous les chapitres de 6 manuels, y compris ceux qui étaient de la pure écriture. Après relecture exercice par exercice, chapter-lock.js évolue vers une granularité par chapitre : seuls les chapitres qui produisent vraiment une photo ou un enregistrement gardent le Form. Costumière et Régisseur général, qui n'avaient stricto sensu aucun exercice fichier, repassent entièrement en texte."
+  }
+];
+
+var COLORS = {
+  "Réalisateur":"#8B2E2E","Directeur de la photographie":"#D98A3D","Scénariste":"#6B4A2E",
+  "Monteur":"#1F8A7A","Ingénieur du son":"#3D8A4E","Animateur IA":"#C9A84C",
+  "Producteur":"#3D5A8A","Régisseur général":"#8A6A2E","Directeur de casting":"#8A5A6B",
+  "Étalonneur":"#2E6B7A","Costumière":"#B98AA0","Chargé de production":"#3D6B8A",
+  "Directeur de production":"#8A6E3D","Assistant réalisateur":"#C9A03D",
+  "Décoration":"#4A6B8A","Acteur vivant":"#8A7A2E"
+};
+
+var MANUALS = [
+  {name:"Réalisateur", font:"Archivo + Poppins", chapters:["Découpage de scénario","Grammaire du plan","Blocking","Direction d'acteurs","Plan de tournage","Langage visuel","Penser montage","Leadership","Style personnel"]},
+  {name:"Directeur de la photographie", font:"Space Grotesk + Poppins", chapters:["Triade d'exposition","Focale","Éclairage 3 points","Température de couleur","Composition","Mouvement de caméra","Dialogue avec le réal","Matériel","Style"]},
+  {name:"Scénariste", font:"Courier Prime + Poppins", chapters:["Logline","Structure 3 actes / beat sheet","Want vs need","Formatage scénario","Dialogue et sous-texte","Construction de scène","Réécriture","Pitch oral","Voix d'auteur"]},
+  {name:"Monteur", font:"JetBrains Mono + Poppins", chapters:["Rôle de traduction","Règle de Six (Murch)","Rythme (Pearlman)","J-cut / L-cut","Couverture de dialogue","Montage parallèle","Premier assemblage vs final","Collaboration réal","Style"]},
+  {name:"Ingénieur du son", font:"Unbounded + Poppins + IBM Plex Mono", chapters:["3 piliers dialogue/effets/musique","Prise de son plateau","Foley","Sound design (Randy Thom)","Musique narrative","Mixage & carving fréquentiel","Silence comme outil","Spotting session","Signature sonore"]},
+  {name:"Animateur IA", font:"Sora + Poppins + IBM Plex Mono", chapters:["Ce qui change / ne change pas","Briques du pipeline","Anatomie de prompt","Cohérence de personnage","Composer un plan en langage IA","Montage de segments générés","Son génératif","Éthique / droits / divulgation","Workflow personnel"]},
+  {name:"Producteur", font:"Poppins", chapters:["Créatif vs exécutif","Développement / package","Budget ATL/BTL","Financement","Planning par lieu","Équipe clé","Gestion du risque","Distribution","Vision vs budget"]},
+  {name:"Régisseur général", font:"Barlow Condensed + Poppins", chapters:["Rôle et historique","Repérage et qualification","Permis / autorisations","Planning terrain","Sécurité","Riverains / autorités","Logistique jour J","Budget régie","Plan B imprévu"]},
+  {name:"Directeur de casting", font:"DM Serif Display + Poppins", chapters:["Rôle et position","Décoder un personnage","Breakdown / agents","Diriger une audition","Lire une self-tape","Callback et alchimie","Négociation agents","Diversité / représentation","Base de talents"]},
+  {name:"Étalonneur", font:"Manrope", chapters:["Rôle","Correction vs grading","Lecture des scopes","Roue lift/gamma/gain","LUTs","Teal & orange","Matching de plans","Tons chair","Construction de look"]},
+  {name:"Costumière", font:"Cormorant Garamond + Poppins", chapters:["Silhouette de personnage","Lecture de script","Continuité / raccord","Couleur et matière","Essayages","Recherche d'époque","Construire / louer / acheter","Vieillissement","Collaboration DP-décor"]},
+  {name:"Chargé de production", font:"Work Sans", chapters:["Rôle et position","Monter le bureau","Call sheet","Révisions de scénario","Voyages / hébergement","Liste de contacts","Rapports quotidiens","Coordination inter-départements","Évolution vers producteur"]},
+  {name:"Directeur de production", font:"Big Shoulders", chapters:["Pont vision/exécution","Découpage budgétable","Stripboard / Gantt","Budget détaillé","Recrutement chefs de poste","Négociation fournisseurs","Suivi quotidien","Gestion des dépassements","Wrap"]},
+  {name:"Assistant réalisateur", font:"Oswald", chapters:["Hiérarchie 1er/2e/3e AD","Dépouillement du scénario","Plan de travail","Validation feuille de service","Annonces de plateau","Tenue du planning en direct","Sécurité du plateau","Gestion des personnes","Trajectoire de carrière"]},
+  {name:"Décoration", font:"—", chapters:["Le portrait par le vide","Lis les génériques","Dépouille une scène réelle","Vole trois palettes","Une lampe, trois humeurs","Fabrique la profondeur","Le coin de table, trois vies","Ta première planche","La chine à 20€"]},
+  {name:"Acteur vivant", font:"—", chapters:["Ancrage, poids, gestion de l'espace","Relaxation et gestion du trac","Voix — souffle, appui, projection","Le silence et le sous-texte","Écoute active — la répétition","Le muscle émotionnel","Décoder le texte","Les trois piliers","Corporalité — centre, tempo, marche"]}
+];
+
+var MATRIX = [
+  ["Décoration","Form (9/9)","Form (9/9)","Chaque exercice est une vraie photo ou planche — configuration déjà correcte"],
+  ["Directeur de la photographie","Form (9/9)","Form (ch. 2, 3, 4)","Seuls « deux focales », « une lampe » et « chasse aux mélanges » demandent une vraie capture"],
+  ["Ingénieur du son","Form (9/9)","Form (ch. 3)","Seul « Enregistre-toi avec ton téléphone » exige un fichier audio"],
+  ["Scénariste","Form (9/9)","Form (ch. 8)","Seul le pitch chronométré à voix haute exige un enregistrement"],
+  ["Costumière","Form (9/9)","Texte (9/9)","Aucun exercice n'exige strictement un fichier — l'un d'eux offrait déjà l'alternative écrite"],
+  ["Régisseur général","Form (9/9)","Texte (9/9)","Aucun exercice ne demande de fichier — que des rédactions"]
+];
+
+var INCIDENTS = [
+  {sev:"crit", label:"Critique", title:"Le Code.gs modifié n'était jamais réellement redéployé",
+   before:"Les corrections apportées au script d'accès n'avaient aucun effet visible en production, malgré des modifications confirmées dans l'éditeur.",
+   cause:"Ambiguïté entre un projet Apps Script standalone et un projet lié (container-bound) au Google Sheet — deux entités différentes, deux déploiements différents.",
+   fix:"Repassage à un script strictement lié, ouvert via Extensions > Apps Script depuis le Sheet lui-même, utilisant SpreadsheetApp.getActiveSpreadsheet() plutôt qu'un SHEET_ID codé en dur. Test réel confirmé de bout en bout depuis un second compte Gmail."},
+  {sev:"crit", label:"Critique", title:"Régression silencieuse après une session parallèle",
+   before:"Tous les manuels affichaient leur contenu complet malgré l'overlay « Contenu réservé » — l'accès protégé ne protégeait plus rien.",
+   cause:"Une régénération externe des 16 manuels (autre session Claude Code, en parallèle du travail direct) avait fait revenir l'URL Apps Script à une ancienne version cassée, et supprimé la règle CSS qui masquait le contenu par défaut tant que la session n'était pas déverrouillée.",
+   fix:"Détection et correction indépendante, vérifiée fichier par fichier via curl direct sur le site en production — 16/16 confirmés avant de considérer l'incident clos."},
+  {sev:"med", label:"Piège récurrent", title:"Nouveau déploiement vs nouvelle version",
+   before:"Plusieurs sessions de débogage consommées à tester une URL qui n'avait jamais reçu le code corrigé.",
+   cause:"Apps Script distingue « Nouveau déploiement » (génère une URL /exec différente) de « Gérer les déploiements → Nouvelle version » (met à jour la même URL) — deux actions au nom proche, à l'effet radicalement différent.",
+   fix:"Devenu un réflexe systématique : toujours vérifier laquelle des deux actions a été faite avant de lancer un test."},
+  {sev:"med", label:"Régression", title:"Tentative d'intégration d'images ratée",
+   before:"Images dupliquées et mal placées sur le lot Réalisateur après une première tentative d'intégration de visuels photoréalistes.",
+   cause:"Divergence entre deux logiques d'intégration développées en parallèle (une côté chat, une côté Claude Code) sans convention commune.",
+   fix:"Retour arrière complet via Claude Code. L'organisation mise en place par Claude Code a été retenue comme référence pour la suite — décision explicite de l'utilisateur."},
+  {sev:"lesson", label:"Leçon retenue", title:"Ne jamais patcher depuis une copie locale ancienne",
+   before:"Un patch d'images construit sur une version du fichier antérieure à l'ajout de chapter-lock.js aurait, s'il avait été poussé tel quel, effacé tout le système de progression sans avertissement.",
+   cause:"Une copie locale récupérée en début de conversation ne reflète plus l'état réel du fichier si d'autres sessions ou d'autres outils l'ont modifié entre-temps.",
+   fix:"Règle systématique adoptée : toujours re-fetch la version EN LIGNE actuelle avant toute modification, et vérifier la présence de chapter-lock.js par recherche de texte avant de livrer un remplacement."},
+  {sev:"med", label:"Bug de lisibilité", title:"Champ email illisible sur les 16 manuels",
+   before:"Le champ de saisie de l'overlay de connexion affichait un texte quasi invisible — signalé d'abord sur un seul manuel (Décoration).",
+   cause:"La règle CSS du champ utilisait color:inherit, qui remontait jusqu'au corps de page (texte foncé prévu pour un fond clair) — alors que l'overlay de connexion a un fond presque noir. Tous les autres éléments de l'overlay avaient une couleur explicite ; seul ce champ en manquait.",
+   fix:"Audit étendu à l'ensemble de la collection dès la découverte du bug sur un seul manuel — confirmé présent sur les 16, corrigé partout en une seule passe plutôt que manuel par manuel."},
+  {sev:"med", label:"Bug mobile", title:"Bouton de connexion inatteignable sur petit écran",
+   before:"Impossible de se connecter depuis un téléphone sur un manuel — le bouton semblait exister mais restait hors d'atteinte.",
+   cause:"L'overlay de connexion (position fixe, plein écran) n'avait aucun défilement possible. Quand son contenu dépassait la hauteur visible — notamment clavier tactile ouvert — rien ne permettait de faire défiler jusqu'au bouton.",
+   fix:"Ajout d'un défilement vertical à l'overlay sur mobile, et passage du centrage vertical à un alignement en haut d'écran sous ce format, pour que le contenu reste accessible même quand le clavier réduit la hauteur visible. Appliqué préventivement aux 16 manuels, le même bloc CSS étant partagé partout."},
+  {sev:"lesson", label:"Bug de fond", title:"Choix de packs envoyés comme la chaîne littérale « on »",
+   before:"La colonne « Pack choisi » d'un Google Sheet de formulaire n'affichait que le mot « on » pour toutes les réponses, rendant les données inexploitables.",
+   cause:"Comportement HTML standard : un bouton radio sans attribut value explicite envoie la chaîne par défaut « on » à la soumission. Le vrai nom du pack était stocké ailleurs (dans un attribut data-), mais la fonction de lecture s'arrêtait dès qu'elle trouvait une valeur non vide — même « on » — sans jamais aller chercher la bonne source.",
+   fix:"Ajout des attributs value= manquants sur les boutons radio concernés. Perte reconnue et assumée des réponses déjà collectées avant le correctif — aucune récupération a posteriori n'était possible depuis les données déjà écrites."},
+  {sev:"lesson", label:"Fausse alerte", title:"Des entry IDs de formulaire identiques entre deux manuels",
+   before:"Deux formulaires Google Forms différents (Directeur de la photographie et Décoration) partageaient exactement les mêmes identifiants de champs internes — signal a priori suspect.",
+   cause:"En réalité aucune erreur : tous les formulaires de la collection avaient été créés par duplication d'un même formulaire d'origine plutôt que créés indépendamment. Une duplication Google Forms peut conserver les ID de champs internes, contrairement à une création indépendante qui en génère toujours de nouveaux.",
+   fix:"Vérification terrain via un lien prérempli réel plutôt qu'une supposition — confirmé correct. La méfiance de départ restait justifiée en général ; elle ne s'appliquait simplement pas à ce cas précis."}
+];
+
+/* ══════════════════════════════════════════════════════════
+   RENDU
+══════════════════════════════════════════════════════════ */
+
+/* --- timeline --- */
+var tlRoot = document.getElementById('timeline');
+TIMELINE.forEach(function(item, idx){
+  var el = document.createElement('div');
+  el.className = 'tl-item' + (idx===0 ? ' on' : '');
+  el.innerHTML =
+    '<div class="ph">' + item.phase + '</div>' +
+    '<h3>' + item.title + '</h3>' +
+    '<div class="tl-detail"><p>' + item.text + '</p>' +
+    '<span class="tag ' + item.tag + '">' + (item.tag==='done'?'Livré':item.tag==='evol'?'Évolution':'Correctif') + '</span></div>';
+  el.addEventListener('click', function(){
+    var wasOn = el.classList.contains('on');
+    tlRoot.querySelectorAll('.tl-item').forEach(function(x){ x.classList.remove('on'); });
+    if(!wasOn) el.classList.add('on');
+  });
+  tlRoot.appendChild(el);
+});
+
+/* --- manuals gallery --- */
+var mgrid = document.getElementById('mgrid');
+var mdetail = document.createElement('div');
+mdetail.className = 'mcard-detail';
+mdetail.innerHTML = '<div class="box"><button class="close" aria-label="Fermer">✕</button><div class="sub" id="mdSub"></div><h3 id="mdName"></h3><ol id="mdList"></ol></div>';
+document.body.appendChild(mdetail);
+mdetail.querySelector('.close').addEventListener('click', function(){ mdetail.classList.remove('show'); });
+mdetail.addEventListener('click', function(e){ if(e.target===mdetail) mdetail.classList.remove('show'); });
+
+MANUALS.forEach(function(m){
+  var c = COLORS[m.name] || '#8A7A2E';
+  var card = document.createElement('div');
+  card.className = 'mcard';
+  card.innerHTML =
+    '<div class="swatch" style="background:linear-gradient(135deg,'+c+',rgba(0,0,0,.3))"></div>' +
+    '<div class="tier">9 chapitres</div>' +
+    '<div class="name">'+m.name+'</div>' +
+    '<div class="font">'+m.font+'</div>' +
+    '<div class="chcount">Cliquer pour voir le sommaire →</div>';
+  card.addEventListener('click', function(){
+    document.getElementById('mdSub').textContent = m.font;
+    document.getElementById('mdName').textContent = m.name;
+    var ol = document.getElementById('mdList');
+    ol.innerHTML = '';
+    m.chapters.forEach(function(ch){ var li=document.createElement('li'); li.textContent=ch; ol.appendChild(li); });
+    mdetail.classList.add('show');
+  });
+  mgrid.appendChild(card);
+});
+
+/* --- format toggle --- */
+document.querySelectorAll('#fmtToggle button').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('#fmtToggle button').forEach(function(x){x.classList.remove('on');});
+    b.classList.add('on');
+    var f = b.dataset.f;
+    document.querySelectorAll('.fmtPanel').forEach(function(p){ p.classList.toggle('on', p.dataset.f===f); });
+  });
+});
+
+/* --- matrix table --- */
+var mbody = document.getElementById('matrixBody');
+MATRIX.forEach(function(row){
+  var tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td>'+row[0]+'</td>' +
+    '<td><span class="badge form">'+row[1]+'</span></td>' +
+    '<td><span class="badge '+(row[2].indexOf('Form')===0?'form':'text')+'">'+row[2]+'</span></td>' +
+    '<td style="font-size:.8rem">'+row[3]+'</td>';
+  mbody.appendChild(tr);
+});
+
+/* --- incidents accordion --- */
+var incRoot = document.getElementById('incidentsList');
+INCIDENTS.forEach(function(inc){
+  var el = document.createElement('div');
+  el.className = 'inc';
+  el.innerHTML =
+    '<div class="inc-head">' +
+      '<span class="sev '+inc.sev+'"></span>' +
+      '<span class="title">'+inc.title+'</span>' +
+      '<span class="sevlabel">'+inc.label+'</span>' +
+      '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>' +
+    '</div>' +
+    '<div class="inc-body"><div class="inc-body-in">' +
+      '<span class="lbl">Symptôme</span><p>'+inc.before+'</p>' +
+      '<span class="lbl">Cause</span><p>'+inc.cause+'</p>' +
+      '<span class="lbl">Correctif</span><p>'+inc.fix+'</p>' +
+    '</div></div>';
+  el.querySelector('.inc-head').addEventListener('click', function(){
+    el.classList.toggle('open');
+  });
+  incRoot.appendChild(el);
+});
+
+})();
+</script>
+</body>
+</html>
