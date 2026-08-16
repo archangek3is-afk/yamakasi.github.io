@@ -461,6 +461,85 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 #gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
 #gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #C9A84C;color:#C9A84C;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
 #gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#C9A84C;color:#0A0A0A;}
+
+/* === RESPONSIVE MOBILE === */
+@media(max-width:768px){
+  /* --- global overflow prevention --- */
+  html, body { overflow-x: hidden; }
+  img, video, iframe, canvas, svg { max-width: 100%; height: auto; }
+  pre, code, .mono, [style*="font-family:monospace"],
+  [style*="Courier"], [style*="JetBrains"], [style*="IBM Plex Mono"] {
+    overflow-x: auto; word-break: break-word;
+  }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* --- hero padding --- */
+  .hero { padding: 90px 16px 50px; min-height: 70vh; }
+
+  /* --- sections padding --- */
+  section { padding: 40px 14px; }
+  .section-head { padding: 0 6px; margin-bottom: 30px; }
+
+  /* --- chapter accordion finger-friendly --- */
+  .ch-head { padding: 14px 10px; gap: 10px; min-height: 54px; }
+  .ch-head .ch-info { min-width: 0; }
+  .ch-body { padding: 18px 12px; }
+
+  /* --- quiz & exercise finger-friendly --- */
+  .quiz-opt { padding: 14px 14px; min-height: 48px; gap: 12px; }
+  .quiz-opt span { font-size: 14px; }
+  .quiz-opt input { width: 20px; height: 20px; min-width: 20px; }
+  .quiz-q { padding: 18px 14px; }
+  .exercice { padding: 20px 14px; }
+  #quizBtn, .quiz-btn, [onclick*="scoreQuiz"] { min-height: 48px; padding: 14px 24px; font-size: 14px; }
+
+  /* --- gate overlay mobile --- */
+  #gate-overlay { padding: 30px 16px; }
+  #gate-overlay h2 { font-size: clamp(20px, 5vw, 28px); }
+  #gate-overlay p#gateMsg { font-size: 13.5px; max-width: 90vw; }
+  #gate-overlay input#gateEmailInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
+  #gate-overlay a#gateRequestLink, #gate-overlay button#gateLoginBtn { padding: 14px 24px; font-size: 12px; min-height: 48px; }
+
+  /* --- watch cards stack --- */
+  .watch-card { flex-direction: column; align-items: flex-start; }
+  .watch-card img { width: 100%; height: auto; max-height: 180px; }
+
+  /* --- book cards --- */
+  .book-card { flex-direction: column; }
+
+  /* --- pull quotes --- */
+  .pull { padding: 0 14px; margin-bottom: 40px; }
+
+  /* --- footer --- */
+  footer { padding: 50px 16px 30px; }
+}
+
+@media(max-width:430px){
+  .hero { padding: 80px 12px 40px; }
+  section { padding: 30px 10px; }
+  .ch-head { padding: 12px 8px; }
+  .ch-body { padding: 14px 10px; }
+  .quiz-q { padding: 14px 10px; }
+  .quiz-opt { padding: 12px 10px; }
+  .exercice { padding: 16px 10px; }
+  #gate-overlay input#gateEmailInput { max-width: 90vw; }
+  .case-strip { gap: 12px; }
+}
+
+@media(max-width:768px){
+  /* --- versus grid --- */
+  .versus { grid-template-columns: 1fr !important; }
+  .versus .row .rk { width: auto; }
+
+  /* --- timeline items --- */
+  .tl-item { grid-template-columns: 60px 1fr !important; gap: 12px; }
+
+  /* --- mark elements --- */
+  .mark { flex-shrink: 0; }
+}
+@media(max-width:430px){
+  .tl-item { grid-template-columns: 1fr !important; }
+}
 </style>
 </head>
 <body>
@@ -499,7 +578,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <main>
 
   <!-- HERO -->
-  <section class="hero" style="padding-top:0;"><div class="hero-bg" style="position:absolute;inset:0;z-index:-1;overflow:hidden;"></div>
+  <section class="hero" style="padding-top:0;"><div class="hero-bg" style="position:absolute;inset:0;z-index:-1;overflow:hidden;"><img src="images/acteur-vivant/01-hero.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.45;"></div>
   
     <div class="spot" aria-hidden="true"></div>
     <div class="eyebrow">Okapi Studios — Manuel formateur · v1.0</div>
@@ -639,9 +718,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
   <!-- ACTE I -->
   <div id="acte1">
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/acteur-vivant/02-rehearsal.jpg" alt="Répétition en compagnie de théâtre" style="width:100%;height:auto;display:block;"></figure>
 
-
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/acteur-vivant/01-theater.jpg" alt="Performance théâtrale sous les projecteurs" style="width:100%;height:auto;display:block;"></figure>
 
   <div class="act-divider fade-in">
     <div class="num">I</div>
@@ -750,9 +829,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
   <!-- ACTE II -->
   <div id="acte2">
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/acteur-vivant/06-emotional-memory.jpg" alt="Projecteurs de scène — lumière et émotion" style="width:100%;height:auto;display:block;"></figure>
 
-
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/acteur-vivant/05-actor-film-camera.jpg" alt="Acteur face à la caméra de tournage" style="width:100%;height:auto;display:block;"></figure>
 
   <div class="act-divider fade-in">
     <div class="num">II</div>

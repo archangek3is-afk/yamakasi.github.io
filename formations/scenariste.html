@@ -213,6 +213,82 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 #gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
 #gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #C9A84C;color:#C9A84C;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
 #gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#C9A84C;color:#0A0A0A;}
+
+/* === RESPONSIVE MOBILE === */
+@media(max-width:768px){
+  /* --- global overflow prevention --- */
+  html, body { overflow-x: hidden; }
+  img, video, iframe, canvas, svg { max-width: 100%; height: auto; }
+  pre, code, .mono, [style*="font-family:monospace"],
+  [style*="Courier"], [style*="JetBrains"], [style*="IBM Plex Mono"] {
+    overflow-x: auto; word-break: break-word;
+  }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* --- hero padding --- */
+  .hero { padding: 90px 16px 50px; min-height: 70vh; }
+
+  /* --- sections padding --- */
+  section { padding: 40px 14px; }
+  .section-head { padding: 0 6px; margin-bottom: 30px; }
+
+  /* --- chapter accordion finger-friendly --- */
+  .ch-head { padding: 14px 10px; gap: 10px; min-height: 54px; }
+  .ch-head .ch-info { min-width: 0; }
+  .ch-body { padding: 18px 12px; }
+
+  /* --- quiz & exercise finger-friendly --- */
+  .quiz-opt { padding: 14px 14px; min-height: 48px; gap: 12px; }
+  .quiz-opt span { font-size: 14px; }
+  .quiz-opt input { width: 20px; height: 20px; min-width: 20px; }
+  .quiz-q { padding: 18px 14px; }
+  .exercice { padding: 20px 14px; }
+  #quizBtn, .quiz-btn, [onclick*="scoreQuiz"] { min-height: 48px; padding: 14px 24px; font-size: 14px; }
+
+  /* --- gate overlay mobile --- */
+  #gate-overlay { padding: 30px 16px; }
+  #gate-overlay h2 { font-size: clamp(20px, 5vw, 28px); }
+  #gate-overlay p#gateMsg { font-size: 13.5px; max-width: 90vw; }
+  #gate-overlay input#gateEmailInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
+  #gate-overlay a#gateRequestLink, #gate-overlay button#gateLoginBtn { padding: 14px 24px; font-size: 12px; min-height: 48px; }
+
+  /* --- watch cards stack --- */
+  .watch-card { flex-direction: column; align-items: flex-start; }
+  .watch-card img { width: 100%; height: auto; max-height: 180px; }
+
+  /* --- book cards --- */
+  .book-card { flex-direction: column; }
+
+  /* --- pull quotes --- */
+  .pull { padding: 0 14px; margin-bottom: 40px; }
+
+  /* --- footer --- */
+  footer { padding: 50px 16px 30px; }
+}
+
+@media(max-width:430px){
+  .hero { padding: 80px 12px 40px; }
+  section { padding: 30px 10px; }
+  .ch-head { padding: 12px 8px; }
+  .ch-body { padding: 14px 10px; }
+  .quiz-q { padding: 14px 10px; }
+  .quiz-opt { padding: 12px 10px; }
+  .exercice { padding: 16px 10px; }
+  #gate-overlay input#gateEmailInput { max-width: 90vw; }
+  .case-strip { gap: 12px; }
+}
+
+@media(max-width:768px){
+  /* --- typewriter decoration --- */
+  .typewriter { width: 100% !important; max-width: 260px; height: auto !important; min-height: 100px; }
+
+  /* --- corkboard beat cards --- */
+  .cork-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .corkboard { padding: 16px; }
+}
+@media(max-width:430px){
+  .cork-grid { grid-template-columns: 1fr !important; }
+}
 </style>
 </head>
 <body>
@@ -251,7 +327,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 <main>
 
 <!-- HERO -->
-<section class="hero" style="padding-top:0;"><div class="hero-bg" style="position:absolute;inset:0;z-index:-1;overflow:hidden;"></div>
+<section class="hero" style="padding-top:0;"><div class="hero-bg" style="position:absolute;inset:0;z-index:-1;overflow:hidden;"><img src="images/scenariste/01-hero.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.45;"></div>
   
   <div class="eyebrow">FADE IN: — Manuel de formation, écriture de scénario</div>
   <h1 class="title">LE <span>SCÉNARISTE</span></h1>
@@ -311,7 +387,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
     </div>
     <div class="ch-body">
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/scenariste/02-screenplay-pitch.jpg" alt="Scénariste au travail" style="width:100%;height:auto;display:block;"></figure>
 
       <p class="ch-lead">Si tu ne peux pas résumer ton histoire en une phrase, c'est qu'elle n'est pas encore claire pour toi non plus. <b>La logline</b> contient un protagoniste, un objectif concret, un antagoniste ou obstacle, et un enjeu.</p>
       <div class="sub-ex"><span class="lbl">Formule minimale</span><ul>
@@ -337,7 +413,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
     </div>
     <div class="ch-body">
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/scenariste/02-three-act-structure.jpg" alt="Structure narrative et notes" style="width:100%;height:auto;display:block;"></figure>
 
       <p class="ch-lead">La structure en trois actes n'est pas une prison créative — c'est un squelette. Le <b>beat sheet</b> de Blake Snyder la découpe en 15 beats précis, de l'image d'ouverture à l'image finale, chacun avec une fonction dramatique.</p>
       <div class="corkboard">
@@ -387,7 +463,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
     </div>
     <div class="ch-body">
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/scenariste/03-film-character.jpg" alt="Développement de personnage" style="width:100%;height:auto;display:block;"></figure>
 
       <p class="ch-lead">Tout bon protagoniste veut deux choses différentes : ce qu'il <b>croit</b> vouloir (want, souvent extérieur et concret) et ce dont il a <b>vraiment besoin</b> (need, souvent intérieur et émotionnel). L'histoire les fait se percuter.</p>
       <div class="redpen">
@@ -489,7 +565,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
     </div>
     <div class="ch-body">
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/scenariste/07-rewriting.jpg" alt="Réécriture et révision du script" style="width:100%;height:auto;display:block;"></figure>
 
       <p class="ch-lead">Le premier jet sert à découvrir l'histoire. La réécriture sert à la servir — même si ça veut dire supprimer la réplique la plus brillante que tu aies jamais écrite parce qu'elle ralentit la scène. <b>"Kill your darlings"</b> n'est pas une punition, c'est un tri.</p>
       <div class="exercice">

@@ -123,6 +123,81 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 #gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
 #gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #C9A84C;color:#C9A84C;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
 #gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#C9A84C;color:#0A0A0A;}
+
+/* === RESPONSIVE MOBILE === */
+@media(max-width:768px){
+  /* --- global overflow prevention --- */
+  html, body { overflow-x: hidden; }
+  img, video, iframe, canvas, svg { max-width: 100%; height: auto; }
+  pre, code, .mono, [style*="font-family:monospace"],
+  [style*="Courier"], [style*="JetBrains"], [style*="IBM Plex Mono"] {
+    overflow-x: auto; word-break: break-word;
+  }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* --- hero padding --- */
+  .hero { padding: 90px 16px 50px; min-height: 70vh; }
+
+  /* --- sections padding --- */
+  section { padding: 40px 14px; }
+  .section-head { padding: 0 6px; margin-bottom: 30px; }
+
+  /* --- chapter accordion finger-friendly --- */
+  .ch-head { padding: 14px 10px; gap: 10px; min-height: 54px; }
+  .ch-head .ch-info { min-width: 0; }
+  .ch-body { padding: 18px 12px; }
+
+  /* --- quiz & exercise finger-friendly --- */
+  .quiz-opt { padding: 14px 14px; min-height: 48px; gap: 12px; }
+  .quiz-opt span { font-size: 14px; }
+  .quiz-opt input { width: 20px; height: 20px; min-width: 20px; }
+  .quiz-q { padding: 18px 14px; }
+  .exercice { padding: 20px 14px; }
+  #quizBtn, .quiz-btn, [onclick*="scoreQuiz"] { min-height: 48px; padding: 14px 24px; font-size: 14px; }
+
+  /* --- gate overlay mobile --- */
+  #gate-overlay { padding: 30px 16px; }
+  #gate-overlay h2 { font-size: clamp(20px, 5vw, 28px); }
+  #gate-overlay p#gateMsg { font-size: 13.5px; max-width: 90vw; }
+  #gate-overlay input#gateEmailInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
+  #gate-overlay a#gateRequestLink, #gate-overlay button#gateLoginBtn { padding: 14px 24px; font-size: 12px; min-height: 48px; }
+
+  /* --- watch cards stack --- */
+  .watch-card { flex-direction: column; align-items: flex-start; }
+  .watch-card img { width: 100%; height: auto; max-height: 180px; }
+
+  /* --- book cards --- */
+  .book-card { flex-direction: column; }
+
+  /* --- pull quotes --- */
+  .pull { padding: 0 14px; margin-bottom: 40px; }
+
+  /* --- footer --- */
+  footer { padding: 50px 16px 30px; }
+}
+
+@media(max-width:430px){
+  .hero { padding: 80px 12px 40px; }
+  section { padding: 30px 10px; }
+  .ch-head { padding: 12px 8px; }
+  .ch-body { padding: 14px 10px; }
+  .quiz-q { padding: 14px 10px; }
+  .quiz-opt { padding: 12px 10px; }
+  .exercice { padding: 16px 10px; }
+  #gate-overlay input#gateEmailInput { max-width: 90vw; }
+  .case-strip { gap: 12px; }
+}
+
+@media(max-width:768px){
+  /* --- swatch strip hero --- */
+  .swatch-strip { flex-wrap: wrap; gap: 6px; justify-content: center; }
+
+  /* --- swatch board nuancier --- */
+  .swatch-board { grid-template-columns: repeat(3, 1fr) !important; gap: 10px; }
+}
+@media(max-width:430px){
+  .swatch-board { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -147,7 +222,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 </header>
 
 <main>
-<section class="hero" style="padding-top:0;"><div class="hero-bg" style="position:absolute;inset:0;z-index:-1;overflow:hidden;"></div>
+<section class="hero" style="padding-top:0;"><div class="hero-bg" style="position:absolute;inset:0;z-index:-1;overflow:hidden;"><img src="images/costumiere/01-hero.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.45;"></div>
   
   <div class="eyebrow">Atelier de couture — Manuel de formation, costume</div>
   <h1 class="title">LA <span>COSTUMIÈRE</span></h1>
@@ -187,7 +262,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   <div class="chapitre fade" data-ch>
     <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Le rôle de la costumière</h3><div class="ch-tag">Silhouette de personnage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/costumiere/02-wardrobe.jpg" alt="Costumes de cinéma époque" style="width:100%;height:auto;display:block;"></figure>
 
       <p class="ch-lead">La costumière (ou designer costume) conçoit l'ensemble de la garde-robe d'un film — cohérente entre les personnages, cohérente dans le temps de l'histoire. Elle travaille en étroite collaboration avec le réalisateur et la DP.</p>
       <div class="watch-row"><a class="watch-card" href="https://www.youtube.com/watch?v=aK0aNhx3jdY" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">NYFA — Masterclass</div><div class="wc-title">Deborah Nadoolman Landis — Basic Costume 101</div></div></a></div>
@@ -198,7 +273,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   <div class="chapitre fade" data-ch>
     <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Lire un scénario pour habiller</h3><div class="ch-tag">Analyse de personnage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/costumiere/02-reading-script.jpg" alt="Lecture du scénario pour les costumes" style="width:100%;height:auto;display:block;"></figure>
 
       <p class="ch-lead">Un scénario dit rarement "il porte une veste bleue" — il faut déduire la garde-robe du métier, du milieu social, de l'époque, de la personnalité du personnage.</p>
       <div class="exercice"><span class="ex-tag">Exercice 02 — Déduis la garde-robe</span><h4>Habille un personnage sans description</h4><ol><li>Choisis un personnage d'un film que tu connais, décrit uniquement par ses actions dans une scène.</li><li>Décris sa garde-robe probable, en justifiant chaque choix.</li></ol></div>
@@ -243,7 +318,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   <div class="chapitre fade" data-ch>
     <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Costume d'époque</h3><div class="ch-tag">Recherche historique</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/costumiere/06-period-costume.jpg" alt="Costume d'époque pour film" style="width:100%;height:auto;display:block;"></figure>
 
       <p class="ch-lead">Un costume d'époque mal recherché sonne toujours faux, même pour un œil non expert. <b>La recherche visuelle précède toujours la conception</b> — vraies photos, vrais patrons d'époque.</p>
       <div class="exercice"><span class="ex-tag">Exercice 06 — L'enquête vestimentaire</span><h4>Documente une décennie</h4><ol><li>Choisis une décennie.</li><li>Trouve 6 vraies photos de tenues de tous les jours (pas de couture haute-couture) de cette époque.</li></ol></div>
@@ -262,7 +337,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   <div class="chapitre fade" data-ch>
     <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Le vieillissement et le vécu</h3><div class="ch-tag">Distressing</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
-
+<figure style="margin:20px 0 4px;line-height:0;"><img src="images/costumiere/08-aged-costume.jpg" alt="Vieillissement et patine de costume" style="width:100%;height:auto;display:block;"></figure>
 
       <p class="ch-lead">Un vêtement neuf sonne faux pour un personnage qui vit dedans depuis des années. <b>Vieillir un costume</b> — user, tacher, décolorer par endroits — est un savoir-faire à part entière.</p>
       <div class="exercice"><span class="ex-tag">Exercice 08 — Vieillis un vêtement mentalement</span><h4>Imagine 5 ans d'usure</h4><ol><li>Choisis un vêtement du quotidien.</li><li>Décris comment il vieillirait sur 5 ans de port intensif — où s'use-t-il en premier ?</li></ol></div>
