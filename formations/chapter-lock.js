@@ -24,55 +24,48 @@
   var ADMIN_EMAILS = ['archangek.3is@gmail.com'];
 
   /*
-   * Configuration Google Forms — un form par manuel pratique.
+   * Configuration Google Forms — granularité par chapitre.
    * email / ch / text = entry IDs des champs pré-remplis.
    * Le champ "ch" reçoit l'index du chapitre (0-8) en chiffre seul,
    * cohérent avec le paramètre &ch= envoyé à checkForm côté Apps Script.
+   * chapters[] = index des chapitres qui utilisent le Form (livrable
+   *   photo/audio) ; les autres chapitres du même manuel utilisent
+   *   automatiquement le textarea standard.
    *
-   * ⚠️  directeur-photographie et costumiere : entry IDs à compléter
-   *      depuis Google Forms → ⋮ → Obtenir le lien prérempli.
-   *      Format attendu : entry.XXXXXXXXXX=valeur dans l'URL générée.
    */
   var FORM_CONFIGS = {
     'decoration-cinema': {
       url:   'https://docs.google.com/forms/d/e/1FAIpQLSegfrRWJMvMz2dyE3l2IRD9qxZ68iWWVQwD7SmGpuTGy34akg/viewform',
       email: '1544973329',
       ch:    '1289460951',
-      text:  '1104388559'
+      text:  '1104388559',
+      chapters: [0,1,2,3,4,5,6,7,8]  /* tous — chaque exercice est photo/planche */
     },
     'directeur-photographie': {
       url:   'https://docs.google.com/forms/d/e/1FAIpQLSdjgmcJdUv1ldmwTuL2qPbwNxLL8hSWSv2A_syXXfcZnFY7xQ/viewform',
       email: '1544973329',
       ch:    '1289460951',
-      text:  '1104388559'
-    },
-    'costumiere': {
-      url:   'https://docs.google.com/forms/d/e/1FAIpQLSceZMPahdg6f0q9R1HXVsdrqFhw2NBYr8kfks6Pmyedw8CjUw/viewform',
-      email: '1544973329',
-      ch:    '1289460951',
-      text:  '1104388559'
+      text:  '1104388559',
+      chapters: [1,2,3]  /* Ex02 (deux focales), Ex03 (une lampe), Ex04 (chasse aux mélanges) */
     },
     'ingenieur-son': {
       url:   'https://docs.google.com/forms/d/e/1FAIpQLScr_ntSBt-0mJa7NUS1XGcjOkSUiZaIxyvWFp13Tw_YfCwzRw/viewform',
       email: '1544973329',
       ch:    '1289460951',
-      text:  '1104388559'
+      text:  '1104388559',
+      chapters: [2]  /* Ex03 — "Enregistre-toi avec ton téléphone", seul exercice audio */
     },
     'scenariste': {
       url:   'https://docs.google.com/forms/d/e/1FAIpQLScVdO3bpxrJvJzzW4Nr4o9gO2Wb9QIrDFnzazDohOHvm-FmgA/viewform',
       email: '1544973329',
       ch:    '1289460951',
-      text:  '1104388559'
-    },
-    'regisseur-general': {
-      url:   'https://docs.google.com/forms/d/e/1FAIpQLSfstI5x-W8Wf3lpxEKgkUnAy9hIn6DBoPBhcHMn1W3pZeOXFQ/viewform',
-      email: '1544973329',
-      ch:    '1289460951',
-      text:  '1104388559'
+      text:  '1104388559',
+      chapters: [7]  /* Ex08 — "Pitche à voix haute... Enregistre-toi", seul exercice audio */
     }
+    /* costumiere et regisseur-general retirés : aucun de leurs exercices
+       n'exige un livrable fichier — ils repassent en textarea standard
+       sur tous leurs chapitres, comme les 10 autres manuels classiques. */
   };
-  /* Manuels dont tous les chapitres utilisent le Form pour la livraison */
-  var FORM_MANUALS = Object.keys(FORM_CONFIGS);
 
   var _manual      = null;
   var _email       = null;
@@ -80,7 +73,13 @@
   var _quizSection = null;
   var _format      = null; /* 'A' | 'B' | 'C' */
 
-  function isFormManual() { return FORM_MANUALS.indexOf(_manual) !== -1; }
+  function chapterUsesForm(chIndex) {
+    var cfg = FORM_CONFIGS[_manual];
+    return !!(cfg && cfg.chapters && cfg.chapters.indexOf(chIndex) !== -1);
+  }
+  function isFormManual() { return !!FORM_CONFIGS[_manual]; }
+  /* isFormManual() reste utilisée telle quelle pour initDeco (Format B,
+     decoration-cinema uniquement) — tous ses chapitres sont dans chapters[]. */
   function isAdmin() { return _email && ADMIN_EMAILS.indexOf(_email.toLowerCase().trim()) !== -1; }
 
   /* ─── CSS injecté ─────────────────────────────────────────────── */
@@ -411,9 +410,10 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     var quizSection = _quizSection;
     if (quizSection) buildQuizGate(quizSection, chapters.length, 'chapitres');
     var ex = getEx();
-    var useForm = isFormManual();
+    var useForm; /* recalculé par chapitre plus bas */
 
     chapters.forEach(function (ch, i) {
+      useForm = chapterUsesForm(i);
       /* Header badges */
       var head = ch.querySelector('.ch-head');
       if (head) {
