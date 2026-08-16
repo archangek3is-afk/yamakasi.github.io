@@ -202,7 +202,7 @@ footer .brandline b{ color:var(--encre); }
 @media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important; } }
 
 /* ===== GATE OKAPI ===== */
-#gate-overlay{position:fixed;inset:0;z-index:99999;background:#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;}
+#gate-overlay{position:fixed;inset:0;z-index:99999;background:#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 body.gate-unlocked #gate-overlay{display:none;}
 body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 #gate-overlay .g-eye{font-size:11px;letter-spacing:.2em;color:#C9A84C;text-transform:uppercase;margin-bottom:20px;}
@@ -247,6 +247,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
   /* --- gate overlay mobile --- */
   #gate-overlay { padding: 30px 16px; }
+  #gate-overlay { min-height: 100%; justify-content: flex-start; padding-top: max(30px, 6vh); }
   #gate-overlay h2 { font-size: clamp(20px, 5vw, 28px); }
   #gate-overlay p#gateMsg { font-size: 13.5px; max-width: 90vw; }
   #gate-overlay input#gateEmailInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
