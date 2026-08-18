@@ -42,9 +42,23 @@ main{ max-width:1100px; margin:0 auto; padding:60px 22px 100px; }
 .card.soon .status{ border-color:var(--fumee); color:var(--fumee); }
 footer{ text-align:center; padding:50px 22px; border-top:1px solid var(--line); font-family:var(--mono); font-size:11px; color:var(--fumee); letter-spacing:.1em; text-transform:uppercase;}
 footer b{ color:var(--or); }
+.video-section{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;margin-bottom:0}
+.video-section img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video-section iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.mute-btn{position:absolute;bottom:10px;right:12px;z-index:3;background:rgba(10,10,10,.6);border:1px solid rgba(245,240,232,.25);color:var(--craie);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.mute-btn:hover{background:rgba(10,10,10,.85)}
+@media(prefers-reduced-motion:reduce){.video-section iframe{display:none}.mute-btn{display:none}}
 </style>
 </head>
 <body>
+<div class="video-section">
+  <img src="https://i.ytimg.com/vi/gZjOg0vyZVI/hqdefault.jpg" alt="Aperçu de la vidéo — L'ÉCOLE OKAPI" fetchpriority="high">
+  <iframe id="heroVideo" src="https://www.youtube.com/embed/gZjOg0vyZVI?autoplay=1&mute=1&loop=1&playlist=gZjOg0vyZVI&controls=1&modestbranding=1&playsinline=1&rel=0&enablejsapi=1" loading="lazy" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="L'ÉCOLE OKAPI"></iframe>
+  <button class="mute-btn" id="muteBtn" aria-label="Activer le son">
+    <svg id="iconMuted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    <svg id="iconSound" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+  </button>
+</div>
 <header>
   <div class="eyebrow">Okapi Studios — Centre de formation</div>
   <h1>L'ÉCOLE <span>OKAPI</span></h1>
@@ -154,5 +168,21 @@ footer b{ color:var(--or); }
   </div>
 </main>
 <footer>Okapi Studios — <b>Centre de formation</b> · Okapi World Média</footer>
+<script>
+(function(){
+  var btn = document.getElementById('muteBtn');
+  var iframe = document.getElementById('heroVideo');
+  if(!btn || !iframe) return;
+  var muted = true;
+  function sendYT(cmd){ iframe.contentWindow.postMessage(JSON.stringify({event:'command',func:cmd,args:[]}),'*'); }
+  btn.addEventListener('click', function(){
+    muted = !muted;
+    sendYT(muted ? 'mute' : 'unMute');
+    document.getElementById('iconMuted').style.display = muted ? '' : 'none';
+    document.getElementById('iconSound').style.display = muted ? 'none' : '';
+    btn.setAttribute('aria-label', muted ? 'Activer le son' : 'Couper le son');
+  });
+})();
+</script>
 </body>
 </html>
