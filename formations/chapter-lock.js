@@ -221,6 +221,8 @@ section.chapter.ch-locked>*:not(.chapter-head):not(.deco-gate){display:none !imp
 section.chapter.ch-locked .deco-gate{display:block;}\
 .deco-gate p{font-family:var(--mono,monospace);font-size:11px;\
   color:var(--encre-dim,#777);text-transform:uppercase;letter-spacing:.08em;}\
+/* === Statut neutre (en attente) === */\
+.ch-form-status-info{color:#b8a56a;}\
 /* === Quiz gate === */\
 #quiz.quiz-gated>*:not(.quiz-gate-okapi){display:none !important;}\
 .quiz-gate-okapi{\
@@ -353,8 +355,8 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           statusMsg.textContent = '\u2713 Soumission accept\u00e9e \u2014 chapitre valid\u00e9\u00a0!';
           onVerified();
         } else if (st === 'en_attente') {
-          statusMsg.className = 'ch-form-status ch-form-status-ok';
-          statusMsg.textContent = 'Ta soumission est en cours de v\u00e9rification \u2014 tu recevras l\u2019acc\u00e8s d\u00e8s qu\u2019elle sera valid\u00e9e par l\u2019administrateur.';
+          statusMsg.className = 'ch-form-status ch-form-status-info';
+          statusMsg.textContent = 'En attente de v\u00e9rification. Si votre soumission est valid\u00e9e le chapitre suivant sera disponible.';
           verifyBtn.textContent = 'V\u00e9rifier \u00e0 nouveau';
           verifyBtn.disabled = false;
         } else if (st === 'refuse') {
@@ -362,8 +364,13 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           statusMsg.textContent = 'Ta soumission a \u00e9t\u00e9 refus\u00e9e \u2014 revois ton exercice et renvoie-le.';
           verifyBtn.textContent = 'R\u00e9essayer';
           verifyBtn.disabled = false;
+        } else if (st === 'aucune_soumission') {
+          statusMsg.className = 'ch-form-status ch-form-status-err';
+          statusMsg.textContent = 'Aucune soumission trouv\u00e9e pour ce chapitre. Compl\u00e8te le formulaire puis clique sur V\u00e9rifier.';
+          verifyBtn.textContent = 'R\u00e9essayer';
+          verifyBtn.disabled = false;
         } else {
-          /* aucune_soumission ou erreur réseau */
+          /* erreur réseau ou réponse inattendue */
           statusMsg.className = 'ch-form-status ch-form-status-err';
           statusMsg.textContent = 'Soumission non trouv\u00e9e. V\u00e9rifie avoir valid\u00e9 le formulaire, puis r\u00e9essaie.';
           verifyBtn.textContent = 'R\u00e9essayer';
