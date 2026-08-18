@@ -15,10 +15,15 @@
     var el = document.getElementById('gateMsg');
     if (el) el.textContent = text;
   }
-  function unlock(email, pwdCustomized){
+  function unlock(email, pwdCustomized, password){
     document.body.classList.add('gate-unlocked');
-    /* Persiste l'email pour que chapter-lock.js puisse syncer avec le serveur */
-    try { localStorage.setItem('okapi_email', email); } catch(e) {}
+    /* Persiste l'email ET le mot de passe pour que chapter-lock.js puisse
+       s'authentifier aupres des endpoints proteges (progression, exercices,
+       formulaires). Sans cela, ces appels sont refuses par le serveur. */
+    try {
+      localStorage.setItem('okapi_email', email);
+      if (password) sessionStorage.setItem('okapi_pwd', password);
+    } catch(e) {}
     /* Signale aux autres scripts que l'accès vient d'être accordé */
     document.dispatchEvent(new CustomEvent('okapi:unlocked', { detail: { email: email, pwdCustomized: !!pwdCustomized } }));
   }
@@ -61,7 +66,7 @@
         btn.disabled = false;
         btn.textContent = originalLabel;
         if (res && res.approved) {
-          unlock(email, res.pwdCustomized);
+          unlock(email, res.pwdCustomized, password);
         } else {
           setMsg("Email ou mot de passe incorrect, ou acces non autorise a ce manuel. Verifie tes identifiants, ou demande l'acces ci-dessous.");
         }

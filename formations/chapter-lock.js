@@ -276,24 +276,48 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     document.body.appendChild(sc);
   }
 
+  /* ─── Auth helpers ───────────────────────────────────────────── */
+  function getPwd() {
+    return sessionStorage.getItem('okapi_pwd') || '';
+  }
+  function handleAuthError(data) {
+    if (data && data.ok === false && data.error === 'Authentification requise') {
+      var existing = document.getElementById('okapi-auth-err');
+      if (existing) return true;
+      var msg = document.createElement('div');
+      msg.id = 'okapi-auth-err';
+      msg.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;' +
+        'background:#c0392b;color:#fff;text-align:center;padding:14px 20px;' +
+        'font-family:system-ui,sans-serif;font-size:13px;letter-spacing:.02em;';
+      msg.textContent = 'Votre session a expir\u00e9 — rechargez la page pour vous reconnecter.';
+      document.body.appendChild(msg);
+      return true;
+    }
+    return false;
+  }
+
   function serverSync(done) {
     if (!_email || !_manual) { if (done) done(); return; }
-    jsonpCall({ action: 'getProgress', email: _email, manual: _manual }, function (data) {
+    jsonpCall({ action: 'getProgress', email: _email, manual: _manual, password: getPwd() }, function (data) {
+      if (handleAuthError(data)) { if (done) done(); return; }
       if (data && typeof data === 'object' && !data.error) saveP(data);
       if (done) done();
     });
   }
   function serverSetChapter(chIndex) {
     if (!_email || !_manual) return;
-    jsonpCall({ action: 'setChapter', email: _email, manual: _manual, ch: chIndex }, null);
+    jsonpCall({ action: 'setChapter', email: _email, manual: _manual, ch: chIndex, password: getPwd() }, function (data) { handleAuthError(data); });
   }
   function serverSaveExerciseText(chIndex, text) {
     if (!_email || !_manual) return;
-    jsonpCall({ action: 'saveExerciseText', email: _email, manual: _manual, ch: chIndex, text: text }, null);
+    jsonpCall({ action: 'saveExerciseText', email: _email, manual: _manual, ch: chIndex, text: text, password: getPwd() }, function (data) { handleAuthError(data); });
   }
   function serverGetExerciseText(chIndex, cb) {
     if (!_email || !_manual) return;
-    jsonpCall({ action: 'getExerciseText', email: _email, manual: _manual, ch: chIndex }, cb);
+    jsonpCall({ action: 'getExerciseText', email: _email, manual: _manual, ch: chIndex, password: getPwd() }, function (data) {
+      if (handleAuthError(data)) return;
+      if (cb) cb(data);
+    });
   }
   function reapply() {
     if (_format === 'A') applyStandard(_chapters, _quizSection);
@@ -342,6 +366,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
     }
     function handleCheckResult(data) {
+      if (handleAuthError(data)) { stopPolling(); return; }
       var st = data && data.status;
       if (data && (data.ok || st === 'valide')) {
         stopPolling();
@@ -355,7 +380,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         verifyBtn.disabled = false;
         if (!pollTimer) {
           pollTimer = setInterval(function () {
-            jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex }, handleCheckResult);
+            jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex, password: getPwd() }, handleCheckResult);
           }, 17000);
         }
       } else if (st === 'refuse') {
@@ -395,7 +420,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       verifyBtn.textContent = 'V\u00e9rification\u2026';
       statusMsg.className = 'ch-form-status';
       statusMsg.textContent = '';
-      jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex }, handleCheckResult);
+      jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex, password: getPwd() }, handleCheckResult);
     });
 
     wrap.appendChild(desc);

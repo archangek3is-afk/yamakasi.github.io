@@ -128,6 +128,9 @@
         btn.textContent = originalLabel;
         if (res && res.ok) {
           msg.textContent = 'Mot de passe change avec succes !';
+          /* Met a jour le mot de passe en session : sans cela, les appels
+             suivants aux endpoints proteges echoueraient avec l'ancien. */
+          try { sessionStorage.setItem('okapi_pwd', newPwd); } catch(e) {}
           document.getElementById('pwdOld').value = '';
           document.getElementById('pwdNew').value = '';
         } else {
