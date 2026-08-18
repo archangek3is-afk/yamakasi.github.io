@@ -111,7 +111,7 @@ footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em
 @media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
 
 /* ===== GATE OKAPI ===== */
-#gate-overlay{position:fixed;inset:0;z-index:99999;background:#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+#gate-overlay{position:fixed;inset:0;z-index:99999;background:linear-gradient(rgba(10,10,10,.82),rgba(10,10,10,.82)),url("images/gate-bg.jpg") center/cover no-repeat,#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
 body.gate-unlocked #gate-overlay{display:none;}
 body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 #gate-overlay .g-eye{font-size:11px;letter-spacing:.2em;color:#C9A84C;text-transform:uppercase;margin-bottom:20px;}
