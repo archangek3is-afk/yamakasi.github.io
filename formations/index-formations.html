@@ -49,6 +49,14 @@ footer b{ color:var(--or); }
 .mute-btn:hover{background:rgba(10,10,10,.85)}
 @media(prefers-reduced-motion:reduce){.video-section iframe{display:none}.mute-btn{display:none}}
 @media(max-width:480px){.card-vignette{width:56px!important;height:56px!important}}
+/* Cards with thumbnail photo */
+.card.has-thumb{padding:0;overflow:hidden}
+.card-thumb{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.card.live.has-thumb:hover .card-thumb img{transform:scale(1.06)}
+.card-thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(10,10,10,.55));pointer-events:none}
+.card-body{padding:22px 26px 26px;position:relative}
+.card.has-thumb .num,.card.has-thumb h3,.card.has-thumb p,.card.has-thumb .status{margin-left:0}
 </style>
 </head>
 <body>
@@ -301,31 +309,29 @@ footer b{ color:var(--or); }
       <p>Présence, corps, vérité émotionnelle, architecture du personnage.</p>
       <span class="status">● Disponible</span>
     </a>
-    <a class="card live" href="communication-film.html">
-      <svg class="card-vignette" viewBox="0 0 120 120" aria-hidden="true" style="position:absolute;top:0;right:0;width:88px;height:88px;opacity:.16;pointer-events:none;">
-        <circle cx="98" cy="22" r="6" fill="#FF5A5F"/>
-        <path d="M98,22 m-18,0 a18,18 0 0,1 -18,18" fill="none" stroke="#FF5A5F" stroke-width="3" stroke-linecap="round"/>
-        <path d="M98,22 m-34,0 a34,34 0 0,1 -34,34" fill="none" stroke="#1B2A4A" stroke-width="3" stroke-linecap="round"/>
-        <path d="M98,22 m-50,0 a50,50 0 0,1 -50,50" fill="none" stroke="#FF5A5F" stroke-width="2.5" stroke-linecap="round" opacity=".7"/>
-      </svg>
-      <span class="num">16 — Communication</span>
-      <h3>Communication d'un film</h3>
-      <p>Stratégie digitale, relations presse, activations, identité de marque — communiquer un film comme le film qu'il est.</p>
-      <span class="status">● Disponible</span>
+    <!-- Photo: "Main Cinema, Nacogdoches, Texas" by Steve Snodgrass — CC BY 2.0 https://creativecommons.org/licenses/by/2.0/ — https://www.flickr.com/photos/10710442@N08/7356121106 -->
+    <a class="card live has-thumb" href="communication-film.html">
+      <div class="card-thumb">
+        <img src="images/hub/communication-film-thumb.jpg" alt="" loading="lazy" title="Main Cinema, Nacogdoches, Texas — Steve Snodgrass, CC BY 2.0">
+      </div>
+      <div class="card-body">
+        <span class="num">16 — Communication</span>
+        <h3>Communication d'un film</h3>
+        <p>Stratégie digitale, relations presse, activations, identité de marque — communiquer un film comme le film qu'il est.</p>
+        <span class="status">● Disponible</span>
+      </div>
     </a>
-    <a class="card live" href="smartphone-filmmaking.html">
-      <svg class="card-vignette" viewBox="0 0 120 120" aria-hidden="true" style="position:absolute;top:0;right:0;width:80px;height:88px;opacity:.16;pointer-events:none;">
-        <rect x="70" y="8" width="40" height="72" rx="8" fill="none" stroke="#C6FF3D" stroke-width="3"/>
-        <line x1="82" y1="16" x2="98" y2="16" stroke="#C6FF3D" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="90" cy="70" r="3" fill="#C6FF3D"/>
-        <circle cx="60" cy="30" r="5" fill="#C6FF3D">
-          <animate attributeName="opacity" values="1;.25;1" dur="1.8s" repeatCount="indefinite"/>
-        </circle>
-      </svg>
-      <span class="num">17 — Smartphone</span>
-      <h3>Smartphone Filmmaking</h3>
-      <p>Filmer avec son téléphone comme un cinéaste — réglages manuels, son, lumière disponible, workflow mobile.</p>
-      <span class="status">● Disponible</span>
+    <!-- Photo: "At sunset – Dublin, Ireland – Color street photography" by Giuseppe Milo (www.pixael.com) — CC BY 2.0 https://creativecommons.org/licenses/by/2.0/ — https://www.flickr.com/photos/87690240@N03/19639092990 -->
+    <a class="card live has-thumb" href="smartphone-filmmaking.html">
+      <div class="card-thumb">
+        <img src="images/hub/smartphone-filmmaking-thumb.jpg" alt="" loading="lazy" title="At sunset – Dublin, Ireland – Giuseppe Milo (www.pixael.com), CC BY 2.0">
+      </div>
+      <div class="card-body">
+        <span class="num">17 — Smartphone</span>
+        <h3>Smartphone Filmmaking</h3>
+        <p>Filmer avec son téléphone comme un cinéaste — réglages manuels, son, lumière disponible, workflow mobile.</p>
+        <span class="status">● Disponible</span>
+      </div>
     </a>
   </div>
 </main>
