@@ -336,6 +336,50 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       setTimeout(function () { verifyBtn.disabled = false; }, 1500);
     });
 
+    /* ── Polling automatique ── */
+    var pollTimer = null;
+    function stopPolling() {
+      if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+    }
+    function handleCheckResult(data) {
+      var st = data && data.status;
+      if (data && (data.ok || st === 'valide')) {
+        stopPolling();
+        statusMsg.className = 'ch-form-status ch-form-status-ok';
+        statusMsg.textContent = '\u2713 Soumission accept\u00e9e \u2014 chapitre valid\u00e9\u00a0!';
+        onVerified();
+      } else if (st === 'en_attente') {
+        statusMsg.className = 'ch-form-status ch-form-status-info';
+        statusMsg.textContent = 'En attente de v\u00e9rification. Si votre soumission est valid\u00e9e le chapitre suivant sera disponible.';
+        verifyBtn.textContent = 'V\u00e9rifier \u00e0 nouveau';
+        verifyBtn.disabled = false;
+        if (!pollTimer) {
+          pollTimer = setInterval(function () {
+            jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex }, handleCheckResult);
+          }, 17000);
+        }
+      } else if (st === 'refuse') {
+        stopPolling();
+        statusMsg.className = 'ch-form-status ch-form-status-err';
+        statusMsg.textContent = 'Ta soumission a \u00e9t\u00e9 refus\u00e9e \u2014 revois ton exercice et renvoie-le.';
+        verifyBtn.textContent = 'R\u00e9essayer';
+        verifyBtn.disabled = false;
+      } else if (st === 'aucune_soumission') {
+        stopPolling();
+        statusMsg.className = 'ch-form-status ch-form-status-err';
+        statusMsg.textContent = 'Aucune soumission trouv\u00e9e pour ce chapitre. Compl\u00e8te le formulaire puis clique sur V\u00e9rifier.';
+        verifyBtn.textContent = 'R\u00e9essayer';
+        verifyBtn.disabled = false;
+      } else {
+        stopPolling();
+        statusMsg.className = 'ch-form-status ch-form-status-err';
+        statusMsg.textContent = 'Soumission non trouv\u00e9e. V\u00e9rifie avoir valid\u00e9 le formulaire, puis r\u00e9essaie.';
+        verifyBtn.textContent = 'R\u00e9essayer';
+        verifyBtn.disabled = false;
+      }
+    }
+    window.addEventListener('beforeunload', stopPolling);
+
     verifyBtn.addEventListener('click', function () {
       if (verifyBtn.disabled) return;
       if (!_email) {
@@ -343,40 +387,12 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         statusMsg.textContent = 'Connecte-toi d\u2019abord pour v\u00e9rifier.';
         return;
       }
+      stopPolling();
       verifyBtn.disabled = true;
       verifyBtn.textContent = 'V\u00e9rification\u2026';
       statusMsg.className = 'ch-form-status';
       statusMsg.textContent = '';
-
-      jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex }, function (data) {
-        var st = data && data.status;
-        if (data && (data.ok || st === 'valide')) {
-          statusMsg.className = 'ch-form-status ch-form-status-ok';
-          statusMsg.textContent = '\u2713 Soumission accept\u00e9e \u2014 chapitre valid\u00e9\u00a0!';
-          onVerified();
-        } else if (st === 'en_attente') {
-          statusMsg.className = 'ch-form-status ch-form-status-info';
-          statusMsg.textContent = 'En attente de v\u00e9rification. Si votre soumission est valid\u00e9e le chapitre suivant sera disponible.';
-          verifyBtn.textContent = 'V\u00e9rifier \u00e0 nouveau';
-          verifyBtn.disabled = false;
-        } else if (st === 'refuse') {
-          statusMsg.className = 'ch-form-status ch-form-status-err';
-          statusMsg.textContent = 'Ta soumission a \u00e9t\u00e9 refus\u00e9e \u2014 revois ton exercice et renvoie-le.';
-          verifyBtn.textContent = 'R\u00e9essayer';
-          verifyBtn.disabled = false;
-        } else if (st === 'aucune_soumission') {
-          statusMsg.className = 'ch-form-status ch-form-status-err';
-          statusMsg.textContent = 'Aucune soumission trouv\u00e9e pour ce chapitre. Compl\u00e8te le formulaire puis clique sur V\u00e9rifier.';
-          verifyBtn.textContent = 'R\u00e9essayer';
-          verifyBtn.disabled = false;
-        } else {
-          /* erreur réseau ou réponse inattendue */
-          statusMsg.className = 'ch-form-status ch-form-status-err';
-          statusMsg.textContent = 'Soumission non trouv\u00e9e. V\u00e9rifie avoir valid\u00e9 le formulaire, puis r\u00e9essaie.';
-          verifyBtn.textContent = 'R\u00e9essayer';
-          verifyBtn.disabled = false;
-        }
-      });
+      jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex }, handleCheckResult);
     });
 
     wrap.appendChild(desc);
