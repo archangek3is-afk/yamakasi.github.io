@@ -36,18 +36,18 @@
       '.pwd-change-box .pwd-close{margin-top:16px;font-size:11px;color:#8a8a85;cursor:pointer;' +
       'text-decoration:underline;}' +
       '.pwd-change-msg{font-size:12px;color:#8a8a85;margin-top:12px;min-height:16px;line-height:1.5;}' +
-      '.pwd-banner{position:fixed;top:0;left:0;right:0;z-index:9997;background:#0A0A0A;' +
-      'border-bottom:1px solid #C9A84C;padding:14px 20px;display:none;' +
-      'align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;text-align:center;' +
-      'font-family:Arial,Helvetica,sans-serif;}' +
-      '.pwd-banner.open{display:flex;}' +
-      '.pwd-banner span{color:#F5F0E8;font-size:13px;}' +
-      '.pwd-banner button{border:none;padding:9px 18px;font-size:11px;font-weight:700;' +
+      '.pwd-banner-overlay{position:fixed;inset:0;z-index:9997;background:rgba(10,9,16,0.92);' +
+      'display:none;align-items:center;justify-content:center;padding:20px;}' +
+      '.pwd-banner-overlay.open{display:flex;}' +
+      '.pwd-banner-box{background:#0A0A0A;border:1px solid #C9A84C;max-width:360px;width:100%;' +
+      'padding:30px 26px;font-family:Arial,Helvetica,sans-serif;text-align:center;border-radius:2px;}' +
+      '.pwd-banner-box span{color:#F5F0E8;font-size:15px;line-height:1.6;display:block;margin-bottom:22px;}' +
+      '.pwd-banner-box button{width:100%;border:none;padding:12px;font-size:12px;font-weight:700;' +
       'text-transform:uppercase;letter-spacing:.5px;cursor:pointer;border-radius:2px;' +
-      'font-family:inherit;}' +
-      '.pwd-banner .pwd-banner-yes{background:#C9A84C;color:#0A0A0A;}' +
-      '.pwd-banner .pwd-banner-no{background:transparent;color:#8a8a85;' +
-      'border:1px solid rgba(255,255,255,.2);}';
+      'font-family:inherit;margin-bottom:10px;}' +
+      '.pwd-banner-yes{background:#C9A84C;color:#0A0A0A;}' +
+      '.pwd-banner-no{background:transparent;color:#8a8a85;' +
+      'border:1px solid rgba(255,255,255,.2)!important;margin-bottom:0!important;}';
     document.head.appendChild(style);
 
     var link = document.createElement('a');
@@ -57,11 +57,13 @@
     document.body.appendChild(link);
 
     var banner = document.createElement('div');
-    banner.className = 'pwd-banner';
+    banner.className = 'pwd-banner-overlay';
     banner.innerHTML =
-      '<span>\uD83D\uDD11 Envie de personnaliser ton mot de passe ?</span>' +
-      '<button class="pwd-banner-yes" id="pwdBannerYes">Le changer maintenant</button>' +
-      '<button class="pwd-banner-no" id="pwdBannerNo">Plus tard</button>';
+      '<div class="pwd-banner-box">' +
+        '<span>\uD83D\uDD11 Envie de personnaliser ton mot de passe ?</span>' +
+        '<button class="pwd-banner-yes" id="pwdBannerYes">Le changer maintenant</button>' +
+        '<button class="pwd-banner-no" id="pwdBannerNo">Plus tard</button>' +
+      '</div>';
     document.body.appendChild(banner);
 
     var modal = document.createElement('div');
