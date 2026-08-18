@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Communication d'un film — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#1B2A4A; --noir-2:#162240; --noir-3:#1c2e50;
+  --emerald:#FF5A5F; --emerald-d:#e04045; --or:#FF5A5F;
+  --craie:#f0f2ee; --fumee:#8c948e; --line: rgba(240,242,238,0.12);
+  --display:'Syne', sans-serif; --body:'Poppins', sans-serif; --mono:'Poppins', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--emerald); color:var(--noir);} img,svg{ display:block; max-width:100%;}
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 18% 10%, rgba(255,90,95,0.12), transparent 45%), radial-gradient(circle at 85% 88%, rgba(255,90,95,0.08), transparent 40%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(27,42,74,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;}
+.brand .light{ width:10px; height:10px; border-radius:50%; background:var(--emerald); box-shadow:0 0 8px var(--emerald);}
+.brand b{ color:var(--craie); font-weight:700;}
+nav.links{ display:none; gap:26px;} nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--emerald); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--craie);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--emerald); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:800; font-size:clamp(34px,8vw,80px); line-height:1.05; letter-spacing:-.01em; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--emerald);}
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:600px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.greenlight{ position:relative; z-index:1; margin-top:44px; display:flex; gap:16px; align-items:center; opacity:0; animation:up .8s .65s ease forwards;}
+.gl-dot{ width:20px; height:20px; border-radius:50%; }
+.gl-dot.red{ background:#5a2a26;} .gl-dot.amber{ background:#8a6a2a;} .gl-dot.green{ background:var(--emerald); box-shadow:0 0 16px var(--emerald);}
+.gl-label{ font-family:var(--mono); font-size:11px; color:var(--fumee); letter-spacing:.06em; text-transform:uppercase;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:800; font-size:20px; color:var(--emerald);} .stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--emerald); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(24px,4vw,40px); line-height:1.2; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--emerald);}
+.role-card h4{ font-family:var(--display); font-weight:700; font-size:14px; margin-bottom:8px;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-weight:800; font-size:28px; color:transparent; -webkit-text-stroke:1.2px var(--emerald); line-height:1; flex-shrink:0; width:52px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:700; font-size:clamp(15px,2.1vw,19px);}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--or); text-transform:uppercase; letter-spacing:.04em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--emerald); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--emerald); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--emerald);}
+.callout{ background:rgba(255,90,95,0.08); border:1px solid var(--emerald-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--craie);} .callout b{ color:var(--emerald);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--emerald); transform:translateY(-2px);}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--emerald); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--emerald); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--craie); margin-top:4px; line-height:1.35; font-weight:500;}
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--craie);} .book-card .spine{ width:8px; align-self:stretch; background:var(--or); flex-shrink:0;}
+.book-card .auth{ font-family:var(--mono); font-size:10px; color:var(--or); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-weight:700; font-size:13.5px; margin-top:4px; color:var(--craie);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--emerald);}
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--emerald-d); font-weight:600; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#1a1c1a; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+.diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
+.budget-bar{ display:flex; height:44px; width:100%; overflow:hidden; border:1px solid var(--line);}
+.budget-bar div{ display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:10px; color:var(--noir); font-weight:600;}
+.budget-legend{ display:flex; flex-wrap:wrap; gap:16px; margin-top:14px; justify-content:center;}
+.budget-legend span{ font-family:var(--mono); font-size:10.5px; color:var(--fumee); display:flex; align-items:center; gap:6px;}
+.budget-legend .sw{ width:10px; height:10px; display:inline-block;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--emerald); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--emerald);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--or);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:6px;} .case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--or); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-weight:700; font-size:14px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--or);}
+.quiz-opt input{ accent-color:var(--emerald);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--or); background:rgba(255,90,95,0.1);} .quiz-opt.wrong span{ color:var(--or);}
+#quizScore{ font-family:var(--display); font-weight:800; font-size:18px; color:var(--emerald); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,22px); color:var(--craie); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--emerald);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--emerald);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+
+/* ===== GATE OKAPI ===== */
+#gate-overlay{position:fixed;inset:0;z-index:99999;background:linear-gradient(rgba(10,10,10,.82),rgba(10,10,10,.82)),url("images/gate-bg.jpg") center/cover no-repeat,#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+body.gate-unlocked #gate-overlay{display:none;}
+body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
+#gate-overlay .g-eye{font-size:11px;letter-spacing:.2em;color:#C9A84C;text-transform:uppercase;margin-bottom:20px;}
+#gate-overlay h2{font-weight:800;font-size:clamp(22px,5vw,32px);color:#F5F0E8;margin-bottom:14px;}
+#gate-overlay p#gateMsg{color:#8a8a85;font-size:14px;line-height:1.65;max-width:380px;margin:0 auto 26px;}
+#gate-overlay form#gateLoginForm{display:flex;flex-direction:column;align-items:center;margin-bottom:14px;gap:10px;}
+#gate-overlay input#gateEmailInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#F5F0E8;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gatePasswordInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#F5F0E8;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay input#gatePasswordInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #C9A84C;color:#C9A84C;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
+#gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#C9A84C;color:#0A0A0A;}
+
+/* === RESPONSIVE MOBILE === */
+@media(max-width:768px){
+  html, body { overflow-x: hidden; }
+  img, video, iframe, canvas, svg { max-width: 100%; height: auto; }
+  pre, code, .mono, [style*="font-family:monospace"],
+  [style*="Courier"], [style*="JetBrains"], [style*="IBM Plex Mono"] {
+    overflow-x: auto; word-break: break-word;
+  }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .hero { padding: 90px 16px 50px; min-height: 70vh; }
+  section { padding: 40px 14px; }
+  .section-head { padding: 0 6px; margin-bottom: 30px; }
+  .ch-head { padding: 14px 10px; gap: 10px; min-height: 54px; }
+  .ch-head .ch-info { min-width: 0; }
+  .ch-body { padding: 18px 12px; }
+  .quiz-opt { padding: 14px 14px; min-height: 48px; gap: 12px; }
+  .quiz-opt span { font-size: 14px; }
+  .quiz-opt input { width: 20px; height: 20px; min-width: 20px; }
+  .quiz-q { padding: 18px 14px; }
+  .exercice { padding: 20px 14px; }
+  #quizBtn, .quiz-btn, [onclick*="scoreQuiz"] { min-height: 48px; padding: 14px 24px; font-size: 14px; }
+  #gate-overlay { padding: 30px 16px; }
+  #gate-overlay { min-height: 100%; justify-content: flex-start; padding-top: max(30px, 6vh); }
+  #gate-overlay h2 { font-size: clamp(20px, 5vw, 28px); }
+  #gate-overlay p#gateMsg { font-size: 13.5px; max-width: 90vw; }
+  #gate-overlay input#gateEmailInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
+  #gate-overlay input#gatePasswordInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
+  #gate-overlay a#gateRequestLink, #gate-overlay button#gateLoginBtn { padding: 14px 24px; font-size: 12px; min-height: 48px; }
+  .watch-card { flex-direction: column; align-items: flex-start; }
+  .watch-card img { width: 100%; height: auto; max-height: 180px; }
+  .book-card { flex-direction: column; }
+  .pull { padding: 0 14px; margin-bottom: 40px; }
+  footer { padding: 50px 16px 30px; }
+}
+
+@media(max-width:430px){
+  .hero { padding: 80px 12px 40px; }
+  section { padding: 30px 10px; }
+  .ch-head { padding: 12px 8px; }
+  .ch-body { padding: 14px 10px; }
+  .quiz-q { padding: 14px 10px; }
+  .quiz-opt { padding: 12px 10px; }
+  .exercice { padding: 16px 10px; }
+  #gate-overlay input#gateEmailInput { max-width: 90vw; }
+  #gate-overlay input#gatePasswordInput { max-width: 90vw; }
+  .case-strip { gap: 12px; }
+}
+
+@media(max-width:768px){
+  .budget-legend { flex-wrap: wrap; gap: 8px; }
+}
+@media(max-width:768px){#gate-overlay{background:linear-gradient(rgba(10,10,10,.82),rgba(10,10,10,.82)),url("images/gate-bg-mobile.jpg") center/cover no-repeat,#0A0A0A;}}
+</style>
+</head>
+<body>
+<div id="gate-overlay">
+  <div class="g-eye">Okapi Studios &mdash; Accès protégé</div>
+  <h2>Contenu réservé</h2>
+  <p id="gateMsg">Entre l'email avec lequel ton accès a été validé.</p>
+  <form id="gateLoginForm">
+    <input type="email" id="gateEmailInput" placeholder="ton@email.com" required>
+    <input type="password" id="gatePasswordInput" placeholder="Mot de passe" required>
+    <button type="submit" id="gateLoginBtn">Se connecter</button>
+  </form>
+  <a id="gateRequestLink" href="acces.html">Pas encore d&rsquo;accès&nbsp;? Demander l&rsquo;accès</a>
+</div>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="light"></span> OKAPI STUDIOS — <b>COMMUNICATION D'UN FILM</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Références</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Approches</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">GREENLIGHT — Manuel de formation, communication</div>
+  <h1 class="title">COMMUNICATION <span>D'UN FILM</span></h1>
+  <p class="subtitle">Stratégie digitale, relations presse, activations, identité de marque — communiquer un film comme le film qu'il est.</p>
+  <div class="greenlight">
+    <div class="gl-dot red"></div><div class="gl-dot amber"></div><div class="gl-dot green"></div>
+    <span class="gl-label">Feu vert donné</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">Digital</div><div class="l">+ Physique</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">Questions de quiz</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">FADE IN, COMMUNICATION</div>
+    <h2>La communication d'un film commence avec le scénario, pas avec l'affiche.</h2>
+    <p class="lede">Avant qu'une caméra ne tourne, quelqu'un doit avoir formulé ce que le film promet à son public. <b style="color:var(--craie)">C'est le premier acte de communication de toute production.</b></p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>📣 Ce qu'elle construit</h4><p>La promesse centrale du film — ce qu'il promet émotionnellement à son public, avant même d'exister.</p></div>
+    <div class="role-card"><h4>🎯 Ce qu'elle cible</h4><p>Le bon public, sur le bon support, au bon moment — pas tous les publics partout tout le temps.</p></div>
+    <div class="role-card"><h4>📊 Ce qu'elle mesure</h4><p>Pas seulement la portée — l'impact réel sur les entrées en salle et l'engagement véritable.</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>À retenir —</b> Un film mal positionné dès le départ sera difficile à vendre, même s'il est excellent. La communication ne rattrape pas une promesse mal formulée.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">TOP SHEET</div><h2>Neuf chapitres, du développement à la mesure d'impact.</h2></div>
+
+  <div class="chapitre fade" data-ch="0">
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Penser communication dès le scénario</h3><div class="ch-tag">Promesse centrale</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">La communication d'un film ne commence pas le jour où le film sort — elle se construit en même temps que le pitch. Avant le premier jour de tournage, l'équipe de communication doit avoir identifié la promesse centrale du film : qu'est-ce que ce film promet à son public ? Quelle émotion, quelle révélation, quel univers ? Cette promesse est le fil directeur de toute la campagne à venir. Un film mal positionné dès le départ sera difficile à vendre, même s'il est excellent. Le communicant doit donc travailler avec le réalisateur et le producteur très en amont, participer aux réunions de développement, lire les versions du scénario — pas pour en juger la qualité artistique, mais pour détecter ce qui peut accrocher un public, et formuler la bonne accroche avant même que le film existe.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — La promesse centrale</span><h4>Formule la promesse d'un film</h4><p>Choisis un film que tu as vu récemment. Rédige en 3 à 5 phrases sa "promesse" telle qu'elle aurait dû être formulée en amont de la production — pas le synopsis, mais ce que le film promet émotionnellement à celui qui s'apprête à l'acheter.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="1">
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Communication digitale</h3><div class="ch-tag">Réseaux sociaux &amp; storytelling</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Les réseaux sociaux ont radicalement transformé la façon dont un film se fait connaître avant sa sortie. Chaque plateforme a sa propre grammaire : Instagram valorise l'esthétique et les portraits, TikTok récompense la spontanéité et le format vertical court, YouTube est le territoire du trailer long et du making-of, X (Twitter) est le lieu du débat et de la polémique maîtrisée. Publier le même contenu partout est une erreur — il faut adapter chaque contenu à la logique de la plateforme qui le reçoit. Le storytelling digital d'un film se construit comme une série : on dévoile progressivement, on crée de l'attente, on alterne révélation et mystère. Le rythme de publication est aussi important que le contenu lui-même — une campagne digitale qui s'emballe trop tôt épuise son public avant la sortie.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — Plan de publication</span><h4>4 semaines de campagne digitale</h4><p>Conçois un plan de publication sur 4 semaines pour la sortie fictive d'un court-métrage que tu viens de terminer. Précise pour chaque semaine : quelle plateforme, quel type de contenu, quel objectif (awareness, engagement, conversion). Rédige au moins 3 accroches de publications.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="2">
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>Communication physique et traditionnelle</h3><div class="ch-tag">Presse, affichage, radio</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">À l'ère du tout-digital, la communication physique a regagné de la valeur précisément parce qu'elle est devenue rare. Une affiche bien placée, un encart dans un magazine de cinéma, un passage radio matinal — ces supports touchent des audiences qui ne sont pas sur les réseaux sociaux, ou qui leur accordent moins de crédit. Pour un film d'auteur ou un documentaire, la presse écrite spécialisée reste un vecteur de légitimité incomparable. Pour un film familial, un encart dans un magazine pratique ou une interview en radio locale peut déclencher plus d'entrées qu'une campagne Instagram. Les festivals, même régionaux, restent des espaces où un film peut construire sa réputation de bouche-à-oreille avant sa sortie en salle. La communication physique et digitale ne s'opposent pas — elles se complètent si on les pense ensemble.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — Supports physiques</span><h4>5 supports pour un film de genre</h4><p>Identifie 5 supports de communication physique ou traditionnelle adaptés à un film de genre (thriller, horreur, ou comédie) ciblant un public de 25-45 ans. Justifie chaque choix en expliquant pourquoi ce support atteint ce public mieux qu'un post Instagram.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="3">
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Stratégie d'activation</h3><div class="ch-tag">Événements &amp; écho médiatique</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une activation est un événement ou une action qui crée son propre écho médiatique — elle génère de la couverture sans qu'on ait à la payer directement. L'avant-première est l'activation classique : elle réunit des influenceurs, des journalistes et des personnalités qui vont ensuite relayer leur expérience. Mais une activation peut aussi être une installation pop-up, un jeu de piste en ville, une expérience immersive liée à l'univers du film, ou un partenariat de marque activé au bon moment. La règle d'or : l'activation doit être cohérente avec l'univers du film et suffisamment singulière pour qu'on ait envie d'en parler. Une avant-première dans un cinéma ordinaire avec un buffet standard est une activation sans potentiel viral. Une projection sur un toit-terrasse avec une scénographie qui rappelle l'univers du film peut se retrouver partout le lendemain.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — Activation originale</span><h4>Imagine une activation pour un film sur l'IA</h4><p>Imagine une activation originale pour la sortie d'un film sur le thème de l'intelligence artificielle. Décris en détail : le lieu, la scénographie, les invités, le moment dans le calendrier de sortie, et le mécanisme qui fera que les gens en parleront spontanément.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="4">
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Community management</h3><div class="ch-tag">Publier vs engager</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Animer une communauté autour d'un film, c'est différent de publier du contenu régulièrement. La différence entre publier et engager est fondamentale : on peut avoir 100 000 abonnés et ne générer aucune conversation, ou avoir 5 000 abonnés très engagés qui deviennent des ambassadeurs actifs du film. Le community manager d'un film doit penser à trois temps : avant la sortie (construire l'attente, présenter l'équipe, nourrir la curiosité), pendant la sortie (amplifier les avis positifs, répondre aux questions, créer des rendez-vous), après la sortie (maintenir la vie du film, préparer les exploitations secondaires, entretenir la communauté de fans). Un commentaire sans réponse est une opportunité manquée. Une question sur un cast ou un lieu de tournage est une invitation à un contenu de coulisse. Le community manager qui comprend ça transforme chaque interaction en carburant de campagne.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Réponse et stratégie</span><h4>Transforme un commentaire en contenu</h4><p>Tu gères le compte Instagram d'un film qui sort dans 3 semaines. Tu reçois un commentaire : "C'est quoi le rapport avec le film du même nom sorti en 2018 ?" Rédige une réponse qui engage, qui clarifie sans être défensive, et qui relance la conversation. Explique aussi ta stratégie pour transformer ce type d'échange en contenu.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="5">
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Le rétroplanning de communication</h3><div class="ch-tag">Organisation &amp; calendrier</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Une campagne de communication qui s'improvise rate toujours au pire moment — généralement la semaine de la sortie, quand tout le monde est épuisé et que les décisions se prennent dans l'urgence. Le rétroplanning part de la date de sortie et remonte dans le temps : à J-12 semaines, que doit-on avoir en place ? À J-8 semaines, quels contenus doivent être prêts ? À J-4 semaines, qu'est-ce qui doit déjà être publié ? La courbe d'intensité d'une campagne doit monter progressivement, atteindre son pic la semaine de la sortie, puis maintenir un niveau suffisant pendant les deux premières semaines d'exploitation. Un piège classique : tout concentrer sur la semaine de sortie et ne rien avoir prévu pour la deuxième semaine, qui est souvent décisive pour la durée d'exploitation en salle.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — Rétroplanning 10 semaines</span><h4>Construis un calendrier de campagne</h4><p>Construis un rétroplanning de communication sur 10 semaines pour un film de fiction sortant en salle. Utilise un format tableau (semaine / action / support / contenu prévu) et justifie l'ordre et le rythme choisis.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="6">
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Relations presse et influenceurs</h3><div class="ch-tag">Dossier &amp; ciblage</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un dossier de presse qui se lit commence par une accroche, pas par la fiche technique. Les journalistes reçoivent des dizaines de dossiers par semaine — le tien doit capter l'attention en 10 secondes ou il sera mis de côté. L'accroche peut être une citation du réalisateur, une anecdote de tournage révélatrice, ou une question que le film pose à son époque. La fiche technique vient ensuite, suivie des notes d'intention, des biographies synthétiques et des photos de presse en haute résolution. Pour les influenceurs, la logique est différente : ils ne veulent pas un dossier, ils veulent une histoire personnelle et une expérience exclusive. Les inviter à un tournage, leur proposer une interview en coulisses, leur envoyer un kit soigné avant la sortie — le soin apporté au premier contact détermine souvent la qualité de leur couverture. Cibler juste plutôt que large : 5 influenceurs vraiment alignés avec l'univers du film valent mieux que 50 contacts génériques.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — Dossier de presse</span><h4>Accroche et ciblage influenceurs</h4><p>Rédige l'accroche et le premier paragraphe du dossier de presse d'un film de ton choix (réel ou fictif). Ensuite, identifie 3 influenceurs ou comptes spécialisés (réels) que tu ciblerais en priorité pour ce film, et explique pourquoi chacun est pertinent.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="7">
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Mesurer l'efficacité</h3><div class="ch-tag">KPIs &amp; impact réel</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">La portée (reach) est la métrique la plus souvent mise en avant dans les bilans de campagne parce qu'elle est la plus flatteuse — et la moins significative. 2 millions d'impressions ne signifient rien si personne n'est allé voir le film. Les KPIs réellement utiles pour mesurer l'efficacité d'une campagne de film sont : le taux d'engagement (interactions divisées par portée), le click-through rate sur les liens de billetterie, l'évolution du sentiment (positif / neutre / négatif) dans les commentaires, le nombre de critiques publiées et leur tonalité, et l'impact sur les ventes réelles de billets. Distinguer la portée vantée de l'impact réel demande de croiser les données digitales avec les données d'entrées en salle semaine par semaine. Une campagne qui génère beaucoup de bruit sans entraîner de déplacement au cinéma est une campagne qui a raté son objectif principal, quelle que soit sa beauté formelle.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Analyse de bilan</span><h4>Décode un bilan de campagne</h4><p>Tu reçois le bilan d'une campagne Instagram pour un film : 4,2M d'impressions, 1,8% de taux d'engagement, 0,3% de CTR sur le lien de billetterie. Le film a fait 12 000 entrées en première semaine, pour un objectif de 40 000. Analyse ces chiffres : qu'est-ce qui a fonctionné, qu'est-ce qui a échoué, et que changerais-tu pour la deuxième semaine ?</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="8">
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Construire une identité de marque autour du film</h3><div class="ch-tag">Bible de communication</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un film qui communique bien ressemble à lui-même dans chaque point de contact avec le public. L'affiche, les trailers, les publications sur les réseaux, le ton des communiqués de presse, le site officiel, les goodies — tout doit être cohérent avec l'univers du film et la promesse qu'on a formulée dès le départ. Cette cohérence ne s'improvise pas : elle se construit à partir d'un document de référence (parfois appelé "bible de communication") qui définit la palette de couleurs, les typographies, le ton rédactionnel, les éléments visuels récurrents, et les règles d'usage. Un film d'auteur sombre et contemplatif n'a pas les mêmes codes visuels qu'une comédie familiale — et la communication doit le signaler immédiatement, sans que le public ait besoin de lire un seul mot. La communication qui ressemble au film qu'elle promeut est la communication qui ne trahit pas le spectateur qui va en salle.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Identité de marque</span><h4>Reconstruis une communication décalée</h4><p>Choisis un film que tu as vu récemment et que tu as trouvé mal communicé (la communication ne ressemblait pas au film). Décris en quoi la communication était décalée, puis propose les grandes lignes d'une identité de marque cohérente avec ce que le film est réellement.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Approches</div><h2>Deux philosophies de la communication de film.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">A24</div><div class="signature">La communication comme extension artistique</div><p>Chaque campagne A24 ressemble au film qu'elle promeut — des affiches minimalistes aux activations bizarres qui génèrent leur propre couverture.</p></div>
+    <div class="case-card"><div class="name">Universal / Disney</div><div class="signature">La machine à impressions</div><p>Des campagnes à budget massif, des spots TV à saturation, des partenariats de marque mondiaux — la portée maximale avant la réflexion sur le fond.</p></div>
+    <div class="case-card"><div class="name">Neon</div><div class="signature">Le ciblage juste</div><p>Distributeur de Parasite, Memoria, Titane — des campagnes précises qui visent le bon public, pas le plus grand public. La qualité du contact avant la quantité.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Bibliographie et ressources.</h2></div>
+  <div class="grid g2 fade">
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Seth Godin</span><div class="ttl">This Is Marketing (2018)</div><div class="desc">Une philosophie du marketing qui s'applique directement à la communication de film — trouver le minimum d'audience viable avant de viser large.</div></div></div>
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Mark Litwak</span><div class="ttl">Reel Power: The Struggle for Influence and Success in the New Hollywood</div><div class="desc">Comment le marketing et la distribution influencent chaque décision créative à Hollywood.</div></div></div>
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Dorie Clark</span><div class="ttl">Stand Out (2015)</div><div class="desc">Construire une position distincte dans un marché encombré — applicable à la communication de n'importe quel film ambitieux.</div></div></div>
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Ressource générale</span><div class="ttl">Box Office Mojo / The Numbers</div><div class="desc">Pour analyser les corrélations entre campagnes de communication et résultats d'entrées en salle — la pratique par les données.</div></div></div>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. À quel moment idéal la réflexion communication doit-elle commencer sur un film ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Dès le développement / le scénario</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Après le montage final</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>La semaine avant la sortie</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Quelle est la grammaire propre à TikTok pour la promotion d'un film ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Les portraits esthétiques et les images léchées</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Format vertical court et spontané</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Les trailers longs et les making-of</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Qu'est-ce qu'une activation ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Un post sponsorisé sur les réseaux sociaux</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Une avant-première standard dans un cinéma</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Un événement qui crée son propre écho médiatique</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Quelle métrique est la plus flatteuse mais la moins significative ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>La portée (reach / impressions)</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Le taux d'engagement</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Le CTR sur les liens de billetterie</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. À quoi sert le rétroplanning de communication ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>À planifier uniquement la semaine de sortie</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>À organiser la campagne de la date de sortie en remontant dans le temps</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>À choisir les influenceurs à contacter</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Quelle est la différence essentielle entre publier et engager sur les réseaux ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Engager crée de la conversation, publier ne suffit pas</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Publier régulièrement suffit à créer une communauté</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Il n'y a pas de différence si le contenu est bon</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Qu'est-ce qui doit apparaître en premier dans un dossier de presse efficace ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>La fiche technique complète</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Les biographies de l'équipe</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Une accroche (pas la fiche technique)</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. Quelle est la règle pour cibler des influenceurs ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Cibler le plus grand nombre possible pour maximiser la portée</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Cibler juste plutôt que large (alignement univers)</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Cibler uniquement les influenceurs avec plus d'un million d'abonnés</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>9. Qu'est-ce qu'une "bible de communication" ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>Un document de référence définissant l'identité visuelle et le ton de la campagne</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>Le plan de publication sur les réseaux sociaux</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>La liste des journalistes à contacter</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. Un CTR de 0,3% sur un lien de billetterie dans une campagne Instagram — est-ce bon ou mauvais ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>Bon — c'est dans la moyenne du secteur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>Acceptable — peut être amélioré</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>Mauvais — très faible, signe que la campagne n'a pas converti</span></label>
+    </div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--emerald); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">La communication qui ressemble au film qu'elle promeut est la seule qui ne trahit pas le spectateur.</p>
+  <div class="brandline">Communication d'un film — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
+    });
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#e0524f';
+  });
+</script>
+<script src="chapter-lock.js"></script>
+<script src="gate.js" data-manual="communication-film"></script>
+<script src="password-change.js"></script>
+
+<script>
+(function(){
+  var btn = document.getElementById('quizBtn');
+  var scoreEl = document.getElementById('quizScore');
+  if(!btn || !scoreEl) return;
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec";
+  var MANUAL_SLUG = "communication-film";
+  var sent = false;
+  btn.addEventListener('click', function(){
+    setTimeout(function(){
+      if(sent) return;
+      var txt = scoreEl.textContent || '';
+      var m = txt.match(/(\d+)\s*\/\s*(\d+)/);
+      if(!m) return;
+      sent = true;
+      var score = m[1], total = m[2];
+      var emailInput = document.getElementById('gateEmailInput');
+      var email = emailInput ? emailInput.value.trim() : '';
+      var s = document.createElement('script');
+      s.src = APPS_SCRIPT_URL + '?exam=1&email=' + encodeURIComponent(email) +
+        '&manuel=' + encodeURIComponent(MANUAL_SLUG) + '&score=' + encodeURIComponent(score) +
+        '&total=' + encodeURIComponent(total);
+      document.body.appendChild(s);
+    }, 60);
+  });
+})();
+</script>
+</body>
+</html>

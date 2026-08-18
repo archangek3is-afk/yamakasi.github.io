@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Smartphone Filmmaking — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#0D0D0D; --noir-2:#141414; --noir-3:#1a1a1a;
+  --emerald:#C6FF3D; --emerald-d:#a8e020; --or:#C6FF3D;
+  --craie:#f0f2ee; --fumee:#8c948e; --line: rgba(198,255,61,0.12);
+  --display:'Plus Jakarta Sans', sans-serif; --body:'IBM Plex Mono', monospace; --mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:400; line-height:1.65; -webkit-font-smoothing:antialiased;}
+::selection{ background:var(--emerald); color:var(--noir);} img,svg{ display:block; max-width:100%;}
+body::before{ content:""; position:fixed; inset:0; z-index:0; pointer-events:none; background: radial-gradient(circle at 18% 10%, rgba(198,255,61,0.07), transparent 45%), radial-gradient(circle at 85% 88%, rgba(198,255,61,0.04), transparent 40%);}
+
+header.top{ position:sticky; top:0; z-index:200; background:rgba(13,13,13,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between;}
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--fumee); text-transform:uppercase;}
+.brand .light{ width:10px; height:10px; border-radius:50%; background:var(--emerald); box-shadow:0 0 8px var(--emerald);}
+.brand b{ color:var(--craie); font-weight:700;}
+nav.links{ display:none; gap:26px;} nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:500; position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--emerald); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie);} nav.links a:hover::after, nav.links a.active::after{ width:100%;}
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;} .burger span{ width:22px; height:2px; background:var(--craie);}
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;} .mmenu.open{ display:flex;}
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px;} .mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex;} .burger{ display:none;} }
+
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; z-index:1;}
+.eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--emerald); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ font-family:var(--display); font-weight:800; font-size:clamp(34px,8vw,80px); line-height:1.05; letter-spacing:-.01em; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title span{ color:var(--emerald);}
+.subtitle{ font-size:clamp(16px,2.3vw,19px); color:var(--fumee); max-width:600px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards;}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+.greenlight{ position:relative; z-index:1; margin-top:44px; display:flex; gap:16px; align-items:center; opacity:0; animation:up .8s .65s ease forwards;}
+.gl-dot{ width:20px; height:20px; border-radius:50%; }
+.gl-dot.red{ background:#5a2a26;} .gl-dot.amber{ background:#8a6a2a;} .gl-dot.green{ background:var(--emerald); box-shadow:0 0 16px var(--emerald);}
+.gl-label{ font-family:var(--mono); font-size:11px; color:var(--fumee); letter-spacing:.06em; text-transform:uppercase;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;} .stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-weight:800; font-size:20px; color:var(--emerald);} .stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:3px;}
+
+main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; padding:90px 22px;}
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;} .fade.in{ opacity:1; transform:translateY(0);}
+.section-head{ margin-bottom:46px;} .section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; color:var(--emerald); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-weight:700; font-size:clamp(24px,4vw,40px); line-height:1.2; max-width:820px;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.grid{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr;} } @media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr;} }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--emerald);}
+.role-card h4{ font-family:var(--display); font-weight:700; font-size:14px; margin-bottom:8px;} .role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.6;}
+
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px;}
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap;}
+.ch-num{ font-family:var(--display); font-weight:800; font-size:28px; color:transparent; -webkit-text-stroke:1.2px var(--emerald); line-height:1; flex-shrink:0; width:52px;}
+.ch-head .ch-info{ flex:1; min-width:200px;} .ch-head h3{ font-family:var(--display); font-weight:700; font-size:clamp(15px,2.1vw,19px);}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--or); text-transform:uppercase; letter-spacing:.04em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--emerald); flex-shrink:0; transition:transform .3s ease;} .chapitre.open .ch-chev{ transform:rotate(135deg);}
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px;} .chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px;}
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.75; max-width:780px; margin-bottom:20px;} .ch-lead b{ color:var(--emerald); font-weight:600;}
+.ch-body ul{ list-style:none;} .ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.6;} .ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--emerald);}
+.callout{ background:rgba(198,255,61,0.06); border:1px solid var(--emerald-d); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--craie);} .callout b{ color:var(--emerald);}
+
+.watch-row{ display:grid; gap:16px; grid-template-columns:1fr; margin:20px 0 26px;} @media(min-width:640px){ .watch-row.two{ grid-template-columns:1fr 1fr;} }
+.watch-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:12px; text-decoration:none; align-items:center; transition:border-color .25s ease, transform .25s ease;}
+.watch-card:hover{ border-color:var(--emerald); transform:translateY(-2px);}
+.watch-card .wc-play{ margin-left:auto; flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--emerald); display:flex; align-items:center; justify-content:center;} .watch-card .wc-play svg{ width:12px; height:12px; fill:var(--noir);}
+.watch-card .wc-src{ font-family:var(--mono); font-size:9.5px; color:var(--emerald); text-transform:uppercase;} .watch-card .wc-title{ font-size:13.5px; color:var(--craie); margin-top:4px; line-height:1.35; font-weight:500;}
+
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--craie);} .book-card .spine{ width:8px; align-self:stretch; background:var(--or); flex-shrink:0;}
+.book-card .auth{ font-family:var(--mono); font-size:10px; color:var(--or); text-transform:uppercase;} .book-card .ttl{ font-family:var(--display); font-weight:700; font-size:13.5px; margin-top:4px; color:var(--craie);}
+.book-card .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+.exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--emerald);}
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--emerald-d); font-weight:600; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#1a1c1a; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
+
+.diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
+.budget-bar{ display:flex; height:44px; width:100%; overflow:hidden; border:1px solid var(--line);}
+.budget-bar div{ display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:10px; color:var(--noir); font-weight:600;}
+.budget-legend{ display:flex; flex-wrap:wrap; gap:16px; margin-top:14px; justify-content:center;}
+.budget-legend span{ font-family:var(--mono); font-size:10.5px; color:var(--fumee); display:flex; align-items:center; gap:6px;}
+.budget-legend .sw{ width:10px; height:10px; display:inline-block;}
+
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px;} table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--emerald); text-transform:uppercase; padding:10px; border-bottom:1px solid var(--emerald);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);} .table-wrap{ overflow-x:auto;} table.plain{ min-width:520px;}
+
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr;} @media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr;} }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--or);}
+.case-card .name{ font-family:var(--display); font-weight:700; font-size:16px; margin-bottom:6px;} .case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--or); text-transform:uppercase; margin-bottom:14px;} .case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px;} .quiz-q p.q-text{ font-family:var(--display); font-weight:700; font-size:14px; margin-bottom:14px;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer;} .quiz-opt:hover{ border-color:var(--or);}
+.quiz-opt input{ accent-color:var(--emerald);} .quiz-opt span{ font-size:13.5px; color:var(--fumee);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);} .quiz-opt.correct span{ color:#9fc19f;}
+.quiz-opt.wrong{ border-color:var(--or); background:rgba(198,255,61,0.08);} .quiz-opt.wrong span{ color:var(--or);}
+#quizScore{ font-family:var(--display); font-weight:800; font-size:18px; color:var(--emerald); text-align:center; margin-top:20px; display:none;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center;} footer .manifesto{ font-family:var(--display); font-weight:700; font-size:clamp(16px,2.4vw,22px); color:var(--craie); max-width:600px; margin:0 auto 22px;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--emerald);}
+::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--emerald);}
+@media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+
+/* ===== GATE OKAPI ===== */
+#gate-overlay{position:fixed;inset:0;z-index:99999;background:linear-gradient(rgba(10,10,10,.82),rgba(10,10,10,.82)),url("images/gate-bg.jpg") center/cover no-repeat,#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+body.gate-unlocked #gate-overlay{display:none;}
+body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
+#gate-overlay .g-eye{font-size:11px;letter-spacing:.2em;color:#C9A84C;text-transform:uppercase;margin-bottom:20px;}
+#gate-overlay h2{font-weight:800;font-size:clamp(22px,5vw,32px);color:#F5F0E8;margin-bottom:14px;}
+#gate-overlay p#gateMsg{color:#8a8a85;font-size:14px;line-height:1.65;max-width:380px;margin:0 auto 26px;}
+#gate-overlay form#gateLoginForm{display:flex;flex-direction:column;align-items:center;margin-bottom:14px;gap:10px;}
+#gate-overlay input#gateEmailInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#F5F0E8;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gatePasswordInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#F5F0E8;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay input#gatePasswordInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #C9A84C;color:#C9A84C;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
+#gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#C9A84C;color:#0A0A0A;}
+
+/* === RESPONSIVE MOBILE === */
+@media(max-width:768px){
+  html, body { overflow-x: hidden; }
+  img, video, iframe, canvas, svg { max-width: 100%; height: auto; }
+  pre, code, .mono, [style*="font-family:monospace"],
+  [style*="Courier"], [style*="JetBrains"], [style*="IBM Plex Mono"] {
+    overflow-x: auto; word-break: break-word;
+  }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .hero { padding: 90px 16px 50px; min-height: 70vh; }
+  section { padding: 40px 14px; }
+  .section-head { padding: 0 6px; margin-bottom: 30px; }
+  .ch-head { padding: 14px 10px; gap: 10px; min-height: 54px; }
+  .ch-head .ch-info { min-width: 0; }
+  .ch-body { padding: 18px 12px; }
+  .quiz-opt { padding: 14px 14px; min-height: 48px; gap: 12px; }
+  .quiz-opt span { font-size: 14px; }
+  .quiz-opt input { width: 20px; height: 20px; min-width: 20px; }
+  .quiz-q { padding: 18px 14px; }
+  .exercice { padding: 20px 14px; }
+  #quizBtn, .quiz-btn, [onclick*="scoreQuiz"] { min-height: 48px; padding: 14px 24px; font-size: 14px; }
+  #gate-overlay { padding: 30px 16px; }
+  #gate-overlay { min-height: 100%; justify-content: flex-start; padding-top: max(30px, 6vh); }
+  #gate-overlay h2 { font-size: clamp(20px, 5vw, 28px); }
+  #gate-overlay p#gateMsg { font-size: 13.5px; max-width: 90vw; }
+  #gate-overlay input#gateEmailInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
+  #gate-overlay input#gatePasswordInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
+  #gate-overlay a#gateRequestLink, #gate-overlay button#gateLoginBtn { padding: 14px 24px; font-size: 12px; min-height: 48px; }
+  .watch-card { flex-direction: column; align-items: flex-start; }
+  .watch-card img { width: 100%; height: auto; max-height: 180px; }
+  .book-card { flex-direction: column; }
+  .pull { padding: 0 14px; margin-bottom: 40px; }
+  footer { padding: 50px 16px 30px; }
+}
+
+@media(max-width:430px){
+  .hero { padding: 80px 12px 40px; }
+  section { padding: 30px 10px; }
+  .ch-head { padding: 12px 8px; }
+  .ch-body { padding: 14px 10px; }
+  .quiz-q { padding: 14px 10px; }
+  .quiz-opt { padding: 12px 10px; }
+  .exercice { padding: 16px 10px; }
+  #gate-overlay input#gateEmailInput { max-width: 90vw; }
+  #gate-overlay input#gatePasswordInput { max-width: 90vw; }
+  .case-strip { gap: 12px; }
+}
+
+@media(max-width:768px){
+  .budget-legend { flex-wrap: wrap; gap: 8px; }
+}
+@media(max-width:768px){#gate-overlay{background:linear-gradient(rgba(10,10,10,.82),rgba(10,10,10,.82)),url("images/gate-bg-mobile.jpg") center/cover no-repeat,#0A0A0A;}}
+</style>
+</head>
+<body>
+<div id="gate-overlay">
+  <div class="g-eye">Okapi Studios &mdash; Accès protégé</div>
+  <h2>Contenu réservé</h2>
+  <p id="gateMsg">Entre l'email avec lequel ton accès a été validé.</p>
+  <form id="gateLoginForm">
+    <input type="email" id="gateEmailInput" placeholder="ton@email.com" required>
+    <input type="password" id="gatePasswordInput" placeholder="Mot de passe" required>
+    <button type="submit" id="gateLoginBtn">Se connecter</button>
+  </form>
+  <a id="gateRequestLink" href="acces.html">Pas encore d&rsquo;accès&nbsp;? Demander l&rsquo;accès</a>
+</div>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="light"></span> OKAPI STUDIOS — <b>SMARTPHONE FILMMAKING</b></div>
+    <nav class="links"><a href="#role">Le rôle</a><a href="#chapitres">Chapitres</a><a href="#references">Références</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu"><a href="#role">Le rôle</a><a href="#chapitres">Les 9 chapitres</a><a href="#references">Approches</a><a href="#biblio">Bibliographie</a><a href="#quiz">Quiz</a></div>
+</header>
+
+<main>
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">GREENLIGHT — Manuel de formation, technique</div>
+  <h1 class="title">SMARTPHONE <span>FILMMAKING</span></h1>
+  <p class="subtitle">Filmer avec son téléphone comme un cinéaste — réglages manuels, son, lumière disponible, workflow mobile.</p>
+  <div class="greenlight">
+    <div class="gl-dot red"></div><div class="gl-dot amber"></div><div class="gl-dot green"></div>
+    <span class="gl-label">Feu vert donné</span>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">4K</div><div class="l">Résolution cible</div></div>
+    <div class="stat"><div class="n">iOS/Android</div><div class="l">Toutes plateformes</div></div>
+  </div>
+</section>
+
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">FADE IN, TECHNIQUE</div>
+    <h2>Le smartphone n'est pas un compromis. C'est un outil de cinéma à part entière.</h2>
+    <p class="lede">Soderbergh a tourné deux films sur iPhone. Baker a été sélectionné à Sundance avec un iPhone 5S. <b style="color:var(--craie)">La contrainte est un langage, pas une limitation.</b></p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card"><h4>📱 Sa force</h4><p>Légèreté, discrétion, accès à des espaces impossibles avec une caméra professionnelle — et un naturel d'interprétation difficile à obtenir autrement.</p></div>
+    <div class="role-card"><h4>🎧 Son talon d'Achille</h4><p>Le son — le micro intégré est conçu pour les appels, pas pour capter un dialogue. C'est là qu'il faut investir en premier.</p></div>
+    <div class="role-card"><h4>🎛️ Sa condition</h4><p>Passer du mode automatique au mode manuel — ISO, vitesse d'obturation, mise au point — pour subir moins et choisir plus.</p></div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;"><b>À retenir —</b> Un mauvais son détruit une bonne image. Une bonne image ne sauve jamais un mauvais son. Cette règle est absolue, et elle s'applique avec encore plus de force au smartphone filmmaking.</div>
+</section>
+
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">TOP SHEET</div><h2>Neuf chapitres, du téléphone à la salle.</h2></div>
+
+  <div class="chapitre fade" data-ch="0">
+    <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Le smartphone comme vraie caméra de cinéma</h3><div class="ch-tag">Paradigme &amp; esthétique</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">L'idée que le smartphone est un outil de secours ou un compromis pour ceux qui n'ont pas les moyens est dépassée depuis longtemps. Steven Soderbergh a tourné Unsane (2018) et High Flying Bird (2019) intégralement sur iPhone, assumant ce choix esthétique dans ses interviews. Sean Baker a tourné Tangerine (2015) sur iPhone 5S avec des objectifs anamorphiques accrochés au téléphone, et le film a été sélectionné à Sundance. Ces exemples ne sont pas des anecdotes — ils signalent un changement de paradigme : le smartphone est devenu un outil de cinéma à part entière, avec ses propres contraintes et ses propres qualités esthétiques. Sa légèreté permet d'accéder à des espaces et des situations impossibles avec une caméra professionnelle. Sa discrétion permet un naturel d'interprétation difficile à obtenir avec une équipe de tournage lourde. Comprendre ces qualités, c'est apprendre à filmer avec, pas malgré elles.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 01 — Analyse esthétique</span><h4>Identifier ce que le format smartphone rend possible</h4><p>Regarde 10 minutes d'Unsane de Soderbergh ou de Tangerine de Sean Baker (disponibles en ligne). Identifie 3 choix esthétiques que le format smartphone rend possible ou amplifie. Décris comment ces choix changent la relation entre la caméra et le sujet filmé.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="1">
+    <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Stabilisation et mouvement sans matériel lourd</h3><div class="ch-tag">Technique corps &amp; accessoires</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le tremblement est le premier défaut qu'on associe au tournage smartphone — et c'est une image largement dépassée. Les smartphones modernes ont des systèmes de stabilisation optique et numérique très efficaces, mais ils ont des limites que tout opérateur doit connaître. La stabilisation numérique croque des pixels et réduit le champ de vision — à utiliser avec discernement. La vraie stabilisation commence dans le corps : coudes serrés contre le torse, respiration contrôlée, déplacement depuis les genoux et non depuis les épaules. Un gimbal à 3 axes léger (type DJI OM) peut transformer un tournage smartphone, mais il introduit aussi une fluidité parfois trop lisse pour certains styles. Savoir quand ne pas se stabiliser — pour un effet de caméra portée, de handheld authentique, de tremblement expressif — est aussi important que savoir se stabiliser. La stabilité est un outil, pas une règle absolue.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 02 — Comparaison stabilisation</span><h4>Trois façons de tenir son téléphone</h4><p>Tourne la même scène de 30 secondes (une personne qui traverse une pièce et s'assoit) de trois façons : main libre sans technique, main libre avec technique de corps correcte, et avec un support physique (trépied, table, ou appui mural). Compare les trois résultats et décris ce que chaque approche apporte ou enlève à la scène.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="2">
+    <div class="ch-head" data-toggle><div class="ch-num">03</div><div class="ch-info"><h3>Lumière naturelle et disponible</h3><div class="ch-tag">Lire la lumière</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Filmer sans éclairage professionnel n'est pas une contrainte — c'est une école. La lumière naturelle a une qualité que les éclairages artificiels les plus sophistiqués peinent à reproduire : elle évolue, elle a une direction, elle change avec le temps et le lieu. L'opérateur qui apprend à lire la lumière disponible développe un instinct précieux qu'il gardera même quand il aura accès à des projecteurs professionnels. La règle de base : observer avant d'installer. Trouver d'où vient la lumière dominante, comment elle tombe sur les visages, où sont les zones d'ombre exploitables. La "magic hour" (l'heure qui suit le lever du soleil et l'heure qui précède le coucher) est l'alliée naturelle du smartphone filmmaking : une lumière chaude, directionnelle, à basse intensité qui enveloppe les sujets sans les écraser. Un réflecteur blanc (même une feuille de carton) peut suffire à déboucher une zone d'ombre et transformer une image médiocre en image acceptable.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 03 — Lire la lumière</span><h4>Un même coin à trois moments de la journée</h4><p>Choisis une pièce de ton domicile et photographie (ou filme) le même coin à 3 moments de la journée différents (matin, après-midi, soir). Décris comment la lumière change et quel moment tu utiliserais pour filmer une scène intime, une scène de tension, et une scène joyeuse — et pourquoi.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="3">
+    <div class="ch-head" data-toggle><div class="ch-num">04</div><div class="ch-info"><h3>Le son, vrai talon d'Achille</h3><div class="ch-tag">Micro &amp; enregistrement</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un mauvais son détruit une bonne image. Une bonne image ne sauve jamais un mauvais son. Cette règle est absolue au cinéma, et elle s'applique avec encore plus de force au smartphone filmmaking : le micro intégré d'un smartphone est conçu pour les appels téléphoniques, pas pour capter un dialogue à distance dans un environnement bruité. Il ramasse la réverbération des pièces, capture les bruits de manipulation et les vibrations du téléphone lui-même, et sature vite dans les environnements avec de la musique ou du bruit ambiant fort. La solution minimale : un micro-cravate filaire branché en jack (ou via adaptateur USB-C / Lightning). La solution intermédiaire : un micro-cardioïde fixé sur le téléphone via une griffe froide. La solution professionnelle pour les projets exigeants : un preneur de son séparé avec micro-canne et enregistreur, synchronisé en post-production. Le son est le budget invisible du smartphone filmmaking — c'est là qu'il ne faut pas économiser.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 04 — Comparaison son</span><h4>Trois sources audio pour un même dialogue</h4><p>Enregistre la même séquence de dialogue (deux personnes qui parlent) de trois façons : micro intégré du smartphone, micro-cravate filaire, et avec un objet placé entre le téléphone et les interlocuteurs pour observer l'effet de masque. Analyse les différences et rédige tes conclusions sur le compromis qualité/budget pour chaque solution.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="4">
+    <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Réglages manuels et applications</h3><div class="ch-tag">ISO, obturateur, mise au point</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le mode automatique d'un smartphone est conçu pour produire une image "correcte" dans le plus grand nombre de situations possible — c'est précisément ce qui le rend insuffisant pour une démarche cinématographique. En automatique, l'ISO monte quand la scène s'assombrit (introduisant du bruit numérique), la vitesse d'obturation s'ajuste sans cohérence (créant des variations de motion blur non maîtrisées), et la mise au point saute d'un sujet à l'autre selon un algorithme qui ne connaît pas tes intentions. Les applications de contrôle manuel — Filmic Pro (iOS/Android), Blackmagic Camera (iOS), Cinema P3 — donnent accès aux mêmes paramètres qu'une caméra professionnelle : ISO (sensibilité lumineuse), vitesse d'obturation (règle du 180° : vitesse = 2x la fréquence d'images), mise au point manuelle avec focus peaking, et dans certains cas des profils log pour un étalonnage plus poussé en post-production. Maîtriser ces réglages est la différence entre subir son image et la choisir.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 05 — Réglages manuels</span><h4>Capture d'écran de tes réglages en situation</h4><p>À remettre via formulaire — capture d'écran de l'interface de ton application de contrôle manuel (Filmic Pro, Blackmagic Camera, ou équivalent) en train de tourner une scène, avec les réglages ISO, vitesse d'obturation et mise au point visibles. Indique dans le formulaire quel était l'environnement lumineux et pourquoi tu as choisi ces réglages précis.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="5">
+    <div class="ch-head" data-toggle><div class="ch-num">06</div><div class="ch-info"><h3>Cadrage et composition, vertical et horizontal</h3><div class="ch-tag">9:16, 16:9, safe zones</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">La montée des plateformes verticales (Stories, Reels, TikTok) a créé une tension nouvelle pour le smartphone filmmaking : composer pour deux formats radicalement différents sans jamais sacrifier l'un pour l'autre. La règle des tiers reste universelle — elle s'applique autant en 9:16 qu'en 16:9. Mais les lignes de force et les zones mortes ne sont pas aux mêmes endroits. Un sujet centré verticalement pour un Reel peut disparaître derrière les éléments d'interface (boutons, textes) si on ne prend pas en compte les "safe zones" de chaque plateforme. La solution pour les projets qui doivent vivre sur les deux formats : filmer en 4:3 ou en carré, avec suffisamment de marge pour recadrer dans les deux directions en post-production. Penser le cadrage en amont de la plateforme de destination plutôt que d'essayer de recadrer en urgence une image qui n'a pas été conçue pour ça.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 06 — Double format</span><h4>Un même plan en vertical et horizontal</h4><p>Filme le même plan (un visage en gros plan, une main qui réalise un geste, ou un paysage) en format vertical 9:16 ET en format horizontal 16:9, en essayant de produire deux cadres également efficaces. Décris les ajustements que tu as dû faire pour que chaque format fonctionne, et lequel des deux tu as trouvé plus difficile à composer.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="6">
+    <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Montage directement sur mobile</h3><div class="ch-tag">CapCut, LumaFusion, DaVinci</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Le workflow tout-mobile — tourner, monter, publier depuis le même appareil — est désormais une réalité professionnelle, pas une curiosité. Les applications de montage mobile ont atteint un niveau de maturité qui permet de produire des contenus de qualité diffusable sans passer par un ordinateur. CapCut est l'application la plus populaire pour les formats courts avec ses templates et ses effets automatisés. LumaFusion (iOS) est la référence pour un montage multicouche professionnel sur iPad ou iPhone — elle gère le color grading, le multicam, les transitions avancées et l'export en ProRes. DaVinci Resolve pour iPad apporte la puissance de l'étalonnage professionnel sur tablette. Le workflow idéal : tourner dans l'application de caméra manuelle, importer dans l'application de montage, étalonner sur la même timeline, exporter directement vers la plateforme de destination. Chaque transfert de fichier entre appareils est un risque de perte de qualité qu'un workflow tout-mobile élimine.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 07 — Séquence montée sur mobile</span><h4>60 à 90 secondes, entièrement sur mobile</h4><p>Monte une séquence de 60 à 90 secondes entièrement sur mobile, en utilisant au minimum : 5 plans différents, une transition intentionnelle (pas automatique), un ajustement de couleur sur au moins un plan, et une musique libre de droits. Décris ton workflow (quelle app de caméra, quelle app de montage, comment tu as organisé tes fichiers) et ce que tu ferais différemment la prochaine fois.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="7">
+    <div class="ch-head" data-toggle><div class="ch-num">08</div><div class="ch-info"><h3>Accessoires essentiels vs gadgets inutiles</h3><div class="ch-tag">Budget &amp; priorités</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">L'industrie des accessoires pour smartphone filmmaking génère des millions d'euros par an en vendant des objets dont la plupart n'améliorent pas significativement la qualité d'une image. La règle pour distinguer l'essentiel du gadget : est-ce que cet accessoire résout un problème réel que j'ai rencontré, ou est-ce qu'il résout un problème que j'imagine avoir ? Les accessoires qui changent vraiment la qualité : un micro-cravate ou un micro directionnel (son), un trépied ou gorilla pod avec rotule fluide (stabilité sans gimbal), un filtre ND variable (gestion de l'exposition en extérieur), une batterie externe de haute capacité (autonomie). Les gadgets souvent inutiles : les objectifs grand-angle clip-on (introduisent du vignettage et des aberrations chromatiques), les "cages" complètes à 300€ pour téléphone (alourdissent l'appareil sans gain réel), les microphones à condensateur à large membrane sur un téléphone (incompatibles avec l'alimentation phantom des smartphones). Investis dans le son avant d'investir dans l'image.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 08 — Budget 150€</span><h4>Tes accessoires prioritaires pour un court-métrage</h4><p>Avec un budget de 150€, constitue ta liste d'accessoires prioritaires pour un tournage de court-métrage smartphone (fiction, 10 minutes, en intérieur et extérieur). Justifie chaque achat et explique ce que tu sacrifies en restant dans ce budget.</p></div>
+    </div>
+  </div>
+
+  <div class="chapitre fade" data-ch="8">
+    <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Du smartphone au grand écran</h3><div class="ch-tag">Post-production &amp; DCP</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
+    <div class="ch-body">
+      <p class="ch-lead">Un film tourné sur smartphone peut être projeté sur grand écran — à condition que chaque étape de la chaîne de post-production soit maîtrisée. La résolution : filmer en 4K si le smartphone le permet, même si la diffusion finale est en Full HD, pour avoir de la marge de recadrage et de stabilisation numérique en post. Le codec : préférer H.265 (HEVC) à H.264 pour un meilleur ratio qualité/poids, ou ProRes via l'application Blackmagic Camera sur iPhone pour un maximum de latitude d'étalonnage. L'étalonnage : les smartphones en mode automatique sur-saturent et sur-contrastent — un léger désaturation et une remontée des ombres en étalonnage donnent une image plus cinématographique. L'export pour la salle : un DCP (Digital Cinema Package) reste le standard de la projection professionnelle — des services comme WeTransfer ou des prestataires locaux peuvent encoder un DCP depuis un fichier H.264 ou ProRes de qualité. La qualité finale dépend de la qualité du maillon le plus faible — souvent le son, rarement l'image.</p>
+      <div class="exercice"><span class="ex-tag">Exercice 09 — Étalonnage mobile</span><h4>Trois ajustements sur une vidéo existante</h4><p>Prends une vidéo tournée sur ton smartphone et applique-lui un étalonnage simple dans l'application de ton choix (CapCut, LumaFusion, DaVinci Resolve Mobile, ou autre) : désaturation légère, lift des ombres, légère baisse du contraste automatique. Décris les 3 ajustements que tu as faits, quel résultat tu as obtenu, et ce que tu ferais différemment avec plus de temps.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Approches</div><h2>Trois cinéastes qui ont fait du smartphone un choix.</h2></div>
+  <div class="case-strip fade">
+    <div class="case-card"><div class="name">Steven Soderbergh</div><div class="signature">Unsane / High Flying Bird — iPhone</div><p>A assumé le tournage sur iPhone comme un choix esthétique délibéré — la contrainte du format au service d'un regard clinique et déstabilisant.</p></div>
+    <div class="case-card"><div class="name">Sean Baker</div><div class="signature">Tangerine — iPhone 5S + anamorphique</div><p>A hacké le format en ajoutant des objectifs anamorphiques, obtenant un ratio cinémascope depuis un téléphone — sélectionné à Sundance 2015.</p></div>
+    <div class="case-card"><div class="name">Michel Gondry</div><div class="signature">Décennies d'expérimentation</div><p>A toujours cherché à utiliser les contraintes techniques comme moteurs créatifs — le smartphone s'inscrit dans cette tradition de l'ingéniosité comme méthode.</p></div>
+  </div>
+</section>
+
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Pour aller plus loin</div><h2>Bibliographie et ressources.</h2></div>
+  <div class="grid g2 fade">
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Philip Bloom</span><div class="ttl">Filmmaking with iPhone (blog &amp; chaîne YouTube)</div><div class="desc">Tutorials pratiques et tests comparatifs — l'une des références les plus sérieuses sur le smartphone filmmaking professionnel.</div></div></div>
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Filmmaking Resources</span><div class="ttl">Filmic Pro — documentation officielle</div><div class="desc">Le guide complet des réglages manuels sur l'application de référence — indispensable pour comprendre l'ISO, l'obturateur et le focus peaking.</div></div></div>
+    <div class="book-card"><div class="spine"></div><div><span class="auth">Blackmagic Design</span><div class="ttl">Blackmagic Camera App — manuel utilisateur</div><div class="desc">L'application qui apporte le workflow ProRes Log sur iPhone — documentation technique complète disponible gratuitement.</div></div></div>
+    <div class="book-card"><div class="spine"></div><div><span class="auth">DCI &amp; SMPTE</span><div class="ttl">Digital Cinema Initiatives — spécifications DCP</div><div class="desc">Les standards de la projection professionnelle en salle — pour comprendre ce qu'il faut livrer si le film va en festival.</div></div></div>
+  </div>
+</section>
+
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade"><div class="tag">Vérifie ce que tu as retenu</div><h2>Le petit quiz de fin de parcours.</h2></div>
+  <div class="fade">
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Quel réalisateur a tourné Unsane et High Flying Bird sur iPhone ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Steven Soderbergh</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Sean Baker</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Michel Gondry</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Quelle est la règle des 180° en vitesse d'obturation ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>La vitesse d'obturation doit toujours être de 1/180s</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Vitesse d'obturation = 2× la fréquence d'images (ex: 1/50s pour 25fps)</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>L'angle d'obturation doit être de 180° dans les réglages de l'app</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>3. Quel est le principal défaut du micro intégré d'un smartphone ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Il capte la réverbération, les manipulations et sature dans les environnements bruités</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Il ne peut pas enregistrer en stéréo</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Sa qualité est identique à un micro-cravate professionnel</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Qu'est-ce que le "focus peaking" ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Une technique de mise au point automatique avancée</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>Un mode de mise au point continue pour les sujets en mouvement</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Une assistance visuelle qui met en évidence les zones nettes dans le viseur</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>5. Quelle est la solution minimale pour améliorer le son sur un tournage smartphone ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>Un micro-cravate filaire branché en jack</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>Un gimbal avec micro intégré</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Enregistrer dans un environnement silencieux</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>6. Pourquoi filmer en 4K même si la diffusion est en Full HD ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Pour augmenter la taille des fichiers et garantir la qualité</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Pour avoir de la marge de recadrage et de stabilisation numérique en post</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Parce que les plateformes de streaming exigent le 4K</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>7. Qu'est-ce qu'un DCP ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Digital Cinema Package — le format standard de la projection professionnelle en salle</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Un codec de compression pour les smartphones</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Une application de montage pour mobile</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>8. Quel est l'accessoire prioritaire à acheter avant tout autre ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Un objectif anamorphique clip-on</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Un gimbal 3 axes</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Un micro externe (le son avant l'image)</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="0">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>9. Pourquoi éviter la stabilisation numérique systématique ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>Elle croque des pixels et réduit le champ de vision</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>Elle consomme trop de batterie</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>Elle n'est disponible que sur les téléphones haut de gamme</span></label>
+    </div>
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. Quelle application de montage mobile est la référence pour le montage multicouche professionnel sur iOS ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>CapCut</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>LumaFusion</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>iMovie</span></label>
+    </div>
+    <button id="quizBtn" style="font-family:var(--display); font-size:11px; text-transform:uppercase; background:var(--emerald); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p class="manifesto">Comprendre les qualités d'un outil, c'est apprendre à filmer avec lui — pas malgré lui.</p>
+  <div class="brandline">Smartphone Filmmaking — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',()=>mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mmenu.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const secIds=['role','chapitres','references','biblio','quiz'], sections=secIds.map(id=>document.getElementById(id)).filter(Boolean), navLinks=document.querySelectorAll('nav.links a');
+  const spy=new IntersectionObserver((es)=>{es.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')==='#'+entry.target.id));}});},{rootMargin:'-40% 0px -50% 0px'});
+  sections.forEach(s=>spy.observe(s));
+  document.querySelectorAll('[data-toggle]').forEach(head=>{head.addEventListener('click',()=>{const ch=head.closest('.chapitre'); const wasOpen=ch.classList.contains('open'); document.querySelectorAll('.chapitre.open').forEach(c=>c.classList.remove('open')); if(!wasOpen){ch.classList.add('open');}});});
+  document.querySelector('[data-ch]')?.classList.add('open');
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
+    });
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#e0524f';
+  });
+</script>
+<script src="chapter-lock.js"></script>
+<script src="gate.js" data-manual="smartphone-filmmaking"></script>
+<script src="password-change.js"></script>
+
+<script>
+(function(){
+  var btn = document.getElementById('quizBtn');
+  var scoreEl = document.getElementById('quizScore');
+  if(!btn || !scoreEl) return;
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec";
+  var MANUAL_SLUG = "smartphone-filmmaking";
+  var sent = false;
+  btn.addEventListener('click', function(){
+    setTimeout(function(){
+      if(sent) return;
+      var txt = scoreEl.textContent || '';
+      var m = txt.match(/(\d+)\s*\/\s*(\d+)/);
+      if(!m) return;
+      sent = true;
+      var score = m[1], total = m[2];
+      var emailInput = document.getElementById('gateEmailInput');
+      var email = emailInput ? emailInput.value.trim() : '';
+      var s = document.createElement('script');
+      s.src = APPS_SCRIPT_URL + '?exam=1&email=' + encodeURIComponent(email) +
+        '&manuel=' + encodeURIComponent(MANUAL_SLUG) + '&score=' + encodeURIComponent(score) +
+        '&total=' + encodeURIComponent(total);
+      document.body.appendChild(s);
+    }, 60);
+  });
+})();
+</script>
+</body>
+</html>

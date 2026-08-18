@@ -61,6 +61,13 @@
       ch:    '1289460951',
       text:  '1104388559',
       chapters: [7]  /* Ex08 — "Pitche à voix haute... Enregistre-toi", seul exercice audio */
+    },
+    'smartphone-filmmaking': {
+      url:   'https://docs.google.com/forms/d/e/1FAIpQLSdjgmcJdUv1ldmwTuL2qPbwNxLL8hSWSv2A_syXXfcZnFY7xQ/viewform',
+      email: '1544973329',
+      ch:    '1289460951',
+      text:  '1104388559',
+      chapters: [4]  /* Ex05 — capture d'écran réglages manuels (Filmic Pro / Blackmagic Camera) */
     }
     /* costumiere et regisseur-general retirés : aucun de leurs exercices
        n'exige un livrable fichier — ils repassent en textarea standard
