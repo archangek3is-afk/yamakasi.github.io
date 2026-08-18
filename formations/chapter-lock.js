@@ -371,7 +371,10 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         verifyBtn.textContent = 'R\u00e9essayer';
         verifyBtn.disabled = false;
       } else {
-        stopPolling();
+        /* Erreur réseau / timeout JSONP (data === null).
+           Si le polling est déjà actif, ignorer ce tick silencieusement
+           et laisser le prochain interval réessayer — NE PAS stopper. */
+        if (pollTimer) return;
         statusMsg.className = 'ch-form-status ch-form-status-err';
         statusMsg.textContent = 'Soumission non trouv\u00e9e. V\u00e9rifie avoir valid\u00e9 le formulaire, puis r\u00e9essaie.';
         verifyBtn.textContent = 'R\u00e9essayer';
