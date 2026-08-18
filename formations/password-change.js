@@ -35,7 +35,19 @@
       '.pwd-change-box button:disabled{opacity:.6;cursor:default;}' +
       '.pwd-change-box .pwd-close{margin-top:16px;font-size:11px;color:#8a8a85;cursor:pointer;' +
       'text-decoration:underline;}' +
-      '.pwd-change-msg{font-size:12px;color:#8a8a85;margin-top:12px;min-height:16px;line-height:1.5;}';
+      '.pwd-change-msg{font-size:12px;color:#8a8a85;margin-top:12px;min-height:16px;line-height:1.5;}' +
+      '.pwd-banner{position:fixed;top:0;left:0;right:0;z-index:9997;background:#0A0A0A;' +
+      'border-bottom:1px solid #C9A84C;padding:14px 20px;display:none;' +
+      'align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;text-align:center;' +
+      'font-family:Arial,Helvetica,sans-serif;}' +
+      '.pwd-banner.open{display:flex;}' +
+      '.pwd-banner span{color:#F5F0E8;font-size:13px;}' +
+      '.pwd-banner button{border:none;padding:9px 18px;font-size:11px;font-weight:700;' +
+      'text-transform:uppercase;letter-spacing:.5px;cursor:pointer;border-radius:2px;' +
+      'font-family:inherit;}' +
+      '.pwd-banner .pwd-banner-yes{background:#C9A84C;color:#0A0A0A;}' +
+      '.pwd-banner .pwd-banner-no{background:transparent;color:#8a8a85;' +
+      'border:1px solid rgba(255,255,255,.2);}';
     document.head.appendChild(style);
 
     var link = document.createElement('a');
@@ -43,6 +55,14 @@
     link.textContent = '\uD83D\uDD11 Changer mon mot de passe';
     link.href = '#';
     document.body.appendChild(link);
+
+    var banner = document.createElement('div');
+    banner.className = 'pwd-banner';
+    banner.innerHTML =
+      '<span>\uD83D\uDD11 Envie de personnaliser ton mot de passe ?</span>' +
+      '<button class="pwd-banner-yes" id="pwdBannerYes">Le changer maintenant</button>' +
+      '<button class="pwd-banner-no" id="pwdBannerNo">Plus tard</button>';
+    document.body.appendChild(banner);
 
     var modal = document.createElement('div');
     modal.className = 'pwd-change-modal';
@@ -68,6 +88,29 @@
     modal.addEventListener('click', function(e){
       if (e.target === modal) modal.classList.remove('open');
     });
+
+    // Bandeau automatique : affiche une seule fois apres une connexion
+    // reussie (jamais revu une fois ferme, memorise par navigateur).
+    function bannerDismissed(){
+      try { return localStorage.getItem('okapi_pwd_banner_dismissed') === '1'; }
+      catch(e){ return false; }
+    }
+    function dismissBanner(){
+      banner.classList.remove('open');
+      try { localStorage.setItem('okapi_pwd_banner_dismissed', '1'); } catch(e){}
+    }
+    function maybeShowBanner(){
+      if (!bannerDismissed()) banner.classList.add('open');
+    }
+    document.getElementById('pwdBannerYes').addEventListener('click', function(){
+      dismissBanner();
+      document.getElementById('pwdMsg').textContent = '';
+      modal.classList.add('open');
+    });
+    document.getElementById('pwdBannerNo').addEventListener('click', dismissBanner);
+
+    document.addEventListener('okapi:unlocked', maybeShowBanner);
+    if (document.body.classList.contains('gate-unlocked')) maybeShowBanner();
 
     var btn = document.getElementById('pwdSubmit');
     btn.addEventListener('click', function(){
