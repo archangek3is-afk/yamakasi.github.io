@@ -285,6 +285,10 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     if (!_email || !_manual) return;
     jsonpCall({ action: 'setChapter', email: _email, manual: _manual, ch: chIndex }, null);
   }
+  function serverSaveExerciseText(chIndex, text) {
+    if (!_email || !_manual) return;
+    jsonpCall({ action: 'saveExerciseText', email: _email, manual: _manual, ch: chIndex, text: text }, null);
+  }
   function reapply() {
     if (_format === 'A') applyStandard(_chapters, _quizSection);
     else if (_format === 'B') applyDeco(_chapters, _quizSection);
@@ -490,6 +494,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           if (btn.disabled) return;
           var p = getP(); p['ch' + i] = 1; saveP(p);
           serverSetChapter(i);
+          serverSaveExerciseText(i, ta.value.trim());
           applyStandard(chapters, quizSection);
           var next = chapters[i + 1];
           if (next && !next.classList.contains('ch-locked')) {
@@ -627,6 +632,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
             if (ta.value.trim().length < MIN_CHARS) { check.checked = false; return; }
             var p = getP(); p['ch' + i] = 1; saveP(p);
             serverSetChapter(i);
+            serverSaveExerciseText(i, ta.value.trim());
             applyDeco(chapters, quizSection);
           });
         }
@@ -727,6 +733,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         if (btn.disabled) return;
         var p = getP(); p['ch' + i] = 1; saveP(p);
         serverSetChapter(i);
+        serverSaveExerciseText(i, ta.value.trim());
         applyActeur(actes, quizSection);
         var next = actes[i + 1];
         if (next) { setTimeout(function () { next.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 180); }
