@@ -1,10 +1,11 @@
 /**
  * OKAPI STUDIOS — Centre de formation
- * Widget "Changer mon mot de passe", visible uniquement une fois connecte
- * (classe body.gate-unlocked, deja geree par gate.js). Entierement auto-
- * contenu : injecte son propre HTML/CSS au chargement, ne necessite aucune
- * modification du reste de la page. Utilise l'action serveur changePassword
- * deja en place cote Code.gs.
+ * Fenetre "Changer mon mot de passe", qui s'affiche automatiquement a
+ * chaque connexion tant que le mot de passe n'a pas ete personnalise
+ * (statut connu du serveur, colonne "Perso" du Sheet — pas d'une simple
+ * memorisation locale). Des qu'un changement reussit, le serveur marque
+ * le compte comme personnalise et la fenetre ne revient plus.
+ * Entierement auto-contenu : injecte son propre HTML/CSS au chargement.
  */
 (function(){
   var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec";
@@ -12,13 +13,6 @@
   function init(){
     var style = document.createElement('style');
     style.textContent =
-      '.pwd-change-link{position:fixed;bottom:16px;right:16px;z-index:9998;' +
-      'font-family:"IBM Plex Mono",monospace;font-size:11px;color:#948d9c;' +
-      'background:rgba(10,9,16,0.9);border:1px solid rgba(255,255,255,.15);' +
-      'padding:9px 16px;cursor:pointer;text-decoration:none;display:none;' +
-      'border-radius:2px;}' +
-      'body.gate-unlocked .pwd-change-link{display:inline-block;}' +
-      '.pwd-change-link:hover{border-color:#C9A84C;color:#C9A84C;}' +
       '.pwd-change-modal{position:fixed;inset:0;z-index:9999;background:rgba(10,9,16,0.92);' +
       'display:none;align-items:center;justify-content:center;padding:20px;}' +
       '.pwd-change-modal.open{display:flex;}' +
@@ -50,12 +44,6 @@
       'border:1px solid rgba(255,255,255,.2)!important;margin-bottom:0!important;}';
     document.head.appendChild(style);
 
-    var link = document.createElement('a');
-    link.className = 'pwd-change-link';
-    link.textContent = '\uD83D\uDD11 Changer mon mot de passe';
-    link.href = '#';
-    document.body.appendChild(link);
-
     var banner = document.createElement('div');
     banner.className = 'pwd-banner-overlay';
     banner.innerHTML =
@@ -79,11 +67,6 @@
       '</div>';
     document.body.appendChild(modal);
 
-    link.addEventListener('click', function(e){
-      e.preventDefault();
-      document.getElementById('pwdMsg').textContent = '';
-      modal.classList.add('open');
-    });
     document.getElementById('pwdClose').addEventListener('click', function(){
       modal.classList.remove('open');
     });
@@ -91,28 +74,26 @@
       if (e.target === modal) modal.classList.remove('open');
     });
 
-    // Bandeau automatique : affiche une seule fois apres une connexion
-    // reussie (jamais revu une fois ferme, memorise par navigateur).
-    function bannerDismissed(){
-      try { return localStorage.getItem('okapi_pwd_banner_dismissed') === '1'; }
-      catch(e){ return false; }
-    }
-    function dismissBanner(){
-      banner.classList.remove('open');
-      try { localStorage.setItem('okapi_pwd_banner_dismissed', '1'); } catch(e){}
-    }
-    function maybeShowBanner(){
-      if (!bannerDismissed()) banner.classList.add('open');
+    // Affichage : uniquement pilote par le statut serveur (pwdCustomized
+    // transmis par gate.js dans le detail de l'evenement okapi:unlocked).
+    // "Plus tard" ferme juste pour cette visite — la fenetre revient a la
+    // prochaine connexion tant que le mot de passe n'a pas ete change.
+    function showBanner(){
+      banner.classList.add('open');
     }
     document.getElementById('pwdBannerYes').addEventListener('click', function(){
-      dismissBanner();
+      banner.classList.remove('open');
       document.getElementById('pwdMsg').textContent = '';
       modal.classList.add('open');
     });
-    document.getElementById('pwdBannerNo').addEventListener('click', dismissBanner);
+    document.getElementById('pwdBannerNo').addEventListener('click', function(){
+      banner.classList.remove('open');
+    });
 
-    document.addEventListener('okapi:unlocked', maybeShowBanner);
-    if (document.body.classList.contains('gate-unlocked')) maybeShowBanner();
+    document.addEventListener('okapi:unlocked', function(e){
+      var customized = e && e.detail && e.detail.pwdCustomized;
+      if (!customized) showBanner();
+    });
 
     var btn = document.getElementById('pwdSubmit');
     btn.addEventListener('click', function(){
