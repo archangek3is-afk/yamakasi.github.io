@@ -289,6 +289,10 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     if (!_email || !_manual) return;
     jsonpCall({ action: 'saveExerciseText', email: _email, manual: _manual, ch: chIndex, text: text }, null);
   }
+  function serverGetExerciseText(chIndex, cb) {
+    if (!_email || !_manual) return;
+    jsonpCall({ action: 'getExerciseText', email: _email, manual: _manual, ch: chIndex }, cb);
+  }
   function reapply() {
     if (_format === 'A') applyStandard(_chapters, _quizSection);
     else if (_format === 'B') applyDeco(_chapters, _quizSection);
@@ -343,11 +347,23 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       statusMsg.textContent = '';
 
       jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex }, function (data) {
-        if (data && data.ok) {
+        var st = data && data.status;
+        if (data && (data.ok || st === 'valide')) {
           statusMsg.className = 'ch-form-status ch-form-status-ok';
-          statusMsg.textContent = '\u2713 Soumission re\u00e7ue \u2014 chapitre valid\u00e9\u00a0!';
+          statusMsg.textContent = '\u2713 Soumission accept\u00e9e \u2014 chapitre valid\u00e9\u00a0!';
           onVerified();
+        } else if (st === 'en_attente') {
+          statusMsg.className = 'ch-form-status ch-form-status-ok';
+          statusMsg.textContent = 'Ta soumission est en cours de v\u00e9rification \u2014 tu recevras l\u2019acc\u00e8s d\u00e8s qu\u2019elle sera valid\u00e9e par l\u2019administrateur.';
+          verifyBtn.textContent = 'V\u00e9rifier \u00e0 nouveau';
+          verifyBtn.disabled = false;
+        } else if (st === 'refuse') {
+          statusMsg.className = 'ch-form-status ch-form-status-err';
+          statusMsg.textContent = 'Ta soumission a \u00e9t\u00e9 refus\u00e9e \u2014 revois ton exercice et renvoie-le.';
+          verifyBtn.textContent = 'R\u00e9essayer';
+          verifyBtn.disabled = false;
         } else {
+          /* aucune_soumission ou erreur réseau */
           statusMsg.className = 'ch-form-status ch-form-status-err';
           statusMsg.textContent = 'Soumission non trouv\u00e9e. V\u00e9rifie avoir valid\u00e9 le formulaire, puis r\u00e9essaie.';
           verifyBtn.textContent = 'R\u00e9essayer';
@@ -506,6 +522,13 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           }
         });
         updateCounter();
+        serverGetExerciseText(i, function (res) {
+          if (res && res.found && res.text) {
+            ta.value = res.text;
+            var curEx = getEx(); curEx['ch' + i] = res.text; saveEx(curEx);
+            updateCounter();
+          }
+        });
       }
     });
 
@@ -637,6 +660,13 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           });
         }
         updateDecoCounter();
+        serverGetExerciseText(i, function (res) {
+          if (res && res.found && res.text) {
+            ta.value = res.text;
+            var curEx = getEx(); curEx['ch' + i] = res.text; saveEx(curEx);
+            updateDecoCounter();
+          }
+        });
       }
     });
 
@@ -740,6 +770,13 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         else if (quizSection) { setTimeout(function () { quizSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 180); }
       });
       updateActeCounter();
+      serverGetExerciseText(i, function (res) {
+        if (res && res.found && res.text) {
+          ta.value = res.text;
+          var curEx = getEx(); curEx['ch' + i] = res.text; saveEx(curEx);
+          updateActeCounter();
+        }
+      });
     });
     applyActeur(actes, quizSection);
   }
