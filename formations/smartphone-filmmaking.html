@@ -179,6 +179,27 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 }
 @media(max-width:768px){#gate-overlay{background:linear-gradient(rgba(10,10,10,.82),rgba(10,10,10,.82)),url("images/gate-bg-mobile.jpg") center/cover no-repeat,#0A0A0A;}}
 .ref-link{ font-size:13px; color:var(--fumee); margin-top:14px; margin-bottom:20px;} .ref-link a{ color:var(--or); text-decoration:none;} .ref-link a:hover{ text-decoration:underline;}
+.sim-wrap{margin:2.4vh 0;border:1px solid rgba(198,255,61,.18);border-radius:14px;background:#0D0D0D;padding:2.4vh 1.6vw;display:grid;grid-template-columns:1fr 1.1fr;gap:2vw;align-items:center}
+.sim-preview{aspect-ratio:9/16;max-width:180px;margin:0 auto;border-radius:10px;background:#1a1a1a;position:relative;overflow:hidden;border:1px solid rgba(198,255,61,.25)}
+.sim-preview .scene{position:absolute;inset:0;background:radial-gradient(circle at 50% 35%,#3a3a2a,#0a0a0a 70%);filter:brightness(1) blur(0px);transition:filter .15s}
+.sim-preview .readout{position:absolute;bottom:.5em;left:.5em;right:.5em;font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:#C6FF3D;text-shadow:0 0 4px rgba(198,255,61,.5)}
+.sim-controls{display:flex;flex-direction:column;gap:1.6vh}
+.sim-ctl label{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:#8A8A85;margin-bottom:.5em}
+.sim-ctl label b{color:#C6FF3D}
+.sim-ctl input[type=range]{width:100%;accent-color:#C6FF3D}
+.sim-note{font-size:.76rem;color:#8A8A85;margin-top:.8vh;line-height:1.5}
+.wave-cmp{display:grid;grid-template-columns:1fr 1fr;gap:1.4vw;margin:2vh 0}
+.wave-card{border:1px solid rgba(198,255,61,.14);border-radius:12px;padding:1.6vh 1vw;background:#0D0D0D;text-align:center}
+.wave-card svg{width:100%;height:60px}
+.wave-card .lb{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:#8A8A85;margin-top:.8vh}
+.wave-card.bad .lb{color:#D9695F}
+.wave-card.good .lb{color:#C6FF3D}
+.frame-cmp{display:grid;grid-template-columns:1fr 1.8fr;gap:1.4vw;margin:2vh 0;align-items:end}
+.frame-box{border:1.5px dashed rgba(198,255,61,.35);border-radius:6px;position:relative;margin:0 auto}
+.frame-box.vert{width:80px;height:142px}
+.frame-box.horiz{width:100%;height:79px}
+.frame-box::after{content:attr(data-lbl);position:absolute;bottom:-1.8em;left:0;right:0;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.64rem;color:#8A8A85}
+.frame-box .safe{position:absolute;inset:12%;border:1px dotted rgba(198,255,61,.5)}
 </style>
 </head>
 <body>
@@ -269,6 +290,16 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-body">
       <p class="ch-lead">Un mauvais son détruit une bonne image. Une bonne image ne sauve jamais un mauvais son. Cette règle est absolue au cinéma, et elle s'applique avec encore plus de force au smartphone filmmaking : le micro intégré d'un smartphone est conçu pour les appels téléphoniques, pas pour capter un dialogue à distance dans un environnement bruité. Il ramasse la réverbération des pièces, capture les bruits de manipulation et les vibrations du téléphone lui-même, et sature vite dans les environnements avec de la musique ou du bruit ambiant fort. La solution minimale : un micro-cravate filaire branché en jack (ou via adaptateur USB-C / Lightning). La solution intermédiaire : un micro-cardioïde fixé sur le téléphone via une griffe froide. La solution professionnelle pour les projets exigeants : un preneur de son séparé avec micro-canne et enregistreur, synchronisé en post-production. Le son est le budget invisible du smartphone filmmaking — c'est là qu'il ne faut pas économiser.</p>
       <p class="ref-link">→ <a href="https://www.docfilmacademy.com/blog/6-steps-to-getting-cinematic-footage-on-your-smartphone" target="_blank" rel="noopener">Documentary Film Academy — Obtenir une image cinématographique au smartphone</a></p>
+      <div class="wave-cmp">
+  <div class="wave-card bad">
+    <svg viewBox="0 0 200 60" preserveAspectRatio="none"><polyline points="0,30 8,10 16,45 24,18 32,40 40,12 48,38 56,20 64,42 72,15 80,35 88,22 96,44 104,14 112,36 120,24 128,46 136,16 144,34 152,26 160,44 168,18 176,38 184,22 192,40 200,30" fill="none" stroke="#D9695F" stroke-width="1.5"/></svg>
+    <div class="lb">Micro intégré — signal irrégulier, sensible au bruit ambiant</div>
+  </div>
+  <div class="wave-card good">
+    <svg viewBox="0 0 200 60" preserveAspectRatio="none"><polyline points="0,30 8,25 16,34 24,27 32,32 40,26 48,33 56,28 64,31 72,27 80,32 88,29 96,31 104,28 112,30 120,29 128,31 136,28 144,30 152,29 160,31 168,29 176,30 184,29 192,30 200,30" fill="none" stroke="#C6FF3D" stroke-width="1.5"/></svg>
+    <div class="lb">Micro externe — signal propre et constant</div>
+  </div>
+</div>
       <div class="exercice"><span class="ex-tag">Exercice 04 — Comparaison son</span><h4>Trois sources audio pour un même dialogue</h4><p>Enregistre la même séquence de dialogue (deux personnes qui parlent) de trois façons : micro intégré du smartphone, micro-cravate filaire, et avec un objet placé entre le téléphone et les interlocuteurs pour observer l'effet de masque. Analyse les différences et rédige tes conclusions sur le compromis qualité/budget pour chaque solution.</p></div>
     </div>
   </div>
@@ -278,6 +309,56 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-body">
       <p class="ch-lead">Le mode automatique d'un smartphone est conçu pour produire une image "correcte" dans le plus grand nombre de situations possible — c'est précisément ce qui le rend insuffisant pour une démarche cinématographique. En automatique, l'ISO monte quand la scène s'assombrit (introduisant du bruit numérique), la vitesse d'obturation s'ajuste sans cohérence (créant des variations de motion blur non maîtrisées), et la mise au point saute d'un sujet à l'autre selon un algorithme qui ne connaît pas tes intentions. Les applications de contrôle manuel — Filmic Pro (iOS/Android), Blackmagic Camera (iOS), Cinema P3 — donnent accès aux mêmes paramètres qu'une caméra professionnelle : ISO (sensibilité lumineuse), vitesse d'obturation (règle du 180° : vitesse = 2x la fréquence d'images), mise au point manuelle avec focus peaking, et dans certains cas des profils log pour un étalonnage plus poussé en post-production. Maîtriser ces réglages est la différence entre subir son image et la choisir.</p>
       <p class="ref-link">→ <a href="https://www.filmicpro.com/" target="_blank" rel="noopener">FiLMiC Pro — site officiel de l'application</a></p>
+      <div class="sim-wrap">
+  <div class="sim-preview">
+    <div class="scene" id="simScene"></div>
+    <div class="readout" id="simReadout">ISO 400 · 1/50 · f/1.8</div>
+  </div>
+  <div class="sim-controls">
+    <div class="sim-ctl">
+      <label>ISO (sensibilité) <b id="isoVal">400</b></label>
+      <input type="range" id="isoSlider" min="50" max="3200" step="50" value="400">
+      <div class="sim-note" id="isoNote">Équilibré. Au-delà de 1600, le bruit numérique devient visible sur la plupart des smartphones.</div>
+    </div>
+    <div class="sim-ctl">
+      <label>Vitesse d'obturation <b id="shutVal">1/50</b></label>
+      <input type="range" id="shutSlider" min="0" max="4" step="1" value="1">
+      <div class="sim-note" id="shutNote">1/50 — le standard cinéma pour un mouvement naturel (règle des 180°).</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var scene = document.getElementById('simScene');
+  var readout = document.getElementById('simReadout');
+  var iso = document.getElementById('isoSlider'), isoVal = document.getElementById('isoVal'), isoNote = document.getElementById('isoNote');
+  var shutOpts = [{l:'1/25',note:'Trop lent — filé de mouvement marqué, à réserver à un effet volontaire.'},
+                   {l:'1/50',note:'1/50 — le standard cinéma pour un mouvement naturel (règle des 180°).'},
+                   {l:'1/100',note:"Plus net sur les mouvements rapides, légèrement plus saccadé à l'œil."},
+                   {l:'1/200',note:"Très net, rendu vidéo plutôt que cinéma — utile pour du sport ou de l'action."},
+                   {l:'1/500',note:"Chaque image figée — casse totalement l'illusion de mouvement fluide."}];
+  var shut = document.getElementById('shutSlider'), shutVal = document.getElementById('shutVal'), shutNote = document.getElementById('shutNote');
+  function update(){
+    var isoN = parseInt(iso.value,10);
+    isoVal.textContent = isoN;
+    var brightness = 0.6 + (isoN/3200)*0.9;
+    var noise = isoN > 1600 ? ' contrast(1.15) saturate(0.8)' : '';
+    scene.style.filter = 'brightness('+brightness.toFixed(2)+')'+noise;
+    isoNote.textContent = isoN <= 400 ? 'Propre et net, idéal en lumière correcte.' :
+                           isoN <= 1600 ? 'Équilibré. Au-delà de 1600, le bruit numérique devient visible sur la plupart des smartphones.' :
+                           "Bruit numérique visible — à réserver aux situations où il n'y a vraiment pas d'autre choix.";
+    var s = shutOpts[shut.value];
+    shutVal.textContent = s.l;
+    shutNote.textContent = s.note;
+    var blurAmt = shut.value <= 1 ? (1-shut.value)*1.2 : 0;
+    scene.style.filter += ' blur('+blurAmt.toFixed(1)+'px)';
+    readout.textContent = 'ISO '+isoN+' · '+s.l+' · f/1.8';
+  }
+  iso.addEventListener('input', update);
+  shut.addEventListener('input', update);
+  update();
+})();
+</script>
       <div class="exercice"><span class="ex-tag">Exercice 05 — Réglages manuels</span><h4>Capture d'écran de tes réglages en situation</h4><p>À remettre via formulaire — capture d'écran de l'interface de ton application de contrôle manuel (Filmic Pro, Blackmagic Camera, ou équivalent) en train de tourner une scène, avec les réglages ISO, vitesse d'obturation et mise au point visibles. Indique dans le formulaire quel était l'environnement lumineux et pourquoi tu as choisi ces réglages précis.</p></div>
     </div>
   </div>
@@ -287,6 +368,10 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-body">
       <p class="ch-lead">La montée des plateformes verticales (Stories, Reels, TikTok) a créé une tension nouvelle pour le smartphone filmmaking : composer pour deux formats radicalement différents sans jamais sacrifier l'un pour l'autre. La règle des tiers reste universelle — elle s'applique autant en 9:16 qu'en 16:9. Mais les lignes de force et les zones mortes ne sont pas aux mêmes endroits. Un sujet centré verticalement pour un Reel peut disparaître derrière les éléments d'interface (boutons, textes) si on ne prend pas en compte les "safe zones" de chaque plateforme. La solution pour les projets qui doivent vivre sur les deux formats : filmer en 4:3 ou en carré, avec suffisamment de marge pour recadrer dans les deux directions en post-production. Penser le cadrage en amont de la plateforme de destination plutôt que d'essayer de recadrer en urgence une image qui n'a pas été conçue pour ça.</p>
       <p class="ref-link">→ <a href="https://learningmole.com/mobile-filmmaking-creating-quality-videos-phone/" target="_blank" rel="noopener">LearningMole — Filmer des vidéos de qualité au smartphone</a></p>
+      <div class="frame-cmp">
+  <div class="frame-box vert" data-lbl="9:16 · Vertical"><div class="safe"></div></div>
+  <div class="frame-box horiz" data-lbl="16:9 · Horizontal"><div class="safe"></div></div>
+</div>
       <div class="exercice"><span class="ex-tag">Exercice 06 — Double format</span><h4>Un même plan en vertical et horizontal</h4><p>Filme le même plan (un visage en gros plan, une main qui réalise un geste, ou un paysage) en format vertical 9:16 ET en format horizontal 16:9, en essayant de produire deux cadres également efficaces. Décris les ajustements que tu as dû faire pour que chaque format fonctionne, et lequel des deux tu as trouvé plus difficile à composer.</p></div>
     </div>
   </div>

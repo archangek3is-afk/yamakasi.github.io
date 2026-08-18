@@ -179,6 +179,28 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 }
 @media(max-width:768px){#gate-overlay{background:linear-gradient(rgba(10,10,10,.82),rgba(10,10,10,.82)),url("images/gate-bg-mobile.jpg") center/cover no-repeat,#0A0A0A;}}
 .ref-link{ font-size:13px; color:var(--fumee); margin-top:14px; margin-bottom:20px;} .ref-link a{ color:var(--or); text-decoration:none;} .ref-link a:hover{ text-decoration:underline;}
+.rpl-wrap{margin:2.4vh 0;border:1px solid rgba(245,240,232,.12);border-radius:14px;background:#141110;padding:2.4vh 1.6vw;overflow-x:auto}
+.rpl-track{position:relative;display:flex;gap:0;min-width:640px;padding-top:1vh}
+.rpl-track::before{content:"";position:absolute;top:1.9em;left:2%;right:2%;height:2px;background:linear-gradient(90deg,#FF5A5F,#1B2A4A)}
+.rpl-step{flex:1;text-align:center;cursor:pointer;position:relative;padding:0 .4vw}
+.rpl-step .dot{width:1.3em;height:1.3em;border-radius:50%;background:#141110;border:2px solid #FF5A5F;margin:0 auto;position:relative;z-index:2;transition:all .2s}
+.rpl-step.on .dot{background:#FF5A5F;box-shadow:0 0 0 5px rgba(255,90,95,.18)}
+.rpl-step .lbl{margin-top:.8em;font-family:'Syne',sans-serif;font-weight:700;font-size:.78rem;color:#8A8175;transition:color .2s}
+.rpl-step.on .lbl{color:#F5F0E8}
+.rpl-panel{margin-top:2.2vh;border-top:1px solid rgba(245,240,232,.1);padding-top:1.8vh;min-height:5em}
+.rpl-panel h4{font-family:'Syne',sans-serif;font-size:1rem;color:#FF5A5F;margin-bottom:.6em}
+.rpl-panel p{font-size:.9rem;line-height:1.6;color:#D9D2C4;margin:0}
+.fmt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.8vw;margin:2vh 0}
+.fmt-chip{border:1px solid rgba(245,240,232,.14);border-radius:10px;padding:1.6vh 1vw;text-align:center;background:#141110}
+.fmt-chip .p{font-family:'Syne',sans-serif;font-weight:700;font-size:.86rem;color:#FF5A5F}
+.fmt-chip .d{font-family:monospace;font-size:.68rem;color:#8A8175;margin-top:.5em}
+.kpi-bars{display:flex;flex-direction:column;gap:1.4vh;margin:2vh 0}
+.kpi-row{display:grid;grid-template-columns:170px 1fr 50px;align-items:center;gap:1vw}
+.kpi-row .lb{font-size:.82rem;color:#D9D2C4}
+.kpi-track{height:10px;border-radius:6px;background:rgba(245,240,232,.08);overflow:hidden}
+.kpi-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#1B2A4A,#FF5A5F);width:0;transition:width 1.1s ease}
+.kpi-val{font-family:'Syne',sans-serif;font-weight:700;font-size:.86rem;color:#F5F0E8;text-align:right}
+.kpi-src{font-size:.66rem;color:#6E6553;margin-top:2vh}
 </style>
 </head>
 <body>
@@ -251,6 +273,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-body">
       <p class="ch-lead">Les réseaux sociaux ont radicalement transformé la façon dont un film se fait connaître avant sa sortie. Chaque plateforme a sa propre grammaire : Instagram valorise l'esthétique et les portraits, TikTok récompense la spontanéité et le format vertical court, YouTube est le territoire du trailer long et du making-of, X (Twitter) est le lieu du débat et de la polémique maîtrisée. Publier le même contenu partout est une erreur — il faut adapter chaque contenu à la logique de la plateforme qui le reçoit. Le storytelling digital d'un film se construit comme une série : on dévoile progressivement, on crée de l'attente, on alterne révélation et mystère. Le rythme de publication est aussi important que le contenu lui-même — une campagne digitale qui s'emballe trop tôt épuise son public avant la sortie.</p>
       <p class="ref-link">→ <a href="https://www.studiobinder.com/blog/short-films-and-digital-communications/" target="_blank" rel="noopener">StudioBinder — Réseaux sociaux et communication digitale pour courts métrages</a></p>
+      <div class="fmt-grid">
+  <div class="fmt-chip"><div class="p">Reels / TikTok</div><div class="d">15-30s · vertical</div></div>
+  <div class="fmt-chip"><div class="p">YouTube Shorts</div><div class="d">≤60s · vertical</div></div>
+  <div class="fmt-chip"><div class="p">Trailer YouTube</div><div class="d">2-2,5min · horizontal</div></div>
+  <div class="fmt-chip"><div class="p">X / Twitter</div><div class="d">≤45s · carré ou vertical</div></div>
+</div>
       <div class="exercice"><span class="ex-tag">Exercice 02 — Plan de publication</span><h4>4 semaines de campagne digitale</h4><p>Conçois un plan de publication sur 4 semaines pour la sortie fictive d'un court-métrage que tu viens de terminer. Précise pour chaque semaine : quelle plateforme, quel type de contenu, quel objectif (awareness, engagement, conversion). Rédige au moins 3 accroches de publications.</p></div>
     </div>
   </div>
@@ -287,6 +315,37 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-body">
       <p class="ch-lead">Une campagne de communication qui s'improvise rate toujours au pire moment — généralement la semaine de la sortie, quand tout le monde est épuisé et que les décisions se prennent dans l'urgence. Le rétroplanning part de la date de sortie et remonte dans le temps : à J-12 semaines, que doit-on avoir en place ? À J-8 semaines, quels contenus doivent être prêts ? À J-4 semaines, qu'est-ce qui doit déjà être publié ? La courbe d'intensité d'une campagne doit monter progressivement, atteindre son pic la semaine de la sortie, puis maintenir un niveau suffisant pendant les deux premières semaines d'exploitation. Un piège classique : tout concentrer sur la semaine de sortie et ne rien avoir prévu pour la deuxième semaine, qui est souvent décisive pour la durée d'exploitation en salle.</p>
       <p class="ref-link">→ <a href="https://www.studiobinder.com/blog/video-marketing-strategy/" target="_blank" rel="noopener">StudioBinder — Construire une stratégie de marketing vidéo en 6 étapes</a></p>
+      <div class="rpl-wrap">
+  <div class="rpl-track" id="rplTrack">
+    <div class="rpl-step on" data-i="0"><div class="dot"></div><div class="lbl">J-90</div></div>
+    <div class="rpl-step" data-i="1"><div class="dot"></div><div class="lbl">J-60</div></div>
+    <div class="rpl-step" data-i="2"><div class="dot"></div><div class="lbl">J-30</div></div>
+    <div class="rpl-step" data-i="3"><div class="dot"></div><div class="lbl">J-14</div></div>
+    <div class="rpl-step" data-i="4"><div class="dot"></div><div class="lbl">Sortie</div></div>
+    <div class="rpl-step" data-i="5"><div class="dot"></div><div class="lbl">J+7</div></div>
+  </div>
+  <div class="rpl-panel" id="rplPanel"></div>
+</div>
+<script>
+(function(){
+  var DATA = [
+    {t:"J-90 — Poser les fondations", d:"Le teaser sort ici, pas avant. Trop tôt et l'attention retombe avant la sortie. C'est aussi le moment de verrouiller l'identité visuelle et le ton de toute la campagne."},
+    {t:"J-60 — Construire l'attente", d:"Premières publications régulières, montée en cadence du community management. Les premières relations presse s'engagent — les journalistes ont besoin de temps."},
+    {t:"J-30 — La bande-annonce", d:"Le vrai trailer sort. Rappel : 36% des spectateurs déclarent avoir découvert leur dernier film vu en salle via une bande-annonce (National Research Group) — ce n'est pas un détail, c'est le pivot de la campagne."},
+    {t:"J-14 — Intensité maximale", d:"Activations, avant-premières, partenariats presse et influenceurs se concentrent ici. C'est la fenêtre où l'écho doit être le plus fort, sans jamais avoir été atteint plus tôt."},
+    {t:"Sortie — Le jour J", d:"Toute la communication converge vers un seul geste : aller voir le film. Community management en veille active pour répondre en temps réel aux premières réactions."},
+    {t:"J+7 — Tenir la dynamique", d:"Le bouche-à-oreille prend le relais. Les 3% de spectateurs les plus fidèles (les \u00ab frequent moviegoers \u00bb, responsables de 34% des billets vendus selon la MPA) sont ceux qu'on active en priorité pour prolonger l'écho."}
+  ];
+  var steps = document.querySelectorAll('#rplTrack .rpl-step');
+  var panel = document.getElementById('rplPanel');
+  function show(i){
+    steps.forEach(function(s){s.classList.toggle('on', s.dataset.i==i);});
+    panel.innerHTML = '<h4>'+DATA[i].t+'</h4><p>'+DATA[i].d+'</p>';
+  }
+  steps.forEach(function(s){ s.addEventListener('click', function(){ show(s.dataset.i); }); });
+  show(0);
+})();
+</script>
       <div class="exercice"><span class="ex-tag">Exercice 06 — Rétroplanning 10 semaines</span><h4>Construis un calendrier de campagne</h4><p>Construis un rétroplanning de communication sur 10 semaines pour un film de fiction sortant en salle. Utilise un format tableau (semaine / action / support / contenu prévu) et justifie l'ordre et le rythme choisis.</p></div>
     </div>
   </div>
@@ -305,6 +364,23 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-body">
       <p class="ch-lead">La portée (reach) est la métrique la plus souvent mise en avant dans les bilans de campagne parce qu'elle est la plus flatteuse — et la moins significative. 2 millions d'impressions ne signifient rien si personne n'est allé voir le film. Les KPIs réellement utiles pour mesurer l'efficacité d'une campagne de film sont : le taux d'engagement (interactions divisées par portée), le click-through rate sur les liens de billetterie, l'évolution du sentiment (positif / neutre / négatif) dans les commentaires, le nombre de critiques publiées et leur tonalité, et l'impact sur les ventes réelles de billets. Distinguer la portée vantée de l'impact réel demande de croiser les données digitales avec les données d'entrées en salle semaine par semaine. Une campagne qui génère beaucoup de bruit sans entraîner de déplacement au cinéma est une campagne qui a raté son objectif principal, quelle que soit sa beauté formelle.</p>
       <p class="ref-link">→ <a href="https://www.geckoboard.com/best-practice/kpi-examples/marketing-roi/" target="_blank" rel="noopener">Geckoboard — KPIs de ROI marketing, exemples</a></p>
+      <div class="kpi-bars" id="kpiBars">
+  <div class="kpi-row"><span class="lb">Découverte via bande-annonce</span><div class="kpi-track"><div class="kpi-fill" data-w="36"></div></div><span class="kpi-val">36%</span></div>
+  <div class="kpi-row"><span class="lb">Part des billets · spectateurs fidèles</span><div class="kpi-track"><div class="kpi-fill" data-w="34"></div></div><span class="kpi-val">34%</span></div>
+  <div class="kpi-row"><span class="lb">Part de la population · spectateurs fidèles</span><div class="kpi-track"><div class="kpi-fill" data-w="3"></div></div><span class="kpi-val">3%</span></div>
+</div>
+<div class="kpi-src">Sources : National Research Group (cité par Forbes, 2025) · Motion Picture Association, données officielles.</div>
+<script>
+(function(){
+  var bars = document.querySelectorAll('#kpiBars .kpi-fill');
+  var done = false;
+  function run(){ if(done) return; done = true; bars.forEach(function(b){ b.style.width = b.dataset.w + '%'; }); }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) run(); }); }, {threshold:.4});
+    var el = document.getElementById('kpiBars'); if(el) io.observe(el);
+  } else { run(); }
+})();
+</script>
       <div class="exercice"><span class="ex-tag">Exercice 08 — Analyse de bilan</span><h4>Décode un bilan de campagne</h4><p>Tu reçois le bilan d'une campagne Instagram pour un film : 4,2M d'impressions, 1,8% de taux d'engagement, 0,3% de CTR sur le lien de billetterie. Le film a fait 12 000 entrées en première semaine, pour un objectif de 40 000. Analyse ces chiffres : qu'est-ce qui a fonctionné, qu'est-ce qui a échoué, et que changerais-tu pour la deuxième semaine ?</p></div>
     </div>
   </div>
