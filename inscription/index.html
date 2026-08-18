@@ -395,11 +395,12 @@ footer{margin-top:5vh;text-align:center;font-family:var(--mono);font-size:.62rem
       </div>
     </div>
     <div class="field">
-      <label>Moyen de paiement favori</label>
+      <label>Moyen de paiement favori <span class="req">*</span></label>
       <div class="opts">
         <div class="opt"><input type="radio" name="paiement" id="pay-total" value="Totalité en une fois"><label for="pay-total"><span class="b"></span>Totalité en une fois</label></div>
         <div class="opt"><input type="radio" name="paiement" id="pay-mens" value="Plusieurs mensualités"><label for="pay-mens"><span class="b"></span>Plusieurs mensualités</label></div>
       </div>
+      <div class="err-msg" id="paiement-err">Merci de choisir une option.</div>
     </div>
   </div>
 
@@ -505,6 +506,7 @@ function validateAll(){
   var badFmt=!groupChecked('format'); showGroupErr('format-err',badFmt); if(badFmt) fail(fieldEl('fmt-ligne'));
 
   var badPack=!groupChecked('pack'); showGroupErr('pack-err',badPack); if(badPack) fail(fieldEl('packs'));
+  var badPaiement=!groupChecked('paiement'); showGroupErr('paiement-err',badPaiement); if(badPaiement) fail(fieldEl('pay-total'));
   var badRythme=!groupChecked('rythme'); showGroupErr('rythme-err',badRythme); if(badRythme) fail(fieldEl('r-intensif'));
   var badFreq=!groupChecked('freqcours'); showGroupErr('freqcours-err',badFreq); if(badFreq) fail(fieldEl('fc-1'));
 
