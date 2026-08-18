@@ -218,7 +218,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 #gate-overlay p#gateMsg{color:#8a8a85;font-size:14px;line-height:1.65;max-width:380px;margin:0 auto 26px;}
 #gate-overlay form#gateLoginForm{display:flex;flex-direction:column;align-items:center;margin-bottom:14px;gap:10px;}
 #gate-overlay input#gateEmailInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#F5F0E8;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gatePasswordInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#F5F0E8;font-size:13px;text-align:center;font-family:inherit;}
 #gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay input#gatePasswordInput::placeholder{color:rgba(255,255,255,.4);}
 #gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #C9A84C;color:#C9A84C;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
 #gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#C9A84C;color:#0A0A0A;}
 
@@ -259,6 +261,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   #gate-overlay h2 { font-size: clamp(20px, 5vw, 28px); }
   #gate-overlay p#gateMsg { font-size: 13.5px; max-width: 90vw; }
   #gate-overlay input#gateEmailInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
+#gate-overlay input#gatePasswordInput { max-width: 85vw; padding: 14px 16px; font-size: 14px; }
   #gate-overlay a#gateRequestLink, #gate-overlay button#gateLoginBtn { padding: 14px 24px; font-size: 12px; min-height: 48px; }
 
   /* --- watch cards stack --- */
@@ -284,6 +287,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   .quiz-opt { padding: 12px 10px; }
   .exercice { padding: 16px 10px; }
   #gate-overlay input#gateEmailInput { max-width: 90vw; }
+#gate-overlay input#gatePasswordInput { max-width: 90vw; }
   .case-strip { gap: 12px; }
 }
 
@@ -300,6 +304,7 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
   <p id="gateMsg">Entre l'email avec lequel ton accès a été validé.</p>
   <form id="gateLoginForm">
     <input type="email" id="gateEmailInput" placeholder="ton@email.com" required>
+    <input type="password" id="gatePasswordInput" placeholder="Mot de passe" required>
     <button type="submit" id="gateLoginBtn">Se connecter</button>
   </form>
   <a id="gateRequestLink" href="acces.html">Pas encore d&rsquo;accès&nbsp;? Demander l&rsquo;accès</a>

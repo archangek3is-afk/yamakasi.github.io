@@ -26,6 +26,7 @@
   function init(){
     var form = document.getElementById('gateLoginForm');
     var input = document.getElementById('gateEmailInput');
+    var passwordInput = document.getElementById('gatePasswordInput');
     var btn = document.getElementById('gateLoginBtn');
     if (!form || !input || !btn) return;
 
@@ -37,6 +38,7 @@
     form.addEventListener('submit', function(evt){
       evt.preventDefault();
       var email = input.value.trim();
+      var password = passwordInput ? passwordInput.value.trim() : '';
       if (!email) return;
 
       var originalLabel = btn.textContent;
@@ -61,7 +63,7 @@
         if (res && res.approved) {
           unlock(email);
         } else {
-          setMsg("Cet email n'a pas d'acces autorise a ce manuel. Verifie l'adresse, ou demande l'acces ci-dessous.");
+          setMsg("Email ou mot de passe incorrect, ou acces non autorise a ce manuel. Verifie tes identifiants, ou demande l'acces ci-dessous.");
         }
         delete window[cbName];
         loaderScript.remove();
@@ -70,6 +72,7 @@
       function startLogin(ip){
         loaderScript = document.createElement('script');
         loaderScript.src = APPS_SCRIPT_URL + '?login=1&email=' + encodeURIComponent(email) +
+          '&password=' + encodeURIComponent(password) +
           '&manuel=' + encodeURIComponent(manual) + '&ip=' + encodeURIComponent(ip || '') +
           '&callback=' + cbName;
         document.body.appendChild(loaderScript);
