@@ -199,8 +199,8 @@ footer{margin-top:5vh;text-align:center;font-family:var(--mono);font-size:.62rem
       <div class="field"><label>Nom <span class="req">*</span></label><input type="text" id="nom" placeholder="Votre nom"><div class="err-msg">Ce champ est requis.</div></div>
     </div>
     <div class="row2">
-      <div class="field"><label>Email</label><input type="email" id="email" placeholder="vous@exemple.com"></div>
-      <div class="field"><label>Téléphone</label><input type="tel" id="tel" placeholder="+33 6 12 34 56 78"></div>
+      <div class="field"><label>Email <span class="req">*</span></label><input type="email" id="email" placeholder="vous@exemple.com"><div class="err-msg" id="email-err">Merci d'indiquer un email valide.</div></div>
+      <div class="field"><label>Téléphone <span class="req">*</span></label><input type="tel" id="tel" placeholder="+33 6 12 34 56 78"><div class="err-msg" id="tel-err">Ce champ est requis.</div></div>
     </div>
     <div class="field"><label>Activité / profession <span class="req">*</span></label><input type="text" id="profession" placeholder="Réalisateur, créateur de contenu, marketeur…"><div class="err-msg">Ce champ est requis.</div></div>
     <div class="row2">
@@ -486,6 +486,11 @@ function validateAll(){
   ['prenom','nom','profession'].forEach(function(id){
     var v=fieldEl(id).value.trim(); var bad=!v; markInvalid(id,bad); if(bad) fail(fieldEl(id));
   });
+  var emailEl=fieldEl('email'); var emailV=emailEl.value.trim();
+  var badEmail=!emailV||!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailV);
+  markInvalid('email',badEmail); if(badEmail) fail(emailEl);
+  var telEl=fieldEl('tel'); var badTel=!telEl.value.trim();
+  markInvalid('tel',badTel); if(badTel) fail(telEl);
   var src=fieldEl('source'); var badSrc=!src.value;
   src.closest('.field').classList.toggle('invalid',badSrc); if(badSrc) fail(src);
 
