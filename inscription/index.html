@@ -30,10 +30,8 @@ body{background-image:
 #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--or-d),var(--or));
   z-index:30;width:0%;transition:width .12s linear}
 .wordmark{display:flex;align-items:center;gap:.6em;font-family:'Sora',sans-serif;font-weight:800;letter-spacing:.02em}
-.wordmark .mark{width:1.5em;height:1.5em;border:1.6px solid var(--or);border-radius:3px;position:relative;flex:none}
-.wordmark .mark::before{content:"";position:absolute;left:22%;top:50%;width:0;height:0;
-  border-top:.32em solid transparent;border-bottom:.32em solid transparent;border-left:.5em solid var(--or);
-  transform:translateY(-50%)}
+.wordmark .mark{width:1.5em;height:1.5em;flex:none;display:block}
+.wordmark .mark img{width:100%;height:100%;object-fit:contain;display:block}
 .wordmark span{font-size:.92em}
 .wordmark b{color:var(--or)}
 
@@ -181,7 +179,7 @@ footer{margin-top:5vh;text-align:center;font-family:var(--mono);font-size:.62rem
 <div id="progress"></div>
 <div class="shell">
   <header class="top">
-    <div class="wordmark"><span class="mark"></span><span>OKAPI <b>WORLD</b> MÉDIA</span></div>
+    <div class="wordmark"><span class="mark"><img src="https://okapiworldmedia.com/assets/okapi-symbol-premium.png" alt="Okapi"></span><span>OKAPI <b>WORLD</b> MÉDIA</span></div>
     <div class="tag">L'École Okapi</div>
   </header>
 
