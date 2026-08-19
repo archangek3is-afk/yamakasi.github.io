@@ -326,6 +326,13 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       if (cb) cb(data);
     });
   }
+  function serverGetAllExerciseText(cb) {
+    if (!_email || !_manual) { if (cb) cb({}); return; }
+    jsonpCall({ action: 'getAllExerciseText', email: _email, manual: _manual, password: getPwd() }, function (data) {
+      if (handleAuthError(data)) { if (cb) cb({}); return; }
+      if (cb) cb(data && data.found && data.texts ? data.texts : {});
+    });
+  }
   function reapply() {
     if (_format === 'A') applyStandard(_chapters, _quizSection);
     else if (_format === 'B') applyDeco(_chapters, _quizSection);
@@ -484,7 +491,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
   /* ══════════════════════════════════════════════════════════════
      FORMAT A — Standard : .chapitre[data-ch]
   ══════════════════════════════════════════════════════════════ */
-  function initStandard(chapters) {
+  function initStandard(chapters, serverTexts) {
     var quizSection = _quizSection;
     if (quizSection) buildQuizGate(quizSection, chapters.length, 'chapitres');
     var ex = getEx();
@@ -580,13 +587,11 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           }
         });
         updateCounter();
-        serverGetExerciseText(i, function (res) {
-          if (res && res.found && res.text) {
-            ta.value = res.text;
-            var curEx = getEx(); curEx['ch' + i] = res.text; saveEx(curEx);
-            updateCounter();
-          }
-        });
+        if (serverTexts && serverTexts['ch' + i]) {
+          ta.value = serverTexts['ch' + i];
+          var curEx = getEx(); curEx['ch' + i] = serverTexts['ch' + i]; saveEx(curEx);
+          updateCounter();
+        }
       }
     });
 
@@ -635,7 +640,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
   /* ══════════════════════════════════════════════════════════════
      FORMAT B — decoration-cinema : section.chapter[id^="ch"]
   ══════════════════════════════════════════════════════════════ */
-  function initDeco(chapters) {
+  function initDeco(chapters, serverTexts) {
     var quizSection = _quizSection;
     var useForm = isFormManual(); /* true pour decoration-cinema */
 
@@ -718,13 +723,11 @@ section.chapter.ch-locked .deco-gate{display:block;}\
           });
         }
         updateDecoCounter();
-        serverGetExerciseText(i, function (res) {
-          if (res && res.found && res.text) {
-            ta.value = res.text;
-            var curEx = getEx(); curEx['ch' + i] = res.text; saveEx(curEx);
-            updateDecoCounter();
-          }
-        });
+        if (serverTexts && serverTexts['ch' + i]) {
+          ta.value = serverTexts['ch' + i];
+          var curEx = getEx(); curEx['ch' + i] = serverTexts['ch' + i]; saveEx(curEx);
+          updateDecoCounter();
+        }
       }
     });
 
@@ -767,7 +770,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
   /* ══════════════════════════════════════════════════════════════
      FORMAT C — acteur-vivant : #acte1 + #acte2
   ══════════════════════════════════════════════════════════════ */
-  function initActeur(actes) {
+  function initActeur(actes, serverTexts) {
     var quizSection = _quizSection;
     if (quizSection) buildQuizGate(quizSection, actes.length, 'modules');
     var ex = getEx();
@@ -828,13 +831,11 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         else if (quizSection) { setTimeout(function () { quizSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 180); }
       });
       updateActeCounter();
-      serverGetExerciseText(i, function (res) {
-        if (res && res.found && res.text) {
-          ta.value = res.text;
-          var curEx = getEx(); curEx['ch' + i] = res.text; saveEx(curEx);
-          updateActeCounter();
-        }
-      });
+      if (serverTexts && serverTexts['ch' + i]) {
+        ta.value = serverTexts['ch' + i];
+        var curEx = getEx(); curEx['ch' + i] = serverTexts['ch' + i]; saveEx(curEx);
+        updateActeCounter();
+      }
     });
     applyActeur(actes, quizSection);
   }
@@ -876,19 +877,21 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     if (stdChapters.length) {
       _format = 'A'; _chapters = stdChapters;
       _quizSection = document.getElementById('quiz');
-      initStandard(stdChapters); return;
+      serverGetAllExerciseText(function (serverTexts) { initStandard(stdChapters, serverTexts); });
+      return;
     }
     var decoChapters = Array.from(document.querySelectorAll('section.chapter[id^="ch"]'));
     if (decoChapters.length) {
       _format = 'B'; _chapters = decoChapters;
       _quizSection = document.getElementById('quiz');
-      initDeco(decoChapters); return;
+      serverGetAllExerciseText(function (serverTexts) { initDeco(decoChapters, serverTexts); });
+      return;
     }
     var actes = ['acte1', 'acte2'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
     if (actes.length) {
       _format = 'C'; _chapters = actes;
       _quizSection = document.getElementById('quiz');
-      initActeur(actes);
+      serverGetAllExerciseText(function (serverTexts) { initActeur(actes, serverTexts); });
     }
   }
 
