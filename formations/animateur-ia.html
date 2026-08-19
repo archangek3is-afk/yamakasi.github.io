@@ -108,6 +108,7 @@ footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:cen
 footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--fumee); text-transform:uppercase;} footer .brandline b{ color:var(--violet);}
 ::-webkit-scrollbar{ width:8px;} ::-webkit-scrollbar-track{ background:var(--noir);} ::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--violet);}
 @media(prefers-reduced-motion: reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important;} }
+.sub-ex{ background:var(--noir-3); border-left:3px solid var(--violet); padding:16px 20px; margin:18px 0;} .sub-ex .lbl{ font-family:var(--mono); font-size:10.5px; color:var(--violet); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:10px;} .sub-ex ul{ list-style:none; margin:0;} .sub-ex ul li{ position:relative; padding-left:20px; margin-bottom:10px; font-size:13.5px; color:var(--fumee); line-height:1.65;} .sub-ex ul li::before{ content:"—"; position:absolute; left:0; color:var(--violet);} .sub-ex ul li b{ color:var(--ivoire); font-weight:500;}
 
 /* ===== GATE OKAPI ===== */
 #gate-overlay{position:fixed;inset:0;z-index:99999;background:linear-gradient(rgba(10,10,10,.82),rgba(10,10,10,.82)),url("images/gate-bg.jpg") center/cover no-repeat,#0A0A0A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
@@ -255,6 +256,13 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Ce que l'IA change (et ne change pas)</h3><div class="ch-tag">Cadrage du métier</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
       <p class="ch-lead">L'IA change les moyens de production — plus besoin de plateau, de caméra, d'équipe complète pour un premier jet visuel. Elle <b>ne change rien</b> à ce qui rend une image ou un plan bon : composition, lumière, intention, rythme. Tous les autres manuels de cette collection s'appliquent toujours.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Runway ML × short films indépendants (2022–2024)</b> : des cinéastes comme Paul Trillo ont produit des courts entiers avec Runway Gen-2, montrant que la maîtrise du cadre et du montage détermine la qualité — pas l'outil. Ses plans les plus forts reprennent la grammaire de Kubrick.</li>
+        <li><b>Corridor Crew — « VFX Artists React » (YouTube, 2023)</b> : chaque semaine, ces artistes VFX comparent génération IA et effets traditionnels, démontrant que l'IA ne détecte pas les erreurs de raccord — c'est le cinéaste qui doit les voir.</li>
+        <li><b>A24 × campagnes marketing IA (2023)</b> : le studio a utilisé des images générées par IA pour des visuels promotionnels de films comme « Talk to Me ». Ce qui a fonctionné, c'est la direction artistique humaine qui guidait chaque génération — pas le hasard du modèle.</li>
+        <li><b>Sora / OpenAI — démo publique (février 2024)</b> : même avec un modèle capable de générer 60 secondes de vidéo, les démonstrations les plus mémorables étaient celles où un cinéaste avait pensé la mise en scène avant de rédiger le prompt.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> L'IA est un appareil photo numérique de 2024 : tout le monde en possède un, mais seul celui qui connaît la lumière, la composition et l'instant décisif fait des photographies qui comptent.</div>
       <div class="exercice"><span class="ex-tag">Exercice 01 — Le test du vocabulaire</span><h4>Décris un plan comme un DP, pas comme un utilisateur</h4><ol><li>Écris deux descriptions d'un même plan imaginaire : une en langage vague ("une belle image de coucher de soleil"), une en langage technique de cinéaste (échelle de plan, focale, température de couleur).</li><li>Laquelle produirait un meilleur résultat avec un outil de génération ?</li></ol></div>
     </div>
   </div>
@@ -300,6 +308,13 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
 
       <p class="ch-lead">Le problème n°1 d'un film généré par IA est qu'un même personnage change de visage d'un plan à l'autre. Les outils avancés permettent d'ancrer une <b>identité de personnage réutilisable</b> — l'équivalent d'un acteur qu'on peut rappeler dans plusieurs scènes.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Midjourney — fonction « Character Reference » (--cref, v6, 2024)</b> : en fournissant une image de référence avec le flag --cref, les générations suivantes maintiennent les traits du visage à travers les poses et éclairages variés. C'est le premier outil grand public à offrir cette cohérence sans fine-tuning.</li>
+        <li><b>Stable Diffusion + LoRA personnalisée</b> : la technique standard en production indépendante consiste à entraîner un modèle LoRA sur 20 à 30 images d'un personnage fictif, puis à l'injecter dans chaque génération. Des courts métrages comme « The Frost » (2023, réalisé avec SD) ont utilisé cette méthode pour maintenir la cohérence sur 40+ plans.</li>
+        <li><b>Kling AI / Pika Labs — « Consistent character » (2024)</b> : ces outils vidéo permettent de charger une image source de personnage et de la faire apparaître dans un plan animé — la cohérence tient sur 5 à 10 secondes, forçant le montage à masquer les transitions.</li>
+        <li><b>Casting traditionnel comme référence</b> : sur « Everything Everywhere All at Once » (Daniels, 2022), la cohérence physique d'une actrice (Michelle Yeoh) à travers des univers parallèles était assurée par le maquillage et le costume — la même logique s'applique : définir 8 points physiques fixes avant de générer.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Un personnage IA sans fiche de continuité n'est pas un personnage — c'est un type générique qui change d'acteur à chaque plan.</div>
       <div class="exercice"><span class="ex-tag">Exercice 04 — Ta fiche de continuité</span><h4>Documente un personnage pour la cohérence</h4><ol><li>Décris un personnage en 8 points fixes (visage, coiffure, tenue, posture type) qui ne doivent jamais varier d'un plan à l'autre.</li></ol></div>
     </div>
   </div>
@@ -308,6 +323,13 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-head" data-toggle><div class="ch-num">05</div><div class="ch-info"><h3>Composer un plan en langage IA</h3><div class="ch-tag">Caméra, optique, lumière</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
       <p class="ch-lead">Tout le vocabulaire des manuels « Réalisateur » et « Directeur de la Photographie » de cette collection est directement transposable en prompt — échelle de plan, mouvement de caméra, température de couleur.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Prompt « dutch angle » pour suspense</b> : un plan généré avec « extreme low angle, dutch tilt 15 degrees, 28mm lens distortion, harsh underlighting, chiaroscuro, Darius Khondji style » produit instantanément la tension narrative d'un film noir — contre « a creepy scene » qui génère un cliché générique.</li>
+        <li><b>Références DP comme ancre de style</b> : mentionner « shot by Roger Deakins, Blade Runner 2049 color palette, anamorphic lens flares, cold blue tones » dans un prompt oriente le modèle vers une esthétique reconnaissable, car ces films sont massivement représentés dans les données d'entraînement.</li>
+        <li><b>Mouvement de caméra en texte</b> : « slow push-in tracking shot following subject from behind at shoulder height » décrit exactement le mouvement emblématique de Stanley Kubrick dans « The Shining » (1980) — et les modèles vidéo comme Runway ML le restituent avec précision quand le vocabulaire est exact.</li>
+        <li><b>Rack focus décrit en prompt</b> : « shallow depth of field, foreground character in focus, background character blurred, then focus pulls to background » — cette technique narrative, canonisée par des DPs comme Gordon Willis, est reproduisible textuellement dans les meilleurs modèles de 2024.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Chaque terme du lexique cinématographique classique est une instruction directe pour le modèle — parler en cinéaste, c'est programmer en cinéaste.</div>
       <div class="exercice"><span class="ex-tag">Exercice 05 — Traduis un plan classique</span><h4>D'un manuel à l'autre</h4><ol><li>Reprends un des plans imaginés dans le manuel DP (chapitre 5 ou 6).</li><li>Réécris-le comme un prompt complet en suivant l'anatomie du chapitre 03.</li></ol></div>
     </div>
   </div>
@@ -318,6 +340,13 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
 
       <p class="ch-lead">Les outils actuels génèrent des segments courts (quelques secondes) qu'il faut ensuite assembler comme n'importe quel montage — les principes du manuel « Monteur » s'appliquent à l'identique, y compris la règle de six de Murch.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Workflow Runway ML + DaVinci Resolve (pratique standard 2023–2024)</b> : les réalisateurs IA exportent chaque segment Runway en 1080p, les importent dans DaVinci Resolve, calent les cuts sur les beats audio et ajoutent un étalonnage unifié pour cacher la discontinuité de style entre les générations.</li>
+        <li><b>Paul Trillo — « What It's Like to Have a Quiet Mind » (2023)</b> : ce court de 3 minutes assemblé entièrement avec Runway Gen-2 dans Premiere Pro illustre comment 40+ segments de 3 secondes deviennent cohérents grâce à une musique continue et des cuts sur les mouvements — la règle de Murch appliquée à l'IA.</li>
+        <li><b>Problème d'aspect ratio</b> : Runway génère en 16:9 ou 9:16, Midjourney en 1:1 par défaut — assembler différentes sources exige une décision de format unique dès la préparation, sinon le montage final est un patchwork de formats incompatibles.</li>
+        <li><b>Upscaling avec Topaz Video AI</b> : quand des segments générés en 720p doivent s'assembler avec d'autres en 1080p, Topaz Video AI permet d'unifier la résolution tout en ajoutant du grain homogène — une étape de post que les productions IA professionnelles systématisent.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Diviser une scène en segments de 4 secondes n'est pas une contrainte technique — c'est une nouvelle grammaire de plateau : chaque segment est un plan, et le montage était déjà prévu avant la génération.</div>
       <div class="exercice"><span class="ex-tag">Exercice 06 — Planifie tes segments</span><h4>Découpe une scène en clips</h4><ol><li>Découpe une scène de 20 secondes en segments de 5 secondes maximum.</li><li>Prévois les plans de coupe nécessaires pour cacher les imperfections entre segments.</li></ol></div>
     </div>
   </div>
@@ -326,6 +355,13 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Le son : voix, musique, sound design</h3><div class="ch-tag">Audio génératif</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
       <p class="ch-lead">Musique et voix générées donnent un premier jet rapide, mais <b>les droits associés sont rarement clairs</b> — une bonne pratique de studio est de composer une base à l'IA puis de la ré-enregistrer en conditions réelles pour sécuriser les droits définitifs.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>ElevenLabs — clonage de voix (2023)</b> : en uploadant 30 secondes d'audio propre, ElevenLabs génère une voix clonée utilisable pour la narration ou les dialogues provisoires. Des productions indépendantes l'utilisent pour le « temp voice » en post-production avant d'enregistrer les acteurs en studio — la même logique que le temp track musical.</li>
+        <li><b>Suno AI — génération musicale (2024)</b> : un prompt comme « cinematic orchestral score, tense strings, French New Wave influence, 90 BPM, no lyrics » génère en 30 secondes une musique utilisable en maquette. La règle de studio est de ré-enregistrer avec de vrais musiciens pour la diffusion commerciale — Suno sert de référence de composition, pas de livrable final.</li>
+        <li><b>Adobe Podcast « Enhance Speech » (2023)</b> : cet outil IA nettoie automatiquement une voix enregistrée en conditions médiocres (fond de rue, réverbération) pour lui donner un rendu studio. Des documentaristes ont commencé à filmer des interviews en extérieur et à corriger le son entièrement en IA — ce qui était impossible sans budget son important.</li>
+        <li><b>Udio vs. droits musicaux (2024)</b> : Udio a été poursuivi par les labels Universal, Sony et Warner pour violation de droits d'auteur — preuve que les compositions générées ne sont pas automatiquement libres de droits. Le principe de ré-enregistrement est d'abord une protection juridique, pas seulement une question de qualité.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Une voix IA est un brouillon, une musique IA est une référence : les deux doivent passer par un enregistrement réel avant toute diffusion commerciale pour sécuriser les droits.</div>
       <div class="exercice"><span class="ex-tag">Exercice 07 — Le brief de composition</span><h4>Décris une ambiance musicale à générer</h4><ol><li>Décris en mots (pas en notes) l'ambiance musicale d'une scène — tempo, instrumentation, émotion.</li></ol></div>
     </div>
   </div>
@@ -336,6 +372,13 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
 
       <p class="ch-lead">Générer un visage réel identifiable, imiter une œuvre existante, ou masquer l'usage de l'IA à un client dans un contexte où ça compte, sont des lignes qu'un studio sérieux ne franchit pas. <b>Voir la section « Éthique et droits » ci-dessous.</b></p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Getty Images vs. Stability AI (poursuites 2023)</b> : Getty a attaqué Stability AI pour avoir entraîné Stable Diffusion sur 12 millions d'images Getty sans licence ni rémunération — le filigrane Getty apparaissait même dans les images générées. Ce cas définit la frontière entre inspiration et reproduction illicite des données d'entraînement.</li>
+        <li><b>Grève WGA et clauses IA (mai–septembre 2023)</b> : les scénaristes hollywoodiens ont obtenu dans leur accord final que l'IA ne puisse pas être considérée comme auteur ni utilisée pour déprécier leur rémunération. C'est le premier accord de branche qui contractualise l'usage de l'IA dans une production — un précédent mondial.</li>
+        <li><b>SAG-AFTRA et le scan de figurants (accord 2023)</b> : SAG-AFTRA a inclus des dispositions encadrant le scan numérique des acteurs — un studio ne peut pas scanner un acteur et réutiliser sa likeness en IA sans consentement explicite et compensation. Des productions Marvel ont dû renégocier des contrats en cours.</li>
+        <li><b>Tom Hanks — fausse publicité IA (2023)</b> : Tom Hanks a publiquement averti ses fans qu'une publicité dentaire utilisant sa likeness générée par IA circulait sans son autorisation — exemple concret de ce que « générer un visage réel identifiable sans accord explicite » signifie dans les faits.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> La loi est en retard sur la technologie, mais la responsabilité du cinéaste, elle, est immédiate : si tu dois te demander si c'est acceptable, la réponse est non.</div>
       <div class="exercice"><span class="ex-tag">Exercice 08 — Ta ligne rouge</span><h4>Écris ta propre charte en 3 règles</h4><ol><li>Écris 3 règles que tu ne franchirais jamais dans l'usage de l'IA pour un projet créatif.</li></ol></div>
     </div>
   </div>
@@ -344,6 +387,13 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Construire son propre workflow</h3><div class="ch-tag">Méthode personnelle</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
       <p class="ch-lead">Les outils évoluent chaque semaine — un bon workflow personnel documente <b>tes tests, ce qui a marché, ce qui a échoué</b>, pour ne pas repartir de zéro à chaque nouvelle version d'un modèle.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Curious Refuge — méthode de workflow documentée (2023)</b> : cette école californienne de cinéma IA publie ses workflows complets — prompt templates, outils utilisés pour chaque brique, ordre des opérations. Leurs élèves partent d'une bibliothèque de prompts testés plutôt que d'une page blanche à chaque projet.</li>
+        <li><b>Cinéastes indépendants micro-budget — workflow type (2024)</b> : pour une production de 500€ ou moins, le workflow standard est : Midjourney (character sheets + décors) → Runway ML (animation des plans) → ElevenLabs (voix provisoire) → DaVinci Resolve (assemblage + étalonnage) → Adobe Podcast (nettoyage son). Chaque étape est documentée dans une note Notion ou un Google Doc partagé.</li>
+        <li><b>Version pinning comme pratique de studio</b> : quand Midjourney a lancé la v6, les studios qui n'avaient pas noté leur version (--v 5.2) se sont retrouvés avec des résultats entièrement différents sur les mêmes prompts. Documenter le numéro de version de chaque outil utilisé est une pratique de production, pas de perfectionnisme.</li>
+        <li><b>Le « prompt journal » comme équivalent du carnet de repérage</b> : des réalisateurs comme Chris Hladczuk (créateur de contenu IA avec 100k+ abonnés) publient leurs carnets de prompts annotés — ce qui a fonctionné, pourquoi, et la variation qui a tout changé. C'est l'équivalent numérique du carnet de repérage d'un DP.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Un workflow documenté transforme une chance en méthode reproductible — la différence entre un coup de chance et un film qu'on peut refaire.</div>
       <div class="exercice"><span class="ex-tag">Exercice 09 — Ton journal de test</span><h4>Documente une itération</h4><ol><li>La prochaine fois que tu testes un outil IA, note en 3 lignes : ce que tu as demandé, ce que tu as obtenu, ce que tu changerais.</li></ol></div>
     </div>
   </div>
