@@ -3,6 +3,10 @@
  * Connexion par email a chaque visite. Aucun token dans l'URL : l'email
  * saisi est verifie en direct contre la liste des acces approuves, et
  * chaque tentative (reussie ou non) est journalisee cote serveur.
+ *
+ * Session tracking: chaque onglet ouvre une session cote serveur.
+ * Max 2 sessions actives par email (1 desktop + 1 mobile).
+ * Au-dela, une alerte est envoyee a l'admin.
  */
 (function(){
   // URL /exec du deploiement Apps Script (Code.gs)
@@ -11,10 +15,43 @@
   var scriptTag = document.currentScript;
   var manual = scriptTag.getAttribute('data-manual');
 
+  /* Identifiant unique pour cet onglet/session navigateur */
+  var _sessionId = (function(){
+    try {
+      var arr = new Uint8Array(8);
+      crypto.getRandomValues(arr);
+      return Array.from(arr, function(b){ return ('0' + b.toString(16)).slice(-2); }).join('');
+    } catch(e) {
+      return Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+    }
+  })();
+  var _heartbeatTimer = null;
+
+  function detectDeviceType(){
+    return (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth < 768)
+      ? 'mobile' : 'desktop';
+  }
+
+  /* Envoie une action de session via pixel (Image beacon) — fire-and-forget,
+     n'utilise pas JSONP pour ne pas bloquer et fonctionner dans pagehide. */
+  function fireSessionAction(actionName){
+    var email = '';
+    try { email = localStorage.getItem('okapi_email') || ''; } catch(e) {}
+    if (!email) return;
+    var img = new Image();
+    img.src = APPS_SCRIPT_URL
+      + '?action=' + encodeURIComponent(actionName)
+      + '&email=' + encodeURIComponent(email)
+      + '&sessionId=' + encodeURIComponent(_sessionId)
+      + '&deviceType=' + encodeURIComponent(detectDeviceType())
+      + '&manuel=' + encodeURIComponent(manual || '');
+  }
+
   function setMsg(text){
     var el = document.getElementById('gateMsg');
     if (el) el.textContent = text;
   }
+
   function unlock(email, pwdCustomized, password){
     document.body.classList.add('gate-unlocked');
     /* Persiste l'email ET le mot de passe pour que chapter-lock.js puisse
@@ -24,9 +61,21 @@
       localStorage.setItem('okapi_email', email);
       if (password) sessionStorage.setItem('okapi_pwd', password);
     } catch(e) {}
+
+    /* Ouvre une session cote serveur et demarre le heartbeat toutes les 2 min */
+    fireSessionAction('sessionOpen');
+    if (_heartbeatTimer) clearInterval(_heartbeatTimer);
+    _heartbeatTimer = setInterval(function(){ fireSessionAction('sessionHeartbeat'); }, 2 * 60 * 1000);
+
     /* Signale aux autres scripts que l'accès vient d'être accordé */
     document.dispatchEvent(new CustomEvent('okapi:unlocked', { detail: { email: email, pwdCustomized: !!pwdCustomized } }));
   }
+
+  /* Ferme la session proprement quand l'onglet/page est quitte */
+  window.addEventListener('pagehide', function(){
+    if (_heartbeatTimer) clearInterval(_heartbeatTimer);
+    fireSessionAction('sessionClose');
+  });
 
   function init(){
     var form = document.getElementById('gateLoginForm');
