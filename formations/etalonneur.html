@@ -85,6 +85,7 @@ main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; p
 
 .exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--teal);}
 .exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--teal-d); font-weight:600; display:block; margin-bottom:8px;}
+.sub-ex{ background:var(--noir-3); border:1px solid var(--line); padding:16px 20px; margin:0 0 14px;} .sub-ex .lbl{ font-family:var(--mono); font-size:10px; color:var(--orange); text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:10px;} .sub-ex ul{ list-style:none;} .sub-ex ul li{ position:relative; padding-left:18px; margin-bottom:8px; color:var(--fumee); font-size:13.5px; line-height:1.6;} .sub-ex ul li::before{ content:"›"; position:absolute; left:0; color:var(--teal);} .sub-ex ul li b{ color:var(--craie); font-weight:600;}
 .exercice h4{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#171a19; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
 
 .diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
@@ -288,6 +289,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-head" data-toggle><div class="ch-num">01</div><div class="ch-info"><h3>Que fait un étalonneur, vraiment</h3><div class="ch-tag">Rôle et responsabilité</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
       <p class="ch-lead">L'étalonneur est responsable de la <b>dernière étape de raffinement</b> de l'image — après le montage, avant la livraison finale. Il travaille en dialogue avec le réalisateur et la DP, jamais seul dans son coin.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>The Dark Knight — Stefan Sonnenfeld / Christopher Nolan (2008)</b> : L'étalonneur Stefan Sonnenfeld a travaillé en dialogue direct avec le DP Wally Pfister pour construire deux palettes de couleurs distinctes dans le même film — bleus froids et acier pour Gotham/Batman, oranges et teintes chaudes pour les scènes de Harvey Dent/Le Joker. Cette décision colorimétrique renforçait la tension narrative sans dialogue.</li>
+        <li><b>Moonlight — Alex Bickel / James Laxton (2016)</b> : L'étalonneur a développé 3 palettes distinctes pour les 3 chapitres du film (enfance/adolescence/âge adulte) en dialogue avec le DP James Laxton. Le chapitre 1 utilise des teintures saturées chaudes, le chapitre 3 un look plus froid et désaturé — une évolution colorimétrique qui raconte le parcours de Chiron sans exposition.</li>
+        <li><b>Saving Private Ryan — Janusz Kamiński (1998)</b> : Kamiński et l'étalonneur ont collaboré avec Technicolor pour développer la technique de "silver retention" (ENR) qui retire de la couleur à l'impression tout en augmentant le contraste — un procédé chimique qui a donné au film son look désaturé et granuleux unique, impossible à reproduire numériquement à l'époque.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> L'étalonneur ne travaille jamais seul sur des décisions artistiques — chaque choix de look est le résultat d'un dialogue avec le réalisateur et le DP, souvent entamé bien avant la session d'étalonnage.</div>
       <div class="exercice"><span class="ex-tag">Exercice 01 — Repère le grading</span><h4>Regarde un film en pensant "couleur"</h4><ol><li>Regarde 5 minutes d'un film en te concentrant uniquement sur la dominante colorimétrique de chaque scène.</li><li>Note comment elle change selon le lieu ou l'émotion.</li></ol></div>
     </div>
   </div>
@@ -307,6 +314,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
 
       <p class="ch-lead">L'œil humain s'adapte et ment — un moniteur mal calibré ou une pièce trop lumineuse fausse tout jugement. <b>Les scopes mesurent objectivement</b> ce que l'écran affiche vraiment.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>DI (Digital Intermediate) — O Brother, Where Art Thou ? / Étalonneur Bob Fredrickson (2000)</b> : Premier long métrage entièrement étalonné numériquement via DI, avec un moniteur de référence calibré à P3 D65. La calibration précise du moniteur Coen/Deakins était essentielle — c'est la première fois qu'une décision colorimétrique majeure (désaturation des verts du Mississippi pour un look sépia poussiéreux) a été prise entièrement en post, pas au tournage.</li>
+        <li><b>The Dark Knight — Stefan Sonnenfeld (2008)</b> : Sonnenfeld travaille systématiquement avec un waveform et un vectorscope en permanence sur son second écran. Lors des sessions avec Nolan, les scopes permettaient de valider que les différences entre les palettes "Gotham" et "Joker" restaient cohérentes entre les sessions d'étalonnage espacées de plusieurs semaines.</li>
+        <li><b>Mad Max: Fury Road — Étalonnage "Day for Night" (2015)</b> : Plusieurs séquences de nuit dans le film ont été tournées en plein jour et converties en post. Les scopes waveform permettaient à l'étalonneur de contrôler l'abaissement des hautes lumières et la saturation des ombres sans rendre l'image visuellement fausse — un travail de correction primaire extrêmement précis rendu possible uniquement par la mesure objective des scopes.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Dans une salle d'étalonnage, les scopes ont toujours raison et l'œil a parfois tort. Un moniteur légèrement trop lumineux peut donner l'impression qu'une image est bien exposée alors que le waveform montre qu'elle est surexposée de 20%.</div>
       <div class="exercice"><span class="ex-tag">Exercice 03 — Devine sans les yeux</span><h4>Réfléchis en données</h4><ol><li>Sans regarder d'écran, écris ce qu'un waveform devrait montrer pour une scène de nuit très sombre versus une scène de plage en plein soleil.</li></ol></div>
     </div>
   </div>
@@ -365,6 +378,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-head" data-toggle><div class="ch-num">07</div><div class="ch-info"><h3>Matcher les plans</h3><div class="ch-tag">Continuité de scène</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
       <p class="ch-lead">Deux plans de la même scène, tournés à des heures différentes ou avec des réglages caméra différents, doivent paraître filmés au même instant. <b>C'est le travail le plus technique et le moins visible</b> de l'étalonneur.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>The Revenant — Iñárritu / DP Emmanuel Lubezki (2015)</b> : Tourné uniquement en lumière naturelle, la même scène pouvait être tournée sur plusieurs jours avec des conditions lumineuses radicalement différentes. Le matching inter-journée — relier des plans tournés par grand soleil avec des plans couverts — a représenté une partie majeure du travail d'étalonnage de Jaime Ugarte sur des centaines de plans.</li>
+        <li><b>Moonlight — Alex Bickel / James Laxton (2016)</b> : Certaines scènes du chapitre 3 (adulte) ont été tournées à Miami sous une lumière tropicale intense, d'autres à Atlanta en lumière artificielle. Le matching entre les deux environnements — tout en maintenant la cohérence de la palette froide du chapitre 3 — constitue un exemple de matching multi-sources complexe sur un budget de 1,5 M$.</li>
+        <li><b>Mad Max: Fury Road — "Day for Night" (2015)</b> : La conversion de séquences de jour en nuit en post impliquait un matching colorimétrique inverse — unifier des plans tournés dans des conditions de lumière identiques (plein soleil) pour qu'ils paraissent tournés la nuit, tout en restant cohérents entre eux. Le vectorscope était utilisé pour valider la cohérence de teinte plan par plan.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Le matching réussi est invisible — le spectateur n'y pense jamais. Le matching raté sort le spectateur du film immédiatement, même s'il n'identifie pas consciemment la raison de son inconfort.</div>
       <div class="exercice"><span class="ex-tag">Exercice 07 — Repère un défaut de matching</span><h4>Chasse aux raccords ratés</h4><ol><li>Trouve une scène où tu perçois un changement de teinte entre deux plans consécutifs — même léger.</li></ol></div>
     </div>
   </div>
@@ -375,6 +394,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
 
       <p class="ch-lead">L'œil humain est extrêmement sensible aux couleurs de peau — une dérive de teinte à peine perceptible ailleurs devient immédiatement visible sur un visage. <b>Le ton chair est toujours la première chose qu'on vérifie</b>, quel que soit le style recherché.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Moonlight — Alex Bickel (2016)</b> : Les trois chapitres utilisent des palettes distinctes, mais dans chacun, les tons chair du personnage principal (Chiron, joué par trois acteurs différents) devaient rester dans une gamme naturellement cohérente. Le vectorscope était utilisé pour maintenir les tons chair dans la "skin tone line" standard, même lorsque les ombres et hautes lumières des scènes dérivaient vers des palettes très différentes.</li>
+        <li><b>The Dark Knight — Stefan Sonnenfeld (2008)</b> : Malgré les palettes opposées des deux univers narratifs, les tons chair de tous les personnages principaux étaient ancrés dans une gamme naturelle — garantissant que ni Batman ni le Joker ne paraissaient visuellement "malades" ou "irréels" malgré des décors aux dominantes très marquées.</li>
+        <li><b>Saving Private Ryan — Janusz Kamiński (1998)</b> : La technique ENR (silver retention) désature toute l'image, y compris les tons chair. Kamiński et l'étalonneur ont calibré précisément le niveau de désaturation peau pour maintenir une lisibilité émotionnelle des visages même dans les séquences de guerre les plus sombres.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Le ton chair fonctionne comme un anchor point de l'étalonnage — on peut aller très loin dans un look stylistique si les peaux restent ancrées dans une gamme humaine reconnaissable. Perdre les tons chair, c'est perdre l'empathie du spectateur pour les personnages.</div>
       <div class="exercice"><span class="ex-tag">Exercice 08 — Priorise ton œil</span><h4>Teste ta propre sensibilité</h4><ol><li>Regarde deux photos très proches en teinte — l'une avec un léger décalage de peau, l'autre avec un décalage égal ailleurs dans l'image.</li><li>Lequel remarques-tu en premier ?</li></ol></div>
     </div>
   </div>
@@ -383,6 +408,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-head" data-toggle><div class="ch-num">09</div><div class="ch-info"><h3>Construire un look</h3><div class="ch-tag">Pas juste corriger</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
       <p class="ch-lead">Un look réussi se sent avant de se voir — voir la section « Approches » ci-dessous pour deux philosophies très différentes du grading.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>The Dark Knight — Stefan Sonnenfeld (2008)</b> : Le look du film est construit autour d'une opposition chromatique narrative — bleus froids acier pour l'univers de Batman/Gotham, oranges chauds pour Harvey Dent et le Joker. Ce choix de look n'est pas décoratif : il exprime la dualité morale du film de façon colorimétrique. Sonnenfeld a développé ce look en session de travail avec Nolan plusieurs semaines avant le début de l'étalonnage.</li>
+        <li><b>Moonlight — Barry Jenkins / Alex Bickel (2016)</b> : Trois looks distincts pour trois chapitres — enfance (saturé, chaud, riche), adolescence (contrasté, plus dur), âge adulte (froid, désaturé, distant). Chaque palette a été définie en référence à des peintures spécifiques que Jenkins avait partagées avec le DP Laxton et l'étalonneur avant le tournage.</li>
+        <li><b>Mad Max: Fury Road — Miller / DP John Seale (2015)</b> : Le look général du film — désaturé, contrasté, avec des ciels presque brûlés et des ombres profondes — a été défini par Miller avec Seale dès la préproduction via des références visuelles. L'étalonneur a traduit ces références en paramètres DaVinci Resolve applicables plan par plan sur 120 jours de matière brute.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Un look se définit en amont, pas en session d'étalonnage — les meilleurs étalonneurs arrivent en salle avec une direction claire, définie en dialogue avec le réalisateur, et non avec une page blanche devant laquelle improviser.</div>
       <div class="exercice"><span class="ex-tag">Exercice 09 — Ton propre look</span><h4>Décris un look en 3 adjectifs</h4><ol><li>Choisis 3 adjectifs pour décrire une ambiance colorimétrique que tu aimerais créer, sans nommer aucune couleur précise.</li><li>Traduis-les ensuite en choix concrets sur les trois roues.</li></ol></div>
     </div>
   </div>
