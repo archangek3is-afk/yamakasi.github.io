@@ -82,6 +82,7 @@ main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; p
 
 .exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--vert);}
 .exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--vert-d); font-weight:600; display:block; margin-bottom:8px;}
+.sub-ex{ background:var(--noir-3); border:1px solid var(--line); padding:16px 20px; margin:0 0 14px;} .sub-ex .lbl{ font-family:var(--mono); font-size:10px; color:var(--rouge); text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:10px;} .sub-ex ul{ list-style:none;} .sub-ex ul li{ position:relative; padding-left:18px; margin-bottom:8px; color:var(--fumee); font-size:13.5px; line-height:1.6;} .sub-ex ul li::before{ content:"›"; position:absolute; left:0; color:var(--vert);} .sub-ex ul li b{ color:var(--craie); font-weight:600;}
 .exercice h4{ font-family:var(--display); font-weight:600; font-size:15px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#1a1d1b; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
 
 .diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
@@ -284,6 +285,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
       <p class="ch-lead">Un dialogue mal capté au tournage coûte des heures en post-production — parfois il faut le refaire entièrement. <b>Le silence de la pièce compte autant que le micro.</b></p>
       <div class="table-wrap"><table class="plain"><tr><th>Outil</th><th>Usage</th></tr><tr><td>Perche</td><td>Capture large, discrète, hors champ caméra</td></tr><tr><td>Micro-cravate</td><td>Proximité constante, mais visible si mal caché</td></tr><tr><td>Enregistreur de secours</td><td>Toujours doubler la prise principale</td></tr></table></div>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>The Revenant (ingénieur du son Chris Duesterdiek, 2015) — tournage à -30°C en forêt canadienne</b> : les micros gelaient, les câbles cassaient. Solution : micros DPA 4060 lavaliers collés à la peau sous les fourrures, jamais suspendus — la seule façon de garantir une prise utilisable dans ces conditions extrêmes.</li>
+        <li><b>No Country for Old Men (Craig Berkey, 2007) — tous les dialogues de Javier Bardem enregistrés en prise directe</b> : aucun ADR. La qualité de la prise directe a permis à Bardem d'improviser légèrement le rythme de ses répliques dans des directions inattendues — une liberté de jeu impossible si le son avait été prévu pour être refait en studio.</li>
+        <li><b>1917 (Simon Hayes, Oscar du meilleur son, 2020) — prise de son sur un film censé être un plan-séquence</b> : le micro boom devait être totalement invisible dans des plans larges sans coupe disponible pour se repositionner. Solution : équipe son de 12 personnes avec des relevés de position micro en temps réel pour anticiper chaque mouvement de caméra.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> une mauvaise prise de son au tournage rend l'ADR obligatoire — et l'ADR, c'est la performance perdue : l'acteur rejoue dans un studio vide ce qu'il avait joué dans le vrai décor, avec la vraie tension, la première fois.</div>
       <div class="exercice"><span class="ex-tag">Exercice 02 — La chasse au bruit parasite</span><h4>Écoute une pièce avant de filmer</h4><ol><li>Assieds-toi 2 minutes dans une pièce, yeux fermés.</li><li>Liste tous les bruits que tu n'avais jamais remarqués (frigo, ventilation, circulation).</li></ol></div>
     </div>
   </div>
@@ -298,6 +305,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
         <a class="watch-card" href="https://www.studiobinder.com/blog/what-is-a-foley-artist/" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">StudioBinder — Article</div><div class="wc-title">Qu'est-ce qu'un artiste foley ? Le métier expliqué</div></div></a>
         <a class="watch-card" href="https://www.youtube.com/watch?v=hE4Xdlf_NbU" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/hE4Xdlf_NbU/hqdefault.jpg" alt=""><div class="wc-info"><div class="wc-src">YouTube</div><div class="wc-title">The Magic of Making Sound — le foley en démonstration</div></div><div class="wc-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></a>
       </div>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>The Dark Knight (foley artist Richard King, 2008) — le bruit du costume de Batman</b> : enregistré sur du cuir véritable froissé à la main pour avoir la granularité du mouvement, pas sur un costume de plastique. Le résultat : une texture sonore organique qui donnait au personnage un poids physique crédible.</li>
+        <li><b>Cast Away (foley artist Randy Thom, 2000) — Tom Hanks seul sur une île</b> : le seul personnage étant Hanks sans interlocuteur, TOUS les sons d'environnement (plage, noix de coco, cabane) ont été créés en foley dans un studio sablonneux construit spécifiquement pour le film — le sable réel était la seule façon d'obtenir la texture sonore juste.</li>
+        <li><b>Mad Max : Fury Road (foley artist Catriona McKenzie, 2015) — les Warboys</b> : ils se frottent les mains sur le crâne avant de foncer au combat. Le son a été créé en frottant une peau de tambour tendue, pas des mains réelles — la résonance de la peau de tambour donnait exactement la vibration sèche et rituelle voulue par George Miller.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> le foley ne reproduit pas le son réel — il reproduit l'idée que le spectateur a du son réel. Un pas dans de vraie neige sonne souvent "faux" à l'image ; un pas dans de la fécule de maïs sonne "juste".</div>
       <div class="exercice"><span class="ex-tag">Exercice 03 — Ton studio foley improvisé</span><h4>Recrée 3 sons du quotidien</h4><ol><li>Sans filmer, trouve 3 objets à la maison pour imiter : des pas dans la neige, une porte qui grince, un os qui craque.</li><li>Enregistre-toi avec ton téléphone en regardant une vidéo muette.</li></ol></div>
     </div>
   </div>
@@ -309,6 +322,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
       <p class="ch-lead">Randy Thom insiste : le sound design n'est pas un ajout technique en fin de production, c'est une <b>décision narrative</b> qui devrait se prendre dès le scénario — quel monde sonore raconte-t-on, et comment ?</p>
       <div class="watch-row"><a class="watch-card" href="https://www.asoundeffect.com/designing-a-movie-for-sound/" target="_blank" rel="noopener"><div class="wc-play" style="margin-left:0;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="wc-info"><div class="wc-src">Randy Thom — Article</div><div class="wc-title">Designing a Movie for Sound</div></div></a></div>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Arrival (Jóhann Jóhannsson, sound designer, 2016) — le son des heptapodes</b> : créé en ralentissant une voix féminine à 400% et en la filtrant à travers un tank d'eau. L'équipe a passé 3 semaines à ne chercher que ce son avant de commencer quoi que ce soit d'autre — le son des extraterrestres devait être le fondement de tout le monde sonore du film.</li>
+        <li><b>A Quiet Place (Erik Aadahl et Ethan Van der Ryn, 2018) — un film conçu autour de l'absence de son</b> : chaque footstep a sa propre signature dans un univers où un seul son signifie la mort. Le sound design a précédé l'écriture du scénario final — les décisions sonores narratives ont guidé la structure dramatique plutôt que de la suivre.</li>
+        <li><b>The Social Network (Ren Klyce, 2010) — le click de souris</b> : répété 2 600 fois dans le film, il a été enregistré séparément sur 8 types de souris différents pour varier subtilement selon l'émotion de la scène. Le click le plus rapide et claquant correspond aux scènes de trahison ; le plus sourd aux scènes de solitude.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> le sound design est la bande-son invisible qui parle à l'inconscient du spectateur. Il ne raconte pas ce qu'il y a à l'image — il raconte ce que l'image fait ressentir.</div>
       <div class="exercice"><span class="ex-tag">Exercice 04 — Le monde sonore d'un lieu imaginaire</span><h4>Décris une ambiance sans image</h4><ol><li>Choisis un lieu fictif (station spatiale, forêt hantée, bureau vide la nuit).</li><li>Liste 8 sons qui construisent son identité sonore, sans dialogue ni musique.</li></ol></div>
     </div>
   </div>
@@ -348,6 +367,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
         <div class="freq-legend"><span>20Hz (grave)</span><span>300Hz-3kHz — zone dialogue</span><span>20kHz (aigu)</span></div>
         <div class="cap">Carving fréquentiel — la musique (gris) cède la place au dialogue (vert) sur sa zone</div>
       </div>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Mad Max : Fury Road (Chris Jenkins et Gregg Rudloff, Oscar du meilleur son, 2016) — 3 000 explosions sur 120 minutes</b> : la règle de base de tout le mixage était que les dialogues de Furiosa et Max restent toujours intelligibles quel que soit le volume des explosions autour. Le dialogue a systématiquement été protégé dans son corridor fréquentiel même lorsque tout le reste saturait.</li>
+        <li><b>Dunkirk (Richard King, 2017) — le Spitfire et la voix humaine</b> : le son des Spitfire en dogfight couvre 4 octaves (80Hz–8kHz) ; le dialogue est compressé dans un corridor 200Hz–3kHz pour ne jamais entrer en collision avec le son des avions. Le spectateur entend les deux simultanément sans confusion — un carving fréquentiel minutieux sur chaque scène d'action aérienne.</li>
+        <li><b>The Social Network (Ren Klyce, 2010) — anticiper la diffusion en streaming</b> : le mix final a été conçu pour les salles en 5.1, mais Klyce a simultanément mixé une version stéréo pour les ordinateurs portables, anticipant que la moitié des spectateurs verrait le film en streaming. Le carving fréquentiel tenait compte des deux contextes d'écoute.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> mixer c'est sculpter le silence autant que le son — chaque espace vide dans le spectre est un choix délibéré qui permet à un autre élément de respirer.</div>
       <div class="exercice"><span class="ex-tag">Exercice 06 — Le conflit de fréquences</span><h4>Repère un mix qui écrase le dialogue</h4><ol><li>Trouve une scène où tu as déjà eu du mal à comprendre un dialogue à cause de la musique.</li><li>À ton avis, quelle fréquence était en conflit ?</li></ol></div>
     </div>
   </div>
