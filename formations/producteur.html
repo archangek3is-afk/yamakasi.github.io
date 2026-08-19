@@ -83,6 +83,7 @@ main{ position:relative; z-index:1;} section{ max-width:1180px; margin:0 auto; p
 
 .exercice{ background:var(--craie); color:var(--noir); padding:24px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.28);} .exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--emerald);}
 .exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; text-transform:uppercase; color:var(--emerald-d); font-weight:600; display:block; margin-bottom:8px;}
+.sub-ex{ background:var(--noir-3); border:1px solid var(--line); padding:16px 20px; margin:0 0 14px;} .sub-ex .lbl{ font-family:var(--mono); font-size:10px; color:var(--or); text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:10px;} .sub-ex ul{ list-style:none;} .sub-ex ul li{ position:relative; padding-left:18px; margin-bottom:8px; color:var(--fumee); font-size:13.5px; line-height:1.6;} .sub-ex ul li::before{ content:"›"; position:absolute; left:0; color:var(--emerald);} .sub-ex ul li b{ color:var(--craie); font-weight:600;}
 .exercice h4{ font-family:var(--display); font-weight:700; font-size:15px; margin-bottom:10px;} .exercice p, .exercice li{ font-size:14px; color:#1a1c1a; line-height:1.7;} .exercice ol{ padding-left:20px; margin-top:8px;} .exercice li{ margin-bottom:6px;}
 
 .diagram-wrap{ background:var(--noir-3); border:1px solid var(--line); padding:24px; margin:22px 0;} .diagram-wrap .cap{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-align:center; margin-top:14px;}
@@ -270,6 +271,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
     <div class="ch-head" data-toggle><div class="ch-num">02</div><div class="ch-info"><h3>Développer un projet</h3><div class="ch-tag">Option, droits, package</div></div><svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg></div>
     <div class="ch-body">
       <p class="ch-lead">Un projet se "développe" bien avant le tournage — sécuriser les droits d'une histoire, réunir un réalisateur et une tête d'affiche (le "package") pour rendre le film finançable.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>El Mariachi — Robert Rodriguez (1992)</b> : Rodriguez a écrit, réalisé, tourné et monté le film lui-même, se finançant à 7 000$ en se proposant comme cobaye à des essais médicaux. Le "package" n'existait pas — il était lui-même le package, ce qui lui a permis de contourner toutes les étapes de développement traditionnel.</li>
+        <li><b>Blair Witch Project — Myrick &amp; Sánchez (1999)</b> : Droits, réalisation, acteurs et marketing construits en un seul bloc par deux réalisateurs inconnus. Le "package" minimaliste — deux diplômés de l'UCFB avec une caméra Hi8 — a suffi à lever 35 000$, générant 140 M$ en retour.</li>
+        <li><b>Parasite — Bong Joon-ho / Miky Lee (2019)</b> : Le film a été développé en financement 100% coréen, refusant toutes les propositions de coproduction étrangère. La décision de garder le contrôle total du projet dès le développement a permis de protéger l'intégrité artistique jusqu'à la Palme d'Or et l'Oscar.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Le "package" n'est pas un document administratif : c'est l'argument de vente humain du film — réalisateur + acteur + histoire, trois éléments qui ensemble rendent le risque finançable.</div>
       <div class="exercice"><span class="ex-tag">Exercice 02 — Construis un package</span><h4>Imagine le trio qui vend un projet</h4><ol><li>Choisis une histoire (même une nouvelle que tu aimes).</li><li>Imagine quel réalisateur et quel acteur la rendraient "finançable" aujourd'hui, et pourquoi.</li></ol></div>
     </div>
   </div>
@@ -299,6 +306,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
 
       <p class="ch-lead">Rares sont les films financés par une seule source — fonds propres, investisseurs privés, subventions publiques, pré-ventes de distribution s'additionnent souvent pour couvrir un budget.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Moonlight — Barry Jenkins / A24 (2016)</b> : Budget de 1,5 M$, financé via A24 et Plan B Entertainment, complété par des subventions du Sundance Institute et du ITVS. La campagne Oscars — payée séparément à environ 500 000$ — a été orchestrée entièrement par A24, démontrant que le financement de la promotion peut être aussi stratégique que celui de la production.</li>
+        <li><b>El Mariachi — Robert Rodriguez (1992)</b> : Financement entièrement auto-produit — 7 000$ récupérés en se proposant comme cobaye dans des essais médicaux à Austin. Columbia Pictures a racheté le film pour redistribution à 1 M$ sans avoir investi un dollar dans sa création.</li>
+        <li><b>Blair Witch Project (1999)</b> : 35 000$ de budget initial, première campagne marketing viral 100% internet avant même que ce terme n'existe — le site officiel présentait le film comme un documentaire réel. 140 M$ de recettes mondiales, ROI de 4 000%.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Construire le financement d'un film, c'est empiler des certitudes partielles jusqu'à atteindre 100% — aucune source ne finance jamais seule, chacune attend que les autres soient là d'abord.</div>
       <div class="exercice"><span class="ex-tag">Exercice 04 — Le puzzle de financement</span><h4>Imagine 3 sources pour un court métrage</h4><ol><li>Pour un projet fictif à petit budget, propose 3 sources de financement réalistes et complémentaires.</li></ol></div>
     </div>
   </div>
@@ -317,6 +330,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
 
       <p class="ch-lead">Le producteur choisit ou valide les chefs de poste — DP, décorateur, monteur — qui recruteront ensuite leurs propres équipes. <b>Une mauvaise embauche à ce niveau se répercute sur tout le film.</b></p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Mad Max: Fury Road — George Miller / Doug Mitchell (2015)</b> : La productrice Margaret Menegoz a imposé à Miller de conserver son équipe australienne de cascadeurs même lors du transfert du tournage en Namibie — un choix d'équipe ATL/BTL qui a coûté plus cher mais garantissait la cohérence des séquences d'action sur 120 jours de tournage.</li>
+        <li><b>Moonlight — Barry Jenkins / Adele Romanski (2016)</b> : Jenkins a recruté James Laxton (DP) sur la base de courts métrages partagés — une décision à 1,5 M$ de budget fondée sur un historique créatif commun, pas sur un CV de studio. Laxton a développé les textures visuelles distinctes des trois chapitres du film.</li>
+        <li><b>Parasite — Bong Joon-ho (2019)</b> : Le décorateur Lee Ha-jun a conçu la maison Park et le sous-sol en deux constructions physiques distinctes et non connectées, ce qui a obligé à réordonner le tournage. Une décision de chef de poste qui a structuré l'entier plan de travail.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> Le producteur n'embauche pas des exécutants — il choisit des décideurs. Chaque chef de poste recrutera à son tour toute une équipe dans son style, ce qui démultiplie l'impact de chaque choix initial.</div>
       <div class="exercice"><span class="ex-tag">Exercice 06 — Le trio essentiel</span><h4>Priorise 3 postes clés</h4><ol><li>Pour un projet à budget serré, choisis les 3 postes que tu sécuriserais en premier, et pourquoi.</li></ol></div>
     </div>
   </div>
@@ -335,6 +354,12 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
 
       <p class="ch-lead">Un film fini n'est pas un film vu — festivals, plateformes, distribution en salle sont des stratégies distinctes, choisies souvent dès le développement du projet, pas après le montage final.</p>
+      <div class="sub-ex"><span class="lbl">Exemples de référence</span><ul>
+        <li><b>Moonlight — A24 (2016)</b> : La stratégie de sortie limitée à 4 salles la première semaine, élargie progressivement sur 8 semaines, a permis de construire un bouche-à-oreille avant l'amplification media. La campagne Oscars — distincte du budget de production — a coûté environ 500 000$ et a été planifiée 12 mois avant la cérémonie.</li>
+        <li><b>Blair Witch Project (1999)</b> : Première mondiale au Sundance Film Festival, suivi d'une distribution Artisan Entertainment en 1 101 salles la première semaine — une décision d'élargissement rapide rendue possible par la campagne marketing viral préexistante. La stratégie a été définie avant le montage final.</li>
+        <li><b>Parasite (2019)</b> : Palme d'Or à Cannes en mai, sortie coréenne en juin, sortie américaine par Neon en octobre — un calendrier de 5 mois orchestré pour maximiser l'élan festival avant la saison des prix américains. La stratégie de sortie était intégrée à la vision dès le développement.</li>
+      </ul></div>
+      <div class="callout"><b>Principe clé —</b> La stratégie de sortie n'est pas une décision post-montage — c'est une décision de développement. À quel public, par quel canal, à quel moment : ces réponses orientent des choix de production bien en amont.</div>
       <div class="exercice"><span class="ex-tag">Exercice 08 — Choisis une stratégie</span><h4>Festival, plateforme ou salle ?</h4><ol><li>Pour un projet fictif, choisis une stratégie de sortie et justifie-la en 3 phrases.</li></ol></div>
     </div>
   </div>
