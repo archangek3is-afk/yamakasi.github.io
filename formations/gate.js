@@ -36,12 +36,15 @@
      n'utilise pas JSONP pour ne pas bloquer et fonctionner dans pagehide. */
   function fireSessionAction(actionName){
     var email = '';
+    var pwd   = '';
     try { email = localStorage.getItem('okapi_email') || ''; } catch(e) {}
+    try { pwd   = sessionStorage.getItem('okapi_pwd')   || ''; } catch(e) {}
     if (!email) return;
     var img = new Image();
     img.src = APPS_SCRIPT_URL
       + '?action=' + encodeURIComponent(actionName)
       + '&email=' + encodeURIComponent(email)
+      + '&password=' + encodeURIComponent(pwd)
       + '&sessionId=' + encodeURIComponent(_sessionId)
       + '&deviceType=' + encodeURIComponent(detectDeviceType())
       + '&manuel=' + encodeURIComponent(manual || '');
