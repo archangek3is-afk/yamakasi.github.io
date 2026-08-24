@@ -437,6 +437,30 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       jsonpCall({ action: 'checkForm', email: _email, manual: _manual, ch: chIndex, password: getPwd() }, handleCheckResult);
     });
 
+    /* ── Vérification initiale au chargement ─────────────────────────
+       Rattrape le cas où la validation a eu lieu pendant que l'étudiant
+       n'était pas sur la page (polling à l'arrêt).
+       Conditions : le formulaire a déjà été ouvert depuis ce navigateur
+       ET le chapitre n'est pas encore marqué valide en local.
+       Si la réponse est "valide" → déblocage immédiat.
+       Sinon → silence total, pas de message d'erreur, pas de polling.
+    ─────────────────────────────────────────────────────────────────── */
+    if (localStorage.getItem(formOpenedKey) && !getP()['ch' + chIndex]) {
+      setTimeout(function () {
+        if (getP()['ch' + chIndex]) return; /* validé entre-temps */
+        if (!_email) return;
+        jsonpCall(
+          { action: 'checkForm', email: _email, manual: _manual, ch: chIndex, password: getPwd() },
+          function (data) {
+            if (data && (data.ok || data.status === 'valide')) {
+              handleCheckResult(data); /* déblocage complet */
+            }
+            /* tout autre résultat : silence — garder l'état courant */
+          }
+        );
+      }, 800);
+    }
+
     wrap.appendChild(desc);
     wrap.appendChild(openBtn);
     wrap.appendChild(verifyBtn);
