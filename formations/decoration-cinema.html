@@ -313,6 +313,22 @@ footer .fb2 b{color:var(--prusse)}
 }
 .backtop.show{opacity:1;pointer-events:auto}
 
+/* ---- CALLOUTS PÉDAGOGIQUES ---- */
+.callout{
+  background:rgba(31,78,95,0.08);
+  border:1px solid rgba(31,78,95,0.35);
+  border-left:4px solid var(--prusse);
+  padding:16px 20px;
+  margin:20px 0;
+  font-size:15px;
+  color:var(--encre);
+  border-radius:2px;
+  max-width:74ch;
+  line-height:1.6;
+}
+.callout b{ color:var(--prusse); }
+.callout.fade{ opacity:1; }
+
 @media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.001s!important}}
 
 /* ===== GATE OKAPI ===== */
@@ -628,6 +644,8 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
         </table>
       </div>
 
+      <div class="callout fade"><b>Ensemblier·ère et accessoiriste —</b> La distinction peut sembler subtile, mais elle est très concrète : l'ensemblier habille la pièce (les rideaux, les tapis, les meubles, les tableaux au mur), tandis que l'accessoiriste gère tout ce que les acteurs vont réellement toucher. La règle d'or : si un acteur saisit un objet dans la scène, cet objet passe automatiquement dans la liste de l'accessoiriste — qui doit en prévoir plusieurs exemplaires identiques en cas de casse.</div>
+
       <h3>Le vocabulaire à connaître (clique pour retourner la carte)</h3>
       <div class="vocab" id="vocab">
         <div class="vcard"><div class="vinner">
@@ -705,6 +723,8 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <figure style="margin:20px 0 4px;line-height:0;"><img src="images/decoration-cinema/02-lecture-references.png" alt="Lecture d'un scénario pour repérer les décors, objets et lieux — méthode de dépouillement" style="width:100%;height:auto;display:block;border-radius:8px;"></figure>
 
       <p>Un scénario n'est pas un roman : c'est un <strong>bon de commande déguisé</strong>. Ton travail commence par le lire trois fois, et à chaque fois avec des lunettes différentes.</p>
+
+      <div class="callout fade"><b>Le dépouillement —</b> C'est le mot technique pour désigner l'inventaire systématique de tout ce qu'un scénario exige. Imagine que tu lis une recette : le dépouillement, c'est dresser la liste de courses complète avant d'aller au marché. Scène par scène, tu notes chaque décor, chaque objet cité, chaque contrainte de lieu — jour ou nuit, intérieur ou extérieur. Ce document devient ta feuille de route pour toute la préparation.</div>
 
       <div class="grid g3">
         <div class="card"><span class="lbl">Lecture 1 — l'histoire</span><p>Tu lis comme une spectatrice. Tu ne notes rien. Tu ressens. À la fin, écris <strong>une seule phrase</strong> : de quoi parle vraiment ce film ?</p></div>
@@ -896,6 +916,8 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
 
       <h3>Les praticables : les lampes qui sont dans le plan</h3>
       <p>Une <em class="term">lampe praticable</em>, c'est une lampe visible à l'image qui éclaire réellement. C'est le point de rencontre entre ton métier et celui du chef opérateur — et souvent ton meilleur argument face à lui.</p>
+
+      <div class="callout fade"><b>La lampe praticable —</b> Contrairement aux gros projecteurs de l'équipe lumière qui restent hors-champ, une lampe praticable est une lampe que la caméra voit dans l'image — et qui éclaire vraiment. C'est comme la différence entre le néon de scène qui illumine un acteur dans les coulisses (invisible) et la lampe de chevet posée sur la table de nuit qu'on voit à l'écran (praticable). Pour le décorateur, c'est un atout précieux : chaque lampe bien placée dans le décor est une source lumineuse gratuite que le chef opérateur peut intégrer à son éclairage.</div>
       <ul class="plain">
         <li><strong>Place-les toi-même, tôt.</strong> Une lampe de chevet, une applique, une enseigne, un néon de cuisine : ce sont autant de sources gratuites pour l'image.</li>
         <li><strong>Pense à la hauteur.</strong> Une lampe basse crée des ombres montantes, inquiétantes. Une lampe haute rassure.</li>
@@ -1038,6 +1060,9 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
         <text class="lbl" x="560" y="240" fill="#C97B63">Tout le reste :</text>
         <text class="lbl" x="560" y="256" fill="#C97B63">budget gaspillé</text>
       </svg>
+
+
+      <div class="callout fade"><b>Le mur mobile (wild wall) —</b> En architecture réelle, les murs sont fixes. Sur un plateau, certains murs sont conçus pour être démontés rapidement : ce sont les murs mobiles. La caméra a besoin d'espace pour reculer, pour suivre un acteur, pour prendre un angle impossible dans une vraie pièce. Le décorateur doit penser dès le début à quel mur devra « sauter » pour laisser passer l'équipe — et construire ou habiller le décor en conséquence. Une pièce qui semble normale à l'écran peut n'avoir que trois murs réels.</div>
 
       <div class="tip">
         <span class="t">La règle des 180 degrés du décorateur</span>
