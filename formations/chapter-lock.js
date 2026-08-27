@@ -357,7 +357,9 @@ section.chapter.ch-locked .deco-gate{display:block;}\
     var verifyBtn = document.createElement('button');
     verifyBtn.className = 'ch-form-verify-btn';
     verifyBtn.textContent = 'V\u00e9rifier ma soumission';
-    verifyBtn.disabled = !localStorage.getItem(formOpenedKey);
+    /* Le bouton est toujours actif dès le chargement — checkForm répond
+       proprement même sans soumission ("aucune_soumission"), rien ne
+       justifie de le bloquer sur la base d'un flag local de navigateur. */
 
     var statusMsg = document.createElement('div');
     statusMsg.className = 'ch-form-status';
@@ -371,7 +373,7 @@ section.chapter.ch-locked .deco-gate{display:block;}\
         + '&entry.' + cfg.text  + '=';
       window.open(url, '_blank');
       try { localStorage.setItem(formOpenedKey, '1'); } catch(e) {}
-      setTimeout(function () { verifyBtn.disabled = false; }, 1500);
+      /* verifyBtn déjà actif — pas besoin de le réactiver ici */
     });
 
     /* ── Polling automatique ── */
