@@ -24,7 +24,7 @@
       '<div class="labo-grid2" style="margin-top:16px;">' +
       '<div><div style="font-family:'+C.mono+';font-size:11px;color:'+C.dim+';margin-bottom:6px;">✅ ESSENTIEL</div><div class="labo-dd-zone" data-z="essentiel" style="min-height:150px;"></div></div>' +
       '<div><div style="font-family:'+C.mono+';font-size:11px;color:'+C.dim+';margin-bottom:6px;">❌ GADGET</div><div class="labo-dd-zone" data-z="gadget" style="min-height:150px;"></div></div></div>' +
-      '<div style="margin-top:14px;"><button class="labo-btn" id="sfCheck">Vérifier</button></div>';
+      '<div style="margin-top:14px;display:flex;gap:8px;"><button class="labo-btn" id="sfCheck">Vérifier</button><button class="labo-btn" id="sfReset">Réessayer</button></div>';
     var dragged = null, placement = {};
     u1.inner.querySelectorAll('.labo-dd-item').forEach(function(el){ el.addEventListener('dragstart', function(){ dragged = el; }); });
     u1.inner.querySelectorAll('.labo-dd-zone').forEach(function(zone){
@@ -36,6 +36,18 @@
         placement[id] = zone.getAttribute('data-z'); dragged = null;
       });
     });
+    
+    u1.inner.querySelector('#sfReset').addEventListener('click', function () {
+      var pool = u1.inner.querySelector('#sfPool');
+      u1.inner.querySelectorAll('.labo-dd-item.placed').forEach(function (el) {
+        el.classList.remove('placed');
+        el.setAttribute('draggable', 'true');
+        pool.appendChild(el);
+      });
+      placement = {};
+      u1.fb.className = 'labo-fb';
+    });
+
     u1.inner.querySelector('#sfCheck').addEventListener('click', function () {
       if (Object.keys(placement).length < 8) { LaboCore.say(u1.fb, 'Classe les 8 accessoires avant de vérifier.', 'bad'); return; }
       var correct = 0;

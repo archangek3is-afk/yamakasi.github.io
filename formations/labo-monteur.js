@@ -75,7 +75,7 @@
         '<div style="margin-top:16px;display:grid;gap:6px;">' +
         [0, 1, 2, 3].map(function (i) { return '<div class="labo-dd-zone" data-slot="' + i + '"><span style="font-family:' + C.mono + ';font-size:10px;color:' + C.dim + ';">PLAN ' + (i + 1) + '</span></div>'; }).join('') +
         '</div>' +
-        '<div style="margin-top:14px;"><button class="labo-btn" id="mCheck">Vérifier le montage</button></div>';
+        '<div style="margin-top:14px;display:flex;gap:8px;"><button class="labo-btn" id="mCheck">Vérifier le montage</button><button class="labo-btn" id="mReset">Réessayer</button></div>';
 
       var dragged = null, placement = {};
       u2.inner.querySelectorAll('.labo-dd-item').forEach(function (el) {
@@ -94,6 +94,17 @@
           dragged = null;
         });
       });
+      u2.inner.querySelector('#mReset').addEventListener('click', function () {
+        var pool = u2.inner.querySelector('#mPool');
+        u2.inner.querySelectorAll('.labo-dd-item.placed').forEach(function (el) {
+          el.classList.remove('placed');
+          el.setAttribute('draggable', 'true');
+          pool.appendChild(el);
+        });
+        placement = {};
+        u2.fb.className = 'labo-fb';
+      });
+
       u2.inner.querySelector('#mCheck').addEventListener('click', function () {
         if (Object.keys(placement).length < 4) { LaboCore.say(u2.fb, 'Place les 4 plans avant de vérifier.', 'bad'); return; }
         var correct = 0;

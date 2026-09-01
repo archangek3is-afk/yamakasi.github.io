@@ -20,7 +20,7 @@
       '<div class="labo-grid2" style="margin-top:16px;">' +
       '<div><div style="font-family:'+C.mono+';font-size:11px;color:'+C.dim+';margin-bottom:6px;">ABOVE THE LINE</div><div class="labo-dd-zone" data-z="atl" style="min-height:150px;"></div></div>' +
       '<div><div style="font-family:'+C.mono+';font-size:11px;color:'+C.dim+';margin-bottom:6px;">BELOW THE LINE</div><div class="labo-dd-zone" data-z="btl" style="min-height:150px;"></div></div></div>' +
-      '<div style="margin-top:14px;"><button class="labo-btn" id="prCheck">Vérifier</button></div>';
+      '<div style="margin-top:14px;display:flex;gap:8px;"><button class="labo-btn" id="prCheck">Vérifier</button><button class="labo-btn" id="prReset">Réessayer</button></div>';
     var dragged = null, placement = {};
     u1.inner.querySelectorAll('.labo-dd-item').forEach(function(el){ el.addEventListener('dragstart', function(){ dragged = el; }); });
     u1.inner.querySelectorAll('.labo-dd-zone').forEach(function(zone){
@@ -32,6 +32,18 @@
         placement[id] = zone.getAttribute('data-z'); dragged = null;
       });
     });
+    
+    u1.inner.querySelector('#prReset').addEventListener('click', function () {
+      var pool = u1.inner.querySelector('#prPool');
+      u1.inner.querySelectorAll('.labo-dd-item.placed').forEach(function (el) {
+        el.classList.remove('placed');
+        el.setAttribute('draggable', 'true');
+        pool.appendChild(el);
+      });
+      placement = {};
+      u1.fb.className = 'labo-fb';
+    });
+
     u1.inner.querySelector('#prCheck').addEventListener('click', function () {
       if (Object.keys(placement).length < 8) { LaboCore.say(u1.fb, 'Place les 8 postes avant de vérifier.', 'bad'); return; }
       var correct = 0;

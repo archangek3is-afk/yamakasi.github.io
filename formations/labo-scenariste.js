@@ -39,7 +39,7 @@
         '<div style="margin-top:16px;display:grid;gap:6px;">' +
         [0, 1, 2, 3, 4].map(function (i) { return '<div class="labo-dd-zone" data-slot="' + i + '"><span style="font-family:' + C.mono + ';font-size:10px;color:' + C.dim + ';">CASE ' + (i + 1) + '</span></div>'; }).join('') +
         '</div>' +
-        '<div style="margin-top:14px;"><button class="labo-btn" id="scCheck">Vérifier l\'ordre</button></div>';
+        '<div style="margin-top:14px;display:flex;gap:8px;"><button class="labo-btn" id="scCheck">Vérifier l\'ordre</button><button class="labo-btn" id="scReset">Réessayer</button></div>';
 
       var pool = u1.inner.querySelector('#scPool');
       var dragged = null;
@@ -61,6 +61,17 @@
           dragged = null;
         });
       });
+      u1.inner.querySelector('#scReset').addEventListener('click', function () {
+        var pool = u1.inner.querySelector('#scPool');
+        u1.inner.querySelectorAll('.labo-dd-item.placed').forEach(function (el) {
+          el.classList.remove('placed');
+          el.setAttribute('draggable', 'true');
+          pool.appendChild(el);
+        });
+        placement = {};
+        u1.fb.className = 'labo-fb';
+      });
+
       u1.inner.querySelector('#scCheck').addEventListener('click', function () {
         if (Object.keys(placement).length < 5) {
           LaboCore.say(u1.fb, 'Place les 5 beats avant de vérifier.', 'bad');
