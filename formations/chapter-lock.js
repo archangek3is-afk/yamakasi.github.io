@@ -507,7 +507,12 @@ section.chapter.ch-locked .deco-gate{display:block;}\
   function refreshQuizGate(quizSection, done, total) {
     var cnt = quizSection.querySelector('.qg-count');
     if (isAdmin() || done >= total) {
+      var wasGated = quizSection.classList.contains('quiz-gated');
       quizSection.classList.remove('quiz-gated');
+      /* Notification e-mail — uniquement au moment de la vraie transition */
+      if (!isAdmin() && wasGated && _email && _manual) {
+        jsonpCall({ action: 'notifyQuizUnlocked', email: _email, manual: _manual, password: getPwd() }, null);
+      }
     } else {
       quizSection.classList.add('quiz-gated');
       if (cnt) cnt.textContent = done + '\u00a0/\u00a0' + total + ' compl\u00e9t\u00e9s';
