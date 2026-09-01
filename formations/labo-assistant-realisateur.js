@@ -40,7 +40,7 @@
         '<div><div style="font-family:' + C.mono + ';font-size:11px;color:' + C.dim + ';margin-bottom:6px;">JOUR 1</div><div class="labo-dd-zone" data-day="1" style="min-height:140px;"></div></div>' +
         '<div><div style="font-family:' + C.mono + ';font-size:11px;color:' + C.dim + ';margin-bottom:6px;">JOUR 2</div><div class="labo-dd-zone" data-day="2" style="min-height:140px;"></div></div>' +
         '</div>' +
-        '<div style="margin-top:14px;"><button class="labo-btn" id="arCheck">Vérifier le plan</button></div>';
+        '<div style="margin-top:14px;display:flex;gap:8px;"><button class="labo-btn" id="arCheck">Vérifier le plan</button><button class="labo-btn" id="arReset">Réessayer</button></div>';
 
       var dragged = null, placement = {};
       u1.inner.querySelectorAll('.labo-dd-item').forEach(function (el) {
@@ -59,7 +59,19 @@
           dragged = null;
         });
       });
-      u1.inner.querySelector('#arCheck').addEventListener('click', function () {
+      
+    u1.inner.querySelector('#arReset').addEventListener('click', function () {
+      var pool = u1.inner.querySelector('#arPool');
+      u1.inner.querySelectorAll('.labo-dd-item.placed').forEach(function (el) {
+        el.classList.remove('placed');
+        el.setAttribute('draggable', 'true');
+        pool.appendChild(el);
+      });
+      placement = {};
+      u1.fb.className = 'labo-fb';
+    });
+
+    u1.inner.querySelector('#arCheck').addEventListener('click', function () {
         if (Object.keys(placement).length < 6) {
           LaboCore.say(u1.fb, 'Place les 6 scènes avant de vérifier.', 'bad');
           return;
