@@ -1473,6 +1473,34 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
         </div>
       </div>
 
+      <div id="pf-depot" style="margin:30px 0;padding:22px;border:1px solid rgba(35,43,43,.2);background:var(--papier);border-radius:3px;">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--prusse);margin-bottom:10px;">Dépôt du projet final</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--encre-dim);margin:0 0 16px;">Quand ton dossier est complet, dépose-le ici. Regroupe tout dans un seul PDF (ou un dossier partagé) et joins tes photos de maquette. Tu recevras un retour une fois le dossier relu.</p>
+        <a id="pf-btn" href="#" target="_blank" rel="noopener" style="display:block;text-align:center;background:var(--prusse);color:#fff;text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:15px 24px;border-radius:2px;">Déposer mon projet final →</a>
+        <p id="pf-note" style="font-family:var(--mono);font-size:11px;color:var(--encre-dim);margin:12px 0 0;text-align:center;">Connecte-toi pour que le dépôt soit associé à ton compte.</p>
+      </div>
+
+      <script>
+      (function () {
+        var FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSegfrRWJMvMz2dyE3l2IRD9qxZ68iWWVQwD7SmGpuTGy34akg/viewform';
+        var F_EMAIL = '1544973329', F_CH = '1289460951';
+        var btn = document.getElementById('pf-btn'), note = document.getElementById('pf-note');
+        function refresh() {
+          var email = '';
+          try { email = localStorage.getItem('okapi_email') || ''; } catch (e) {}
+          if (!email) { btn.style.opacity = '.5'; btn.style.pointerEvents = 'none'; return; }
+          btn.href = FORM + '?usp=pp_url'
+            + '&entry.' + F_EMAIL + '=' + encodeURIComponent(email)
+            + '&entry.' + F_CH + '=' + encodeURIComponent('Projet final');
+          btn.style.opacity = '1';
+          btn.style.pointerEvents = 'auto';
+          note.textContent = 'Le dépôt sera enregistré sous ' + email;
+        }
+        document.addEventListener('okapi:unlocked', refresh);
+        refresh();
+      })();
+      </script>
+
       <h3>Et après</h3>
       <ul class="plain">
         <li><strong>Propose-toi sur des courts métrages.</strong> Écoles de cinéma, collectifs, associations. Le poste s'appelle « assistante déco » et il est presque toujours vacant.</li>
