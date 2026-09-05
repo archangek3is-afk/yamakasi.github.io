@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Chef Électricien (Gaffer) — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#080a0b;
+  --noir-2:#111416;
+  --noir-3:#181d20;
+  --gel:#E8720C;
+  --gel-l:#F09050;
+  --secu:#F5C400;
+  --danger:#C05000;
+  --danger-d:#963C00;
+  --papier:#EEE9DE;
+  --craie:#E2DDD2;
+  --fumee:#888280;
+  --line:rgba(226,221,210,0.10);
+  --display:'Oswald',sans-serif;
+  --body:'Source Serif 4',serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{ scroll-behavior:smooth; }
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased; }
+::selection{ background:var(--gel); color:var(--noir); }
+img,svg{ display:block; max-width:100%; }
+
+/* ---------- nav ---------- */
+header.top{ position:sticky; top:0; z-index:200; background:rgba(8,10,11,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--fumee); text-transform:uppercase;}
+.brand .rec{ width:9px; height:9px; border-radius:50%; background:var(--gel); flex-shrink:0; animation:blink 2s infinite;}
+@keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
+.brand b{ color:var(--craie); font-weight:600;}
+nav.links{ display:none; gap:26px; }
+nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:400; font-family:var(--mono); position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--gel); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie); }
+nav.links a:hover::after, nav.links a.active::after{ width:100%; }
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+.burger span{ width:22px; height:2px; background:var(--craie); }
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;}
+.mmenu.open{ display:flex; }
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px; font-family:var(--mono);}
+.mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex; } .burger{ display:none; } }
+
+/* ---------- hero ---------- */
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; }
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(232,114,12,0.14), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(226,221,210,0.02) 0px, rgba(226,221,210,0.02) 1px, transparent 1px, transparent 28px),
+    repeating-linear-gradient(90deg, rgba(226,221,210,0.015) 0px, rgba(226,221,210,0.015) 1px, transparent 1px, transparent 120px);
+}
+.eyebrow{ position:relative; z-index:1; font-family:var(--mono); font-size:11px; letter-spacing:.26em; color:var(--gel-l); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ position:relative; z-index:1; font-family:var(--display); font-size:clamp(48px,11vw,112px); line-height:.95; letter-spacing:.03em; text-transform:uppercase; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title em{ font-style:normal; color:var(--gel); }
+.subtitle{ position:relative; z-index:1; font-size:clamp(16px,2.2vw,18px); color:var(--fumee); max-width:560px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards; font-family:var(--body);}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+/* elec-card hero decoration */
+.elec-card{
+  position:relative; z-index:1; margin-top:44px; opacity:0; animation:up .8s .65s ease forwards;
+  background:var(--noir-3); color:var(--craie); border:1px solid var(--line); border-top:4px solid var(--gel); display:inline-block;
+  padding:16px 24px; font-family:var(--mono); font-size:11px; text-align:left;
+  box-shadow:3px 3px 0 rgba(232,114,12,0.25);
+}
+.elec-card .ec-row{ display:flex; gap:0; flex-wrap:wrap; }
+.elec-card .ec-field{ padding:8px 16px 8px 0; border-right:1px solid rgba(226,221,210,0.15); margin-right:16px;}
+.elec-card .ec-field:last-child{ border-right:none; margin-right:0; padding-right:0;}
+.elec-card .ec-l{ font-size:9px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em;}
+.elec-card .ec-v{ font-size:14px; color:var(--craie); margin-top:2px; font-weight:500;}
+.elec-card .ec-stamp{ font-family:var(--display); font-size:13px; color:var(--gel); border:2px solid var(--gel); padding:3px 8px; display:inline-block; margin-top:10px; transform:rotate(-2deg); opacity:.85; letter-spacing:.08em; text-transform:uppercase;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;}
+.stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-size:26px; color:var(--gel-l); letter-spacing:.04em;}
+.stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.08em; margin-top:3px;}
+
+/* ---------- scaffolding ---------- */
+main{ position:relative; z-index:1; }
+section{ max-width:1180px; margin:0 auto; padding:90px 22px; }
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.fade.in{ opacity:1; transform:translateY(0); }
+.section-head{ margin-bottom:46px; }
+.section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--gel-l); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-size:clamp(28px,4.5vw,46px); line-height:1.1; max-width:820px; text-transform:uppercase;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+.pull{ font-family:var(--display); font-size:clamp(20px,3vw,29px); line-height:1.45; color:var(--papier); max-width:760px; margin:0 auto 60px; padding:0 22px; text-align:center; text-transform:uppercase;}
+.pull span{ color:var(--gel); }
+
+/* grids */
+.grid{ display:grid; gap:18px; grid-template-columns:1fr; }
+@media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr; } }
+@media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr; } }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--gel);}
+.role-card h4{ font-family:var(--display); font-size:17px; margin-bottom:8px; text-transform:uppercase;}
+.role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+/* chapter accordion */
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px; }
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap; }
+.ch-num{ font-family:var(--display); font-size:38px; color:transparent; -webkit-text-stroke:1.4px var(--gel); line-height:1; flex-shrink:0; width:62px; letter-spacing:.04em;}
+.ch-head .ch-info{ flex:1; min-width:200px; }
+.ch-head h3{ font-family:var(--display); font-size:clamp(18px,2.4vw,22px); text-transform:uppercase;}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--gel); flex-shrink:0; transition:transform .3s ease;}
+.chapitre.open .ch-chev{ transform:rotate(135deg); }
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px; }
+.chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px; }
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.8; max-width:780px; margin-bottom:20px;}
+.ch-lead b{ color:var(--gel-l); font-weight:600; }
+.ch-body ul{ list-style:none; margin:14px 0; }
+.ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.65;}
+.ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--secu);}
+.callout{ background:rgba(232,114,12,0.10); border:1px solid var(--gel); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--papier);}
+.callout b{ color:var(--gel-l); }
+.callout-danger{ background:rgba(192,80,0,0.10); border:1px solid var(--danger); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--papier);}
+.callout-danger b{ color:var(--gel); }
+
+/* exercice */
+.exercice{ background:var(--papier); color:var(--noir); padding:24px; position:relative; box-shadow:0 6px 18px rgba(0,0,0,0.28); }
+.exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--gel); }
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--danger); font-weight:500; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-size:17px; margin-bottom:10px; text-transform:uppercase;}
+.exercice p, .exercice li{ font-size:14px; color:#2c2822; line-height:1.7;}
+.exercice ol{ padding-left:20px; margin-top:8px;}
+.exercice li{ margin-bottom:6px;}
+.exercice textarea{ width:100%; margin-top:14px; padding:12px; border:1px solid rgba(12,15,16,0.2); background:rgba(255,255,255,0.6); font-family:var(--mono); font-size:13px; color:#1a1a1a; line-height:1.6; resize:vertical; min-height:100px;}
+.exercice textarea::placeholder{ color:#888; }
+
+/* book cards */
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--papier); }
+.book-card .spine{ width:8px; align-self:stretch; background:var(--gel); flex-shrink:0;}
+.book-card .bk-info .auth{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em;}
+.book-card .bk-info .ttl{ font-family:var(--display); font-size:15px; margin-top:4px; color:var(--craie); text-transform:uppercase;}
+.book-card .bk-info .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+/* case study */
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr; }
+@media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr; } }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--gel);}
+.case-card .name{ font-family:var(--display); font-size:21px; color:var(--craie); margin-bottom:6px; text-transform:uppercase;}
+.case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--gel-l); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px;}
+.case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+/* table */
+.table-wrap{ overflow-x:auto; }
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px; min-width:480px;}
+table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--gel-l); text-transform:uppercase; letter-spacing:.06em; padding:10px; border-bottom:1px solid var(--gel);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);}
+
+/* quiz */
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px; }
+.quiz-q p.q-text{ font-family:var(--display); font-size:15.5px; margin-bottom:14px; text-transform:uppercase;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer; transition:border-color .2s ease;}
+.quiz-opt:hover{ border-color:var(--gel); }
+.quiz-opt input{ accent-color:var(--gel); }
+.quiz-opt span{ font-size:13.5px; color:var(--fumee); font-family:var(--body);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);}
+.quiz-opt.correct span{ color:#9fc19f; }
+.quiz-opt.wrong{ border-color:var(--danger); background:rgba(192,80,0,0.1);}
+.quiz-opt.wrong span{ color:var(--gel); }
+#quizScore{ font-family:var(--display); font-size:20px; color:var(--gel-l); text-align:center; margin-top:20px; display:none; text-transform:uppercase;}
+
+.divider{ display:flex; align-items:center; gap:16px; margin:50px 0; }
+.divider .l{ flex:1; height:1px; background:var(--line); }
+.divider span{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-transform:uppercase; letter-spacing:.1em;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center; }
+footer .manifesto{ font-family:var(--display); font-size:clamp(19px,2.8vw,26px); color:var(--craie); max-width:600px; margin:0 auto 22px; text-transform:uppercase;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; color:var(--fumee); text-transform:uppercase;}
+footer .brandline b{ color:var(--gel-l); }
+
+::-webkit-scrollbar{ width:8px; }
+::-webkit-scrollbar-track{ background:var(--noir); }
+::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--gel); }
+@media(prefers-reduced-motion:reduce){ *{ animation-duration:.001s !important; transition-duration:.001s !important; } }
+
+/* ===== GATE OKAPI ===== */
+#gate-overlay{position:fixed;inset:0;z-index:99999;background:linear-gradient(rgba(12,15,16,.85),rgba(12,15,16,.85)),url("images/gate-bg.jpg") center/cover no-repeat,#0c0f10;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+body.gate-unlocked #gate-overlay{display:none;}
+body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
+#gate-overlay .g-eye{font-size:11px;letter-spacing:.2em;color:#2d5fad;text-transform:uppercase;margin-bottom:20px;}
+#gate-overlay h2{font-weight:800;font-size:clamp(22px,5vw,32px);color:#e5dece;margin-bottom:14px;}
+#gate-overlay p#gateMsg{color:#7a8086;font-size:14px;line-height:1.65;max-width:380px;margin:0 auto 26px;}
+#gate-overlay form#gateLoginForm{display:flex;flex-direction:column;align-items:center;margin-bottom:14px;gap:10px;}
+#gate-overlay input#gateEmailInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#e5dece;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gatePasswordInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#e5dece;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay input#gatePasswordInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #2d5fad;color:#2d5fad;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
+#gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#2d5fad;color:#0c0f10;}
+
+/* responsive */
+@media(max-width:768px){
+  html,body{overflow-x:hidden;}
+  img,video,iframe,canvas,svg{max-width:100%;height:auto;}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .hero{padding:90px 16px 50px;min-height:70vh;}
+  section{padding:40px 14px;}
+  .section-head{padding:0 6px;margin-bottom:30px;}
+  .ch-head{padding:14px 10px;gap:10px;min-height:54px;}
+  .ch-body{padding:18px 12px;}
+  .quiz-opt{padding:14px 14px;min-height:48px;gap:12px;}
+  .quiz-opt span{font-size:14px;}
+  .quiz-opt input{width:20px;height:20px;min-width:20px;}
+  .quiz-q{padding:18px 14px;}
+  .exercice{padding:20px 14px;}
+  #quizBtn,[onclick*="scoreQuiz"]{min-height:48px;padding:14px 24px;font-size:14px;}
+  #gate-overlay{padding:30px 16px;min-height:100%;justify-content:flex-start;padding-top:max(30px,6vh);}
+  #gate-overlay h2{font-size:clamp(20px,5vw,28px);}
+  #gate-overlay p#gateMsg{font-size:13.5px;max-width:90vw;}
+  #gate-overlay input#gateEmailInput,#gate-overlay input#gatePasswordInput{max-width:85vw;padding:14px 16px;font-size:14px;}
+  #gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{padding:14px 24px;font-size:12px;min-height:48px;}
+  .elec-card{transform:scale(0.85);transform-origin:center;}
+}
+@media(max-width:430px){
+  .hero{padding:80px 12px 40px;}
+  section{padding:30px 10px;}
+  .ch-head{padding:12px 8px;}
+  .ch-body{padding:14px 10px;}
+  .quiz-q{padding:14px 10px;}
+  .quiz-opt{padding:12px 10px;}
+  .exercice{padding:16px 10px;}
+}
+@media(max-width:768px){#gate-overlay{background:linear-gradient(rgba(12,15,16,.85),rgba(12,15,16,.85)),url("images/gate-bg-mobile.jpg") center/cover no-repeat,#0c0f10;}}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay">
+  <div class="g-eye">Okapi Studios &mdash; Accès protégé</div>
+  <h2>Contenu réservé</h2>
+  <p id="gateMsg">Entre l'email avec lequel ton accès a été validé.</p>
+  <form id="gateLoginForm">
+    <input type="email" id="gateEmailInput" placeholder="ton@email.com" required>
+    <input type="password" id="gatePasswordInput" placeholder="Mot de passe" required>
+    <button type="submit" id="gateLoginBtn">Se connecter</button>
+  </form>
+  <a id="gateRequestLink" href="acces.html">Pas encore d&rsquo;accès&nbsp;? Demander l&rsquo;accès</a>
+</div>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="rec"></span> OKAPI STUDIOS — <b>LE CHEF ÉLECTRICIEN</b></div>
+    <nav class="links">
+      <a href="#role">Le rôle</a>
+      <a href="#chapitres">Chapitres</a>
+      <a href="#references">Références</a>
+      <a href="#biblio">Bibliographie</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu">
+    <a href="#role">Le rôle</a>
+    <a href="#chapitres">Les 9 chapitres</a>
+    <a href="#references">Références créatives</a>
+    <a href="#biblio">Bibliographie</a>
+    <a href="#quiz">Quiz</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">Manuel de formation — Éclairage &amp; Direction électrique</div>
+  <h1 class="title">LE CHEF<br><em>ÉLECTRICIEN</em></h1>
+  <p class="subtitle">Comprendre la lumière que le DP veut, la fabriquer avec du vrai matériel, du vrai budget et du vrai temps — sans faire sauter les plombs ni mettre des vies en danger.</p>
+
+  <div class="elec-card">
+    <div class="ec-row">
+      <div class="ec-field"><div class="ec-l">Source</div><div class="ec-v">HMI 2.5K</div></div>
+      <div class="ec-field"><div class="ec-l">Circuit</div><div class="ec-v">32A / 230V</div></div>
+      <div class="ec-field"><div class="ec-l">Diffusion</div><div class="ec-v">¼ CTB + Grid</div></div>
+      <div class="ec-field"><div class="ec-l">Gaffer</div><div class="ec-v">Toi</div></div>
+    </div>
+    <div class="ec-stamp">Cleared ✓</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">02</div><div class="l">Références</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">Quiz</div></div>
+  </div>
+</section>
+
+<!-- LE ROLE -->
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">Avant de commencer</div>
+    <h2>Le gaffer est le bras technique du directeur de la photographie.</h2>
+    <p class="lede">Le DP décide de l'ambiance lumineuse. Le chef électricien sait comment la fabriquer — avec du matériel réel, dans un espace réel, avec un budget et un temps donnés.</p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card">
+      <h4>Ce qu'il fabrique</h4>
+      <p>La lumière concrète. Pas l'intention artistique — la réalisation physique. Choisir les bons projecteurs, les positionner, les alimenter électriquement, les diffuser ou les bloquer selon l'ambiance voulue par le DP.</p>
+    </div>
+    <div class="role-card">
+      <h4>Ce qu'il dirige</h4>
+      <p>Une équipe entière : les électriciens (qui câblent et opèrent), les riggers (qui installent en hauteur), et le best boy electric (son assistant direct). Sur les grandes productions, le département lumière compte parfois vingt personnes.</p>
+    </div>
+    <div class="role-card">
+      <h4>Sa place sur le plateau</h4>
+      <p>Toujours entre l'intention et l'exécution. Il traduit un langage artistique ("quelque chose de chaud, comme une bougie") en liste de matériel, en plan de charge électrique, en positionnement précis — sans jamais se substituer à la vision du DP.</p>
+    </div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;">
+    <b>Sur un petit tournage —</b> Une seule personne cumule souvent les rôles de DP et de gaffer. C'est normal, et instructif : ça oblige à comprendre les deux langages à la fois. Sur un long-métrage ou une série, en revanche, ce sont deux métiers distincts avec une vraie hiérarchie. Ce manuel s'intéresse au gaffer en tant que poste indépendant — mais si tu cumules les deux rôles sur une petite production, tout ce qui suit s'applique à toi.
+  </div>
+</section>
+
+<!-- CHAPITRES -->
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Le parcours</div>
+    <h2>Neuf chapitres, de la source lumineuse au groupe électrogène.</h2>
+    <p class="lede">Clique sur un chapitre pour l'ouvrir. Chacun contient le contenu essentiel et un exercice pratique à faire dans le champ texte fourni.</p>
+  </div>
+
+  <!-- CH 00 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">00</div>
+      <div class="ch-info"><h3>Qui est le chef électricien</h3><div class="ch-tag">Le gaffer, bras technique du DP</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Le cinéma est d'abord une question de lumière. Avant même que la caméra soit chargée, quelqu'un doit se demander : d'où vient la lumière ? Quelle source ? Quelle puissance ? Quel câblage ? Ce quelqu'un, c'est le chef électricien — ou <b>gaffer</b>, selon le terme anglophone désormais universel dans l'industrie.</p>
+      <p class="ch-lead">Sur un grand tournage, la chaîne est claire : le directeur de la photographie (DP) décide de l'ambiance lumineuse souhaitée — "je veux quelque chose de dur, comme un soleil de midi à travers une vénitienne" — et le gaffer traduit cette intention en matériel concret, en positionnement de projecteurs, en choix de diffusion, en calcul de circuit électrique. <b>Le DP est l'artiste ; le gaffer est l'architecte qui rend l'art possible.</b></p>
+      <div class="callout">
+        <b>L'équipe électrique —</b> Le gaffer ne travaille pas seul. Il dirige un département complet : le <em>best boy electric</em> (son bras droit, responsable de l'inventaire, des plannings et de la coordination de l'équipe), les électriciens (qui câblent, installent et opèrent les projecteurs), et parfois des riggers (techniciens spécialisés dans les installations en hauteur, sur des structures ou des grilles de cintre). Sur une petite production, le gaffer peut cumuler tous ces rôles lui-même.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 00 — Repérer le gaffer dans les crédits</span>
+        <h4>Cherche le duo DP / Chef électricien dans un film</h4>
+        <ol>
+          <li>Choisis un long-métrage récent sur IMDb ou dans un film que tu connais bien.</li>
+          <li>Dans les crédits techniques, identifie le "Director of Photography" et le "Gaffer" (ou "Chef Électricien" dans les productions françaises).</li>
+          <li>Ce sont deux personnes différentes ? Ont-ils travaillé ensemble sur d'autres films ? Qu'est-ce que ça dit sur la fidélité des équipes de plateau ?</li>
+        </ol>
+        <textarea placeholder="Film choisi, noms du DP et du gaffer, et tes observations sur leur collaboration…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 01 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">01</div>
+      <div class="ch-info"><h3>Fabriquer le trois points avec du vrai matériel</h3><div class="ch-tag">Clé, remplissage, contre-jour</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Si tu as consulté le manuel Directeur de la Photographie, tu connais déjà la logique du trois points : une <b>clé</b> (key light), un <b>remplissage</b> (fill light), un <b>contre-jour</b> (back light). Ce chapitre aborde la même structure, mais du point de vue du gaffer — celui qui doit physiquement construire ces trois sources avec du matériel réel, dans un espace réel, avec un budget et un temps limités.</p>
+      <p class="ch-lead">La <b>clé</b> est la source principale. C'est elle qui modèle le visage et définit l'ambiance. Pour un portrait en intérieur, un gaffer placera souvent un Fresnel ou une source LED douce à 45° par rapport à l'axe caméra, légèrement surélevé. Le <b>remplissage</b> atténue les ombres créées par la clé — son intensité est réglée par le rapport clé/remplissage voulu (2:1 pour une ambiance douce, 4:1 ou plus pour quelque chose de dramatique). Le <b>contre-jour</b> se place derrière le sujet pour le détacher du fond et lui donner du volume.</p>
+      <div class="callout">
+        <b>La loi du carré inverse —</b> Un projecteur de 1 000 W placé à 3 mètres du sujet produit une intensité quatre fois plus forte que le même projecteur à 6 mètres. Quand on double la distance, on divise l'intensité par 4. Le gaffer calcule constamment ces équilibres dans sa tête pour évaluer si un projecteur donné, à une distance donnée, peut jouer le rôle qu'on lui demande.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 01 — Dessiner un plan de lumière</span>
+        <h4>Conçois l'éclairage d'une scène de dialogue</h4>
+        <ol>
+          <li>Imagine une scène : deux personnages assis face à face dans une cuisine, éclairage d'ambiance neutre visé.</li>
+          <li>Dessine (sur papier ou en décrivant) le placement de ta clé, ton remplissage et ton contre-jour pour chaque personnage.</li>
+          <li>Quelle source utiliserais-tu pour chaque point ? Justifie brièvement chaque choix.</li>
+        </ol>
+        <textarea placeholder="Décris ou schématise ton plan de lumière : positions, sources, et justifications…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 02 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">02</div>
+      <div class="ch-info"><h3>Les sources de lumière</h3><div class="ch-tag">Tungstène, HMI, LED, Kino-Flo</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Tous les projecteurs ne produisent pas la même lumière. Avant de choisir un matériel, un gaffer doit comprendre ce que chaque type de source offre — et ce qu'il coûte en argent, en poids, en chaleur dégagée et en temps d'installation.</p>
+      <ul>
+        <li><b style="color:var(--gel-l);">Tungstène</b> — lumière chaude (3 200 K), continue et stable, peu chère à l'achat. Consomme beaucoup d'électricité et chauffe énormément. Après quelques minutes de fonctionnement, le verre du projecteur peut dépasser 400°C — ne jamais le toucher à mains nues. Bonne pour les intérieurs à ambiance chaude, mais lourde en consommation sur de longues journées de tournage.</li>
+        <li><b style="color:var(--gel-l);">HMI</b> — produit une lumière équivalente à la lumière du jour (5 600 K). Très puissant pour son poids : un HMI de 1 200 W produit autant de lumière qu'un tungstène de 4 000 W. Nécessite un ballast électronique séparé (lourd, encombrant). Coûteux à la location. Indispensable pour les tournages en extérieur ou quand on veut simuler la lumière naturelle en studio.</li>
+        <li><b style="color:var(--gel-l);">LED</b> — la révolution des vingt dernières années. Économe en énergie, légère, ne chauffe pas, souvent bi-color (réglable de 3 200 K à 5 600 K en un bouton). L'IRC varie énormément selon les fabricants : toujours le vérifier avant de louer. Les LED haut de gamme (Arri SkyPanel, Aputure 600d) ont un IRC &gt; 95 et rivalisent avec les sources traditionnelles.</li>
+        <li><b style="color:var(--gel-l);">Fluo / Kino-Flo</b> — tubes fluorescents spéciaux, très doux et uniformes. Idéaux pour les interviews, les plateaux TV, les bureaux et espaces de travail filmés. Peu de chaleur, bonne couverture sur une grande surface. Limités en puissance pour les extérieurs ou les très grandes surfaces.</li>
+      </ul>
+      <div class="callout">
+        <b>L'IRC — Indice de Rendu des Couleurs —</b> L'IRC mesure la fidélité d'une source à reproduire les couleurs réelles d'un objet, sur une échelle de 0 à 100. Le soleil est la référence (IRC 100). Un IRC bas (60–70) peut donner des carnations verdâtres ou blafards à l'image, particulièrement visible sur les peaux. Les LED bon marché ont souvent un IRC médiocre. Règle pratique : en dessous de 90, réfléchis à deux fois avant d'utiliser cette source sur un visage humain.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 02 — Choisir ses sources</span>
+        <h4>Équiper une journée d'interviews en appartement</h4>
+        <ol>
+          <li>Tu dois éclairer une journée d'interviews dans un appartement. Budget location limité. Lumière naturelle disponible par une grande fenêtre côté sud.</li>
+          <li>Décris les deux ou trois sources que tu choisirais et pourquoi. Quelle température de couleur cibles-tu ?</li>
+          <li>Comment vérifierais-tu l'IRC du matériel avant de le louer ?</li>
+        </ol>
+        <textarea placeholder="Tes choix de sources, les raisons, la température cible et ta méthode de vérification IRC…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 03 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">03</div>
+      <div class="ch-info"><h3>Le plan de charge électrique</h3><div class="ch-tag">Volts, ampères, watts — sans se planter</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Avant de brancher quoi que ce soit, un gaffer doit savoir si l'installation électrique disponible peut supporter le matériel prévu. Faire sauter les plombs au milieu d'une prise coûte du temps, de l'argent — et dans les cas graves, ça prend feu.</p>
+      <p class="ch-lead">L'analogie du tuyau d'eau : les <b>volts (V)</b>, c'est la pression — la force qui pousse les électrons. Les <b>ampères (A)</b>, c'est le débit — la quantité d'électrons qui circule. Les <b>watts (W)</b>, c'est le produit des deux : <em>puissance = tension × intensité (P = U × I)</em>. En France, le courant domestique standard est 230 V. Un circuit classique avec un disjoncteur de 16 A peut donc supporter au maximum <b>230 × 16 = 3 680 W</b> de matériel simultanément. Au-delà : le disjoncteur saute. Dans les cas extrêmes : ça brûle.</p>
+      <div class="table-wrap" style="margin:20px 0;">
+        <table class="plain">
+          <thead>
+            <tr>
+              <th>Disjoncteur</th>
+              <th>Tension</th>
+              <th>Puissance max</th>
+              <th>Matériel typique</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>10 A</td><td>230 V</td><td>2 300 W</td><td>2 × LED 1K ou 1 × fluo kit</td></tr>
+            <tr><td>16 A</td><td>230 V</td><td>3 680 W</td><td>1 × HMI 2,5K ou 3 × LED 1K</td></tr>
+            <tr><td>32 A</td><td>230 V</td><td>7 360 W</td><td>1 × HMI 6K ou plusieurs tungstènes</td></tr>
+            <tr><td>63 A</td><td>230 V</td><td>14 490 W</td><td>Gros kit multi-sources, HMI 12K</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <b>Quand le groupe électrogène devient nécessaire —</b> Si tu tournes en extérieur sans prise accessible, si tu utilises des HMI très puissants (4K, 6K, 12K), ou si ton plan de charge total dépasse la capacité du bâtiment, il faut un groupe électrogène ("genny"). Un petit groupe de 20 kVA peut alimenter environ 16 000 W confortablement. Pour un long-métrage standard, les groupes de 100 à 200 kVA sont courants. Un genny se réserve à l'avance, se positionne à distance (le bruit pollue le son), et son conducteur doit être qualifié.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 03 — Calculer un plan de charge</span>
+        <h4>Est-ce que le bâtiment peut supporter ton kit ?</h4>
+        <ol>
+          <li>Tu veux éclairer une scène avec : 1 HMI 2 500 W, 2 tungstènes de 1 000 W chacun, et 1 kit LED de 500 W.</li>
+          <li>Le lieu a 3 circuits de 16 A à 230 V. Est-ce suffisant ?</li>
+          <li>Distribue les sources sur les circuits disponibles. Y a-t-il de la marge ? Sinon, qu'est-ce que tu remplaces ou supprimes ?</li>
+        </ol>
+        <textarea placeholder="Ton calcul de charge, la distribution sur les circuits, et ta conclusion…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 04 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">04</div>
+      <div class="ch-info"><h3>Diffuser et modifier la lumière</h3><div class="ch-tag">Softbox, flags, silks, bounce, grid</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Choisir un projecteur puissant n'est que la moitié du travail. Ce qui définit réellement le talent d'un gaffer, c'est la façon dont il <b>façonne</b> la lumière après qu'elle soit sortie de la source — en la diffusant, en la bloquant, en la redirigeant ou en la concentrant.</p>
+      <ul>
+        <li><b style="color:var(--gel-l);">Softbox</b> — boîte textile placée devant le projecteur. Elle transforme une source dure et directionnelle en une source douce aux ombres graduelles. Plus la softbox est grande et proche du sujet, plus la lumière est douce.</li>
+        <li><b style="color:var(--gel-l);">Drapeaux / Flags</b> — panneaux noirs rigides placés dans le trajet de la lumière pour bloquer, créer des ombres nettes ou éviter qu'une source ne déborde là où on ne le veut pas. Outil de contrôle précis, très utilisé sur les visages.</li>
+        <li><b style="color:var(--gel-l);">Silk</b> — grand tissu blanc diffusant tendu sur un cadre. Utile pour adoucir une grande zone (atténuer le soleil direct en extérieur) ou créer une vaste source douce en studio.</li>
+        <li><b style="color:var(--gel-l);">Bounce / Réflecteur</b> — renvoyer de la lumière existante sans ajouter de source électrique. Un panneau blanc, un polystyrène, une toile argentée — le réflecteur est souvent la solution la plus rapide et la moins chère pour ajouter un remplissage doux.</li>
+        <li><b style="color:var(--gel-l);">Grid (nid d'abeilles)</b> — accessoire placé devant une softbox ou un Fresnel pour concentrer le faisceau et éviter que la lumière se répande dans toutes les directions. Donne plus de direction sans durcir les ombres.</li>
+      </ul>
+      <div class="callout">
+        <b>La douceur, c'est une question de taille perçue —</b> Un soleil est immensément puissant mais apparaît petit dans le ciel — il crée des ombres dures. Un ciel couvert est moins intense mais couvre tout l'horizon — il crée des ombres très douces. Le gaffer reproduit cette logique : pour une lumière douce, agrandir la source ou la rapprocher du sujet ; pour une lumière dure, utiliser une petite source ou l'éloigner.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 04 — Kit minimal de diffusion</span>
+        <h4>Qu'est-ce que tu emportes pour une journée d'interviews ?</h4>
+        <ol>
+          <li>Tu prépares une journée d'interviews dans un appartement. Ton van a de la place pour un kit de diffusion limité.</li>
+          <li>Liste les accessoires que tu emporterais (softbox, flags, silks, bounce…) et justifie chaque choix en une phrase.</li>
+          <li>Qu'est-ce que tu laisserais au camion pour ne pas surcharger, et pourquoi ?</li>
+        </ol>
+        <textarea placeholder="Ta liste d'accessoires commentée, et ce que tu laisses derrière…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 05 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">05</div>
+      <div class="ch-info"><h3>Traduire une intention en matériel</h3><div class="ch-tag">Le dialogue DP-Gaffer</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">La vraie compétence du gaffer, c'est la traduction. Le DP parle en intentions — "je veux quelque chose de chaud, comme la lumière d'une bougie qui vacille" — et le gaffer doit répondre en matériel, en position, en accessoires. Rapidement et précisément, sans interrompre le rythme du plateau.</p>
+      <p class="ch-lead">Prenons cet exemple concret, filé jusqu'au bout. La DP dit : <em>"Je veux que ça ressemble à une bougie dans un couloir sombre."</em> Le gaffer décompose mentalement : <b>couleur</b> — lumière très chaude, 2 700 K, avec un gel CTO orange pour accentuer. <b>Intensité</b> — faible, juste ce qu'il faut pour que la caméra lise l'image. <b>Vacillement</b> — une flicker box (boîtier électronique qui module aléatoirement l'intensité d'un projecteur) ou, en solution de fortune, un technicien qui bouge un drapeau noir devant la source. <b>Direction</b> — lumière venant de bas en haut, comme une vraie bougie posée sur une table. <b>Diffusion</b> — peu ou aucune : une bougie réelle produit une lumière dure aux ombres nettes.</p>
+      <div class="callout">
+        <b>Les gélatines (gels) —</b> Les gélatines sont des films colorés ou diffusants qu'on place devant les projecteurs pour modifier leur couleur. <em>CTO (Color Temperature Orange)</em> réchauffe la lumière. <em>CTB (Color Temperature Blue)</em> la refroidit pour simuler la lumière du jour. Les marques de référence sont Rosco et Lee Filters. Chaque professionnel finit par mémoriser ses références par numéro : "Colle-moi un 216 blanc diffusant et un ½ CTO."
+      </div>
+      <p class="ch-lead" style="margin-top:16px;">Ce dialogue DP-gaffer est un <b>aller-retour</b>, pas un ordre descendant. Après la première installation, le DP regarde dans le moniteur et dit "c'est un peu trop chaud, on peut refroidir légèrement ?" — et le gaffer ajuste. Parfois, c'est le gaffer qui propose : "Si on diffuse légèrement avec un muslin, ça sera plus flatteur pour la peau tout en gardant l'ambiance." Le bon gaffer parle, suggère, échange — mais ne contredit jamais le DP devant l'équipe.</p>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 05 — Traduire un brief DP</span>
+        <h4>La DP te donne une intention, tu la traduis en matériel</h4>
+        <ol>
+          <li>Le brief : "Je veux que la scène ressemble à une cuisine baignée de soleil de midi — très crue, presque photographique, contrastée."</li>
+          <li>Décris précisément : quelle(s) source(s), quelle température de couleur, quelle diffusion (ou pas), d'où vient la lumière principale.</li>
+          <li>Qu'est-ce que tu suggèrerais en plus, si le DP était ouvert à une proposition ?</li>
+        </ol>
+        <textarea placeholder="Ton plan de matériel, ta traduction de l'intention en technique, et ta proposition…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 06 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">06</div>
+      <div class="ch-info"><h3>Sécurité électrique sur plateau</h3><div class="ch-tag">Le gaffer est responsable de vies humaines</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Le gaffer ne gère pas que de la lumière — il gère des courants électriques puissants dans des environnements souvent encombrés, humides, avec des dizaines de personnes qui se déplacent rapidement. <b>C'est la partie du métier où une erreur peut coûter une vie.</b> Pas une exagération : des accidents mortels par électrocution sur des tournages ont eu lieu, en France comme à l'étranger.</p>
+      <ul>
+        <li><b style="color:var(--gel-l);">Câbles au sol</b> — tout câble qui traverse un passage doit être protégé par un cache-câble (rubber ramp) pour éviter les trébuchements et protéger le câble d'être écrasé. Un câble endommagé peut provoquer un arc électrique et démarrer un incendie.</li>
+        <li><b style="color:var(--gel-l);">Eau et humidité</b> — eau et électricité ne se mélangent jamais. En extérieur sous la pluie, tout le matériel électrique doit être couvert, surélevé, et les connexions protégées. Ne jamais laisser un câble ou un projecteur en contact avec une surface humide.</li>
+        <li><b style="color:var(--gel-l);">Surcharge de circuit</b> — ne jamais brancher plus que ce que le circuit peut supporter. Garder une marge de 20–25 % en dessous de la capacité maximale. Un circuit de 16 A ne doit pas travailler en permanence à 16 A.</li>
+        <li><b style="color:var(--gel-l);">Mise à la terre</b> — tous les projecteurs et équipements doivent être correctement mis à la terre. Sans mise à la terre, en cas de défaut d'isolement, c'est le corps humain qui ferme le circuit électrique.</li>
+        <li><b style="color:var(--gel-l);">Habilitation électrique</b> — sur les grosses productions, le gaffer et le best boy doivent être habilités (niveau B2V en France — habilitation pour les travaux au voisinage de pièces nues sous tension). Un non-habilité ne touche pas aux installations électriques au-delà d'un simple branchement de prise.</li>
+      </ul>
+      <div class="callout-danger">
+        <b>La règle d'or —</b> Si tu as le moindre doute sur une installation électrique — câble qui semble chaud, odeur de brûlé, disjoncteur qui saute à répétition, projecteur qui scintille sans raison — tu arrêtes, tu coupes l'alimentation, et tu demandes à quelqu'un de compétent de vérifier avant de continuer. Le plateau peut attendre. Une ambulance aussi, mais c'est moins bien.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 06 — Identifier les risques</span>
+        <h4>Trois situations, trois protocoles</h4>
+        <ol>
+          <li>Décris trois situations concrètes de risque électrique que tu pourrais rencontrer sur un tournage en appartement avec une équipe de 10 personnes.</li>
+          <li>Pour chacune : quel est le risque exact ? Comment le préviens-tu avant le tournage ? Comment réagis-tu si ça arrive quand même ?</li>
+        </ol>
+        <textarea placeholder="Tes trois situations, les risques identifiés, et tes protocoles de prévention et de réaction…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 07 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">07</div>
+      <div class="ch-info"><h3>Le camion lumière et l'inventaire</h3><div class="ch-tag">Anticiper, gérer, réagir</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Sur un tournage professionnel, le matériel d'éclairage arrive dans un camion — le "camion lumière" — chargé la veille par le gaffer et son équipe. Ce camion, c'est la réserve opérationnelle du département. Si une ampoule grille, si un projecteur lâche, si le DP change d'avis sur un accessoire : <b>la solution doit idéalement être dans ce camion</b>.</p>
+      <p class="ch-lead">Anticiper est la compétence centrale. Avant le tournage, le gaffer reçoit le plan de tournage, les repérages et la liste des scènes du jour. Il construit son plan de charge prévisionnel, établit une liste de matériel, réserve auprès du loueur, vérifie à la réception que tout est en état de marche, et charge le camion dans un ordre logique : ce qui servira en premier est accessible en premier.</p>
+      <ul>
+        <li>Projecteurs HMI (avec ballasts), tungstènes, LEDs bi-color</li>
+        <li>Softboxes, silks, flags et drapeaux noirs</li>
+        <li>Gélatines (Rosco ou Lee) : CTO, CTB, diffusions, neutres</li>
+        <li>Câbles et rallonges (en double pour les pannes), multiprises professionnelles</li>
+        <li>Grip stands, bras articulés, pinces et C-stands</li>
+        <li>Ampoules et fusibles de rechange, multimètre</li>
+        <li>Batteries spare pour les LEDs sans fil</li>
+        <li>Ruban noir (gaffer tape), ruban d'électricien, cache-câbles</li>
+      </ul>
+      <div class="callout">
+        <b>Gérer une panne en cours de journée —</b> Un projecteur qui lâche au milieu d'une prise, ça arrive. La bonne réaction : 1) signaler calmement au DP et au 1er AD ("on a un projecteur HS, je règle ça en deux minutes"), 2) chercher en priorité une solution de substitution dans le camion, 3) ne jamais quitter le plateau pour aller chercher du matériel sans le signaler au 1er AD — ça crée un trou dans l'équipe. La vitesse de réaction sans affolement, c'est ce qui distingue un gaffer expérimenté d'un débutant.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 07 — Préparer le camion</span>
+        <h4>Liste de matériel pour une journée mixte intérieur/extérieur</h4>
+        <ol>
+          <li>Scénario : 3 scènes d'intérieur appartement + 1 scène d'extérieur jour. Équipe de 8 personnes.</li>
+          <li>Établis une liste de matériel commentée. Pour chaque item, note la raison de sa présence en une phrase.</li>
+          <li>Qu'est-ce que tu emporterais en double (pour les pannes potentielles) ? Justifie.</li>
+        </ol>
+        <textarea placeholder="Ta liste de matériel commentée, avec les doublons et leurs justifications…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 08 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">08</div>
+      <div class="ch-info"><h3>Devenir chef électricien</h3><div class="ch-tag">Parcours et perspectives</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Il n'existe pas de diplôme de gaffer. Le métier s'apprend sur le terrain, progressivement, en commençant le plus souvent par le bas de l'échelle du département électrique — le poste d'"électricien" tout court, qu'on appelle <b>electric</b> sur les tournages anglophones.</p>
+      <p class="ch-lead">Voici le parcours type : on commence électricien (câblage, installation sous la direction du gaffer), on monte <b>best boy electric</b> (assistant direct du gaffer, responsable des plannings, de l'inventaire et de la coordination de l'équipe électrique), puis gaffer après plusieurs années de terrain. Il n'y a pas de raccourci — le métier exige une connaissance intime du matériel qui ne s'acquiert que dans l'expérience répétée.</p>
+      <ul>
+        <li>Commencer comme électricien sur des courts-métrages ou productions étudiantes — le meilleur terrain d'entraînement, accessible sans expérience</li>
+        <li>Obtenir les habilitations électriques nécessaires (B1V, B2V en France) dès que possible — elles ouvrent des portes sur les grosses productions</li>
+        <li>Des sociétés de location de matériel (TSF, Transpalux, Panalux) proposent parfois des stages ou périodes d'observation — excellent moyen d'apprendre le matériel avant le plateau</li>
+        <li>Les syndicats de techniciens du cinéma (IATSE pour les productions internationales) peuvent orienter vers les premières expériences et les formations continues</li>
+      </ul>
+      <div class="callout">
+        <b>Les qualités recherchées —</b> Sang-froid absolu (quand ça ne marche pas, tout le monde regarde le gaffer — paniquer n'aide personne). Rapidité physique et mentale. Sens aigu de la sécurité, sans que ce soit paralysant. Capacité à lire la lumière et à comprendre ce que la caméra "voit" réellement. Et surtout : une capacité à dialoguer avec des artistes, à comprendre un langage poétique et à le traduire en technique, sans jamais se substituer à la vision du DP.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 08 — Ton plan d'entrée dans le métier</span>
+        <h4>Identifie une première étape concrète</h4>
+        <ol>
+          <li>Cherche un tournage (court-métrage, clip, événement filmé) dans ton réseau ou en ligne où tu pourrais aider le département lumière.</li>
+          <li>Propose-toi comme électricien débutant, même bénévolement — l'expérience vaut plus qu'un salaire à ce stade.</li>
+          <li>Si aucun projet n'est disponible immédiatement : chez toi, avec une lampe de bureau et un smartphone, essaie de reproduire un éclairage trois points sur un sujet simple. Observe, note, compare.</li>
+        </ol>
+        <textarea placeholder="Le tournage identifié (ou ton exercice maison), ta démarche, et ce que tu as appris ou observé…"></textarea>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- RÉFÉRENCES CRÉATIVES -->
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Figures du métier</div>
+    <h2>Des gaffers qui ont façonné l'image de films majeurs.</h2>
+    <p class="lede">Le travail du gaffer est par nature invisible : si tout se passe bien, le spectateur voit la lumière, pas le travail. Ces figures font exception — leur nom apparaît dans les making-of et les profils professionnels des DPs avec qui ils ont collaboré.</p>
+  </div>
+  <div class="case-strip fade">
+    <div class="case-card">
+      <div class="name">James Plannette</div>
+      <div class="signature">États-Unis · années 1980–1990</div>
+      <p>Crédité gaffer sur <em>The Terminator</em> (1984) de James Cameron — DP Adam Greenberg — puis sur <em>Aliens</em> (1986). Sur ces deux productions, Plannette a contribué à résoudre des défis d'éclairage complexes : ambiances industrielles nocturnes tournées avant l'ère des caméras ultra-sensibles, à une époque où chaque watt comptait double. Son travail a contribué à l'esthétique reconnaissable de ces films fondateurs.</p>
+    </div>
+    <div class="case-card">
+      <div class="name">Michael Bohanan</div>
+      <div class="signature">États-Unis · collaborateur de Roger Deakins</div>
+      <p>Gaffer régulier de Roger Deakins — l'un des directeurs de la photographie les plus reconnus de sa génération (<em>Shawshank Redemption</em>, <em>No Country for Old Men</em>, <em>Skyfall</em>, <em>Blade Runner 2049</em>, <em>1917</em>). Mentionné dans plusieurs profils publiés par l'ASC (American Society of Cinematographers). Leur collaboration illustre comment un tandem DP-gaffer stable finit par développer un langage commun qui accélère considérablement le travail sur plateau, film après film.</p>
+    </div>
+    <div class="case-card">
+      <div class="name">Les gaffers invisibles</div>
+      <div class="signature">Une discipline discrète, une carrière entière</div>
+      <p>La plupart des chefs électriciens passent toute leur carrière sans jamais être mentionnés dans la presse. Leur récompense : une image qui fonctionne, un DP qui les rappelle sur le prochain film, une équipe qui leur fait confiance. Pour découvrir les noms de gaffers sur tes films préférés, va dans les crédits complets sur IMDb — tu retrouveras souvent les mêmes noms sur des filmographies entières, ce qui dit tout sur les fidélités de plateau.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BIBLIOGRAPHIE -->
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Pour aller plus loin</div>
+    <h2>Bibliographie et ressources.</h2>
+  </div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://www.amazon.com/Motion-Picture-Video-Lighting-Brown/dp/0240807634" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Blain Brown</span><div class="ttl">Motion Picture and Video Lighting (Focal Press)</div><div class="desc">La référence technique la plus complète en anglais — couvre les sources, les modificateurs, le plan de charge, les techniques de plateau. Incontournable si tu lis l'anglais.</div></div>
+    </a>
+    <a class="book-card" href="https://www.amazon.com/Film-Lighting-Talks-Hollywoods-Cinematographers/dp/0671736817" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Kris Malkiewicz</span><div class="ttl">Film Lighting — Talks with Hollywood's Cinematographers</div><div class="desc">Conversations avec des DPs sur leur approche de l'éclairage — utile pour comprendre le langage artistique que le gaffer doit traduire en technique.</div></div>
+    </a>
+    <a class="book-card" href="https://www.theasc.com/store" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">American Society of Cinematographers</span><div class="ttl">American Cinematographer Manual</div><div class="desc">Le manuel de référence de l'industrie anglophone — tableaux de puissance, calculs d'exposition, fiches techniques. Utilisé sur les plateaux du monde entier.</div></div>
+    </a>
+    <a class="book-card" href="https://www.youtube.com/results?search_query=gaffer+breakdown+film+lighting" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">YouTube — making-of et breakdowns</span><div class="ttl">Gaffer breakdown / Film lighting behind the scenes</div><div class="desc">Cherche "gaffer breakdown" ou "film lighting setup" : des dizaines de vidéos montrent concrètement comment les équipes lumière construisent des ambiances complexes, projecteur par projecteur.</div></div>
+    </a>
+    <a class="book-card" href="https://www.imdb.com" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">IMDb</span><div class="ttl">Crédits techniques — department head listings</div><div class="desc">Pour chercher le nom du gaffer sur n'importe quel film. Filtrer les crédits par département "Camera and Electrical Department" — tu verras souvent les mêmes noms revenir sur toute une filmographie.</div></div>
+    </a>
+    <a class="book-card" href="https://www.afcinema.com" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">AFC — Association Française des directeurs de la photographie</span><div class="ttl">afcinema.com</div><div class="desc">Ressources en français sur la direction de la photographie — inclut des entretiens qui évoquent le travail avec le chef électricien et la construction de la lumière sur les tournages français.</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Vérifie ce que tu as retenu</div>
+    <h2>Le petit quiz de fin de parcours.</h2>
+  </div>
+  <div class="fade">
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Quel est le rôle principal du chef électricien (gaffer) sur un tournage ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Choisir les acteurs qui joueront dans les scènes nécessitant des effets de lumière spéciaux</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Traduire l'intention lumineuse du directeur de la photographie en matériel concret, en position et en câblage électrique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Gérer le budget total de la production cinématographique</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Dans un éclairage trois points, quel est le rôle de la clé (key light) ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>Éliminer toutes les ombres portées sur le fond</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>Créer une ambiance générale de couleur chaude dans toute la scène</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Constituer la source principale qui modèle le sujet et définit l'ambiance lumineuse</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>3. Quelle source de lumière produit naturellement une lumière équivalente à la lumière du jour (5 600 K) ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Le tungstène</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>L'HMI</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>La LED réglée à 3 200 K</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Qu'est-ce que l'IRC (Indice de Rendu des Couleurs) ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>La puissance maximale d'un projecteur exprimée en watts</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>La température de couleur d'une source exprimée en Kelvin</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>La capacité d'une source lumineuse à restituer fidèlement les couleurs réelles d'un objet, sur une échelle de 0 à 100</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>5. Dans l'analogie du tuyau d'eau, à quoi correspondent les ampères (A) ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>À la pression de l'eau — la force qui pousse le courant</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>Au débit de l'eau — la quantité de courant qui circule</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Au volume total du tuyau — la capacité maximale du circuit</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>6. Sur un circuit domestique de 16 A à 230 V, quelle puissance maximale peut-on brancher sans risquer de faire sauter le disjoncteur ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Environ 500 watts — pour rester très prudent en toutes circonstances</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Environ 3 600 watts — soit 16 × 230 V, la capacité du circuit</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Environ 10 000 watts — c'est la norme pour les plateaux professionnels</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>7. Quel accessoire permet de concentrer un faisceau lumineux pour éviter les débordements de lumière dans les zones non désirées ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Un silk</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Une softbox sans accessoire</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Un grid (nid d'abeilles)</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>8. Qu'est-ce qu'une flicker box ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Un accessoire de diffusion qui imite la douceur d'une lumière de fenêtre</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Un boîtier électronique qui module l'intensité d'un projecteur de façon aléatoire pour simuler une flamme ou une bougie</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Un type de projecteur HMI portable conçu pour les tournages en extérieur</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>9. Pourquoi ne faut-il jamais poser un câble électrique non protégé en travers d'un passage sur un plateau ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>Pour des raisons esthétiques — les câbles visibles peuvent apparaître accidentellement dans le cadre</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>Pour éviter les risques de trébuchement et d'endommagement du câble, qui peut provoquer un arc électrique et un incendie</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>Parce que les câbles horizontaux génèrent plus de chaleur et augmentent la consommation du projecteur</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. Qu'est-ce qu'un best boy electric sur un tournage ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>Le meilleur électricien de l'équipe, désigné par vote du département en début de tournage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>L'assistant direct du gaffer, responsable de la gestion des plannings, de l'inventaire du matériel et de la coordination de l'équipe électrique</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>Le technicien exclusivement chargé de la sécurité électrique et des habilitations sur le plateau</span></label>
+    </div>
+
+    <button id="quizBtn" style="font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:var(--gel); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0; font-weight:600;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="manifesto">Un film sans lumière maîtrisée, c'est un tournage sans mémoire — et le monteur s'en rend compte trop tard.</p>
+  <div class="brandline">Le Chef Électricien — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const mmenu = document.getElementById('mmenu');
+  burger.addEventListener('click', ()=> mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mmenu.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.1 });
+  document.querySelectorAll('.fade').forEach(el=> io.observe(el));
+
+  const secIds = ['role','chapitres','references','biblio','quiz'];
+  const sections = secIds.map(id=>document.getElementById(id)).filter(Boolean);
+  const navLinks = document.querySelectorAll('nav.links a');
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        navLinks.forEach(l=> l.classList.toggle('active', l.getAttribute('href') === '#'+entry.target.id));
+      }
+    });
+  }, { rootMargin:'-40% 0px -50% 0px' });
+  sections.forEach(s=> spy.observe(s));
+
+  document.querySelectorAll('[data-toggle]').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      const ch = head.closest('.chapitre');
+      const wasOpen = ch.classList.contains('open');
+      document.querySelectorAll('.chapitre.open').forEach(c=> c.classList.remove('open'));
+      if(!wasOpen){ ch.classList.add('open'); }
+    });
+  });
+  document.querySelector('[data-ch]')?.classList.add('open');
+
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
+    });
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#c05000';
+  });
+</script>
+
+<script src="chapter-lock.js"></script>
+<script src="gate.js" data-manual="chef-electricien"></script>
+<script src="password-change.js"></script>
+
+<script>
+(function(){
+  var btn = document.getElementById('quizBtn');
+  var scoreEl = document.getElementById('quizScore');
+  if(!btn || !scoreEl) return;
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec";
+  var MANUAL_SLUG = "chef-electricien";
+  var sent = false;
+  btn.addEventListener('click', function(){
+    setTimeout(function(){
+      if(sent) return;
+      var txt = scoreEl.textContent || '';
+      var m = txt.match(/(\d+)\s*\/\s*(\d+)/);
+      if(!m) return;
+      sent = true;
+      var score = m[1], total = m[2];
+      var emailInput = document.getElementById('gateEmailInput');
+      var email = emailInput ? emailInput.value.trim() : '';
+      var s = document.createElement('script');
+      s.src = APPS_SCRIPT_URL + '?exam=1&email=' + encodeURIComponent(email) +
+        '&manuel=' + encodeURIComponent(MANUAL_SLUG) + '&score=' + encodeURIComponent(score) +
+        '&total=' + encodeURIComponent(total);
+      document.body.appendChild(s);
+    }, 60);
+  });
+})();
+</script>
+
+</body>
+</html>
