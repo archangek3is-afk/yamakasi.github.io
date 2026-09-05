@@ -172,6 +172,22 @@ table.plain td:first-child{ color:var(--craie); font-weight:500;}
 .quiz-opt.wrong span{ color:#c0392b; }
 #quizScore{ font-family:var(--display); font-size:20px; color:var(--menthe); text-align:center; margin-top:20px; display:none; font-weight:600;}
 
+/* gear cards */
+.gear-label{ font-family:var(--mono); font-size:10px; color:var(--acier-l); text-transform:uppercase; letter-spacing:.14em; margin:28px 0 12px; display:flex; align-items:center; gap:10px; }
+.gear-label::before,.gear-label::after{ content:""; flex:1; height:1px; background:var(--line); }
+.gear-grid{ display:grid; gap:10px; grid-template-columns:1fr 1fr; margin-bottom:24px; }
+@media(min-width:640px){ .gear-grid.g3{ grid-template-columns:1fr 1fr 1fr; } }
+@media(min-width:900px){ .gear-grid.g4{ grid-template-columns:1fr 1fr 1fr 1fr; } }
+.gear-card{ background:var(--noir-3); border:1px solid var(--line); overflow:hidden; transition:border-color .25s ease; }
+.gear-card:hover{ border-color:var(--acier); }
+.gear-img{ width:100%; aspect-ratio:4/3; overflow:hidden; }
+.gear-img img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; }
+.gear-card:hover .gear-img img{ transform:scale(1.05); }
+.gear-info{ padding:10px 12px 12px; }
+.gear-cat{ font-family:var(--mono); font-size:9px; color:var(--acier-l); text-transform:uppercase; letter-spacing:.06em; }
+.gear-name{ font-family:var(--display); font-size:13px; font-weight:600; color:var(--craie); margin:3px 0 4px; line-height:1.2; }
+.gear-desc{ font-size:11.5px; color:var(--fumee); line-height:1.5; }
+
 .divider{ display:flex; align-items:center; gap:16px; margin:50px 0; }
 .divider .l{ flex:1; height:1px; background:var(--line); }
 .divider span{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-transform:uppercase; letter-spacing:.1em;}
@@ -385,6 +401,34 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <div class="callout">
         <b>Les grandes familles pratiques —</b> <em>ARRI</em> (Alexa, Mini LF) : la référence qualité de l'industrie cinéma, couleurs exceptionnelles, dynamique imbattable — et prix à l'avenant. <em>RED</em> : résolution extrême (6K, 8K), workflows numériques avancés, prisé pour les VFX et les plans larges complexes. <em>Sony</em> (FX9, FX6, Venice) : polyvalence remarquable, bon rapport qualité-prix, très présent sur les séries et documentaires. <em>Blackmagic Design</em> (BMPCC, Ursa) : accessible financièrement, image cinéma convaincante — idéal pour débuter avec du vrai matériel cinéma sans budget de long-métrage.
       </div>
+      
+      <div class="gear-label">Repères visuels</div>
+      <div class="gear-grid g3">
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/arri-alexa.jpg" alt="ARRI Alexa Plus" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Caméra cinéma</div>
+            <div class="gear-name">ARRI Alexa Plus</div>
+            <div class="gear-desc">Super 35, couleurs et dynamique de référence. Utilisée sur la majorité des longs-métrages haut de gamme.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/red-epic.jpg" alt="RED EPIC" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Caméra cinéma</div>
+            <div class="gear-name">RED EPIC</div>
+            <div class="gear-desc">Résolution 5K, workflow RAW natif. Prisée pour les VFX et plans larges ultra-détaillés.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/blackmagic-4k.jpg" alt="Blackmagic 4K" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Caméra cinéma</div>
+            <div class="gear-name">Blackmagic 4K</div>
+            <div class="gear-desc">Image cinéma convaincante à budget accessible. Idéal pour débuter avec du vrai matériel numérique.</div>
+          </div>
+        </div>
+      </div>
       <div class="exercice" style="margin-top:20px;">
         <span class="ex-tag">Exercice 01 — Lire une fiche technique caméra</span>
         <h4>Décoder les specs d'une caméra</h4>
@@ -420,6 +464,26 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       </ul>
       <div class="callout-acier">
         <b>Les séries d'objectifs de référence —</b> <em>Zeiss Supreme Prime, Leica Summilux-C</em> (ultra nets, modernes, T1.5). <em>Cooke S4/i, S7/i</em> (le "Cooke look", légèrement chaud et romantique, très prisé en cinéma). <em>Atlas Orion, Leitz THALIA</em> (anamorphiques, caractère fort, bokeh ovale). <em>Vintage rehoused</em> (objectifs photo des années 70–80 remontés sur monture cinéma — personnalité forte, prix souvent plus bas).
+      </div>
+      
+      <div class="gear-label">Repères visuels</div>
+      <div class="gear-grid">
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/primes.jpg" alt="Focales fixes (primes)" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Optiques cinéma</div>
+            <div class="gear-name">Focales fixes (primes)</div>
+            <div class="gear-desc">Série de primes D-mount. Chaque focale fixe est optiquement optimisée : plus lumineuse et plus caractérisée qu'un zoom.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/angenieux.jpg" alt="Objectifs Angenieux" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Optiques cinéma</div>
+            <div class="gear-name">Objectifs Angenieux</div>
+            <div class="gear-desc">Fabricant français historique d'optiques cinéma. Zooms et primes reconnus pour leur rendu organique et chaud.</div>
+          </div>
+        </div>
       </div>
       <div class="exercice" style="margin-top:20px;">
         <span class="ex-tag">Exercice 02 — Lire la lumière à travers l'objectif</span>
@@ -465,6 +529,34 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <div class="callout">
         <b>Lumière dure vs lumière douce —</b> Une source petite ou lointaine produit des ombres nettes et dures (lumière dure). Une source grande ou proche produit des ombres graduelles et douces (lumière douce). Le soleil directement est dur ; un ciel couvert est doux. Le gaffer reproduit cette logique avec des modificateurs (softboxes, silks, bounces). Voir le manuel Chef Électricien pour le détail des modificateurs.
       </div>
+      
+      <div class="gear-label">Repères visuels</div>
+      <div class="gear-grid g3">
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/hmi.jpg" alt="HMI 18 kW" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Source lumière</div>
+            <div class="gear-name">HMI 18 kW</div>
+            <div class="gear-desc">Source lumière du jour (5 600 K). Puissance maximale pour éclairer de grands espaces ou simuler le soleil.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/led.jpg" alt="Panneau LED bi-color" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Source lumière</div>
+            <div class="gear-name">Panneau LED bi-color</div>
+            <div class="gear-desc">Réglable de 3 200 K à 5 600 K. Économique, sans chaleur. Standard des petites équipes et documentaires.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/lumiere-plateau.jpg" alt="Éclairage de plateau" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Source lumière</div>
+            <div class="gear-name">Éclairage de plateau</div>
+            <div class="gear-desc">Vue d'ensemble de l'infrastructure lumière sur un tournage professionnel en extérieur — camions, rampes, groupes.</div>
+          </div>
+        </div>
+      </div>
       <div class="exercice" style="margin-top:20px;">
         <span class="ex-tag">Exercice 03 — Observer la lumière existante</span>
         <h4>Analyser la lumière d'une scène de film</h4>
@@ -501,6 +593,42 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       <div class="callout">
         <b>Le mouvement comme langage —</b> Un travelling avant vers un visage crée de l'intimité ou de la menace, selon le contexte. Un travelling arrière qui révèle un espace crée de la solitude ou du vertige. La caméra à l'épaule non stabilisée crée une sensation d'urgence et de présence documentaire. Ces effets ne sont pas des astuces — ce sont des choix qui doivent être justifiés par le propos du film. Un mouvement sans raison narrative est un mouvement de trop.
       </div>
+      
+      <div class="gear-label">Repères visuels</div>
+      <div class="gear-grid g4">
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/dolly.jpg" alt="Dolly sur rails" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Machinerie</div>
+            <div class="gear-name">Dolly sur rails</div>
+            <div class="gear-desc">Chariot sur rails pour travellings fluides et reproductibles. Pose lente mais précision absolue.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/crane.jpg" alt="Grue télescopique" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Machinerie</div>
+            <div class="gear-name">Grue télescopique</div>
+            <div class="gear-desc">MovieBird 45 — bras télescopique motorisé pour plans révélateurs et survols de décors.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/boom.jpg" alt="Perche sur dolly" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Machinerie</div>
+            <div class="gear-name">Perche sur dolly</div>
+            <div class="gear-desc">L'opérateur perche (boom op) positionné sur un dolly Fisher pour suivre les acteurs en mouvement.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/gimbal.jpg" alt="Stabilisateur électronique" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Machinerie</div>
+            <div class="gear-name">Stabilisateur électronique</div>
+            <div class="gear-desc">Gimbal motorisé Freefly en extérieur. Fluidité de déplacement sans les rails du dolly.</div>
+          </div>
+        </div>
+      </div>
       <div class="exercice" style="margin-top:20px;">
         <span class="ex-tag">Exercice 04 — Identifier les outils de machinerie</span>
         <h4>Lire les mouvements de caméra dans un film</h4>
@@ -535,6 +663,26 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       </ul>
       <div class="callout-acier">
         <b>Pour aller plus loin —</b> Ce chapitre couvre uniquement les bases du matériel son. Pour comprendre la chaîne sonore complète, le rôle de l'ingénieur du son, la gestion du bruit de plateau, et la post-production son, voir le manuel <em>L'Ingénieur du Son</em>.
+      </div>
+      
+      <div class="gear-label">Repères visuels</div>
+      <div class="gear-grid">
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/boom.jpg" alt="Boom operator + perche" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Son</div>
+            <div class="gear-name">Boom operator + perche</div>
+            <div class="gear-desc">Micro-canon pointé hors cadre depuis une perche. Standard de la fiction professionnelle.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/lavalier.jpg" alt="Micro lavalier (HF)" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Son</div>
+            <div class="gear-name">Micro lavalier (HF)</div>
+            <div class="gear-desc">Micro-cravate sans fil fixé sur le comédien. Complémentaire à la perche, utile en grand angle ou extérieur venteux.</div>
+          </div>
+        </div>
       </div>
       <div class="exercice" style="margin-top:20px;">
         <span class="ex-tag">Exercice 05 — Écouter avant de filmer</span>
@@ -571,6 +719,26 @@ body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
       </ul>
       <div class="callout">
         <b>Le support que tu choisis, c'est un point de vue —</b> Le même dialogue filmé au trépied puis à l'épaule raconte deux choses différentes. Au trépied, on observe la scène avec recul. À l'épaule, on est dans la scène. Ni l'un ni l'autre n'est "mieux" — ils sont différents. La question n'est pas "quel support est le plus professionnel ?" mais "quel support sert le mieux cette scène précise ?"
+      </div>
+      
+      <div class="gear-label">Repères visuels</div>
+      <div class="gear-grid">
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/trepied.jpg" alt="Trépied cinéma" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Support</div>
+            <div class="gear-name">Trépied cinéma</div>
+            <div class="gear-desc">Stabilité maximale. Plan d'observation ou d'établissement. Opérateur caméra avec tête fluide professionnelle.</div>
+          </div>
+        </div>
+        <div class="gear-card">
+          <div class="gear-img"><img src="images/materiel-cinema/gear/gimbal.jpg" alt="Gimbal / Stabilisateur" loading="lazy"></div>
+          <div class="gear-info">
+            <div class="gear-cat">Support</div>
+            <div class="gear-name">Gimbal / Stabilisateur</div>
+            <div class="gear-desc">Stabilisateur électronique motorisé (DJI Ronin, Movi). Déplacement fluide sans infrastructure lourde.</div>
+          </div>
+        </div>
       </div>
       <div class="exercice" style="margin-top:20px;">
         <span class="ex-tag">Exercice 06 — Le même plan, deux façons</span>
