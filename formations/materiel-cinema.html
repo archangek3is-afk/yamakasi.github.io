@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Le Matériel de Cinéma — Manuel de formation · Okapi Studios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#080B0E;
+  --noir-2:#0F1418;
+  --noir-3:#161C22;
+  --acier:#3D8BA6;
+  --acier-l:#6AB4CC;
+  --menthe:#22C97A;
+  --menthe-d:#189C5A;
+  --papier:#E8EDF0;
+  --craie:#D5DDE2;
+  --fumee:#7A8890;
+  --line:rgba(213,221,226,0.10);
+  --display:'Space Grotesk',sans-serif;
+  --body:'Source Serif 4',serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{ scroll-behavior:smooth; }
+body{ background:var(--noir); color:var(--craie); font-family:var(--body); font-weight:300; line-height:1.7; -webkit-font-smoothing:antialiased; }
+::selection{ background:var(--menthe); color:var(--noir); }
+img,svg{ display:block; max-width:100%; }
+
+/* ---------- nav ---------- */
+header.top{ position:sticky; top:0; z-index:200; background:rgba(8,11,14,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
+.nav-inner{ max-width:1180px; margin:0 auto; padding:16px 22px; display:flex; align-items:center; justify-content:space-between; }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--fumee); text-transform:uppercase;}
+.brand .rec{ width:9px; height:9px; border-radius:50%; background:var(--menthe); flex-shrink:0; animation:blink 2s infinite;}
+@keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.3;} }
+.brand b{ color:var(--craie); font-weight:600;}
+nav.links{ display:none; gap:26px; }
+nav.links a{ color:var(--fumee); text-decoration:none; font-size:13px; font-weight:400; font-family:var(--mono); position:relative; padding-bottom:3px;}
+nav.links a::after{ content:""; position:absolute; left:0; bottom:0; height:2px; width:0; background:var(--menthe); transition:width .25s ease;}
+nav.links a:hover, nav.links a.active{ color:var(--craie); }
+nav.links a:hover::after, nav.links a.active::after{ width:100%; }
+.burger{ display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+.burger span{ width:22px; height:2px; background:var(--craie); }
+.mmenu{ display:none; flex-direction:column; background:var(--noir-2); border-bottom:1px solid var(--line); padding:6px 22px 18px;}
+.mmenu.open{ display:flex; }
+.mmenu a{ color:var(--fumee); text-decoration:none; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px; font-family:var(--mono);}
+.mmenu a:last-child{ border-bottom:none;}
+@media(min-width:900px){ nav.links{ display:flex; } .burger{ display:none; } }
+
+/* ---------- hero ---------- */
+.hero{ position:relative; min-height:88vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 22px 70px; overflow:hidden; }
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(34,201,122,0.10), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(213,221,226,0.018) 0px, rgba(213,221,226,0.018) 1px, transparent 1px, transparent 28px),
+    repeating-linear-gradient(90deg, rgba(213,221,226,0.012) 0px, rgba(213,221,226,0.012) 1px, transparent 1px, transparent 120px);
+}
+.eyebrow{ position:relative; z-index:1; font-family:var(--mono); font-size:11px; letter-spacing:.26em; color:var(--acier-l); text-transform:uppercase; margin-bottom:24px; opacity:0; animation:up .8s .2s ease forwards;}
+h1.title{ position:relative; z-index:1; font-family:var(--display); font-size:clamp(42px,9vw,100px); line-height:.98; letter-spacing:-.02em; font-weight:700; opacity:0; animation:up .8s .35s ease forwards;}
+h1.title em{ font-style:normal; color:var(--menthe); }
+.subtitle{ position:relative; z-index:1; font-size:clamp(16px,2.2vw,18px); color:var(--fumee); max-width:560px; margin:24px auto 0; opacity:0; animation:up .8s .5s ease forwards; font-family:var(--body);}
+@keyframes up{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+
+/* spec-card hero decoration */
+.spec-card{
+  position:relative; z-index:1; margin-top:44px; opacity:0; animation:up .8s .65s ease forwards;
+  background:var(--noir-3); color:var(--craie); border:1px solid var(--line); border-top:3px solid var(--menthe); display:inline-block;
+  padding:16px 24px; font-family:var(--mono); font-size:11px; text-align:left;
+  box-shadow:0 0 24px rgba(34,201,122,0.08);
+}
+.spec-card .sc-row{ display:flex; gap:0; flex-wrap:wrap; }
+.spec-card .sc-field{ padding:8px 16px 8px 0; border-right:1px solid rgba(213,221,226,0.12); margin-right:16px;}
+.spec-card .sc-field:last-child{ border-right:none; margin-right:0; padding-right:0;}
+.spec-card .sc-l{ font-size:9px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em;}
+.spec-card .sc-v{ font-size:13px; color:var(--menthe); margin-top:3px; font-weight:500;}
+.spec-card .sc-stamp{ font-family:var(--mono); font-size:12px; color:var(--menthe); display:inline-flex; align-items:center; gap:6px; margin-top:12px; letter-spacing:.08em;}
+.spec-card .sc-stamp::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--menthe); animation:blink 1.2s infinite;}
+
+.stats{ position:relative; z-index:1; display:flex; flex-wrap:wrap; justify-content:center; margin-top:44px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); opacity:0; animation:up .8s .8s ease forwards;}
+.stats .stat{ padding:18px 26px; border-right:1px solid var(--line); text-align:left;}
+.stats .stat:last-child{ border-right:none;}
+.stats .stat .n{ font-family:var(--display); font-size:26px; color:var(--menthe); font-weight:700;}
+.stats .stat .l{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.08em; margin-top:3px;}
+
+/* ---------- scaffolding ---------- */
+main{ position:relative; z-index:1; }
+section{ max-width:1180px; margin:0 auto; padding:90px 22px; }
+.fade{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+.fade.in{ opacity:1; transform:translateY(0); }
+.section-head{ margin-bottom:46px; }
+.section-head .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--acier-l); text-transform:uppercase; margin-bottom:14px;}
+.section-head h2{ font-family:var(--display); font-size:clamp(26px,4vw,44px); line-height:1.12; max-width:820px; font-weight:700;}
+.section-head p.lede{ font-size:16px; color:var(--fumee); max-width:600px; margin-top:16px;}
+
+/* grids */
+.grid{ display:grid; gap:18px; grid-template-columns:1fr; }
+@media(min-width:720px){ .grid.g2{ grid-template-columns:1fr 1fr; } }
+@media(min-width:900px){ .grid.g3{ grid-template-columns:1fr 1fr 1fr; } }
+.role-card{ background:var(--noir-2); border:1px solid var(--line); padding:22px; border-top:3px solid var(--acier);}
+.role-card h4{ font-family:var(--display); font-size:16px; margin-bottom:8px; font-weight:600;}
+.role-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+/* chapter accordion */
+.chapitre{ border:1px solid var(--line); background:var(--noir-2); margin-bottom:14px; }
+.ch-head{ display:flex; align-items:center; gap:20px; padding:24px; cursor:pointer; user-select:none; flex-wrap:wrap; }
+.ch-num{ font-family:var(--display); font-size:36px; color:transparent; -webkit-text-stroke:1.4px var(--acier); line-height:1; flex-shrink:0; width:62px; font-weight:700;}
+.ch-head .ch-info{ flex:1; min-width:200px; }
+.ch-head h3{ font-family:var(--display); font-size:clamp(17px,2.2vw,21px); font-weight:600;}
+.ch-head .ch-tag{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em; margin-top:5px;}
+.ch-chev{ width:20px; height:20px; color:var(--menthe); flex-shrink:0; transition:transform .3s ease;}
+.chapitre.open .ch-chev{ transform:rotate(135deg); }
+.ch-body{ max-height:0; overflow:hidden; transition:max-height .5s ease; padding:0 24px; }
+.chapitre.open .ch-body{ max-height:5000px; padding-bottom:28px; }
+.ch-lead{ font-size:15px; color:var(--craie); line-height:1.8; max-width:780px; margin-bottom:20px;}
+.ch-lead b{ color:var(--menthe); font-weight:600; }
+.ch-body ul{ list-style:none; margin:14px 0; }
+.ch-body ul li{ position:relative; padding-left:20px; margin-bottom:8px; color:var(--fumee); font-size:14px; line-height:1.65;}
+.ch-body ul li::before{ content:"—"; position:absolute; left:0; color:var(--acier-l);}
+.callout{ background:rgba(34,201,122,0.08); border:1px solid rgba(34,201,122,0.30); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--papier);}
+.callout b{ color:var(--menthe); }
+.callout-acier{ background:rgba(61,139,166,0.10); border:1px solid var(--acier); padding:14px 16px; margin-top:14px; font-size:13.5px; color:var(--papier);}
+.callout-acier b{ color:var(--acier-l); }
+
+/* table */
+.table-wrap{ overflow-x:auto; }
+table.plain{ width:100%; border-collapse:collapse; margin-top:6px; min-width:480px;}
+table.plain th{ text-align:left; font-family:var(--mono); font-size:10.5px; color:var(--menthe); text-transform:uppercase; letter-spacing:.06em; padding:10px; border-bottom:1px solid rgba(34,201,122,0.30);}
+table.plain td{ padding:10px; border-bottom:1px solid var(--line); font-size:13px; color:var(--fumee);}
+table.plain td:first-child{ color:var(--craie); font-weight:500;}
+
+/* exercice */
+.exercice{ background:var(--papier); color:var(--noir); padding:24px; position:relative; box-shadow:0 6px 18px rgba(0,0,0,0.28); }
+.exercice::before{ content:""; position:absolute; top:0; left:0; width:5px; height:100%; background:var(--menthe); }
+.exercice .ex-tag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--menthe-d); font-weight:500; display:block; margin-bottom:8px;}
+.exercice h4{ font-family:var(--display); font-size:17px; margin-bottom:10px; font-weight:600;}
+.exercice p, .exercice li{ font-size:14px; color:#2c2e30; line-height:1.7;}
+.exercice ol{ padding-left:20px; margin-top:8px;}
+.exercice li{ margin-bottom:6px;}
+.exercice textarea{ width:100%; margin-top:14px; padding:12px; border:1px solid rgba(12,15,16,0.2); background:rgba(255,255,255,0.6); font-family:var(--mono); font-size:13px; color:#1a1a1a; line-height:1.6; resize:vertical; min-height:100px;}
+.exercice textarea::placeholder{ color:#888; }
+
+/* book cards */
+.book-card{ display:flex; gap:14px; background:var(--noir-3); border:1px solid var(--line); padding:16px; text-decoration:none; color:inherit; align-items:flex-start; transition:border-color .25s ease;}
+.book-card:hover{ border-color:var(--menthe); }
+.book-card .spine{ width:8px; align-self:stretch; background:var(--acier); flex-shrink:0;}
+.book-card .bk-info .auth{ font-family:var(--mono); font-size:10px; color:var(--fumee); text-transform:uppercase; letter-spacing:.06em;}
+.book-card .bk-info .ttl{ font-family:var(--display); font-size:15px; margin-top:4px; color:var(--craie); font-weight:600;}
+.book-card .bk-info .desc{ font-size:12.5px; color:var(--fumee); margin-top:6px; line-height:1.5;}
+
+/* case study */
+.case-strip{ display:grid; gap:18px; grid-template-columns:1fr; }
+@media(min-width:820px){ .case-strip{ grid-template-columns:1fr 1fr 1fr; } }
+.case-card{ background:var(--noir-2); border:1px solid var(--line); padding:24px; border-bottom:3px solid var(--menthe);}
+.case-card .name{ font-family:var(--display); font-size:20px; color:var(--craie); margin-bottom:6px; font-weight:700;}
+.case-card .signature{ font-family:var(--mono); font-size:10.5px; color:var(--menthe); text-transform:uppercase; letter-spacing:.06em; margin-bottom:14px;}
+.case-card p{ font-size:13.5px; color:var(--fumee); line-height:1.65;}
+
+/* quiz */
+.quiz-q{ background:var(--noir-2); border:1px solid var(--line); padding:22px; margin-bottom:16px; }
+.quiz-q p.q-text{ font-family:var(--display); font-size:15px; margin-bottom:14px; font-weight:500;}
+.quiz-opt{ display:flex; align-items:center; gap:10px; padding:10px 12px; margin-bottom:8px; border:1px solid var(--line); cursor:pointer; transition:border-color .2s ease;}
+.quiz-opt:hover{ border-color:var(--menthe); }
+.quiz-opt input{ accent-color:var(--menthe); }
+.quiz-opt span{ font-size:13.5px; color:var(--fumee); font-family:var(--body);}
+.quiz-opt.correct{ border-color:#7a9a7a; background:rgba(122,154,122,0.1);}
+.quiz-opt.correct span{ color:#9fc19f; }
+.quiz-opt.wrong{ border-color:#c0392b; background:rgba(192,57,43,0.1);}
+.quiz-opt.wrong span{ color:#c0392b; }
+#quizScore{ font-family:var(--display); font-size:20px; color:var(--menthe); text-align:center; margin-top:20px; display:none; font-weight:600;}
+
+.divider{ display:flex; align-items:center; gap:16px; margin:50px 0; }
+.divider .l{ flex:1; height:1px; background:var(--line); }
+.divider span{ font-family:var(--mono); font-size:11px; color:var(--fumee); text-transform:uppercase; letter-spacing:.1em;}
+
+footer{ border-top:1px solid var(--line); padding:70px 22px 40px; text-align:center; }
+footer .manifesto{ font-family:var(--display); font-size:clamp(19px,2.8vw,26px); color:var(--craie); max-width:640px; margin:0 auto 22px; font-weight:600; line-height:1.3;}
+footer .brandline{ font-family:var(--mono); font-size:11px; letter-spacing:.12em; color:var(--fumee); text-transform:uppercase;}
+footer .brandline b{ color:var(--menthe); }
+
+::-webkit-scrollbar{ width:8px; }
+::-webkit-scrollbar-track{ background:var(--noir); }
+::-webkit-scrollbar-thumb{ background:var(--noir-3); border:1px solid var(--acier); }
+@media(prefers-reduced-motion:reduce){ *{ animation-duration:.001ms !important; transition-duration:.001ms !important; } }
+
+/* ===== GATE OKAPI ===== */
+#gate-overlay{position:fixed;inset:0;z-index:99999;background:linear-gradient(rgba(12,15,16,.85),rgba(12,15,16,.85)),url("images/gate-bg.jpg") center/cover no-repeat,#0c0f10;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;font-family:system-ui,sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+body.gate-unlocked #gate-overlay{display:none;}
+body:not(.gate-unlocked) > *:not(#gate-overlay){display:none !important;}
+#gate-overlay .g-eye{font-size:11px;letter-spacing:.2em;color:#2d5fad;text-transform:uppercase;margin-bottom:20px;}
+#gate-overlay h2{font-weight:800;font-size:clamp(22px,5vw,32px);color:#e5dece;margin-bottom:14px;}
+#gate-overlay p#gateMsg{color:#7a8086;font-size:14px;line-height:1.65;max-width:380px;margin:0 auto 26px;}
+#gate-overlay form#gateLoginForm{display:flex;flex-direction:column;align-items:center;margin-bottom:14px;gap:10px;}
+#gate-overlay input#gateEmailInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#e5dece;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gatePasswordInput{width:100%;max-width:280px;padding:12px 16px;background:transparent;border:1px solid rgba(255,255,255,.25);color:#e5dece;font-size:13px;text-align:center;font-family:inherit;}
+#gate-overlay input#gateEmailInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay input#gatePasswordInput::placeholder{color:rgba(255,255,255,.4);}
+#gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{border:1px solid #2d5fad;color:#2d5fad;padding:12px 28px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;text-decoration:none;background:transparent;cursor:pointer;font-family:inherit;}
+#gate-overlay a#gateRequestLink:hover,#gate-overlay button#gateLoginBtn:hover{background:#2d5fad;color:#0c0f10;}
+
+/* responsive */
+@media(max-width:768px){
+  html,body{overflow-x:hidden;}
+  img,video,iframe,canvas,svg{max-width:100%;height:auto;}
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .hero{padding:90px 16px 50px;min-height:70vh;}
+  section{padding:40px 14px;}
+  .section-head{padding:0 6px;margin-bottom:30px;}
+  .ch-head{padding:14px 10px;gap:10px;min-height:54px;}
+  .ch-body{padding:18px 12px;}
+  .quiz-opt{padding:14px 14px;min-height:48px;gap:12px;}
+  .quiz-opt span{font-size:14px;}
+  .quiz-opt input{width:20px;height:20px;min-width:20px;}
+  .quiz-q{padding:18px 14px;}
+  .exercice{padding:20px 14px;}
+  #quizBtn{min-height:48px;padding:14px 24px;font-size:14px;}
+  #gate-overlay{padding:30px 16px;min-height:100%;justify-content:flex-start;padding-top:max(30px,6vh);}
+  #gate-overlay h2{font-size:clamp(20px,5vw,28px);}
+  #gate-overlay p#gateMsg{font-size:13.5px;max-width:90vw;}
+  #gate-overlay input#gateEmailInput,#gate-overlay input#gatePasswordInput{max-width:85vw;padding:14px 16px;font-size:14px;}
+  #gate-overlay a#gateRequestLink,#gate-overlay button#gateLoginBtn{padding:14px 24px;font-size:12px;min-height:48px;}
+  .spec-card{transform:scale(0.85);transform-origin:center;}
+}
+@media(max-width:430px){
+  .hero{padding:80px 12px 40px;}
+  section{padding:30px 10px;}
+  .ch-head{padding:12px 8px;}
+  .ch-body{padding:14px 10px;}
+  .quiz-q{padding:14px 10px;}
+  .quiz-opt{padding:12px 10px;}
+  .exercice{padding:16px 10px;}
+}
+@media(max-width:768px){#gate-overlay{background:linear-gradient(rgba(12,15,16,.85),rgba(12,15,16,.85)),url("images/gate-bg-mobile.jpg") center/cover no-repeat,#0c0f10;}}
+</style>
+</head>
+<body>
+
+<div id="gate-overlay">
+  <div class="g-eye">Okapi Studios &mdash; Accès protégé</div>
+  <h2>Contenu réservé</h2>
+  <p id="gateMsg">Entre l'email avec lequel ton accès a été validé.</p>
+  <form id="gateLoginForm">
+    <input type="email" id="gateEmailInput" placeholder="ton@email.com" required>
+    <input type="password" id="gatePasswordInput" placeholder="Mot de passe" required>
+    <button type="submit" id="gateLoginBtn">Se connecter</button>
+  </form>
+  <a id="gateRequestLink" href="acces.html">Pas encore d&rsquo;accès&nbsp;? Demander l&rsquo;accès</a>
+</div>
+
+<header class="top">
+  <div class="nav-inner">
+    <div class="brand"><span class="rec"></span> OKAPI STUDIOS — <b>LE MATÉRIEL DE CINÉMA</b></div>
+    <nav class="links">
+      <a href="#role">Vue d'ensemble</a>
+      <a href="#chapitres">Chapitres</a>
+      <a href="#references">Références</a>
+      <a href="#biblio">Bibliographie</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mmenu" id="mmenu">
+    <a href="#role">Vue d'ensemble</a>
+    <a href="#chapitres">Les 9 chapitres</a>
+    <a href="#references">Références créatives</a>
+    <a href="#biblio">Bibliographie</a>
+    <a href="#quiz">Quiz</a>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:0;">
+  <div class="eyebrow">Manuel de formation — Caméra, Optiques, Lumière &amp; Machinerie</div>
+  <h1 class="title">LE <em>MATÉRIEL</em><br>DE CINÉMA</h1>
+  <p class="subtitle">Comprendre ce que chaque outil fait, pourquoi il coûte ce qu'il coûte, et quand l'utiliser — sans jamais confondre la possession de matériel avec la maîtrise du cinéma.</p>
+
+  <div class="spec-card">
+    <div class="sc-row">
+      <div class="sc-field"><div class="sc-l">Caméra</div><div class="sc-v">ARRI ALEXA 35</div></div>
+      <div class="sc-field"><div class="sc-l">Capteur</div><div class="sc-v">4.6K / 17 stops</div></div>
+      <div class="sc-field"><div class="sc-l">Optique</div><div class="sc-v">Zeiss CP.3 35mm T2.1</div></div>
+      <div class="sc-field"><div class="sc-l">Support</div><div class="sc-v">Dolly + rails</div></div>
+    </div>
+    <div class="sc-stamp">REC ●&nbsp; EN COURS</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">09</div><div class="l">Chapitres</div></div>
+    <div class="stat"><div class="n">09</div><div class="l">Exercices</div></div>
+    <div class="stat"><div class="n">03</div><div class="l">Références</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">Quiz</div></div>
+  </div>
+</section>
+
+<!-- VUE D'ENSEMBLE -->
+<section id="role">
+  <div class="section-head fade">
+    <div class="tag">Avant de commencer</div>
+    <h2>Le matériel ne fait pas le film. Mais le connaître change tout.</h2>
+    <p class="lede">Un réalisateur ou un producteur qui comprend son matériel communique mieux, budgète plus juste, et n'est jamais pris au dépourvu sur un plateau. Ce manuel couvre les quatre grandes familles — plus le son, souvent oublié.</p>
+  </div>
+  <div class="grid g3 fade">
+    <div class="role-card">
+      <h4>Caméra &amp; Optiques</h4>
+      <p>Le capteur enregistre la lumière. L'objectif contrôle ce qui entre. Les deux ensemble définissent l'image : sa profondeur, sa texture, son rapport au sujet. Chapitres 01 et 02.</p>
+    </div>
+    <div class="role-card">
+      <h4>Lumière &amp; Machinerie</h4>
+      <p>La lumière est l'atmosphère de la scène. La machinerie détermine comment la caméra se déplace — et chaque mouvement raconte quelque chose au spectateur. Chapitres 03 et 04.</p>
+    </div>
+    <div class="role-card">
+      <h4>Son, supports &amp; budget</h4>
+      <p>Le son est la dimension la plus sous-estimée par les débutants. Les supports de tournage et les logiques de location complètent la vision d'ensemble. Chapitres 05 à 08.</p>
+    </div>
+  </div>
+  <div class="callout fade" style="margin-top:26px;">
+    <b>Ce que ce manuel n'est pas —</b> Une liste d'achats. Ce manuel ne te dira pas "achète tel modèle". Il t'explique ce que chaque catégorie de matériel fait, pourquoi elle existe, et comment décider si tu en as besoin — ou si la même intention peut être servie par quelque chose de beaucoup moins cher. Le meilleur matériel est celui que tu sais utiliser.
+  </div>
+</section>
+
+<!-- CHAPITRES -->
+<section id="chapitres" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Le parcours</div>
+    <h2>Neuf chapitres, de la caméra au budget de location.</h2>
+    <p class="lede">Clique sur un chapitre pour l'ouvrir. Chacun contient le contenu essentiel et un exercice pratique à faire dans le champ texte fourni.</p>
+  </div>
+
+  <!-- CH 00 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">00</div>
+      <div class="ch-info"><h3>Avant de commencer — pourquoi connaître le matériel</h3><div class="ch-tag">La carte et le territoire</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Beaucoup de gens qui travaillent dans le cinéma n'opèrent jamais eux-mêmes une caméra. Le réalisateur cadre rarement ; le producteur ne touche presque jamais au matériel. Et pourtant, <b>comprendre ce matériel change radicalement la qualité de leur travail</b>.</p>
+      <p class="ch-lead">Quand un réalisateur dit "je voudrais quelque chose de plus intime", et que le DP répond "on pourrait passer en 35mm avec une grande ouverture", le réalisateur qui comprend ce que ça signifie — visuellement et économiquement — peut valider ou affiner cette décision en trente secondes. Celui qui ne comprend pas subit une décision technique qu'il ne maîtrise pas. <b>La connaissance du matériel est une forme d'autorité artistique.</b></p>
+      <div class="callout">
+        <b>Les cinq familles du manuel —</b> Ce manuel est organisé autour de quatre grandes familles de matériel : la <em>caméra</em> (le capteur, la résolution, la dynamique), les <em>optiques</em> (focale, ouverture, caractère), la <em>lumière</em> (sources et modificateurs), la <em>machinerie</em> (dolly, steadicam, drone), et une cinquième famille transversale souvent oubliée : le <em>son</em>. Chaque famille a son chapitre, et chaque chapitre se referme sur un exercice pratique.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 00 — Faire l'inventaire de ce qu'on connaît</span>
+        <h4>Évalue ton point de départ</h4>
+        <ol>
+          <li>Sans chercher, liste les termes techniques liés au matériel de cinéma que tu connais déjà (focale, f/stop, steadicam, 4K…).</li>
+          <li>Pour chacun, note si tu peux l'expliquer à quelqu'un de non-initié, ou si tu utilises le mot sans vraiment savoir ce qu'il désigne.</li>
+          <li>Reviens à cette liste à la fin du manuel et mesure ce qui a changé.</li>
+        </ol>
+        <textarea placeholder="Tes termes connus, et ton honnête évaluation de ce que tu comprends vraiment…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 01 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">01</div>
+      <div class="ch-info"><h3>Les caméras</h3><div class="ch-tag">Capteur, format, résolution, dynamique</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Une caméra est essentiellement un boîtier autour d'un capteur. Ce capteur — la "rétine" de la caméra — transforme la lumière en données numériques. Tout le reste (le boîtier, les menus, les boutons) sert à contrôler comment cette transformation se fait. Quatre caractéristiques définissent un capteur : son <b>format</b>, sa <b>résolution</b>, sa <b>dynamique</b>, et ses performances <b>en basse lumière</b>.</p>
+      <ul>
+        <li><b style="color:var(--menthe);">Format (taille du capteur)</b> — un capteur Super 35 (standard cinéma) capte plus de lumière qu'un capteur Micro 4/3, produit un bokeh plus marqué (flou d'arrière-plan) et une profondeur de champ plus réduite. Plus grand = plus expressif mais aussi plus cher et plus lourd à manœuvrer.</li>
+        <li><b style="color:var(--menthe);">Résolution</b> — exprimée en K (4K = environ 4 000 pixels en largeur). Plus n'est pas toujours mieux : un 4K bien exposé et colorimétrisé sera souvent plus beau qu'un 8K mal éclairé. La résolution est un argument de vente autant qu'un outil technique.</li>
+        <li><b style="color:var(--menthe);">Dynamique</b> — capacité à capter simultanément du détail dans les ombres profondes ET dans les hautes lumières. Mesurée en "stops". Les meilleurs capteurs actuels atteignent 15 à 17 stops de dynamique — la plage de latitude entre ce qui est trop noir et ce qui est cramé.</li>
+        <li><b style="color:var(--menthe);">Basse lumière</b> — certains capteurs tiennent une image propre à 6 400 ISO ou plus. D'autres deviennent inutilisables au-delà de 800 ISO. C'est crucial pour tout tournage sans éclairage artificiel suffisant.</li>
+      </ul>
+      <div class="callout">
+        <b>Les grandes familles pratiques —</b> <em>ARRI</em> (Alexa, Mini LF) : la référence qualité de l'industrie cinéma, couleurs exceptionnelles, dynamique imbattable — et prix à l'avenant. <em>RED</em> : résolution extrême (6K, 8K), workflows numériques avancés, prisé pour les VFX et les plans larges complexes. <em>Sony</em> (FX9, FX6, Venice) : polyvalence remarquable, bon rapport qualité-prix, très présent sur les séries et documentaires. <em>Blackmagic Design</em> (BMPCC, Ursa) : accessible financièrement, image cinéma convaincante — idéal pour débuter avec du vrai matériel cinéma sans budget de long-métrage.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 01 — Lire une fiche technique caméra</span>
+        <h4>Décoder les specs d'une caméra</h4>
+        <ol>
+          <li>Cherche la fiche technique officielle d'une caméra de ton choix (ARRI, RED, Sony ou Blackmagic — toutes publient leurs specs).</li>
+          <li>Identifie : la taille du capteur, la résolution maximale, la dynamique annoncée (en stops), et la sensibilité ISO native.</li>
+          <li>En une phrase : à quoi cette caméra semble-t-elle adaptée, et à quoi pas ?</li>
+        </ol>
+        <textarea placeholder="La caméra choisie, ses specs principales, et ton analyse d'usage…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 02 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">02</div>
+      <div class="ch-info"><h3>Les optiques</h3><div class="ch-tag">Focale, ouverture, caractère</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Si le capteur est la rétine, l'objectif est le cristallin. Il contrôle ce qui entre, en quelle quantité, et avec quelle déformation. Un objectif médiocre monte une caméra haut de gamme — une image nette, plate, sans caractère. Un très bon objectif sur une caméra modeste peut produire quelque chose de saisissant. <b>Les directeurs de la photographie disent souvent qu'ils choisissent leurs optiques avant leur caméra.</b></p>
+      <ul>
+        <li><b style="color:var(--menthe);">Focale</b> — exprimée en millimètres. Un 16mm donne un angle très large (tout entre dans le cadre, grande sensation d'espace). Un 85mm donne un cadre serré, qui comprime la perspective et isole le sujet. La focale, c'est d'abord un point de vue narratif avant d'être un choix technique — voir le manuel Réalisateur pour les valeurs de plan correspondantes.</li>
+        <li><b style="color:var(--menthe);">Ouverture (f/stop ou T/stop)</b> — mesurée en f/1.4, f/2, f/2.8… Plus le chiffre est bas, plus l'objectif est "ouvert" : il laisse entrer plus de lumière ET réduit la profondeur de champ (le bokeh devient plus marqué). Un f/1.4 en basse lumière est une arme redoutable. Un f/4 en plein soleil est parfaitement adapté.</li>
+        <li><b style="color:var(--menthe);">Focale fixe (prime) vs zoom</b> — un zoom est pratique (on change l'angle sans bouger la caméra), mais les zooms professionnels sont lourds, chers, et ont généralement une ouverture maximale inférieure aux primes. Une focale fixe est optiquement plus simple, plus légère, souvent plus ouverte, et plus "caractérisée". Les films à gros budget utilisent souvent des séries de primes plutôt qu'un zoom.</li>
+        <li><b style="color:var(--menthe);">Le "caractère" d'un objectif</b> — deux objectifs de 50mm peuvent donner des images radicalement différentes. Un objectif vintage des années 1970 produit des aberrations optiques légères, un vignettage doux, une texture particulière. Un objectif ultra-moderne sera au contraire d'une netteté clinique. Les DPs choisissent souvent des objectifs "imparfaits" précisément pour leurs défauts.</li>
+      </ul>
+      <div class="callout-acier">
+        <b>Les séries d'objectifs de référence —</b> <em>Zeiss Supreme Prime, Leica Summilux-C</em> (ultra nets, modernes, T1.5). <em>Cooke S4/i, S7/i</em> (le "Cooke look", légèrement chaud et romantique, très prisé en cinéma). <em>Atlas Orion, Leitz THALIA</em> (anamorphiques, caractère fort, bokeh ovale). <em>Vintage rehoused</em> (objectifs photo des années 70–80 remontés sur monture cinéma — personnalité forte, prix souvent plus bas).
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 02 — Lire la lumière à travers l'objectif</span>
+        <h4>Comprendre l'ouverture par l'observation</h4>
+        <ol>
+          <li>Avec n'importe quel appareil photo ou smartphone en mode manuel, trouve une scène avec un sujet en avant-plan et un fond reconnaissable.</li>
+          <li>Fais varier l'ouverture entre ouverte au maximum et fermée. Observe comment la profondeur de champ change.</li>
+          <li>Note : à quelle ouverture l'image te semble-t-elle la plus "cinématographique" pour cette scène précise ? Pourquoi ?</li>
+        </ol>
+        <textarea placeholder="Ta scène choisie, tes observations sur la profondeur de champ, et ton analyse…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 03 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">03</div>
+      <div class="ch-info"><h3>La lumière — vue générale</h3><div class="ch-tag">Sources, températures, caractère</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Ce chapitre donne une vue générale des sources lumineuses utilisées au cinéma — non pas pour que tu saches les installer toi-même, mais pour que tu comprennes ce que chaque source implique visuellement, budgétairement et logistiquement. Pour la mise en œuvre technique (plans de charge, sécurité, diffusion), <b>voir le manuel Le Chef Électricien</b>.</p>
+      <div class="table-wrap" style="margin:20px 0;">
+        <table class="plain">
+          <thead>
+            <tr><th>Source</th><th>Température</th><th>Caractère visuel</th><th>Pour qui ?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tungstène</td><td>3 200 K (chaud)</td><td>Lumière continue, ombres dures, chaleur dorée</td><td>Décors intérieurs chaleureux, petits budgets</td></tr>
+            <tr><td>HMI</td><td>5 600 K (jour)</td><td>Puissant, "lumière du soleil", netteté maximale</td><td>Extérieurs, studios nécessitant lumière du jour</td></tr>
+            <tr><td>LED</td><td>Réglable (bi-color)</td><td>Polyvalent, propre, économe — IRC variable</td><td>Interviews, documentaires, petites équipes</td></tr>
+            <tr><td>Fluo / Kino-Flo</td><td>Réglable</td><td>Doux, uniforme, peu de chaleur</td><td>Plateaux TV, interviews en intérieur</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ch-lead">La <b>température de couleur</b> (exprimée en Kelvin) détermine si la lumière paraît chaude (jaune-orangé, basses valeurs : 2 700–3 200 K) ou froide (bleue-blanche, hautes valeurs : 5 600–6 500 K). La caméra doit être "balancée" sur cette température — c'est la balance des blancs. Une erreur de balance des blancs donne des carnations vertes, bleues ou orangées à l'image.</p>
+      <div class="callout">
+        <b>Lumière dure vs lumière douce —</b> Une source petite ou lointaine produit des ombres nettes et dures (lumière dure). Une source grande ou proche produit des ombres graduelles et douces (lumière douce). Le soleil directement est dur ; un ciel couvert est doux. Le gaffer reproduit cette logique avec des modificateurs (softboxes, silks, bounces). Voir le manuel Chef Électricien pour le détail des modificateurs.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 03 — Observer la lumière existante</span>
+        <h4>Analyser la lumière d'une scène de film</h4>
+        <ol>
+          <li>Choisis une scène courte dans un film de ton choix — une scène d'intérieur de préférence.</li>
+          <li>Essaie de déterminer : d'où vient la source principale ? Est-elle dure ou douce ? Chaude ou froide ?</li>
+          <li>Cette lumière correspond-elle à l'ambiance émotionnelle de la scène ? Comment ?</li>
+        </ol>
+        <textarea placeholder="Film et scène choisis, ton analyse de la lumière et son rapport à l'émotion…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 04 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">04</div>
+      <div class="ch-info"><h3>La machinerie</h3><div class="ch-tag">Dolly, grue, steadicam, drone</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">La machinerie de cinéma sert à déplacer la caméra de façon contrôlée. Chaque outil crée un type de mouvement différent — et chaque mouvement communique quelque chose au spectateur. <b>Un réalisateur qui choisit un steadicam plutôt qu'un dolly fait un choix narratif autant que technique.</b></p>
+      <ul>
+        <li><b style="color:var(--menthe);">Dolly sur rails</b> — chariot monté sur des rails posés au sol. Permet des mouvements horizontaux ultra-fluides, parfaitement reproductibles. Standard pour les plans d'accompagnement d'un personnage qui marche ou les travellings d'installation. Lent à installer (poser les rails, niveler, ajuster), mais d'une précision absolue. Coût : location + machiniste spécialisé (dolly grip).</li>
+        <li><b style="color:var(--menthe);">Grue / Jib</b> — bras motorisé qui lève la caméra en hauteur tout en pouvant la faire pivoter. Permet les plans "révélateurs" (on part d'un détail, on monte pour révéler le contexte) et les survols de décors. Une grue de grande taille (technocrane) peut avoir un bras de plus de 10 mètres. Très impressionnant visuellement, mais coûteux et lent à installer.</li>
+        <li><b style="color:var(--menthe);">Steadicam</b> — système de stabilisation mécanique porté par un opérateur (le steadicam operator). Permet de suivre un sujet en mouvement avec une fluidité impossible à pied, sans les vibrations d'une caméra portée à l'épaule. Technique exigeante, l'opérateur s'entraîne pendant des années. Plus cher à louer qu'un dolly car il inclut un technicien hautement spécialisé.</li>
+        <li><b style="color:var(--menthe);">Drone</b> — caméra aérienne pilotée. Permet des vues impossibles autrement (survols, descentes vertigineuses). En France, le pilotage de drones à des fins professionnelles est très encadré : brevet de télépilote, déclaration de vol, zones interdites. Ne pas improviser un vol de drone sans avoir vérifié la réglementation locale au préalable.</li>
+      </ul>
+      <div class="callout">
+        <b>Le mouvement comme langage —</b> Un travelling avant vers un visage crée de l'intimité ou de la menace, selon le contexte. Un travelling arrière qui révèle un espace crée de la solitude ou du vertige. La caméra à l'épaule non stabilisée crée une sensation d'urgence et de présence documentaire. Ces effets ne sont pas des astuces — ce sont des choix qui doivent être justifiés par le propos du film. Un mouvement sans raison narrative est un mouvement de trop.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 04 — Identifier les outils de machinerie</span>
+        <h4>Lire les mouvements de caméra dans un film</h4>
+        <ol>
+          <li>Dans un film de ton choix, identifie deux scènes avec des mouvements de caméra distincts.</li>
+          <li>Pour chaque scène : quel outil a probablement été utilisé (dolly, steadicam, grue, à l'épaule) ? Qu'est-ce qui te le fait dire ?</li>
+          <li>Ce mouvement sert-il la scène émotionnellement ? Comment ?</li>
+        </ol>
+        <textarea placeholder="Tes deux scènes, tes suppositions sur le matériel utilisé, et ton analyse narrative…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 05 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">05</div>
+      <div class="ch-info"><h3>Le matériel son</h3><div class="ch-tag">Le grand oublié des débutants</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Le son est systématiquement sous-estimé par les débutants qui s'équipent en image d'abord. C'est une erreur coûteuse. <b>Le spectateur pardonne une image légèrement sous-exposée, légèrement floue, légèrement bougée. Il ne pardonne pas un son mal enregistré.</b> Un dialogue incompréhensible, saturé ou parasité détruit l'immersion d'un film en quelques secondes — quelle que soit la qualité de l'image.</p>
+      <ul>
+        <li><b style="color:var(--menthe);">Perche + micro canon</b> — le standard du plateau de fiction. Le micro-canon (hypercardioid) est pointé vers la source sonore par un perchman depuis hors cadre. Il capture le son direct avec un haut niveau de rejet du bruit ambiant. Efficace, discret, professionnel. Nécessite un ingénieur du son et un perchman.</li>
+        <li><b style="color:var(--menthe);">Micro HF (micro-cravate sans fil)</b> — petit micro fixé sur le vêtement ou la peau du comédien. Utile quand la perche ne peut pas approcher (grand angle, extérieur venteux). Problèmes fréquents : frottements de tissu, saturation si le comédien s'éloigne de l'émetteur, interférences. Complémentaire à la perche, pas substitut.</li>
+        <li><b style="color:var(--menthe);">Enregistreur externe</b> — le son n'est jamais enregistré directement dans la caméra sur un tournage professionnel. Il passe par un enregistreur externe dédié (Sound Devices, Zoom F-series) qui offre de bien meilleures préamplis et plus de contrôle. Le clap sert à synchroniser son et image en post-production.</li>
+      </ul>
+      <div class="callout-acier">
+        <b>Pour aller plus loin —</b> Ce chapitre couvre uniquement les bases du matériel son. Pour comprendre la chaîne sonore complète, le rôle de l'ingénieur du son, la gestion du bruit de plateau, et la post-production son, voir le manuel <em>L'Ingénieur du Son</em>.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 05 — Écouter avant de filmer</span>
+        <h4>Analyser la qualité sonore d'un espace</h4>
+        <ol>
+          <li>Choisis un espace où tu pourrais tourner une scène : un appartement, une rue, un café.</li>
+          <li>Écoute attentivement pendant deux minutes sans faire quoi que ce soit : quels bruits parasites existent en permanence ? Quels sons interviennent de façon imprévisible ?</li>
+          <li>Comment ces contraintes sonores changeraient-elles ta façon de planifier le tournage dans cet espace ?</li>
+        </ol>
+        <textarea placeholder="L'espace choisi, les bruits identifiés, et ton plan pour gérer les contraintes sonores…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 06 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">06</div>
+      <div class="ch-info"><h3>Les supports de tournage</h3><div class="ch-tag">Trépied, épaule, gimbal, slider</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Comment la caméra est tenue détermine directement ce que le spectateur ressent. Ce n'est pas une contrainte technique — c'est une décision narrative. <b>Avant de choisir un support, demande-toi ce que le plan doit "dire" au spectateur.</b></p>
+      <ul>
+        <li><b style="color:var(--menthe);">Trépied</b> — stabilité totale, plan statique ou avec panoramique/tilt contrôlé. Le plan d'observation par excellence. Raconte la distance, la maîtrise, parfois la froideur. Standard pour les plans d'établissement et les interviews. Accessible à tous les budgets.</li>
+        <li><b style="color:var(--menthe);">À l'épaule</b> — mobilité maximale, look "documentaire" ou "urgence". Les vibrations légères créent une sensation de présence physique, de chaos maîtrisé. Utilisé délibérément dans les films de guerre, les thrillers, ou tout ce qui demande une impression d'être "dans l'action". Peut aussi être accidentel et nuire à l'image si c'est non intentionnel.</li>
+        <li><b style="color:var(--menthe);">Gimbal électronique</b> — système motorisé (DJI, Moza, Ronin) qui stabilise la caméra portée à la main en compensant les mouvements involontaires. Résultat : un déplacement fluide sans les rails du dolly. Moins technique que le steadicam, moins coûteux. Devenu omniprésent dans les productions de taille moyenne. Donne un look "digital" reconnaissable.</li>
+        <li><b style="color:var(--menthe);">Slider / Mini-rails</b> — mouvement court (20 à 100 cm) sur des rails légers. Permet un travelling élégant sur une petite distance, idéal pour animer un plan statique en le faisant "respirer" légèrement. Facile à transporter, rapide à installer.</li>
+      </ul>
+      <div class="callout">
+        <b>Le support que tu choisis, c'est un point de vue —</b> Le même dialogue filmé au trépied puis à l'épaule raconte deux choses différentes. Au trépied, on observe la scène avec recul. À l'épaule, on est dans la scène. Ni l'un ni l'autre n'est "mieux" — ils sont différents. La question n'est pas "quel support est le plus professionnel ?" mais "quel support sert le mieux cette scène précise ?"
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 06 — Le même plan, deux façons</span>
+        <h4>Observer comment le support change l'effet</h4>
+        <ol>
+          <li>Filme la même scène courte deux fois : une fois posé sur un trépied, une fois à main levée (ou à l'épaule si possible).</li>
+          <li>Regarde les deux versions. Quelle différence émotionnelle perçois-tu ? Laquelle fonctionne le mieux pour cette scène et pourquoi ?</li>
+          <li>Dans quel type de film ou de scène utiliserais-tu chaque approche ?</li>
+        </ol>
+        <textarea placeholder="Ta scène filmée, les différences observées entre les deux versions, et ton analyse…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 07 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">07</div>
+      <div class="ch-info"><h3>Louer vs acheter</h3><div class="ch-tag">Repères budgétaires pour débutants</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">La première erreur des débutants est d'acheter du matériel coûteux qu'ils n'ont pas encore les moyens de maîtriser. La deuxième est de louer tout ce qu'ils pourraient posséder. La règle de base est simple : <b>on achète ce qu'on utilise constamment et qui s'amortit rapidement ; on loue ce qui coûte cher, se démode vite, ou qu'on n'utilise que pour quelques tournages par an.</b></p>
+      <div class="table-wrap" style="margin:20px 0;">
+        <table class="plain">
+          <thead>
+            <tr><th>Catégorie</th><th>Acheter ?</th><th>Pourquoi</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Caméra cinéma haut de gamme</td><td>Louer</td><td>Obsolète en 3–5 ans, coût d'achat énorme, maintenance lourde</td></tr>
+            <tr><td>Objectifs de cinéma</td><td>Louer</td><td>Coût très élevé, les séries changent selon le projet</td></tr>
+            <tr><td>Machinerie lourde (dolly, grue)</td><td>Louer</td><td>Usage rare, stockage impossible, technicien inclus dans la loc</td></tr>
+            <tr><td>Trépied solide</td><td>Acheter</td><td>Usage quotidien, amortissement rapide, indispensable</td></tr>
+            <tr><td>Cartes mémoire, batteries</td><td>Acheter</td><td>Consommable, remplacé régulièrement, peu coûteux</td></tr>
+            <tr><td>Micro-canon d'entrée de gamme</td><td>Acheter</td><td>Améliore immédiatement le son, usage constant</td></tr>
+            <tr><td>Gimbal électronique</td><td>Selon usage</td><td>Si utilisé régulièrement, l'achat s'amortit vite</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <b>Négocier une location — ce qui compte vraiment —</b> Le prix n'est pas le seul critère. La disponibilité d'un matériel de secours en cas de panne (est-ce que le loueur peut envoyer un remplacement en urgence ?) est souvent plus importante que 50 € de différence de tarif journalier. L'assurance matériel est non négociable — vérifier que ta production est couverte, ou souscrire la franchise proposée par le loueur. Les grands loueurs spécialisés en France : TSF, Transpalux, Panalux, Camérimage.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 07 — Simuler un budget de location</span>
+        <h4>Chiffre une journée de tournage</h4>
+        <ol>
+          <li>Imagine que tu dois tourner une scène courte en intérieur : deux personnages, une heure de tournage effectif prévu.</li>
+          <li>Consulte le site d'un loueur (TSF, Transpalux ou autre) et liste le matériel que tu louerais pour cette journée avec les tarifs.</li>
+          <li>Quelle est la part de ce budget que tu aurais pu éviter si tu possédais certains éléments ? Qu'est-ce que tu achèterais en premier si tu avais 1 500 € ?</li>
+        </ol>
+        <textarea placeholder="Ta liste de matériel loué avec les tarifs, ton analyse, et tes priorités d'achat…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CH 08 -->
+  <div class="chapitre fade" data-ch>
+    <div class="ch-head" data-toggle>
+      <div class="ch-num">08</div>
+      <div class="ch-info"><h3>Construire sa trousse minimale viable</h3><div class="ch-tag">Trois paliers, zéro superflu</div></div>
+      <svg class="ch-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="ch-body">
+      <p class="ch-lead">Commencer avec peu, c'est souvent commencer mieux. <b>Un kit limité oblige à trouver des solutions créatives là où le matériel abondant incite à la paresse technique.</b> Voici trois paliers selon le budget disponible — avec dans chaque cas, la priorité absolue.</p>
+      <ul>
+        <li><b style="color:var(--menthe);">Palier "très limité" (0–300 €)</b> — un smartphone récent (déjà en ta possession), un trépied léger compatible (15–30 €), un micro-cravate filaire (20–40 €), un réflecteur blanc/argenté (15 €). Ce kit suffit pour filmer des courts-métrages documentaires, des interviews, des exercices. L'apprentissage se fait sur la cadrage, la lumière naturelle et le son — pas sur la technique du matériel. Voir le manuel Smartphone Filmmaking pour aller au bout de ce palier.</li>
+        <li><b style="color:var(--menthe);">Palier "correct" (300–1 500 €)</b> — une caméra mirrorless ou hybride entry-level (Sony ZV-E10, Fuji X-S10…) avec une optique fixe (50mm f/1.8 : 150–250 €), un trépied à tête fluide (80–150 €), un micro-canon compact (Rode VideoMicro : 60 €), des cartes mémoire et batteries. On peut produire du contenu professionnel régulier avec ce kit.</li>
+        <li><b style="color:var(--menthe);">Palier "confortable" (1 500–4 000 €)</b> — une caméra mirrorless de niveau intermédiaire (Sony FX30, Blackmagic Pocket 6K G2), une ou deux optiques primes de qualité, un trépied vidéo sérieux, un gimbal, un micro HF. C'est le kit d'un créateur ou d'un documentariste professionnel indépendant.</li>
+      </ul>
+      <div class="callout">
+        <b>Le piège du matériel superflu —</b> Chaque palier est suffisant pour produire quelque chose de bien. Le passage au palier supérieur ne te donnera pas automatiquement de meilleures images — il te donnera plus de possibilités, que tu pourras ou non exploiter selon ton niveau de maîtrise. Le matériel n'est jamais l'obstacle principal. La vision l'est. Voir le manuel Smartphone Filmmaking pour une démonstration rigoureuse de ce principe.
+      </div>
+      <div class="exercice" style="margin-top:20px;">
+        <span class="ex-tag">Exercice 08 — Ta trousse personnelle</span>
+        <h4>Évalue ce que tu as et ce dont tu as vraiment besoin</h4>
+        <ol>
+          <li>Liste le matériel que tu possèdes déjà (même un smartphone compte).</li>
+          <li>En utilisant les trois paliers de ce chapitre : à quel palier te situes-tu ? Qu'est-ce qui manque dans ton palier actuel ?</li>
+          <li>Quel serait ton prochain achat prioritaire — non pas le plus impressionnant, mais celui qui améliorerait le plus concrètement la qualité de ce que tu produis aujourd'hui ?</li>
+        </ol>
+        <textarea placeholder="Ton inventaire actuel, ton palier, et ton prochain achat justifié…"></textarea>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- RÉFÉRENCES CRÉATIVES -->
+<section id="references" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Figures du domaine</div>
+    <h2>Trois directeurs de la photographie qui ont repoussé les limites du matériel.</h2>
+    <p class="lede">Maîtriser le matériel ne signifie pas le subir — les meilleurs DPs utilisent ses limites comme des décisions artistiques.</p>
+  </div>
+  <div class="case-strip fade">
+    <div class="case-card">
+      <div class="name">Gordon Willis</div>
+      <div class="signature">États-Unis · 1931 – 2014</div>
+      <p>Surnommé "The Prince of Darkness", Willis a poussé les pellicules de l'époque bien au-delà de leurs limites conventionnelles pour <em>Le Parrain</em> (1972) : des visages à peine éclairés, des ombres qui mangent les yeux des personnages — ce que les laboratoires lui déconseillaient formellement. Son parti-pris technique est devenu l'une des signatures visuelles les plus imitées de l'histoire du cinéma. La connaissance intime des limites du matériel lui permettait de les utiliser précisément là où d'autres les évitaient.</p>
+    </div>
+    <div class="case-card">
+      <div class="name">Emmanuel Lubezki</div>
+      <div class="signature">Mexique · né en 1964</div>
+      <p>Triple Oscar (Gravity, Birdman, The Revenant — 2014, 2015, 2016). Sur <em>Children of Men</em> (2006), il a co-développé avec le réalisateur Alfonso Cuarón des techniques de plan-séquence en lumière naturelle qui n'existaient pas encore. Sur <em>The Revenant</em> (2015), il a tourné exclusivement à la lumière naturelle avec des caméras numériques ultra-sensibles — repoussant les limites de ce que le numérique pouvait capturer en conditions extrêmes.</p>
+    </div>
+    <div class="case-card">
+      <div class="name">Roger Deakins</div>
+      <div class="signature">Royaume-Uni · né en 1949</div>
+      <p>Considéré par beaucoup comme le meilleur DP en activité. Connu pour son passage précoce au numérique et son implication dans les innovations de la caméra ARRI (notamment sur les tests du capteur ALEV 4 de l'Alexa 35). Sur <em>1917</em> (2019), il a développé avec l'équipe d'éclairage des solutions LED sur mesure pour simuler la lumière de fusées éclairantes en mouvement. Sa chaîne YouTube "Ask Roger" documente directement ses choix techniques sur chaque film.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BIBLIOGRAPHIE -->
+<section id="biblio" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Pour aller plus loin</div>
+    <h2>Bibliographie et ressources.</h2>
+  </div>
+  <div class="grid g2 fade">
+    <a class="book-card" href="https://www.theasc.com/store" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">American Society of Cinematographers</span><div class="ttl">American Cinematographer Manual</div><div class="desc">La bible technique de l'industrie — tableaux d'exposition, caractéristiques des capteurs et pellicules, optiques, machinerie. Référence absolue.</div></div>
+    </a>
+    <a class="book-card" href="https://www.amazon.com/Cinematography-Theory-Practice-Imagemaking-Cinematographers/dp/0240807200" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Blain Brown</span><div class="ttl">Cinematography — Theory and Practice (Focal Press)</div><div class="desc">Couvre les caméras, optiques, lumière et composition dans un seul volume. Accessible aux débutants tout en allant assez loin pour les intermédiaires.</div></div>
+    </a>
+    <a class="book-card" href="https://www.bhphotovideo.com" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">B&H Photo Video</span><div class="ttl">bhphotovideo.com — fiches techniques et comparatifs</div><div class="desc">La fiche technique de n'importe quelle caméra ou objectif du marché, avec souvent des avis professionnels et des vidéos comparatives. Référence pour comparer des specs.</div></div>
+    </a>
+    <a class="book-card" href="https://www.youtube.com/@deakinsdiary" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">Roger Deakins</span><div class="ttl">Chaîne YouTube + forum askroger.online</div><div class="desc">Deakins répond directement aux questions de ses fans sur ses choix techniques et artistiques. Unique par sa franchise et la profondeur des réponses.</div></div>
+    </a>
+    <a class="book-card" href="https://www.newsshooter.com" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">NewsShooter</span><div class="ttl">newsshooter.com — actualité matériel cinéma</div><div class="desc">Site de référence pour les tests de caméras, objectifs et accessoires cinéma — des analyses approfondies sans discours marketing.</div></div>
+    </a>
+    <a class="book-card" href="https://www.youtube.com/results?search_query=cinema+camera+test+comparison" target="_blank" rel="noopener" style="text-decoration:none;">
+      <div class="spine"></div>
+      <div class="bk-info"><span class="auth">YouTube — tests comparatifs</span><div class="ttl">Camera test / Lens comparison</div><div class="desc">Des dizaines de créateurs publient des comparatifs visuels de caméras et optiques. Voir plutôt que lire les specs permet de comprendre les différences réelles.</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz" style="padding-top:0;">
+  <div class="section-head fade">
+    <div class="tag">Vérifie ce que tu as retenu</div>
+    <h2>Le petit quiz de fin de parcours.</h2>
+  </div>
+  <div class="fade">
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>1. Pourquoi est-il utile pour un réalisateur de comprendre le matériel, même s'il ne l'opère pas lui-même ?</p>
+      <label class="quiz-opt"><input type="radio" name="q1" value="0"><span>Pour pouvoir remplacer un technicien absent en urgence pendant le tournage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="1"><span>Pour communiquer plus précisément avec les équipes techniques, valider des choix artistiques rapidement et budgéter plus juste</span></label>
+      <label class="quiz-opt"><input type="radio" name="q1" value="2"><span>Pour réduire le nombre de techniciens nécessaires sur le plateau</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>2. Qu'est-ce que la "dynamique" d'une caméra ?</p>
+      <label class="quiz-opt"><input type="radio" name="q2" value="0"><span>La vitesse maximale à laquelle la caméra peut filmer, exprimée en images par seconde</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="1"><span>La capacité du capteur à enregistrer simultanément du détail dans les ombres profondes et dans les hautes lumières</span></label>
+      <label class="quiz-opt"><input type="radio" name="q2" value="2"><span>Le nombre de pixels du capteur exprimé en mégapixels ou en K</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 1 — BASES</span>3. Un capteur de plus grand format (par exemple Super 35 vs Micro 4/3) produit généralement quel effet sur la profondeur de champ ?</p>
+      <label class="quiz-opt"><input type="radio" name="q3" value="0"><span>Il augmente la profondeur de champ — tout reste net sur une distance plus importante</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="1"><span>Il réduit la profondeur de champ — le flou d'arrière-plan (bokeh) est plus marqué</span></label>
+      <label class="quiz-opt"><input type="radio" name="q3" value="2"><span>Il n'a aucun effet sur la profondeur de champ — seul l'objectif en est responsable</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>4. Qu'est-ce que l'ouverture (f/stop) d'un objectif contrôle concrètement ?</p>
+      <label class="quiz-opt"><input type="radio" name="q4" value="0"><span>Uniquement la résolution finale de l'image enregistrée par le capteur</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="1"><span>La quantité de lumière entrant dans l'objectif ET la profondeur de champ — deux effets simultanés d'un seul réglage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q4" value="2"><span>Uniquement la distance minimale de mise au point de l'objectif</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>5. Quel est l'avantage principal d'une focale fixe (prime lens) par rapport à un zoom professionnel ?</p>
+      <label class="quiz-opt"><input type="radio" name="q5" value="0"><span>Elle permet de changer rapidement d'angle de vue sans bouger la caméra, ce qui accélère le tournage</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="1"><span>Elle offre généralement une meilleure qualité optique, une ouverture maximale plus grande et un caractère visuel plus affirmé</span></label>
+      <label class="quiz-opt"><input type="radio" name="q5" value="2"><span>Elle est toujours moins chère à l'achat et à la location qu'un zoom équivalent</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 2 — APPLICATION</span>6. Quel outil de machinerie permet de suivre un personnage en mouvement avec une fluidité impossible à pied, sans rails, dans des espaces complexes ?</p>
+      <label class="quiz-opt"><input type="radio" name="q6" value="0"><span>Un slider (mini-rails)</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="1"><span>Une grue / jib</span></label>
+      <label class="quiz-opt"><input type="radio" name="q6" value="2"><span>Un steadicam</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>7. Pourquoi les professionnels considèrent-ils qu'un mauvais son est plus rédhibitoire qu'une image imparfaite ?</p>
+      <label class="quiz-opt"><input type="radio" name="q7" value="0"><span>Parce que le son coûte beaucoup plus cher à corriger en post-production que l'image</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="1"><span>Parce que le spectateur tolère difficilement un dialogue incompréhensible ou un son parasité, alors qu'une image légèrement imparfaite reste acceptable</span></label>
+      <label class="quiz-opt"><input type="radio" name="q7" value="2"><span>Parce que les normes de diffusion imposent des standards sonores minimaux que l'image n'exige pas</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 3 — ANALYSE</span>8. Qu'est-ce qu'un gimbal électronique, et qu'est-ce qui le distingue d'un steadicam ?</p>
+      <label class="quiz-opt"><input type="radio" name="q8" value="0"><span>Un type de trépied à friction réglable permettant des panoramiques très fluides</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="1"><span>Un système motorisé de stabilisation à main levée — plus accessible et moins technique qu'un steadicam, mais donnant un résultat visuel différent</span></label>
+      <label class="quiz-opt"><input type="radio" name="q8" value="2"><span>Un type de rails pliables ultra-légers permettant de faire des travellings courtes distances</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="2">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 4 — EXPERT</span>9. Quel type de matériel vaut-il mieux louer plutôt qu'acheter, selon ce manuel ?</p>
+      <label class="quiz-opt"><input type="radio" name="q9" value="0"><span>Les cartes mémoire et batteries — car elles s'usent rapidement et doivent être remplacées souvent</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="1"><span>Les trépieds et micro-canons d'entrée de gamme — car leur amortissement est trop long</span></label>
+      <label class="quiz-opt"><input type="radio" name="q9" value="2"><span>Les caméras cinéma haut de gamme, les optiques de cinéma et la machinerie lourde — coût d'achat élevé, obsolescence rapide, usage ponctuel</span></label>
+    </div>
+
+    <div class="quiz-q" data-quiz data-correct="1">
+      <p class="q-text"><span style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--fumee);margin-bottom:6px;">NIVEAU 5 — MAÎTRISE</span>10. Selon l'approche du "kit minimal viable" de ce manuel, quelle est la priorité absolue pour un débutant avec très peu de budget ?</p>
+      <label class="quiz-opt"><input type="radio" name="q10" value="0"><span>Investir d'abord dans la caméra la plus puissante possible pour ne jamais être techniquement limité</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="1"><span>Maîtriser ce qu'on possède déjà — souvent un smartphone — avant d'investir dans du matériel plus complexe que l'on ne sait pas encore utiliser</span></label>
+      <label class="quiz-opt"><input type="radio" name="q10" value="2"><span>Acheter en priorité des objectifs plutôt qu'une caméra, car l'optique détermine plus l'image que le boîtier</span></label>
+    </div>
+
+    <button id="quizBtn" style="font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; background:var(--menthe); color:var(--noir); border:none; padding:14px 26px; cursor:pointer; display:block; margin:10px auto 0; font-weight:600;">Corriger le quiz</button>
+    <div id="quizScore"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p class="manifesto">Le meilleur matériel est celui que tu maîtrises assez pour l'oublier pendant que tu filmes.</p>
+  <div class="brandline">Le Matériel de Cinéma — Manuel v1.0 · <b>Okapi Studios</b> · Centre de formation</div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const mmenu = document.getElementById('mmenu');
+  burger.addEventListener('click', ()=> mmenu.classList.toggle('open'));
+  mmenu.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> mmenu.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.1 });
+  document.querySelectorAll('.fade').forEach(el=> io.observe(el));
+
+  const secIds = ['role','chapitres','references','biblio','quiz'];
+  const sections = secIds.map(id=>document.getElementById(id)).filter(Boolean);
+  const navLinks = document.querySelectorAll('nav.links a');
+  const spy = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        navLinks.forEach(l=> l.classList.toggle('active', l.getAttribute('href') === '#'+entry.target.id));
+      }
+    });
+  }, { rootMargin:'-40% 0px -50% 0px' });
+  sections.forEach(s=> spy.observe(s));
+
+  document.querySelectorAll('[data-toggle]').forEach(head=>{
+    head.addEventListener('click', ()=>{
+      const ch = head.closest('.chapitre');
+      const wasOpen = ch.classList.contains('open');
+      document.querySelectorAll('.chapitre.open').forEach(c=> c.classList.remove('open'));
+      if(!wasOpen){ ch.classList.add('open'); }
+    });
+  });
+  document.querySelector('[data-ch]')?.classList.add('open');
+
+  document.getElementById('quizBtn').addEventListener('click', ()=>{
+    let score = 0;
+    const questions = document.querySelectorAll('[data-quiz]');
+    questions.forEach(q=>{
+      const correct = q.getAttribute('data-correct');
+      const opts = q.querySelectorAll('.quiz-opt');
+      const checked = q.querySelector('input:checked');
+      opts.forEach((opt, idx)=>{
+        opt.classList.remove('correct','wrong');
+        if(String(idx) === correct) opt.classList.add('correct');
+      });
+      if(checked && checked.value === correct) score++;
+      else if(checked){ checked.closest('.quiz-opt').classList.add('wrong'); }
+    });
+    const total = questions.length;
+    const out = document.getElementById('quizScore');
+    out.style.display='block';
+    const passed = score >= 7;
+    out.textContent = score + ' / ' + total + ' bonnes réponses' + (score===total ? ' — parfait !' : '') + (passed ? ' — seuil de réussite atteint ✓' : ' — seuil de réussite non atteint (7/10 requis)');
+    out.style.color = passed ? '#7a9a7a' : '#c0392b';
+  });
+</script>
+
+<script src="chapter-lock.js"></script>
+<script src="gate.js" data-manual="materiel-cinema"></script>
+<script src="password-change.js"></script>
+
+<script>
+(function(){
+  var btn = document.getElementById('quizBtn');
+  var scoreEl = document.getElementById('quizScore');
+  if(!btn || !scoreEl) return;
+  var APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLNVnXaY7Zr0E4xczwJbX74rrPfkRleZBuwlrflLlD0bickCK3dXgUW2u-abypLAy-xw/exec";
+  var MANUAL_SLUG = "materiel-cinema";
+  var sent = false;
+  btn.addEventListener('click', function(){
+    setTimeout(function(){
+      if(sent) return;
+      var txt = scoreEl.textContent || '';
+      var m = txt.match(/(\d+)\s*\/\s*(\d+)/);
+      if(!m) return;
+      sent = true;
+      var score = m[1], total = m[2];
+      var emailInput = document.getElementById('gateEmailInput');
+      var email = emailInput ? emailInput.value.trim() : '';
+      var s = document.createElement('script');
+      s.src = APPS_SCRIPT_URL + '?exam=1&email=' + encodeURIComponent(email) +
+        '&manuel=' + encodeURIComponent(MANUAL_SLUG) + '&score=' + encodeURIComponent(score) +
+        '&total=' + encodeURIComponent(total);
+      document.body.appendChild(s);
+    }, 60);
+  });
+})();
+</script>
+
+</body>
+</html>
