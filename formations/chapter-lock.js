@@ -638,7 +638,11 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       var ta      = ch._lockTa;
       var openBtn = ch._lockOpenBtn;
 
-      if (admin || i === 0) { ch.classList.remove('ch-locked'); }
+      // Un chapitre DEJA VALIDE ne doit jamais rester verrouille, meme si
+      // un chapitre anterieur manque dans la progression (trou cause par un
+      // enregistrement rate). Sans isDone ici, un exercice valide pouvait
+      // s'afficher verrouille tandis que le chapitre SUIVANT se deverrouillait.
+      if (admin || i === 0 || isDone) { ch.classList.remove('ch-locked'); }
       else {
         if (p['ch' + (i - 1)]) { ch.classList.remove('ch-locked'); }
         else { ch.classList.add('ch-locked'); ch.classList.remove('open'); }
@@ -772,7 +776,9 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       var isDone = admin || !!p['ch' + i];
       if (isDone) done++;
 
-      if (admin || i === 0) { ch.classList.remove('ch-locked'); }
+      // Meme garde que pour le format standard : un chapitre valide reste
+      // toujours accessible, quel que soit l'etat des chapitres anterieurs.
+      if (admin || i === 0 || isDone) { ch.classList.remove('ch-locked'); }
       else {
         if (p['ch' + (i - 1)]) { ch.classList.remove('ch-locked'); }
         else { ch.classList.add('ch-locked'); }
@@ -880,7 +886,8 @@ section.chapter.ch-locked .deco-gate{display:block;}\
       var btn = acte._lockBtn; var ta = acte._lockTa;
       var shield = document.getElementById('acte-shield-' + i);
       if (i > 0) {
-        if (admin || p['ch' + (i - 1)]) { acte.classList.remove('acte-locked'); if (shield) shield.style.display = 'none'; }
+        // Meme garde : un module deja termine ne se reverrouille jamais.
+        if (admin || isDone || p['ch' + (i - 1)]) { acte.classList.remove('acte-locked'); if (shield) shield.style.display = 'none'; }
         else { acte.classList.add('acte-locked'); if (shield) shield.style.display = ''; }
       }
       if (isDone) {
