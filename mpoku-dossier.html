@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paul-José Mpoku — Dossier de production & dossier artistique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2EC; --surface:#FFFFFF; --surface2:#E3EAE1; --ink:#0F1D16; --muted:#4F5F55;
+  --line:#C9D4C8; --pitch:#0E4A33; --pitch2:#0B3B29; --chalk:#EAF3EC;
+  --red:#C8001C; --sky:#1583CF; --star:#E2B900; --starInk:#1A1400;
+  --flag:#F9E0E3;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#08231A; --surface:#0E3024; --surface2:#123A2C; --ink:#ECF3EE; --muted:#A6B8AD;
+    --line:#244D3D; --pitch:#0E4A33; --pitch2:#0A3525; --chalk:#EAF3EC;
+    --red:#FF3B4E; --sky:#4FB4F5; --star:#F5D10F; --starInk:#1A1400; --flag:#3A1A1F;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#08231A; --surface:#0E3024; --surface2:#123A2C; --ink:#ECF3EE; --muted:#A6B8AD;
+  --line:#244D3D; --pitch:#0E4A33; --pitch2:#0A3525; --chalk:#EAF3EC;
+  --red:#FF3B4E; --sky:#4FB4F5; --star:#F5D10F; --starInk:#1A1400; --flag:#3A1A1F;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:var(--sky);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--star);outline-offset:2px;border-radius:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.prose{max-width:68ch}
+h1,h2,h3{font-family:'Anton',Impact,'Arial Narrow',sans-serif;font-weight:400;line-height:1.02;letter-spacing:.2px;margin:0}
+h2{font-size:clamp(2.2rem,5.4vw,3.8rem);margin-bottom:.35em}
+h3{font-size:clamp(1.35rem,2.4vw,1.75rem);margin-bottom:.4em}
+p{margin:0 0 1em}
+.cond{font-family:'Barlow Condensed','Barlow',sans-serif;letter-spacing:.2px}
+.muted{color:var(--muted)}
+small{font-size:.86em}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#07170F;color:#EAF3EC}
+.bar .wrap{display:flex;align-items:center;gap:14px;height:56px}
+.bar .mark{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:.5px;white-space:nowrap}
+.bar .mark span{color:var(--star)}
+.bar nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{flex:none;color:inherit;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;padding:6px 10px;border-radius:3px;white-space:nowrap;opacity:.78}
+.bar nav a:hover,.bar nav a.on{opacity:1;background:rgba(255,255,255,.12)}
+.bar nav .half{color:#F5D10F;opacity:1;pointer-events:none;padding:6px 4px 6px 14px;white-space:nowrap;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;flex:none}
+.bar button{background:none;border:1px solid rgba(255,255,255,.35);color:inherit;font:600 13px 'Barlow Condensed',sans-serif;padding:5px 10px;border-radius:3px;cursor:pointer;white-space:nowrap}
+.progress{position:absolute;left:0;bottom:0;height:3px;background:var(--red);width:0}
+
+/* hero */
+.hero{background:var(--pitch);color:var(--chalk);position:relative;overflow:hidden}
+.hero .wrap{position:relative;padding-top:48px;padding-bottom:40px}
+.hero .kicker{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:17px;color:var(--star);margin-bottom:10px}
+.hero h1{font-size:clamp(3.4rem,11vw,8.6rem);line-height:.9;margin-bottom:.12em}
+.hero .sub{font-size:clamp(1.05rem,2vw,1.35rem);max-width:44ch;opacity:.92}
+.board{margin-top:26px;border:2px solid rgba(234,243,236,.55);border-radius:6px;background:var(--pitch2);position:relative}
+.board svg{display:block;width:100%;height:auto}
+.board .legend{display:flex;flex-wrap:wrap;gap:6px 18px;padding:12px 16px;border-top:1px solid rgba(234,243,236,.25);font-family:'Barlow Condensed',sans-serif;font-size:15px}
+.board .legend i{display:inline-block;width:22px;height:3px;vertical-align:middle;margin-right:6px}
+.passline{stroke-dasharray:2600;stroke-dashoffset:2600;animation:pass 5.5s cubic-bezier(.45,.05,.3,1) .6s forwards}
+.node{opacity:0;animation:pop .4s ease forwards}
+@keyframes pass{to{stroke-dashoffset:0}}
+@keyframes pop{to{opacity:1}}
+@media (prefers-reduced-motion: reduce){.passline{animation:none;stroke-dashoffset:0}.node{animation:none;opacity:1}}
+.hero .meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;padding:5px 11px;border-radius:30px;border:1px solid currentColor}
+
+/* sections */
+section.s{padding:74px 0 30px;border-bottom:1px solid var(--line)}
+.halfbanner{background:#07170F;color:#EAF3EC;padding:46px 0}
+.halfbanner .n{font-family:'Anton',sans-serif;font-size:clamp(4rem,14vw,9rem);line-height:.8;color:#F5D10F}
+.halfbanner h2{font-size:clamp(2rem,5vw,3.6rem);margin:8px 0 6px}
+.halfbanner p{max-width:60ch;opacity:.85;margin:0}
+.lede{font-size:1.18rem;max-width:62ch}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:20px 22px}
+.panel.flat{background:transparent}
+.panel h3{font-size:1.4rem}
+
+.alert{border-left:5px solid var(--red);background:var(--flag);padding:14px 18px;border-radius:0 6px 6px 0;margin:18px 0}
+.alert strong{color:var(--red)}
+.note{border-left:5px solid var(--sky);background:var(--surface);padding:14px 18px;border-radius:0 6px 6px 0;margin:18px 0}
+.gold{border-left:5px solid var(--star);background:var(--surface);padding:16px 20px;border-radius:0 6px 6px 0;margin:18px 0}
+
+/* match sheet */
+.sheet{width:100%;border-collapse:collapse;font-size:16px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.sheet th,.sheet td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.sheet th{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:15px;color:var(--muted);background:var(--surface2)}
+.sheet tr:last-child td{border-bottom:none}
+.sheet td.num{font-family:'Anton',sans-serif;font-size:1.25rem;white-space:nowrap}
+.sheet td.k{font-weight:600;white-space:nowrap}
+.flag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12.5px;padding:1px 7px;border-radius:3px;background:var(--red);color:#fff;margin-left:6px;vertical-align:2px}
+.flag.ok{background:var(--sky)}
+.flag.gd{background:var(--star);color:var(--starInk)}
+
+/* timeline */
+.tl{position:relative;margin:26px 0 10px;padding-left:28px}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:3px;background:linear-gradient(var(--sky),var(--red) 55%,var(--star))}
+.ev{position:relative;padding:0 0 22px}
+.ev::before{content:"";position:absolute;left:-26px;top:7px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--ink)}
+.ev.key::before{background:var(--star);border-color:var(--star);width:17px;height:17px;left:-28px;top:5px}
+.ev .d{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--red)}
+.ev .t{font-weight:600}
+.ev p{margin:2px 0 0;max-width:70ch}
+.tlfilter{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
+.tlfilter button,.qf button{font:600 15px 'Barlow Condensed',sans-serif;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:30px;padding:6px 14px;cursor:pointer}
+.tlfilter button[aria-pressed="true"],.qf button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.ev[hidden]{display:none}
+
+/* clubs */
+details.club{background:var(--surface);border:1px solid var(--line);border-radius:6px;margin-bottom:10px}
+details.club summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:118px 1fr auto;gap:14px;align-items:center;padding:14px 18px}
+details.club summary::-webkit-details-marker{display:none}
+details.club .yr{font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--muted)}
+details.club .nm{font-family:'Anton',sans-serif;font-size:1.35rem}
+details.club .nm small{font-family:'Barlow',sans-serif;font-size:.62em;color:var(--muted);margin-left:8px}
+details.club .st{font-family:'Barlow Condensed',sans-serif;font-weight:600;white-space:nowrap;font-size:15px}
+details.club .body{padding:0 18px 16px 150px;max-width:900px}
+details.club[open]{border-color:var(--ink)}
+details.club[open] summary .nm{color:var(--red)}
+@media (max-width:640px){details.club summary{grid-template-columns:1fr auto}details.club .yr{grid-column:1/-1}details.club .body{padding:0 18px 16px}}
+
+/* quotes */
+.qf{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+.qgrid{columns:2 330px;column-gap:18px}
+.q{break-inside:avoid;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin:0 0 18px}
+.q.cite{border-top:5px solid var(--red)}
+.q.para{border-top:5px solid var(--sky)}
+.q blockquote{margin:0 0 8px;font-family:'Anton',sans-serif;font-size:1.45rem;line-height:1.15}
+.q .pt{margin:0 0 8px}
+.q .src{font-size:14px;color:var(--muted)}
+.q .tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;color:var(--muted)}
+.q[hidden]{display:none}
+
+/* people */
+.person{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+.person .role{font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--red);font-size:15px}
+.person h3{font-size:1.3rem;margin:2px 0 6px}
+.person p{margin:0;font-size:15.5px}
+.prio{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;margin-top:8px;display:inline-block}
+.prio.a{color:var(--red)} .prio.b{color:var(--sky)} .prio.c{color:var(--muted)}
+
+/* episodes */
+.ep{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:22px 0;border-top:2px solid var(--ink)}
+.ep .no{font-family:'Anton',sans-serif;font-size:4.2rem;line-height:.85;color:var(--red)}
+.ep h3{font-size:clamp(1.6rem,3vw,2.2rem)}
+.ep .beats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 22px;margin-top:10px}
+.ep .beats div{font-size:15.5px}
+.ep .beats b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--muted)}
+@media (max-width:620px){.ep{grid-template-columns:1fr;gap:4px}.ep .no{font-size:3rem}}
+
+/* braid */
+.braid svg{width:100%;height:auto;display:block}
+.swatches{display:flex;flex-wrap:wrap;gap:12px;margin:10px 0}
+.sw{width:150px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface)}
+.sw div{height:64px}
+.sw span{display:block;padding:8px 10px;font-size:14px}
+.sw b{display:block;font-family:'Barlow Condensed',sans-serif}
+
+/* refs */
+.ref{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px;display:flex;flex-direction:column}
+.ref .pf{font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--muted);font-size:15px}
+.ref h3{font-size:1.45rem;margin:4px 0 8px}
+.ref .take{flex:1}
+.ref .take b{font-family:'Barlow Condensed',sans-serif;color:var(--red);font-size:15px}
+.ref a.go{margin-top:12px;font-weight:600}
+
+/* checklist */
+.check{list-style:none;padding:0;margin:14px 0}
+.check li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin-bottom:8px}
+.check input{width:20px;height:20px;margin-top:3px;accent-color:var(--red);flex:none}
+.check label{cursor:pointer}
+.check li.done label{text-decoration:line-through;color:var(--muted)}
+.counter{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px}
+
+.srcs{columns:2 360px;column-gap:28px;font-size:15px}
+.srcs li{break-inside:avoid;margin-bottom:8px}
+footer{padding:40px 0 60px;color:var(--muted);font-size:14px}
+.big{font-family:'Anton',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.05}
+.logline{font-family:'Anton',sans-serif;font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1.1;max-width:28ch;margin:6px 0 18px}
+hr.chalk{border:none;border-top:2px dashed var(--line);margin:28px 0}
+</style>
+</head>
+<body>
+
+<div class="bar" role="banner">
+  <div class="wrap">
+    <div class="mark">MPOKU <span>/</span> OWM</div>
+    <nav aria-label="Chapitres">
+      <span class="half">1re mi-temps</span>
+      <a href="#fiche">Fiche</a>
+      <a href="#chrono">Chronologie</a>
+      <a href="#clubs">Clubs</a>
+      <a href="#selection">Sélections</a>
+      <a href="#apres">Reconversion</a>
+      <a href="#arena">L'Arena</a>
+      <a href="#gens">Personnages</a>
+      <a href="#paroles">Paroles</a>
+      <a href="#images">Archives</a>
+      <span class="half">2e mi-temps</span>
+      <a href="#these">Thèse</a>
+      <a href="#themes">Thèmes</a>
+      <a href="#arc">Arc</a>
+      <a href="#motifs">Motifs</a>
+      <a href="#da">DA</a>
+      <a href="#tournage">Tournage</a>
+      <a href="#refs">Références</a>
+      <a href="#verif">À vérifier</a>
+      <a href="#sources">Sources</a>
+    </nav>
+    <button id="themeBtn" type="button" aria-label="Changer de thème">Thème</button>
+  </div>
+  <div class="progress" id="progress"></div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Dossier de production & dossier artistique — série documentaire — Okapi World Média</div>
+    <h1>Paul-José<br>Mpoku</h1>
+    <p class="sub">Il a passé vingt ans à faire briller les autres. À 33 ans, il retourne à l'école — pour construire, sur le terrain de son enfance, le lieu où la génération suivante ira plus loin que lui.</p>
+
+    <div class="board" aria-label="Schéma tactique : la carrière de Paul-José Mpoku tracée comme une chaîne de passes, de Kinshasa jusqu'à Petit-Rechain">
+      <svg viewBox="0 0 1000 520" role="img" aria-hidden="true">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#F5D10F"/></marker>
+        </defs>
+        <g fill="none" stroke="#EAF3EC" stroke-opacity=".42" stroke-width="2">
+          <rect x="20" y="20" width="960" height="480" rx="2"/>
+          <line x1="500" y1="20" x2="500" y2="500"/>
+          <circle cx="500" cy="260" r="62"/>
+          <rect x="20" y="150" width="120" height="220"/>
+          <rect x="20" y="210" width="44" height="100"/>
+          <rect x="860" y="150" width="120" height="220"/>
+          <rect x="936" y="210" width="44" height="100"/>
+          <path d="M140 222a48 48 0 0 1 0 76"/>
+          <path d="M860 222a48 48 0 0 0 0 76"/>
+        </g>
+        <circle cx="500" cy="260" r="4" fill="#EAF3EC" fill-opacity=".6"/>
+        <polyline class="passline" fill="none" stroke="#F5D10F" stroke-width="3.5" stroke-linejoin="round" stroke-dasharray="2600" marker-end="url(#ah)"
+          points="70,440 150,330 250,420 330,300 410,410 470,190 560,330 610,120 700,240 760,110 830,230 880,90 920,300"/>
+        <g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-size="17" font-weight="600" fill="#EAF3EC">
+          <g class="node" style="animation-delay:.6s"><circle cx="70" cy="440" r="9" fill="#1E9BE8"/><text x="84" y="468">Kinshasa 1992</text></g>
+          <g class="node" style="animation-delay:1s"><circle cx="150" cy="330" r="9" fill="#EAF3EC"/><text x="118" y="312">Verviers</text></g>
+          <g class="node" style="animation-delay:1.35s"><circle cx="250" cy="420" r="9" fill="#EAF3EC"/><text x="222" y="452">Standard</text></g>
+          <g class="node" style="animation-delay:1.7s"><circle cx="330" cy="300" r="9" fill="#EAF3EC"/><text x="300" y="282">Londres</text></g>
+          <g class="node" style="animation-delay:2.05s"><circle cx="410" cy="410" r="9" fill="#FF3B4E"/><text x="376" y="442">Standard</text></g>
+          <g class="node" style="animation-delay:2.4s"><circle cx="470" cy="190" r="9" fill="#EAF3EC"/><text x="428" y="170">Sardaigne</text></g>
+          <g class="node" style="animation-delay:2.75s"><circle cx="560" cy="330" r="9" fill="#EAF3EC"/><text x="530" y="362">Vérone</text></g>
+          <g class="node" style="animation-delay:3.1s"><circle cx="610" cy="120" r="9" fill="#EAF3EC"/><text x="585" y="100">Athènes</text></g>
+          <g class="node" style="animation-delay:3.45s"><circle cx="700" cy="240" r="9" fill="#EAF3EC"/><text x="672" y="272">Abou Dabi</text></g>
+          <g class="node" style="animation-delay:3.8s"><circle cx="760" cy="110" r="9" fill="#EAF3EC"/><text x="738" y="90">Konya</text></g>
+          <g class="node" style="animation-delay:4.15s"><circle cx="830" cy="230" r="9" fill="#EAF3EC"/><text x="800" y="262">Incheon</text></g>
+          <g class="node" style="animation-delay:4.5s"><circle cx="880" cy="90" r="9" fill="#EAF3EC"/><text x="820" y="66">Arad · Al-Batin</text></g>
+          <g class="node" style="animation-delay:5.4s"><circle cx="920" cy="300" r="13" fill="#F5D10F"/><text x="826" y="340" font-size="19">Petit-Rechain</text></g>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:#F5D10F"></i>La trajectoire : 11 clubs, 9 pays</span>
+        <span><i style="background:#1E9BE8"></i>Départ : Kinshasa</span>
+        <span><i style="background:#FF3B4E"></i>Retour au Standard, club de cœur</span>
+        <span><i style="background:#F5D10F;height:8px;width:8px;border-radius:50%"></i>But : le terrain vide où il a joué enfant</span>
+      </div>
+    </div>
+
+    <div class="meta">
+      <span class="chip">Document de travail — recherche arrêtée au 24 septembre 2026</span>
+      <span class="chip">Veille de la conférence de presse du 25/09</span>
+    </div>
+  </div>
+</header>
+
+<div class="halfbanner" id="mt1">
+  <div class="wrap">
+    <div class="n">1</div>
+    <h2>Première mi-temps — le dossier de production</h2>
+    <p>Les faits, vérifiés et sourcés : qui il est, ce qu'il a fait, ce qu'il a dit, qui l'entoure, et quelles images existent. Chaque donnée contradictoire est signalée en rouge — rien n'entre au montage sans vérification avec Paul.</p>
+  </div>
+</div>
+
+<main>
+<!-- FICHE -->
+<section class="s" id="fiche">
+  <div class="wrap">
+    <h2>Feuille de match</h2>
+    <p class="lede">L'essentiel, en une table. Les lignes marquées d'un drapeau rouge sont contradictoires d'une source à l'autre — à trancher avec Paul avant tout carton ou voix off.</p>
+    <div class="tbl">
+    <table class="sheet">
+      <tbody>
+        <tr><td class="k">Nom complet</td><td>Paul-José M'Poku Ebunge — dit « Polo ». Graphies de presse : Mpoku / M'Poku.</td></tr>
+        <tr><td class="k">Naissance</td><td>19 avril 1992, Kinshasa (alors Zaïre). <span class="flag">À vérifier</span> Radio Okapi indique « février 1992 ».</td></tr>
+        <tr><td class="k">Origine du nom</td><td>Seul des trois frères né au Congo ; leur père lui a donné le nom Mpoku, celui d'un oncle vivant en Suisse — d'où un nom différent de ses frères Sambi Lokonga.</td></tr>
+        <tr><td class="k">Ville</td><td>Verviers (province de Liège). A grandi en partie au quartier du Pré-Javais ; maison familiale « sur les hauteurs de Verviers » (La DH, 2019).</td></tr>
+        <tr><td class="k">Poste</td><td>Milieu offensif / ailier — meneur de jeu, spécialiste des coups de pied arrêtés.</td></tr>
+        <tr><td class="k">Carrière pro</td><td><span class="num" style="font-family:Anton">11</span> clubs · <span style="font-family:Anton">9</span> pays · 2010–2025</td></tr>
+        <tr><td class="k">Dernier match</td><td>27 octobre 2025, Al-Batin – Al Ahli (Arabie saoudite). Remplacé à la 59e minute — sans savoir que ce serait le dernier.</td></tr>
+        <tr><td class="k">Retraite</td><td>Annoncée le 5 mars 2026 par vidéo sur ses réseaux, à 33 ans. <span class="flag">À vérifier</span> Plusieurs médias écrivent 34 ans ; Radio Okapi cite l'UTA Arad comme dernier club au lieu d'Al-Batin.</td></tr>
+        <tr><td class="k">Sélections</td><td>Belgique U15 → U21 (capitaine à certaines périodes). RD Congo : 22 sélections, 6 buts selon Wikipédia et Les Dépêches de Brazzaville. <span class="flag">À vérifier</span> BeSoccer : 16 sélections, 5 buts ; première cape datée au 29/03/2016.</td></tr>
+        <tr><td class="k">Palmarès</td><td>Coupe de Belgique 2018 avec le Standard (finale contre Genk, 17 mars 2018). Deux fois vice-champion selon ses propres mots.</td></tr>
+        <tr><td class="k">Diplômes</td><td>UEFA B (juin 2024). Cours FIFA — <span class="flag">À vérifier</span> intitulé exact du programme non trouvé en source publique (rushes LA & New York).</td></tr>
+        <tr><td class="k">Activités</td><td>Consultant Play Sports · PMK Group / PMK Company (agence de management sportif, stages) · Mpoku Academy · parrain du BX Brussels (Kompany) · porte-parole football de WGI (tentative de rachat du Standard, 2025).</td></tr>
+        <tr><td class="k">Famille</td><td>Marié, un fils et une fille. Frères : Albert Sambi Lokonga (international belge, Hamburger SV), Fabrice Sambi Lokonga (football amateur).</td></tr>
+        <tr><td class="k">Foi</td><td>Chrétien. Rencontre personnelle avec la foi à Londres, après le décès d'un cousin proche.</td></tr>
+        <tr><td class="k">Réseaux</td><td>Instagram (vidéo de retraite), X @PaulJoseMpoku, LinkedIn (actif depuis 2026), site <a href="https://pmk.group/" target="_blank" rel="noopener">pmk.group</a></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- CHRONO -->
+<section class="s" id="chrono">
+  <div class="wrap">
+    <h2>Chronologie</h2>
+    <p class="lede">Les dates qui comptent pour le récit. Filtrez par fil narratif — les pastilles jaunes sont les points de bascule utilisables comme charnières d'épisode.</p>
+    <div class="tlfilter" role="group" aria-label="Filtrer la chronologie">
+      <button type="button" data-f="all" aria-pressed="true">Tout</button>
+      <button type="button" data-f="vie" aria-pressed="false">Vie & famille</button>
+      <button type="button" data-f="terrain" aria-pressed="false">Terrain</button>
+      <button type="button" data-f="batir" aria-pressed="false">Bâtir</button>
+      <button type="button" data-f="congo" aria-pressed="false">Congo</button>
+    </div>
+    <div class="tl" id="tl">
+      <div class="ev key" data-c="vie"><div class="d">19 avril 1992</div><div class="t">Naissance à Kinshasa</div><p>Seul des trois frères né au Congo. Ses parents quittent ensuite le pays pour l'Europe — pour des écoles, des papiers, un avenir. Il en parle comme du premier sacrifice de son histoire — celui de ses parents.</p></div>
+      <div class="ev" data-c="terrain"><div class="d">1998 – 2002</div><div class="t">Cornesse FC</div><p>Premier club, dans les environs de Verviers.</p></div>
+      <div class="ev key" data-c="terrain batir"><div class="d">2002 – 2004</div><div class="t">Entente Rechaintoise — Petit-Rechain</div><p>Le club dont les installations du Domaine des Tourelles accueilleront, vingt ans plus tard, son académie. <span class="flag gd">Boucle narrative</span></p></div>
+      <div class="ev" data-c="terrain"><div class="d">2004 – 2008</div><div class="t">Formation au Standard de Liège</div><p>Et, en parallèle, toutes les sélections de jeunes belges de U15 à U19.</p></div>
+      <div class="ev key" data-c="terrain vie"><div class="d">Juin 2008</div><div class="t">Tottenham Hotspur, à 16 ans</div><p>Il ne parle pas anglais. Choc culturel, jeu plus physique. Il côtoie Harry Kane chez les jeunes. Harry Redknapp annonce au groupe qu'il est prêt pour l'équipe première.</p></div>
+      <div class="ev" data-c="terrain"><div class="d">2010 – 2011</div><div class="t">Prêt à Leyton Orient</div><p>27 matchs, 3 buts. Il choisit l'inconfort plutôt que la réserve de Tottenham, pour se mesurer à des adultes.</p></div>
+      <div class="ev key" data-c="vie"><div class="d">Londres (date à préciser)</div><div class="t">La foi</div><p>Après la mort d'un cousin dont il était proche, il vit ce qu'il appelle une rencontre personnelle avec Jésus. Il en fait l'origine de ses convictions, de ses projets, de sa fondation. <span class="flag">À vérifier</span></p></div>
+      <div class="ev" data-c="terrain"><div class="d">2011</div><div class="t">Retour au Standard</div><p>Le club veut miser sur des jeunes de la région ; il pense d'abord partir en prêt, faute de temps de jeu, puis s'impose.</p></div>
+      <div class="ev" data-c="terrain"><div class="d">2015 – 2017</div><div class="t">Italie puis Grèce</div><p>Cagliari (prêt), Chievo Vérone, Panathinaïkos (prêt).</p></div>
+      <div class="ev key" data-c="congo"><div class="d">2015 – 2016</div><div class="t">Choix de la RD Congo</div><p>Après tout le parcours des jeunes belges, il rejoint les Léopards — parmi les premiers binationaux d'une génération dont il dit avoir ouvert la voie.</p></div>
+      <div class="ev key" data-c="congo terrain"><div class="d">24 janvier 2017</div><div class="t">CAN, Togo – RDC 1-3</div><p>À la 80e minute, coup franc qui rentre avec l'aide de la barre. La RDC termine première de son groupe.</p></div>
+      <div class="ev" data-c="congo terrain"><div class="d">29 janvier 2017</div><div class="t">Quart de finale contre le Ghana</div><p>Première titularisation en CAN par Florent Ibenge. Défaite 2-1, élimination.</p></div>
+      <div class="ev" data-c="terrain batir"><div class="d">Juillet 2017</div><div class="t">Retour au Standard — et au Pré-Javais</div><p>Il revient dans son quartier annoncer un espace multisports et une académie qui portera son nom. Première graine du projet.</p></div>
+      <div class="ev key" data-c="terrain"><div class="d">17 mars 2018</div><div class="t">Coupe de Belgique</div><p>Victoire en finale contre Genk. Il garde la médaille — et ne l'a pas encore montrée à son fils (La DH, mars 2026).</p></div>
+      <div class="ev" data-c="vie"><div class="d">Vers 2018 – 2019</div><div class="t">Capitaine du Standard, parrain d'une enfant</div><p>Il parraine une petite fille via SEL Projets, ONG chrétienne active au Congo.</p></div>
+      <div class="ev" data-c="terrain"><div class="d">2020 – 2025</div><div class="t">Le monde</div><p>Al Wahda (Émirats), Konyaspor (Turquie), Incheon United (Corée du Sud, 52 matchs), UTA Arad (Roumanie).</p></div>
+      <div class="ev" data-c="vie"><div class="d">Avril 2020</div><div class="t">Covid à Verviers</div><p>Avec Albert, il fait livrer des colis aux services de première ligne de Verviers.</p></div>
+      <div class="ev key" data-c="batir"><div class="d">25 mai 2023</div><div class="t">Le projet de Rechain fuite</div><p>L'Avenir révèle son intérêt pour le Domaine des Tourelles, libéré par la fusion Rechain–Lambermont. Accord financier évoqué sur l'achat des terrains.</p></div>
+      <div class="ev" data-c="batir"><div class="d">Juin 2024</div><div class="t">Diplôme UEFA B</div><p>Il ne sait pas s'il sera entraîneur ; il veut simplement avoir tout appris avant la suite.</p></div>
+      <div class="ev" data-c="batir"><div class="d">Novembre 2024</div><div class="t">La Ville suit</div><p>Le futur bourgmestre Maxime Degey confirme publiquement les accords de vente et remercie Paul pour le projet.</p></div>
+      <div class="ev key" data-c="batir"><div class="d">Mars – 21 avril 2025</div><div class="t">Le Standard, presque</div><p>Responsable des opérations football du fonds émirati WGI, candidat au rachat du Standard. Le 21 avril, retrait officiel, communiqué cinglant sur un processus jugé confus. Le groupe regarde ensuite vers Toulouse.</p></div>
+      <div class="ev" data-c="terrain"><div class="d">Septembre 2025</div><div class="t">Al-Batin, Arabie saoudite</div><p>Dernier club. Des problèmes de paiement ; le plaisir n'y est plus.</p></div>
+      <div class="ev key" data-c="terrain vie"><div class="d">27 octobre 2025</div><div class="t">59e minute</div><p>Il sort du terrain lors d'Al-Batin – Al Ahli. C'est son dernier match ; il ne le sait pas. La même semaine (27–31 octobre), la 8e édition des Stages Mpoku se tient au CREF de Blégny. <span class="flag gd">Image d'ouverture</span></p></div>
+      <div class="ev key" data-c="vie"><div class="d">5 mars 2026</div><div class="t">Il annonce l'arrêt</div><p>Vidéo sur ses réseaux. Il dit vouloir aider la prochaine génération à aller plus loin.</p></div>
+      <div class="ev" data-c="batir"><div class="d">7 mars 2026</div><div class="t">Parrain du BX Brussels</div><p>Alliance avec le club fondé par Vincent Kompany : stages communs, même philosophie d'éducation.</p></div>
+      <div class="ev key" data-c="batir"><div class="d">Mars 2026</div><div class="t">Permis déposé</div><p>Vedia le filme souriant sur le site des Tourelles. La DH publie le 21 mars sa grande interview de retraité.</p></div>
+      <div class="ev key" data-c="congo"><div class="d">31 mars 2026</div><div class="t">La RDC qualifiée pour la Coupe du monde</div><p>1-0 après prolongation contre la Jamaïque, à Guadalajara — premier Mondial depuis le Zaïre de 1974. Vingt-six jours après sa retraite.</p></div>
+      <div class="ev" data-c="batir"><div class="d">4 – 8 mai 2026</div><div class="t">Premier stage Mpoku Academy × BX Brussels</div><p>Wegnez et Bruxelles, journée de dépassement de soi à Durbuy, intervention prévue de la championne paralympique Léa Bayekula.</p></div>
+      <div class="ev key" data-c="congo"><div class="d">Juin – juillet 2026</div><div class="t">Coupe du monde en Amérique du Nord</div><p>La RDC atteint la phase à élimination directe pour la première fois de son histoire, éliminée en seizièmes par l'Angleterre. <span class="flag">À vérifier</span> Où était Paul pendant le tournoi ? Les rushes LA / New York datent-ils de cette période ?</p></div>
+      <div class="ev key" data-c="batir"><div class="d">2026 (date à préciser)</div><div class="t">Permis accordé · Formation FIFA à Los Angeles et New York</div><p>Les rushes qui fondent la série. <span class="flag">À vérifier</span></p></div>
+      <div class="ev key" data-c="batir"><div class="d">25 septembre 2026 — 18 h</div><div class="t">Conférence de presse — PMK Sport Arena</div><p>Annonce officielle du projet à Verviers. Tournage du teaser et de la dernière pièce du puzzle.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLUBS -->
+<section class="s" id="clubs">
+  <div class="wrap">
+    <h2>Parcours club</h2>
+    <p class="lede">Onze clubs. Ouvrez chaque ligne pour le contenu narratif exploitable. Statistiques en championnat, source Wikipédia (anglais) ; elles varient selon les bases de données.</p>
+
+    <details class="club"><summary><span class="yr">1998 – 2008</span><span class="nm">Formation<small>Cornesse · Rechain · Standard</small></span><span class="st">Jeunes</span></summary>
+      <div class="body"><p>Cornesse FC (1998–2002), Entente Rechaintoise (2002–2004), puis le centre de formation du Standard (2004–2008). Le passage à Rechain est la clé de voûte émotionnelle de la série : c'est ce site que l'académie vient reprendre. À faire confirmer : a-t-il joué précisément sur les terrains du Domaine des Tourelles ? Reste-t-il des photos d'équipe, des éducateurs de l'époque ?</p></div></details>
+
+    <details class="club"><summary><span class="yr">2008 – 2011</span><span class="nm">Tottenham Hotspur<small>Angleterre</small></span><span class="st">0 m · réserve</span></summary>
+      <div class="body"><p>Parti à 16 ans sans parler la langue. Il raconte ses débuts en réserve face à Carl Hoefkens, défenseur belge rompu au jeu anglais, qui ne lui fait aucun cadeau — une leçon de dureté qu'il revendique. Génération Harry Kane et Tom Carroll ; Harry Redknapp vient leur dire qu'ils sont prêts pour l'équipe première. C'est à Londres que sa foi naît. Il résume l'époque comme le début du commencement.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2010 – 2011</span><span class="nm">Leyton Orient<small>Angleterre · prêt</small></span><span class="st">27 m · 3 b</span></summary>
+      <div class="body"><p>Choix de quitter le confort de Tottenham pour affronter des adultes en League One. Anecdote : à son retour de Corée, Leyton lui propose un contrat d'un an et demi… à condition de passer un test, ce qu'il n'avait jamais fait de sa vie.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2011 – 2016</span><span class="nm">Standard de Liège<small>Belgique · 1er passage</small></span><span class="st">71 m · 13 b</span></summary>
+      <div class="body"><p>Le club voulait relancer des jeunes du cru. Peu utilisé au début, tenté par un prêt, il s'impose sous d'autres entraîneurs. Il dit avoir porté le Standard sur ses épaules en Europa League à une époque — et estime qu'un joueur d'Anderlecht au même niveau aurait été appelé chez les Diables rouges.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2015</span><span class="nm">Cagliari<small>Italie · prêt</small></span><span class="st">16 m · 3 b</span></summary>
+      <div class="body"><p>Première expérience en Serie A.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2015 – 2017</span><span class="nm">Chievo Vérone<small>Italie</small></span><span class="st">20 m · 0 b</span></summary>
+      <div class="body"><p>Saison en Serie A, puis prêt en Grèce.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2016 – 2017</span><span class="nm">Panathinaïkos<small>Grèce · prêt</small></span><span class="st">25 m · 2 b</span></summary>
+      <div class="body"><p>Saison de la CAN 2017 et de son coup franc contre le Togo.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2017 – 2020</span><span class="nm">Standard de Liège<small>Belgique · 2e passage</small></span><span class="st">69 m · 15 b</span></summary>
+      <div class="body"><p>Le retour au club de cœur. Premier but le 4 août 2017 contre Genk ; frappe de 30 mètres dans les arrêts de jeu contre Lokeren le 24 septembre 2017. Coupe de Belgique le 17 mars 2018 (photo Belga avec Sébastien Pocognoli). Capitaine. Clasico de septembre 2019 face à son frère Albert, sous le maillot d'Anderlecht — une image à retrouver absolument.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2020 – 2021</span><span class="nm">Al Wahda<small>Émirats arabes unis</small></span><span class="st">27 m · 6 b</span></summary>
+      <div class="body"><p>Début de la période « monde ». Il dira plus tard avoir appris l'investissement en voyageant, en comparant ce que rapporte un bien ici et là-bas.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2021 – 2022</span><span class="nm">Konyaspor<small>Turquie</small></span><span class="st">27 m · 3 b</span></summary>
+      <div class="body"><p>Puis six mois sans club, pendant lesquels il passe par la formation UEFA.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2022 – 2025</span><span class="nm">Incheon United<small>Corée du Sud</small></span><span class="st">52 m · 4 b</span></summary>
+      <div class="body"><p>Signé en décembre 2022. Pendant qu'il joue à l'autre bout du monde, le projet de Rechain fuite dans la presse locale (mai 2023). Distance géographique, attachement intact : un contraste à exploiter.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2025</span><span class="nm">UTA Arad<small>Roumanie</small></span><span class="st">10 m · 3 b</span></summary>
+      <div class="body"><p>Printemps 2025 — en pleine affaire WGI / Standard.</p></div></details>
+
+    <details class="club"><summary><span class="yr">2025</span><span class="nm">Al-Batin<small>Arabie saoudite</small></span><span class="st">Dernier club</span></summary>
+      <div class="body"><p>Arrivé en septembre 2025. Problèmes de paiement, niveau en deçà de ce qu'il a connu. Dernier match le 27 octobre, sorti à la 59e. Il dit que d'autres choses le motivaient déjà davantage que jouer.</p></div></details>
+  </div>
+</section>
+
+<!-- SELECTION -->
+<section class="s" id="selection">
+  <div class="wrap">
+    <h2>Deux maillots</h2>
+    <div class="grid2">
+      <div class="panel">
+        <h3 style="color:var(--red)">Belgique — de U15 à U21</h3>
+        <p>Il fait toutes les sélections de jeunes, parfois capitaine. En 2013, il est sur la photo des Espoirs avec Batshuayi, Carrasco, Thorgan Hazard, Kaminski, Mechele. La plupart deviendront Diables rouges. Lui non.</p>
+        <p class="muted">Son explication, sans amertume affichée : le poids d'Anderlecht dans les sélections à l'époque. Il cite le cas de Pelé Mboyo, appelé une fois puis oublié, pour justifier son choix.</p>
+      </div>
+      <div class="panel">
+        <h3 style="color:var(--sky)">RD Congo — les Léopards</h3>
+        <p>Le Congo vient le chercher avec un projet : la CAN, la qualification mondiale, une génération de binationaux — Bakambu, Kakuta, Mulumbu, Mbemba, Mbokani. Il se dit fier d'avoir ouvert la voie, et cite Noah Sadiki comme exemple de ceux qui en profitent aujourd'hui.</p>
+        <p class="muted">CAN 2017 au Gabon : but sur coup franc contre le Togo (3-1), quart de finale perdu contre le Ghana.</p>
+      </div>
+    </div>
+    <div class="gold">
+      <p style="margin:0"><strong>Le fait le plus fort du dossier Congo.</strong> Paul annonce sa retraite le 5 mars 2026. Le 31 mars, la RDC se qualifie pour la Coupe du monde, à Guadalajara — son premier Mondial depuis 1974, avec plusieurs binationaux dans l'effectif. L'été suivant, elle joue sur le sol américain, et Paul, lui, étudie à Los Angeles et New York. S'il était dans le pays pendant le tournoi, la série tient une ironie dramatique que personne ne peut écrire : l'homme qui a ouvert la voie est au bon endroit, au bon moment — de l'autre côté, en salle de classe.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APRES -->
+<section class="s" id="apres">
+  <div class="wrap">
+    <h2>L'élève</h2>
+    <p class="lede">La reconversion n'a pas commencé à la retraite. Elle commence dans une église, des années avant, avec une phrase.</p>
+    <div class="grid2">
+      <div class="panel">
+        <h3>Le déclic</h3>
+        <p>Lors d'une conférence dans son église — qui parle de foi mais aussi de vie quotidienne — un intervenant, Alain Patrice, lance qu'une seule source de revenus expose aux problèmes. Paul pense aux anciens joueurs ruinés. Il décide de se former, d'échanger, d'apprendre sur le tas en voyageant.</p>
+        <p class="muted">Scène à reconstituer ou à faire raconter face caméra, dans l'église si elle l'accepte.</p>
+      </div>
+      <div class="panel">
+        <h3>Les mentors qu'il se choisit</h3>
+        <p>Pas de mentor direct, dit-il. Mais il s'assied avec Roland Duchâtelet (ex-propriétaire du Standard, pionnier de la multipropriété selon lui), échange avec Bruno Venanzi, cite Salvatore Curaba comme preuve qu'on peut réussir en affaires avec des valeurs. Et il veut devenir, pour d'autres, le mentor qu'il n'a pas eu.</p>
+      </div>
+      <div class="panel">
+        <h3>Les diplômes</h3>
+        <p>UEFA B en juin 2024, sans certitude de vouloir entraîner. Puis les cours FIFA, où il découvre comment de petites villes ont été redynamisées par le football — et se demande pourquoi pas Verviers. C'est le programme filmé à Los Angeles et New York.</p>
+        <p class="muted">Piste à vérifier : le Diplôme FIFA en gestion des clubs couvre académies, stades, gouvernance, finance — ce qui correspond exactement au projet de Rechain.</p>
+      </div>
+      <div class="panel">
+        <h3>L'échec qui construit</h3>
+        <p>Au printemps 2025, il porte la candidature du fonds WGI pour racheter le Standard. Le club choisit une autre voie ; WGI se retire avec fracas le 21 avril. Un an plus tard, il assume : il estime qu'un investisseur non blanc est plus vite suspecté de manquer de sérieux, et veut prouver le contraire. Il reconnaît aussi un déficit de formation dans sa propre communauté, que des modèles comme Kompany ou Fadiga sont en train de combler.</p>
+      </div>
+    </div>
+    <div class="alert"><strong>Point sensible.</strong> Les propos sur la représentation et sur le rachat raté du Standard sont forts, publics, et polarisants. Ils doivent être traités dans la série avec Paul, en connaissance de cause — pas découverts par lui au visionnage.</div>
+  </div>
+</section>
+
+<!-- ARENA -->
+<section class="s" id="arena">
+  <div class="wrap">
+    <h2>Le terrain vide</h2>
+    <p class="lede">Le projet a neuf ans. Il n'est pas né d'une retraite : il est né dans un quartier.</p>
+    <div class="tbl">
+    <table class="sheet">
+      <thead><tr><th>Quand</th><th>Étape</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Juillet 2017</td><td>Au Pré-Javais, il annonce un espace multisports et une académie à son nom.</td><td><a href="https://www.vedia.be/sport/football/paul-jose-mpoku-cree-une-pmk-academie-verviers-pour-les-jeunes-footballeurs/92347" target="_blank" rel="noopener">Vedia</a></td></tr>
+        <tr><td class="k">2017 – 2025</td><td>Stages Mpoku pour les 7–15 ans, filles et garçons, trois fois par an, surtout au CREF de Blégny — 8 éditions.</td><td><a href="https://pmk.group/stage-mpoku/" target="_blank" rel="noopener">PMK Group</a></td></tr>
+        <tr><td class="k">Mai 2023</td><td>La fusion Rechain–Lambermont libère le Domaine des Tourelles. Une partie appartient au club, une partie à la Ville. Premiers contacts avec le président rechaintois Bruno Grignard.</td><td><a href="https://www.lavenir.net/regions/verviers/sports/2023/05/25/paul-jose-mpoku-songe-a-lancer-son-academie-de-football-a-rechain-verviers-27ZQIGXTEFHTFN4JEGXVEWUPXA/" target="_blank" rel="noopener">L'Avenir</a></td></tr>
+        <tr><td class="k">Novembre 2024</td><td>Maxime Degey, futur bourgmestre, confirme les accords de vente. Padel et football au programme.</td><td><a href="https://www.lavenir.net/regions/verviers/sports/2024/11/08/le-projet-mpoku-a-petit-rechain-est-tres-avance-et-on-sait-desormais-ce-quon-y-proposera-ICJWXSXARZHR3HPZCAAZ7JO2C4/" target="_blank" rel="noopener">L'Avenir</a></td></tr>
+        <tr><td class="k">Mars 2026</td><td>Permis d'urbanisme déposé. Modèle revendiqué : Right to Dream. Complexe de vie : football, padel, autres sports ; stages de pros et de sélections, avec l'hôtel Van der Valk à cinq minutes.</td><td><a href="https://www.vedia.be/info/urbanisme/verviers-le-projet-dacademie-de-mpoku-prend-forme/211712" target="_blank" rel="noopener">Vedia</a> · <a href="https://www.dhnet.be/sports/football/2026/03/07/quand-paul-jose-mpoku-collabore-avec-vincent-kompany-VZWEEA6JEVFI5LWQVCXTK5QSSA/" target="_blank" rel="noopener">La DH</a></td></tr>
+        <tr><td class="k">2026</td><td>Permis accordé. <span class="flag">À dater</span></td><td>Paul / PMK</td></tr>
+        <tr><td class="k">25 sept. 2026</td><td>Conférence de presse, 18 h : PMK Sport Arena.</td><td>Invitation</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="grid2" style="margin-top:18px">
+      <div class="panel">
+        <h3>Ce que le projet dit de lui</h3>
+        <p>Il le décrit comme plus qu'un business : un moyen de rendre à la ville et de s'impliquer dans la communauté. Tout le monde ne deviendra pas pro, mais chacun doit repartir avec quelque chose pour la vie. Il veut aussi, à terme, un club — à Verviers, à Liège ou au Congo — porté par un groupe lié au territoire plutôt que par un investisseur seul.</p>
+      </div>
+      <div class="panel">
+        <h3>La ligne de Rechain</h3>
+        <p>Entre 10 et 12 ans, il jouait à l'Entente Rechaintoise. Le site que la fusion des clubs a laissé vide est celui que son académie reprend. <strong>L'enfant revient construire sur le terrain où il a appris.</strong> C'est la charpente de toute la série — à condition que Paul confirme qu'il s'agit bien des mêmes terrains.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONNAGES -->
+<section class="s" id="gens">
+  <div class="wrap">
+    <h2>La distribution</h2>
+    <p class="lede">Les personnes qui peuvent porter le récit. La priorité indique l'ordre dans lequel les solliciter pour les interviews.</p>
+    <div class="grid3">
+      <div class="person"><div class="role">Le personnage</div><h3>Paul-José Mpoku</h3><p>Meneur de jeu, croyant, entrepreneur, élève. Parle facilement, avec humour, et assume des positions tranchées.</p><span class="prio a">Priorité A — plusieurs sessions</span></div>
+      <div class="person"><div class="role">Épouse</div><h3>Son épouse</h3><p>A géré tous les déménagements de 9 pays et s'est réadaptée à chaque fois. Il la remercie publiquement pour tout.</p><span class="prio a">Priorité A — sous réserve d'accord</span></div>
+      <div class="person"><div class="role">Destinataires</div><h3>Son fils et sa fille</h3><p>Adresse de la voix off du teaser. Le fils voit le visage de son père partout au club, sans connaître encore la médaille de 2018.</p><span class="prio a">Présence à l'image à discuter</span></div>
+      <div class="person"><div class="role">Les parents</div><h3>Le père et la mère</h3><p>Ont quitté le Congo pour l'avenir de leurs enfants. Le père a choisi le nom Mpoku. La mère le chouchoutait à chaque retour à Verviers.</p><span class="prio a">Priorité A</span></div>
+      <div class="person"><div class="role">Le petit frère</div><h3>Albert Sambi Lokonga</h3><p>Né à Verviers en 1999, Anderlecht, Arsenal, Hamburger SV, deux sélections belges. Il porte le 48 en hommage au code postal de Verviers. Paul le cite comme sa plus grande fierté.</p><span class="prio a">Priorité A</span></div>
+      <div class="person"><div class="role">Le frère du milieu</div><h3>Fabrice Sambi Lokonga</h3><p>Footballeur amateur, a raconté la famille à la presse en 2019. Témoin idéal du quotidien et du Pré-Javais.</p><span class="prio b">Priorité B</span></div>
+      <div class="person"><div class="role">L'allié</div><h3>Vincent Kompany</h3><p>Fondateur du BX Brussels, dont Paul est parrain. Même vision de la formation comme école de vie. Entraîneur du Bayern.</p><span class="prio b">Priorité B — ambitieux</span></div>
+      <div class="person"><div class="role">La Ville</div><h3>Maxime Degey</h3><p>Bourgmestre de Verviers, a porté l'accord de vente des Tourelles.</p><span class="prio b">Priorité B — tournage conférence</span></div>
+      <div class="person"><div class="role">Rechain</div><h3>Bruno Grignard</h3><p>Président de l'ancien club rechaintois, premiers contacts avant la fusion. Peut retrouver les éducateurs et les photos de l'époque.</p><span class="prio a">Priorité A pour l'épisode racines</span></div>
+      <div class="person"><div class="role">BX Brussels</div><h3>Steven Gibas</h3><p>Directeur des opérations, parle d'une approche holistique commune.</p><span class="prio c">Priorité C</span></div>
+      <div class="person"><div class="role">Inspiration</div><h3>Léa Bayekula</h3><p>Championne paralympique, intervenante prévue aux stages. Figure du dépassement.</p><span class="prio c">Priorité C</span></div>
+      <div class="person"><div class="role">Les mentors</div><h3>Duchâtelet, Venanzi, Curaba</h3><p>Trois hommes d'affaires qu'il écoute. Un seul suffit pour incarner l'apprentissage des affaires.</p><span class="prio c">Priorité C</span></div>
+      <div class="person"><div class="role">Le terrain</div><h3>Coéquipiers</h3><p>Sébastien Pocognoli (Coupe 2018), Florent Ibenge (sélectionneur CAN 2017), Carl Hoefkens (l'anecdote Tottenham), un camarade de promotion FIFA.</p><span class="prio b">Priorité B</span></div>
+      <div class="person"><div class="role">L'avenir</div><h3>Les enfants des stages</h3><p>Et leurs parents. Ceux pour qui tout est construit : la dernière image de la série leur appartient.</p><span class="prio a">Priorité A</span></div>
+      <div class="person"><div class="role">Le financement</div><h3>La famille qui soutient le projet</h3><p>Présence à l'écran ou anonymat : à décider avec Paul et avec elle avant tout tournage.</p><span class="prio c">À arbitrer</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAROLES -->
+<section class="s" id="paroles">
+  <div class="wrap">
+    <h2>Ce qu'il a dit</h2>
+    <p class="lede">Ses positions publiques, classées par thème. Bord rouge : citation courte vérifiée. Bord bleu : propos reformulés, à retrouver dans la source pour une utilisation exacte. Aucun de ces extraits ne remplace l'entretien : ce sont des pistes de questions.</p>
+    <div class="qf" role="group" aria-label="Filtrer par thème">
+      <button type="button" data-q="all" aria-pressed="true">Tous</button>
+      <button type="button" data-q="racines" aria-pressed="false">Racines</button>
+      <button type="button" data-q="gagner" aria-pressed="false">Gagner autrement</button>
+      <button type="button" data-q="transmettre" aria-pressed="false">Transmettre</button>
+      <button type="button" data-q="foi" aria-pressed="false">Foi & valeurs</button>
+      <button type="button" data-q="batir" aria-pressed="false">Bâtir</button>
+      <button type="button" data-q="representation" aria-pressed="false">Représentation</button>
+    </div>
+    <div class="qgrid">
+      <div class="q cite" data-t="transmettre"><blockquote>« Ce que je n'ai pas gagné, vous allez le gagner. »</blockquote><div class="tag">Transmettre — ce qu'il dit à son petit frère</div><div class="src">La DH, 21 mars 2026 — <a href="https://www.dhnet.be/sports/football/division-1a/standard/2026/03/21/sa-vie-de-joueur-son-apres-carriere-le-standard-paul-jose-mpoku-se-confie-si-javais-ete-anderlechtois-jaurais-ete-appele-chez-les-diables-3X477PAHLVAGNHDDRV2FRHFCOQ/" target="_blank" rel="noopener">lire</a></div></div>
+      <div class="q cite" data-t="gagner"><blockquote>« Il fallait gagner autrement. »</blockquote><div class="tag">Gagner autrement — sur le Ballon d'or qu'il savait inaccessible</div><div class="src">VOOSport World, via Walfoot, 12 mars 2026 — <a href="https://www.walfoot.be/news/2026-03-12/jai-gagne-autrement-dans-ma-carriere--frachement-retraite-paul-jose-mpoku-se-confie" target="_blank" rel="noopener">lire</a></div></div>
+      <div class="q cite" data-t="gagner"><blockquote>« J'ai accompli un rêve que beaucoup rêvent d'atteindre. »</blockquote><div class="tag">Gagner autrement — vidéo de retraite</div><div class="src">Radio Okapi, 7 mars 2026 — <a href="https://www.radiookapi.net/2026/03/07/actualite/sport/linternational-congolais-paul-jose-mpoku-met-fin-sa-carriere-de-joueur-de" target="_blank" rel="noopener">lire</a></div></div>
+      <div class="q cite" data-t="batir"><blockquote>« Faire toutes les formations possibles afin d'être prêt pour ce qui viendra après. »</blockquote><div class="tag">Bâtir — sur son diplôme UEFA B</div><div class="src">Actualite.cd, 6 mars 2026 — <a href="https://actualite.cd/2026/03/06/paul-jose-mpoku-prend-sa-retraite-33-ans-clap-de-fin-pour-un-leopard-au-parcours" target="_blank" rel="noopener">lire</a></div></div>
+      <div class="q cite" data-t="transmettre batir"><blockquote>« Chez nous, il n'y a pas de faux espoirs. »</blockquote><div class="tag">Transmettre — sur la Mpoku Academy</div><div class="src">La DH, 7 mars 2026 — <a href="https://www.dhnet.be/sports/football/2026/03/07/quand-paul-jose-mpoku-collabore-avec-vincent-kompany-VZWEEA6JEVFI5LWQVCXTK5QSSA/" target="_blank" rel="noopener">lire</a></div></div>
+      <div class="q para" data-t="racines"><p class="pt">Les premiers à se sacrifier, ce sont ses parents, partis du Congo pour que leurs enfants aient de bonnes écoles et des papiers. En voyageant, il mesure la chance d'avoir un passeport belge quand d'autres restent bloqués.</p><div class="tag">Racines</div><div class="src">La DH, 21 mars 2026</div></div>
+      <div class="q para" data-t="racines"><p class="pt">Sa femme a géré tous les déménagements et s'est réadaptée à chaque pays. Son frère Albert a suivi sa route sans qu'ils aient besoin de se parler : c'est sa plus grande fierté.</p><div class="tag">Racines</div><div class="src">La DH, 21 mars 2026</div></div>
+      <div class="q para" data-t="gagner"><p class="pt">Il ne sait pas s'il était fait pour être l'homme d'un seul club : il aime voyager, découvrir, et considère qu'une carrière sert à cela. Il a gagné en rencontrant des cultures et des gens dans le monde entier.</p><div class="tag">Gagner autrement</div><div class="src">La DH 21/03/2026 · Walfoot 12/03/2026</div></div>
+      <div class="q para" data-t="transmettre"><p class="pt">Le rôle de meneur de jeu, faire briller les autres, ne décrit pas seulement son jeu : il dit que c'est sa vie entière. Il assure que sa motivation n'a jamais été l'argent.</p><div class="tag">Transmettre</div><div class="src">La DH, 21 mars 2026</div></div>
+      <div class="q para" data-t="foi"><p class="pt">À Londres, après la mort d'un cousin proche, il vit une rencontre personnelle avec Jésus. Tout part de là : ses convictions, ses projets, la fondation. Il veut faire le bien, briller là où ça ne va pas, rester fidèle à ses valeurs dans un milieu où il voit des coups de couteau dans le dos.</p><div class="tag">Foi & valeurs</div><div class="src">La DH, 21 mars 2026 · SEL Belgique</div></div>
+      <div class="q para" data-t="batir"><p class="pt">Pendant ses cours FIFA, il a vu de petites villes relancées par le football, et se demande pourquoi pas Verviers, qui regorge de talent.</p><div class="tag">Bâtir</div><div class="src">La DH, 21 mars 2026</div></div>
+      <div class="q para" data-t="batir"><p class="pt">L'académie n'est pas que du football : c'est de l'éducation. Tout le monde ne sera pas professionnel, mais on peut donner à chacun des choses pour la vie.</p><div class="tag">Bâtir</div><div class="src">La DH, 21 mars 2026</div></div>
+      <div class="q para" data-t="representation"><p class="pt">Il estime qu'on remet plus vite en cause le sérieux d'un investisseur étranger ou non blanc, et veut prouver qu'on peut être noir, arabe, et bien faire les choses. Il parle d'un déficit de représentation dont sa communauté porte aussi une part, faute de s'être assez formée.</p><div class="tag">Représentation</div><div class="src">La DH, 21 mars 2026</div></div>
+      <div class="q para" data-t="representation"><p class="pt">En choisissant le Congo, sa génération a ouvert la voie aux binationaux ; les jeunes d'aujourd'hui ont ce qu'eux n'avaient pas, parce qu'ils se sont battus pour.</p><div class="tag">Représentation</div><div class="src">La DH, 21 mars 2026</div></div>
+      <div class="q cite" data-t="racines"><blockquote>« On a tout appris dans les quartiers du Pré-Javais. »</blockquote><div class="tag">Racines — Albert, son frère</div><div class="src">Vedia, décembre 2019 — <a href="https://www.vedia.be/www/video/sport/football/albert-sambi-lokonga-quot-je-porte-le-48-en-hommage-a-verviers-quot-_100264_89.html" target="_blank" rel="noopener">voir</a></div></div>
+      <div class="q cite" data-t="racines"><blockquote>« Paul-José est le seul de nous trois à être né au Congo. »</blockquote><div class="tag">Racines — Fabrice, son frère</div><div class="src">La DH, 31 janvier 2019 — <a href="https://www.dhnet.be/sports/football/division-1a/2019/01/31/en-visite-chez-fabrice-le-frere-de-sambi-lokonga-et-polo-mpoku-albert-a-un-potentiel-encore-plus-grand-que-paul-jose-JGSIKQNMSJE5HIPEGQKKZZ2Q7U/" target="_blank" rel="noopener">lire</a></div></div>
+      <div class="q cite" data-t="batir"><blockquote>« On doit remercier Monsieur Mpoku pour ce beau projet. »</blockquote><div class="tag">Bâtir — Maxime Degey, futur bourgmestre</div><div class="src">L'Avenir, 8 novembre 2024 — <a href="https://www.lavenir.net/regions/verviers/sports/2024/11/08/le-projet-mpoku-a-petit-rechain-est-tres-avance-et-on-sait-desormais-ce-quon-y-proposera-ICJWXSXARZHR3HPZCAAZ7JO2C4/" target="_blank" rel="noopener">lire</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGES -->
+<section class="s" id="images">
+  <div class="wrap">
+    <h2>Iconographie & archives</h2>
+    <p class="lede">Ce qui existe, où le trouver, et à qui appartiennent les droits. Rien de cette liste n'est libre d'usage : chaque ligne est une demande à faire.</p>
+    <div class="tbl">
+    <table class="sheet">
+      <thead><tr><th>Image</th><th>Où</th><th>Droits</th></tr></thead>
+      <tbody>
+        <tr><td>Vidéo d'annonce de retraite</td><td><a href="https://www.instagram.com/reel/DVg3A9biBE3/" target="_blank" rel="noopener">Instagram de Paul</a></td><td><span class="flag ok">Paul</span></td></tr>
+        <tr><td>Post famille intégré à l'interview DH</td><td><a href="https://www.instagram.com/p/DTpwxh9CO6r/" target="_blank" rel="noopener">Instagram de Paul</a></td><td><span class="flag ok">Paul</span></td></tr>
+        <tr><td>Paul souriant sur le site des Tourelles, permis déposé</td><td><a href="https://www.vedia.be/info/urbanisme/verviers-le-projet-dacademie-de-mpoku-prend-forme/211712" target="_blank" rel="noopener">Vedia, mars 2026</a></td><td><span class="flag">Vedia</span></td></tr>
+        <tr><td>Rétrospective carrière</td><td><a href="https://www.vedia.be/sport/football/paul-jose-mpoku-retour-sur-une-carriere-bien-remplie/211697" target="_blank" rel="noopener">Vedia, mars 2026</a></td><td><span class="flag">Vedia</span></td></tr>
+        <tr><td>Retour au Pré-Javais, annonce de la première académie</td><td><a href="https://www.vedia.be/sport/football/paul-jose-mpoku-cree-une-pmk-academie-verviers-pour-les-jeunes-footballeurs/92347" target="_blank" rel="noopener">Vedia, juillet 2017</a></td><td><span class="flag">Vedia</span></td></tr>
+        <tr><td>Albert et le numéro 48</td><td><a href="https://www.vedia.be/www/video/sport/football/albert-sambi-lokonga-quot-je-porte-le-48-en-hommage-a-verviers-quot-_100264_89.html" target="_blank" rel="noopener">Vedia, 2019</a></td><td><span class="flag">Vedia</span></td></tr>
+        <tr><td>Colis Covid des deux frères</td><td><a href="https://www.vedia.be/www/video/info/coronavirus/paul-jose-mpoku-et-albert-sambi-lokonga-apportent-leur-soutien-dans-la-lutte-contre-le-covid-19_101615_89.html" target="_blank" rel="noopener">Vedia, 2020</a></td><td><span class="flag">Vedia</span></td></tr>
+        <tr><td>Finale Coupe de Belgique 2018, avec Pocognoli</td><td>Belga Image (photo Laurie Dieffembacq), reprise par <a href="https://www.dhnet.be/sports/football/division-1a/standard/2026/03/21/sa-vie-de-joueur-son-apres-carriere-le-standard-paul-jose-mpoku-se-confie-si-javais-ete-anderlechtois-jaurais-ete-appele-chez-les-diables-3X477PAHLVAGNHDDRV2FRHFCOQ/" target="_blank" rel="noopener">La DH</a></td><td><span class="flag">Belga</span></td></tr>
+        <tr><td>Clasico Anderlecht – Standard, 1er septembre 2019 : duel des frères</td><td>Belga Image (photo Virginie Lefour)</td><td><span class="flag">Belga</span></td></tr>
+        <tr><td>Photo d'équipe Belgique Espoirs, 9 septembre 2013</td><td>Photonews (Vincent Kalut)</td><td><span class="flag">Photonews</span></td></tr>
+        <tr><td>Rendu 3D du complexe de Rechain</td><td>Publié par La DH (crédit DR)</td><td><span class="flag ok">Architecte / PMK</span></td></tr>
+        <tr><td>Parrainage du BX Brussels</td><td><a href="https://www.dhnet.be/sports/football/2026/03/07/quand-paul-jose-mpoku-collabore-avec-vincent-kompany-VZWEEA6JEVFI5LWQVCXTK5QSSA/" target="_blank" rel="noopener">La DH</a> (crédits DR et Kponou Degnon)</td><td><span class="flag">BX / photographe</span></td></tr>
+        <tr><td>Coup franc Togo – RDC, CAN 2017</td><td>Diffuseur officiel CAF</td><td><span class="flag">CAF / diffuseur</span></td></tr>
+        <tr><td>Matchs Standard, Europa League, Tottenham réserve, Leyton Orient</td><td>Diffuseurs, clubs, Getty Images</td><td><span class="flag">Payant</span></td></tr>
+        <tr><td>Interventions de consultant</td><td>Play Sports, VOOSport World</td><td><span class="flag">Diffuseurs</span></td></tr>
+        <tr><td>Photo Incheon United, 2023</td><td><a href="https://en.wikipedia.org/wiki/Paul-Jos%C3%A9_M%27Poku" target="_blank" rel="noopener">Wikipédia</a> — licence à vérifier sur Wikimedia Commons</td><td><span class="flag gd">Peut-être libre</span></td></tr>
+        <tr><td>Stages Mpoku : photos, vidéos</td><td><a href="https://pmk.group/mpoku-academy/" target="_blank" rel="noopener">pmk.group</a></td><td><span class="flag ok">PMK</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="note"><p style="margin:0"><strong>Le plus précieux n'est pas en ligne.</strong> Les archives familiales — photos de Kinshasa, de l'arrivée en Belgique, des matchs de jeunes à Cornesse et Rechain, des vidéos amateur du Pré-Javais, les lettres de Tottenham — n'existent que chez les Mpoku. Une journée de numérisation chez ses parents vaut plus que tous les droits Belga réunis, et ne coûte rien.</p></div>
+  </div>
+</section>
+</main>
+
+<div class="halfbanner" id="mt2">
+  <div class="wrap">
+    <div class="n">2</div>
+    <h2>Seconde mi-temps — le dossier artistique</h2>
+    <p>Ce que la série raconte, comment elle le raconte, à quoi elle ressemble et ce qu'il reste à tourner. Des propositions — la construction définitive viendra du dérushage des rushes LA et New York.</p>
+  </div>
+</div>
+
+<div class="main2">
+<!-- THESE -->
+<section class="s" id="these">
+  <div class="wrap">
+    <h2>La thèse</h2>
+    <p class="logline">Pendant vingt ans, on lui a dit où courir. À 33 ans, il retourne à l'école pour apprendre à être celui qui décide.</p>
+    <div class="grid2">
+      <div class="panel">
+        <h3>Ce que la série n'est pas</h3>
+        <p>Ni une rétrospective de carrière — il n'a pas gagné de Ballon d'or et le dit lui-même —, ni un film promotionnel pour un complexe sportif. Si le spectateur sort en ayant retenu des chiffres d'investissement, la série a échoué.</p>
+      </div>
+      <div class="panel">
+        <h3>Ce qu'elle est</h3>
+        <p>Le portrait d'un <strong>meneur de jeu</strong> — celui dont le métier est de rendre les autres décisifs — au moment précis où il n'a plus de match à jouer, et où il doit décider ce que sa vie fait passer à la génération suivante. Le projet de Rechain n'est pas le sujet : c'est la passe.</p>
+      </div>
+    </div>
+    <h3 style="margin-top:28px">Titres de travail</h3>
+    <div class="grid3">
+      <div class="panel"><div class="big">Passe décisive</div><p class="muted" style="margin:6px 0 0">Le métier du meneur, et le sens de toute sa reconversion. Lisible en français comme en anglais (« The Assist »).</p></div>
+      <div class="panel"><div class="big">59e minute</div><p class="muted" style="margin:6px 0 0">La minute où il est sorti pour la dernière fois sans le savoir. Titre de mystère, fort pour un premier épisode.</p></div>
+      <div class="panel"><div class="big">Le terrain vide</div><p class="muted" style="margin:6px 0 0">Rechain avant l'Arena. Titre d'image, cohérent avec l'ouverture du teaser.</p></div>
+      <div class="panel"><div class="big">Gagner autrement</div><p class="muted" style="margin:6px 0 0">Ses propres mots. Titre de thèse, idéal pour une série destinée aussi aux jeunes des stages.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<section class="s" id="themes">
+  <div class="wrap">
+    <h2>Six lignes de force</h2>
+    <p class="lede">Chaque thème est ancré dans un fait sourcé, pas dans une intention. C'est ce qui rend le récit crédible et impossible à transposer à un autre ancien joueur.</p>
+    <div class="grid2">
+      <div class="panel"><h3>Le premier sacrifice n'est pas le sien</h3><p>Des parents qui quittent Kinshasa. Un fils seul né là-bas, qui porte un autre nom que ses frères. Un passeport belge dont il mesure la valeur en voyageant. Le récit d'un exil qui a réussi, raconté par celui qui en a bénéficié.</p><p class="muted" style="margin:0">Ancrage : La DH 2019 et 2026.</p></div>
+      <div class="panel"><h3>Gagner autrement</h3><p>Le Ballon d'or était hors de portée ; il a gagné en cultures, en rencontres, en réseau — neuf pays. C'est la réponse de la série à la question que tout le monde pose à un joueur sans grand palmarès.</p><p class="muted" style="margin:0">Ancrage : VOOSport World, mars 2026.</p></div>
+      <div class="panel"><h3>Faire briller les autres</h3><p>Le meneur de jeu comme philosophie de vie. Albert, les binationaux du Congo, les enfants des stages. Ce qu'il n'a pas gagné, d'autres le gagneront.</p><p class="muted" style="margin:0">Ancrage : La DH, mars 2026.</p></div>
+      <div class="panel"><h3>Un deuil à Londres</h3><p>Un adolescent loin de chez lui perd un cousin, et trouve la foi. Le moteur intime de tout le reste. Thème à traiter avec pudeur et avec l'accord explicite de Paul.</p><p class="muted" style="margin:0">Ancrage : La DH 2026, SEL Belgique.</p></div>
+      <div class="panel"><h3>Le joueur devient élève</h3><p>Une phrase dans une église, un diplôme UEFA sans vocation d'entraîneur, des cours FIFA à Los Angeles et New York. L'inversion de statut est le cœur visuel de la série : l'ancien international en salle de classe, carnet à la main.</p><p class="muted" style="margin:0">Ancrage : rushes LA / NY, actualite.cd.</p></div>
+      <div class="panel"><h3>Rendre à la ville</h3><p>Verviers, ancienne ville industrielle. Le Pré-Javais. Le terrain vide des Tourelles, abandonné après une fusion de clubs. Il ramène le monde qu'il a vu dans la ville qu'il a quittée à 16 ans.</p><p class="muted" style="margin:0">Ancrage : L'Avenir 2023-2024, Vedia 2017 et 2026.</p></div>
+    </div>
+    <div class="gold"><p style="margin:0"><strong>Le thème qu'on garde en réserve :</strong> la représentation. Le rachat avorté du Standard et ses propos sur le sérieux prêté aux investisseurs noirs ou arabes peuvent donner au dernier épisode sa tension politique. Mais c'est un choix éditorial lourd, qui engage Paul publiquement : il se décide avec lui, et après avis juridique.</p></div>
+  </div>
+</section>
+
+<!-- ARC -->
+<section class="s" id="arc">
+  <div class="wrap">
+    <h2>Architecture : la tresse</h2>
+    <p class="lede">Une série en trois temporalités tressées, sur le modèle de The Last Dance : un fil présent qui avance (l'école FIFA, puis Verviers), et des retours au passé déclenchés par ce qui s'y passe.</p>
+    <div class="braid panel">
+      <svg viewBox="0 0 1000 250" role="img" aria-label="Trois fils narratifs tressés : présent à l'école FIFA, passé de carrière, futur à Rechain">
+        <path d="M110 50 C220 50 240 125 350 125 S480 50 590 50 S720 200 830 200 S930 125 990 125" fill="none" stroke="#1E9BE8" stroke-width="7" stroke-linecap="round"/>
+        <path d="M110 125 C220 125 240 50 350 50 S480 125 590 125 S720 50 830 50 S930 50 990 50" fill="none" stroke="#C8001C" stroke-width="7" stroke-linecap="round"/>
+        <path d="M110 200 C220 200 240 200 350 200 S480 200 590 200 S720 125 830 125 S930 200 990 200" fill="none" stroke="#E2B900" stroke-width="7" stroke-linecap="round"/>
+        <g font-family="Barlow, sans-serif" font-size="14" fill="currentColor" opacity=".75">
+          <text x="120" y="240">Ép. 1</text><text x="290" y="240">Ép. 2</text><text x="455" y="240">Ép. 3</text><text x="620" y="240">Ép. 4</text><text x="785" y="240">Ép. 5</text><text x="930" y="240">Ép. 6</text>
+        </g>
+      </svg>
+      <div class="legend" style="display:flex;gap:18px;flex-wrap:wrap;font-family:'Barlow Condensed',sans-serif;font-size:15px">
+        <span><b style="color:#1E9BE8">Bleu</b> — rushes FIFA, Los Angeles et New York : le fil qui avance</span>
+        <span><b style="color:#C8001C">Rouge</b> — archives et témoignages : la carrière</span>
+        <span><b style="color:#B89600">Jaune</b> — Verviers : le terrain vide, le permis, la conférence</span>
+        <span class="muted">Le fil le plus haut porte l'épisode ; les croisements sont les transitions.</span>
+      </div>
+    </div>
+    <div class="alert"><strong>Durées et nombre d'épisodes non fixés.</strong> Le découpage ci-dessous est une hypothèse en six mouvements, à confronter au dérushage. Il peut se contracter à quatre si la matière LA / New York est moins riche que prévu.</div>
+
+    <div class="ep"><div class="no">1</div><div><h3>59e minute</h3><p>Octobre 2025, un stade saoudien : il sort du terrain à la 59e minute. Personne ne le sait, pas même lui. Cinq mois plus tard, une vidéo sur son téléphone. Puis une salle de classe à Los Angeles. Qu'est-ce qu'un meneur de jeu quand il n'y a plus de match ?</p>
+      <div class="beats"><div><b>Ouverture</b>Le terrain vide de Rechain au drone, en silence — puis le brouhaha d'Al-Batin.</div><div><b>Présent</b>Premiers jours de formation FIFA. Paul élève.</div><div><b>Question</b>Pourquoi, à 33 ans, retourner à l'école plutôt que profiter ?</div><div><b>Sortie</b>Il nomme Verviers pour la première fois.</div></div></div>
+
+    <div class="ep"><div class="no">2</div><div><h3>Pré-Javais</h3><p>Kinshasa, l'exil des parents, un nom différent de celui des frères. Cornesse, Rechain, le ballon contre les murs du quartier. Les trois frères, la maison sur les hauteurs.</p>
+      <div class="beats"><div><b>Témoins</b>Parents, Fabrice, Albert, éducateurs de Rechain.</div><div><b>Archive</b>Photos de famille, matchs de jeunes.</div><div><b>Pivot</b>On découvre que Rechain est le terrain de l'Arena.</div><div><b>Présent</b>Un cours FIFA sur les académies et la communauté.</div></div></div>
+
+    <div class="ep"><div class="no">3</div><div><h3>Le début du commencement</h3><p>Seize ans, Londres, pas un mot d'anglais. Les coudes de Carl Hoefkens, la génération Kane, Leyton Orient. Puis le deuil d'un cousin, et la foi. L'épisode le plus intime.</p>
+      <div class="beats"><div><b>Témoins</b>Paul seul, face caméra, dans un lieu calme.</div><div><b>Archive</b>Tottenham réserve, Leyton Orient.</div><div><b>Pivot</b>La rencontre avec la foi.</div><div><b>Présent</b>New York : un homme loin de chez lui, à nouveau.</div></div></div>
+
+    <div class="ep"><div class="no">4</div><div><h3>Gagner autrement</h3><p>Le Standard, deux fois. L'Italie, la Grèce, le Golfe, la Turquie, la Corée. Le choix du Congo, le coup franc contre le Togo. La Coupe 2018 et une médaille jamais montrée. Puis, en 2026, le Congo au Mondial — sans lui.</p>
+      <div class="beats"><div><b>Témoins</b>Pocognoli, Ibenge, son épouse.</div><div><b>Archive</b>Coupe 2018, CAN 2017, Clasico des frères.</div><div><b>Pivot</b>La qualification du Congo, 26 jours après sa retraite.</div><div><b>Présent</b>Le Mondial en Amérique vu depuis la formation.</div></div></div>
+
+    <div class="ep"><div class="no">5</div><div><h3>L'élève</h3><p>La phrase de l'église. Duchâtelet, Venanzi. Le rachat raté du Standard et ce qu'il en a appris sur la confiance accordée à qui. La formation FIFA comme réponse : se former pour ne plus être jugé.</p>
+      <div class="beats"><div><b>Témoins</b>Un mentor, un camarade de promotion FIFA.</div><div><b>Archive</b>Communiqué WGI d'avril 2025, presse.</div><div><b>Pivot</b>Le diplôme, la fin des cours.</div><div><b>Présent</b>Le retour en Belgique, le permis accordé.</div></div></div>
+
+    <div class="ep"><div class="no">6</div><div><h3>Passe décisive</h3><p>Verviers, 25 septembre 2026, 18 h. La conférence de presse. Les enfants des stages, le BX de Kompany, la Ville. Et une dernière scène, privée : un père qui montre enfin à son fils la médaille de 2018, sur le terrain où lui-même a appris.</p>
+      <div class="beats"><div><b>Témoins</b>Degey, Kompany, enfants et parents.</div><div><b>Tournage</b>Conférence, terrain, famille.</div><div><b>Pivot</b>La lettre aux enfants — reprise du teaser.</div><div><b>Dernière image</b>Des enfants qui jouent là où il n'y avait plus rien.</div></div></div>
+  </div>
+</section>
+
+<!-- MOTIFS -->
+<section class="s" id="motifs">
+  <div class="wrap">
+    <h2>Motifs récurrents</h2>
+    <p class="lede">Des éléments qui reviennent d'un épisode à l'autre et gagnent du sens à chaque apparition. Chacun est tiré d'un fait réel.</p>
+    <div class="grid3">
+      <div class="panel"><h3>Le terrain vide</h3><p>Filmé à chaque saison au même cadre, au drone et au sol : herbe haute, gel, pluie, premiers engins, première pierre. Le temps qui passe rendu visible.</p></div>
+      <div class="panel"><h3>La médaille</h3><p>Coupe de Belgique 2018, jamais montrée au fils. Introduite à l'épisode 4 comme un détail, payée à la toute fin. <span class="flag">Accord de Paul</span></p></div>
+      <div class="panel"><h3>La 59e minute</h3><p>Un chronomètre de match qui s'arrête, repris comme transition quand le passé coupe le présent.</p></div>
+      <div class="panel"><h3>La ligne de passe</h3><p>Le graphisme du tableau tactique : chaque départ vers un nouveau pays est une passe tracée à la craie, jusqu'au dernier point, Rechain.</p></div>
+      <div class="panel"><h3>Le carnet</h3><p>Le Paul élève : notes de cours FIFA, stylo, tableau blanc. L'ancien joueur en posture d'apprenant, jamais montré ainsi.</p></div>
+      <div class="panel"><h3>Le numéro 48</h3><p>Le code postal de Verviers dans le dos d'Albert. Le lien des frères avec la ville, en un chiffre.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DA -->
+<section class="s" id="da">
+  <div class="wrap">
+    <h2>Direction artistique</h2>
+    <div class="grid3">
+      <div class="panel"><h3 style="color:var(--sky)">Présent — l'école</h3><p>Rushes LA et New York tels quels : caméra épaule, lumière naturelle, étalonnage neutre et froid. On ne maquille pas leur caractère documentaire, on l'assume comme le « maintenant » de la série.</p></div>
+      <div class="panel"><h3 style="color:var(--red)">Passé — la carrière</h3><p>Archives au format d'origine — 4:3, 16:9 broadcast, grain, logos de diffuseur conservés quand c'est autorisé. Témoignages en entretien posé, fond sombre, lumière latérale chaude.</p></div>
+      <div class="panel"><h3 style="color:var(--star)">Futur — Verviers</h3><p>Le seul espace cinéma : 2.39, drone lent, heures dorées et bleues, plans fixes longs sur le terrain. Étalonnage chaud, noirs profonds.</p></div>
+    </div>
+    <h3 style="margin-top:26px">Palette</h3>
+    <div class="swatches">
+      <div class="sw"><div style="background:#0E4A33"></div><span><b>Pelouse de nuit</b>#0E4A33</span></div>
+      <div class="sw"><div style="background:#C8001C"></div><span><b>Rouge Sclessin</b>#C8001C</span></div>
+      <div class="sw"><div style="background:#1583CF"></div><span><b>Bleu Léopard</b>#1583CF</span></div>
+      <div class="sw"><div style="background:#E2B900"></div><span><b>Étoile</b>#E2B900</span></div>
+      <div class="sw"><div style="background:#EAF3EC"></div><span><b>Craie</b>#EAF3EC</span></div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="panel"><h3>Typographie & habillage</h3><p>Titres dans une grotesque condensée de maillot, texte en sans-serif de signalétique de stade. Cartons de lieu sous forme de ligne de passe tracée à la craie ; chaque épisode s'ouvre sur le tableau tactique et le point qui s'allume.</p></div>
+      <div class="panel"><h3>Son</h3><p>Rumba et guitare congolaises épurées pour les racines ; nappes électroniques froides pour l'école ; orchestre sobre pour Verviers. Sound design de matière : crampons sur béton, ballon contre un mur de quartier, clameur de Sclessin étouffée comme un souvenir. Un chœur gospel possible pour l'épisode 3, si la foi y est traitée de front.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOURNAGE -->
+<section class="s" id="tournage">
+  <div class="wrap">
+    <h2>À tourner</h2>
+    <p class="lede">Ce que les rushes existants ne couvrent pas. Classé par nécessité pour la série.</p>
+    <div class="tbl">
+    <table class="sheet">
+      <thead><tr><th>Lieu</th><th>Ce qu'on y filme</th><th>Priorité</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Domaine des Tourelles, Petit-Rechain</td><td>Le terrain vide, à chaque saison. Paul marchant sur le terrain de son enfance. Entretien principal.</td><td><span class="flag">Indispensable</span></td></tr>
+        <tr><td class="k">Conférence du 25/09, Verviers</td><td>Captation multicaméra, coulisses, réactions.</td><td><span class="flag">Indispensable</span></td></tr>
+        <tr><td class="k">Maison familiale</td><td>Entretien des parents, numérisation des archives, la médaille.</td><td><span class="flag">Indispensable</span></td></tr>
+        <tr><td class="k">Pré-Javais, Verviers</td><td>Le quartier, les murs, un ballon. Walk-and-talk avec Albert ou Fabrice.</td><td><span class="flag gd">Fort</span></td></tr>
+        <tr><td class="k">Stage Mpoku (CREF Blégny ou Wegnez)</td><td>Paul avec les enfants, sans mise en scène.</td><td><span class="flag gd">Fort</span></td></tr>
+        <tr><td class="k">Église</td><td>La phrase qui a tout déclenché, racontée sur place.</td><td><span class="flag gd">Si accord</span></td></tr>
+        <tr><td class="k">Stade de Sclessin</td><td>Tribunes vides, vestiaire, le club de cœur.</td><td><span class="flag gd">Fort</span></td></tr>
+        <tr><td class="k">Cornesse</td><td>Le premier terrain.</td><td><span class="flag ok">Utile</span></td></tr>
+        <tr><td class="k">Kinshasa</td><td>Le lieu de naissance, avec Paul.</td><td><span class="flag ok">Option</span></td></tr>
+        <tr><td class="k">Londres</td><td>Tottenham, Leyton Orient.</td><td><span class="flag ok">Option</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3 style="margin-top:26px">Questions pour l'entretien principal</h3>
+    <div class="grid2">
+      <div class="panel"><p>Qu'as-tu ressenti le 27 octobre en sortant à la 59e, si tu y repenses aujourd'hui ?</p><p>Qu'est-ce que tes parents ont laissé à Kinshasa, et te l'ont-ils raconté ?</p><p>Pourquoi porter un autre nom que tes frères a-t-il compté, ou non ?</p><p>Te souviens-tu d'un match précis sur les terrains de Rechain ?</p></div>
+      <div class="panel"><p>Qu'est-ce qu'un joueur qui n'a pas gagné le Ballon d'or doit apprendre pour gagner autrement ?</p><p>Qu'as-tu vu en salle de classe à Los Angeles que tu n'avais jamais vu en vestiaire ?</p><p>Où étais-tu pendant la Coupe du monde du Congo ?</p><p>Pourquoi n'as-tu jamais montré la médaille à ton fils ?</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- REFS -->
+<section class="s" id="refs">
+  <div class="wrap">
+    <h2>À voir avant de monter</h2>
+    <p class="lede">Chaque référence est choisie pour une chose précise à lui emprunter — pas pour son sujet.</p>
+    <div class="grid3">
+      <div class="ref"><div class="pf">Netflix · 2018 – 2022</div><h3>Sunderland 'Til I Die</h3><p class="take"><b>À prendre :</b> la ville autant que le club. Des chauffeurs de taxi, des bénévoles, une communauté ouvrière qui vit à travers une équipe. Le modèle pour filmer Verviers.</p><a class="go" href="https://en.wikipedia.org/wiki/Sunderland_'Til_I_Die" target="_blank" rel="noopener">Fiche</a></div>
+      <div class="ref"><div class="pf">FX / Disney+ · depuis 2022</div><h3>Welcome to Wrexham</h3><p class="take"><b>À prendre :</b> une petite ville en déclin relancée par un projet sportif porté par des outsiders — exactement ce que Paul dit avoir étudié à la FIFA. Référence à citer dans le pitch aux partenaires.</p><a class="go" href="https://en.wikipedia.org/wiki/Welcome_to_Wrexham" target="_blank" rel="noopener">Fiche</a></div>
+      <div class="ref"><div class="pf">Unisport · 3 épisodes</div><h3>The Right to Dream Documentary</h3><p class="take"><b>À prendre :</b> le modèle revendiqué par Paul, vu de l'intérieur. Trois jeunes, de la rue au contrat pro, et le discours d'éducation avant le football.</p><a class="go" href="https://www.unisportstore.com/stories/15150-the-right-to-dream-documentary-watch-all-3-episodes/" target="_blank" rel="noopener">Voir</a></div>
+      <div class="ref"><div class="pf">GhanaSoccernet · court</div><h3>Inside Right to Dream</h3><p class="take"><b>À prendre :</b> le fondateur Tom Vernon parle de fabriquer des modèles plutôt que des joueurs. La phrase de Paul sur le mentor qu'il veut devenir y répond directement.</p><a class="go" href="https://ghanasoccernet.com/video-developing-role-models-inside-ghanas-right-to-dream-academy" target="_blank" rel="noopener">Voir</a></div>
+      <div class="ref"><div class="pf">Netflix · 2022</div><h3>Captains</h3><p class="take"><b>À prendre :</b> six capitaines de nations en qualification, dont de petites sélections. La grammaire du joueur-leader filmé dans son pays, pas seulement sur le terrain.</p><a class="go" href="https://www.netflix.com/title/81580687" target="_blank" rel="noopener">Netflix</a></div>
+      <div class="ref"><div class="pf">Netflix · 2023</div><h3>Captains of the World</h3><p class="take"><b>À prendre :</b> le Mondial vu par ses acteurs, coproduit avec FIFA+. Utile pour comprendre ce que FIFA autorise en coulisses — et pour le fil Congo 2026.</p><a class="go" href="https://www.netflix.com/title/81681112" target="_blank" rel="noopener">Netflix</a></div>
+      <div class="ref"><div class="pf">Prime Video · 2022</div><h3>All or Nothing: Arsenal</h3><p class="take"><b>À prendre :</b> la saison 2021-22, celle où Albert Sambi Lokonga est dans l'effectif londonien. Un fragment de l'histoire familiale déjà filmé par d'autres — et la narration de Daniel Kaluuya comme repère de ton.</p><a class="go" href="https://www.primevideo.com/detail/0U4BJCPKS2XTFUQI8G3PONZPHA" target="_blank" rel="noopener">Prime Video</a></div>
+      <div class="ref"><div class="pf">Netflix / ESPN · 2020</div><h3>The Last Dance</h3><p class="take"><b>À prendre :</b> la tresse. Une saison présente qui avance, et chaque épisode qui plonge dans le passé d'un personnage. C'est l'architecture proposée pour la série.</p><span class="muted" style="margin-top:12px">Lien à ajouter</span></div>
+      <div class="ref"><div class="pf">Asif Kapadia · 2019</div><h3>Diego Maradona</h3><p class="take"><b>À prendre :</b> un récit entièrement porté par l'archive et les voix off, sans têtes parlantes à l'image. Utile si des témoins refusent la caméra.</p><span class="muted" style="margin-top:12px">Lien à ajouter</span></div>
+      <div class="ref"><div class="pf">Netflix · 2023</div><h3>Beckham</h3><p class="take"><b>À prendre :</b> la famille comme chœur — l'épouse, les parents, les enfants témoins. Le registre de l'intime chez un sportif médiatique.</p><span class="muted" style="margin-top:12px">Lien à ajouter</span></div>
+      <div class="ref"><div class="pf">Netflix · 2020</div><h3>Anelka : L'Incompris</h3><p class="take"><b>À prendre :</b> un joueur qui explique lui-même une carrière jugée par d'autres. Proche de la question Diables rouges / Congo et du rachat raté du Standard.</p><span class="muted" style="margin-top:12px">Lien à ajouter</span></div>
+      <div class="ref"><div class="pf">Gordon & Parreno · 2006</div><h3>Zidane, un portrait du 21e siècle</h3><p class="take"><b>À prendre :</b> un seul homme filmé pendant 90 minutes de match. Référence pour une séquence onirique de la 59e minute, ou pour le filmer seul sur le terrain vide.</p><span class="muted" style="margin-top:12px">Lien à ajouter</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VERIF -->
+<section class="s" id="verif">
+  <div class="wrap">
+    <h2>À vérifier avec Paul</h2>
+    <p class="lede">Tant que ces points ne sont pas tranchés, rien ne sort. Les cases cochées restent enregistrées sur cet appareil.</p>
+    <p class="counter" id="counter" aria-live="polite"></p>
+    <ul class="check" id="check">
+      <li><input type="checkbox" id="c1"><label for="c1"><strong>Le programme FIFA</strong> : intitulé exact, dates des séjours à Los Angeles et New York, et s'il était aux États-Unis pendant la Coupe du monde (juin – juillet 2026).</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2"><strong>Rechain</strong> : a-t-il joué enfant sur les terrains du Domaine des Tourelles eux-mêmes ? Photos, éducateurs, coéquipiers de l'époque.</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3"><strong>Date de naissance</strong> : 19 avril 1992 ou février 1992.</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4"><strong>Dernier club</strong> : Al-Batin (Arabie saoudite) confirmé, et nombre de matchs joués là-bas.</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5"><strong>Sélections RDC</strong> : 22 capes et 6 buts, ou 16 et 5 ; date de la première sélection.</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6"><strong>L'Arena</strong> : nom officiel, programme (terrains, padel, hébergement, éducation), date d'octroi du permis, calendrier des travaux.</label></li>
+      <li><input type="checkbox" id="c7"><label for="c7"><strong>La médaille de 2018</strong> : accord pour en faire un motif, et pour filmer le moment où il la montre à son fils.</label></li>
+      <li><input type="checkbox" id="c8"><label for="c8"><strong>La foi et le deuil</strong> : jusqu'où il accepte d'en parler, nom et accord de la famille du cousin.</label></li>
+      <li><input type="checkbox" id="c9"><label for="c9"><strong>Famille à l'image</strong> : épouse, enfants, parents — consentements écrits, et droit à l'image des mineurs.</label></li>
+      <li><input type="checkbox" id="c10"><label for="c10"><strong>Le rachat du Standard et la représentation</strong> : veut-il que la série y revienne ? Relecture juridique des propos.</label></li>
+      <li><input type="checkbox" id="c11"><label for="c11"><strong>La famille qui soutient le projet</strong> : visible à l'écran ou anonyme.</label></li>
+      <li><input type="checkbox" id="c12"><label for="c12"><strong>Archives personnelles</strong> : journée de numérisation chez ses parents à planifier.</label></li>
+      <li><input type="checkbox" id="c13"><label for="c13"><strong>Droits</strong> : budget et interlocuteurs pour Belga, Vedia, le diffuseur CAF et le Standard.</label></li>
+      <li><input type="checkbox" id="c14"><label for="c14"><strong>Capitanat au Standard</strong> : saisons exactes.</label></li>
+    </ul>
+    <button type="button" id="resetCheck" style="font:600 15px 'Barlow Condensed',sans-serif;background:none;border:1px solid var(--line);color:var(--muted);padding:6px 14px;border-radius:30px;cursor:pointer">Tout décocher</button>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="s" id="sources">
+  <div class="wrap">
+    <h2>Sources</h2>
+    <ul class="srcs">
+      <li>La DH, J. Lange, « Sa vie de joueur, son après-carrière, le Standard… », 21 mars 2026 — <a href="https://www.dhnet.be/sports/football/division-1a/standard/2026/03/21/sa-vie-de-joueur-son-apres-carriere-le-standard-paul-jose-mpoku-se-confie-si-javais-ete-anderlechtois-jaurais-ete-appele-chez-les-diables-3X477PAHLVAGNHDDRV2FRHFCOQ/" target="_blank" rel="noopener">lien</a> (source principale, réservée aux abonnés)</li>
+      <li>La DH, « Quand Paul-José Mpoku collabore avec Vincent Kompany », 7 mars 2026 — <a href="https://www.dhnet.be/sports/football/2026/03/07/quand-paul-jose-mpoku-collabore-avec-vincent-kompany-VZWEEA6JEVFI5LWQVCXTK5QSSA/" target="_blank" rel="noopener">lien</a></li>
+      <li>Walfoot / VOOSport World, 12 mars 2026 — <a href="https://www.walfoot.be/news/2026-03-12/jai-gagne-autrement-dans-ma-carriere--frachement-retraite-paul-jose-mpoku-se-confie" target="_blank" rel="noopener">lien</a></li>
+      <li>Radio Okapi, 7 mars 2026 — <a href="https://www.radiookapi.net/2026/03/07/actualite/sport/linternational-congolais-paul-jose-mpoku-met-fin-sa-carriere-de-joueur-de" target="_blank" rel="noopener">lien</a></li>
+      <li>Actualite.cd, 6 mars 2026 — <a href="https://actualite.cd/2026/03/06/paul-jose-mpoku-prend-sa-retraite-33-ans-clap-de-fin-pour-un-leopard-au-parcours" target="_blank" rel="noopener">lien</a></li>
+      <li>MediaCongo Press, 6 mars 2026 — <a href="https://www.congo-press.com/sport/football-paul-jose-mpoku-met-fin-a-sa-carriere-professionnelle/" target="_blank" rel="noopener">lien</a></li>
+      <li>Wikipédia (EN), Paul-José M'Poku — <a href="https://en.wikipedia.org/wiki/Paul-Jos%C3%A9_M%27Poku" target="_blank" rel="noopener">lien</a></li>
+      <li>Les Dépêches de Brazzaville via AllAfrica, UEFA B, juin 2024 — <a href="https://fr.allafrica.com/stories/202406270522.html" target="_blank" rel="noopener">lien</a></li>
+      <li>Vedia, projet d'académie, mars 2026 — <a href="https://www.vedia.be/info/urbanisme/verviers-le-projet-dacademie-de-mpoku-prend-forme/211712" target="_blank" rel="noopener">lien</a></li>
+      <li>Vedia, PMK Académie au Pré-Javais, juillet 2017 — <a href="https://www.vedia.be/sport/football/paul-jose-mpoku-cree-une-pmk-academie-verviers-pour-les-jeunes-footballeurs/92347" target="_blank" rel="noopener">lien</a></li>
+      <li>L'Avenir, projet de Rechain, 25 mai 2023 — <a href="https://www.lavenir.net/regions/verviers/sports/2023/05/25/paul-jose-mpoku-songe-a-lancer-son-academie-de-football-a-rechain-verviers-27ZQIGXTEFHTFN4JEGXVEWUPXA/" target="_blank" rel="noopener">lien</a></li>
+      <li>L'Avenir, accords de vente, 8 novembre 2024 — <a href="https://www.lavenir.net/regions/verviers/sports/2024/11/08/le-projet-mpoku-a-petit-rechain-est-tres-avance-et-on-sait-desormais-ce-quon-y-proposera-ICJWXSXARZHR3HPZCAAZ7JO2C4/" target="_blank" rel="noopener">lien</a></li>
+      <li>La DH, visite chez Fabrice Sambi Lokonga, 31 janvier 2019 — <a href="https://www.dhnet.be/sports/football/division-1a/2019/01/31/en-visite-chez-fabrice-le-frere-de-sambi-lokonga-et-polo-mpoku-albert-a-un-potentiel-encore-plus-grand-que-paul-jose-JGSIKQNMSJE5HIPEGQKKZZ2Q7U/" target="_blank" rel="noopener">lien</a></li>
+      <li>Vedia, Albert Sambi Lokonga et le 48, 2019 — <a href="https://www.vedia.be/www/video/sport/football/albert-sambi-lokonga-quot-je-porte-le-48-en-hommage-a-verviers-quot-_100264_89.html" target="_blank" rel="noopener">lien</a></li>
+      <li>Wikipédia (EN), Albert Sambi Lokonga — <a href="https://en.wikipedia.org/wiki/Albert_Sambi_Lokonga" target="_blank" rel="noopener">lien</a></li>
+      <li>La DH, retrait de WGI, 21 avril 2025 — <a href="https://www.dhnet.be/sports/football/division-1a/standard/2025/04/21/rachat-du-standard-les-emiratis-et-paul-jose-mpoku-se-retirent-HAHSXI6VCZA2BOM2GTQZ7XSPH4/" target="_blank" rel="noopener">lien</a></li>
+      <li>RTBF, WGI et Toulouse, 22 avril 2025 — <a href="https://www.rtbf.be/article/pro-league-le-groupe-de-dubai-represente-par-mpoku-confirme-ne-plus-etre-interesse-par-le-standard-11536418" target="_blank" rel="noopener">lien</a></li>
+      <li>Afrik-Foot, Togo – RDC, CAN 2017 — <a href="https://www.afrik-foot.com/can-2017-la-rdc-confirme-face-au-togo" target="_blank" rel="noopener">lien</a> · Radio Okapi, quart contre le Ghana — <a href="https://www.radiookapi.net/2017/01/30/actualite/sport/can-2017-rdc-ghana-premiere-titularisation-de-mpoku" target="_blank" rel="noopener">lien</a></li>
+      <li>FIFA, profil RD Congo au Mondial 2026 — <a href="https://www.fifa.com/fr/tournaments/mens/worldcup/canadamexicousa2026/articles/profil-rd-congo-mondial-2026" target="_blank" rel="noopener">lien</a> · résultats — <a href="https://www.fifa.com/fr/tournaments/mens/worldcup/canadamexicousa2026/articles/calendrier-resultats-rd-congo-coupe-du-monde-2026" target="_blank" rel="noopener">lien</a></li>
+      <li>SEL Belgique, « Chrétien avant d'être footballeur » — <a href="https://www.selbelgique.org/chretien-avant-detre-footballeur/" target="_blank" rel="noopener">lien</a></li>
+      <li>PMK Group, Stages Mpoku — <a href="https://pmk.group/stage-mpoku/" target="_blank" rel="noopener">lien</a></li>
+      <li>FIFA, Diplôme en gestion des clubs — <a href="https://clubmanagementdiploma.fifa.com/" target="_blank" rel="noopener">lien</a> (hypothèse de programme, non confirmée)</li>
+      <li>Right to Dream, académie du Ghana — <a href="https://www.righttodream.com/ghana-academy" target="_blank" rel="noopener">lien</a></li>
+    </ul>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Okapi World Média — document de travail interne, établi à partir de sources publiques consultées le 24 septembre 2026. Les propos de Paul-José Mpoku sont majoritairement reformulés ; seules quelques citations courtes sont reproduites, avec leur source. Toute donnée marquée « à vérifier » doit être confirmée par l'intéressé avant diffusion.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // theme toggle
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  try{var saved=localStorage.getItem('mpk-theme'); if(saved) root.setAttribute('data-theme',saved);}catch(e){}
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    if(!cur){cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+    var next=cur==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('mpk-theme',next);}catch(e){}
+  });
+
+  // progress + active nav
+  var bar=document.getElementById('progress');
+  var links=[].slice.call(document.querySelectorAll('.bar nav a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(h>0?(window.scrollY/h*100):0)+'%';
+    var idx=-1;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].getBoundingClientRect().top<120) idx=i; }
+    links.forEach(function(l,i){l.classList.toggle('on',i===idx);});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  // timeline filter
+  var tb=[].slice.call(document.querySelectorAll('.tlfilter button'));
+  var evs=[].slice.call(document.querySelectorAll('#tl .ev'));
+  tb.forEach(function(b){b.addEventListener('click',function(){
+    tb.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    var f=b.dataset.f;
+    evs.forEach(function(e){e.hidden=!(f==='all'||e.dataset.c.split(' ').indexOf(f)>-1);});
+  });});
+
+  // quote filter
+  var qb=[].slice.call(document.querySelectorAll('.qf button'));
+  var qs=[].slice.call(document.querySelectorAll('.qgrid .q'));
+  qb.forEach(function(b){b.addEventListener('click',function(){
+    qb.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    var f=b.dataset.q;
+    qs.forEach(function(q){q.hidden=!(f==='all'||q.dataset.t.split(' ').indexOf(f)>-1);});
+  });});
+
+  // checklist
+  var boxes=[].slice.call(document.querySelectorAll('#check input'));
+  var counter=document.getElementById('counter');
+  var state={};
+  try{state=JSON.parse(localStorage.getItem('mpk-check')||'{}')||{};}catch(e){state={};}
+  function render(){
+    var n=0;
+    boxes.forEach(function(b){b.checked=!!state[b.id]; b.parentNode.classList.toggle('done',b.checked); if(b.checked)n++;});
+    counter.textContent=n+' / '+boxes.length+' points réglés';
+  }
+  boxes.forEach(function(b){b.addEventListener('change',function(){
+    state[b.id]=b.checked;
+    try{localStorage.setItem('mpk-check',JSON.stringify(state));}catch(e){}
+    render();
+  });});
+  document.getElementById('resetCheck').addEventListener('click',function(){
+    state={}; try{localStorage.removeItem('mpk-check');}catch(e){} render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
