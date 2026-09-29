@@ -66,6 +66,7 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
 .opt input:checked+span{border-color:var(--or);color:var(--ivoire);background:#1c1810}
 .opt input:focus-visible+span{outline:2px solid var(--or);outline-offset:2px}
 #bloc-ia-oui{display:none;border-left:2px solid var(--ligne);padding-left:18px;margin:4px 0 18px}
+.aide-select{display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);border:1px solid var(--or);padding:7px 14px;border-radius:2px}
 
 /* Packs */
 .packs{display:grid;gap:14px}
@@ -251,6 +252,8 @@ footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;f
     <div class="num">04</div>
     <h2>Votre pack</h2>
     <p class="aide">Les trois packs démarrent ensemble le 10 octobre, sur le même tronc commun. Chaque pack se poursuit là où le précédent s'arrête : rien à refaire pour aller plus loin.</p>
+
+    <p class="aide-select">👇 Cliquez sur une carte pour sélectionner votre pack</p>
 
     <div class="groupe" id="g-pack">
       <div class="packs">
