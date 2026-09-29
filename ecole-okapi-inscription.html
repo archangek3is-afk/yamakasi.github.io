@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inscription — L'ÉCOLE OKAPI</title>
+<meta name="description" content="Inscription à L'ÉCOLE OKAPI — formation en ligne : réalisation de films et production assistée par l'intelligence artificielle. Début le 10 octobre 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@300;400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#0A0A0A; --noir2:#141110; --ligne:#2A2417;
+  --or:#C9A84C; --ivoire:#F5F0E8; --texte:#D6D0C4; --gris:#8A8175; --gris2:#6E6553;
+  --erreur:#E0705A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--texte);font-family:'Poppins',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+
+/* En-tête */
+header{text-align:center;padding:56px 0 34px;border-bottom:1px solid var(--ligne)}
+header img{width:92px;height:auto;display:block;margin:0 auto 18px}
+.marque{font-family:'Sora',sans-serif;font-weight:600;font-size:24px;letter-spacing:6px;color:var(--or)}
+.sous-marque{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:3.5px;color:var(--gris2);margin-top:8px}
+.titre{font-family:'Sora',sans-serif;font-weight:600;font-size:clamp(24px,5vw,32px);color:var(--ivoire);line-height:1.3;margin:30px auto 10px;max-width:600px}
+.intro{color:var(--texte);max-width:560px;margin:0 auto}
+.faits{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--or);text-transform:uppercase}
+
+/* Sections */
+section{padding:40px 0 6px}
+.num{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:2.5px;color:var(--or)}
+h2{font-family:'Sora',sans-serif;font-weight:600;font-size:21px;color:var(--ivoire);margin:8px 0 20px}
+.aide{color:var(--gris);font-size:13px;margin:-10px 0 18px}
+
+.grille{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.champ{margin-bottom:16px}
+.plein{grid-column:1/-1}
+label.lbl{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gris);margin-bottom:7px}
+label.lbl .req{color:var(--or)}
+input[type=text],input[type=email],input[type=tel],select,textarea{
+  width:100%;background:var(--noir2);border:1px solid var(--ligne);color:var(--ivoire);
+  font-family:'Poppins',sans-serif;font-size:15px;padding:13px 14px;border-radius:2px;outline:none;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--or)}
+textarea{min-height:110px;resize:vertical}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--or) 50%),linear-gradient(135deg,var(--or) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+.invalide{border-color:var(--erreur)!important}
+.msg-err{color:var(--erreur);font-size:12px;margin-top:6px;display:none}
+.champ.err .msg-err,.groupe.err .msg-err{display:block}
+
+/* Choix (radios / cases) */
+.options{display:flex;flex-wrap:wrap;gap:10px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt span{display:inline-block;padding:10px 16px;border:1px solid var(--ligne);background:var(--noir2);border-radius:2px;color:var(--texte);font-size:14px;cursor:pointer;transition:all .2s}
+.opt input:checked+span{border-color:var(--or);color:var(--ivoire);background:#1c1810}
+.opt input:focus-visible+span{outline:2px solid var(--or);outline-offset:2px}
+#bloc-ia-oui{display:none;border-left:2px solid var(--ligne);padding-left:18px;margin:4px 0 18px}
+
+/* Packs */
+.packs{display:grid;gap:14px}
+.pack{position:relative;display:block;cursor:pointer}
+.pack input{position:absolute;opacity:0;pointer-events:none}
+.pack .carte{border:1px solid var(--ligne);background:var(--noir2);padding:22px 22px 20px;border-radius:2px;transition:all .2s}
+.pack input:checked+.carte{border-color:var(--or);background:#1c1810;box-shadow:0 0 0 1px var(--or) inset}
+.pack input:focus-visible+.carte{outline:2px solid var(--or);outline-offset:3px}
+.pack .haut{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.pack .nom{font-family:'Sora',sans-serif;font-weight:600;font-size:17px;color:var(--ivoire)}
+.pack .prix{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:18px;color:var(--or)}
+.pack .duree{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gris);text-transform:uppercase;margin-top:2px}
+.pack p{font-size:14px;color:var(--texte);margin:12px 0 0}
+.pack .echeancier{margin-top:14px;padding-top:12px;border-top:1px solid var(--ligne);font-size:13px;color:var(--gris)}
+.pack .echeancier b{color:var(--or);font-weight:500}
+.pack.vedette .carte{border-color:#4A3D1E}
+.pack .badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--noir);background:var(--or);padding:3px 8px;border-radius:2px;margin-left:8px;vertical-align:middle}
+
+.principe{border:1px solid var(--or);background:var(--noir2);padding:22px 24px;margin-top:22px}
+.principe .etiq{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--or);margin-bottom:12px}
+.principe ol{padding-left:20px;font-size:14px}
+.principe li{margin-bottom:8px}
+.principe li:last-child{margin-bottom:0}
+.principe strong{color:var(--ivoire);font-weight:500}
+.note{font-size:12.5px;color:var(--gris);margin-top:14px}
+
+/* Engagements */
+.coche{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;cursor:pointer}
+.coche input{margin-top:5px;accent-color:var(--or);width:17px;height:17px;flex:none}
+.coche span{font-size:14px;color:var(--texte)}
+
+/* Envoi */
+.envoi{padding:34px 0 64px;text-align:center}
+button.cta{background:var(--or);color:var(--noir);border:0;font-family:'Sora',sans-serif;font-weight:600;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;padding:17px 44px;border-radius:2px;cursor:pointer;transition:opacity .2s}
+button.cta:hover{opacity:.9}
+button.cta:disabled{opacity:.5;cursor:wait}
+.statut{margin-top:16px;font-size:13px;color:var(--gris);min-height:20px}
+.statut.err{color:var(--erreur)}
+
+/* Confirmation */
+#confirmation{display:none;padding:56px 0 70px;text-align:center}
+#confirmation h2{font-size:26px;margin-bottom:14px}
+#confirmation .sceau{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--or);margin-bottom:12px}
+.suite{text-align:left;max-width:560px;margin:28px auto 0;border:1px solid var(--ligne);background:var(--noir2);padding:24px 26px}
+.suite .etiq{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gris2);margin-bottom:14px}
+.suite ol{padding-left:20px;font-size:14px}
+.suite li{margin-bottom:10px}
+.suite li:last-child{margin-bottom:0}
+.suite strong{color:var(--ivoire);font-weight:500}
+.repli{margin-top:26px;font-size:13px;color:var(--gris)}
+.repli button,.repli a{display:inline-block;margin:8px 6px 0;background:transparent;border:1px solid var(--ligne);color:var(--texte);font-family:'Poppins',sans-serif;font-size:13px;padding:10px 18px;border-radius:2px;cursor:pointer;text-decoration:none}
+.repli button:hover,.repli a:hover{border-color:var(--or);color:var(--ivoire)}
+
+footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;font-size:11.5px;color:var(--gris2)}
+
+@media (max-width:600px){
+  .grille{grid-template-columns:1fr}
+  header{padding-top:40px}
+  .pack .carte{padding:18px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="https://okapiworldmedia.com/assets/okapi-symbol-premium.png" alt="Okapi World Média">
+    <div class="marque">L'ÉCOLE OKAPI</div>
+    <div class="sous-marque">OKAPI WORLD MÉDIA</div>
+    <h1 class="titre">Passez de l'idée au film, avec l'intelligence artificielle.</h1>
+    <p class="intro">Une formation 100&nbsp;% en ligne pour apprendre à réaliser des films et à produire avec l'IA, du premier prompt jusqu'à la livraison.</p>
+    <div class="faits"><span>Début le 10 octobre 2026</span><span>100 % en ligne</span><span>25 places maximum</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<div id="formulaire">
+<form id="form" novalidate>
+
+  <!-- 01 -->
+  <section>
+    <div class="num">01</div>
+    <h2>Vous</h2>
+    <div class="grille">
+      <div class="champ"><label class="lbl" for="prenom">Prénom <span class="req">*</span></label><input type="text" id="prenom" autocomplete="given-name"><div class="msg-err">Indiquez votre prénom.</div></div>
+      <div class="champ"><label class="lbl" for="nom">Nom <span class="req">*</span></label><input type="text" id="nom" autocomplete="family-name"><div class="msg-err">Indiquez votre nom.</div></div>
+      <div class="champ"><label class="lbl" for="email">Email <span class="req">*</span></label><input type="email" id="email" autocomplete="email" inputmode="email"><div class="msg-err">Indiquez une adresse email valide : votre contrat vous y sera envoyé.</div></div>
+      <div class="champ"><label class="lbl" for="telephone">Téléphone (WhatsApp) <span class="req">*</span></label><input type="tel" id="telephone" autocomplete="tel" inputmode="tel" placeholder="+33 6 12 34 56 78"><div class="msg-err">Indiquez un numéro avec l'indicatif du pays.</div></div>
+      <div class="champ"><label class="lbl" for="profession">Profession ou activité</label><input type="text" id="profession"></div>
+      <div class="champ"><label class="lbl" for="ville">Ville / Pays</label><input type="text" id="ville" autocomplete="address-level2"></div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section>
+    <div class="num">02</div>
+    <h2>Votre point de départ</h2>
+    <p class="aide">Aucune mauvaise réponse : ces questions m'aident à savoir d'où vous partez.</p>
+
+    <div class="champ">
+      <label class="lbl" for="source">Comment avez-vous connu L'École Okapi ?</label>
+      <select id="source">
+        <option value="">Choisir…</option>
+        <option>Formation BNC Cinéma</option>
+        <option>La Nuit de l'IA</option>
+        <option>Instagram</option>
+        <option>Facebook</option>
+        <option>WhatsApp / bouche à oreille</option>
+        <option>Autre</option>
+      </select>
+    </div>
+
+    <div class="champ groupe" id="g-ia">
+      <label class="lbl">Utilisez-vous déjà l'IA pour créer ? <span class="req">*</span></label>
+      <div class="options">
+        <label class="opt"><input type="radio" name="ia" value="Oui"><span>Oui</span></label>
+        <label class="opt"><input type="radio" name="ia" value="Non"><span>Non, je débute</span></label>
+      </div>
+      <div class="msg-err">Choisissez une réponse.</div>
+    </div>
+
+    <div id="bloc-ia-oui">
+      <div class="champ">
+        <label class="lbl" for="depuis">Depuis quand ?</label>
+        <select id="depuis">
+          <option value="">Choisir…</option>
+          <option>Moins de 3 mois</option>
+          <option>3-6 mois</option>
+          <option>6-12 mois</option>
+          <option>Plus d'un an</option>
+        </select>
+      </div>
+      <div class="champ">
+        <label class="lbl">Ce que vous utilisez déjà</label>
+        <div class="options">
+          <label class="opt"><input type="checkbox" name="outils" value="Assistants conversationnels"><span>Assistants conversationnels</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Génération d'images"><span>Génération d'images</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Génération vidéo"><span>Génération vidéo</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Voix et musique"><span>Voix et musique</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Montage"><span>Montage</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="champ">
+      <label class="lbl" for="difficulte">Votre principale difficulté aujourd'hui</label>
+      <select id="difficulte">
+        <option value="">Choisir…</option>
+        <option>Je ne sais pas par où commencer</option>
+        <option>Formuler de bons prompts</option>
+        <option>Choisir les bons outils</option>
+        <option>Obtenir des résultats réalistes</option>
+        <option>Garder des personnages cohérents</option>
+        <option>Mener un projet de bout en bout</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section>
+    <div class="num">03</div>
+    <h2>Votre objectif</h2>
+    <div class="champ">
+      <label class="lbl" for="objectif">Qu'aimeriez-vous être capable de réaliser grâce à la formation ? <span class="req">*</span></label>
+      <textarea id="objectif" placeholder="Un court-métrage, une publicité, un clip, des contenus pour votre activité…"></textarea>
+      <div class="msg-err">Dites-moi en une ou deux phrases ce que vous visez.</div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section>
+    <div class="num">04</div>
+    <h2>Votre pack</h2>
+    <p class="aide">Les trois packs démarrent ensemble le 10 octobre, sur le même tronc commun. Chaque pack se poursuit là où le précédent s'arrête : rien à refaire pour aller plus loin.</p>
+
+    <div class="groupe" id="g-pack">
+      <div class="packs">
+
+        <label class="pack">
+          <input type="radio" name="pack" value="Pack Skywalker — 300€">
+          <div class="carte">
+            <div class="haut"><div class="nom">Pack Skywalker</div><div class="prix">300 €</div></div>
+            <div class="duree">3 mois · oct. → déc. 2026</div>
+            <p><strong style="color:var(--ivoire);font-weight:500">Les fondations.</strong> Vous comprenez la chaîne de production par IA, vous maîtrisez les outils et l'art du prompt, puis vous réalisez votre premier projet visuel et votre première séquence animée. Idéal si vous partez de zéro.</p>
+            <div class="echeancier">Échéancier : <b>90 €</b> à l'ouverture, puis <b>105 €</b> en novembre et <b>105 €</b> en décembre.</div>
+          </div>
+        </label>
+
+        <label class="pack">
+          <input type="radio" name="pack" value="Pack Obi-Wan — 500€">
+          <div class="carte">
+            <div class="haut"><div class="nom">Pack Obi-Wan</div><div class="prix">500 €</div></div>
+            <div class="duree">6 mois · oct. 2026 → mars 2027</div>
+            <p><strong style="color:var(--ivoire);font-weight:500">La méthode.</strong> Tout Skywalker, plus : voir comme un cinéaste, obtenir un rendu réaliste, garder des personnages cohérents, construire la bible visuelle d'un projet et mener une séquence de bout en bout. Vous terminez avec une pièce de 2 à 3 minutes.</p>
+            <div class="echeancier">Échéancier : <b>150 €</b> à l'ouverture, puis <b>5 mensualités de 70 €</b> (novembre → mars).</div>
+          </div>
+        </label>
+
+        <label class="pack vedette">
+          <input type="radio" name="pack" value="Pack Maître Yoda — 1500€">
+          <div class="carte">
+            <div class="haut"><div class="nom">Pack Maître Yoda<span class="badge">LE PLUS COMPLET</span></div><div class="prix">1 500 €</div></div>
+            <div class="duree">10 mois · oct. 2026 → juil. 2027</div>
+            <p><strong style="color:var(--ivoire);font-weight:500">Le parcours complet.</strong> Tout Obi-Wan, plus le métier de réalisateur : écriture et découpage, direction de la photographie, son, voix et musique, effets visuels et finition. Vous terminez avec un film court produit et livré, avec mon accompagnement direct sur votre projet.</p>
+            <div class="echeancier">Échéancier : <b>450 €</b> à l'ouverture, puis <b>8 mensualités de 117 €</b> (novembre → juin) et <b>114 €</b> en juillet.</div>
+          </div>
+        </label>
+
+        <label class="pack">
+          <input type="radio" name="pack" value="Pack Légende — sur devis">
+          <div class="carte">
+            <div class="haut"><div class="nom">Pack Légende</div><div class="prix">Sur devis</div></div>
+            <div class="duree">Accompagnement sur mesure</div>
+            <p>Un accompagnement de votre projet de bout en bout, avec la possibilité de participer à une production Okapi à mes côtés. On en discute d'abord ensemble : je reviens vers vous pour un échange.</p>
+          </div>
+        </label>
+
+      </div>
+      <div class="msg-err">Choisissez un pack.</div>
+    </div>
+
+    <div class="principe">
+      <div class="etiq">LE PRINCIPE DE L'ÉCHÉANCIER</div>
+      <ol>
+        <li><strong>Rien n'est encaissé à l'inscription.</strong> Je vous envoie d'abord votre contrat de formation.</li>
+        <li>Après votre signature, vous avez <strong>14 jours pour vous rétracter</strong>, sans frais ni justification. Aucun paiement n'est demandé pendant ce délai.</li>
+        <li>Ensuite, le <strong>1er versement est de 30&nbsp;%</strong> du prix du pack.</li>
+        <li>Le <strong>solde est étalé en mensualités</strong>, mois après mois, pendant la formation.</li>
+      </ol>
+      <p class="note">Paiement par virement bancaire ou carte bancaire. Tarifs nets, TVA non applicable. Accès à la plateforme pendant toute la durée du pack, prolongé de 30 jours.</p>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section>
+    <div class="num">05</div>
+    <h2>Paiement et engagements</h2>
+
+    <div class="champ groupe" id="g-paiement">
+      <label class="lbl">Moyen de paiement préféré <span class="req">*</span></label>
+      <div class="options">
+        <label class="opt"><input type="radio" name="paiement" value="Virement bancaire"><span>Virement bancaire</span></label>
+        <label class="opt"><input type="radio" name="paiement" value="Carte bancaire"><span>Carte bancaire</span></label>
+      </div>
+      <div class="msg-err">Choisissez un moyen de paiement.</div>
+    </div>
+
+    <div class="groupe" id="g-engagement">
+      <label class="coche"><input type="checkbox" id="engagement"><span>Je comprends que mon inscription ne devient définitive qu'après la signature du contrat de formation, et qu'aucun paiement n'est demandé avant la fin du délai de rétractation de 14 jours.</span></label>
+      <div class="msg-err">Cette case est nécessaire pour continuer.</div>
+    </div>
+    <div class="groupe" id="g-rgpd">
+      <label class="coche"><input type="checkbox" id="rgpd"><span>J'accepte que mes données soient utilisées pour gérer mon inscription et m'écrire au sujet de la formation.</span></label>
+      <div class="msg-err">Cette case est nécessaire pour continuer.</div>
+    </div>
+
+    <p class="note">La formation démarre le 10 octobre. Votre accès s'ouvre à l'issue du délai légal de 14 jours après la signature de votre contrat : si vous vous inscrivez maintenant, il peut donc s'ouvrir après cette date. Les vidéos sont disponibles à la demande, vous avancez à votre rythme et vous rattrapez sans difficulté.</p>
+  </section>
+
+  <div class="envoi">
+    <button type="submit" class="cta" id="btn-envoi">Envoyer mon inscription</button>
+    <div class="statut" id="statut" role="status" aria-live="polite"></div>
+  </div>
+
+</form>
+</div>
+
+<!-- Confirmation -->
+<div id="confirmation">
+  <div class="sceau">INSCRIPTION REÇUE</div>
+  <h2 id="conf-titre">Merci !</h2>
+  <p>Votre inscription est bien enregistrée. Un email de confirmation vous est envoyé.</p>
+  <div class="suite">
+    <div class="etiq">LA SUITE</div>
+    <ol>
+      <li><strong>Je vous envoie votre contrat de formation</strong> par email.</li>
+      <li>Vous le signez et vous me le renvoyez (besoin d'aide ? on vous guide pas à pas).</li>
+      <li>Vous disposez de <strong>14 jours pour vous rétracter</strong> : aucun paiement pendant ce délai.</li>
+      <li>Votre accès s'ouvre, puis le premier versement de 30&nbsp;% est prélevé.</li>
+    </ol>
+  </div>
+  <div class="repli">
+    Vous n'avez pas reçu d'email de confirmation d'ici quelques minutes&nbsp;? Vérifiez vos courriers indésirables, ou écrivez-moi&nbsp;:<br>
+    <a id="lien-mail" href="#">Envoyer mes réponses par email</a>
+    <button type="button" id="btn-copie">Copier mes réponses</button>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">OKAPI STUDIOS — Archange Kiyindou, entrepreneur individuel — SIRET 918 020 975 00028 — Asnières-sur-Seine<br>formation@okapiworldmedia.com</div>
+</footer>
+
+<script>
+/* ⚙️ COLLE ICI L'URL DE DÉPLOIEMENT DE TON GOOGLE APPS SCRIPT (se termine par /exec)
+   C'est la même URL que celle de ton formulaire actuellement en ligne.
+   Tant que cette valeur reste vide, le formulaire fonctionne uniquement
+   avec les boutons "Envoyer par email" / "Copier mes réponses". */
+var WEBHOOK_URL = "https://script.google.com/macros/s/AKfycby-kfETPfgY0pHZKQd4a1G1SYpw9vCgQTLTBnWGsSGEnx_HrC9Bd63d4NKxzO8MvxTZ/exec";
+
+var MAIL_INSCRIPTION = "formation@okapiworldmedia.com";
+var form = document.getElementById('form');
+var donnees = {};
+
+/* ── Sélection visuelle et bloc conditionnel ── */
+function val(id){ return (document.getElementById(id).value || '').trim(); }
+function radio(name){ var r = document.querySelector('input[name="'+name+'"]:checked'); return r ? r.value : ''; }
+
+document.querySelectorAll('input[name="ia"]').forEach(function(r){
+  r.addEventListener('change', function(){
+    document.getElementById('bloc-ia-oui').style.display = (radio('ia') === 'Oui') ? 'block' : 'none';
+  });
+});
+
+/* ── Validation ── */
+function marquerErreur(el, actif){
+  var parent = el.closest('.champ, .groupe');
+  if (parent) parent.classList.toggle('err', actif);
+  if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') el.classList.toggle('invalide', actif);
+}
+
+function valider(){
+  var premiereErreur = null;
+  function verif(ok, el){
+    marquerErreur(el, !ok);
+    if (!ok && !premiereErreur) premiereErreur = el;
+  }
+  var email = val('email');
+  var chiffresTel = val('telephone').replace(/\D/g,'');
+
+  verif(val('prenom').length > 0, document.getElementById('prenom'));
+  verif(val('nom').length > 0, document.getElementById('nom'));
+  verif(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email), document.getElementById('email'));
+  verif(chiffresTel.length >= 8, document.getElementById('telephone'));
+  verif(radio('ia') !== '', document.getElementById('g-ia'));
+  verif(val('objectif').length > 5, document.getElementById('objectif'));
+  verif(radio('pack') !== '', document.getElementById('g-pack'));
+  verif(radio('paiement') !== '', document.getElementById('g-paiement'));
+  verif(document.getElementById('engagement').checked, document.getElementById('g-engagement'));
+  verif(document.getElementById('rgpd').checked, document.getElementById('g-rgpd'));
+
+  if (premiereErreur){
+    premiereErreur.scrollIntoView({behavior:'smooth', block:'center'});
+    return false;
+  }
+  return true;
+}
+
+/* Efface l'erreur dès que l'utilisateur corrige */
+form.addEventListener('input', function(e){ marquerErreur(e.target, false); });
+form.addEventListener('change', function(e){ marquerErreur(e.target, false); });
+
+/* ── Construction des données (clés = en-têtes de la Sheet) ── */
+function collecter(){
+  var outils = [];
+  document.querySelectorAll('input[name="outils"]:checked').forEach(function(c){ outils.push(c.value); });
+  var ia = radio('ia');
+  return {
+    "Prénom": val('prenom'),
+    "Nom": val('nom'),
+    "Email": val('email'),
+    "Téléphone": val('telephone'),
+    "Profession": val('profession'),
+    "Ville / Pays": val('ville'),
+    "Source": val('source'),
+    "Utilise déjà l'IA": ia,
+    "Depuis quand": ia === 'Oui' ? val('depuis') : '',
+    "Outils utilisés": ia === 'Oui' ? outils.join(', ') : '',
+    "Difficulté principale": val('difficulte'),
+    "Objectif principal": val('objectif'),
+    "Pack choisi": radio('pack'),
+    "Moyen de paiement": radio('paiement'),
+    "Engagement compris": "Oui",
+    "Consentement données": "Oui"
+  };
+}
+
+function resume(d){
+  return Object.keys(d).map(function(k){ return k + " : " + (d[k] || "—"); }).join("\n");
+}
+
+/* ── Envoi ── */
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  if (!valider()) return;
+
+  donnees = collecter();
+  var btn = document.getElementById('btn-envoi');
+  var statut = document.getElementById('statut');
+  btn.disabled = true;
+  statut.className = 'statut';
+  statut.textContent = 'Envoi en cours…';
+
+  function succes(){
+    document.getElementById('formulaire').style.display = 'none';
+    document.getElementById('conf-titre').textContent = 'Merci ' + donnees["Prénom"] + ' !';
+    document.getElementById('confirmation').style.display = 'block';
+    var sujet = encodeURIComponent("Inscription L'École Okapi — " + donnees["Prénom"] + " " + donnees["Nom"]);
+    var corps = encodeURIComponent(resume(donnees));
+    document.getElementById('lien-mail').href = "mailto:" + MAIL_INSCRIPTION + "?subject=" + sujet + "&body=" + corps;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function echec(){
+    /* Le réseau a bloqué l'envoi : on affiche quand même la confirmation
+       avec les boutons de secours, pour ne jamais perdre une inscription. */
+    succes();
+    var alerte = document.createElement('p');
+    alerte.style.cssText = 'color:#E0705A;font-size:13px;margin-top:18px';
+    alerte.textContent = "L'envoi automatique a échoué. Utilisez le bouton ci-dessous pour m'envoyer vos réponses par email.";
+    document.getElementById('confirmation').insertBefore(alerte, document.querySelector('#confirmation .suite'));
+  }
+
+  if (!WEBHOOK_URL){ echec(); return; }
+
+  fetch(WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(donnees)
+  }).then(succes).catch(function(){
+    btn.disabled = false;
+    statut.className = 'statut err';
+    statut.textContent = '';
+    echec();
+  });
+});
+
+/* ── Copie de secours ── */
+document.getElementById('btn-copie').addEventListener('click', function(){
+  var texte = resume(donnees);
+  var b = this;
+  function ok(){ b.textContent = 'Copié ✓'; setTimeout(function(){ b.textContent = 'Copier mes réponses'; }, 2500); }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(texte).then(ok, function(){ fallbackCopie(texte); ok(); });
+  } else { fallbackCopie(texte); ok(); }
+});
+function fallbackCopie(texte){
+  var t = document.createElement('textarea');
+  t.value = texte; t.style.position = 'fixed'; t.style.opacity = '0';
+  document.body.appendChild(t); t.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(t);
+}
+</script>
+</body>
+</html>
