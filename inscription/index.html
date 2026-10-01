@@ -28,6 +28,9 @@ header img{width:92px;height:auto;display:block;margin:0 auto 18px}
 .intro{color:var(--texte);max-width:560px;margin:0 auto}
 .faits{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;margin-top:22px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--or);text-transform:uppercase}
 
+/* Note langue EN */
+#note-langue{border:1px solid var(--or);background:#130f02;padding:15px 20px;margin:20px auto 0;max-width:560px;font-size:13.5px;color:var(--texte);text-align:left;line-height:1.6;display:none}
+
 /* Vidéo */
 .video-section{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;margin:0}
 .video-section img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -122,23 +125,43 @@ button.cta:disabled{opacity:.5;cursor:wait}
 
 footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;font-size:11.5px;color:var(--gris2)}
 
+/* Commutateur de langue */
+.lang-switch{position:fixed;top:14px;right:14px;z-index:1000;display:flex;background:var(--noir);border:1px solid var(--or);border-radius:3px;overflow:hidden}
+.lang-switch button{min-width:44px;min-height:44px;padding:0 10px;background:transparent;border:none;color:var(--gris);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.lang-switch button[aria-pressed="true"]{background:var(--or);color:var(--noir);font-weight:500}
+.lang-switch button:hover:not([aria-pressed="true"]){color:var(--ivoire)}
+.lang-switch .lsep{width:1px;background:var(--or);flex-shrink:0;pointer-events:none}
+
 @media (max-width:600px){
   .grille{grid-template-columns:1fr}
   header{padding-top:40px}
   .pack .carte{padding:18px}
+  .lang-switch{top:10px;right:10px}
 }
 </style>
 </head>
 <body>
+
+<!-- Commutateur langue -->
+<div class="lang-switch" role="group" aria-label="Langue / Language">
+  <button type="button" id="btn-fr" aria-pressed="true">FR</button>
+  <span class="lsep" aria-hidden="true"></span>
+  <button type="button" id="btn-en" aria-pressed="false">EN</button>
+</div>
 
 <header>
   <div class="wrap">
     <img src="https://okapiworldmedia.com/assets/okapi-symbol-premium.png" alt="Okapi World Média">
     <div class="marque">L'ÉCOLE OKAPI</div>
     <div class="sous-marque">OKAPI WORLD MÉDIA</div>
-    <h1 class="titre">Passez de l'idée au film, avec l'intelligence artificielle.</h1>
-    <p class="intro">Une formation 100&nbsp;% en ligne pour apprendre à réaliser des films et à produire avec l'IA, du premier prompt jusqu'à la livraison.</p>
-    <div class="faits"><span>Début le 10 octobre 2026</span><span>100 % en ligne</span><span>25 places maximum</span></div>
+    <h1 class="titre" data-i18n="titre_principal">Passez de l'idée au film, avec l'intelligence artificielle.</h1>
+    <p class="intro" data-i18n="intro_principale">Une formation 100&nbsp;% en ligne pour apprendre à réaliser des films et à produire avec l'IA, du premier prompt jusqu'à la livraison.</p>
+    <div class="faits">
+      <span data-i18n="fait_debut">Début le 10 octobre 2026</span>
+      <span data-i18n="fait_ligne">100 % en ligne</span>
+      <span data-i18n="fait_places">25 places maximum</span>
+    </div>
+    <div id="note-langue" aria-hidden="true">Please note: the course is taught in French (videos and course materials), and the contract and internal rules you will sign are written in French. Make sure you are comfortable following a course in French before registering.</div>
   </div>
 </header>
 
@@ -160,78 +183,100 @@ footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;f
   <!-- 01 -->
   <section>
     <div class="num">01</div>
-    <h2>Vous</h2>
+    <h2 data-i18n="sec01_titre">Vous</h2>
     <div class="grille">
-      <div class="champ"><label class="lbl" for="prenom">Prénom <span class="req">*</span></label><input type="text" id="prenom" autocomplete="given-name"><div class="msg-err">Indiquez votre prénom.</div></div>
-      <div class="champ"><label class="lbl" for="nom">Nom <span class="req">*</span></label><input type="text" id="nom" autocomplete="family-name"><div class="msg-err">Indiquez votre nom.</div></div>
-      <div class="champ"><label class="lbl" for="email">Email <span class="req">*</span></label><input type="email" id="email" autocomplete="email" inputmode="email"><div class="msg-err">Indiquez une adresse email valide : votre contrat vous y sera envoyé.</div></div>
-      <div class="champ"><label class="lbl" for="telephone">Téléphone (WhatsApp) <span class="req">*</span></label><input type="tel" id="telephone" autocomplete="tel" inputmode="tel" placeholder="+33 6 12 34 56 78"><div class="msg-err">Indiquez un numéro avec l'indicatif du pays.</div></div>
-      <div class="champ"><label class="lbl" for="profession">Profession ou activité</label><input type="text" id="profession"></div>
-      <div class="champ"><label class="lbl" for="ville">Ville / Pays</label><input type="text" id="ville" autocomplete="address-level2"></div>
+      <div class="champ">
+        <label class="lbl" for="prenom" data-i18n-html="lbl_prenom">Prénom <span class="req">*</span></label>
+        <input type="text" id="prenom" autocomplete="given-name">
+        <div class="msg-err" data-i18n="err_prenom">Indiquez votre prénom.</div>
+      </div>
+      <div class="champ">
+        <label class="lbl" for="nom" data-i18n-html="lbl_nom">Nom <span class="req">*</span></label>
+        <input type="text" id="nom" autocomplete="family-name">
+        <div class="msg-err" data-i18n="err_nom">Indiquez votre nom.</div>
+      </div>
+      <div class="champ">
+        <label class="lbl" for="email" data-i18n-html="lbl_email">Email <span class="req">*</span></label>
+        <input type="email" id="email" autocomplete="email" inputmode="email">
+        <div class="msg-err" data-i18n="err_email">Indiquez une adresse email valide : votre contrat vous y sera envoyé.</div>
+      </div>
+      <div class="champ">
+        <label class="lbl" for="telephone" data-i18n-html="lbl_tel">Téléphone (WhatsApp) <span class="req">*</span></label>
+        <input type="tel" id="telephone" autocomplete="tel" inputmode="tel" placeholder="+33 6 12 34 56 78">
+        <div class="msg-err" data-i18n="err_tel">Indiquez un numéro avec l'indicatif du pays.</div>
+      </div>
+      <div class="champ">
+        <label class="lbl" for="profession" data-i18n="lbl_profession">Profession ou activité</label>
+        <input type="text" id="profession">
+      </div>
+      <div class="champ">
+        <label class="lbl" for="ville" data-i18n="lbl_ville">Ville / Pays</label>
+        <input type="text" id="ville" autocomplete="address-level2">
+      </div>
     </div>
   </section>
 
   <!-- 02 -->
   <section>
     <div class="num">02</div>
-    <h2>Votre point de départ</h2>
-    <p class="aide">Aucune mauvaise réponse : ces questions m'aident à savoir d'où vous partez.</p>
+    <h2 data-i18n="sec02_titre">Votre point de départ</h2>
+    <p class="aide" data-i18n="sec02_aide">Aucune mauvaise réponse : ces questions m'aident à savoir d'où vous partez.</p>
 
     <div class="champ">
-      <label class="lbl" for="source">Comment avez-vous connu L'École Okapi ?</label>
+      <label class="lbl" for="source" data-i18n="lbl_source">Comment avez-vous connu L'École Okapi ?</label>
       <select id="source">
-        <option value="">Choisir…</option>
-        <option>Formation BNC Cinéma</option>
-        <option>La Nuit de l'IA</option>
-        <option>Instagram</option>
-        <option>Facebook</option>
-        <option>WhatsApp / bouche à oreille</option>
-        <option>Autre</option>
+        <option value="" data-i18n="opt_choisir">Choisir…</option>
+        <option value="Formation BNC Cinéma" data-i18n="opt_bnc">Formation BNC Cinéma</option>
+        <option value="La Nuit de l'IA" data-i18n="opt_nuit">La Nuit de l'IA</option>
+        <option value="Instagram">Instagram</option>
+        <option value="Facebook">Facebook</option>
+        <option value="WhatsApp / bouche à oreille" data-i18n="opt_bouche">WhatsApp / bouche à oreille</option>
+        <option value="Autre" data-i18n="opt_autre">Autre</option>
       </select>
     </div>
 
     <div class="champ groupe" id="g-ia">
-      <label class="lbl">Utilisez-vous déjà l'IA pour créer ? <span class="req">*</span></label>
+      <label class="lbl" data-i18n-html="lbl_ia">Utilisez-vous déjà l'IA pour créer ? <span class="req">*</span></label>
       <div class="options">
-        <label class="opt"><input type="radio" name="ia" value="Oui"><span>Oui</span></label>
-        <label class="opt"><input type="radio" name="ia" value="Non"><span>Non, je débute</span></label>
+        <label class="opt"><input type="radio" name="ia" value="Oui"><span data-i18n="opt_oui">Oui</span></label>
+        <label class="opt"><input type="radio" name="ia" value="Non"><span data-i18n="opt_non">Non, je débute</span></label>
       </div>
-      <div class="msg-err">Choisissez une réponse.</div>
+      <div class="msg-err" data-i18n="err_ia">Choisissez une réponse.</div>
     </div>
 
     <div id="bloc-ia-oui">
       <div class="champ">
-        <label class="lbl" for="depuis">Depuis quand ?</label>
+        <label class="lbl" for="depuis" data-i18n="lbl_depuis">Depuis quand ?</label>
         <select id="depuis">
-          <option value="">Choisir…</option>
-          <option>Moins de 3 mois</option>
-          <option>3-6 mois</option>
-          <option>6-12 mois</option>
-          <option>Plus d'un an</option>
+          <option value="" data-i18n="opt_choisir">Choisir…</option>
+          <option value="Moins de 3 mois" data-i18n="opt_3mois">Moins de 3 mois</option>
+          <option value="3-6 mois" data-i18n="opt_36">3-6 mois</option>
+          <option value="6-12 mois" data-i18n="opt_612">6-12 mois</option>
+          <option value="Plus d'un an" data-i18n="opt_1an">Plus d'un an</option>
         </select>
       </div>
       <div class="champ">
-        <label class="lbl">Ce que vous utilisez déjà</label>
+        <label class="lbl" data-i18n="lbl_outils">Ce que vous utilisez déjà</label>
         <div class="options">
-          <label class="opt"><input type="checkbox" name="outils" value="Assistants conversationnels"><span>Assistants conversationnels</span></label>
-          <label class="opt"><input type="checkbox" name="outils" value="Génération d'images"><span>Génération d'images</span></label>
-          <label class="opt"><input type="checkbox" name="outils" value="Génération vidéo"><span>Génération vidéo</span></label>
-          <label class="opt"><input type="checkbox" name="outils" value="Voix et musique"><span>Voix et musique</span></label>
-          <label class="opt"><input type="checkbox" name="outils" value="Montage"><span>Montage</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Assistants conversationnels"><span data-i18n="opt_assistants">Assistants conversationnels</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Génération d'images"><span data-i18n="opt_images">Génération d'images</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Génération vidéo"><span data-i18n="opt_video">Génération vidéo</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Voix et musique"><span data-i18n="opt_voix">Voix et musique</span></label>
+          <label class="opt"><input type="checkbox" name="outils" value="Montage"><span data-i18n="opt_montage">Montage</span></label>
         </div>
       </div>
     </div>
 
     <div class="champ">
-      <label class="lbl" for="difficulte">Votre principale difficulté aujourd'hui</label>
+      <label class="lbl" for="difficulte" data-i18n="lbl_difficulte">Votre principale difficulté aujourd'hui</label>
       <select id="difficulte">
-        <option value="">Choisir…</option>
-        <option>Je ne sais pas par où commencer</option>
-        <option>Formuler de bons prompts</option>
-        <option>Choisir les bons outils</option>
-        <option>Obtenir des résultats réalistes</option>
-        <option>Garder des personnages cohérents</option>
-        <option>Mener un projet de bout en bout</option>
+        <option value="" data-i18n="opt_choisir">Choisir…</option>
+        <option value="Je ne sais pas par où commencer" data-i18n="opt_d1">Je ne sais pas par où commencer</option>
+        <option value="Formuler de bons prompts" data-i18n="opt_d2">Formuler de bons prompts</option>
+        <option value="Choisir les bons outils" data-i18n="opt_d3">Choisir les bons outils</option>
+        <option value="Obtenir des résultats réalistes" data-i18n="opt_d4">Obtenir des résultats réalistes</option>
+        <option value="Garder des personnages cohérents" data-i18n="opt_d5">Garder des personnages cohérents</option>
+        <option value="Mener un projet de bout en bout" data-i18n="opt_d6">Mener un projet de bout en bout</option>
       </select>
     </div>
   </section>
@@ -239,21 +284,21 @@ footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;f
   <!-- 03 -->
   <section>
     <div class="num">03</div>
-    <h2>Votre objectif</h2>
+    <h2 data-i18n="sec03_titre">Votre objectif</h2>
     <div class="champ">
-      <label class="lbl" for="objectif">Qu'aimeriez-vous être capable de réaliser grâce à la formation ? <span class="req">*</span></label>
-      <textarea id="objectif" placeholder="Un court-métrage, une publicité, un clip, des contenus pour votre activité…"></textarea>
-      <div class="msg-err">Dites-moi en une ou deux phrases ce que vous visez.</div>
+      <label class="lbl" for="objectif" data-i18n-html="lbl_objectif">Qu'aimeriez-vous être capable de réaliser grâce à la formation ? <span class="req">*</span></label>
+      <textarea id="objectif" placeholder="Un court-métrage, une publicité, un clip, des contenus pour votre activité…" data-i18n-placeholder="ph_objectif"></textarea>
+      <div class="msg-err" data-i18n="err_objectif">Dites-moi en une ou deux phrases ce que vous visez.</div>
     </div>
   </section>
 
   <!-- 04 -->
   <section>
     <div class="num">04</div>
-    <h2>Votre pack</h2>
-    <p class="aide">Les trois packs démarrent ensemble le 10 octobre, sur le même tronc commun. Chaque pack se poursuit là où le précédent s'arrête : rien à refaire pour aller plus loin.</p>
+    <h2 data-i18n="sec04_titre">Votre pack</h2>
+    <p class="aide" data-i18n="sec04_aide">Les trois packs démarrent ensemble le 10 octobre, sur le même tronc commun. Chaque pack se poursuit là où le précédent s'arrête : rien à refaire pour aller plus loin.</p>
 
-    <p class="aide-select">👇 Cliquez sur une carte pour sélectionner votre pack</p>
+    <p class="aide-select" data-i18n="sec04_aide2">👇 Cliquez sur une carte pour sélectionner votre pack</p>
 
     <div class="groupe" id="g-pack">
       <div class="packs">
@@ -262,9 +307,9 @@ footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;f
           <input type="radio" name="pack" value="Pack Skywalker — 300€">
           <div class="carte">
             <div class="haut"><div class="nom">Pack Skywalker</div><div class="prix">300 €</div></div>
-            <div class="duree">3 mois · oct. → déc. 2026</div>
-            <p><strong style="color:var(--ivoire);font-weight:500">Les fondations.</strong> Vous comprenez la chaîne de production par IA, vous maîtrisez les outils et l'art du prompt, puis vous réalisez votre premier projet visuel et votre première séquence animée. Idéal si vous partez de zéro.</p>
-            <div class="echeancier">Échéancier : <b>90 €</b> à l'ouverture, puis <b>105 €</b> en novembre et <b>105 €</b> en décembre.</div>
+            <div class="duree" data-i18n="sk_duree">3 mois · oct. → déc. 2026</div>
+            <p data-i18n-html="sk_desc"><strong style="color:var(--ivoire);font-weight:500">Les fondations.</strong> Vous comprenez la chaîne de production par IA, vous maîtrisez les outils et l'art du prompt, puis vous réalisez votre premier projet visuel et votre première séquence animée. Idéal si vous partez de zéro.</p>
+            <div class="echeancier" data-i18n-html="sk_ech">Échéancier : <b>90 €</b> à l'ouverture, puis <b>105 €</b> en novembre et <b>105 €</b> en décembre.</div>
           </div>
         </label>
 
@@ -272,75 +317,75 @@ footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;f
           <input type="radio" name="pack" value="Pack Obi-Wan — 500€">
           <div class="carte">
             <div class="haut"><div class="nom">Pack Obi-Wan</div><div class="prix">500 €</div></div>
-            <div class="duree">6 mois · oct. 2026 → mars 2027</div>
-            <p><strong style="color:var(--ivoire);font-weight:500">La méthode.</strong> Tout Skywalker, plus : voir comme un cinéaste, obtenir un rendu réaliste, garder des personnages cohérents, construire la bible visuelle d'un projet et mener une séquence de bout en bout. Vous terminez avec une pièce de 2 à 3 minutes.</p>
-            <div class="echeancier">Échéancier : <b>150 €</b> à l'ouverture, puis <b>5 mensualités de 70 €</b> (novembre → mars).</div>
+            <div class="duree" data-i18n="ob_duree">6 mois · oct. 2026 → mars 2027</div>
+            <p data-i18n-html="ob_desc"><strong style="color:var(--ivoire);font-weight:500">La méthode.</strong> Tout Skywalker, plus : voir comme un cinéaste, obtenir un rendu réaliste, garder des personnages cohérents, construire la bible visuelle d'un projet et mener une séquence de bout en bout. Vous terminez avec une pièce de 2 à 3 minutes.</p>
+            <div class="echeancier" data-i18n-html="ob_ech">Échéancier : <b>150 €</b> à l'ouverture, puis <b>5 mensualités de 70 €</b> (novembre → mars).</div>
           </div>
         </label>
 
         <label class="pack vedette">
           <input type="radio" name="pack" value="Pack Maître Yoda — 1500€">
           <div class="carte">
-            <div class="haut"><div class="nom">Pack Maître Yoda<span class="badge">LE PLUS COMPLET</span></div><div class="prix">1 500 €</div></div>
-            <div class="duree">10 mois · oct. 2026 → juil. 2027</div>
-            <p><strong style="color:var(--ivoire);font-weight:500">Le parcours complet.</strong> Tout Obi-Wan, plus le métier de réalisateur : écriture et découpage, direction de la photographie, son, voix et musique, effets visuels et finition. Vous terminez avec un film court produit et livré, avec mon accompagnement direct sur votre projet.</p>
-            <div class="echeancier">Échéancier : <b>450 €</b> à l'ouverture, puis <b>8 mensualités de 117 €</b> (novembre → juin) et <b>114 €</b> en juillet.</div>
+            <div class="haut"><div class="nom">Pack Maître Yoda<span class="badge" data-i18n="badge_complet">LE PLUS COMPLET</span></div><div class="prix" data-i18n="prix_yoda">1 500 €</div></div>
+            <div class="duree" data-i18n="my_duree">10 mois · oct. 2026 → juil. 2027</div>
+            <p data-i18n-html="my_desc"><strong style="color:var(--ivoire);font-weight:500">Le parcours complet.</strong> Tout Obi-Wan, plus le métier de réalisateur : écriture et découpage, direction de la photographie, son, voix et musique, effets visuels et finition. Vous terminez avec un film court produit et livré, avec mon accompagnement direct sur votre projet.</p>
+            <div class="echeancier" data-i18n-html="my_ech">Échéancier : <b>450 €</b> à l'ouverture, puis <b>8 mensualités de 117 €</b> (novembre → juin) et <b>114 €</b> en juillet.</div>
           </div>
         </label>
 
         <label class="pack">
           <input type="radio" name="pack" value="Pack Légende — sur devis">
           <div class="carte">
-            <div class="haut"><div class="nom">Pack Légende</div><div class="prix">Sur devis</div></div>
-            <div class="duree">Accompagnement sur mesure</div>
-            <p>Un accompagnement de votre projet de bout en bout, avec la possibilité de participer à une production Okapi à mes côtés. On en discute d'abord ensemble : je reviens vers vous pour un échange.</p>
+            <div class="haut"><div class="nom">Pack Légende</div><div class="prix" data-i18n="leg_devis">Sur devis</div></div>
+            <div class="duree" data-i18n="leg_duree">Accompagnement sur mesure</div>
+            <p data-i18n="leg_desc">Un accompagnement de votre projet de bout en bout, avec la possibilité de participer à une production Okapi à mes côtés. On en discute d'abord ensemble : je reviens vers vous pour un échange.</p>
           </div>
         </label>
 
       </div>
-      <div class="msg-err">Choisissez un pack.</div>
+      <div class="msg-err" data-i18n="err_pack">Choisissez un pack.</div>
     </div>
 
     <div class="principe">
-      <div class="etiq">LE PRINCIPE DE L'ÉCHÉANCIER</div>
+      <div class="etiq" data-i18n="etiq_principe">LE PRINCIPE DE L'ÉCHÉANCIER</div>
       <ol>
-        <li><strong>Rien n'est encaissé à l'inscription.</strong> Je vous envoie d'abord votre contrat de formation.</li>
-        <li>Après votre signature, vous avez <strong>14 jours pour vous rétracter</strong>, sans frais ni justification. Aucun paiement n'est demandé pendant ce délai.</li>
-        <li>Ensuite, le <strong>1er versement est de 30&nbsp;%</strong> du prix du pack.</li>
-        <li>Le <strong>solde est étalé en mensualités</strong>, mois après mois, pendant la formation.</li>
+        <li data-i18n-html="li_p1"><strong>Rien n'est encaissé à l'inscription.</strong> Je vous envoie d'abord votre contrat de formation.</li>
+        <li data-i18n-html="li_p2">Après votre signature, vous avez <strong>14 jours pour vous rétracter</strong>, sans frais ni justification. Aucun paiement n'est demandé pendant ce délai.</li>
+        <li data-i18n-html="li_p3">Ensuite, le <strong>1er versement est de 30&nbsp;%</strong> du prix du pack.</li>
+        <li data-i18n-html="li_p4">Le <strong>solde est étalé en mensualités</strong>, mois après mois, pendant la formation.</li>
       </ol>
-      <p class="note">Paiement par virement bancaire ou carte bancaire. Tarifs nets, TVA non applicable. Accès à la plateforme pendant toute la durée du pack, prolongé de 30 jours.</p>
+      <p class="note" data-i18n="note_principe">Paiement par virement bancaire ou carte bancaire. Tarifs nets, TVA non applicable. Accès à la plateforme pendant toute la durée du pack, prolongé de 30 jours.</p>
     </div>
   </section>
 
   <!-- 05 -->
   <section>
     <div class="num">05</div>
-    <h2>Paiement et engagements</h2>
+    <h2 data-i18n="sec05_titre">Paiement et engagements</h2>
 
     <div class="champ groupe" id="g-paiement">
-      <label class="lbl">Moyen de paiement préféré <span class="req">*</span></label>
+      <label class="lbl" data-i18n-html="lbl_paiement">Moyen de paiement préféré <span class="req">*</span></label>
       <div class="options">
-        <label class="opt"><input type="radio" name="paiement" value="Virement bancaire"><span>Virement bancaire</span></label>
-        <label class="opt"><input type="radio" name="paiement" value="Carte bancaire"><span>Carte bancaire</span></label>
+        <label class="opt"><input type="radio" name="paiement" value="Virement bancaire"><span data-i18n="opt_virement">Virement bancaire</span></label>
+        <label class="opt"><input type="radio" name="paiement" value="Carte bancaire"><span data-i18n="opt_carte">Carte bancaire</span></label>
       </div>
-      <div class="msg-err">Choisissez un moyen de paiement.</div>
+      <div class="msg-err" data-i18n="err_paiement">Choisissez un moyen de paiement.</div>
     </div>
 
     <div class="groupe" id="g-engagement">
-      <label class="coche"><input type="checkbox" id="engagement"><span>Je comprends que mon inscription ne devient définitive qu'après la signature du contrat de formation, et qu'aucun paiement n'est demandé avant la fin du délai de rétractation de 14 jours.</span></label>
-      <div class="msg-err">Cette case est nécessaire pour continuer.</div>
+      <label class="coche"><input type="checkbox" id="engagement"><span data-i18n="chk_engagement">Je comprends que mon inscription ne devient définitive qu'après la signature du contrat de formation, et qu'aucun paiement n'est demandé avant la fin du délai de rétractation de 14 jours.</span></label>
+      <div class="msg-err" data-i18n="err_case">Cette case est nécessaire pour continuer.</div>
     </div>
     <div class="groupe" id="g-rgpd">
-      <label class="coche"><input type="checkbox" id="rgpd"><span>J'accepte que mes données soient utilisées pour gérer mon inscription et m'écrire au sujet de la formation.</span></label>
-      <div class="msg-err">Cette case est nécessaire pour continuer.</div>
+      <label class="coche"><input type="checkbox" id="rgpd"><span data-i18n="chk_rgpd">J'accepte que mes données soient utilisées pour gérer mon inscription et m'écrire au sujet de la formation.</span></label>
+      <div class="msg-err" data-i18n="err_case">Cette case est nécessaire pour continuer.</div>
     </div>
 
-    <p class="note">La formation démarre le 10 octobre. Votre accès s'ouvre à l'issue du délai légal de 14 jours après la signature de votre contrat : si vous vous inscrivez maintenant, il peut donc s'ouvrir après cette date. Les vidéos sont disponibles à la demande, vous avancez à votre rythme et vous rattrapez sans difficulté.</p>
+    <p class="note" data-i18n="note_acces">La formation démarre le 10 octobre. Votre accès s'ouvre à l'issue du délai légal de 14 jours après la signature de votre contrat : si vous vous inscrivez maintenant, il peut donc s'ouvrir après cette date. Les vidéos sont disponibles à la demande, vous avancez à votre rythme et vous rattrapez sans difficulté.</p>
   </section>
 
   <div class="envoi">
-    <button type="submit" class="cta" id="btn-envoi">Envoyer mon inscription</button>
+    <button type="submit" class="cta" id="btn-envoi" data-i18n="btn_envoi">Envoyer mon inscription</button>
     <div class="statut" id="statut" role="status" aria-live="polite"></div>
   </div>
 
@@ -349,22 +394,22 @@ footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;f
 
 <!-- Confirmation -->
 <div id="confirmation">
-  <div class="sceau">INSCRIPTION REÇUE</div>
+  <div class="sceau" data-i18n="sceau">INSCRIPTION REÇUE</div>
   <h2 id="conf-titre">Merci !</h2>
-  <p>Votre inscription est bien enregistrée. Un email de confirmation vous est envoyé.</p>
+  <p data-i18n="conf_intro">Votre inscription est bien enregistrée. Un email de confirmation vous est envoyé.</p>
   <div class="suite">
-    <div class="etiq">LA SUITE</div>
+    <div class="etiq" data-i18n="etiq_suite">LA SUITE</div>
     <ol>
-      <li><strong>Je vous envoie votre contrat de formation</strong> par email.</li>
-      <li>Vous le signez et vous me le renvoyez (besoin d'aide ? on vous guide pas à pas).</li>
-      <li>Vous disposez de <strong>14 jours pour vous rétracter</strong> : aucun paiement pendant ce délai.</li>
-      <li>Votre accès s'ouvre, puis le premier versement de 30&nbsp;% est prélevé.</li>
+      <li data-i18n-html="suite_li1"><strong>Je vous envoie votre contrat de formation</strong> par email.</li>
+      <li data-i18n="suite_li2">Vous le signez et vous me le renvoyez (besoin d'aide ? on vous guide pas à pas).</li>
+      <li data-i18n-html="suite_li3">Vous disposez de <strong>14 jours pour vous rétracter</strong> : aucun paiement pendant ce délai.</li>
+      <li data-i18n="suite_li4">Votre accès s'ouvre, puis le premier versement de 30&nbsp;% est prélevé.</li>
     </ol>
   </div>
   <div class="repli">
-    Vous n'avez pas reçu d'email de confirmation d'ici quelques minutes&nbsp;? Vérifiez vos courriers indésirables, ou écrivez-moi&nbsp;:<br>
-    <a id="lien-mail" href="#">Envoyer mes réponses par email</a>
-    <button type="button" id="btn-copie">Copier mes réponses</button>
+    <span data-i18n="repli_text">Vous n'avez pas reçu d'email de confirmation d'ici quelques minutes&nbsp;? Vérifiez vos courriers indésirables, ou écrivez-moi&nbsp;:</span><br>
+    <a id="lien-mail" href="#" data-i18n="lien_mail">Envoyer mes réponses par email</a>
+    <button type="button" id="btn-copie" data-i18n="btn_copie">Copier mes réponses</button>
   </div>
 </div>
 
@@ -381,6 +426,196 @@ var MAIL_INSCRIPTION = "formation@okapiworldmedia.com";
 var form = document.getElementById('form');
 var donnees = {};
 
+/* ── Internationalisation ── */
+var FR_TITLE = document.title;
+var FR_META  = document.querySelector('meta[name="description"]').getAttribute('content');
+var langue   = 'fr';
+var cachesFR = {};
+
+var EN = {
+  title:         "Registration — L'ÉCOLE OKAPI",
+  meta_desc:     "Registration at L'ÉCOLE OKAPI — online course: filmmaking and AI-assisted production. Starts October 10, 2026.",
+  titre_principal:"From idea to film, with artificial intelligence.",
+  intro_principale:"A 100% online course to learn how to make films and produce with AI, from your first prompt to final delivery.",
+  fait_debut:    "Starts October 10, 2026",
+  fait_ligne:    "100% online",
+  fait_places:   "25 places maximum",
+  sec01_titre:   "You",
+  lbl_prenom:    'First name <span class="req">*</span>',
+  err_prenom:    "Please enter your first name.",
+  lbl_nom:       'Last name <span class="req">*</span>',
+  err_nom:       "Please enter your last name.",
+  lbl_email:     'Email <span class="req">*</span>',
+  err_email:     "Please enter a valid email address: your contract will be sent there.",
+  lbl_tel:       'Phone (WhatsApp) <span class="req">*</span>',
+  err_tel:       "Please enter a number with the country code.",
+  lbl_profession:"Occupation",
+  lbl_ville:     "City / Country",
+  sec02_titre:   "Where you're starting from",
+  sec02_aide:    "There are no wrong answers: these questions help me understand where you are starting from.",
+  lbl_source:    "How did you hear about L'École Okapi?",
+  opt_choisir:   "Choose\u2026",
+  opt_bnc:       "BNC Cinéma training",
+  opt_nuit:      "La Nuit de l'IA (event)",
+  opt_bouche:    "WhatsApp / word of mouth",
+  opt_autre:     "Other",
+  lbl_ia:        'Do you already use AI to create? <span class="req">*</span>',
+  opt_oui:       "Yes",
+  opt_non:       "No, I'm a beginner",
+  err_ia:        "Please choose an answer.",
+  lbl_depuis:    "Since when?",
+  opt_3mois:     "Less than 3 months",
+  opt_36:        "3\u20136 months",
+  opt_612:       "6\u201312 months",
+  opt_1an:       "More than a year",
+  lbl_outils:    "What you already use",
+  opt_assistants:"Chat assistants",
+  opt_images:    "Image generation",
+  opt_video:     "Video generation",
+  opt_voix:      "Voice and music",
+  opt_montage:   "Editing",
+  lbl_difficulte:"Your main challenge today",
+  opt_d1:        "I don't know where to start",
+  opt_d2:        "Writing good prompts",
+  opt_d3:        "Choosing the right tools",
+  opt_d4:        "Getting realistic results",
+  opt_d5:        "Keeping characters consistent",
+  opt_d6:        "Carrying a project through from start to finish",
+  sec03_titre:   "Your goal",
+  lbl_objectif:  'What would you like to be able to create thanks to the course? <span class="req">*</span>',
+  ph_objectif:   "A short film, an ad, a music video, content for your business\u2026",
+  err_objectif:  "Tell me in a sentence or two what you're aiming for.",
+  sec04_titre:   "Your pack",
+  sec04_aide:    "All three packs start together on October 10, on the same common foundation. Each pack continues where the previous one stops: nothing to redo to go further.",
+  sec04_aide2:   "\uD83D\uDC47 Click on a card to select your pack",
+  sk_duree:      "3 months \u00b7 Oct. \u2192 Dec. 2026",
+  sk_desc:       '<strong style="color:var(--ivoire);font-weight:500">The foundations.</strong> You understand the AI production chain, master the tools and the art of prompting, then complete your first visual project and your first animated sequence. Ideal if you\u2019re starting from zero.',
+  sk_ech:        'Payment schedule: <b>\u20ac90</b> at the start, then <b>\u20ac105</b> in November and <b>\u20ac105</b> in December.',
+  ob_duree:      "6 months \u00b7 Oct. 2026 \u2192 March 2027",
+  ob_desc:       '<strong style="color:var(--ivoire);font-weight:500">The method.</strong> Everything in Skywalker, plus: seeing like a filmmaker, achieving a realistic look, keeping characters consistent, building a project\u2019s visual bible and carrying a sequence through from start to finish. You finish with a 2-to-3-minute piece.',
+  ob_ech:        'Payment schedule: <b>\u20ac150</b> at the start, then <b>5 monthly payments of \u20ac70</b> (November \u2192 March).',
+  badge_complet: "MOST COMPLETE",
+  prix_yoda:     "\u20ac1,500",
+  my_duree:      "10 months \u00b7 Oct. 2026 \u2192 July 2027",
+  my_desc:       '<strong style="color:var(--ivoire);font-weight:500">The complete path.</strong> Everything in Obi-Wan, plus the craft of directing: writing and shot breakdown, cinematography, sound, voice and music, visual effects and finishing. You finish with a short film produced and delivered, with my direct support on your project.',
+  my_ech:        'Payment schedule: <b>\u20ac450</b> at the start, then <b>8 monthly payments of \u20ac117</b> (November \u2192 June) and <b>\u20ac114</b> in July.',
+  leg_devis:     "Custom quote",
+  leg_duree:     "Tailor-made support",
+  leg_desc:      "End-to-end support for your project, with the possibility of taking part in an Okapi production alongside me. We discuss it together first: I\u2019ll get back to you for a conversation.",
+  etiq_principe: "HOW THE PAYMENT SCHEDULE WORKS",
+  li_p1:         "<strong>Nothing is charged at registration.</strong> I first send you your training contract.",
+  li_p2:         "After you sign, you have <strong>14 days to withdraw</strong>, at no cost and without giving a reason. No payment is requested during this period.",
+  li_p3:         "Then the first payment is <strong>30% of the pack price</strong>.",
+  li_p4:         "The <strong>balance is spread over monthly payments</strong> during the course.",
+  note_principe: "Payment by bank transfer or card. Net prices, VAT not applicable. Platform access for the full duration of the pack, extended by 30 days.",
+  err_pack:      "Please choose a pack.",
+  sec05_titre:   "Payment and commitments",
+  lbl_paiement:  'Preferred payment method <span class="req">*</span>',
+  opt_virement:  "Bank transfer",
+  opt_carte:     "Card",
+  err_paiement:  "Please choose a payment method.",
+  chk_engagement:"I understand that my registration only becomes final after signing the training contract, and that no payment is requested before the end of the 14-day withdrawal period.",
+  err_case:      "This box is required to continue.",
+  chk_rgpd:      "I agree that my data may be used to manage my registration and to contact me about the course.",
+  note_acces:    "The course starts on October 10. Your access opens at the end of the legal 14-day period after you sign your contract: if you register now, it may therefore open after that date. Videos are available on demand: you go at your own pace and can easily catch up.",
+  btn_envoi:     "Submit my registration",
+  statut_envoi:  "Sending\u2026",
+  sceau:         "REGISTRATION RECEIVED",
+  conf_intro:    "Your registration has been recorded. A confirmation email is on its way.",
+  etiq_suite:    "WHAT HAPPENS NEXT",
+  suite_li1:     "<strong>I email you your training contract.</strong>",
+  suite_li2:     "You sign it and send it back (need help? We\u2019ll guide you step by step).",
+  suite_li3:     "You have <strong>14 days to withdraw</strong>: no payment during this period.",
+  suite_li4:     "Your access opens, then the first payment of 30% is taken.",
+  repli_text:    "Haven\u2019t received a confirmation email within a few minutes? Check your spam folder, or write to me:",
+  lien_mail:     "Send my answers by email",
+  btn_copie:     "Copy my answers",
+  copie_ok:      "Copied \u2713",
+  echec_envoi:   "Automatic sending failed. Use the button below to email me your answers.",
+  aria_activer:  "Unmute",
+  aria_couper:   "Mute"
+};
+
+function lirePreference(){
+  try{ return localStorage.getItem('okapi_langue') || 'fr'; }catch(e){ return 'fr'; }
+}
+function sauvePreference(lang){
+  try{ localStorage.setItem('okapi_langue', lang); }catch(e){}
+}
+
+function precacherFR(){
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(!(k in cachesFR)) cachesFR[k] = el.textContent;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if(!(k in cachesFR)) cachesFR[k] = el.innerHTML;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-placeholder');
+    if(!(k in cachesFR)) cachesFR[k] = el.placeholder;
+  });
+}
+
+function appliquerLangue(lang){
+  langue = lang;
+  sauvePreference(lang);
+  document.documentElement.lang = lang;
+
+  if(lang === 'en'){
+    document.title = EN.title;
+    document.querySelector('meta[name="description"]').setAttribute('content', EN.meta_desc);
+  } else {
+    document.title = FR_TITLE;
+    document.querySelector('meta[name="description"]').setAttribute('content', FR_META);
+  }
+
+  var noteEl = document.getElementById('note-langue');
+  if(noteEl){
+    noteEl.style.display = lang === 'en' ? 'block' : 'none';
+    noteEl.setAttribute('aria-hidden', lang === 'en' ? 'false' : 'true');
+  }
+
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.getAttribute('data-i18n');
+    if(lang === 'en'){
+      if(EN[k] !== undefined) el.textContent = EN[k];
+    } else {
+      if(cachesFR[k] !== undefined) el.textContent = cachesFR[k];
+    }
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-html');
+    if(lang === 'en'){
+      if(EN[k] !== undefined) el.innerHTML = EN[k];
+    } else {
+      if(cachesFR[k] !== undefined) el.innerHTML = cachesFR[k];
+    }
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    var k = el.getAttribute('data-i18n-placeholder');
+    if(lang === 'en'){
+      if(EN[k] !== undefined) el.placeholder = EN[k];
+    } else {
+      if(cachesFR[k] !== undefined) el.placeholder = cachesFR[k];
+    }
+  });
+
+  document.getElementById('btn-fr').setAttribute('aria-pressed', lang === 'fr' ? 'true' : 'false');
+  document.getElementById('btn-en').setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
+}
+
+/* Init langue */
+precacherFR();
+var langInit = lirePreference();
+if(langInit === 'en') appliquerLangue('en');
+
+document.getElementById('btn-fr').addEventListener('click', function(){ appliquerLangue('fr'); });
+document.getElementById('btn-en').addEventListener('click', function(){ appliquerLangue('en'); });
+
 /* ── Sélection visuelle et bloc conditionnel ── */
 function val(id){ return (document.getElementById(id).value || '').trim(); }
 function radio(name){ var r = document.querySelector('input[name="'+name+'"]:checked'); return r ? r.value : ''; }
@@ -394,15 +629,15 @@ document.querySelectorAll('input[name="ia"]').forEach(function(r){
 /* ── Validation ── */
 function marquerErreur(el, actif){
   var parent = el.closest('.champ, .groupe');
-  if (parent) parent.classList.toggle('err', actif);
-  if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') el.classList.toggle('invalide', actif);
+  if(parent) parent.classList.toggle('err', actif);
+  if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') el.classList.toggle('invalide', actif);
 }
 
 function valider(){
   var premiereErreur = null;
   function verif(ok, el){
     marquerErreur(el, !ok);
-    if (!ok && !premiereErreur) premiereErreur = el;
+    if(!ok && !premiereErreur) premiereErreur = el;
   }
   var email = val('email');
   var chiffresTel = val('telephone').replace(/\D/g,'');
@@ -418,18 +653,17 @@ function valider(){
   verif(document.getElementById('engagement').checked, document.getElementById('g-engagement'));
   verif(document.getElementById('rgpd').checked, document.getElementById('g-rgpd'));
 
-  if (premiereErreur){
+  if(premiereErreur){
     premiereErreur.scrollIntoView({behavior:'smooth', block:'center'});
     return false;
   }
   return true;
 }
 
-/* Efface l'erreur dès que l'utilisateur corrige */
 form.addEventListener('input', function(e){ marquerErreur(e.target, false); });
 form.addEventListener('change', function(e){ marquerErreur(e.target, false); });
 
-/* ── Construction des données (clés = en-têtes de la Sheet) ── */
+/* ── Construction des données ── */
 function collecter(){
   var outils = [];
   document.querySelectorAll('input[name="outils"]:checked').forEach(function(c){ outils.push(c.value); });
@@ -450,7 +684,8 @@ function collecter(){
     "Pack choisi": radio('pack'),
     "Moyen de paiement": radio('paiement'),
     "Engagement compris": "Oui",
-    "Consentement données": "Oui"
+    "Consentement données": "Oui",
+    "Langue du formulaire": langue === 'en' ? 'EN' : 'FR'
   };
 }
 
@@ -461,18 +696,20 @@ function resume(d){
 /* ── Envoi ── */
 form.addEventListener('submit', function(e){
   e.preventDefault();
-  if (!valider()) return;
+  if(!valider()) return;
 
   donnees = collecter();
   var btn = document.getElementById('btn-envoi');
   var statut = document.getElementById('statut');
   btn.disabled = true;
   statut.className = 'statut';
-  statut.textContent = 'Envoi en cours…';
+  statut.textContent = langue === 'en' ? EN.statut_envoi : 'Envoi en cours\u2026';
 
   function succes(){
     document.getElementById('formulaire').style.display = 'none';
-    document.getElementById('conf-titre').textContent = 'Merci ' + donnees["Prénom"] + ' !';
+    document.getElementById('conf-titre').textContent = langue === 'en'
+      ? 'Thank you, ' + donnees["Prénom"] + '!'
+      : 'Merci ' + donnees["Prénom"] + '\u00a0!';
     document.getElementById('confirmation').style.display = 'block';
     var sujet = encodeURIComponent("Inscription L'École Okapi — " + donnees["Prénom"] + " " + donnees["Nom"]);
     var corps = encodeURIComponent(resume(donnees));
@@ -484,11 +721,13 @@ form.addEventListener('submit', function(e){
     succes();
     var alerte = document.createElement('p');
     alerte.style.cssText = 'color:#E0705A;font-size:13px;margin-top:18px';
-    alerte.textContent = "L'envoi automatique a échoué. Utilisez le bouton ci-dessous pour m'envoyer vos réponses par email.";
+    alerte.textContent = langue === 'en'
+      ? EN.echec_envoi
+      : "L'envoi automatique a échoué. Utilisez le bouton ci-dessous pour m'envoyer vos réponses par email.";
     document.getElementById('confirmation').insertBefore(alerte, document.querySelector('#confirmation .suite'));
   }
 
-  if (!WEBHOOK_URL){ echec(); return; }
+  if(!WEBHOOK_URL){ echec(); return; }
 
   fetch(WEBHOOK_URL, {
     method: 'POST',
@@ -507,8 +746,13 @@ form.addEventListener('submit', function(e){
 document.getElementById('btn-copie').addEventListener('click', function(){
   var texte = resume(donnees);
   var b = this;
-  function ok(){ b.textContent = 'Copié ✓'; setTimeout(function(){ b.textContent = 'Copier mes réponses'; }, 2500); }
-  if (navigator.clipboard && navigator.clipboard.writeText){
+  function ok(){
+    b.textContent = langue === 'en' ? EN.copie_ok : 'Copié \u2713';
+    setTimeout(function(){
+      b.textContent = langue === 'en' ? EN.btn_copie : 'Copier mes réponses';
+    }, 2500);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(texte).then(ok, function(){ fallbackCopie(texte); ok(); });
   } else { fallbackCopie(texte); ok(); }
 });
@@ -532,7 +776,9 @@ function fallbackCopie(texte){
     sendYT(muted ? 'mute' : 'unMute');
     document.getElementById('iconMuted').style.display = muted ? '' : 'none';
     document.getElementById('iconSound').style.display = muted ? 'none' : '';
-    btn.setAttribute('aria-label', muted ? 'Activer le son' : 'Couper le son');
+    btn.setAttribute('aria-label', muted
+      ? (langue === 'en' ? EN.aria_activer : 'Activer le son')
+      : (langue === 'en' ? EN.aria_couper  : 'Couper le son'));
   });
 })();
 </script>
