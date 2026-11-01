@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Atelier live · Mois 1 · L'École Okapi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--n:#0A0A0A;--n2:#121212;--g:#C9A84C;--g2:#E2C878;--i:#F5F0E8;--m:#8C867A;--r:#C25B4E;--line:rgba(201,168,76,.24);
+--sujet:#C9A84C;--action:#A9C3D6;--cadre:#A8C6A0;--lumiere:#D9A273;--style:#C3B0D8}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--n);color:var(--i);font-family:'Poppins',sans-serif;overflow:hidden}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>")}
+button{font-family:inherit;cursor:pointer}
+a{color:var(--g)}
+/* barre haute */
+#top{position:fixed;left:0;right:0;top:0;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;z-index:50;background:linear-gradient(180deg,rgba(10,10,10,.95),rgba(10,10,10,0))}
+#top .brand{display:flex;align-items:center;gap:12px;color:var(--g);font-weight:500;font-size:11.5px;letter-spacing:.42em}
+#top .right{display:flex;align-items:center;gap:22px;font-size:11.5px;letter-spacing:.24em;color:var(--g);font-weight:500}
+#clock{font-variant-numeric:tabular-nums;letter-spacing:.12em;color:var(--i);opacity:.75;cursor:pointer}
+#clock.on{color:var(--g);opacity:1}
+#counter{color:var(--m)}
+.icon-btn{background:none;border:1px solid var(--line);color:var(--g);border-radius:3px;padding:5px 10px;font-size:11px;letter-spacing:.2em}
+.icon-btn:hover{border-color:var(--g)}
+#prog{position:fixed;left:0;bottom:0;height:2px;background:var(--g);z-index:60;transition:width .5s ease}
+/* slides */
+#deck{position:fixed;inset:0}
+.slide{position:absolute;inset:0;overflow-x:hidden;padding:96px 7vw 70px 7vw;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(18px);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1);background:radial-gradient(110% 90% at 75% 25%,#1A160D 0%,#0E0D0B 45%,#0A0A0A 100%);overflow-y:auto}
+.slide.active{opacity:1;pointer-events:auto;transform:none}
+.slide.dark{background:#0A0A0A}
+.kick{font-weight:500;font-size:12px;letter-spacing:.44em;color:var(--g);text-transform:uppercase}
+h1{font-weight:300;font-size:clamp(40px,5.4vw,86px);line-height:1.04;letter-spacing:-.02em}
+h2{font-weight:300;font-size:clamp(30px,3.4vw,52px);line-height:1.1;letter-spacing:-.015em;margin-top:10px}
+h1 b,h2 b,h3 b{font-weight:700;color:var(--g)}
+h3{font-weight:600;font-size:20px;line-height:1.3}
+p,li{font-weight:300;font-size:17px;line-height:1.6}
+.lead{font-weight:300;font-size:clamp(17px,1.35vw,21px);line-height:1.55;color:#E6DFD1;max-width:900px;margin-top:16px}
+.muted{color:var(--m)}
+.gold{color:var(--g)}
+.grid{display:grid;gap:18px}.grid>*{min-width:0}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--n2);border:1px solid var(--line);border-radius:6px;padding:22px 24px;position:relative}
+.card .lab{font-weight:500;font-size:10.5px;letter-spacing:.32em;color:var(--g);text-transform:uppercase;margin-bottom:10px}
+.ph{position:relative;border-radius:5px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.ph img{display:block;width:100%;height:100%;object-fit:cover}
+.ph .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 10px;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);font-weight:500;font-size:11px;letter-spacing:.24em;color:var(--g2);text-transform:uppercase}
+.row{display:flex;gap:18px;align-items:stretch}.row>div{min-width:0}
+.spacer{flex:1}
+.tag{display:inline-block;border:1px solid var(--c,var(--g));color:var(--c,var(--g));font-weight:500;font-size:10.5px;letter-spacing:.24em;padding:4px 9px;border-radius:2px;text-transform:uppercase}
+.quote{border-left:2px solid var(--g);padding-left:18px;font-weight:300;font-size:clamp(19px,1.6vw,26px);line-height:1.4;margin-top:24px;max-width:980px}
+.quote b{color:var(--g);font-weight:600}
+.btn{background:transparent;border:1px solid var(--g);color:var(--g);padding:10px 18px;border-radius:3px;font-weight:500;font-size:13px;letter-spacing:.06em;transition:all .2s}
+.btn:hover,.btn.on{background:var(--g);color:var(--n)}
+.btn.ghost{border-color:var(--line);color:var(--i)}
+.btn.ghost:hover{border-color:var(--g);background:transparent;color:var(--g)}
+.lesson-head{display:flex;align-items:baseline;gap:20px}
+.lnum{font-weight:300;font-size:clamp(54px,6vw,96px);color:var(--g);line-height:.9}
+.ex{margin-top:auto;padding-top:18px}
+.exbox{border:1px dashed rgba(201,168,76,.5);border-radius:6px;padding:14px 18px;font-weight:300;font-size:15.5px;line-height:1.55;background:rgba(201,168,76,.04)}
+.exbox b{font-weight:600;color:var(--g)}
+.flash{margin-top:14px}
+.flash .ans{display:none;margin-top:8px;color:var(--g2);font-weight:400;font-size:15.5px}
+.flash.open .ans{display:block}
+.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(201,168,76,.12);cursor:pointer;font-weight:300;font-size:15.5px}
+.chk i{flex:none;width:20px;height:20px;border:1px solid var(--g);border-radius:3px;margin-top:3px;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:13px;color:var(--n)}
+.chk.on i{background:var(--g)}.chk.on span{color:var(--m);text-decoration:line-through}
+/* navigation */
+.nav{position:fixed;bottom:22px;right:36px;z-index:55;display:flex;gap:8px}
+.nav button{width:42px;height:42px;border-radius:50%;background:rgba(18,18,18,.9);border:1px solid var(--line);color:var(--g);font-size:18px}
+.nav button:hover{border-color:var(--g)}
+#overview{position:fixed;inset:0;z-index:120;background:rgba(10,10,10,.97);display:none;padding:80px 6vw 40px;overflow-y:auto}
+#overview.open{display:block}
+#overview .grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+#overview .it{border:1px solid var(--line);border-radius:5px;padding:16px;cursor:pointer;min-height:86px}
+#overview .it:hover,#overview .it.cur{border-color:var(--g);background:rgba(201,168,76,.06)}
+#overview .it small{display:block;color:var(--g);letter-spacing:.24em;font-size:10px;font-weight:500}
+#overview .it span{font-weight:400;font-size:15px}
+#help{position:fixed;left:40px;bottom:22px;z-index:55;font-size:11px;letter-spacing:.14em;color:var(--m)}
+/* composants */
+.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:26px}
+.brick{border:1px solid var(--line);padding:20px;cursor:pointer;background:var(--n2);transition:all .25s;position:relative}
+.brick+.brick{border-left:none}
+.brick:after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--g);z-index:2;background:var(--n);padding:0 2px}
+.brick:last-child:after{display:none}
+.brick .n{font-weight:300;font-size:40px;color:var(--g);line-height:1}
+.brick h3{margin-top:8px;font-size:17px}
+.brick .more{max-height:0;overflow:hidden;transition:max-height .4s ease;font-weight:300;font-size:14.5px;line-height:1.5;color:#d9d2c3}
+.brick.open{background:#17140c;border-color:var(--g)}
+.brick.open .more{max-height:260px;margin-top:10px}
+.sort-item{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:30px;padding:9px 16px;margin:5px;font-size:14.5px;background:var(--n2);cursor:pointer;transition:all .2s;user-select:none}
+.sort-item.sel{border-color:var(--g);background:#17140c}
+.sort-item.ok{border-color:#7FB08A;color:#cfe6d4}.sort-item.ko{border-color:var(--r);color:#f0b3a9}
+.bin{border:1px dashed var(--line);border-radius:6px;padding:14px;min-height:150px;cursor:pointer;transition:all .2s}
+.bin:hover{border-color:var(--g)}
+.bin h3{font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--g);font-weight:500;margin-bottom:6px}
+.fam{border:1px solid var(--line);border-radius:6px;padding:18px;background:var(--n2);cursor:pointer;transition:all .3s}
+.fam.on{border-color:var(--g);background:#17140c;transform:translateY(-4px)}
+.fam .ar{font-weight:600;font-size:16px}
+.meter{height:6px;border-radius:3px;background:#2a2620;margin-top:10px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--g)}
+.ftab{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.ftab .btn{white-space:nowrap;padding:8px 12px;font-size:12.5px}
+.fmt-stage{display:flex;align-items:center;justify-content:center;height:46vh;min-height:300px}
+.fmt-stage .ph{transition:all .5s cubic-bezier(.2,.8,.2,1);max-height:100%;max-width:100%}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:500;font-size:10.5px;letter-spacing:.28em;color:var(--g);text-transform:uppercase}
+.field input,.field textarea,.field select{width:100%;min-width:0;background:#151515;border:1px solid var(--line);color:var(--i);border-radius:4px;padding:10px 12px;font-family:inherit;font-size:14.5px;font-weight:300}
+.field textarea{resize:vertical;min-height:58px}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--g)}
+.out{background:#0f0e0b;border:1px solid var(--g);border-radius:5px;padding:16px 18px;font-weight:300;font-size:15.5px;line-height:1.55;min-height:60px;white-space:pre-wrap}
+.big{font-weight:300;font-size:46px;color:var(--g);line-height:1}
+.ba{position:relative;overflow:hidden;border-radius:5px;user-select:none;cursor:ew-resize;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.ba img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba .top{position:absolute;inset:0;clip-path:inset(0 50% 0 0)}
+.ba .bar{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--g);box-shadow:0 0 18px rgba(201,168,76,.8)}
+.ba .bar:after{content:"⟷";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:var(--n);border:1px solid var(--g);color:var(--g);display:flex;align-items:center;justify-content:center;font-size:16px}
+.ba .l1,.ba .l2{position:absolute;bottom:12px;font-weight:500;font-size:11px;letter-spacing:.24em;padding:5px 10px;background:rgba(0,0,0,.7);border-radius:2px}
+.ba .l1{left:12px;color:#f0b3a9}.ba .l2{right:12px;color:var(--g2)}
+.flip{perspective:1000px;cursor:pointer;height:210px}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.flip .f{background:var(--n2);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:16px}
+.flip .f h3{font-size:20px}.flip .f small{color:var(--m);margin-top:6px;font-size:12px;letter-spacing:.16em}
+.flip .b{transform:rotateY(180deg)}
+.flip .b img{width:100%;height:100%;object-fit:cover}
+.flip .b div{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent);font-size:13px;font-weight:400}
+.acc{border-bottom:1px solid rgba(201,168,76,.18)}
+.acc button{width:100%;text-align:left;background:none;border:none;color:var(--i);padding:14px 0;font-size:16.5px;font-weight:500;display:flex;justify-content:space-between;gap:12px}
+.acc button:after{content:"+";color:var(--g);font-weight:300;font-size:22px}
+.acc.open button:after{content:"–"}
+.acc .p{max-height:0;overflow:hidden;transition:max-height .4s;color:#d9d2c3;font-weight:300;font-size:15px;line-height:1.55}
+.acc.open .p{max-height:300px;padding-bottom:14px}
+.step{display:flex;gap:14px;align-items:flex-start;margin:10px 0}
+.step i{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--g);color:var(--g);display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:500;font-size:13px}
+.step span{font-weight:300;font-size:16px;line-height:1.5;padding-top:3px}
+.step span b{font-weight:600;color:var(--i)}
+.mock{background:#212121;border-radius:10px;border:1px solid #333;overflow:hidden;font-family:Helvetica,Arial,sans-serif;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.mock .bar{height:34px;background:#171717;display:flex;align-items:center;gap:6px;padding:0 12px}
+.mock .bar i{width:10px;height:10px;border-radius:50%;background:#444}
+.q-opt{display:block;width:100%;text-align:left;background:var(--n2);border:1px solid var(--line);color:var(--i);padding:14px 18px;border-radius:5px;margin:8px 0;font-size:16px;font-weight:300;transition:all .2s}
+.q-opt:hover{border-color:var(--g)}
+.q-opt.ok{border-color:#7FB08A;background:rgba(127,176,138,.12)}
+.q-opt.ko{border-color:var(--r);background:rgba(194,91,78,.12)}
+.tally{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid rgba(201,168,76,.15)}
+.tally .v{font-weight:300;font-size:34px;color:var(--g);width:60px;text-align:center}
+.tally button{width:34px;height:34px;border-radius:50%;background:none;border:1px solid var(--line);color:var(--g);font-size:18px}
+.tl{display:flex;gap:6px;margin-top:22px;flex-wrap:wrap}
+.tl button{flex:1;min-width:92px;background:var(--n2);border:1px solid var(--line);color:var(--i);padding:12px 8px;border-radius:4px;text-align:left}
+.tl button:hover{border-color:var(--g)}
+.tl button small{display:block;color:var(--g);font-size:10px;letter-spacing:.24em;font-weight:500}
+.tl button span{font-size:13px;font-weight:400;line-height:1.3;display:block;margin-top:4px}
+.section{justify-content:center;align-items:flex-start}
+.section .bignum{font-weight:300;font-size:clamp(90px,14vw,220px);color:transparent;-webkit-text-stroke:1px var(--g);line-height:.85}
+.fade-in>*{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .7s ease}
+.slide.active .fade-in>*{opacity:1;transform:none}
+.slide.active .fade-in>*:nth-child(2){transition-delay:.12s}.slide.active .fade-in>*:nth-child(3){transition-delay:.24s}.slide.active .fade-in>*:nth-child(4){transition-delay:.36s}.slide.active .fade-in>*:nth-child(5){transition-delay:.48s}.slide.active .fade-in>*:nth-child(6){transition-delay:.6s}
+@media (max-width:900px){.g2,.g3,.g4,.g5,.pipe{grid-template-columns:1fr}.row{flex-direction:column}.slide{padding:80px 22px 80px}#help{display:none}.brick+.brick{border-left:1px solid var(--line);border-top:none}.brick:after{display:none}}
+</style></head><body>
+<div id="top"><div class="brand"><svg width="22" height="26" viewBox="0 0 256 295"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpjYzY0ZGExNy1lMjJkLTQ0YTYtYmY0Ni02MDJlOWI2NTBmY2UAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaPugG7VZsGxfyiZwGtnNJpMAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo5NzQ0MDQ2OC1mMmUyLTQ3NjctOTRiYS04NTRjY2JiNDM5ZTBscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoJL1FBhFSTKOR6xbrFZjolAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggysvJPzcbDVAvgafdJjk+HsQERR1TJUdTGkVK0JEUFi2kZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaBm00bQDNuDzkbSmeqfkT1AAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCALCvnDg42EAZDxmO0+Q5CWd1SN1LJc5+eg06a3Ce7Rs2RuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBh9Zmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmNjNjRkYTE3LWUyMmQtNDRhNi1iZjQ2LTYwMmU5YjY1MGZjZS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjA3NDA5NDVjLTEwOWEtNDY0ZS05MTRkLTQ0MDc2OGJkMzg5MHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDKy8k/NxsNUC+Bp90mOT4exARFHVMlR1MaRUrQkRQWLaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggiz1i5myEAEB15c4Rz/R47pOt8fUVmKY1J74SIh/RlJ+iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggZOxJP/AniRx0gY9eNTIyPs3OluZ6A/qnfliLARtadZl0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQMKwMXS8uUonRdfsQPF7yHnmsYSyj31m+uFEvqPk1KgkyZnu/xmrdmas18kcXHm0nU06lltk4WfxkcJitUq584s=</c2pa:manifest></metadata>
+<path fill="#C9A84C" fill-opacity="1.0" fill-rule="evenodd" d="M1.17,1.17 L1.00,2.00 L27.17,87.67 L28.33,89.33 L27.50,90.00 L26.17,90.00 L25.67,90.67 L50.00,161.33 L51.00,162.33 L55.83,162.33 L56.67,162.83 L50.67,211.83 L205.17,211.83 L202.00,180.17 L201.17,177.33 L199.67,163.17 L200.17,162.67 L204.83,162.33 L205.83,161.33 L230.17,90.50 L227.50,89.33 L228.67,87.67 L254.83,2.00 L254.67,1.17 L254.00,1.33 L200.83,62.00 L200.83,62.67 L227.50,89.33 L226.83,90.00 L194.83,90.00 L188.50,85.33 L184.67,83.33 L178.83,81.33 L172.67,80.33 L166.83,80.50 L158.67,82.33 L152.33,85.33 L146.00,90.00 L109.83,90.00 L103.50,85.33 L99.67,83.33 L93.83,81.33 L87.67,80.33 L81.83,80.50 L73.67,82.33 L67.33,85.33 L61.00,90.00 L29.00,90.00 L28.33,89.33 L54.67,63.17 L55.00,62.00 L1.83,1.33Z"/>
+<path fill="#C9A84C" fill-opacity="0.85" fill-rule="evenodd" d="M50.83,212.00 L51.67,212.50 L62.50,212.33 L63.17,212.83 L72.17,247.00 L73.50,249.83 L182.33,249.83 L183.67,247.00 L191.83,215.17 L192.83,212.83 L189.67,212.67 L189.00,212.00 L170.33,212.00 L169.17,212.83 L151.67,212.83 L150.50,212.00 L133.00,212.00 L132.33,212.83 L113.50,212.83 L112.83,212.00 L96.67,212.00 L96.17,212.67 L78.17,212.83 L76.67,212.00Z M147.00,231.67 L149.33,228.83 L152.33,227.00 L156.67,226.17 L160.33,226.33 L163.50,227.00 L166.50,228.83 L168.83,231.67 L169.00,235.00 L167.83,237.17 L164.50,239.83 L160.67,241.00 L154.00,240.83 L149.67,238.83 L148.00,237.17 L146.83,235.17Z M87.00,231.67 L89.33,228.83 L92.33,227.00 L96.67,226.17 L100.33,226.33 L103.50,227.00 L106.50,228.83 L108.83,231.67 L109.00,235.00 L107.83,237.17 L104.50,239.83 L100.67,241.00 L94.00,240.83 L89.67,238.83 L88.00,237.17 L86.83,235.17Z"/>
+<path fill="#7D6932" fill-opacity="0.85" fill-rule="evenodd" d="M147.17,231.67 L147.00,235.17 L148.17,237.17 L149.67,238.67 L154.00,240.67 L160.67,240.83 L164.50,239.67 L167.67,237.17 L168.83,235.00 L168.83,232.33 L167.83,230.33 L165.50,228.17 L163.50,227.17 L160.33,226.50 L156.67,226.33 L152.33,227.17 L149.33,229.00Z M87.17,231.67 L87.00,235.17 L88.17,237.17 L89.67,238.67 L94.00,240.67 L100.67,240.83 L104.50,239.67 L107.67,237.17 L108.83,235.00 L108.83,232.33 L107.83,230.33 L105.50,228.17 L103.50,227.17 L100.33,226.50 L96.67,226.33 L92.33,227.17 L89.33,229.00Z M189.17,212.00 L189.67,212.50 L192.33,212.67 L203.83,212.50 L203.83,212.00Z M150.67,212.00 L151.67,212.67 L169.17,212.67 L170.17,212.17Z M113.00,212.00 L113.50,212.67 L132.33,212.67 L132.83,212.17Z M76.83,212.00 L77.50,212.67 L96.50,212.33 L96.50,212.00Z"/>
+<path fill="#C9A84C" fill-opacity="0.7" fill-rule="evenodd" d="M75.50,250.00 L76.17,250.83 L88.17,294.83 L167.67,294.83 L179.67,250.83 L180.33,250.00Z"/>
+<path fill="#7D6932" fill-rule="evenodd" d="M191.17,162.33 L190.50,162.83 L189.17,211.83 L203.83,211.83 L203.83,198.83 L202.83,198.17 L202.50,192.50 L201.50,188.50 L201.50,184.50 L200.67,181.00 L200.33,175.33 L199.67,173.17 L199.33,167.33 L198.50,163.33 L199.50,162.33Z M153.33,162.33 L152.17,176.17 L150.50,211.83 L170.33,211.83 L167.83,162.83 L167.50,162.33Z M116.17,162.33 L115.50,162.83 L113.00,211.83 L132.83,211.83 L130.33,162.83 L129.67,162.33Z M81.17,162.33 L80.33,163.17 L76.83,211.83 L96.67,211.83 L92.83,162.83 L92.50,162.33Z M204.83,110.33 L205.17,113.83 L204.83,119.50 L205.17,119.50 L205.50,113.00 L205.17,110.33Z M119.83,110.33 L120.17,113.83 L119.83,119.50 L120.17,119.50 L120.50,113.00 L120.17,110.33Z M135.67,110.17 L135.33,117.17 L135.67,119.67 L136.00,119.67 L135.67,116.17 L136.00,110.17Z M50.67,110.17 L50.33,117.17 L50.67,119.67 L51.00,119.67 L50.67,116.17 L51.00,110.17Z"/>
+<path fill="#72612E" fill-rule="evenodd" d="M190.67,180.67 L190.67,191.83 L191.00,191.83 L191.00,180.67Z M158.83,90.83 L158.50,91.83 L154.33,94.17 L150.17,98.17 L147.33,102.33 L145.17,107.67 L144.17,114.00 L144.33,117.83 L145.17,122.17 L147.00,126.83 L149.83,131.17 L153.17,134.67 L157.33,137.67 L161.67,139.67 L165.00,140.67 L172.00,141.00 L175.67,140.67 L181.67,138.67 L186.50,135.67 L190.83,131.33 L193.67,127.17 L195.67,122.17 L196.50,118.00 L196.50,111.83 L195.67,107.67 L193.67,102.67 L189.83,97.33 L185.17,93.17 L182.33,91.83 L181.83,90.83 L179.50,90.50 L179.33,91.17 L178.33,91.17 L178.17,90.17 L175.50,90.00 L162.67,90.17 L162.50,91.17 L161.50,91.17 L161.33,90.50Z M168.00,95.67 L173.83,95.83 L176.83,96.67 L180.67,98.67 L183.50,100.83 L186.00,103.67 L188.17,107.33 L189.17,110.17 L189.50,113.17 L189.17,119.67 L187.00,124.67 L184.00,128.50 L180.67,131.17 L176.83,133.17 L172.83,134.17 L167.00,134.00 L164.00,133.17 L160.17,131.17 L157.33,129.00 L154.83,126.17 L151.67,119.83 L151.33,116.67 L151.67,110.00 L153.67,105.33 L156.83,101.33 L159.83,98.83 L164.00,96.67Z M73.83,90.83 L73.50,91.83 L69.33,94.17 L65.17,98.17 L62.33,102.33 L60.17,107.67 L59.17,114.00 L59.33,117.83 L60.17,122.17 L62.00,126.83 L64.83,131.17 L68.17,134.67 L72.33,137.67 L76.67,139.67 L80.00,140.67 L87.00,141.00 L90.67,140.67 L96.67,138.67 L101.50,135.67 L105.83,131.33 L108.67,127.17 L110.67,122.17 L111.50,118.00 L111.50,111.83 L110.67,107.67 L108.67,102.67 L104.83,97.33 L100.17,93.17 L97.33,91.83 L96.83,90.83 L94.50,90.50 L94.33,91.17 L93.33,91.17 L93.17,90.17 L90.50,90.00 L77.67,90.17 L77.50,91.17 L76.50,91.17 L76.33,90.50Z M83.00,95.67 L88.83,95.83 L91.83,96.67 L95.67,98.67 L98.50,100.83 L101.00,103.67 L103.17,107.33 L104.17,110.17 L104.50,113.17 L104.17,119.67 L102.00,124.67 L99.00,128.50 L95.67,131.17 L91.83,133.17 L87.83,134.17 L82.00,134.00 L79.00,133.17 L75.17,131.17 L72.33,129.00 L69.83,126.17 L66.67,119.83 L66.33,116.67 L66.67,110.00 L68.67,105.33 L71.83,101.33 L74.83,98.83 L79.00,96.67Z"/>
+<path fill="#564924" fill-rule="evenodd" d="M160.17,130.67 L161.50,131.83 L164.00,133.00 L168.00,134.00 L173.67,133.83 L176.83,133.00 L180.67,131.00 L180.67,130.67 L175.83,132.83 L172.33,133.50 L168.50,133.50 L164.50,132.67Z M75.17,130.67 L76.50,131.83 L79.00,133.00 L83.00,134.00 L88.67,133.83 L91.83,133.00 L95.67,131.00 L95.67,130.67 L90.83,132.83 L87.33,133.50 L83.50,133.50 L79.50,132.67Z M151.83,118.67 L152.83,122.50 L154.00,124.67 L154.67,125.00 L153.00,121.83 L152.17,118.67Z M66.83,118.67 L67.83,122.50 L69.00,124.67 L69.67,125.00 L68.00,121.83 L67.17,118.67Z M189.00,118.50 L188.67,118.50 L187.83,121.83 L186.00,125.17 L186.83,124.67 L188.00,122.50Z M104.00,118.50 L103.67,118.50 L102.83,121.83 L101.00,125.17 L101.83,124.67 L103.00,122.50Z M186.17,104.83 L187.83,108.00 L188.67,111.17 L189.00,111.17 L188.00,107.33 L186.83,105.17Z M154.67,104.83 L153.83,105.33 L152.83,107.33 L151.83,111.17 L152.17,111.17 L153.00,108.00Z M101.17,104.83 L102.83,108.00 L103.67,111.17 L104.00,111.17 L103.00,107.33 L101.83,105.17Z M69.67,104.83 L68.83,105.33 L67.83,107.33 L66.83,111.17 L67.17,111.17 L68.00,108.00Z M159.33,99.83 L164.83,97.00 L168.50,96.33 L172.33,96.33 L175.83,97.00 L180.33,99.17 L180.67,98.83 L176.83,96.83 L173.83,96.00 L168.00,95.83 L164.00,96.83 L159.83,99.00Z M74.33,99.83 L79.83,97.00 L83.50,96.33 L87.33,96.33 L90.83,97.00 L95.33,99.17 L95.67,98.83 L91.83,96.83 L88.83,96.00 L83.00,95.83 L79.00,96.83 L74.83,99.00Z M146.17,90.00 L146.33,90.83 L145.33,91.33 L142.50,94.50 L139.33,99.83 L137.33,104.67 L136.17,111.33 L136.33,121.00 L137.17,123.00 L137.33,125.17 L140.33,132.00 L144.17,137.33 L148.33,141.50 L152.50,144.50 L156.33,146.50 L162.17,148.50 L169.50,149.50 L173.67,149.33 L182.00,147.50 L188.33,144.50 L194.67,139.50 L198.50,135.00 L201.50,130.00 L203.50,125.00 L203.67,123.00 L204.50,121.00 L204.67,118.17 L204.50,108.83 L203.67,106.83 L203.33,104.33 L199.33,96.00 L196.67,92.50 L194.50,90.83 L194.67,90.00 L179.50,90.00 L179.50,90.33 L181.83,90.67 L182.33,91.67 L185.17,93.00 L187.50,94.83 L191.83,99.50 L194.83,104.83 L196.00,108.33 L196.83,114.00 L196.67,118.00 L194.83,125.00 L191.83,130.33 L187.50,135.00 L185.33,136.67 L179.67,139.67 L175.67,140.83 L172.00,141.17 L165.00,140.83 L157.33,137.83 L154.33,135.83 L150.83,132.50 L147.17,127.50 L145.00,122.17 L144.00,115.83 L144.17,112.00 L146.00,104.83 L150.00,98.17 L153.17,95.00 L156.00,92.83 L158.50,91.67 L158.83,90.67 L161.33,90.33 L161.33,90.00Z M61.17,90.00 L61.33,90.83 L60.33,91.33 L57.50,94.50 L54.33,99.83 L52.33,104.67 L51.17,111.33 L51.33,121.00 L52.17,123.00 L52.33,125.17 L55.33,132.00 L59.17,137.33 L63.33,141.50 L67.50,144.50 L71.33,146.50 L77.17,148.50 L84.50,149.50 L88.67,149.33 L97.00,147.50 L103.33,144.50 L109.67,139.50 L113.50,135.00 L116.50,130.00 L118.50,125.00 L118.67,123.00 L119.50,121.00 L119.67,118.17 L119.50,108.83 L118.67,106.83 L118.33,104.33 L114.33,96.00 L111.67,92.50 L109.50,90.83 L109.67,90.00 L94.50,90.00 L94.50,90.33 L96.83,90.67 L97.33,91.67 L100.17,93.00 L102.50,94.83 L106.83,99.50 L109.83,104.83 L111.00,108.33 L111.83,114.00 L111.67,118.00 L109.83,125.00 L106.83,130.33 L102.50,135.00 L100.33,136.67 L94.67,139.67 L90.67,140.83 L87.00,141.17 L80.00,140.83 L72.33,137.83 L69.33,135.83 L65.83,132.50 L62.17,127.50 L60.00,122.17 L59.00,115.83 L59.17,112.00 L61.00,104.83 L65.00,98.17 L68.17,95.00 L71.00,92.83 L73.50,91.67 L73.83,90.67 L76.33,90.33 L76.33,90.00Z M163.83,89.67 L163.83,90.00 L177.00,90.00 L177.00,89.67 L174.83,89.33Z M78.83,89.67 L78.83,90.00 L92.00,90.00 L92.00,89.67 L89.83,89.33Z"/>
+<path fill="#292415" fill-rule="evenodd" d="M169.83,110.33 L167.50,111.33 L166.33,112.67 L166.17,115.83 L166.33,117.17 L167.50,118.50 L170.83,119.50 L173.33,118.50 L174.33,117.33 L174.67,114.17 L174.50,112.67 L173.33,111.33 L171.00,110.33Z M84.83,110.33 L82.50,111.33 L81.33,112.67 L81.17,115.83 L81.33,117.17 L82.50,118.50 L85.83,119.50 L88.33,118.50 L89.33,117.33 L89.67,114.17 L89.50,112.67 L88.33,111.33 L86.00,110.33Z M168.50,96.50 L164.83,97.17 L162.00,98.33 L157.83,101.33 L155.17,104.33 L153.17,108.00 L152.17,111.33 L152.17,118.50 L153.17,121.83 L155.17,125.50 L157.83,128.50 L160.33,130.50 L165.00,132.67 L168.50,133.33 L172.33,133.33 L176.33,132.50 L180.50,130.50 L183.00,128.50 L185.67,125.50 L187.67,121.83 L188.67,118.33 L188.67,111.33 L187.67,108.00 L185.67,104.33 L183.00,101.33 L180.50,99.33 L175.83,97.17 L172.33,96.50Z M169.83,103.17 L174.33,103.67 L175.50,104.50 L178.67,105.50 L180.33,107.50 L180.33,108.83 L182.17,112.67 L182.17,117.17 L180.17,121.50 L176.33,125.17 L174.33,126.17 L171.00,126.67 L166.50,126.17 L163.17,124.17 L160.83,121.83 L158.67,117.17 L158.67,112.67 L160.83,108.00 L164.50,104.67 L166.50,103.67Z M83.50,96.50 L79.83,97.17 L77.00,98.33 L72.83,101.33 L70.17,104.33 L68.17,108.00 L67.17,111.33 L67.17,118.50 L68.17,121.83 L70.17,125.50 L72.83,128.50 L75.33,130.50 L80.00,132.67 L83.50,133.33 L87.33,133.33 L91.33,132.50 L95.50,130.50 L98.00,128.50 L100.67,125.50 L102.67,121.83 L103.67,118.33 L103.67,111.33 L102.67,108.00 L100.67,104.33 L98.00,101.33 L95.50,99.33 L90.83,97.17 L87.33,96.50Z M84.83,103.17 L89.33,103.67 L90.50,104.50 L93.67,105.50 L95.33,107.50 L95.33,108.83 L97.17,112.67 L97.17,117.17 L95.17,121.50 L91.33,125.17 L89.33,126.17 L86.00,126.67 L81.50,126.17 L78.17,124.17 L75.83,121.83 L73.67,117.17 L73.67,112.67 L75.83,108.00 L79.50,104.67 L81.50,103.67Z M146.83,89.67 L146.83,90.00 L160.17,90.00 L166.00,89.17 L174.83,89.17 L180.83,90.00 L194.00,90.00 L190.00,86.33 L184.67,83.33 L178.83,81.33 L172.67,80.33 L166.83,80.50 L158.67,82.33 L152.33,85.33Z M61.83,89.67 L61.83,90.00 L75.17,90.00 L81.00,89.17 L89.83,89.17 L95.83,90.00 L109.00,90.00 L105.00,86.33 L99.67,83.33 L93.83,81.33 L87.67,80.33 L81.83,80.50 L73.67,82.33 L67.33,85.33Z"/>
+<path fill="#F4EEDB" fill-rule="evenodd" d="M175.33,105.83 L173.83,107.67 L174.00,110.33 L175.67,111.67 L177.50,111.67 L179.33,110.17 L179.50,108.17 L178.33,106.33Z M90.33,105.83 L88.83,107.67 L89.00,110.33 L90.67,111.67 L92.50,111.67 L94.33,110.17 L94.50,108.17 L93.33,106.33Z"/>
+</svg><span>L'ÉCOLE OKAPI · ATELIER LIVE</span></div>
+<div class="right"><span id="clock" title="Chronomètre : cliquez ou touche T">00:00</span><span id="counter"></span><button class="icon-btn" id="btnOv" title="Sommaire (touche M)">SOMMAIRE</button><button class="icon-btn" id="btnFs" title="Plein écran (touche F)">PLEIN ÉCRAN</button></div></div>
+<div id="deck">
+
+<!-- 1 COUVERTURE -->
+<section class="slide" data-title="Couverture" style="padding:0">
+ <div style="position:absolute;inset:0;background:url(img/hero.jpg) center/cover;filter:brightness(.32) saturate(.9)"></div>
+ <div style="position:absolute;inset:0;background:radial-gradient(80% 80% at 50% 50%,rgba(10,10,10,.1),rgba(10,10,10,.92))"></div>
+ <div class="fade-in" style="position:relative;margin:auto;text-align:center;padding:0 24px">
+  <div class="kick">Mois 1 · Les Bases · Leçons 1 à 9</div>
+  <h1 style="margin-top:26px">Atelier <b>live</b></h1>
+  <div style="width:340px;height:1px;background:var(--g);margin:30px auto"></div>
+  <p class="lead" style="margin:0 auto;text-align:center">Dimanche 1<sup>er</sup> novembre 2026 · 20 h, heure de Paris</p>
+  <p class="muted" style="margin-top:10px;font-size:14px;letter-spacing:.2em">YAMAKASI · CINÉASTE | FORMATEUR</p>
+ </div>
+</section>
+
+<!-- 2 PROGRAMME -->
+<section class="slide" data-title="Le programme de ce soir">
+ <div class="fade-in"><div class="kick">Ce soir</div><h2>Le programme de <b>l'atelier</b></h2>
+ <p class="lead">Une heure trente pour faire le point sur les neuf leçons, débloquer ce qui coince, et pratiquer ensemble en direct.</p></div>
+ <div class="grid g5 fade-in" style="margin-top:34px">
+  <div class="card"><div class="lab">10 min</div><h3>Accueil et tour de table</h3><p class="muted" style="font-size:14.5px;margin-top:6px">Où en êtes-vous ? Votre projet fil rouge en une phrase.</p></div>
+  <div class="card"><div class="lab">30 min</div><h3>Récap des leçons 1 à 9</h3><p class="muted" style="font-size:14.5px;margin-top:6px">L'essentiel de chaque leçon, avec une question flash.</p></div>
+  <div class="card"><div class="lab">20 min</div><h3>Les points bloquants</h3><p class="muted" style="font-size:14.5px;margin-top:6px">Double authentification ChatGPT et Claude, Fal.ai, les pièges.</p></div>
+  <div class="card"><div class="lab">20 min</div><h3>Atelier pratique</h3><p class="muted" style="font-size:14.5px;margin-top:6px">Diagnostic, prompt en cinq briques, quiz en direct.</p></div>
+  <div class="card"><div class="lab">10 min</div><h3>Questions et suite</h3><p class="muted" style="font-size:14.5px;margin-top:6px">La leçon 10, la semaine 4, vos exercices.</p></div>
+ </div>
+ <div class="quote fade-in"><b>Règle du soir :</b> aucune question n'est bête. C'est souvent là que les choses se débloquent.</div>
+</section>
+
+<!-- 3 SONDAGE -->
+<section class="slide" data-title="Où en êtes-vous ?">
+ <div class="row" style="gap:6vw;align-items:flex-start">
+  <div style="flex:1" class="fade-in"><div class="kick">Tour de table</div><h2>Où en <b>êtes-vous ?</b></h2>
+   <p class="lead">Répondez dans le chat ou à voix haute : je compte en direct.</p>
+   <div class="quote" style="font-size:19px">Et votre projet fil rouge, en une phrase : <b>qu'est-ce que vous fabriquez ?</b></div></div>
+  <div style="flex:1.1" id="tallies" class="fade-in"></div>
+ </div>
+</section>
+
+<!-- 4 FIL ROUGE + CARTE DES LECONS -->
+<section class="slide" data-title="Le fil rouge du mois">
+ <div class="row" style="gap:4vw;align-items:center">
+  <div style="flex:1" class="fade-in"><div class="kick">Le fil rouge du mois</div><h2>Une scène, <b>neuf leçons</b></h2>
+   <p class="lead">Une jeune femme attend un bus sous la pluie, au petit matin, à Douala. Elle est seule, fatiguée, peut-être inquiète. Au loin, un bus approche. C'est la scène qu'on a fait évoluer de leçon en leçon.</p></div>
+  <div style="flex:1.2" class="ph fade-in"><img src="img/bus_struct.jpg" alt="La scène de l'arrêt de bus" style="aspect-ratio:16/9"><div class="cap">La version en cinq briques · leçon 9</div></div>
+ </div>
+ <div class="tl" id="timeline"></div>
+</section>
+
+<!-- 5 L1 -->
+<section class="slide" data-title="L1 · Ce que vous allez savoir faire">
+ <div class="lesson-head fade-in"><div class="lnum">01</div><div><div class="kick">Leçon 1</div><h2>Ce que vous allez savoir faire <b>à la fin du mois</b></h2></div></div>
+ <div class="row" style="margin-top:26px;gap:3vw">
+  <div style="flex:1.3" class="fade-in">
+   <div class="quote" style="margin-top:0">L'IA ne remplace pas votre œil. <b>Elle décuple votre vitesse d'exécution.</b></div>
+   <div class="grid g3" style="margin-top:22px">
+    <div class="card"><div class="lab">Story-board</div><p style="font-size:15px">Deux semaines avant, un après-midi aujourd'hui.</p></div>
+    <div class="card"><div class="lab">Repérage</div><p style="font-size:15px">Je génère l'ambiance avant de me déplacer.</p></div>
+    <div class="card"><div class="lab">Pitch</div><p style="font-size:15px">Des images qui ressemblent déjà au film.</p></div>
+   </div>
+   <p class="lead" style="font-size:16.5px">Dans les trois cas, <b class="gold">l'outil ne décide de rien</b>. C'est vous qui savez ce que vous voulez voir.</p>
+  </div>
+  <div style="flex:1" class="card fade-in"><div class="lab">Votre dossier de travail</div>
+   <div style="font-weight:300;font-size:16px;line-height:2;font-family:inherit">📁 École Okapi<br>&nbsp;&nbsp;&nbsp;└ 📁 Mois 1<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ 📁 Prompts<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├ 📁 Images<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└ 📁 Vidéos</div>
+   <p class="muted" style="font-size:14px;margin-top:8px">+ votre projet fil rouge, écrit en trois lignes.</p></div>
+ </div>
+ <div class="ex fade-in"><div class="flash card" style="padding:14px 18px"><button class="btn ghost" data-flash>Question flash · Ce mois-ci, on cherche le chef-d'œuvre ?</button><div class="ans">Non. On cherche à comprendre. Vos premiers résultats ne ressembleront pas à ceux de la leçon : c'est normal, c'est que vous apprenez.</div></div></div>
+</section>
+
+<!-- 6 L2 -->
+<section class="slide" data-title="L2 · Les 4 briques du pipeline">
+ <div class="lesson-head fade-in"><div class="lnum">02</div><div><div class="kick">Leçon 2</div><h2>Les 4 briques du <b>pipeline</b></h2></div></div>
+ <p class="lead fade-in">Il n'existe pas d'outil qui fait un film. Il existe une chaîne. <span class="muted">Cliquez sur chaque brique.</span></p>
+ <div class="pipe fade-in">
+  <div class="brick" data-toggle><div class="n">1</div><h3>L'idéation et le prompt</h3><div class="more">Qui, où, quand, quelle émotion ? Si vous ne décidez pas, le modèle décide au hasard.<br><span class="gold">Outils : votre cerveau, un carnet, ChatGPT, Claude.</span></div></div>
+  <div class="brick" data-toggle><div class="n">2</div><h3>La génération d'image</h3><div class="more">L'image fixe, c'est votre brouillon : quelques secondes, quelques centimes. On valide en image d'abord.<br><span class="gold">Outils : Nano Banana, GPT Image.</span></div></div>
+  <div class="brick" data-toggle><div class="n">3</div><h3>L'animation et la vidéo</h3><div class="more">Des clips de quelques secondes. Tout ne doit pas bouger : choisir ce qui bouge, c'est déjà de la mise en scène.<br><span class="gold">Outils : Veo 3, Kling.</span></div></div>
+  <div class="brick" data-toggle><div class="n">4</div><h3>L'assemblage et le son</h3><div class="more">Montage, ambiance, bruitages, musique. Le son, c'est la moitié de l'émotion d'un film.<br><span class="gold">Outil : CapCut.</span></div></div>
+ </div>
+ <div class="quote fade-in">Votre film ne sera jamais meilleur que <b>le maillon le plus faible de votre chaîne.</b></div>
+ <div class="ex fade-in"><div class="exbox"><b>Exercice :</b> découpez votre projet fil rouge en quatre paragraphes, un par brique. Ce document va évoluer tout le mois.</div></div>
+</section>
+
+<!-- 7 L3 -->
+<section class="slide" data-title="L3 · LLM vs IA générative">
+ <div class="lesson-head fade-in"><div class="lnum">03</div><div><div class="kick">Leçon 3</div><h2>Langage ou génération : <b>quand utiliser quoi</b></h2></div></div>
+ <div class="grid g2 fade-in" style="margin-top:22px">
+  <div class="card"><div class="lab">Les modèles de langage · ChatGPT, Claude</div><p style="font-size:15.5px">Ils raisonnent avec des mots et dialoguent. C'est votre <b class="gold">assistant réalisateur</b>.</p></div>
+  <div class="card"><div class="lab">Les modèles génératifs · Nano Banana, GPT Image, Veo 3, Kling</div><p style="font-size:15.5px">Ils fabriquent, au pied de la lettre. C'est votre <b class="gold">équipe technique</b>.</p></div>
+ </div>
+ <div class="card fade-in" style="margin-top:18px"><div class="lab">Jeu · Classez chaque tâche</div><p class="muted" style="font-size:14px">Cliquez une tâche, puis la bonne colonne.</p>
+  <div id="sortItems" style="margin:10px 0"></div>
+  <div class="grid g3" id="bins"></div>
+  <div style="margin-top:10px;display:flex;gap:10px;align-items:center"><button class="btn ghost" id="sortReset">Recommencer</button><span id="sortScore" class="gold"></span></div></div>
+ <div class="quote fade-in" style="font-size:19px">Langage d'abord, génération ensuite : <b>c'est le relais.</b></div>
+</section>
+
+<!-- 8 L4 -->
+<section class="slide" data-title="L4 · Créer et configurer vos comptes">
+ <div class="lesson-head fade-in"><div class="lnum">04</div><div><div class="kick">Leçon 4</div><h2>Vos comptes : <b>ChatGPT, Claude, Fal.ai</b></h2></div></div>
+ <div class="row" style="margin-top:22px;gap:3vw">
+  <div style="flex:1.2" class="fade-in">
+   <div class="grid g3">
+    <div class="card"><div class="lab">ChatGPT</div><p style="font-size:14.5px">Version gratuite suffisante. <b class="gold">Instructions personnalisées</b> : qui vous êtes, comment il doit répondre.</p></div>
+    <div class="card"><div class="lab">Claude</div><p style="font-size:14.5px">Même logique, même question posée aux deux : on compare.</p></div>
+    <div class="card"><div class="lab">Fal.ai</div><p style="font-size:14.5px">Pas d'abonnement : on paie à la génération. <b class="gold">Créditez petit : 5 à 10 €.</b></p></div>
+   </div>
+   <div class="card" style="margin-top:16px"><div class="lab">Le tableau de suivi · 6 colonnes</div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;font-size:12.5px;font-weight:500;color:var(--g);letter-spacing:.06em">
+     <div>Date</div><div>Modèle</div><div>Demande</div><div>Coût</div><div>Note /5</div><div>Je refais ?</div></div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;font-size:13px;font-weight:300;margin-top:6px;color:#d9d2c3">
+     <div>10/10</div><div>GPT Image</div><div>Tasse de café</div><div>0,005 $</div><div>4/5</div><div>Non</div></div></div>
+  </div>
+  <div style="flex:.9" class="fade-in"><div class="ph"><img src="img/cafe.jpg" alt="Tasse de café" style="aspect-ratio:16/9"><div class="cap">« Une tasse de café posée sur une table en bois, lumière douce du matin. »</div></div>
+   <p class="muted" style="font-size:14px;margin-top:10px">La toute première image : dix secondes de prompt, quelques centimes.</p></div>
+ </div>
+ <div class="ex fade-in"><div class="flash card" style="padding:14px 18px"><button class="btn ghost" data-flash>Question flash · Pourquoi créditer seulement 5 à 10 € ?</button><div class="ans">Parce qu'avec dix euros, vous sentez chaque génération : c'est elle qui vous apprend à réfléchir avant de cliquer. C'est la discipline du coût.</div></div></div>
+</section>
+
+<!-- 9 L5 -->
+<section class="slide" data-title="L5 · Les 4 familles de modèles">
+ <div class="lesson-head fade-in"><div class="lnum">05</div><div><div class="kick">Leçon 5</div><h2>Les 4 familles : <b>une question de contrôle</b></h2></div></div>
+ <p class="lead fade-in">Plus on avance, plus on gagne en spectacle, et plus on perd en contrôle. <span class="muted">Cliquez une famille.</span></p>
+ <div class="grid g4 fade-in" id="fams" style="margin-top:20px"></div>
+ <div class="row fade-in" style="margin-top:20px;gap:3vw;align-items:center">
+  <div style="flex:1" class="card" id="famInfo"><div class="lab">Famille</div><p>Choisissez une famille ci-dessus.</p></div>
+  <div style="flex:.8" class="ph" id="famPh"><img src="img/f169.jpg" alt="" id="famImg" style="aspect-ratio:16/9"><div class="cap" id="famCap">Texte → image</div></div>
+ </div>
+ <div class="quote fade-in" style="font-size:19px">Ma règle de travail : <b>je valide en image avant d'engager de la vidéo.</b> Toujours.</div>
+</section>
+
+<!-- 10 L6 -->
+<section class="slide" data-title="L6 · Prise en main de Fal.ai">
+ <div class="lesson-head fade-in"><div class="lnum">06</div><div><div class="kick">Leçon 6</div><h2>Fal.ai : lire une fiche, <b>choisir son format</b></h2></div></div>
+ <div class="row" style="margin-top:18px;gap:3vw">
+  <div style="flex:1" class="fade-in">
+   <div class="card"><div class="lab">Une fiche en 30 secondes</div><div class="step"><i>1</i><span><b>Le prix</b>, avant de cliquer. Pas après.</span></div><div class="step"><i>2</i><span><b>Le temps</b> de génération.</span></div><div class="step"><i>3</i><span><b>Les paramètres</b>, à regarder avant de lancer.</span></div></div>
+   <div class="card" style="margin-top:14px"><div class="lab">Nommer ses fichiers · essayez</div>
+    <div class="grid g4" style="gap:8px"><div class="field"><label>Projet</label><input id="nm1" value="arret-bus"></div><div class="field"><label>Plan</label><input id="nm2" value="plan-01"></div><div class="field"><label>Description</label><input id="nm3" value="large-pluie"></div><div class="field"><label>Version</label><input id="nm4" value="v02"></div></div>
+    <div class="out" id="nmOut" style="margin-top:10px;font-size:17px"></div></div>
+  </div>
+  <div style="flex:1.1" class="fade-in"><div class="lab gold" style="font-size:10.5px;letter-spacing:.3em;font-weight:500">LA MÊME DESCRIPTION, TROIS FORMATS</div>
+   <div class="ftab"><button class="btn on" data-fmt="169">16:9 · cinéma, YouTube</button><button class="btn" data-fmt="916">9:16 · Reels, TikTok</button><button class="btn" data-fmt="11">1:1 · carré</button></div>
+   <div class="fmt-stage"><div class="ph" id="fmtPh" style="aspect-ratio:16/9;width:100%"><img id="fmtImg" src="img/f169.jpg" alt=""></div></div>
+   <p class="muted" style="font-size:14.5px;margin-top:8px">Le format se décide <b class="gold">au début</b>, selon la diffusion, et on le garde jusqu'au bout.</p></div>
+ </div>
+</section>
+
+<!-- 11 L7 -->
+<section class="slide" data-title="L7 · Choisir le bon modèle">
+ <div class="lesson-head fade-in"><div class="lnum">07</div><div><div class="kick">Leçon 7</div><h2>Choisir le bon modèle <b>selon votre besoin</b></h2></div></div>
+ <div class="row" style="margin-top:18px;gap:3vw">
+  <div style="flex:1" class="fade-in">
+   <div class="grid g4" style="gap:10px"><div class="card" style="padding:14px"><div class="lab">1 · Objectif</div><p style="font-size:13.5px">Ce que je cherche à obtenir.</p></div><div class="card" style="padding:14px"><div class="lab">2 · Coût</div><p style="font-size:13.5px">La vidéo pèse lourd.</p></div><div class="card" style="padding:14px"><div class="lab">3 · Temps</div><p style="font-size:13.5px">Explorer vite, finir bien.</p></div><div class="card" style="padding:14px"><div class="lab">4 · Contrôle</div><p style="font-size:13.5px">À la lettre ou surprise.</p></div></div>
+   <div class="card" style="margin-top:14px"><div class="lab">Calculateur de budget · votre projet</div>
+    <div class="grid g3" style="gap:8px">
+     <div class="field"><label>Plans</label><input type="number" id="b1" value="6" min="1"></div>
+     <div class="field"><label>Essais image / plan</label><input type="number" id="b2" value="3" min="0"></div>
+     <div class="field"><label>Prix d'une image (€)</label><input type="number" id="b3" value="0.05" step="0.01" min="0"></div>
+     <div class="field"><label>Essais vidéo / plan</label><input type="number" id="b4" value="2" min="0"></div>
+     <div class="field"><label>Prix d'un clip (€)</label><input type="number" id="b5" value="0.50" step="0.05" min="0"></div>
+     <div class="field"><label>Total estimé</label><div class="big" id="bTot">0 €</div></div></div>
+    <p class="muted" id="bDet" style="font-size:14px;margin-top:8px"></p></div>
+  </div>
+  <div style="flex:1" class="fade-in"><div class="lab gold" style="font-size:10.5px;letter-spacing:.3em;font-weight:500;margin-bottom:8px">MÊME DESCRIPTION · GLISSEZ POUR COMPARER</div>
+   <div class="ba" style="aspect-ratio:16/9" data-ba><img src="img/nano.jpg" alt=""><div class="top"><img src="img/f169.jpg" alt=""></div><div class="bar"></div><span class="l1" style="color:var(--g2)">GPT IMAGE</span><span class="l2">NANO BANANA</span></div>
+   <p class="muted" style="font-size:14.5px;margin-top:10px">Ni l'un ni l'autre n'est faux. La question : <b class="gold">lequel est le plus proche de ce que j'imaginais ?</b></p></div>
+ </div>
+</section>
+
+<!-- 12 L8 -->
+<section class="slide" data-title="L8 · Exercice pratique">
+ <div class="lesson-head fade-in"><div class="lnum">08</div><div><div class="kick">Leçon 8</div><h2>Une image, une correction, <b>un clip</b></h2></div></div>
+ <div class="grid g3 fade-in" style="margin-top:20px">
+  <div><div class="ph"><img src="img/l8_gen1.jpg" alt="" style="aspect-ratio:16/9"></div><p style="font-size:14.5px;margin-top:8px"><b class="gold">1 · Générer.</b> GPT Image, format 16:9, prix vérifié avant de lancer.</p></div>
+  <div><div class="ph"><img src="img/l8_corr.jpg" alt="" style="aspect-ratio:16/9"></div><p style="font-size:14.5px;margin-top:8px"><b class="gold">2 · Corriger.</b> Une seule modification précise, avec « Ne change rien d'autre ».</p></div>
+  <div><div class="ph"><img src="img/l8_clip.jpg" alt="" style="aspect-ratio:16/9"></div><p style="font-size:14.5px;margin-top:8px"><b class="gold">3 · Animer.</b> Image vers vidéo, le mouvement décrit, la caméra fixe.</p></div>
+ </div>
+ <div class="row fade-in" style="margin-top:18px;gap:3vw">
+  <div class="card" style="flex:1.3"><div class="lab">Ce que je regarde dans votre rendu</div>
+   <div class="grid g2" style="gap:6px 20px"><div class="step"><i>1</i><span>La cohérence de votre prompt</span></div><div class="step"><i>2</i><span>La lisibilité du résultat</span></div><div class="step"><i>3</i><span>Le respect de la méthode</span></div><div class="step"><i>4</i><span>Votre suivi de budget</span></div></div></div>
+  <div class="card" style="flex:1"><div class="lab">Le prompt qui ne va pas</div><div class="row" style="gap:12px;align-items:center"><div class="ph" style="width:46%"><img src="img/l8_faible.jpg" alt="" style="aspect-ratio:16/9"></div><p style="font-size:15px">« belle femme ville pluie » : le modèle a tout choisi à votre place.</p></div></div>
+ </div>
+</section>
+
+<!-- 13 L9 -->
+<section class="slide" data-title="L9 · Anatomie d'un prompt efficace">
+ <div class="lesson-head fade-in"><div class="lnum">09</div><div><div class="kick">Leçon 9</div><h2>Anatomie d'un <b>prompt efficace</b></h2></div></div>
+ <div class="row fade-in" style="margin-top:18px;gap:3vw">
+  <div style="flex:1">
+   <div class="grid" style="gap:10px">
+    <div class="card" style="padding:12px 16px;border-left:3px solid var(--sujet)"><span class="tag" style="--c:var(--sujet)">Sujet</span> <span style="font-weight:300;font-size:15px;margin-left:8px">Qui, ou quoi, est au centre ?</span></div>
+    <div class="card" style="padding:12px 16px;border-left:3px solid var(--action)"><span class="tag" style="--c:var(--action)">Action</span> <span style="font-weight:300;font-size:15px;margin-left:8px">Que fait le sujet ? La brique la plus oubliée.</span></div>
+    <div class="card" style="padding:12px 16px;border-left:3px solid var(--cadre)"><span class="tag" style="--c:var(--cadre)">Cadre</span> <span style="font-weight:300;font-size:15px;margin-left:8px">Plan large, plan moyen ou gros plan.</span></div>
+    <div class="card" style="padding:12px 16px;border-left:3px solid var(--lumiere)"><span class="tag" style="--c:var(--lumiere)">Lumière</span> <span style="font-weight:300;font-size:15px;margin-left:8px">D'où vient-elle, comment est-elle ?</span></div>
+    <div class="card" style="padding:12px 16px;border-left:3px solid var(--style)"><span class="tag" style="--c:var(--style)">Style</span> <span style="font-weight:300;font-size:15px;margin-left:8px">Photo, illustration, 3D, aquarelle ?</span></div>
+   </div>
+   <div class="quote" style="font-size:18px">L'ordre compte. Et parfois, il faut dire <b>ce qu'on ne veut pas</b> : « Personne d'autre dans la rue. »</div>
+  </div>
+  <div style="flex:1.15">
+   <div class="ftab"><button class="btn on" data-ba-set="bus">L'arrêt de bus</button><button class="btn" data-ba-set="btl">La bouteille</button><button class="btn" data-ba-set="homme">Le sujet</button><button class="btn" data-ba-set="cuisine">L'action</button></div>
+   <div class="ba" style="aspect-ratio:16/9" id="ba9" data-ba><img id="ba9b" src="img/bus_struct.jpg" alt=""><div class="top"><img id="ba9a" src="img/bus_lazy.jpg" alt=""></div><div class="bar"></div><span class="l1" id="ba9l1">« femme arrêt de bus pluie »</span><span class="l2">CINQ BRIQUES</span></div>
+   <p class="muted" style="font-size:14px;margin-top:8px">Glissez la barre : à gauche le prompt paresseux, à droite le prompt précis.</p>
+  </div>
+ </div>
+</section>
+
+<!-- 14 L9 vocabulaire -->
+<section class="slide" data-title="L9 · Le vocabulaire en images">
+ <div class="fade-in"><div class="kick">Leçon 9 · Le vocabulaire</div><h2>Un mot juste remplace <b>une phrase entière</b></h2><p class="lead">Retournez chaque carte : c'est le même sujet, seul le mot change.</p></div>
+ <div class="grid g4 fade-in" id="flips" style="margin-top:22px"></div>
+</section>
+
+<!-- 15 SECTION POINTS BLOQUANTS -->
+<section class="slide section dark" data-title="Les points bloquants">
+ <div class="fade-in"><div class="bignum">02</div><div class="kick" style="margin-top:20px">Deuxième partie</div><h1 style="margin-top:12px">Les points <b>bloquants</b></h1><p class="lead">Ce qui vous a fait perdre du temps ce mois-ci. On le règle ensemble, maintenant.</p></div>
+</section>
+
+<!-- 16 2FA CHATGPT -->
+<section class="slide" data-title="La double authentification · ChatGPT">
+ <div class="fade-in"><div class="kick">Point bloquant n°1</div><h2>La double authentification <b>sur ChatGPT</b></h2></div>
+ <div class="row" style="margin-top:18px;gap:3vw">
+  <div style="flex:1" class="fade-in">
+   <div class="card"><div class="lab">Le principe</div><p style="font-size:15.5px">Votre mot de passe <b class="gold">+</b> un code à 6 chiffres sur votre téléphone, qui change toutes les 30 secondes. Si on vole votre mot de passe, il manque encore votre téléphone.</p></div>
+   <div class="card" style="margin-top:14px"><div class="lab">Pas à pas · avec une appli (Google Authenticator ou Authy)</div>
+    <div class="step"><i>1</i><span>Photo de profil › <b>Paramètres</b></span></div>
+    <div class="step"><i>2</i><span><b>Sécurité</b> › <b>Authentification multifacteur</b></span></div>
+    <div class="step"><i>3</i><span>Choisir <b>l'application d'authentification</b></span></div>
+    <div class="step"><i>4</i><span>Dans l'appli : <b>ajouter un compte</b>, scanner le QR code</span></div>
+    <div class="step"><i>5</i><span>Recopier le <b>code à 6 chiffres</b> dans ChatGPT</span></div>
+    <p class="muted" style="font-size:13px;margin-top:6px">Les libellés exacts peuvent varier selon votre version.</p></div>
+  </div>
+  <div style="flex:1" class="fade-in"><div class="card"><div class="lab">Si ça bloque</div>
+   <div class="acc"><button>« Je ne vois pas l'option »</button><div class="p">Les options dépendent de l'appareil, du pays, de l'offre et de la façon dont le compte a été créé. Compte créé avec Google ? Protégez aussi votre compte Google.</div></div>
+   <div class="acc"><button>« Mon code est refusé »</button><div class="p">Un code ne vaut que quelques secondes : attendez le suivant. Vérifiez que l'heure de votre téléphone est en réglage automatique.</div></div>
+   <div class="acc"><button>« Je ne reçois pas le SMS »</button><div class="p">Vérifiez le numéro et l'indicatif du pays. Essayez WhatsApp s'il est proposé, ou passez par l'application d'authentification.</div></div>
+   <div class="acc"><button>« J'ai perdu mon téléphone »</button><div class="p">À la connexion : « Essayer une autre méthode ». Sinon, il faut contacter le support d'OpenAI, et la vérification peut prendre plusieurs jours. <b class="gold">Ajoutez dès maintenant un second moyen.</b></div></div>
+   <div class="acc"><button>« On m'a demandé mon code »</button><div class="p">Ne communiquez jamais un code, même à quelqu'un qui dit venir du support. Jamais.</div></div>
+  </div></div>
+ </div>
+</section>
+
+<!-- 17 CLAUDE -->
+<section class="slide" data-title="Claude · une connexion sans mot de passe">
+ <div class="fade-in"><div class="kick">Point bloquant n°2</div><h2>Claude : ici, <b>c'est différent</b></h2>
+  <p class="lead">Je vous ai dit en leçon 4 d'activer la double authentification sur Claude. Précision importante : Claude se connecte <b class="gold">sans mot de passe</b>, avec Google ou avec un lien envoyé par e-mail. D'après l'aide officielle d'Anthropic, il n'y a pas de réglage de double authentification propre à Claude. Votre second verrou, c'est le compte qui vous connecte.</p></div>
+ <div class="grid g3 fade-in" style="margin-top:22px">
+  <div class="card" style="border-color:rgba(66,133,244,.5)"><div class="lab" style="color:#8fb4f5">Vous vous connectez avec Google</div><p style="font-size:15px">Activez la <b class="gold">validation en deux étapes</b> de votre compte Google : Compte Google › Sécurité › Validation en deux étapes.</p></div>
+  <div class="card"><div class="lab">Vous vous connectez par e-mail</div><p style="font-size:15px">Le lien arrive dans votre boîte mail : activez la <b class="gold">double authentification de votre messagerie</b> (Gmail, Outlook, Yahoo, La Poste…).</p></div>
+  <div class="card"><div class="lab">Vérifiez vos sessions</div><p style="font-size:15px">Photo de profil › Paramètres › Compte : la liste des appareils connectés. Un appareil inconnu ? <b class="gold">⋮ › Terminer.</b></p></div>
+ </div>
+ <div class="exbox fade-in" style="margin-top:18px"><b>Le lien de connexion n'arrive pas ?</b> Regardez vos courriers indésirables et les messages venant de @mail.anthropic.com, puis réessayez dans quelques minutes.</div>
+ <p class="muted fade-in" style="font-size:12.5px;margin-top:10px">Vérifié dans les aides officielles d'OpenAI et d'Anthropic le 26 octobre 2026. Les interfaces évoluent : vérifiez dans votre compte.</p>
+</section>
+
+<!-- 18 FAL.AI -->
+<section class="slide" data-title="Fal.ai · les pièges qui coûtent">
+ <div class="fade-in"><div class="kick">Point bloquant n°3</div><h2>Fal.ai : les pièges <b>qui coûtent</b></h2></div>
+ <div class="grid g3 fade-in" style="margin-top:20px">
+  <div class="card"><div class="lab">Les paramètres par défaut</div><p style="font-size:15px">Certains modèles vidéo démarrent avec une durée longue et le son activé. Relevé le 23 octobre : Kling par défaut à 12 s avec audio, environ 1,51 $. <b class="gold">Vérifiez durée et audio avant chaque clip.</b></p></div>
+  <div class="card"><div class="lab">Image d'abord, vidéo ensuite</div><p style="font-size:15px">Relevés du 23 octobre : une image GPT Image en qualité basse autour de 0,005 $, un clip Kling de 5 s autour de 0,21 $. Une erreur en image coûte des centimes, une erreur en vidéo coûte beaucoup plus.</p></div>
+  <div class="card"><div class="lab">Votre page de consommation</div><p style="font-size:15px">En favori dans le navigateur. Un coup d'œil chaque dimanche soir, et votre tableau de suivi à jour.</p></div>
+  <div class="card"><div class="lab">La carte bancaire</div><p style="font-size:15px">Une carte Visa fonctionne, y compris une carte émise en Afrique. Créditez petit : 5 à 10 €.</p></div>
+  <div class="card"><div class="lab">Le format oublié</div><p style="font-size:15px">Le carré par défaut, puis des bandes noires dans le film. Décidez le format avant la première génération.</p></div>
+  <div class="card"><div class="lab">À savoir · Veo 3.1 Fast</div><p style="font-size:15px">Sur Fal.ai, un bandeau annonce la fin de ce modèle le 17 novembre 2026. Prévoyez Kling ou un autre modèle pour vos clips.</p></div>
+ </div>
+ <p class="muted fade-in" style="font-size:12.5px;margin-top:12px">Prix et bandeaux relevés sur Fal.ai le 23 octobre 2026 : ils peuvent changer, regardez toujours la fiche du modèle.</p>
+</section>
+
+<!-- 19 ERREURS FREQUENTES -->
+<section class="slide" data-title="Les réflexes à garder">
+ <div class="fade-in"><div class="kick">Ce que j'ai vu dans vos essais</div><h2>Cinq réflexes <b>à garder</b></h2></div>
+ <div class="grid g5 fade-in" style="margin-top:24px">
+  <div class="card"><div class="big">1</div><h3 style="margin-top:10px">Clarifier avant de générer</h3><p class="muted" style="font-size:14px;margin-top:6px">Le temps passé à clarifier coûte moins cher que le temps passé à relancer.</p></div>
+  <div class="card"><div class="big">2</div><h3 style="margin-top:10px">Valider en image</h3><p class="muted" style="font-size:14px;margin-top:6px">Pas de texte vers vidéo direct pour vos exercices.</p></div>
+  <div class="card"><div class="big">3</div><h3 style="margin-top:10px">Corriger, pas relancer</h3><p class="muted" style="font-size:14px;margin-top:6px">Une modification précise, « Ne change rien d'autre ».</p></div>
+  <div class="card"><div class="big">4</div><h3 style="margin-top:10px">Noter chaque génération</h3><p class="muted" style="font-size:14px;margin-top:6px">Le tableau de suivi, et le prompt exact gardé.</p></div>
+  <div class="card"><div class="big">5</div><h3 style="margin-top:10px">Ranger et nommer</h3><p class="muted" style="font-size:14px;margin-top:6px">projet_plan_description_version, dans le bon dossier.</p></div>
+ </div>
+</section>
+
+<!-- 20 SECTION ATELIER -->
+<section class="slide section dark" data-title="Atelier pratique">
+ <div class="fade-in"><div class="bignum">03</div><div class="kick" style="margin-top:20px">Troisième partie</div><h1 style="margin-top:12px">Atelier <b>pratique</b></h1><p class="lead">On pratique ensemble, en direct. Répondez dans le chat.</p></div>
+</section>
+
+<!-- 21 DIAGNOSTIC -->
+<section class="slide" data-title="Exercice 1 · Le diagnostic express">
+ <div class="fade-in"><div class="kick">Exercice 1 · 3 minutes</div><h2>Le diagnostic <b>express</b></h2><p class="lead">On voulait la fin de la nuit, une femme seule et mélancolique. <b class="gold">Qu'est-ce qui ne va pas, précisément ?</b></p></div>
+ <div class="grid g2 fade-in" style="margin-top:20px">
+  <div><div class="ph"><img src="img/it_lumineux.jpg" alt="" style="aspect-ratio:16/9"></div><div class="flash" style="margin-top:10px"><button class="btn ghost" data-flash>Révéler le diagnostic</button><div class="ans">Trop lumineux : on dirait déjà le plein jour. Correction de la seule brique lumière : « encore la nuit, le ciel est presque noir, seuls les lampadaires orangés éclairent la scène ».</div></div></div>
+  <div><div class="ph"><img src="img/it_deux.jpg" alt="" style="aspect-ratio:16/9"></div><div class="flash" style="margin-top:10px"><button class="btn ghost" data-flash>Révéler le diagnostic</button><div class="ans">Deux autres personnes attendent à l'arrière-plan : la solitude disparaît. Une seule précision à ajouter : « Personne d'autre dans la rue. »</div></div></div>
+ </div>
+ <div class="quote fade-in" style="font-size:18px">Pas « c'est pas bien ». <b>Un diagnostic précis donne une correction précise.</b></div>
+</section>
+
+<!-- 22 PROMPT BUILDER -->
+<section class="slide" data-title="Exercice 2 · Réécrire en cinq briques">
+ <div class="fade-in"><div class="kick">Exercice 2 · 7 minutes</div><h2>« belle femme ville pluie » <b>en cinq briques</b></h2><p class="lead">Proposez chaque brique dans le chat, je les assemble en direct.</p></div>
+ <div class="row fade-in" style="margin-top:18px;gap:3vw">
+  <div style="flex:1" class="grid" id="builder"></div>
+  <div style="flex:1">
+   <div class="field"><label>Le prompt assemblé</label><div class="out" id="bOut" style="min-height:190px"></div></div>
+   <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap"><button class="btn" id="bCopy">Copier le prompt</button><button class="btn ghost" id="bEx">Charger l'exemple de la leçon 9</button><button class="btn ghost" id="bClr">Effacer</button></div>
+   <p class="muted" id="bMsg" style="font-size:13.5px;margin-top:8px"></p>
+  </div>
+ </div>
+</section>
+
+<!-- 23 QUIZ -->
+<section class="slide" data-title="Exercice 3 · Le quiz du mois">
+ <div class="row" style="gap:5vw;align-items:flex-start">
+  <div style="flex:.8" class="fade-in"><div class="kick">Exercice 3 · 8 minutes</div><h2>Le quiz <b>du mois</b></h2><p class="lead">Dix questions sur les leçons 1 à 9. Votez dans le chat, puis on révèle.</p>
+   <div class="card" style="margin-top:20px"><div class="lab">Score de la salle</div><div class="big" id="qScore">0 / 0</div></div></div>
+  <div style="flex:1.2" class="card fade-in" id="quiz"></div>
+ </div>
+</section>
+
+<!-- 24 VOS EXERCICES -->
+<section class="slide" data-title="Vos exercices · la liste">
+ <div class="fade-in"><div class="kick">À rattraper avant la semaine 4</div><h2>Vos exercices, <b>leçon par leçon</b></h2><p class="lead">Cochez ce que vous avez fait. La liste reste enregistrée dans votre navigateur.</p></div>
+ <div class="grid g2 fade-in" id="exlist" style="margin-top:16px;gap:0 4vw"></div>
+</section>
+
+<!-- 25 LA SUITE -->
+<section class="slide" data-title="La suite du mois">
+ <div class="fade-in"><div class="kick">La suite</div><h2>Ce qui vous <b>attend</b></h2></div>
+ <div class="grid g3 fade-in" style="margin-top:22px">
+  <div class="card"><div class="lab">Leçon 10</div><h3>Craft Better Prompts</h3><p class="muted" style="font-size:14.5px;margin-top:8px">La boucle d'itération, le test A/B, le relais avec le modèle de langage, le journal de prompts. Et le piège du prompt fourre-tout.</p></div>
+  <div class="card"><div class="lab">Semaine 4</div><h3>Les pièges du débutant</h3><p class="muted" style="font-size:14.5px;margin-top:8px">Les cinq erreurs que fait tout le monde au début, et comment les corriger.</p></div>
+  <div class="card"><div class="lab">Le rythme</div><h3>Lundi, mercredi, samedi</h3><p class="muted" style="font-size:14.5px;margin-top:8px">Une nouvelle leçon à partir de 20 h, heure de Paris. Chaque exercice est à finaliser avant la semaine suivante.</p></div>
+ </div>
+ <div class="quote fade-in">Les professionnels ne réinventent pas leur méthode à chaque projet. <b>Ils capitalisent.</b></div>
+</section>
+
+<!-- 26 FIN -->
+<section class="slide" data-title="Merci" style="padding:0">
+ <div style="position:absolute;inset:0;background:url(img/it_seule.jpg) center/cover;filter:brightness(.28)"></div>
+ <div class="fade-in" style="position:relative;margin:auto;text-align:center;padding:0 24px">
+  <svg width="64" height="74" viewBox="0 0 256 295" style="filter:drop-shadow(0 0 22px rgba(201,168,76,.5))"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpjYzY0ZGExNy1lMjJkLTQ0YTYtYmY0Ni02MDJlOWI2NTBmY2UAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaPugG7VZsGxfyiZwGtnNJpMAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo5NzQ0MDQ2OC1mMmUyLTQ3NjctOTRiYS04NTRjY2JiNDM5ZTBscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoJL1FBhFSTKOR6xbrFZjolAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggysvJPzcbDVAvgafdJjk+HsQERR1TJUdTGkVK0JEUFi2kZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaBm00bQDNuDzkbSmeqfkT1AAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCALCvnDg42EAZDxmO0+Q5CWd1SN1LJc5+eg06a3Ce7Rs2RuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBh9Zmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmNjNjRkYTE3LWUyMmQtNDRhNi1iZjQ2LTYwMmU5YjY1MGZjZS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjA3NDA5NDVjLTEwOWEtNDY0ZS05MTRkLTQ0MDc2OGJkMzg5MHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDKy8k/NxsNUC+Bp90mOT4exARFHVMlR1MaRUrQkRQWLaJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggiz1i5myEAEB15c4Rz/R47pOt8fUVmKY1J74SIh/RlJ+iY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggZOxJP/AniRx0gY9eNTIyPs3OluZ6A/qnfliLARtadZl0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQMKwMXS8uUonRdfsQPF7yHnmsYSyj31m+uFEvqPk1KgkyZnu/xmrdmas18kcXHm0nU06lltk4WfxkcJitUq584s=</c2pa:manifest></metadata>
+<path fill="#C9A84C" fill-opacity="1.0" fill-rule="evenodd" d="M1.17,1.17 L1.00,2.00 L27.17,87.67 L28.33,89.33 L27.50,90.00 L26.17,90.00 L25.67,90.67 L50.00,161.33 L51.00,162.33 L55.83,162.33 L56.67,162.83 L50.67,211.83 L205.17,211.83 L202.00,180.17 L201.17,177.33 L199.67,163.17 L200.17,162.67 L204.83,162.33 L205.83,161.33 L230.17,90.50 L227.50,89.33 L228.67,87.67 L254.83,2.00 L254.67,1.17 L254.00,1.33 L200.83,62.00 L200.83,62.67 L227.50,89.33 L226.83,90.00 L194.83,90.00 L188.50,85.33 L184.67,83.33 L178.83,81.33 L172.67,80.33 L166.83,80.50 L158.67,82.33 L152.33,85.33 L146.00,90.00 L109.83,90.00 L103.50,85.33 L99.67,83.33 L93.83,81.33 L87.67,80.33 L81.83,80.50 L73.67,82.33 L67.33,85.33 L61.00,90.00 L29.00,90.00 L28.33,89.33 L54.67,63.17 L55.00,62.00 L1.83,1.33Z"/>
+<path fill="#C9A84C" fill-opacity="0.85" fill-rule="evenodd" d="M50.83,212.00 L51.67,212.50 L62.50,212.33 L63.17,212.83 L72.17,247.00 L73.50,249.83 L182.33,249.83 L183.67,247.00 L191.83,215.17 L192.83,212.83 L189.67,212.67 L189.00,212.00 L170.33,212.00 L169.17,212.83 L151.67,212.83 L150.50,212.00 L133.00,212.00 L132.33,212.83 L113.50,212.83 L112.83,212.00 L96.67,212.00 L96.17,212.67 L78.17,212.83 L76.67,212.00Z M147.00,231.67 L149.33,228.83 L152.33,227.00 L156.67,226.17 L160.33,226.33 L163.50,227.00 L166.50,228.83 L168.83,231.67 L169.00,235.00 L167.83,237.17 L164.50,239.83 L160.67,241.00 L154.00,240.83 L149.67,238.83 L148.00,237.17 L146.83,235.17Z M87.00,231.67 L89.33,228.83 L92.33,227.00 L96.67,226.17 L100.33,226.33 L103.50,227.00 L106.50,228.83 L108.83,231.67 L109.00,235.00 L107.83,237.17 L104.50,239.83 L100.67,241.00 L94.00,240.83 L89.67,238.83 L88.00,237.17 L86.83,235.17Z"/>
+<path fill="#7D6932" fill-opacity="0.85" fill-rule="evenodd" d="M147.17,231.67 L147.00,235.17 L148.17,237.17 L149.67,238.67 L154.00,240.67 L160.67,240.83 L164.50,239.67 L167.67,237.17 L168.83,235.00 L168.83,232.33 L167.83,230.33 L165.50,228.17 L163.50,227.17 L160.33,226.50 L156.67,226.33 L152.33,227.17 L149.33,229.00Z M87.17,231.67 L87.00,235.17 L88.17,237.17 L89.67,238.67 L94.00,240.67 L100.67,240.83 L104.50,239.67 L107.67,237.17 L108.83,235.00 L108.83,232.33 L107.83,230.33 L105.50,228.17 L103.50,227.17 L100.33,226.50 L96.67,226.33 L92.33,227.17 L89.33,229.00Z M189.17,212.00 L189.67,212.50 L192.33,212.67 L203.83,212.50 L203.83,212.00Z M150.67,212.00 L151.67,212.67 L169.17,212.67 L170.17,212.17Z M113.00,212.00 L113.50,212.67 L132.33,212.67 L132.83,212.17Z M76.83,212.00 L77.50,212.67 L96.50,212.33 L96.50,212.00Z"/>
+<path fill="#C9A84C" fill-opacity="0.7" fill-rule="evenodd" d="M75.50,250.00 L76.17,250.83 L88.17,294.83 L167.67,294.83 L179.67,250.83 L180.33,250.00Z"/>
+<path fill="#7D6932" fill-rule="evenodd" d="M191.17,162.33 L190.50,162.83 L189.17,211.83 L203.83,211.83 L203.83,198.83 L202.83,198.17 L202.50,192.50 L201.50,188.50 L201.50,184.50 L200.67,181.00 L200.33,175.33 L199.67,173.17 L199.33,167.33 L198.50,163.33 L199.50,162.33Z M153.33,162.33 L152.17,176.17 L150.50,211.83 L170.33,211.83 L167.83,162.83 L167.50,162.33Z M116.17,162.33 L115.50,162.83 L113.00,211.83 L132.83,211.83 L130.33,162.83 L129.67,162.33Z M81.17,162.33 L80.33,163.17 L76.83,211.83 L96.67,211.83 L92.83,162.83 L92.50,162.33Z M204.83,110.33 L205.17,113.83 L204.83,119.50 L205.17,119.50 L205.50,113.00 L205.17,110.33Z M119.83,110.33 L120.17,113.83 L119.83,119.50 L120.17,119.50 L120.50,113.00 L120.17,110.33Z M135.67,110.17 L135.33,117.17 L135.67,119.67 L136.00,119.67 L135.67,116.17 L136.00,110.17Z M50.67,110.17 L50.33,117.17 L50.67,119.67 L51.00,119.67 L50.67,116.17 L51.00,110.17Z"/>
+<path fill="#72612E" fill-rule="evenodd" d="M190.67,180.67 L190.67,191.83 L191.00,191.83 L191.00,180.67Z M158.83,90.83 L158.50,91.83 L154.33,94.17 L150.17,98.17 L147.33,102.33 L145.17,107.67 L144.17,114.00 L144.33,117.83 L145.17,122.17 L147.00,126.83 L149.83,131.17 L153.17,134.67 L157.33,137.67 L161.67,139.67 L165.00,140.67 L172.00,141.00 L175.67,140.67 L181.67,138.67 L186.50,135.67 L190.83,131.33 L193.67,127.17 L195.67,122.17 L196.50,118.00 L196.50,111.83 L195.67,107.67 L193.67,102.67 L189.83,97.33 L185.17,93.17 L182.33,91.83 L181.83,90.83 L179.50,90.50 L179.33,91.17 L178.33,91.17 L178.17,90.17 L175.50,90.00 L162.67,90.17 L162.50,91.17 L161.50,91.17 L161.33,90.50Z M168.00,95.67 L173.83,95.83 L176.83,96.67 L180.67,98.67 L183.50,100.83 L186.00,103.67 L188.17,107.33 L189.17,110.17 L189.50,113.17 L189.17,119.67 L187.00,124.67 L184.00,128.50 L180.67,131.17 L176.83,133.17 L172.83,134.17 L167.00,134.00 L164.00,133.17 L160.17,131.17 L157.33,129.00 L154.83,126.17 L151.67,119.83 L151.33,116.67 L151.67,110.00 L153.67,105.33 L156.83,101.33 L159.83,98.83 L164.00,96.67Z M73.83,90.83 L73.50,91.83 L69.33,94.17 L65.17,98.17 L62.33,102.33 L60.17,107.67 L59.17,114.00 L59.33,117.83 L60.17,122.17 L62.00,126.83 L64.83,131.17 L68.17,134.67 L72.33,137.67 L76.67,139.67 L80.00,140.67 L87.00,141.00 L90.67,140.67 L96.67,138.67 L101.50,135.67 L105.83,131.33 L108.67,127.17 L110.67,122.17 L111.50,118.00 L111.50,111.83 L110.67,107.67 L108.67,102.67 L104.83,97.33 L100.17,93.17 L97.33,91.83 L96.83,90.83 L94.50,90.50 L94.33,91.17 L93.33,91.17 L93.17,90.17 L90.50,90.00 L77.67,90.17 L77.50,91.17 L76.50,91.17 L76.33,90.50Z M83.00,95.67 L88.83,95.83 L91.83,96.67 L95.67,98.67 L98.50,100.83 L101.00,103.67 L103.17,107.33 L104.17,110.17 L104.50,113.17 L104.17,119.67 L102.00,124.67 L99.00,128.50 L95.67,131.17 L91.83,133.17 L87.83,134.17 L82.00,134.00 L79.00,133.17 L75.17,131.17 L72.33,129.00 L69.83,126.17 L66.67,119.83 L66.33,116.67 L66.67,110.00 L68.67,105.33 L71.83,101.33 L74.83,98.83 L79.00,96.67Z"/>
+<path fill="#564924" fill-rule="evenodd" d="M160.17,130.67 L161.50,131.83 L164.00,133.00 L168.00,134.00 L173.67,133.83 L176.83,133.00 L180.67,131.00 L180.67,130.67 L175.83,132.83 L172.33,133.50 L168.50,133.50 L164.50,132.67Z M75.17,130.67 L76.50,131.83 L79.00,133.00 L83.00,134.00 L88.67,133.83 L91.83,133.00 L95.67,131.00 L95.67,130.67 L90.83,132.83 L87.33,133.50 L83.50,133.50 L79.50,132.67Z M151.83,118.67 L152.83,122.50 L154.00,124.67 L154.67,125.00 L153.00,121.83 L152.17,118.67Z M66.83,118.67 L67.83,122.50 L69.00,124.67 L69.67,125.00 L68.00,121.83 L67.17,118.67Z M189.00,118.50 L188.67,118.50 L187.83,121.83 L186.00,125.17 L186.83,124.67 L188.00,122.50Z M104.00,118.50 L103.67,118.50 L102.83,121.83 L101.00,125.17 L101.83,124.67 L103.00,122.50Z M186.17,104.83 L187.83,108.00 L188.67,111.17 L189.00,111.17 L188.00,107.33 L186.83,105.17Z M154.67,104.83 L153.83,105.33 L152.83,107.33 L151.83,111.17 L152.17,111.17 L153.00,108.00Z M101.17,104.83 L102.83,108.00 L103.67,111.17 L104.00,111.17 L103.00,107.33 L101.83,105.17Z M69.67,104.83 L68.83,105.33 L67.83,107.33 L66.83,111.17 L67.17,111.17 L68.00,108.00Z M159.33,99.83 L164.83,97.00 L168.50,96.33 L172.33,96.33 L175.83,97.00 L180.33,99.17 L180.67,98.83 L176.83,96.83 L173.83,96.00 L168.00,95.83 L164.00,96.83 L159.83,99.00Z M74.33,99.83 L79.83,97.00 L83.50,96.33 L87.33,96.33 L90.83,97.00 L95.33,99.17 L95.67,98.83 L91.83,96.83 L88.83,96.00 L83.00,95.83 L79.00,96.83 L74.83,99.00Z M146.17,90.00 L146.33,90.83 L145.33,91.33 L142.50,94.50 L139.33,99.83 L137.33,104.67 L136.17,111.33 L136.33,121.00 L137.17,123.00 L137.33,125.17 L140.33,132.00 L144.17,137.33 L148.33,141.50 L152.50,144.50 L156.33,146.50 L162.17,148.50 L169.50,149.50 L173.67,149.33 L182.00,147.50 L188.33,144.50 L194.67,139.50 L198.50,135.00 L201.50,130.00 L203.50,125.00 L203.67,123.00 L204.50,121.00 L204.67,118.17 L204.50,108.83 L203.67,106.83 L203.33,104.33 L199.33,96.00 L196.67,92.50 L194.50,90.83 L194.67,90.00 L179.50,90.00 L179.50,90.33 L181.83,90.67 L182.33,91.67 L185.17,93.00 L187.50,94.83 L191.83,99.50 L194.83,104.83 L196.00,108.33 L196.83,114.00 L196.67,118.00 L194.83,125.00 L191.83,130.33 L187.50,135.00 L185.33,136.67 L179.67,139.67 L175.67,140.83 L172.00,141.17 L165.00,140.83 L157.33,137.83 L154.33,135.83 L150.83,132.50 L147.17,127.50 L145.00,122.17 L144.00,115.83 L144.17,112.00 L146.00,104.83 L150.00,98.17 L153.17,95.00 L156.00,92.83 L158.50,91.67 L158.83,90.67 L161.33,90.33 L161.33,90.00Z M61.17,90.00 L61.33,90.83 L60.33,91.33 L57.50,94.50 L54.33,99.83 L52.33,104.67 L51.17,111.33 L51.33,121.00 L52.17,123.00 L52.33,125.17 L55.33,132.00 L59.17,137.33 L63.33,141.50 L67.50,144.50 L71.33,146.50 L77.17,148.50 L84.50,149.50 L88.67,149.33 L97.00,147.50 L103.33,144.50 L109.67,139.50 L113.50,135.00 L116.50,130.00 L118.50,125.00 L118.67,123.00 L119.50,121.00 L119.67,118.17 L119.50,108.83 L118.67,106.83 L118.33,104.33 L114.33,96.00 L111.67,92.50 L109.50,90.83 L109.67,90.00 L94.50,90.00 L94.50,90.33 L96.83,90.67 L97.33,91.67 L100.17,93.00 L102.50,94.83 L106.83,99.50 L109.83,104.83 L111.00,108.33 L111.83,114.00 L111.67,118.00 L109.83,125.00 L106.83,130.33 L102.50,135.00 L100.33,136.67 L94.67,139.67 L90.67,140.83 L87.00,141.17 L80.00,140.83 L72.33,137.83 L69.33,135.83 L65.83,132.50 L62.17,127.50 L60.00,122.17 L59.00,115.83 L59.17,112.00 L61.00,104.83 L65.00,98.17 L68.17,95.00 L71.00,92.83 L73.50,91.67 L73.83,90.67 L76.33,90.33 L76.33,90.00Z M163.83,89.67 L163.83,90.00 L177.00,90.00 L177.00,89.67 L174.83,89.33Z M78.83,89.67 L78.83,90.00 L92.00,90.00 L92.00,89.67 L89.83,89.33Z"/>
+<path fill="#292415" fill-rule="evenodd" d="M169.83,110.33 L167.50,111.33 L166.33,112.67 L166.17,115.83 L166.33,117.17 L167.50,118.50 L170.83,119.50 L173.33,118.50 L174.33,117.33 L174.67,114.17 L174.50,112.67 L173.33,111.33 L171.00,110.33Z M84.83,110.33 L82.50,111.33 L81.33,112.67 L81.17,115.83 L81.33,117.17 L82.50,118.50 L85.83,119.50 L88.33,118.50 L89.33,117.33 L89.67,114.17 L89.50,112.67 L88.33,111.33 L86.00,110.33Z M168.50,96.50 L164.83,97.17 L162.00,98.33 L157.83,101.33 L155.17,104.33 L153.17,108.00 L152.17,111.33 L152.17,118.50 L153.17,121.83 L155.17,125.50 L157.83,128.50 L160.33,130.50 L165.00,132.67 L168.50,133.33 L172.33,133.33 L176.33,132.50 L180.50,130.50 L183.00,128.50 L185.67,125.50 L187.67,121.83 L188.67,118.33 L188.67,111.33 L187.67,108.00 L185.67,104.33 L183.00,101.33 L180.50,99.33 L175.83,97.17 L172.33,96.50Z M169.83,103.17 L174.33,103.67 L175.50,104.50 L178.67,105.50 L180.33,107.50 L180.33,108.83 L182.17,112.67 L182.17,117.17 L180.17,121.50 L176.33,125.17 L174.33,126.17 L171.00,126.67 L166.50,126.17 L163.17,124.17 L160.83,121.83 L158.67,117.17 L158.67,112.67 L160.83,108.00 L164.50,104.67 L166.50,103.67Z M83.50,96.50 L79.83,97.17 L77.00,98.33 L72.83,101.33 L70.17,104.33 L68.17,108.00 L67.17,111.33 L67.17,118.50 L68.17,121.83 L70.17,125.50 L72.83,128.50 L75.33,130.50 L80.00,132.67 L83.50,133.33 L87.33,133.33 L91.33,132.50 L95.50,130.50 L98.00,128.50 L100.67,125.50 L102.67,121.83 L103.67,118.33 L103.67,111.33 L102.67,108.00 L100.67,104.33 L98.00,101.33 L95.50,99.33 L90.83,97.17 L87.33,96.50Z M84.83,103.17 L89.33,103.67 L90.50,104.50 L93.67,105.50 L95.33,107.50 L95.33,108.83 L97.17,112.67 L97.17,117.17 L95.17,121.50 L91.33,125.17 L89.33,126.17 L86.00,126.67 L81.50,126.17 L78.17,124.17 L75.83,121.83 L73.67,117.17 L73.67,112.67 L75.83,108.00 L79.50,104.67 L81.50,103.67Z M146.83,89.67 L146.83,90.00 L160.17,90.00 L166.00,89.17 L174.83,89.17 L180.83,90.00 L194.00,90.00 L190.00,86.33 L184.67,83.33 L178.83,81.33 L172.67,80.33 L166.83,80.50 L158.67,82.33 L152.33,85.33Z M61.83,89.67 L61.83,90.00 L75.17,90.00 L81.00,89.17 L89.83,89.17 L95.83,90.00 L109.00,90.00 L105.00,86.33 L99.67,83.33 L93.83,81.33 L87.67,80.33 L81.83,80.50 L73.67,82.33 L67.33,85.33Z"/>
+<path fill="#F4EEDB" fill-rule="evenodd" d="M175.33,105.83 L173.83,107.67 L174.00,110.33 L175.67,111.67 L177.50,111.67 L179.33,110.17 L179.50,108.17 L178.33,106.33Z M90.33,105.83 L88.83,107.67 L89.00,110.33 L90.67,111.67 L92.50,111.67 L94.33,110.17 L94.50,108.17 L93.33,106.33Z"/>
+</svg>
+  <h1 style="margin-top:26px">On ne fait pas du contenu.<br><b>On fait du cinéma.</b></h1>
+  <p class="lead" style="margin:26px auto 0;text-align:center">Vos questions, maintenant. Et après ce soir : <span class="gold">yamakasi@okapiworldmedia.com</span></p>
+ </div>
+</section>
+
+</div>
+<div id="overview"><div class="kick" style="margin-bottom:18px">Sommaire · cliquez pour aller à une diapositive</div><div class="grid" id="ovGrid"></div></div>
+<div class="nav"><button id="prev" aria-label="Précédente">‹</button><button id="next" aria-label="Suivante">›</button></div>
+<div id="help">← → naviguer · M sommaire · F plein écran · T chronomètre</div>
+<div id="prog"></div>
+<script>
+(function(){
+const slides=[...document.querySelectorAll('.slide')];let cur=0;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function go(n,push=true){n=Math.max(0,Math.min(slides.length-1,n));slides[cur].classList.remove('active');cur=n;slides[cur].classList.add('active');slides[cur].scrollTop=0;
+ $('#prog').style.width=((cur+1)/slides.length*100)+'%';$('#counter').textContent=(cur+1)+' / '+slides.length;
+ if(push)history.replaceState(null,'','#'+(cur+1));$$('#ovGrid .it').forEach((e,i)=>e.classList.toggle('cur',i===cur))}
+$('#next').onclick=()=>go(cur+1);$('#prev').onclick=()=>go(cur-1);
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;
+ if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}
+ else if(e.key==='m'||e.key==='M')toggleOv();else if(e.key==='f'||e.key==='F')fs();else if(e.key==='t'||e.key==='T')toggleClock();else if(e.key==='Escape')$('#overview').classList.remove('open');
+ else if(e.key==='Home')go(0);else if(e.key==='End')go(slides.length-1)});
+let tx=null;document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});document.addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>70&&!e.target.closest('.ba,input,textarea'))go(cur+(d<0?1:-1));tx=null});
+// sommaire
+$('#ovGrid').innerHTML=slides.map((s,i)=>`<div class="it" data-i="${i}"><small>${String(i+1).padStart(2,'0')}</small><span>${s.dataset.title}</span></div>`).join('');
+$$('#ovGrid .it').forEach(e=>e.onclick=()=>{go(+e.dataset.i);toggleOv()});
+function toggleOv(){$('#overview').classList.toggle('open')}$('#btnOv').onclick=toggleOv;
+function fs(){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen()}$('#btnFs').onclick=fs;
+// chrono
+let t0=null,acc=0,tick=null;function toggleClock(){const c=$('#clock');if(t0){acc+=Date.now()-t0;t0=null;clearInterval(tick);c.classList.remove('on')}else{t0=Date.now();tick=setInterval(draw,500);c.classList.add('on')}draw()}
+function draw(){const ms=acc+(t0?Date.now()-t0:0),s=Math.floor(ms/1000);$('#clock').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}$('#clock').onclick=toggleClock;
+// carte des leçons
+const L=[['L1','Ce que vous allez savoir faire'],['L2','Les 4 briques du pipeline'],['L3','Langage ou génération'],['L4','Vos comptes'],['L5','Les 4 familles'],['L6','Prise en main de Fal.ai'],['L7','Choisir le bon modèle'],['L8','Image, correction, clip'],['L9','Anatomie d\'un prompt']];
+$('#timeline').innerHTML=L.map((l,i)=>`<button data-go="${4+i}"><small>${l[0]}</small><span>${l[1]}</span></button>`).join('');
+$$('#timeline button').forEach(b=>b.onclick=()=>go(+b.dataset.go));
+// sondage
+const T=['J\'ai vu les 9 leçons','J\'ai déposé l\'exercice de la leçon 8','J\'ai activé la double authentification','J\'ai crédité mon compte Fal.ai','J\'ai mon tableau de suivi'];
+$('#tallies').innerHTML='<div class="card">'+T.map((t,i)=>`<div class="tally"><span style="font-weight:300;font-size:16px;flex:1">${t}</span><button data-t="${i}" data-d="-1">−</button><span class="v" id="tv${i}">0</span><button data-t="${i}" data-d="1">+</button></div>`).join('')+'</div>';
+$$('#tallies button').forEach(b=>b.onclick=()=>{const v=$('#tv'+b.dataset.t);v.textContent=Math.max(0,+v.textContent+ +b.dataset.d)});
+// questions flash
+$$('[data-flash]').forEach(b=>b.onclick=()=>b.parentElement.classList.toggle('open'));
+// briques et accordéons
+$$('[data-toggle]').forEach(b=>b.onclick=()=>b.classList.toggle('open'));
+$$('.acc button').forEach(b=>b.onclick=()=>b.parentElement.classList.toggle('open'));
+// jeu de tri (L3)
+const ITEMS=[['Trouver le titre du film','Langage'],['Décider l\'ordre des scènes','Langage'],['Préparer la description d\'une image','Langage'],['Créer l\'affiche du film','Relais'],['Générer l\'image à partir d\'une description déjà prête','Génération'],['Animer l\'image validée','Génération']];
+const BINS=['Langage','Génération','Relais'];let sel=null,placed={};
+function drawSort(){$('#sortItems').innerHTML=ITEMS.map((it,i)=>placed[i]?'':`<span class="sort-item ${sel===i?'sel':''}" data-i="${i}">${it[0]}</span>`).join('')||'<span class="muted" style="font-size:14px">Toutes les tâches sont classées.</span>';
+ $('#bins').innerHTML=BINS.map(b=>`<div class="bin" data-b="${b}"><h3>${b}</h3>${ITEMS.map((it,i)=>placed[i]===b?`<span class="sort-item ${it[1]===b?'ok':'ko'}">${it[0]} ${it[1]===b?'✓':'✗ → '+it[1]}</span>`:'').join('')}</div>`).join('');
+ const n=Object.keys(placed).length,ok=Object.entries(placed).filter(([i,b])=>ITEMS[i][1]===b).length;$('#sortScore').textContent=n?`${ok} / ${n} bonnes réponses`:'';
+ $$('#sortItems .sort-item').forEach(e=>e.onclick=()=>{sel=+e.dataset.i;drawSort()});$$('#bins .bin').forEach(e=>e.onclick=()=>{if(sel===null)return;placed[sel]=e.dataset.b;sel=null;drawSort()})}
+$('#sortReset').onclick=()=>{placed={};sel=null;drawSort()};drawSort();
+// familles (L5)
+const FAM=[['Texte → image','Créer à partir de rien. Rapide, peu cher, peu de contrôle sur les détails : tout ce que vous ne décidez pas, le modèle le décide.',2,1,'img/f169.jpg','Texte → image · la description de la leçon 3'],
+['Image → image','Corriger sans tout refaire : votre outil de précision. Une modification, et une seule.',3,2,'img/l8_corr.jpg','Image → image · la correction de la leçon 8'],
+['Image → vidéo','Animer ce que vous avez validé : le chemin le plus sûr vers une vidéo. Décrivez le mouvement, et la caméra.',4,3,'img/l8_clip.jpg','Image → vidéo · le clip de la leçon 8'],
+['Texte → vidéo','Explorer vite, en acceptant l\'imprévu. Si ça tombe à côté, on repaie tout, au prix d\'une vidéo.',1,4,'img/sty_photo.jpg','Texte → vidéo · à garder pour l\'exploration']];
+$('#fams').innerHTML=FAM.map((f,i)=>`<div class="fam" data-i="${i}"><div class="ar">${f[0]}</div><div class="muted" style="font-size:11px;letter-spacing:.2em;margin-top:10px">CONTRÔLE</div><div class="meter"><i style="width:${f[2]*25}%"></i></div><div class="muted" style="font-size:11px;letter-spacing:.2em;margin-top:8px">SPECTACLE</div><div class="meter"><i style="width:${f[3]*25}%;background:var(--lumiere)"></i></div></div>`).join('');
+$$('#fams .fam').forEach(e=>e.onclick=()=>{$$('#fams .fam').forEach(x=>x.classList.remove('on'));e.classList.add('on');const f=FAM[+e.dataset.i];$('#famInfo').innerHTML=`<div class="lab">${f[0]}</div><p style="font-size:16px">${f[1]}</p>`;$('#famImg').src=f[4];$('#famCap').textContent=f[5]});
+// formats (L6)
+const FM={'169':['img/f169.jpg','16/9','100%'],'916':['img/f916.jpg','9/16','auto'],'11':['img/f11.jpg','1/1','auto']};
+$$('[data-fmt]').forEach(b=>b.onclick=()=>{$$('[data-fmt]').forEach(x=>x.classList.remove('on'));b.classList.add('on');const f=FM[b.dataset.fmt];const ph=$('#fmtPh');ph.style.aspectRatio=f[1];const w=b.dataset.fmt==='169';ph.style.width=w?'100%':'auto';ph.style.height=w?'auto':'100%';$('#fmtImg').src=f[0]});
+// nommage
+function nm(){const v=[1,2,3,4].map(i=>$('#nm'+i).value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-')).filter(Boolean);$('#nmOut').innerHTML='<span class="gold">'+v.join('_')+'</span>.png'}
+[1,2,3,4].forEach(i=>$('#nm'+i).oninput=nm);nm();
+// budget (L7)
+function bud(){const g=i=>parseFloat($('#b'+i).value)||0;const im=g(1)*g(2),vi=g(1)*g(4),ci=im*g(3),cv=vi*g(5);const f=x=>x.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});
+ $('#bTot').textContent=f(ci+cv)+' €';$('#bDet').textContent=`${im} images = ${f(ci)} € · ${vi} clips vidéo = ${f(cv)} €. La vidéo pèse ${ci+cv>0?Math.round(cv/(ci+cv)*100):0} % du budget : on valide en image d'abord.`}
+[1,2,3,4,5].forEach(i=>$('#b'+i).oninput=bud);bud();
+// comparateurs avant/après
+function baInit(el){const top=el.querySelector('.top'),bar=el.querySelector('.bar');let drag=false;
+ const set=x=>{const r=el.getBoundingClientRect();const p=Math.max(0,Math.min(1,(x-r.left)/r.width));top.style.clipPath=`inset(0 ${100-p*100}% 0 0)`;bar.style.left=(p*100)+'%'};
+ el.addEventListener('pointerdown',e=>{drag=true;el.setPointerCapture(e.pointerId);set(e.clientX)});el.addEventListener('pointermove',e=>{if(drag)set(e.clientX)});el.addEventListener('pointerup',()=>drag=false)}
+$$('[data-ba]').forEach(baInit);
+const BA={bus:['img/bus_lazy.jpg','img/bus_struct.jpg','« femme arrêt de bus pluie »'],btl:['img/btl_lazy.jpg','img/btl_struct.jpg','« bouteille de jus »'],homme:['img/homme_a.jpg','img/homme_b.jpg','« Un homme »'],cuisine:['img/cuisine_a.jpg','img/cuisine_b.jpg','« Une femme dans une cuisine »']};
+$$('[data-ba-set]').forEach(b=>b.onclick=()=>{$$('[data-ba-set]').forEach(x=>x.classList.remove('on'));b.classList.add('on');const v=BA[b.dataset.baSet];$('#ba9a').src=v[0];$('#ba9b').src=v[1];$('#ba9l1').textContent=v[2]});
+// cartes du vocabulaire
+const FL=[['Plan large','Cadre','img/cad_large.jpg','Le sujet et une bonne partie de son environnement'],['Plan moyen','Cadre','img/cad_moyen.jpg','Le sujet en entier, ou presque'],['Gros plan','Cadre','img/cad_gros.jpg','Un visage, ou un objet, qui remplit le cadre'],['Plongée','Cadre','img/cad_plong.jpg','La caméra en hauteur, qui regarde vers le bas'],
+['Contre-plongée','Cadre','img/cad_contre.jpg','La caméra basse, qui regarde vers le haut'],['Lumière douce','Lumière','img/voc_douce.jpg','Des ombres légères, estompées'],['Lumière dure','Lumière','img/voc_dure.jpg','Des ombres nettes, marquées'],['Contre-jour','Lumière','img/voc_contre.jpg','La lumière vient de derrière le sujet']];
+$('#flips').innerHTML=FL.map(f=>`<div class="flip"><div class="in"><div class="f"><span class="tag" style="--c:var(--${f[1]==='Cadre'?'cadre':'lumiere'})">${f[1]}</span><h3 style="margin-top:12px">${f[0]}</h3><small>CLIQUEZ POUR VOIR</small></div><div class="b"><img src="${f[2]}" alt="" loading="lazy"><div>${f[3]}</div></div></div></div>`).join('');
+$$('.flip').forEach(f=>f.onclick=()=>f.classList.toggle('on'));
+// constructeur de prompt
+const BR=[['Sujet','sujet','Qui, ou quoi, est au centre ?'],['Action','action','Que fait le sujet ?'],['Cadre','cadre','Plan large, moyen, gros plan ?'],['Lumière','lumiere','D\'où vient-elle, comment est-elle ?'],['Style','style','Photo réaliste, illustration… ?']];
+const EXB=['Une jeune femme d\'environ vingt-cinq ans, en tenue d\'infirmière sous un manteau léger, un parapluie jaune fermé à la main.','Elle attend seule, le regard baissé, perdue dans ses pensées.','Plan large, elle est placée sur le côté gauche de l\'image, sous un abribus au bord d\'une rue de Douala.','Avant l\'aube, pluie fine, lumière orangée des lampadaires qui se reflète sur la chaussée mouillée, ciel bleu sombre.','Style photo réaliste, ambiance calme et mélancolique.'];
+$('#builder').innerHTML=BR.map((b,i)=>`<div class="field"><label style="color:var(--${b[1]})">${b[0]}</label><textarea id="pb${i}" rows="2" placeholder="${b[2]}"></textarea></div>`).join('');
+function pb(){const t=BR.map((b,i)=>$('#pb'+i).value.trim()).filter(Boolean).map(s=>/[.!?]$/.test(s)?s:s+'.').join(' ');$('#bOut').textContent=t||'Les briques apparaîtront ici, dans l\'ordre.'}
+BR.forEach((b,i)=>$('#pb'+i).oninput=pb);pb();
+$('#bEx').onclick=()=>{EXB.forEach((s,i)=>$('#pb'+i).value=s);pb()};$('#bClr').onclick=()=>{BR.forEach((b,i)=>$('#pb'+i).value='');pb();$('#bMsg').textContent=''};
+$('#bCopy').onclick=()=>{const t=$('#bOut').textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>$('#bMsg').textContent='Prompt copié.').catch(()=>$('#bMsg').textContent='Copie impossible : sélectionnez le texte à la main.')};
+// quiz
+const Q=[['Vous voulez changer la couleur d\'un objet dans une image, sans tout refaire.',['Texte → image','Image → image','Texte → vidéo'],1,'Image → image : une modification précise, « Ne change rien d\'autre ».'],
+['Votre projet est une publicité pour Instagram Reels. Quel format ?',['16:9','9:16','1:1'],1,'9:16, le format du téléphone tenu dans la main.'],
+['Vous cherchez vingt titres pour votre court-métrage.',['Un modèle de langage','Un générateur d\'image','Un modèle vidéo'],0,'C\'est un travail de langage : ChatGPT ou Claude.'],
+['Quelle est la brique la plus souvent oubliée dans un prompt ?',['Le style','L\'action','La lumière'],1,'L\'action : sans elle, le modèle fige un mannequin face caméra.'],
+['Combien créditer sur Fal.ai pour commencer ?',['5 à 10 €','50 €','100 €'],0,'5 à 10 € : vous sentez chaque génération.'],
+['Le chemin le plus sûr vers une vidéo ?',['Texte → vidéo directement','Image validée → vidéo','Relancer jusqu\'à ce que ce soit bon'],1,'On valide en image, puis on anime.'],
+['Un plan de nuages, sans visage à conserver, pour explorer une idée.',['Texte → vidéo','Image → image','Aucun modèle'],0,'Texte → vidéo : quand le hasard ne dérange pas.'],
+['Un bon nom de fichier, c\'est…',['image (3).png','arret-bus_plan-01_large-pluie_v02.png','final_final_v3_ok.png'],1,'Projet, plan, description courte, version.'],
+['Dans la leçon 8, que regarde le formateur en premier ?',['La qualité artistique','La méthode : prompt, lisibilité, méthode, budget','Le nombre de générations'],1,'Les quatre critères. Pas la qualité artistique.'],
+['Deux instructions de votre prompt se contredisent. Que fait le modèle ?',['Il vous demande de choisir','Il tranche lui-même, souvent mal','Il ignore tout le prompt'],1,'Il tranche, souvent mal : un bon prompt n\'est pas le plus long, c\'est le plus clair.']];
+let qi=0,qok=0,qdone=0;
+function drawQ(){if(qi>=Q.length){$('#quiz').innerHTML=`<div class="lab">Terminé</div><h3>Score de la salle : ${qok} / ${Q.length}</h3><p class="muted" style="margin-top:8px">Les questions ratées, on les reprend ensemble maintenant.</p><button class="btn" id="qRe" style="margin-top:16px">Recommencer</button>`;$('#qRe').onclick=()=>{qi=0;qok=0;qdone=0;$('#qScore').textContent='0 / 0';drawQ()};return}
+ const q=Q[qi];$('#quiz').innerHTML=`<div class="lab">Question ${qi+1} / ${Q.length}</div><h3 style="font-weight:400;font-size:21px">${q[0]}</h3>${q[1].map((o,i)=>`<button class="q-opt" data-o="${i}">${o}</button>`).join('')}<p id="qExp" class="gold" style="min-height:26px;margin-top:6px;font-size:15.5px"></p><button class="btn" id="qNext" style="margin-top:8px;display:none">Question suivante</button>`;
+ $$('#quiz .q-opt').forEach(b=>b.onclick=()=>{if($('#quiz').dataset.ans==='1')return;$('#quiz').dataset.ans='1';const o=+b.dataset.o;$$('#quiz .q-opt').forEach((x,i)=>{if(i===q[2])x.classList.add('ok');else if(i===o)x.classList.add('ko')});if(o===q[2])qok++;qdone++;$('#qScore').textContent=qok+' / '+qdone;$('#qExp').textContent=q[3];$('#qNext').style.display='inline-block'});
+ $('#quiz').dataset.ans='0';$('#qNext').onclick=()=>{qi++;drawQ()}}
+drawQ();
+// liste d'exercices
+const EX=[['L1','Créer le dossier École Okapi › Mois 1 › Prompts, Images, Vidéos, et écrire le projet fil rouge en trois lignes'],['L2','Découper le projet fil rouge en quatre briques'],['L3','Classer cinq tâches (langage, génération, relais) et faire le relais avec un modèle de langage'],['L4','Remplir les instructions personnalisées, comparer ChatGPT et Claude, générer trois images'],['L5','Les quatre familles sur une scène du projet, avec le coût de chacune'],['L6','Explorer trois modèles, décider le format, renommer ses fichiers'],['L7','Comparer deux modèles d\'image et estimer le budget du projet'],['L8','Déposer l\'image, le clip, les trois prompts exacts et le coût total'],['L9','Réécrire le prompt de la leçon 8 en cinq briques et comparer les deux images']];
+let saved={};try{saved=JSON.parse(localStorage.getItem('okapi-atelier-m1')||'{}')}catch(e){}
+$('#exlist').innerHTML=EX.map((e,i)=>`<div class="chk ${saved[i]?'on':''}" data-i="${i}"><i>✓</i><span><b class="gold" style="font-weight:600">${e[0]}</b> · ${e[1]}</span></div>`).join('');
+$$('#exlist .chk').forEach(c=>c.onclick=()=>{c.classList.toggle('on');saved[c.dataset.i]=c.classList.contains('on');try{localStorage.setItem('okapi-atelier-m1',JSON.stringify(saved))}catch(e){}});
+// départ
+const h=parseInt(location.hash.slice(1));slides[0].classList.add('active');go(isNaN(h)?0:h-1,false);
+})();
+</script></body></html>
