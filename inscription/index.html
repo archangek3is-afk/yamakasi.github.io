@@ -138,6 +138,51 @@ footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;f
   .pack .carte{padding:18px}
   .lang-switch{top:10px;right:10px}
 }
+
+/* ── Tableau comparatif ── */
+.tableau-cmp-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:24px}
+.tableau-etiq{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gris2);margin-bottom:10px}
+table.cmp{width:100%;min-width:500px;border-collapse:collapse;font-size:13px}
+table.cmp th,table.cmp td{padding:9px 14px;border:1px solid var(--ligne);text-align:center;vertical-align:middle}
+table.cmp th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);background:#0f0d0a;white-space:nowrap}
+table.cmp th.feat{text-align:left;color:var(--gris2);font-size:9px;min-width:170px}
+table.cmp td{color:var(--texte);background:var(--noir2)}
+table.cmp td.feat{text-align:left;color:var(--gris);font-size:12.5px}
+table.cmp td.ok{color:var(--or);font-size:17px;font-weight:500}
+table.cmp tr.prix-row td{font-family:'IBM Plex Mono',monospace;font-weight:500;color:var(--or);font-size:14px}
+table.cmp tr.duree-row td{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gris)}
+table.cmp thead th.vd{background:#1c1810;border-top:2px solid var(--or)}
+table.cmp tbody td.vd{background:#1a1810}
+table.cmp tbody tr:hover td{background:#15120e}
+table.cmp tbody tr:hover td.vd{background:#1f1b0f}
+
+/* ── Pack wrapper + accordéon programme ── */
+.pack.vedette .carte{border-color:var(--or);border-width:2px}
+.programme{border:1px solid var(--ligne);border-top:none;background:var(--noir2)}
+.programme summary{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--or);padding:11px 22px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;user-select:none;transition:background .2s}
+.programme summary::-webkit-details-marker{display:none}
+.programme summary::before{content:'+';font-size:14px;font-weight:500;width:14px;text-align:center;flex-shrink:0}
+.programme[open] summary::before{content:'−'}
+.programme summary:hover{background:#171410}
+.programme summary:focus-visible{outline:2px solid var(--or);outline-offset:-2px}
+.programme-contenu{padding:20px 22px 24px;border-top:1px solid var(--ligne)}
+.prog-sec{margin-bottom:18px}
+.prog-sec:last-child{margin-bottom:0}
+.prog-titre{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:9px}
+.prog-ul{list-style:none;padding:0;font-size:14px;color:var(--texte)}
+.prog-ul li{padding-left:18px;position:relative;margin-bottom:6px;line-height:1.5}
+.prog-ul li::before{content:'–';position:absolute;left:0;color:var(--gris)}
+.prog-realisation{border:1px solid var(--ligne);background:#0f0d0a;padding:12px 16px;font-size:13.5px;color:var(--texte)}
+.prog-realisation .mini{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gris2);display:block;margin-bottom:5px}
+.prog-inclus{font-size:13px;color:var(--gris);border-left:2px solid var(--or);padding-left:14px;margin-top:16px}
+.prog-cumul{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--gris);padding:9px 14px;border:1px solid var(--ligne);margin-bottom:14px;background:#0f0d0a}
+.prog-volet{margin-top:14px}
+.prog-volet-titre{font-family:'Sora',sans-serif;font-weight:600;font-size:13px;color:var(--ivoire);margin-bottom:7px}
+@media(max-width:600px){
+  .programme-contenu{padding:16px 16px 20px}
+  table.cmp{min-width:460px;font-size:12px}
+  table.cmp th,table.cmp td{padding:7px 10px}
+}
 </style>
 </head>
 <body>
@@ -300,47 +345,250 @@ footer{border-top:1px solid var(--ligne);padding:26px 0 40px;text-align:center;f
 
     <p class="aide-select" data-i18n="sec04_aide2">👇 Cliquez sur une carte pour sélectionner votre pack</p>
 
+    <!-- Tableau comparatif -->
+    <div class="tableau-cmp-wrap">
+      <p class="tableau-etiq" data-i18n="tab_etiq">COMPARER LES PACKS</p>
+      <table class="cmp" aria-label="Comparaison des packs">
+        <thead>
+          <tr>
+            <th class="feat"></th>
+            <th>Skywalker</th>
+            <th>Obi-Wan</th>
+            <th class="vd">Maître Yoda</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feat" data-i18n="tab_fondations">Fondations IA</td>
+            <td class="ok">✓</td><td class="ok">✓</td><td class="ok vd">✓</td>
+          </tr>
+          <tr>
+            <td class="feat" data-i18n="tab_grammaire">Grammaire du plan</td>
+            <td>—</td><td class="ok">✓</td><td class="ok vd">✓</td>
+          </tr>
+          <tr>
+            <td class="feat" data-i18n="tab_rendu">Rendu hyperréaliste · bibles visuelles</td>
+            <td>—</td><td class="ok">✓</td><td class="ok vd">✓</td>
+          </tr>
+          <tr>
+            <td class="feat" data-i18n="tab_cinema">Cinéma complet</td>
+            <td>—</td><td>—</td><td class="ok vd">✓</td>
+          </tr>
+          <tr>
+            <td class="feat" data-i18n="tab_agents">Agents IA</td>
+            <td>—</td><td>—</td><td class="ok vd">✓</td>
+          </tr>
+          <tr>
+            <td class="feat" data-i18n="tab_clients">Trouver des clients</td>
+            <td>—</td><td>—</td><td class="ok vd">✓</td>
+          </tr>
+          <tr>
+            <td class="feat" data-i18n="tab_pitch">Pitch</td>
+            <td>—</td><td>—</td><td class="ok vd">✓</td>
+          </tr>
+          <tr>
+            <td class="feat" data-i18n="tab_realisation">Réalisation de fin de parcours</td>
+            <td style="font-size:12px" data-i18n="tab_real_sk">30–60 s</td>
+            <td style="font-size:12px" data-i18n="tab_real_ob">2–3 min</td>
+            <td class="vd" style="font-size:12px" data-i18n="tab_real_my">Film court</td>
+          </tr>
+          <tr class="duree-row">
+            <td class="feat" data-i18n="tab_duree">Durée indicative</td>
+            <td data-i18n="tab_duree_sk">3 mois</td>
+            <td data-i18n="tab_duree_ob">6 mois</td>
+            <td class="vd" data-i18n="tab_duree_my">10 mois</td>
+          </tr>
+          <tr class="prix-row">
+            <td class="feat" data-i18n="tab_prix">Prix</td>
+            <td>300 €</td><td>500 €</td><td class="vd">1 500 €</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="groupe" id="g-pack">
       <div class="packs">
 
-        <label class="pack">
-          <input type="radio" name="pack" value="Pack Skywalker — 300€">
-          <div class="carte">
-            <div class="haut"><div class="nom">Pack Skywalker</div><div class="prix">300 €</div></div>
-            <div class="duree" data-i18n="sk_duree">3 mois · fondations</div>
-            <p data-i18n-html="sk_desc"><strong style="color:var(--ivoire);font-weight:500">Les fondations.</strong> Vous comprenez la chaîne de production par IA, vous maîtrisez les outils et l'art du prompt, puis vous réalisez votre premier projet visuel et votre première séquence animée. Idéal si vous partez de zéro.</p>
-            <div class="echeancier" data-i18n-html="sk_ech">Échéancier : <b>90 €</b> à l'ouverture, puis <b>105 €</b> en novembre et <b>105 €</b> en décembre.</div>
-          </div>
-        </label>
+        <!-- Pack Skywalker -->
+        <div class="pack-wrapper">
+          <label class="pack">
+            <input type="radio" name="pack" value="Pack Skywalker — 300€">
+            <div class="carte">
+              <div class="haut"><div class="nom">Pack Skywalker</div><div class="prix">300 €</div></div>
+              <div class="duree" data-i18n="sk_duree">3 mois · fondations</div>
+              <p data-i18n-html="sk_desc"><strong style="color:var(--ivoire);font-weight:500">Les fondations.</strong> Vous comprenez la chaîne de production par IA, vous maîtrisez les outils et l'art du prompt, puis vous réalisez votre premier projet visuel et votre première séquence animée. Idéal si vous partez de zéro.</p>
+              <div class="echeancier" data-i18n-html="sk_ech">Échéancier : <b>90 €</b> à l'ouverture, puis <b>105 €</b> en novembre et <b>105 €</b> en décembre.</div>
+            </div>
+          </label>
+          <details class="programme">
+            <summary data-i18n="prog_voir">Voir le programme détaillé</summary>
+            <div class="programme-contenu">
+              <div class="prog-sec">
+                <div class="prog-titre" data-i18n="prog_savoir">Ce que vous saurez faire</div>
+                <ul class="prog-ul">
+                  <li>Créer vos premières images et vos premiers plans animés avec des générateurs d'images et des modèles vidéo</li>
+                  <li>Écrire des prompts précis et efficaces</li>
+                  <li>Corriger une image sans tout refaire</li>
+                  <li>Choisir les bons outils et maîtriser votre budget</li>
+                  <li>Éviter les erreurs de débutant</li>
+                </ul>
+              </div>
+              <div class="prog-sec">
+                <div class="prog-titre" data-i18n="prog_prog">Au programme</div>
+                <ul class="prog-ul">
+                  <li>Comprendre les IA génératives : modèles de langage et modèles de génération</li>
+                  <li>La chaîne complète d'un film en IA, de l'idée au montage</li>
+                  <li>Créer et sécuriser vos comptes, gérer votre budget</li>
+                  <li>Générer, corriger et animer des images</li>
+                  <li>L'anatomie d'un prompt efficace</li>
+                  <li>Itérer et tester avec méthode</li>
+                  <li>Bien choisir son écosystème d'outils</li>
+                  <li>Garder un même personnage d'une image à l'autre</li>
+                  <li>Un premier projet visuel</li>
+                  <li>De l'image fixe au plan animé</li>
+                </ul>
+              </div>
+              <div class="prog-sec">
+                <div class="prog-realisation">
+                  <span class="mini" data-i18n="prog_realisation">Votre réalisation de fin de parcours</span>
+                  Une séquence de 30 à 60 secondes.
+                </div>
+              </div>
+              <div class="prog-inclus" data-i18n="prog_inclus_sk">Vidéos-leçons · exercices pratiques suivis · ateliers en direct en fin de mois · fiches et mémos à télécharger.</div>
+            </div>
+          </details>
+        </div>
 
-        <label class="pack">
-          <input type="radio" name="pack" value="Pack Obi-Wan — 500€">
-          <div class="carte">
-            <div class="haut"><div class="nom">Pack Obi-Wan</div><div class="prix">500 €</div></div>
-            <div class="duree" data-i18n="ob_duree">6 mois · fondations + modules avancés</div>
-            <p data-i18n-html="ob_desc"><strong style="color:var(--ivoire);font-weight:500">La méthode.</strong> Tout Skywalker, plus : voir comme un cinéaste, obtenir un rendu réaliste, garder des personnages cohérents, construire la bible visuelle d'un projet et mener une séquence de bout en bout. Vous terminez avec une pièce de 2 à 3 minutes.</p>
-            <div class="echeancier" data-i18n-html="ob_ech">Échéancier : <b>150 €</b> à l'ouverture, puis <b>5 mensualités de 70 €</b> (novembre → mars).</div>
-          </div>
-        </label>
+        <!-- Pack Obi-Wan -->
+        <div class="pack-wrapper">
+          <label class="pack">
+            <input type="radio" name="pack" value="Pack Obi-Wan — 500€">
+            <div class="carte">
+              <div class="haut"><div class="nom">Pack Obi-Wan</div><div class="prix">500 €</div></div>
+              <div class="duree" data-i18n="ob_duree">6 mois · fondations + modules avancés</div>
+              <p data-i18n-html="ob_desc"><strong style="color:var(--ivoire);font-weight:500">La méthode.</strong> Tout Skywalker, plus : voir comme un cinéaste, obtenir un rendu réaliste, garder des personnages cohérents, construire la bible visuelle d'un projet et mener une séquence de bout en bout. Vous terminez avec une pièce de 2 à 3 minutes.</p>
+              <div class="echeancier" data-i18n-html="ob_ech">Échéancier : <b>150 €</b> à l'ouverture, puis <b>5 mensualités de 70 €</b> (novembre → mars).</div>
+            </div>
+          </label>
+          <details class="programme">
+            <summary data-i18n="prog_voir">Voir le programme détaillé</summary>
+            <div class="programme-contenu">
+              <div class="prog-cumul" data-i18n="prog_cumul_ob">Tout le Pack Skywalker, plus :</div>
+              <div class="prog-sec">
+                <div class="prog-titre" data-i18n="prog_savoir">Ce que vous saurez faire</div>
+                <ul class="prog-ul">
+                  <li>Penser chaque image comme un plan de cinéma</li>
+                  <li>Produire des images hyperréalistes et cohérentes d'un plan à l'autre</li>
+                  <li>Construire les bibles visuelles d'un projet</li>
+                  <li>Organiser une vraie chaîne de production</li>
+                </ul>
+              </div>
+              <div class="prog-sec">
+                <div class="prog-titre" data-i18n="prog_prog">Au programme</div>
+                <ul class="prog-ul">
+                  <li>Culture de l'image et grammaire du plan : cadre, focale, lumière, mouvement, découpage, lecture de séquence</li>
+                  <li>Plateformes de production avancées et rendu hyperréaliste</li>
+                  <li>Agrandissement et finition des images</li>
+                  <li>Bibles visuelles : personnages, décors, accessoires</li>
+                  <li>Cohérence entre les plans</li>
+                  <li>Pipelines de production</li>
+                </ul>
+              </div>
+              <div class="prog-sec">
+                <div class="prog-realisation">
+                  <span class="mini" data-i18n="prog_realisation">Votre réalisation de fin de parcours</span>
+                  Une séquence de 2 à 3 minutes.
+                </div>
+              </div>
+              <div class="prog-inclus" data-i18n="prog_inclus_ob">Tout ce qui est inclus dans Skywalker, plus un atelier de clôture du bloc.</div>
+            </div>
+          </details>
+        </div>
 
-        <label class="pack vedette">
-          <input type="radio" name="pack" value="Pack Maître Yoda — 1500€">
-          <div class="carte">
-            <div class="haut"><div class="nom">Pack Maître Yoda<span class="badge" data-i18n="badge_complet">LE PLUS COMPLET</span></div><div class="prix" data-i18n="prix_yoda">1 500 €</div></div>
-            <div class="duree" data-i18n="my_duree">10 mois · parcours complet</div>
-            <p data-i18n-html="my_desc"><strong style="color:var(--ivoire);font-weight:500">Le parcours complet.</strong> Tout Obi-Wan, plus le métier de réalisateur : écriture et découpage, direction de la photographie, son, voix et musique, effets visuels et finition. Vous terminez avec un film court produit et livré, avec mon accompagnement direct sur votre projet.</p>
-            <div class="echeancier" data-i18n-html="my_ech">Échéancier : <b>450 €</b> à l'ouverture, puis <b>8 mensualités de 117 €</b> (novembre → juin) et <b>114 €</b> en juillet.</div>
-          </div>
-        </label>
+        <!-- Pack Maître Yoda -->
+        <div class="pack-wrapper">
+          <label class="pack vedette">
+            <input type="radio" name="pack" value="Pack Maître Yoda — 1500€">
+            <div class="carte">
+              <div class="haut"><div class="nom">Pack Maître Yoda<span class="badge" data-i18n="badge_complet">LE PARCOURS LE PLUS COMPLET</span></div><div class="prix" data-i18n="prix_yoda">1 500 €</div></div>
+              <div class="duree" data-i18n="my_duree">10 mois · parcours complet</div>
+              <p data-i18n-html="my_desc"><strong style="color:var(--ivoire);font-weight:500">Le parcours complet.</strong> Tout Obi-Wan, plus le métier de réalisateur : écriture et découpage, direction de la photographie, son, voix et musique, effets visuels et finition. Vous terminez avec un film court produit et livré, avec mon accompagnement direct sur votre projet.</p>
+              <div class="echeancier" data-i18n-html="my_ech">Échéancier : <b>450 €</b> à l'ouverture, puis <b>8 mensualités de 117 €</b> (novembre → juin) et <b>114 €</b> en juillet.</div>
+            </div>
+          </label>
+          <details class="programme">
+            <summary data-i18n="prog_voir">Voir le programme détaillé</summary>
+            <div class="programme-contenu">
+              <div class="prog-cumul" data-i18n="prog_cumul_my">Tout le Pack Obi-Wan, plus :</div>
+              <div class="prog-sec">
+                <div class="prog-titre" data-i18n="prog_savoir">Ce que vous saurez faire</div>
+                <ul class="prog-ul">
+                  <li>Mener un film court de l'écriture à la livraison</li>
+                  <li>Créer et déployer vos propres agents IA pour gagner du temps en production</li>
+                  <li>Trouver vos premiers clients et vendre vos créations</li>
+                  <li>Pitcher votre projet devant un client, un producteur ou un festival</li>
+                </ul>
+              </div>
+              <div class="prog-sec">
+                <div class="prog-titre" data-i18n="prog_prog">Au programme</div>
+                <div class="prog-volet">
+                  <div class="prog-volet-titre">1. Le cinéma complet</div>
+                  <ul class="prog-ul">
+                    <li>Écriture et scénario</li>
+                    <li>Découpage et direction</li>
+                    <li>Système de cohérence avancé et design system de film</li>
+                    <li>Bibles complètes</li>
+                    <li>Musique et sound design</li>
+                    <li>Voix et synchronisation labiale</li>
+                    <li>Effets visuels</li>
+                  </ul>
+                </div>
+                <div class="prog-volet">
+                  <div class="prog-volet-titre">2. L'IA agentique</div>
+                  <ul class="prog-ul">
+                    <li>Comprendre ce qu'est un agent IA</li>
+                    <li>Créer et déployer vos agents pour préparer un projet et organiser une production</li>
+                    <li>Automatiser les tâches répétitives et la communication avec vos clients</li>
+                  </ul>
+                </div>
+                <div class="prog-volet">
+                  <div class="prog-volet-titre">3. Trouver des clients</div>
+                  <ul class="prog-ul">
+                    <li>Définir votre offre et vos tarifs</li>
+                    <li>Construire votre portfolio et votre bande démo</li>
+                    <li>Prospecter et convertir un premier contact en commande</li>
+                  </ul>
+                </div>
+                <div class="prog-volet">
+                  <div class="prog-volet-titre">4. Pitcher votre projet</div>
+                  <ul class="prog-ul">
+                    <li>Construire un dossier de présentation et un pitch deck</li>
+                    <li>Présenter un projet à un client, un producteur, un diffuseur ou un festival</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prog-sec">
+                <div class="prog-realisation">
+                  <span class="mini" data-i18n="prog_realisation">Votre réalisation de fin de parcours</span>
+                  Un film court livré et votre dossier de présentation.
+                </div>
+              </div>
+              <div class="prog-inclus" data-i18n="prog_inclus_my">Tout ce qui est inclus dans Obi-Wan, plus un atelier de clôture du bloc.</div>
+            </div>
+          </details>
+        </div>
 
-        <label class="pack">
-          <input type="radio" name="pack" value="Pack Légende — sur devis">
-          <div class="carte">
-            <div class="haut"><div class="nom">Pack Légende</div><div class="prix" data-i18n="leg_devis">Sur devis</div></div>
-            <div class="duree" data-i18n="leg_duree">Accompagnement sur mesure</div>
-            <p data-i18n="leg_desc">Un accompagnement de votre projet de bout en bout, avec la possibilité de participer à une production Okapi à mes côtés. On en discute d'abord ensemble : je reviens vers vous pour un échange.</p>
-          </div>
-        </label>
+        <!-- Pack Légende -->
+        <div class="pack-wrapper">
+          <label class="pack">
+            <input type="radio" name="pack" value="Pack Légende — sur devis">
+            <div class="carte">
+              <div class="haut"><div class="nom">Pack Légende</div><div class="prix" data-i18n="leg_devis">Sur devis</div></div>
+              <div class="duree" data-i18n="leg_duree">Accompagnement sur mesure</div>
+              <p data-i18n="leg_desc">Un accompagnement de votre projet de bout en bout, avec la possibilité de participer à une production Okapi à mes côtés. On en discute d'abord ensemble : je reviens vers vous pour un échange.</p>
+            </div>
+          </label>
+        </div>
 
       </div>
       <div class="msg-err" data-i18n="err_pack">Choisissez un pack.</div>
@@ -495,7 +743,7 @@ var EN = {
   ob_duree:      "6 months \u00b7 foundations + advanced modules",
   ob_desc:       '<strong style="color:var(--ivoire);font-weight:500">The method.</strong> Everything in Skywalker, plus: seeing like a filmmaker, achieving a realistic look, keeping characters consistent, building a project\u2019s visual bible and carrying a sequence through from start to finish. You finish with a 2-to-3-minute piece.',
   ob_ech:        'Payment schedule: <b>\u20ac150</b> at the start, then <b>5 monthly payments of \u20ac70</b> (November \u2192 March).',
-  badge_complet: "MOST COMPLETE",
+  badge_complet: "THE MOST COMPLETE PATH",
   prix_yoda:     "\u20ac1,500",
   my_duree:      "10 months \u00b7 complete path",
   my_desc:       '<strong style="color:var(--ivoire);font-weight:500">The complete path.</strong> Everything in Obi-Wan, plus the craft of directing: writing and shot breakdown, cinematography, sound, voice and music, visual effects and finishing. You finish with a short film produced and delivered, with my direct support on your project.',
@@ -534,6 +782,32 @@ var EN = {
   btn_copie:     "Copy my answers",
   copie_ok:      "Copied \u2713",
   echec_envoi:   "Automatic sending failed. Use the button below to email me your answers.",
+  tab_etiq:      "COMPARE PACKS",
+  tab_fondations:"AI foundations",
+  tab_grammaire: "Filmmaking grammar",
+  tab_rendu:     "Hyperrealistic render \u00b7 visual bibles",
+  tab_cinema:    "Full filmmaking craft",
+  tab_agents:    "AI agents",
+  tab_clients:   "Finding clients",
+  tab_pitch:     "Pitching",
+  tab_realisation:"End-of-course project",
+  tab_real_sk:   "30\u201360 s",
+  tab_real_ob:   "2\u20133 min",
+  tab_real_my:   "Short film",
+  tab_duree:     "Indicative duration",
+  tab_duree_sk:  "3 months",
+  tab_duree_ob:  "6 months",
+  tab_duree_my:  "10 months",
+  tab_prix:      "Price",
+  prog_voir:     "See the full programme",
+  prog_savoir:   "What you will be able to do",
+  prog_prog:     "Programme",
+  prog_realisation:"Your end-of-course project",
+  prog_inclus_sk:"Video lessons \u00b7 practical exercises \u00b7 live workshops at month-end \u00b7 printable cheat sheets.",
+  prog_inclus_ob:"Everything included in Skywalker, plus a closing workshop.",
+  prog_inclus_my:"Everything included in Obi-Wan, plus a closing workshop.",
+  prog_cumul_ob: "Everything in Pack Skywalker, plus:",
+  prog_cumul_my: "Everything in Pack Obi-Wan, plus:",
   aria_activer:  "Unmute",
   aria_couper:   "Mute"
 };
