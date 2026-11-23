@@ -95,8 +95,8 @@ h2{font-size:104px;margin-bottom:30px}
 .top{position:absolute;left:150px;top:120px}
 .top h2{font-size:84px}
 /* timeline */
-.tl{position:absolute;left:150px;right:150px;top:330px}
-.row{display:grid;grid-template-columns:110px 470px 1fr 120px;align-items:center;height:100px;border-bottom:1px solid rgba(239,230,212,.12)}
+.tl{position:absolute;left:150px;right:150px;top:300px}
+.row{display:grid;grid-template-columns:110px 470px 1fr 120px;align-items:center;height:92px;border-bottom:1px solid rgba(239,230,212,.12)}
 .row .n{font-family:"Cormorant Garamond",serif;font-size:56px;color:var(--gold)}
 .row .t{font-size:28px;font-weight:400}
 .row .bar{height:14px;position:relative}
@@ -104,7 +104,7 @@ h2{font-size:104px;margin-bottom:30px}
 .scene.active .row .bar span{animation:grow 1.8s cubic-bezier(.3,.8,.2,1) both;animation-delay:var(--d)}
 @keyframes grow{to{transform:scaleX(1)}}
 .row .m{text-align:right;font-size:28px;color:var(--gold2);font-variant-numeric:tabular-nums}
-.total{position:absolute;right:150px;top:880px;font-family:"Cormorant Garamond",serif;font-size:46px;color:var(--ink)}
+.total{position:absolute;right:150px;top:890px;font-family:"Cormorant Garamond",serif;font-size:46px;color:var(--ink)}
 .total b{color:var(--gold2);font-weight:500}
 /* trinity lines */
 .lines{margin-top:10px}
@@ -196,22 +196,23 @@ h2{font-size:104px;margin-bottom:30px}
 </section>
 
 <section class="scene" data-act="La structure">
-  <div class="top"><p class="kicker r" style="--d:.3s">La scénographie</p><h2 class="r" style="--d:.6s">Cinq actes, de la Création jusqu'à nous</h2></div>
+  <div class="top"><p class="kicker r" style="--d:.3s">La scénographie</p><h2 class="r" style="--d:.6s">Un prélude, cinq actes, de la Création jusqu'à nous</h2></div>
   <div class="tl">
-    <div class="row r" style="--d:1s"><span class="n">I</span><span class="t">La création</span><span class="bar"><span style="--w:30%;--d:1.4s"></span></span><span class="m">1'30</span></div>
-    <div class="row r" style="--d:1.2s"><span class="n">II</span><span class="t">La perte de l'image</span><span class="bar"><span style="--w:60%;--c:var(--red);--d:1.6s"></span></span><span class="m">3'</span></div>
-    <div class="row r" style="--d:1.4s"><span class="n">III</span><span class="t">Le silence prophétique</span><span class="bar"><span style="--w:20%;--c:#8a8378;--d:1.8s"></span></span><span class="m">1'</span></div>
-    <div class="row r" style="--d:1.6s"><span class="n">IV</span><span class="t">L'image réintroduite</span><span class="bar"><span style="--w:100%;--c:var(--gold2);--d:2s"></span></span><span class="m">5'</span></div>
-    <div class="row r" style="--d:1.8s"><span class="n">V</span><span class="t">La multiplication</span><span class="bar"><span style="--w:20%;--d:2.2s"></span></span><span class="m">1'</span></div>
+    <div class="row r" style="--d:.9s"><span class="n" style="font-size:40px">Pr.</span><span class="t">Prélude · la Trinité</span><span class="bar"><span style="--w:25%;--c:#cfd6e6;--d:1.3s"></span></span><span class="m">2'</span></div>
+    <div class="row r" style="--d:1.05s"><span class="n">I</span><span class="t">La création</span><span class="bar"><span style="--w:62.5%;--d:1.45s"></span></span><span class="m">5'</span></div>
+    <div class="row r" style="--d:1.2s"><span class="n">II</span><span class="t">La perte de l'image</span><span class="bar"><span style="--w:75%;--c:var(--red);--d:1.6s"></span></span><span class="m">6'</span></div>
+    <div class="row r" style="--d:1.35s"><span class="n">III</span><span class="t">Le silence prophétique</span><span class="bar"><span style="--w:37.5%;--c:#8a8378;--d:1.75s"></span></span><span class="m">3'</span></div>
+    <div class="row r" style="--d:1.5s"><span class="n">IV</span><span class="t">L'image réintroduite</span><span class="bar"><span style="--w:100%;--c:var(--gold2);--d:1.9s"></span></span><span class="m">8'</span></div>
+    <div class="row r" style="--d:1.65s"><span class="n">V</span><span class="t">La multiplication</span><span class="bar"><span style="--w:25%;--d:2.05s"></span></span><span class="m">2'</span></div>
   </div>
-  <p class="total r" style="--d:2.8s">Durée totale ≈ <b>11 min 30</b></p>
+  <p class="total r" style="--d:2.8s">Durée totale ≈ <b>26 min</b></p>
 </section>
 
 <section class="scene" data-act="Acte I · Prélude">
   <div class="bg"><img src="assets/trinity.jpg" alt="Trois colonnes de lumière en conversation dans le vide"></div>
   <div class="shade"></div>
   <div class="content" style="bottom:130px">
-    <p class="kicker r" style="--d:.6s">Prélude · en hébreu, en écho à l'Ancien Testament</p>
+    <p class="kicker r" style="--d:.6s">Prélude · 2 min · en hébreu, en écho à l'Ancien Testament</p>
     <h2 class="r" style="--d:1s">La conversation de la Trinité</h2>
     <div class="lines">
       <div class="line r" style="--d:2s"><span class="he">בְּנִי אַתָּה אֲנִי הַיּוֹם יְלִדְתִּיךָ</span><span class="fr">« Tu es mon Fils, je t'ai engendré aujourd'hui. »</span><span class="ref">Psaume 2.7</span></div>
@@ -226,7 +227,7 @@ h2{font-size:104px;margin-bottom:30px}
   <div class="bg"><img src="assets/light.jpg" alt="Explosion de lumière dorée dans le vide cosmique"></div>
   <div class="shade center"></div>
   <div class="content mid">
-    <p class="kicker r" style="--d:.4s">Acte I · La création · 1'30</p>
+    <p class="kicker r" style="--d:.4s">Acte I · La création · 5 min</p>
     <p class="body r" style="--d:.9s;max-width:none;font-size:26px">Le son du soleil. Puis la voix de Dieu retentit en hébreu :</p>
     <p class="or glow" style="--d:2.4s;opacity:0">Lumière</p>
     <div class="rule" style="--d:3s"></div>
@@ -269,11 +270,11 @@ h2{font-size:104px;margin-bottom:30px}
   <div class="bg"><img src="assets/decadence.jpg" alt="Danseurs en noir rampant et grimpant les uns sur les autres"></div>
   <div class="shade"></div>
   <div class="content" style="bottom:120px">
-    <p class="kicker r" style="--d:.4s;color:#ff6b62">Acte II · 3 min</p>
+    <p class="kicker r" style="--d:.4s;color:#ff6b62">Acte II · 6 min</p>
     <h2 class="r" style="--d:.8s">La perte de l'image</h2>
     <p class="body r" style="--d:1.6s">L'humanité perd l'image et se comporte comme la bête. Des tableaux dansés traversent l'Ancien Testament et montrent la décadence de l'homme.</p>
     <div class="chips r" style="--d:2.4s"><span>Caïn et Abel</span><span>Le Déluge</span><span>Babel</span><span>Le veau d'or</span></div>
-    <p class="refs r" style="--d:3s">Pistes de tableaux à valider · Références chorégraphiques :
+    <p class="refs r" style="--d:3s">Quatre tableaux d'environ 1 min 30, pistes à valider · Références chorégraphiques :
       <a href="https://www.instagram.com/p/DX7wfl2x1Xk/" target="_blank" rel="noopener">réf. 1</a><a href="https://www.youtube.com/watch?v=VW63e0gjh6o" target="_blank" rel="noopener">réf. 2</a></p>
   </div>
 </section>
@@ -282,9 +283,9 @@ h2{font-size:104px;margin-bottom:30px}
   <div class="bg"><img src="assets/silence.jpg" alt="Scène vide, un seul faisceau de lumière blanche"></div>
   <div class="shade center"></div>
   <div class="content fr0">
-    <p class="kicker r" style="--d:.6s">Acte III · 1 min · en araméen, en écho au Nouveau Testament</p>
+    <p class="kicker r" style="--d:.6s">Acte III · 3 min · en araméen, en écho au Nouveau Testament</p>
     <h2 class="r" style="--d:1.2s">Le silence prophétique</h2>
-    <p class="body r" style="--d:2.2s">Retour dans la conversation de la Trinité. Dieu annonce l'entrée du Christ dans la création. <b style="color:var(--gold2);font-weight:500">Le Fils accepte l'incarnation.</b></p>
+    <p class="body r" style="--d:2.2s">Quatre cents ans sans parole. Dans le noir, les voix des prophètes annoncent ce qui vient. Puis retour dans la conversation de la Trinité : Dieu annonce l'entrée du Christ dans la création. <b style="color:var(--gold2);font-weight:500">Le Fils accepte l'incarnation.</b></p>
   </div>
   <div class="fracas"><div><h2>FRACAS</h2><p>… puis le cri d'un nouveau-né.</p></div></div>
 </section>
@@ -293,11 +294,12 @@ h2{font-size:104px;margin-bottom:30px}
   <div class="bg rise"><img src="assets/nativity.jpg" alt="Marie tient le nouveau-né qui rayonne d'une lumière dorée, entourée de danseurs"></div>
   <div class="shade"></div>
   <div class="content" style="bottom:120px">
-    <p class="kicker r" style="--d:.6s">Acte IV · 5 min</p>
+    <p class="kicker r" style="--d:.6s">Acte IV · 8 min</p>
     <h2 class="r" style="--d:1s">L'image de Dieu réintroduite</h2>
     <p class="lead r" style="--d:2s">Le Messie. <b>L'image revient habiter la création.</b></p>
     <p class="verse r" style="--d:3.2s">« Et la parole a été faite chair, et elle a habité parmi nous. »<small>Jean 1.14</small></p>
-    <p class="note r" style="--d:4.2s">Mise en scène de la naissance : en cours de validation.</p>
+    <div class="chips r" style="--d:4s"><span>L'annonce à Marie</span><span>Pas de place à Bethléem</span><span>La naissance</span><span>La gloire des anges</span><span>Bergers et mages</span></div>
+    <p class="note r" style="--d:4.6s;margin-top:18px">Pistes de tableaux · mise en scène de la naissance en cours de validation.</p>
   </div>
 </section>
 
@@ -305,7 +307,7 @@ h2{font-size:104px;margin-bottom:30px}
   <div class="bg rise"><img src="assets/multiply.jpg" alt="Des faisceaux dorés se posent un à un sur les spectateurs, jusqu'à la mezzanine"><i class="beams"></i></div>
   <div class="shade"></div>
   <div class="content" style="bottom:120px;width:1100px">
-    <p class="kicker r" style="--d:.6s">Acte V · 1 min · 4 000 places et la mezzanine</p>
+    <p class="kicker r" style="--d:.6s">Acte V · 2 min · 4 000 places et la mezzanine</p>
     <h2 class="r" style="--d:1s">La multiplication</h2>
     <p class="body r" style="--d:1.8s;max-width:980px">Un faisceau se pose sur un spectateur. Puis deux, puis cent, jusqu'à la mezzanine. Une voix off nomme ce qui se passe : <b style="color:var(--gold2);font-weight:500">l'image de Dieu se multiplie en chacun d'entre nous.</b></p>
     <p class="verse r" style="--d:3.4s;font-size:36px">« Elle est en toi. Elle est en toi. Elle est en toi… Regarde autour de toi : ce n'est pas une lumière. C'est la même image, multipliée. »<small>Voix off · extrait</small></p>
