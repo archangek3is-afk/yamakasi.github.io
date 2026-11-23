@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSELEM — Noël 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Frank+Ruhl+Libre:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: sacred, cinematic, hushed — a pitch played like a film, not read like a deck
+   IDEA: the theatre itself: a black hall where light, sound and image arrive act by act
+   PICTURE: full-bleed photoreal stills with slow camera drift, golden dust, film grain
+   COLOUR and TYPE: night black, bone, gold (image of God), crimson only for the fall; Cormorant Garamond + Manrope + Frank Ruhl Libre for Hebrew
+   LAYOUT: fixed 16:9 stage scaled to the screen, letterbox, text low-left like subtitles of a film */
+:root{color-scheme:dark;--bg:#0a0807;--ink:#efe6d4;--mute:#a89f8f;--gold:#e0b25e;--gold2:#f6d48c;--red:#c3161f}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#000;color:var(--ink);overflow:hidden;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+#wrap{position:fixed;inset:0;background:#000;overflow:hidden;overflow:clip}
+#stage{position:fixed;left:50%;top:50%;width:1920px;height:1080px;overflow:hidden;overflow:clip;background:var(--bg);transform-origin:center center}
+.scene{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.3s ease,filter 1.3s ease,visibility 0s 1.3s;filter:blur(8px)}
+.scene.active{opacity:1;visibility:visible;filter:blur(0);transition:opacity 1.6s ease,filter 1.6s ease,visibility 0s}
+.bg{position:absolute;inset:-2%;will-change:transform}
+.bg img{width:100%;height:100%;object-fit:cover;display:block}
+.scene.active .bg{animation:kb 22s cubic-bezier(.25,.6,.3,1) both}
+.scene.active .bg.pan{animation-name:kbpan}
+.scene.active .bg.rise{animation-name:kbrise}
+@keyframes kb{from{transform:scale(1.14)}to{transform:scale(1.02)}}
+@keyframes kbpan{from{transform:scale(1.12) translateX(2.5%)}to{transform:scale(1.04) translateX(-1.5%)}}
+@keyframes kbrise{from{transform:scale(1.1) translateY(3%)}to{transform:scale(1.03) translateY(-1%)}}
+.shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,5,4,.88) 0%,rgba(6,5,4,.55) 38%,rgba(6,5,4,0) 70%),linear-gradient(0deg,rgba(6,5,4,.85) 0%,rgba(6,5,4,0) 45%)}
+.shade.center{background:radial-gradient(ellipse at center,rgba(6,5,4,.25) 0%,rgba(6,5,4,.8) 75%)}
+.shade.low{background:linear-gradient(0deg,rgba(6,5,4,.92) 0%,rgba(6,5,4,.35) 40%,rgba(6,5,4,.1) 70%)}
+.content{position:absolute;left:150px;bottom:170px;width:900px}
+.content.mid{left:0;right:0;bottom:auto;top:50%;transform:translateY(-50%);width:auto;text-align:center}
+.kicker{font-size:22px;letter-spacing:.04em;color:var(--gold);font-weight:500;margin-bottom:26px;display:flex;gap:18px;align-items:center}
+.kicker::before{content:"";width:46px;height:1px;background:var(--gold)}
+.mid .kicker{justify-content:center}.mid .kicker::before{display:none}
+h1,h2{font-family:"Cormorant Garamond",serif;font-weight:400;line-height:1.02}
+h1{font-size:210px;letter-spacing:.06em;font-weight:300}
+h2{font-size:104px;margin-bottom:30px}
+.lead{font-size:34px;line-height:1.45;color:var(--ink);font-weight:300}
+.lead b{font-weight:500;color:var(--gold2)}
+.body{font-size:27px;line-height:1.6;color:#d9d0bf;font-weight:300;max-width:860px}
+.verse{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:40px;line-height:1.35;color:var(--gold2);margin-top:36px}
+.verse small{display:block;font-family:Manrope;font-style:normal;font-size:20px;color:var(--mute);margin-top:12px;letter-spacing:.03em}
+.he{font-family:"Frank Ruhl Libre",serif;direction:rtl;unicode-bidi:isolate}
+.note{font-size:20px;color:var(--mute);margin-top:30px;font-style:italic}
+.r{opacity:0}
+.scene.active .r{animation:rise 1.6s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--d,.3s)}
+@keyframes rise{from{opacity:0;transform:translateY(28px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+.scene.active .glow{animation:glowin 2.6s ease both;animation-delay:var(--d,.3s)}
+@keyframes glowin{0%{opacity:0;filter:blur(20px);letter-spacing:.4em}60%{opacity:1;filter:blur(0);text-shadow:0 0 80px var(--gold2),0 0 30px var(--gold)}100%{opacity:1;letter-spacing:.06em;text-shadow:0 0 40px rgba(224,178,94,.35)}}
+/* overlays */
+#dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.grain{position:absolute;inset:-50%;z-index:6;pointer-events:none;opacity:.09;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");animation:grain .8s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-2%)}60%{transform:translate(-2%,-4%)}80%{transform:translate(4%,2%)}100%{transform:translate(0,0)}}
+.vig{position:absolute;inset:0;z-index:7;pointer-events:none;box-shadow:inset 0 0 260px 60px rgba(0,0,0,.85)}
+.lb{position:absolute;left:0;right:0;height:64px;background:#000;z-index:8;pointer-events:none;transition:height 1.4s cubic-bezier(.6,0,.2,1)}
+.lb.t{top:0}.lb.b{bottom:0}
+#stage.open .lb{height:0}
+#flash{position:absolute;inset:0;z-index:9;background:#fff;opacity:0;pointer-events:none}
+#flash.go{animation:flash 1.6s ease-out}
+@keyframes flash{0%{opacity:.95}100%{opacity:0}}
+#stage.shake{animation:shake .7s cubic-bezier(.36,.07,.19,.97)}
+@keyframes shake{10%,90%{transform:var(--sc) translate(-4px,2px)}20%,80%{transform:var(--sc) translate(8px,-4px)}30%,50%,70%{transform:var(--sc) translate(-12px,6px)}40%,60%{transform:var(--sc) translate(12px,-6px)}}
+/* HUD */
+.hud{position:absolute;z-index:10;font-size:17px;color:rgba(239,230,212,.62);letter-spacing:.03em}
+#brand{top:22px;left:150px}
+#actlabel{top:22px;right:150px;text-align:right;color:var(--gold)}
+#prog{position:absolute;z-index:10;left:150px;right:330px;bottom:26px;display:flex;gap:6px}
+#prog i{flex:1;height:2px;background:rgba(239,230,212,.18);transition:background .6s}
+#prog i.on{background:var(--gold)}
+#ctrl{bottom:12px;right:150px;display:flex;gap:10px}
+#ctrl button{background:rgba(20,16,12,.6);border:1px solid rgba(239,230,212,.2);color:var(--ink);font:500 15px Manrope;padding:9px 16px;border-radius:30px;cursor:pointer;min-height:40px}
+#ctrl button:hover,#ctrl button:focus-visible{border-color:var(--gold);color:var(--gold2);outline:none}
+#hint{position:absolute;z-index:10;right:150px;bottom:110px;font-size:18px;color:var(--gold);opacity:0;transition:opacity .8s}
+#hint.show{opacity:.9;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+/* gate */
+#gate .content{text-align:center}
+#gate h1{font-size:180px}
+#enter{margin-top:60px;background:transparent;border:1px solid var(--gold);color:var(--gold2);font:500 24px Manrope;padding:22px 52px;border-radius:60px;cursor:pointer;letter-spacing:.04em;transition:background .4s,color .4s}
+#enter:hover,#enter:focus-visible{background:var(--gold);color:#120d08;outline:none}
+.small{font-size:19px;color:var(--mute);margin-top:28px}
+/* experience */
+.trio{position:absolute;left:150px;right:150px;top:250px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.trio figure{border-top:1px solid rgba(224,178,94,.5);padding-top:30px}
+.trio .ph{height:330px;overflow:hidden;margin-bottom:30px}
+.trio .ph img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease}
+.scene.active .trio .ph img{transform:scale(1.08)}
+.trio h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:52px;margin-bottom:14px}
+.trio p{font-size:24px;line-height:1.55;color:#d1c8b6;font-weight:300}
+.top{position:absolute;left:150px;top:120px}
+.top h2{font-size:84px}
+/* timeline */
+.tl{position:absolute;left:150px;right:150px;top:330px}
+.row{display:grid;grid-template-columns:110px 470px 1fr 120px;align-items:center;height:100px;border-bottom:1px solid rgba(239,230,212,.12)}
+.row .n{font-family:"Cormorant Garamond",serif;font-size:56px;color:var(--gold)}
+.row .t{font-size:28px;font-weight:400}
+.row .bar{height:14px;position:relative}
+.row .bar span{position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--c,var(--gold));transform-origin:left;transform:scaleX(0);box-shadow:0 0 24px var(--c,var(--gold))}
+.scene.active .row .bar span{animation:grow 1.8s cubic-bezier(.3,.8,.2,1) both;animation-delay:var(--d)}
+@keyframes grow{to{transform:scaleX(1)}}
+.row .m{text-align:right;font-size:28px;color:var(--gold2);font-variant-numeric:tabular-nums}
+.total{position:absolute;right:150px;top:880px;font-family:"Cormorant Garamond",serif;font-size:46px;color:var(--ink)}
+.total b{color:var(--gold2);font-weight:500}
+/* trinity lines */
+.lines{margin-top:10px}
+.line{display:grid;grid-template-columns:1fr;gap:4px;margin-bottom:28px}
+.line .he{font-size:44px;color:var(--gold2);text-align:left}
+.line .fr{font-family:"Cormorant Garamond",serif;font-size:36px;font-style:italic}
+.line .ref{font-size:18px;color:var(--mute)}
+/* lumière */
+.or{font-family:"Cormorant Garamond",serif;font-size:250px;font-weight:500;color:var(--gold2);line-height:1}
+.orhe{font-size:150px;color:var(--gold);margin-top:10px;font-family:"Frank Ruhl Libre",serif}
+.rule{width:620px;height:2px;background:var(--gold);margin:28px auto 0;transform:scaleX(0)}
+.scene.active .rule{animation:grow 1.6s cubic-bezier(.3,.8,.2,1) both;animation-delay:var(--d)}
+/* cells glow */
+.core{position:absolute;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(255,220,140,.95) 0%,rgba(224,178,94,.45) 35%,rgba(224,178,94,0) 70%);mix-blend-mode:screen;opacity:0;translate:-50% -50%}
+.scene.active .core{animation:beat 1.1s ease-in-out 2s infinite}
+@keyframes beat{0%,100%{opacity:.55;transform:scale(.9)}15%{opacity:1;transform:scale(1.15)}30%{opacity:.7;transform:scale(1)}45%{opacity:.95;transform:scale(1.08)}}
+.core.off{animation:none!important}
+/* devil gold extinguish */
+.ember{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--gold2);box-shadow:0 0 30px 10px var(--gold);vertical-align:middle;margin-right:18px}
+.scene.active .ember{animation:die 4s ease-in 2.4s both}
+@keyframes die{to{background:#3a332b;box-shadow:0 0 0 0 transparent}}
+.chips{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.chips span{border:1px solid rgba(239,230,212,.35);padding:10px 22px;border-radius:40px;font-size:22px}
+.refs{margin-top:28px;font-size:20px;color:var(--mute)}
+.refs a{color:var(--gold2);text-decoration:none;border-bottom:1px solid rgba(246,212,140,.4);margin-right:22px}
+/* act V beams */
+.beams{position:absolute;inset:0;transform-origin:50% 0;pointer-events:none;mix-blend-mode:screen;opacity:0;background:repeating-conic-gradient(from 160deg at 50% -8%,rgba(255,214,140,0) 0deg,rgba(255,214,140,.16) 1.2deg,rgba(255,214,140,0) 2.6deg,rgba(255,214,140,0) 7deg)}
+.scene.active .beams{animation:beams 9s ease-in-out 1.2s infinite alternate}
+@keyframes beams{0%{opacity:0;transform:rotate(-3deg)}35%{opacity:.8}100%{opacity:1;transform:rotate(3deg)}}
+/* fracas */
+.fr0{transition:opacity 1s,filter 1s}
+.scene.st1 .fr0{opacity:0!important;filter:blur(12px)}
+.fracas{position:absolute;inset:0;display:grid;place-items:center;text-align:center;opacity:0;pointer-events:none}
+.scene.st1 .fracas{opacity:1}
+.fracas h2{font-size:300px;font-weight:600;letter-spacing:.02em;margin:0;opacity:0}
+.scene.st1 .fracas h2{animation:slam 1.2s cubic-bezier(.1,.9,.2,1) both}
+@keyframes slam{0%{opacity:0;transform:scale(2.2);filter:blur(30px)}30%{opacity:1;transform:scale(.96);filter:blur(0)}100%{opacity:1;transform:scale(1)}}
+.fracas p{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:48px;color:var(--gold2);opacity:0;margin-top:20px}
+.scene.st1 .fracas p{animation:rise 2s ease both 2.2s}
+/* dispositif */
+.grid6{position:absolute;left:150px;right:150px;top:330px;display:grid;grid-template-columns:repeat(3,1fr);gap:0 70px}
+.grid6 div{border-top:1px solid rgba(224,178,94,.4);padding:26px 0 46px}
+.grid6 h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:44px;color:var(--gold2);margin-bottom:10px}
+.grid6 p{font-size:23px;line-height:1.55;color:#cfc6b4;font-weight:300}
+@media (prefers-reduced-motion:reduce){.scene.active .bg,.grain,.scene.active .core{animation:none!important}}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+
+<section class="scene active" id="gate" data-act="">
+  <div class="shade center"></div>
+  <div class="content mid">
+    <h1 class="r" style="--d:.2s">TSELEM</h1>
+    <p class="he r" style="--d:.7s;font-size:64px;color:var(--gold);margin-top:6px">צֶלֶם</p>
+    <p class="lead r" style="--d:1.1s;margin-top:30px">Proposition de spectacle immersif · Noël 2026</p>
+    <button id="enter" class="r" style="--d:1.6s">Entrer dans l'expérience</button>
+    <p class="small r" style="--d:2s">Son activé · casque ou enceintes conseillés · ← → pour naviguer · F plein écran</p>
+  </div>
+</section>
+
+<section class="scene" data-act="Ouverture">
+  <div class="bg rise"><img src="assets/cover.jpg" alt="Salle de théâtre plongée dans le noir, un fil de lumière dorée descend sur la scène"></div>
+  <div class="shade low"></div>
+  <div class="content mid" style="top:auto;bottom:150px;transform:none">
+    <p class="kicker r" style="--d:.8s">Spectacle immersif · Noël 2026</p>
+    <h1 class="glow" style="--d:1.4s;opacity:0">TSELEM</h1>
+    <p class="lead r" style="--d:3s;margin-top:10px">Noël, ou le retour de l'image de Dieu sur Terre.</p>
+  </div>
+</section>
+
+<section class="scene" data-act="Le pitch">
+  <div class="content mid" style="padding:0 260px">
+    <p class="lead r" style="--d:.5s;font-family:'Cormorant Garamond';font-size:64px;font-style:italic">Et si Noël n'était pas seulement une naissance…</p>
+    <p class="r" style="--d:2.4s;font-family:'Cormorant Garamond';font-size:110px;color:var(--gold2);margin-top:10px">…mais un retour ?</p>
+    <p class="lead r" style="--d:4.2s;margin-top:50px">La naissance de Jésus comme <b>la réintroduction de l'image de Dieu</b> dans la création.</p>
+    <p class="verse r" style="--d:5.6s;font-size:34px">« Dieu créa l'homme à son image, il le créa à l'image de Dieu. »<small>Genèse 1.27</small></p>
+  </div>
+</section>
+
+<section class="scene" data-act="L'expérience">
+  <div class="top"><p class="kicker r" style="--d:.3s">Le concept</p><h2 class="r" style="--d:.6s">Une expérience, trois langages</h2></div>
+  <div class="trio">
+    <figure class="r" style="--d:1.1s"><div class="ph"><img src="assets/light.jpg" alt=""></div><h3>Cinéma</h3><p>Des séquences projetées : la naissance de la lumière, la première cellule, la voix de Dieu.</p></figure>
+    <figure class="r" style="--d:1.5s"><div class="ph"><img src="assets/decadence.jpg" alt=""></div><h3>Danse</h3><p>Des chorégraphies qui portent la chute, puis la décadence d'une humanité devenue bête.</p></figure>
+    <figure class="r" style="--d:1.9s"><div class="ph"><img src="assets/adam.jpg" alt=""></div><h3>Jeu</h3><p>Une représentation théâtrale qui prend le relais de l'écran sur le podium, et peut déborder dans la salle.</p></figure>
+  </div>
+  <p class="lead r" style="--d:2.6s;position:absolute;left:150px;bottom:110px;font-size:28px;color:var(--mute)">Émotions visuelles et auditives, réunies dans un seul récit.</p>
+</section>
+
+<section class="scene" data-act="La structure">
+  <div class="top"><p class="kicker r" style="--d:.3s">La scénographie</p><h2 class="r" style="--d:.6s">Cinq actes, de la Création jusqu'à nous</h2></div>
+  <div class="tl">
+    <div class="row r" style="--d:1s"><span class="n">I</span><span class="t">La création</span><span class="bar"><span style="--w:30%;--d:1.4s"></span></span><span class="m">1'30</span></div>
+    <div class="row r" style="--d:1.2s"><span class="n">II</span><span class="t">La perte de l'image</span><span class="bar"><span style="--w:60%;--c:var(--red);--d:1.6s"></span></span><span class="m">3'</span></div>
+    <div class="row r" style="--d:1.4s"><span class="n">III</span><span class="t">Le silence prophétique</span><span class="bar"><span style="--w:20%;--c:#8a8378;--d:1.8s"></span></span><span class="m">1'</span></div>
+    <div class="row r" style="--d:1.6s"><span class="n">IV</span><span class="t">L'image réintroduite</span><span class="bar"><span style="--w:100%;--c:var(--gold2);--d:2s"></span></span><span class="m">5'</span></div>
+    <div class="row r" style="--d:1.8s"><span class="n">V</span><span class="t">La multiplication</span><span class="bar"><span style="--w:20%;--d:2.2s"></span></span><span class="m">1'</span></div>
+  </div>
+  <p class="total r" style="--d:2.8s">Durée totale ≈ <b>11 min 30</b></p>
+</section>
+
+<section class="scene" data-act="Acte I · Prélude">
+  <div class="bg"><img src="assets/trinity.jpg" alt="Trois colonnes de lumière en conversation dans le vide"></div>
+  <div class="shade"></div>
+  <div class="content" style="bottom:130px">
+    <p class="kicker r" style="--d:.6s">Prélude · en hébreu, en écho à l'Ancien Testament</p>
+    <h2 class="r" style="--d:1s">La conversation de la Trinité</h2>
+    <div class="lines">
+      <div class="line r" style="--d:2s"><span class="he">בְּנִי אַתָּה אֲנִי הַיּוֹם יְלִדְתִּיךָ</span><span class="fr">« Tu es mon Fils, je t'ai engendré aujourd'hui. »</span><span class="ref">Psaume 2.7</span></div>
+      <div class="line r" style="--d:3.6s"><span class="he">אֲנִי אֶהְיֶה לּוֹ לְאָב וְהוּא יִהְיֶה לִּי לְבֵן</span><span class="fr">« Je serai pour lui un père, et il sera pour moi un fils. »</span><span class="ref">2 Samuel 7.14</span></div>
+      <div class="line r" style="--d:5.2s"><span class="fr" style="color:var(--gold2)">« Que tous les anges de Dieu l'adorent ! »</span><span class="ref">Hébreux 1.6</span></div>
+    </div>
+    <p class="body r" style="--d:6.4s;font-size:23px">Le Père annonce au Fils ce qui vient : la création de son effigie.</p>
+  </div>
+</section>
+
+<section class="scene" data-act="Acte I · La création" data-fx="lumiere">
+  <div class="bg"><img src="assets/light.jpg" alt="Explosion de lumière dorée dans le vide cosmique"></div>
+  <div class="shade center"></div>
+  <div class="content mid">
+    <p class="kicker r" style="--d:.4s">Acte I · La création · 1'30</p>
+    <p class="body r" style="--d:.9s;max-width:none;font-size:26px">Le son du soleil. Puis la voix de Dieu retentit en hébreu :</p>
+    <p class="or glow" style="--d:2.4s;opacity:0">Lumière</p>
+    <div class="rule" style="--d:3s"></div>
+    <p class="orhe r" style="--d:3.4s">אוֹר</p>
+    <p class="body r" style="--d:4.6s;max-width:none;margin-top:20px">Au même instant, la lumière de l'univers apparaît.</p>
+  </div>
+</section>
+
+<section class="scene" data-act="Acte I · Tselem">
+  <div class="bg pan"><img src="assets/cells.jpg" alt="Une cellule se divise en deux, un cœur d'or au centre de chacune"><i class="core" style="left:34.5%;top:48%"></i><i class="core" style="left:69.5%;top:47%;animation-delay:2.15s"></i></div>
+  <div class="shade low"></div>
+  <div class="content" style="bottom:120px;width:1200px">
+    <p class="kicker r" style="--d:.5s">Acte I · La première division</p>
+    <h2 class="r" style="--d:.9s;font-size:130px;letter-spacing:.08em">TSELEM <span class="he" style="font-size:80px;color:var(--gold)">צֶלֶם</span></h2>
+    <p class="body r" style="--d:1.8s;max-width:1100px">Après l'expansion vient la première division cellulaire. Deux cellules : <b style="color:var(--ink);font-weight:500">l'homme et la femme</b>. En leur cœur, quelque chose de doré — <b style="color:var(--gold2);font-weight:500">l'image de Dieu</b>.</p>
+  </div>
+</section>
+
+<section class="scene" data-act="Acte I · Bascule">
+  <div class="bg rise"><img src="assets/adam.jpg" alt="Adam et Ève en lin blanc dans la fumée, une lueur dorée dans la poitrine"></div>
+  <div class="shade"></div>
+  <div class="content">
+    <p class="kicker r" style="--d:.5s">Bascule sur le podium</p>
+    <h2 class="r" style="--d:.9s">Le film devient théâtre</h2>
+    <p class="body r" style="--d:1.8s">Fumée au sol. Adam et Ève sortent de l'image et apparaissent en chair sur le podium — l'or brille encore en eux. Quelques scènes pourront surgir dans la salle, au parterre comme en mezzanine : piste à travailler.</p>
+  </div>
+</section>
+
+<section class="scene" data-act="Acte I · La chute">
+  <div class="bg pan"><img src="assets/devil.jpg" alt="Scène rouge, silhouette encapuchonnée devant des voiles rouges"></div>
+  <div class="shade"></div>
+  <div class="content">
+    <p class="kicker r" style="--d:.5s;color:#ff6b62">La chute</p>
+    <h2 class="r" style="--d:.9s">L'apparition</h2>
+    <p class="body r" style="--d:1.8s"><span class="ember"></span>Le diable entre en scène. La désobéissance est consommée : l'or s'éteint dans les corps.</p>
+  </div>
+</section>
+
+<section class="scene" data-act="Acte II · La perte de l'image">
+  <div class="bg"><img src="assets/decadence.jpg" alt="Danseurs en noir rampant et grimpant les uns sur les autres"></div>
+  <div class="shade"></div>
+  <div class="content" style="bottom:120px">
+    <p class="kicker r" style="--d:.4s;color:#ff6b62">Acte II · 3 min</p>
+    <h2 class="r" style="--d:.8s">La perte de l'image</h2>
+    <p class="body r" style="--d:1.6s">L'humanité perd l'image et se comporte comme la bête. Des tableaux dansés traversent l'Ancien Testament et montrent la décadence de l'homme.</p>
+    <div class="chips r" style="--d:2.4s"><span>Caïn et Abel</span><span>Le Déluge</span><span>Babel</span><span>Le veau d'or</span></div>
+    <p class="refs r" style="--d:3s">Pistes de tableaux à valider · Références chorégraphiques :
+      <a href="https://www.instagram.com/p/DX7wfl2x1Xk/" target="_blank" rel="noopener">réf. 1</a><a href="https://www.youtube.com/watch?v=VW63e0gjh6o" target="_blank" rel="noopener">réf. 2</a></p>
+  </div>
+</section>
+
+<section class="scene" data-act="Acte III · Le silence" data-steps="1" data-fx="fracas">
+  <div class="bg"><img src="assets/silence.jpg" alt="Scène vide, un seul faisceau de lumière blanche"></div>
+  <div class="shade center"></div>
+  <div class="content fr0">
+    <p class="kicker r" style="--d:.6s">Acte III · 1 min · en araméen, en écho au Nouveau Testament</p>
+    <h2 class="r" style="--d:1.2s">Le silence prophétique</h2>
+    <p class="body r" style="--d:2.2s">Retour dans la conversation de la Trinité. Dieu annonce l'entrée du Christ dans la création. <b style="color:var(--gold2);font-weight:500">Le Fils accepte l'incarnation.</b></p>
+  </div>
+  <div class="fracas"><div><h2>FRACAS</h2><p>… puis le cri d'un nouveau-né.</p></div></div>
+</section>
+
+<section class="scene" data-act="Acte IV · L'image réintroduite">
+  <div class="bg rise"><img src="assets/nativity.jpg" alt="Marie tient le nouveau-né qui rayonne d'une lumière dorée, entourée de danseurs"></div>
+  <div class="shade"></div>
+  <div class="content" style="bottom:120px">
+    <p class="kicker r" style="--d:.6s">Acte IV · 5 min</p>
+    <h2 class="r" style="--d:1s">L'image de Dieu réintroduite</h2>
+    <p class="lead r" style="--d:2s">Le Messie. <b>L'image revient habiter la création.</b></p>
+    <p class="verse r" style="--d:3.2s">« Et la parole a été faite chair, et elle a habité parmi nous. »<small>Jean 1.14</small></p>
+    <p class="note r" style="--d:4.2s">Mise en scène de la naissance : en cours de validation.</p>
+  </div>
+</section>
+
+<section class="scene" data-act="Acte V · La multiplication" data-fx="multiply">
+  <div class="bg rise"><img src="assets/multiply.jpg" alt="Des faisceaux dorés se posent un à un sur les spectateurs, jusqu'à la mezzanine"><i class="beams"></i></div>
+  <div class="shade"></div>
+  <div class="content" style="bottom:120px;width:1100px">
+    <p class="kicker r" style="--d:.6s">Acte V · 1 min · 4 000 places et la mezzanine</p>
+    <h2 class="r" style="--d:1s">La multiplication</h2>
+    <p class="body r" style="--d:1.8s;max-width:980px">Un faisceau se pose sur un spectateur. Puis deux, puis cent, jusqu'à la mezzanine. Une voix off nomme ce qui se passe : <b style="color:var(--gold2);font-weight:500">l'image de Dieu se multiplie en chacun d'entre nous.</b></p>
+    <p class="verse r" style="--d:3.4s;font-size:36px">« Elle est en toi. Elle est en toi. Elle est en toi… Regarde autour de toi : ce n'est pas une lumière. C'est la même image, multipliée. »<small>Voix off · extrait</small></p>
+  </div>
+</section>
+
+<section class="scene" data-act="Le dispositif">
+  <div class="top"><p class="kicker r" style="--d:.3s">Premières pistes de production</p><h2 class="r" style="--d:.6s">Ce que l'expérience demande</h2></div>
+  <p class="lead r" style="--d:2.4s;position:absolute;left:150px;bottom:120px;font-size:28px;color:var(--mute)">La salle d'ILLUSION : <b>4 000 places assises et une mezzanine</b>. Chaque effet est pensé pour le dernier rang.</p>
+  <div class="grid6">
+    <div class="r" style="--d:1s"><h3>Projection</h3><p>Grand écran pour le cosmos, la cellule et la conversation de la Trinité.</p></div>
+    <div class="r" style="--d:1.2s"><h3>Fumée &amp; lumière</h3><p>La bascule écran → podium, le rouge de la chute, l'or de la naissance.</p></div>
+    <div class="r" style="--d:1.4s"><h3>Son immersif</h3><p>Voix en hébreu puis en araméen, souffle du soleil, fracas, cri du nouveau-né.</p></div>
+    <div class="r" style="--d:1.6s"><h3>Danseurs</h3><p>Les tableaux de la décadence, puis le cercle autour de la naissance.</p></div>
+    <div class="r" style="--d:1.8s"><h3>Comédiens</h3><p>Adam, Ève, le diable, Marie sur le podium, avec de possibles incursions au parterre et en mezzanine.</p></div>
+    <div class="r" style="--d:2s"><h3>Le public</h3><p>Dernier acteur : à l'Acte V, un faisceau sur chaque spectateur, porté par la voix off.</p></div>
+  </div>
+</section>
+
+<section class="scene" data-act="Fin" data-fx="end">
+  <div class="content mid">
+    <h1 class="glow" style="--d:.6s;opacity:0">TSELEM</h1>
+    <p class="he r" style="--d:2s;font-size:60px;color:var(--gold)">צֶלֶם</p>
+    <p class="lead r" style="--d:2.8s;margin-top:40px">Dieu créa l'homme à son image. <b>À Noël, l'image revient.</b></p>
+    <p class="small r" style="--d:3.8s">Spectacle immersif · cinéma · danse · théâtre — Noël 2026</p>
+  </div>
+</section>
+
+<canvas id="dust"></canvas>
+<div class="grain"></div><div class="vig"></div>
+<div class="lb t"></div><div class="lb b"></div>
+<div id="flash"></div>
+<div class="hud" id="brand">TSELEM · Noël 2026</div>
+<div class="hud" id="actlabel"></div>
+<div id="prog"></div>
+<div id="hint">Suite ›</div>
+<div class="hud" id="ctrl"><button id="snd" type="button">Son : on</button><button id="fs" type="button">Plein écran</button></div>
+</div></div>
+
+<script>
+{
+const stage=document.getElementById('stage'), wrap=document.getElementById('wrap');
+const scenes=[...document.querySelectorAll('.scene')];
+let cur=0, step=0;
+
+/* ---------- fit 1920x1080 stage ---------- */
+function fit(){const s=Math.min(innerWidth/1920,innerHeight/1080);const v='translate(-50%,-50%) scale('+s+')';stage.style.transform=v;stage.style.setProperty('--sc',v)}
+addEventListener('resize',fit);fit();
+const lock=()=>{for(const el of [wrap,stage])if(el.scrollTop||el.scrollLeft){el.scrollTop=0;el.scrollLeft=0}if(scrollX||scrollY)scrollTo(0,0)};wrap.addEventListener('scroll',lock);stage.addEventListener('scroll',lock);addEventListener('scroll',lock);
+
+/* ---------- progress ---------- */
+const prog=document.getElementById('prog');
+prog.innerHTML=scenes.slice(1).map(()=>'<i></i>').join('');
+const bars=[...prog.children];
+
+/* ---------- audio ---------- */
+let ctx=null, master=null, revIn=null, noiseBuf=null, muted=false, amb=[];
+const tracks={};
+function impulse(sec){const r=ctx.sampleRate,l=r*sec,b=ctx.createBuffer(2,l,r);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<l;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/l,2.4)}return b}
+function initAudio(){
+  try{
+    ctx=new (window.AudioContext||window.webkitAudioContext)();
+    master=ctx.createGain();master.gain.value=1;master.connect(ctx.destination);
+    const rv=ctx.createConvolver();rv.buffer=impulse(4);revIn=ctx.createGain();revIn.gain.value=.6;revIn.connect(rv);rv.connect(master);
+    noiseBuf=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);const d=noiseBuf.getChannelData(0);let last=0;
+    for(let i=0;i<d.length;i++){const w=Math.random()*2-1;last=(last+.02*w)/1.02;d[i]=last*3.5}
+    for(const n of ['light','dark']){
+      const el=new Audio('assets/'+n+'.mp3');el.loop=true;el.preload='auto';el.crossOrigin='anonymous';
+      const g=ctx.createGain();g.gain.value=0;
+      try{ctx.createMediaElementSource(el).connect(g);g.connect(master);tracks[n]={el,g,graph:true}}
+      catch(e){el.volume=0;tracks[n]={el,g:null,graph:false}}
+    }
+  }catch(e){ctx=null}
+}
+function setMusic(name,vol){
+  if(!ctx)return;const t=ctx.currentTime;
+  for(const [n,tr] of Object.entries(tracks)){
+    const target=(n===name)?vol:0;
+    if(target>0&&tr.el.paused){tr.el.play().catch(()=>{})}
+    if(tr.graph){tr.g.gain.cancelScheduledValues(t);tr.g.gain.setValueAtTime(tr.g.gain.value,t);tr.g.gain.linearRampToValueAtTime(target,t+2.5)}
+    else{fadeEl(tr.el,target)}
+    if(target===0){clearTimeout(tr.to);tr.to=setTimeout(()=>{if(tr.graph?tr.g.gain.value<.01:tr.el.volume<.01)tr.el.pause()},2800)}else clearTimeout(tr.to);
+  }
+}
+function fadeEl(el,to){const from=el.volume;let k=0;clearInterval(el._f);el._f=setInterval(()=>{k++;el.volume=Math.max(0,Math.min(1,from+(to-from)*k/25));if(k>=25)clearInterval(el._f)},100)}
+function out(gain,wet){const g=ctx.createGain();g.gain.value=0;g.connect(master);if(wet){const s=ctx.createGain();s.gain.value=wet;g.connect(s);s.connect(revIn)}return g}
+function fadeIn(g,v,s){const t=ctx.currentTime;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+s)}
+function osc(type,f,dest,det){const o=ctx.createOscillator();o.type=type;o.frequency.value=f;if(det)o.detune.value=det;o.connect(dest);o.start();return o}
+function noise(dest){const n=ctx.createBufferSource();n.buffer=noiseBuf;n.loop=true;n.connect(dest);n.start();return n}
+function lfo(param,rate,depth){const l=ctx.createOscillator(),g=ctx.createGain();l.frequency.value=rate;g.gain.value=depth;l.connect(g);g.connect(param);l.start();return l}
+const AMB={
+  drone(){const g=out(0,.4),f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=380;f.connect(g);
+    const n=[osc('sawtooth',55,f,-7),osc('sawtooth',55,f,7),osc('sine',82.4,f),osc('sine',110,f,3)];n.push(lfo(f.frequency,.07,140));fadeIn(g,.09,4);return{g,n}},
+  sun(){const g=out(0,.5),f=ctx.createBiquadFilter();f.type='bandpass';f.frequency.value=160;f.Q.value=.8;f.connect(g);
+    const n=[noise(f),lfo(f.frequency,.11,90),osc('sine',41,g),lfo(g.gain,.23,.05)];fadeIn(g,.32,3);return{g,n}},
+  shimmer(){const g=out(0,.9);const n=[659.3,987.8,1318.5,1975.5].map((f,i)=>{const o=osc('sine',f,g,i*4);return o});n.push(lfo(g.gain,.3,.012));fadeIn(g,.028,5);return{g,n}},
+  heart(){const g=out(0,.3);g.gain.value=1;let on=true;const beat=()=>{if(!on)return;thump(g,.0,.9);thump(g,.28,.6);h.t=setTimeout(beat,1100)};const h={g,n:[],stop(){on=false;clearTimeout(h.t)}};h.t=setTimeout(beat,1800);return h},
+  wind(){const g=out(0,.6),f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=500;f.connect(g);const n=[noise(f),lfo(f.frequency,.05,300)];fadeIn(g,.07,4);return{g,n}},
+  red(){const g=out(0,.5),f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=260;f.connect(g);const n=[osc('sawtooth',41.2,f),osc('sawtooth',58.3,f,10),osc('sine',29,g),lfo(f.frequency,.2,120)];fadeIn(g,.13,2.5);return{g,n}}
+};
+function thump(dest,delay,v){const t=ctx.currentTime+delay,o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(70,t);o.frequency.exponentialRampToValueAtTime(38,t+.18);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.55*v,t+.015);g.gain.exponentialRampToValueAtTime(.001,t+.35);o.connect(g);g.connect(dest);o.start(t);o.stop(t+.4)}
+function stopAmb(){if(!ctx)return;const t=ctx.currentTime;for(const a of amb){if(a.stop)a.stop();a.g.gain.cancelScheduledValues(t);a.g.gain.setValueAtTime(a.g.gain.value,t);a.g.gain.linearRampToValueAtTime(0,t+2);setTimeout(()=>{a.n.forEach(x=>{try{x.stop()}catch(e){}});a.g.disconnect()},2300)}amb=[]}
+function startAmb(list){if(!ctx)return;for(const k of list)if(AMB[k])amb.push(AMB[k]())}
+function boom(size){if(!ctx)return;const t=ctx.currentTime,g=out(0,.9);const o=ctx.createOscillator();o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(26,t+2*size);o.connect(g);o.start(t);o.stop(t+4);
+  const nf=ctx.createBiquadFilter();nf.type='lowpass';nf.frequency.setValueAtTime(3000,t);nf.frequency.exponentialRampToValueAtTime(80,t+1.5*size);nf.connect(g);const n=noise(nf);n.stop(t+4);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.9*size,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+3.5*size)}
+function whoosh(){if(!ctx)return;const t=ctx.currentTime,g=out(0,.5),f=ctx.createBiquadFilter();f.type='bandpass';f.Q.value=1.4;f.frequency.setValueAtTime(300,t);f.frequency.exponentialRampToValueAtTime(2200,t+1.2);f.connect(g);const n=noise(f);n.stop(t+1.8);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.12,t+.5);g.gain.linearRampToValueAtTime(0,t+1.6)}
+function bell(f,v,delay){if(!ctx)return;const t=ctx.currentTime+(delay||0),g=out(0,1.2);[1,2.01,3.02,4.2].forEach((m,i)=>{const o=ctx.createOscillator(),og=ctx.createGain();o.frequency.value=f*m;og.gain.value=v/(i+1);o.connect(og);og.connect(g);o.start(t);o.stop(t+7)});g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(1,t+.01);g.gain.exponentialRampToValueAtTime(.001,t+6.5)}
+
+/* per-scene sound map */
+const SND=[
+  {m:null},
+  {m:'light',v:.45,a:['drone']},
+  {m:'light',v:.25,a:['shimmer']},
+  {m:'light',v:.35,a:[]},
+  {m:'light',v:.3,a:['drone']},
+  {m:'light',v:.55,a:['shimmer']},
+  {m:'light',v:.12,a:['sun']},
+  {m:'light',v:.2,a:['heart','shimmer']},
+  {m:'light',v:.18,a:['wind','drone']},
+  {m:'dark',v:.25,a:['red']},
+  {m:'dark',v:.85,a:[]},
+  {m:null,a:['wind']},
+  {m:'light',v:.8,a:['shimmer']},
+  {m:'light',v:.7,a:['shimmer']},
+  {m:'light',v:.3,a:['drone']},
+  {m:'light',v:.6,a:['shimmer']}
+];
+
+/* ---------- dust canvas ---------- */
+const cv=document.getElementById('dust'),cx=cv.getContext('2d');cv.width=1920;cv.height=1080;
+let P=[],mode={n:60,col:'224,178,94',spd:.25},mult=null;
+function seed(n){P=[];for(let i=0;i<n;i++)P.push(mk(Math.random()*1920,Math.random()*1080))}
+function mk(x,y){return{x,y,r:Math.random()*2.2+.4,vx:(Math.random()-.5)*.25,vy:-(Math.random()*.5+.1),a:Math.random()*.7+.2,tw:Math.random()*6}}
+function setDust(n,col,spd){mode={n,col,spd};while(P.length<n)P.push(mk(Math.random()*1920,1080+Math.random()*200));P.length=Math.min(P.length,n)}
+seed(60);
+function frame(t){
+  cx.clearRect(0,0,1920,1080);
+  for(const p of P){p.x+=p.vx*mode.spd*4;p.y+=p.vy*mode.spd*4;p.tw+=.03;if(p.y<-10){p.y=1090;p.x=Math.random()*1920}
+    const a=p.a*(.6+.4*Math.sin(p.tw));cx.beginPath();cx.fillStyle='rgba('+mode.col+','+a+')';cx.shadowBlur=8;cx.shadowColor='rgba('+mode.col+',.9)';cx.arc(p.x,p.y,p.r,0,7);cx.fill()}
+  if(mult){for(const q of mult.pts){q.s=Math.min(1,q.s+.04);cx.beginPath();cx.fillStyle='rgba(255,214,140,'+(.85*q.s)+')';cx.shadowBlur=18;cx.shadowColor='rgba(246,212,140,1)';cx.arc(q.x,q.y,3.2*q.s,0,7);cx.fill()}}
+  cx.shadowBlur=0;requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+function startMultiply(){mult={pts:[{x:960,y:560,s:0}]};let gen=0;const go=()=>{if(!mult||gen>8)return;gen++;const add=mult.pts.map(()=>({x:150+Math.random()*1620,y:120+Math.random()*840,s:0}));mult.pts=mult.pts.concat(add);if(ctx)bell(392*Math.pow(2,(gen%5)/5),.05);mult.t=setTimeout(go,700)};mult.t=setTimeout(go,1800)}
+function stopMultiply(){if(mult){clearTimeout(mult.t);mult=null}}
+
+/* ---------- navigation ---------- */
+const actlabel=document.getElementById('actlabel'),hint=document.getElementById('hint');
+const DUST=[[40],[70],[110],[30],[40],[80],[160,'255,226,160',.5],[60,'200,225,255'],[50],[70,'255,80,60',.4],[25,'200,200,200',.6],[20,'230,230,230',.08],[120],[40],[30],[130]];
+let fxT=[];
+function clearFx(){fxT.forEach(clearTimeout);fxT=[];stopMultiply()}
+function go(i){
+  if(i<0||i>=scenes.length||i===cur)return;
+  const prev=scenes[cur];prev.classList.remove('active','st1');
+  cur=i;step=0;const s=scenes[cur];
+  void s.offsetWidth;s.classList.add('active');
+  actlabel.textContent=s.dataset.act||'';
+  bars.forEach((b,k)=>b.classList.toggle('on',k<cur));
+  stage.classList.toggle('open',cur===0);
+  hint.classList.toggle('show',!!s.dataset.steps);
+  clearFx();
+  const d=DUST[cur]||[50];setDust(d[0],d[1]||'224,178,94',d[2]||.25);
+  if(ctx){const sd=SND[cur]||{};whoosh();stopAmb();setMusic(sd.m,sd.v||0);startAmb(sd.a||[])}
+  const fx=s.dataset.fx;
+  if(fx==='lumiere')fxT.push(setTimeout(()=>{boom(1);flash(.6);bell(261.6,.06,.2)},2300));
+  if(fx==='multiply')startMultiply();
+  if(fx==='end'&&ctx)fxT.push(setTimeout(()=>bell(523.3,.05),700));
+  if(cur===9)fxT.push(setTimeout(()=>boom(.6),900));
+  try{history.replaceState(null,'','#s'+cur)}catch(e){}
+}
+function flash(o){const f=document.getElementById('flash');f.style.setProperty('opacity','');f.classList.remove('go');void f.offsetWidth;f.classList.add('go')}
+function next(){const s=scenes[cur];const n=+(s.dataset.steps||0);
+  if(step<n){step++;s.classList.add('st1');hint.classList.remove('show');
+    if(s.dataset.fx==='fracas'){if(ctx){stopAmb();boom(1.6);setTimeout(()=>boom(1),120)}flash();stage.classList.remove('shake');void stage.offsetWidth;stage.classList.add('shake');
+      fxT.push(setTimeout(()=>{if(ctx){bell(880,.03);bell(1318.5,.02,.15)}},2300))}
+    return}
+  go(cur+1)}
+function prev(){go(cur-1)}
+
+let started=false;
+function start(){if(started)return;started=true;initAudio();if(ctx&&ctx.state==='suspended')ctx.resume();go(1)}
+document.getElementById('enter').addEventListener('click',e=>{e.stopPropagation();start()});
+stage.addEventListener('click',e=>{if(e.target.closest('button,a'))return;if(!started){start();return}next()});
+addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();if(!started)start();else next()}
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();if(started)prev()}
+  else if(e.key==='f'||e.key==='F')toggleFs();
+  else if(e.key==='m'||e.key==='M')toggleSnd();
+  else if(e.key==='Home'&&started)go(1);
+});
+let tx=null;addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>60){if(!started)start();else dx<0?next():prev()}},{passive:true});
+const sndBtn=document.getElementById('snd');
+function toggleSnd(){muted=!muted;if(master)master.gain.setTargetAtTime(muted?0:1,ctx.currentTime,.2);for(const tr of Object.values(tracks))if(!tr.graph)tr.el.muted=muted;sndBtn.textContent='Son : '+(muted?'off':'on')}
+sndBtn.addEventListener('click',e=>{e.stopPropagation();toggleSnd()});
+function toggleFs(){try{if(!document.fullscreenElement)document.documentElement.requestFullscreen().catch(()=>{});else document.exitFullscreen()}catch(e){}}
+document.getElementById('fs').addEventListener('click',e=>{e.stopPropagation();toggleFs()});
+stage.classList.add('open');
+}
+</script>
+</body>
+</html>
